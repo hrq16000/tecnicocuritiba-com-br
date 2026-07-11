@@ -10645,14 +10645,14 @@ crontab -e
   },
 
   "como-escolher-tecnico-informatica-confiavel-curitiba": {
-    title: "Como Escolher um Técnico de Informática Confiável em Curitiba",
+    title: "Como escolher um técnico de informática confiável em Curitiba",
     excerpt: "9 critérios para não cair em cilada: garantia por escrito, orçamento fechado, reputação e mais.",
     date: "2026-07-10",
     readTime: "10 min",
     category: "Guia",
     content: (
       <>
-        <p className="lead">Contratar um <strong>técnico de informática em Curitiba</strong> não é só olhar o preço. Um mau atendimento pode significar dados perdidos, Windows pirata, o mesmo defeito voltando em 15 dias, ou preço que só cresce depois que o computador está aberto. Este guia lista os 9 sinais de um técnico confiável.</p>
+        <p className="lead"><strong>Como escolher um técnico de informática confiável em Curitiba?</strong> Não é só olhar o preço. Um mau atendimento pode significar dados perdidos, Windows pirata, o mesmo defeito voltando em 15 dias, ou preço que só cresce depois que o computador está aberto. Este guia lista os 9 sinais de um técnico de informática confiável em Curitiba e RMC.</p>
 
         <h2>1. Orçamento fechado antes de começar</h2>
         <p>Técnico sério dá o valor antes de mexer no equipamento — ou cobra apenas o <strong>diagnóstico</strong> (R$ 99,99) e só depois fecha o orçamento do reparo. Fuja de "vou ver aqui e depois te aviso".</p>
