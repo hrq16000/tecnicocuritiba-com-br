@@ -91,7 +91,7 @@ export default function EmpresaTICuritiba() {
       />
 
       <div className="container mx-auto px-4 py-8 md:py-12">
-        <Breadcrumbs items={[{ name: "Início", path: "/" }, { name: "Empresa de TI em Curitiba", path: "/empresa-de-ti-curitiba" }]} />
+        <Breadcrumbs items={[{ label: "Empresa de TI em Curitiba" }]} />
 
         <header className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
           <div className="inline-flex items-center gap-2 bg-accent/10 text-accent rounded-full px-4 py-1.5 mb-4 text-sm font-semibold">
