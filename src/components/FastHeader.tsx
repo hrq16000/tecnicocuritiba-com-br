@@ -1,10 +1,10 @@
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico.";
-const SCHEDULE_MESSAGE = "Olá! Quero agendar atendimento técnico.";
 
-const trackHeaderClick = (type: "whatsapp" | "chatbot") => {
+const trackHeaderClick = (type: "whatsapp") => {
   import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick(type, "header"));
 };
+
 
 const menuGroups: Array<{
   label: string;
