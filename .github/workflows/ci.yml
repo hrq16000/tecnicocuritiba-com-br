@@ -51,8 +51,9 @@ jobs:
           CI: "true"
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
-      - name: Run targeted E2E (whatsapp + termos + sitemap + como-funciona)
-        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts
+      - name: Run targeted E2E (whatsapp + termos + sitemap + como-funciona + nap + a11y skip-link)
+        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts
+
         env:
           E2E_BASE_URL: http://localhost:8080
 

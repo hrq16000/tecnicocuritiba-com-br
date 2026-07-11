@@ -18,7 +18,8 @@ const TestimonialsPlaceholder = lazy(() => import("@/components/TestimonialsPlac
 const ComoFuncionaFluxo = lazy(() => import("@/components/ComoFuncionaFluxo").then(m => ({ default: m.ComoFuncionaFluxo })));
 
 const CoverageMapSection = lazy(() => import("@/components/CoverageMapSection").then(m => ({ default: m.CoverageMapSection })));
-const SchedulingSection = lazy(() => import("@/components/scheduling").then(m => ({ default: m.SchedulingSection })));
+// SchedulingSection removido do funil (WhatsApp é canal exclusivo — memory: whatsapp-conversion).
+
 const TrustBadges = lazy(() => import("@/components/social-proof").then(m => ({ default: m.TrustBadges })));
 const SecurityBadge = lazy(() => import("@/components/social-proof").then(m => ({ default: m.SecurityBadge })));
 const SocialProofAdminPanel = lazy(() => import("@/components/social-proof/AdminPanel").then(m => ({ default: m.SocialProofAdminPanel })));
@@ -42,8 +43,8 @@ const DeferredContent = () => (
 
     <LazyOnVisible minHeight="120px" rootMargin="-240px 0px"><Suspense fallback={<SectionFallback height="120px" />}><TechBrandsMarquee /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><PainSection /></Suspense></LazyOnVisible>
-    <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><SchedulingSection /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><ServicesSection /></Suspense></LazyOnVisible>
+
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><TopSearchedServicesSection /></Suspense></LazyOnVisible>
     <LazyOnVisible minHeight="1px" rootMargin="-240px 0px"><Suspense fallback={null}><GeolocationTrigger /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><CoverageMapSection /></Suspense></LazyOnVisible>

@@ -400,7 +400,7 @@ const CFTVAraucaria = lazy(() => import("./pages/cftv/CFTVAraucaria"));
 const CFTVCampoLargo = lazy(() => import("./pages/cftv/CFTVCampoLargo"));
 const CFTVPinhais = lazy(() => import("./pages/cftv/CFTVPinhais"));
 
-const WhatsAppChatbot = lazy(() => import("@/components/WhatsAppChatbot").then((m) => ({ default: m.WhatsAppChatbot })));
+// WhatsAppChatbot removido: redundante com WhatsAppFloat (bottom-right global).
 const SocialProofProvider = lazy(() => import("@/components/social-proof").then((m) => ({ default: m.SocialProofProvider })));
 const GA4ChecklistPanel = lazy(() => import("@/components/GA4ChecklistPanel").then((m) => ({ default: m.GA4ChecklistPanel })));
 const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
@@ -439,8 +439,8 @@ const IdleEnhancements = () => {
     <Suspense fallback={null}>
       <Toaster />
       <Sonner />
-      <WhatsAppChatbot />
       <SocialProofProvider />
+
       <GA4ChecklistPanel />
     </Suspense>
   );

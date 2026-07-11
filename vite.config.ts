@@ -64,11 +64,17 @@ export default defineConfig(({ mode }) => ({
         manualChunks(id) {
           if (!id.includes("node_modules")) return undefined;
 
-          // Produção estava congelando antes da hidratação por um ciclo TDZ entre
-          // vendor-react e vendor (`Cannot access 'kf' before initialization`).
-          // Um único vendor elimina imports circulares entre chunks de libs.
+          // Split leaf-only libs. Runtime react/router/supabase permanecem em
+          // `vendor` para evitar o TDZ ("Cannot access 'kf' before initialization",
+          // 2026-07 audit-fase2). Adições futuras: manter apenas libs sem
+          // dependência do runtime React.
+          if (id.includes("lucide-react")) return "vendor-icons";
+          if (id.includes("@radix-ui")) return "vendor-radix";
+          if (id.includes("react-helmet")) return "vendor-helmet";
+
           return "vendor";
         },
+
       },
     },
   },
