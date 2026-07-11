@@ -205,7 +205,7 @@ export async function prerenderCities(distDir) {
         "@type": "Service",
         name: `${cat.titlePrefix} em ${meta.cityLabel}`,
         serviceType: cat.titlePrefix,
-        provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: SITE, telephone: "+5541997452053", address: { "@type": "PostalAddress", addressLocality: "Curitiba", addressRegion: "PR", addressCountry: "BR" } },
+        provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: SITE, telephone: "+5541997452053", areaServed: { "@type": "City", name: "Curitiba" } },
         areaServed: { "@type": local.kind === "bairro" ? "Place" : "City", name: meta.cityLabel, containedInPlace: { "@type": "State", name: "Paraná" } },
         offers: {
           "@type": "Offer", priceCurrency: "BRL", price: "300",
