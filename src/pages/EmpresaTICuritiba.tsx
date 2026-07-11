@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Building2, Shield, Clock, Headphones, MapPin, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageSEO } from "@/components/PageSEO";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import { useEffect } from "react";
 
