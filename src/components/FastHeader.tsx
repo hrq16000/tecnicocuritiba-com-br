@@ -1,10 +1,10 @@
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico.";
-const SCHEDULE_MESSAGE = "Olá! Quero agendar atendimento técnico.";
 
-const trackHeaderClick = (type: "whatsapp" | "chatbot") => {
+const trackHeaderClick = (type: "whatsapp") => {
   import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick(type, "header"));
 };
+
 
 const menuGroups: Array<{
   label: string;
@@ -71,7 +71,7 @@ const menuGroups: Array<{
 
 export const FastHeader = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-  const scheduleUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(SCHEDULE_MESSAGE)}`;
+
 
   // Shrink-on-scroll: alterna `data-scrolled` no <html>, e o CSS troca
   // `--site-header-height` por sua versão compacta. Sem re-render do React.
@@ -119,23 +119,13 @@ export const FastHeader = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackHeaderClick("whatsapp")}
-            aria-label="WhatsApp"
+            aria-label="Falar com técnico no WhatsApp"
             className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-sm transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
           >
             <span aria-hidden="true">☏</span>
             <span>WhatsApp</span>
           </a>
 
-          <a
-            href={scheduleUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackHeaderClick("chatbot")}
-            aria-label="Agendar atendimento"
-            className="inline-flex min-h-9 items-center justify-center rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90"
-          >
-            Agendar
-          </a>
 
           <details className="group/root relative">
             <summary
