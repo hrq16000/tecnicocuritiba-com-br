@@ -179,3 +179,63 @@ export const trackPageView = (pagePath: string, pageTitle: string) => {
     });
   }
 };
+
+// ---------- Scroll depth (25/50/75/100) ----------
+// Dispara GA4 `scroll_depth` com `percent_scrolled` uma vez por sessão+página.
+// Dedup via sessionStorage para não inflar métricas em reloads.
+const SCROLL_KEY = 'scroll_depth_v1';
+const readScrollMap = (): Record<string, number[]> => {
+  try { return JSON.parse(sessionStorage.getItem(SCROLL_KEY) || '{}'); } catch { return {}; }
+};
+const writeScrollMap = (m: Record<string, number[]>) => {
+  try { sessionStorage.setItem(SCROLL_KEY, JSON.stringify(m)); } catch { /* noop */ }
+};
+
+export const trackScrollDepth = (percent: 25 | 50 | 75 | 100, pagePath: string) => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  const map = readScrollMap();
+  const sent = map[pagePath] || [];
+  if (sent.includes(percent)) return;
+  sent.push(percent);
+  map[pagePath] = sent;
+  writeScrollMap(map);
+  window.gtag('event', 'scroll_depth', {
+    event_category: 'engagement',
+    event_label: `${percent}%`,
+    percent_scrolled: percent,
+    page_path: pagePath,
+    value: percent,
+  });
+};
+
+// Attach once. Idempotent — safe to call from multiple mount points.
+export const attachScrollDepthTracking = () => {
+  if (typeof window === 'undefined') return;
+  const w = window as unknown as { __scrollDepthBound?: boolean };
+  if (w.__scrollDepthBound) return;
+  w.__scrollDepthBound = true;
+
+  const thresholds: Array<25 | 50 | 75 | 100> = [25, 50, 75, 100];
+  let ticking = false;
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const winH = window.innerHeight || doc.clientHeight;
+      const docH = Math.max(doc.scrollHeight, doc.offsetHeight) - winH;
+      if (docH <= 0) { ticking = false; return; }
+      const pct = Math.min(100, Math.round((scrollTop / docH) * 100));
+      const pagePath = window.location.pathname;
+      for (const t of thresholds) {
+        if (pct >= t) trackScrollDepth(t, pagePath);
+      }
+      ticking = false;
+    });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+};
+

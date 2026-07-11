@@ -20,6 +20,7 @@ const TecnicoInformaticaAraucaria = lazy(() => import("./pages/TecnicoInformatic
 const TecnicoInformaticaCampoLargo = lazy(() => import("./pages/TecnicoInformaticaCampoLargo"));
 const TecnicoInformaticaPinhais = lazy(() => import("./pages/TecnicoInformaticaPinhais"));
 const Sobre = lazy(() => import("./pages/Sobre"));
+const Autor = lazy(() => import("./pages/Autor"));
 const Contato = lazy(() => import("./pages/Contato"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -406,9 +407,13 @@ const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ defa
 const Sonner = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
 
 const AppInit = () => {
-  useEffect(() => { captureUtmsFromUrl(); }, []);
+  useEffect(() => {
+    captureUtmsFromUrl();
+    import("@/lib/analytics").then(({ attachScrollDepthTracking }) => attachScrollDepthTracking());
+  }, []);
   return null;
 };
+
 
 const IdleEnhancements = () => {
   const [enabled, setEnabled] = useState(false);
@@ -498,6 +503,8 @@ const App = () => (
 
             
             <Route path="/sobre" element={<Sobre />} />
+            <Route path="/autor/tecnico-curitiba" element={<Autor />} />
+
             <Route path="/contato" element={<Contato />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
