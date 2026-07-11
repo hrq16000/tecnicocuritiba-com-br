@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronDown, HelpCircle, MessageCircle } from "lucide-react";
 import { trackCTAClick } from "@/lib/analytics";
 
-const WHATSAPP_URL = "https://wa.me/5541987224831?text=Ol%C3%A1!%20Vi%20a%20FAQ%20e%20quero%20um%20atendimento%20em%20Curitiba.";
+const WHATSAPP_URL = "https://wa.me/5541997452053?text=Ol%C3%A1!%20Vi%20a%20FAQ%20e%20quero%20um%20atendimento%20em%20Curitiba.";
 
 
 interface FAQItem {

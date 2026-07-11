@@ -117,7 +117,7 @@ const TecnicoInformaticaAlmiranteTamandare = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Almirante Tamandaré" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Técnico de Informática em Almirante Tamandaré"
           subtitle="Assistência técnica profissional em Almirante Tamandaré e região. Atendimento a domicílio com garantia e transparência."

@@ -40,7 +40,7 @@ const TecnicoInformaticaCuritibaAds = () => {
         </div>
       </header>
 
-      <main>
+      <main id="main-content">
         {/* Hero Section */}
         <section className="hero-gradient py-16 md:py-24">
           <div className="container mx-auto">

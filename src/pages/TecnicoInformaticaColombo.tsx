@@ -122,7 +122,7 @@ const TecnicoInformaticaColombo = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Colombo" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Técnico de Informática em Colombo"
           subtitle="Assistência técnica profissional em Colombo e região. Atendimento a domicílio com diagnóstico transparente e garantia."

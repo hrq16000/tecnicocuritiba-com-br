@@ -169,7 +169,7 @@ const ArrumarPC = () => {
 
       <Header />
 
-      <main>
+      <main id="main-content">
         <PageHero
           title="Arrumar PC online — em qualquer lugar do Brasil"
           subtitle="Técnico de informática de verdade pelo WhatsApp + acesso remoto seguro. Diagnóstico grátis, paga só se resolver. Sem robô, sem call center."

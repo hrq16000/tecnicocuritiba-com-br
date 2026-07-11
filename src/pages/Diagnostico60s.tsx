@@ -134,7 +134,7 @@ export default function Diagnostico60s() {
         </div>
       </header>
 
-      <main className="container mx-auto max-w-3xl px-4 py-8">
+      <main id="main-content" className="container mx-auto max-w-3xl px-4 py-8">
         {step.kind === "equipment" && (
           <section aria-labelledby="eq-q">
             <h2 id="eq-q" className="text-xl font-semibold mb-4">

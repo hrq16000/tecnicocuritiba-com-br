@@ -29,7 +29,7 @@ const MarcaPage = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="container mx-auto py-20 text-center">
+        <main id="main-content" className="container mx-auto py-20 text-center">
           <h1 className="text-3xl font-bold text-foreground mb-4">Marca não encontrada</h1>
           <Link to="/blog" className="text-accent hover:underline">Voltar ao portal de conteúdo</Link>
         </main>
@@ -49,7 +49,7 @@ const MarcaPage = () => {
       />
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* ═══ Hero ═══ */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 premium-gradient" />

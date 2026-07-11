@@ -58,7 +58,7 @@ const DiagnosticoTecnico = () => {
       <Header />
       <Breadcrumbs items={[{ label: "Diagnóstico Técnico" }]} />
 
-      <main>
+      <main id="main-content">
         {/* HERO */}
         <section className="relative hero-gradient pt-10 pb-10 md:pt-12 md:pb-12">
           <div className="container mx-auto relative z-10">

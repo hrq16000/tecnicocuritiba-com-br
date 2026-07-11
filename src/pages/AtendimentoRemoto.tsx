@@ -46,7 +46,7 @@ const AtendimentoRemoto = () => {
       <PageSEO title="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" description="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" path="/atendimento-remoto" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]} />
       <JsonLdSchema />
       <Header />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Atendimento Remoto de Informática"
           subtitle="Conserto de problemas do seu computador sem sair de casa"

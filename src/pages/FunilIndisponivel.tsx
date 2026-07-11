@@ -37,7 +37,7 @@ const FunilIndisponivel = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-16 max-w-xl">
+      <main id="main-content" className="flex-1 container mx-auto px-4 py-16 max-w-xl">
         <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-6 sm:p-8 text-center">
           <AlertTriangle className="h-10 w-10 text-amber-600 mx-auto mb-3" />
           <h1 className="text-2xl font-bold mb-2">Não conseguimos abrir o formulário agora</h1>

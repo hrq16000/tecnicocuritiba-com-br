@@ -188,7 +188,7 @@ const TecnicoInformaticaAraucaria = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Araucária" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Técnico de Informática em Araucária"
           subtitle="Assistência técnica profissional em Araucária. Atendimento rápido para residências, comércios e indústrias na região metropolitana."

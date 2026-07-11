@@ -504,7 +504,7 @@ const Blog = () => {
       <JsonLdSchema />
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* ═══════════ HERO ═══════════ */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 premium-gradient" />

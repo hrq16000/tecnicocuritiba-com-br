@@ -3,7 +3,7 @@ import { withOgVersion } from "@/lib/ogCacheBust";
 
 const SITE_NAME = "Técnico em Curitiba";
 const BASE_URL = "https://tecnicocuritiba.com.br";
-const DEFAULT_OG_IMAGE = "https://tecnicocuritiba.com.br/og-image.png";
+const DEFAULT_OG_IMAGE = "https://tecnicocuritiba.com.br/og-image.jpg";
 
 interface BreadcrumbItem {
   name: string;

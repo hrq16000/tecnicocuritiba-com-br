@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -151,10 +151,14 @@ const ColetaFormulario = () => {
   const [form, setForm] = useState<FormData>(initialFormData);
   const [acceptedTerms, setAcceptedTerms] = useState<Record<string, boolean>>({});
   const [submitted, setSubmitted] = useState(false);
+  // Anti-spam: honeypot field + tempo mínimo entre mount e submit
+  const [honeypot, setHoneypot] = useState("");
+  const mountedAtRef = useRef<number>(Date.now());
 
   useEffect(() => {
     document.title = "Formulário de Coleta — Preencha seus Dados | Técnico em Curitiba";
     trackPageView("/coleta-formulario", "Formulário Coleta");
+    mountedAtRef.current = Date.now();
   }, []);
 
   const updateField = (field: keyof FormData, value: string) => {
@@ -239,6 +243,24 @@ const ColetaFormulario = () => {
   };
 
   const handleSubmit = () => {
+    // Anti-spam guards (silenciosos): honeypot preenchido OU submit muito rápido
+    const elapsed = Date.now() - mountedAtRef.current;
+    if (honeypot.trim() !== "" || elapsed < 2000) {
+      try {
+        (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.(
+          "event",
+          "spam_blocked",
+          {
+            reason: honeypot ? "honeypot" : "too_fast",
+            elapsed_ms: elapsed,
+            non_interaction: true,
+          },
+        );
+      } catch {
+        /* noop */
+      }
+      return;
+    }
     trackCTAClick("whatsapp", "coleta-formulario-confirmado");
     const msg = buildWhatsAppMessage();
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -265,7 +287,7 @@ const ColetaFormulario = () => {
       <Header />
       <Breadcrumbs items={[{ label: "Coleta e Entrega", href: "/coleta-e-entrega" }, { label: "Formulário de Coleta" }]} />
 
-      <main className="py-8 md:py-12">
+      <main id="main-content" className="py-8 md:py-12">
         <div className="container mx-auto max-w-3xl px-4">
           {/* Title */}
           <div className="text-center mb-8">
@@ -276,6 +298,18 @@ const ColetaFormulario = () => {
               Preencha todos os campos para solicitar a coleta do seu equipamento.
             </p>
           </div>
+
+          {/* Honeypot anti-spam (invisível para humanos) */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            className="absolute -left-[9999px] w-px h-px opacity-0 pointer-events-none"
+          />
 
           {/* Step indicator */}
           <div className="flex items-center justify-center gap-4 md:gap-8 mb-8">

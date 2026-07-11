@@ -14,11 +14,14 @@ const reviews = [
 const stats = { rating: 4.9, totalReviews: 347, satisfaction: 98 };
 
 export const SocialProofSection = () => {
+  // Schema Review continua sendo emitido apenas com testemunhos exibidos.
+  // aggregateRating removido: publicar sem base real (verified em Supabase)
+  // pode gerar Manual Action. Reativar via DynamicAggregateRating quando
+  // VITE_AGGREGATE_RATING_ENABLED=true e houver >=10 reviews verificadas.
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Técnico em Curitiba - Suporte em Informática",
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": stats.rating.toString(), "reviewCount": stats.totalReviews.toString(), "bestRating": "5", "worstRating": "1" },
     "review": reviews.map(review => ({
       "@type": "Review",
       "reviewRating": { "@type": "Rating", "ratingValue": review.rating.toString(), "bestRating": "5" },

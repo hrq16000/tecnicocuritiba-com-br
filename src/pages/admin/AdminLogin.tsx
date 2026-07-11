@@ -38,7 +38,7 @@ const AdminLogin = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-12 max-w-sm">
+      <main id="main-content" className="flex-1 container mx-auto px-4 py-12 max-w-sm">
         <div className="rounded-2xl border border-border bg-card p-6">
           <div className="flex items-center gap-2 mb-4">
             <Shield className="h-5 w-5 text-primary" />

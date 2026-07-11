@@ -220,7 +220,9 @@ export default function AssistenciaTecnicaCuritiba() {
     url: "https://tecnicocuritiba.com.br/assistencia-tecnica-curitiba",
     image: "https://tecnicocuritiba.com.br/favicon.png",
     priceRange: "$$",
-    aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "127" },
+    // aggregateRating removido: publicar sem base real de reviews viola guidelines
+    // do Google e pode gerar Manual Action. Reativar via DynamicAggregateRating
+    // quando VITE_AGGREGATE_RATING_ENABLED=true e houver >=10 reviews verificadas.
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
@@ -366,7 +368,7 @@ export default function AssistenciaTecnicaCuritiba() {
 
       <Header />
 
-      <main className="pt-20">
+      <main id="main-content" className="pt-20">
         <div className="container mx-auto px-4 pt-4">
           <Breadcrumbs
             items={[

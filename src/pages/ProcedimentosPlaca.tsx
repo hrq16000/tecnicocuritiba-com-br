@@ -90,7 +90,7 @@ const ProcedimentosPlaca = () => {
         { label: "Procedimentos Técnicos" },
       ]} />
 
-      <main className="py-10 md:py-16">
+      <main id="main-content" className="py-10 md:py-16">
         <div className="container mx-auto max-w-5xl px-4">
           {/* Hero */}
           <AnimatedSection>

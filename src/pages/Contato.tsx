@@ -39,7 +39,7 @@ const Contato = () => {
       <PageSEO title="Contato Técnico em Curitiba | WhatsApp Hoje R$ 99,99" description="Fale com técnico de informática em Curitiba pelo WhatsApp. Atendimento hoje para PC, notebook, vírus, formatação e SSD a partir de R$ 99,99." path="/contato" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Contato", path: "/contato" }]} />
       <JsonLdSchema />
       <Header />
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 premium-gradient" />

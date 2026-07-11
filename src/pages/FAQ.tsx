@@ -160,7 +160,7 @@ const FAQ = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Header />
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 premium-gradient" />

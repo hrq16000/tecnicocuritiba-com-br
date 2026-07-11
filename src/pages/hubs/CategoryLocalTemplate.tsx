@@ -111,7 +111,7 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
 
       <Header />
 
-      <main>
+      <main id="main-content">
         <PageHero
           title={`${category.titlePrefix} em ${cityLabel}`}
           subtitle={`${category.emoji} Coleta e entrega no seu endereço · diagnóstico incluso · garantia de 90 dias. Atendimento por WhatsApp em até 30 min.`}
@@ -280,7 +280,7 @@ export const CategoryHub = ({ categoryId }: { categoryId: CategoryId }) => {
         <script type="application/ld+json">{JSON.stringify(hubSchema)}</script>
       </Helmet>
       <Header />
-      <main>
+      <main id="main-content">
         <PageHero
           title={`${category.emoji} ${category.titlePrefix} em Curitiba e RMC`}
           subtitle={`Cobertura completa para ${category.nome.toLowerCase()}: coleta e entrega em toda a Região Metropolitana, diagnóstico incluso e garantia escrita.`}
