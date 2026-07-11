@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CTASection } from "@/components/CTASection";
-import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { trackPageView } from "@/lib/analytics";
+
 
 /**
  * /autor/tecnico-curitiba — página de autor para reforço de E-E-A-T.
