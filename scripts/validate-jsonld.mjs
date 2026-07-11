@@ -15,7 +15,17 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { chromium } from "playwright";
 
-const ROUTE = "/assistencia-tecnica-curitiba";
+// Rotas auditadas: home, hub principal, top-bairros e top-serviços.
+// Cada rota exige LocalBusiness e WebSite; a hub exige o conjunto completo.
+const ROUTES = [
+  { path: "/", required: ["LocalBusiness", "WebSite"] },
+  { path: "/assistencia-tecnica-curitiba", required: ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service", "WebSite"] },
+  { path: "/bairros/batel", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
+  { path: "/bairros/agua-verde", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
+  { path: "/bairros/centro", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
+  { path: "/servicos/formatacao-computador", required: ["LocalBusiness", "WebSite", "Service"] },
+  { path: "/servicos/remocao-virus", required: ["LocalBusiness", "WebSite", "Service"] },
+];
 const REQUIRED = ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service"];
 
 async function waitForServer(url, timeoutMs = 30_000) {
