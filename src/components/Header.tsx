@@ -206,7 +206,7 @@ export const Header = () => {
 
 
 
-          <details className="group/root relative">
+          <details ref={menuRef} className="group/root relative">
             <summary
               aria-label="Abrir menu"
               title="Abrir menu"
