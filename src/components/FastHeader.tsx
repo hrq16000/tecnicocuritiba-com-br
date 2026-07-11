@@ -88,12 +88,19 @@ export const FastHeader = () => {
   }
 
   return (
-    <header
-      data-testid="site-header"
-      className="fixed left-0 right-0 top-0 h-[var(--site-header-height)] border-b border-border bg-background/95 shadow-[var(--shadow-sm)] backdrop-blur-md transition-[height] duration-200"
-      style={{ zIndex: "var(--z-header)" as unknown as number }}
-    >
-      <div className="container mx-auto flex h-full items-center justify-between gap-2">
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg"
+      >
+        Pular para o conteúdo
+      </a>
+      <header
+        data-testid="site-header"
+        className="fixed left-0 right-0 top-0 h-[var(--site-header-height)] border-b border-border bg-background/95 shadow-[var(--shadow-sm)] backdrop-blur-md transition-[height] duration-200"
+        style={{ zIndex: "var(--z-header)" as unknown as number }}
+      >
+        <div className="container mx-auto flex h-full items-center justify-between gap-2">
         <a href="/" aria-label="Início" className="min-w-0 flex-shrink-0">
           <img
             alt="Técnico em Curitiba — Assistência Técnica em Informática"
