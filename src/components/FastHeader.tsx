@@ -1,8 +1,34 @@
+import { lazy, Suspense, useEffect, useState } from "react";
+
+const SchedulingModal = lazy(() =>
+  import("@/components/scheduling/SchedulingModal").then((m) => ({ default: m.SchedulingModal }))
+);
+
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico.";
 
-const trackHeaderClick = (type: "whatsapp") => {
-  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick(type, "header"));
+const trackHeaderClick = (type: "whatsapp" | "agendar") => {
+  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick(type as "whatsapp", "header"));
+};
+
+// Rotação de CTA no header — sticky por sessão: hora WhatsApp, hora Agendar,
+// nunca os dois juntos. Preserva o WhatsAppFloat global como fallback.
+const HEADER_CTA_KEY = "header_cta_variant_v1";
+const pickHeaderVariant = (): "whatsapp" | "agendar" => {
+  if (typeof window === "undefined") return "whatsapp";
+  try {
+    const saved = sessionStorage.getItem(HEADER_CTA_KEY);
+    if (saved === "whatsapp" || saved === "agendar") return saved;
+    const variant: "whatsapp" | "agendar" = Math.random() < 0.5 ? "whatsapp" : "agendar";
+    sessionStorage.setItem(HEADER_CTA_KEY, variant);
+    // Expor no dataLayer para segmentar no GA4.
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "header_cta_variant_assigned", { variant });
+    }
+    return variant;
+  } catch {
+    return "whatsapp";
+  }
 };
 
 
@@ -71,7 +97,12 @@ const menuGroups: Array<{
 
 export const FastHeader = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  const [variant, setVariant] = useState<"whatsapp" | "agendar">("whatsapp");
+  const [schedulingOpen, setSchedulingOpen] = useState(false);
 
+  useEffect(() => {
+    setVariant(pickHeaderVariant());
+  }, []);
 
   // Shrink-on-scroll: alterna `data-scrolled` no <html>, e o CSS troca
   // `--site-header-height` por sua versão compacta. Sem re-render do React.
@@ -121,17 +152,36 @@ export const FastHeader = () => {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackHeaderClick("whatsapp")}
-            aria-label="Falar com técnico no WhatsApp"
-            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-sm transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
-          >
-            <span aria-hidden="true">☏</span>
-            <span>WhatsApp</span>
-          </a>
+          {variant === "whatsapp" ? (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackHeaderClick("whatsapp")}
+              aria-label="Falar com técnico no WhatsApp"
+              data-cta-variant="whatsapp"
+              className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-sm transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
+            >
+              <span aria-hidden="true">☏</span>
+              <span>WhatsApp</span>
+            </a>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                trackHeaderClick("agendar");
+                setSchedulingOpen(true);
+              }}
+              aria-label="Agendar visita técnica"
+              data-cta-variant="agendar"
+              className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90 sm:min-w-24"
+            >
+              <span aria-hidden="true">📅</span>
+              <span>Agendar</span>
+            </button>
+          )}
+
+
 
 
           <details className="group/root relative">
@@ -155,9 +205,15 @@ export const FastHeader = () => {
                 Menu
               </div>
               <div className="grid gap-2 border-b border-border p-4">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackHeaderClick("whatsapp")} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-4 text-sm font-bold text-primary-foreground">
-                  <span aria-hidden="true">☏</span> Falar no WhatsApp
-                </a>
+                {variant === "whatsapp" ? (
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackHeaderClick("whatsapp")} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-4 text-sm font-bold text-primary-foreground">
+                    <span aria-hidden="true">☏</span> Falar no WhatsApp
+                  </a>
+                ) : (
+                  <button type="button" onClick={() => { trackHeaderClick("agendar"); setSchedulingOpen(true); }} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground">
+                    <span aria-hidden="true">📅</span> Agendar visita técnica
+                  </button>
+                )}
                 <a href="/arrumar-pc" className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-accent/40 bg-accent/5 px-4 text-sm font-semibold text-accent">
                   <span aria-hidden="true">◉</span> Arrumar PC online — Brasil
                 </a>
@@ -201,6 +257,11 @@ export const FastHeader = () => {
         </div>
         </div>
       </header>
+      {schedulingOpen ? (
+        <Suspense fallback={null}>
+          <SchedulingModal isOpen={schedulingOpen} onClose={() => setSchedulingOpen(false)} />
+        </Suspense>
+      ) : null}
     </>
   );
 };
