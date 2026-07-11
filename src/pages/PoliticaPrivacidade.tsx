@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
-import { ShieldCheck, Cookie, Database, Mail, MessageCircle, FileText } from "lucide-react";
+import { ShieldCheck, Cookie, Database, MessageCircle, FileText } from "lucide-react";
 
 const CANONICAL = "https://tecnicocuritiba.com.br/politica-de-privacidade";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
 const CNPJ = "41.723.708/0001-58";
 const WHATSAPP = "5541997452053";
-const EMAIL = "contato@tecnicocuritiba.com.br";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Tenho uma dúvida sobre a Política de Privacidade do site.")}`;
 const UPDATED = "24/06/2026";
 
 const sections: { id: string; title: string; icon: typeof ShieldCheck; body: React.ReactNode }[] = [
@@ -25,8 +25,8 @@ const sections: { id: string; title: string; icon: typeof ShieldCheck; body: Rea
           inscrita no CNPJ {CNPJ}, com atendimento em Curitiba e Região Metropolitana – PR.
         </p>
         <p className="mt-2">
-          Contato do encarregado (DPO): <a href={`mailto:${EMAIL}`} className="text-accent underline">{EMAIL}</a>{" "}
-          ou WhatsApp (41) 9 9745-2053.
+          Contato do encarregado (DPO) exclusivamente pelo{" "}
+          <a href={WHATSAPP_URL} className="text-accent underline" data-cta-location="privacy_dpo_whatsapp">WhatsApp do site</a>.
         </p>
       </>
     ),
@@ -128,8 +128,8 @@ const sections: { id: string; title: string; icon: typeof ShieldCheck; body: Rea
           <li>Informações sobre compartilhamento.</li>
         </ul>
         <p className="mt-2">
-          Para exercer, envie o pedido pelo e-mail{" "}
-          <a href={`mailto:${EMAIL}`} className="text-accent underline">{EMAIL}</a>.
+          Para exercer, envie o pedido pelo{" "}
+          <a href={WHATSAPP_URL} className="text-accent underline" data-cta-location="privacy_rights_whatsapp">WhatsApp do site</a>.
           Respondemos em até 15 dias.
         </p>
       </>
@@ -143,18 +143,17 @@ const sections: { id: string; title: string; icon: typeof ShieldCheck; body: Rea
       <p>
         Aplicamos medidas técnicas e administrativas razoáveis para proteger seus dados
         (HTTPS, controle de acesso, backups). Nenhum sistema é 100% imune; comunique imediatamente
-        qualquer suspeita pelo nosso e-mail.
+        qualquer suspeita pelo nosso WhatsApp.
       </p>
     ),
   },
   {
     id: "contato",
     title: "10. Como falar com a gente",
-    icon: Mail,
+    icon: MessageCircle,
     body: (
       <ul className="list-disc pl-5 space-y-1.5">
-        <li>WhatsApp: <a className="text-accent underline" href={`https://wa.me/${WHATSAPP}`} data-cta-location="privacy_contact_whatsapp">Clique para chamar no WhatsApp</a></li>
-        <li>E-mail: <a className="text-accent underline" href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+        <li>WhatsApp: <a className="text-accent underline" href={WHATSAPP_URL} data-cta-location="privacy_contact_whatsapp">Iniciar atendimento pelo WhatsApp</a></li>
         <li>Endereço: Curitiba e Região Metropolitana – PR</li>
       </ul>
     ),
