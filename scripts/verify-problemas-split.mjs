@@ -51,7 +51,7 @@ function extractWinner(slug) {
 }
 let seoFails = 0;
 for (const [slug, widx] of MERGES) {
-  const winner = orig.problemaPagesData[widx - 1];
+  const winner = extractWinner(slug);
   const now = problemaPagesData.find((p) => p.slug === slug);
   const ok =
     winner.title === now.title &&
@@ -60,6 +60,8 @@ for (const [slug, widx] of MERGES) {
   if (!ok) {
     seoFails++;
     console.error(`[SEO FAIL] ${slug}`);
+    console.error("  expected:", winner);
+    console.error("  got:     ", { title: now.title, h1: now.h1, metaDescription: now.metaDescription });
   }
 }
 
