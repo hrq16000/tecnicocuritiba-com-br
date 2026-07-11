@@ -35,7 +35,7 @@ for (const p of redirectPaths) routes.delete(p);
 
 // 2) Expand dynamic routes from data files.
 const brandSlugs = [...brandsSrc.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
-const problemSlugs = [...problemsSrc.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+const problemSlugs = problemSlugsFromDir;
 
 for (const s of brandSlugs) routes.add(`/marcas/${s}`);
 for (const s of problemSlugs) routes.add(`/problemas/${s}`);
