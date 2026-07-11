@@ -88,3 +88,6 @@ Sitemap: https://tecnicocuritiba.com.br/sitemap.xml
 Sitemap: https://tecnicocuritiba.com.br/sitemap-news.xml
 
 Host: https://tecnicocuritiba.com.br
+
+# Feed RSS do blog
+# RSS: https://tecnicocuritiba.com.br/rss.xml
