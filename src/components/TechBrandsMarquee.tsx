@@ -59,30 +59,24 @@ export const TechBrandsMarquee = () => {
       </div>
       <div className="container mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 items-center justify-items-center min-h-[60px]">
-          {visibleBrands.map((b) => (
-            <Link
-              key={b.key}
-              to={`/marcas/${b.slug}`}
-              className={`${b.anim} select-none group flex flex-col items-center gap-1.5 hover:scale-110 transition-transform duration-300`}
-              title={`Assistência Técnica ${b.name}`}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                className="w-8 h-8 md:w-9 md:h-9 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_var(--brand-shadow)]"
-                fill="currentColor"
-                stroke="none"
-                style={{
-                  color: b.color === "#000000" ? "hsl(var(--muted-foreground))" : b.color,
-                  ["--brand-shadow" as string]: `${b.color}80`,
-                }}
+          {visibleBrands.map((b) => {
+            const brandColor = b.color === "#000000" ? "hsl(var(--foreground))" : b.color;
+            return (
+              <Link
+                key={b.key}
+                to={`/marcas/${b.slug}`}
+                className={`${b.anim} select-none group inline-flex items-center justify-center px-3 py-2 rounded-md border border-border/60 bg-background/70 hover:bg-background hover:border-accent/50 hover:scale-105 transition-all duration-300`}
+                title={`Assistência Técnica ${b.name}`}
               >
-                <path d={b.logoPath} />
-              </svg>
-              <span className="text-muted-foreground font-heading font-bold text-[11px] md:text-xs tracking-wide group-hover:text-accent transition-colors duration-300 text-center leading-tight">
-                {b.name}
-              </span>
-            </Link>
-          ))}
+                <span
+                  className="font-heading font-extrabold text-sm md:text-base tracking-tight text-foreground group-hover:text-accent transition-colors duration-300 leading-none"
+                  style={{ color: brandColor }}
+                >
+                  {b.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
