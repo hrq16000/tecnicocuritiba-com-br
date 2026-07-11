@@ -1,0 +1,34 @@
+name: Internal links
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install deps
+        run: bun install --frozen-lockfile
+      - name: Build
+        run: bun run build
+      - name: Start preview
+        run: bun run preview --port 4173 &
+      - name: Wait for preview
+        run: |
+          for i in {1..30}; do
+            curl -sf http://localhost:4173 >/dev/null && exit 0
+            sleep 1
+          done
+          echo "preview não subiu"; exit 1
+      - name: Check internal links + sitemap URLs
+        run: node scripts/check-internal-links.mjs
+        env:
+          PREVIEW_URL: http://localhost:4173
