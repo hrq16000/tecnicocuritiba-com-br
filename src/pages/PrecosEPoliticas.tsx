@@ -46,29 +46,29 @@ const servicosPrecos = [
     categoria: "Formatação e Sistema",
     icon: Monitor,
     servicos: [
-      { nome: "Formatação Completa", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Até 1h R$168,99 • +1h consultar" },
-      { nome: "Instalação Windows 11", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Até 1h R$168,99 • Licença não inclusa" },
-      { nome: "Reinstalação de Sistema", valor: "A partir de R$ 99,99", obs: "30min R$99,99 • Até 1h R$168,99 • Mantendo dados do usuário" },
-      { nome: "Configuração Inicial PC Novo", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Até 30min R$99,99" },
+      { nome: "Formatação Completa", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Até 1h R$169,99 • +1h consultar" },
+      { nome: "Instalação Windows 11", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Até 1h R$169,99 • Licença não inclusa" },
+      { nome: "Reinstalação de Sistema", valor: "A partir de R$ 99,99", obs: "30min R$99,99 • Até 1h R$169,99 • Mantendo dados do usuário" },
+      { nome: "Configuração Inicial PC Novo", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Até 30min R$99,99" },
     ]
   },
   {
     categoria: "Segurança e Vírus",
     icon: Shield,
     servicos: [
-      { nome: "Remoção de Vírus Simples", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Até 30min R$99,99" },
-      { nome: "Remoção Vírus Complexo", valor: "A partir de R$ 168,99", obs: "Até 1h R$168,99 • Até 2h R$199,99 • Ransomware, rootkits" },
-      { nome: "Instalação Antivírus", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Gratuito ou licenciado" },
-      { nome: "Limpeza Completa + Proteção", valor: "A partir de R$ 168,99", obs: "Até 1h R$168,99 • Formatação + antivírus" },
+      { nome: "Remoção de Vírus Simples", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Até 30min R$99,99" },
+      { nome: "Remoção Vírus Complexo", valor: "A partir de R$ 169,99", obs: "Até 1h R$169,99 • Até 2h R$199,99 • Ransomware, rootkits" },
+      { nome: "Instalação Antivírus", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Gratuito ou licenciado" },
+      { nome: "Limpeza Completa + Proteção", valor: "A partir de R$ 169,99", obs: "Até 1h R$169,99 • Formatação + antivírus" },
     ]
   },
   {
     categoria: "Hardware e Upgrades",
     icon: HardDrive,
     servicos: [
-      { nome: "Upgrade SSD (só mão de obra)", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Peça não inclusa" },
-      { nome: "Upgrade Memória RAM", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Peça não inclusa" },
-      { nome: "Troca de HD por SSD", valor: "A partir de R$ 99,99", obs: "30min R$99,99 • Clonagem até 1h R$168,99" },
+      { nome: "Upgrade SSD (só mão de obra)", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Peça não inclusa" },
+      { nome: "Upgrade Memória RAM", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Peça não inclusa" },
+      { nome: "Troca de HD por SSD", valor: "A partir de R$ 99,99", obs: "30min R$99,99 • Clonagem até 1h R$169,99" },
       { nome: "Limpeza Interna + Pasta Térmica", valor: "A partir de R$ 169", obs: "Mínimo 1h R$169 • Notebook ou desktop" },
     ]
   },
@@ -91,9 +91,9 @@ const servicosPrecos = [
     categoria: "Redes e Internet",
     icon: Wifi,
     servicos: [
-      { nome: "Configuração de Roteador", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Wi-Fi + segurança" },
+      { nome: "Configuração de Roteador", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Wi-Fi + segurança" },
       { nome: "Instalação Rede Cabeada", valor: "Sob orçamento", obs: "Por ponto de rede" },
-      { nome: "Extensão de Sinal Wi-Fi", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Repetidor/mesh" },
+      { nome: "Extensão de Sinal Wi-Fi", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Repetidor/mesh" },
       { nome: "Configuração VPN", valor: "Sob orçamento", obs: "Empresarial ou residencial" },
     ]
   },
@@ -101,17 +101,17 @@ const servicosPrecos = [
     categoria: "Backup e Dados",
     icon: Database,
     servicos: [
-      { nome: "Backup de Dados", valor: "A partir de R$ 168,99", obs: "Mínimo 1-3h • R$168,99 (1h) a R$249,99 (3h)" },
+      { nome: "Backup de Dados", valor: "A partir de R$ 169,99", obs: "Mínimo 1-3h • R$169,99 (1h) a R$249,99 (3h)" },
       { nome: "Recuperação de Dados", valor: "A partir de R$ 300", obs: "Somente com coleta e entrega • HD funcionando" },
       { nome: "Recuperação Dados HD Danificado", valor: "Sob orçamento", obs: "Análise prévia" },
-      { nome: "Configuração Backup Nuvem", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • OneDrive, Google Drive" },
+      { nome: "Configuração Backup Nuvem", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • OneDrive, Google Drive" },
     ]
   },
   {
     categoria: "Suporte Remoto",
     icon: Headphones,
     servicos: [
-      { nome: "Suporte Remoto Básico", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$69,99 • Problemas simples" },
+      { nome: "Suporte Remoto Básico", valor: "a partir de R$ 99,99", obs: "⚡ Flash 15min R$ 99,99 • Problemas simples" },
       { nome: "Suporte Remoto Avançado", valor: "A partir de R$ 99,99", obs: "30min R$99,99 • Configurações complexas" },
       { nome: "Hora Técnica Remota", valor: "A partir de R$ 79 / hora", obs: "Para empresas e particulares" },
     ]
@@ -231,7 +231,7 @@ const PrecosEPoliticas = () => {
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
                 {[
-                  { tempo: "até 1 hora", valor: "R$ 168,99" },
+                  { tempo: "até 1 hora", valor: "R$ 169,99" },
                   { tempo: "até 2 horas", valor: "R$ 199,99" },
                   { tempo: "até 3 horas", valor: "R$ 249,99" },
                 ].map((t, i) => (

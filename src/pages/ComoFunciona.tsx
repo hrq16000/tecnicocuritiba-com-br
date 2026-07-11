@@ -245,7 +245,7 @@ const ComoFunciona = () => {
                   Quanto Custa o Atendimento?
                 </h2>
                 <p className="text-muted-foreground mb-3 leading-relaxed max-w-xl mx-auto">
-                  Os valores iniciais são simples e transparentes. A visita técnica presencial começa em <strong className="text-accent">R$ 99,99</strong>. Formatação a partir de <strong className="text-accent">R$ 168,99</strong>. Suporte remoto a partir de <strong className="text-accent">R$ 99,99</strong>. Hora técnica remota a partir de <strong className="text-accent">R$ 79/hora</strong>.
+                  Os valores iniciais são simples e transparentes. A visita técnica presencial começa em <strong className="text-accent">R$ 99,99</strong>. Formatação a partir de <strong className="text-accent">R$ 169,99</strong>. Suporte remoto a partir de <strong className="text-accent">R$ 99,99</strong>. Hora técnica remota a partir de <strong className="text-accent">R$ 79/hora</strong>.
                 </p>
                 <p className="text-sm text-muted-foreground mb-6">
                   Os valores podem variar conforme a complexidade do serviço, necessidade de peças e localização. Veja todos os detalhes na nossa tabela completa de preços.
@@ -493,7 +493,7 @@ const ComoFunciona = () => {
                     exemplo: "Notebook não liga → Fonte defeituosa + bateria viciada",
                     tempo: "1-3 horas ou coleta para bancada",
                     solucao: "Diagnóstico detalhado, troca de fonte/carregador, avaliação de bateria",
-                    custo: "R$ 168,99 a R$ 400",
+                    custo: "R$ 169,99 a R$ 400",
                   },
                   {
                     nivel: "Complexo",
