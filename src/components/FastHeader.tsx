@@ -199,7 +199,8 @@ export const FastHeader = () => {
             </nav>
           </details>
         </div>
-      </div>
-    </header>
+        </div>
+      </header>
+    </>
   );
 };
