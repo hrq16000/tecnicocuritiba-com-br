@@ -29,9 +29,9 @@ const Index = () => {
     const ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
     if (ogUrl) ogUrl.content = "https://tecnicocuritiba.com.br/";
     const ogImage = document.querySelector<HTMLMetaElement>('meta[property="og:image"]');
-    if (ogImage) ogImage.content = "https://tecnicocuritiba.com.br/og-image.png?v=20260629-1";
+    if (ogImage) ogImage.content = "https://tecnicocuritiba.com.br/og-image.jpg?v=20260711-1";
     const twitterImage = document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]');
-    if (twitterImage) twitterImage.content = "https://tecnicocuritiba.com.br/og-image.png?v=20260629-1";
+    if (twitterImage) twitterImage.content = "https://tecnicocuritiba.com.br/og-image.jpg?v=20260711-1";
     const id = window.setTimeout(() => {
       import("@/lib/analytics").then(({ trackPageView }) => trackPageView("/", "Home"));
     }, 1800);
@@ -52,7 +52,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <FastHeader />
       <TopOfferBanner />
-      <main>
+      <main id="main-content">
         <FastHeroSection />
 
         {showNearFold ? (
