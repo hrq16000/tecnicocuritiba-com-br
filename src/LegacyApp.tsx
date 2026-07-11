@@ -406,9 +406,13 @@ const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ defa
 const Sonner = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
 
 const AppInit = () => {
-  useEffect(() => { captureUtmsFromUrl(); }, []);
+  useEffect(() => {
+    captureUtmsFromUrl();
+    import("@/lib/analytics").then(({ attachScrollDepthTracking }) => attachScrollDepthTracking());
+  }, []);
   return null;
 };
+
 
 const IdleEnhancements = () => {
   const [enabled, setEnabled] = useState(false);
