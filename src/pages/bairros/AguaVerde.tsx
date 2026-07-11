@@ -4,7 +4,7 @@ const data = {
   nome: "Água Verde",
   slug: "agua-verde",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no Água Verde | Curitiba | Atendimento a Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Água Verde | Curitiba | Atendimento a Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Água Verde, Curitiba. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio rápido. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Água Verde – Curitiba",
   subtitulo: "Atendimento técnico profissional a domicílio no Água Verde. Diagnóstico no local, orçamento transparente e garantia.",

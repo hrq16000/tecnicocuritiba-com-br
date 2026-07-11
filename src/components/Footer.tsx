@@ -101,7 +101,7 @@ const infoLinks = [
 
 // NAP (Name · Address · Phone) — fonte única de verdade para SEO local
 const NAP = {
-  name: "Técnico Curitiba — Assistência Técnica em Informática",
+  name: "Técnico em Curitiba — Assistência Técnica em Informática",
   street: "Atendimento a domicílio e coleta",
   city: "Curitiba",
   region: "PR",
@@ -120,7 +120,7 @@ const localBusinessSchema = {
   "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
   name: NAP.name,
-  alternateName: "Técnico Curitiba",
+  alternateName: "Técnico em Curitiba",
   description:
     "Assistência técnica em informática a domicílio em Curitiba e Região Metropolitana: formatação, conserto de PC/notebook, remoção de vírus, upgrade de SSD/memória, redes Wi-Fi e suporte para empresas.",
   image: "https://tecnicocuritiba.com.br/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp",
@@ -211,7 +211,7 @@ export const Footer = () => {
           <div className="col-span-2 md:col-span-3 lg:col-span-2 space-y-4">
             <div className="inline-flex w-fit rounded-md bg-white/95 px-2 py-1 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-shadow duration-300">
               <img
-                alt="Técnico Curitiba"
+                alt="Técnico em Curitiba"
                 className="h-10 w-auto"
                 src="/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp"
                 width="200"
@@ -353,7 +353,7 @@ export const Footer = () => {
 
         <div className="border-t border-white/[0.08] pt-7 text-center space-y-2 spotlight-sweep">
           <p className="text-white/70 text-sm">
-            © {currentYear} Técnico Curitiba - Assistência Técnica em Informática. CNPJ: 41.723.708/0001-58. Todos os direitos reservados.
+            © {currentYear} Técnico em Curitiba - Assistência Técnica em Informática. CNPJ: 41.723.708/0001-58. Todos os direitos reservados.
           </p>
           <p className="text-white/80 text-xs">
             Uma empresa do ecossistema{" "}

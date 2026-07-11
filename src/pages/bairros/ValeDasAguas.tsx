@@ -4,7 +4,7 @@ const data = {
   nome: "Vale das Águas",
   slug: "vale-das-aguas",
   cidade: "Pinhais",
-  metaTitle: "Técnico de Informática no Vale das Águas | Pinhais | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Vale das Águas | Pinhais | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Vale das Águas, Pinhais. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Vale das Águas – Pinhais",
   subtitulo: "Atendimento técnico profissional a domicílio no Vale das Águas. Diagnóstico no local, orçamento transparente e garantia.",

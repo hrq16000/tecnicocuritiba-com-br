@@ -4,7 +4,7 @@ const data = {
   nome: "Mercês",
   slug: "merces",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no Mercês | Curitiba | Atendimento a Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Mercês | Curitiba | Atendimento a Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Mercês, Curitiba. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio rápido. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Mercês – Curitiba",
   subtitulo: "Atendimento técnico profissional a domicílio no Mercês. Diagnóstico no local, orçamento transparente e garantia.",

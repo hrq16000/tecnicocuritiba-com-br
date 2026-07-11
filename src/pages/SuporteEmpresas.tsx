@@ -60,7 +60,7 @@ const diferenciais = [
 
 const SuporteEmpresas = () => {
   useEffect(() => {
-    document.title = "Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico Curitiba";
+    document.title = "Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -72,7 +72,7 @@ const SuporteEmpresas = () => {
 
     // Schemas Service para sinais Premium PJ
     import("@/lib/schemaValidation").then(({ validateAndInjectSchema }) => {
-      const baseProvider = { "@type": "LocalBusiness", name: "Técnico Curitiba", url: "https://tecnicocuritiba.com.br/", areaServed: "Curitiba e região metropolitana" };
+      const baseProvider = { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: "https://tecnicocuritiba.com.br/", areaServed: "Curitiba e região metropolitana" };
       const services = [
         { id: "service-faturado", name: "Pagamento Faturado PJ", desc: "Atendimento técnico corporativo com pagamento faturado (boleto/30 dias) para empresas em Curitiba." },
         { id: "service-nfe", name: "Emissão de NF-e", desc: "Nota fiscal eletrônica em todos os atendimentos PJ, conforme legislação do Município de Curitiba." },
@@ -104,7 +104,7 @@ const SuporteEmpresas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico Curitiba" description="Suporte técnico empresarial em Curitiba. TI para pequenas e médias empresas com planos mensais, nota fiscal e pagamento faturado. Manutenção de computadores corporativos." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
+      <PageSEO title="Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico em Curitiba" description="Suporte técnico empresarial em Curitiba. TI para pequenas e médias empresas com planos mensais, nota fiscal e pagamento faturado. Manutenção de computadores corporativos." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
       <JsonLdSchema />
       <Header />
       <main>
@@ -226,7 +226,7 @@ const SuporteEmpresas = () => {
           <div className="container mx-auto">
             <div className="text-center mb-6">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-                Por Que Empresas Escolhem a Técnico Curitiba?
+                Por Que Empresas Escolhem a Técnico em Curitiba?
               </h2>
               <p className="text-muted-foreground text-lg">
                 Diferenciais que fazem a diferença no dia a dia da sua empresa
@@ -303,6 +303,24 @@ const SuporteEmpresas = () => {
         </section>
 
         <TrustSection />
+
+        <section className="py-10 bg-secondary/40" aria-labelledby="hub-empresa-ti">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h2 id="hub-empresa-ti" className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+              Conheça o hub oficial: Empresa de TI em Curitiba
+            </h2>
+            <p className="text-muted-foreground mb-5">
+              Página dedicada com FAQ corporativo, bairros comerciais atendidos (Batel, Centro Cívico, Ecoville) e planos mensais com SLA.
+            </p>
+            <a
+              href="/empresa-de-ti-curitiba"
+              className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-semibold px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+            >
+              Ver hub Empresa de TI Curitiba →
+            </a>
+          </div>
+        </section>
+
         <CTASection />
       </main>
       <RealImageSection imageKey="servidores" secondaryImageKey="redesWifi" layout="duo" caption="Infraestrutura de rede empresarial" secondaryCaption="Configuração profissional de redes corporativas" />

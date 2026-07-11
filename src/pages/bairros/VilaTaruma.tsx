@@ -4,7 +4,7 @@ const data = {
   nome: "Vila Tarumã",
   slug: "vila-taruma",
   cidade: "Pinhais",
-  metaTitle: "Técnico de Informática no Vila Tarumã | Pinhais | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Vila Tarumã | Pinhais | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Vila Tarumã, Pinhais. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Vila Tarumã – Pinhais",
   subtitulo: "Atendimento técnico profissional a domicílio no Vila Tarumã. Diagnóstico no local, orçamento transparente e garantia.",

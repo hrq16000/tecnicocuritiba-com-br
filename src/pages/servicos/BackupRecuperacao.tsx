@@ -14,7 +14,7 @@ const WHATSAPP_NUMBER = "5541997452053";
 
 const BackupRecuperacao = () => {
   useEffect(() => {
-    document.title = "Backup e Recuperação de Dados em Curitiba | Técnico Curitiba";
+    document.title = "Backup e Recuperação de Dados em Curitiba | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Backup e recuperação de dados em Curitiba. Resgate de arquivos de HD, SSD, pendrive. Recuperação de dados deletados. Atendimento especializado.");
@@ -30,7 +30,7 @@ const BackupRecuperacao = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Backup e Recuperação de Dados em Curitiba | Técnico Curitiba" description="Backup e recuperação de dados em Curitiba. Resgate de arquivos de HD, SSD, pendrive. Recuperação de dados deletados. Atendimento especializado." path="/servicos/backup-recuperacao"  breadcrumbs={[
+      <PageSEO title="Backup e Recuperação de Dados em Curitiba | Técnico em Curitiba" description="Backup e recuperação de dados em Curitiba. Resgate de arquivos de HD, SSD, pendrive. Recuperação de dados deletados. Atendimento especializado." path="/servicos/backup-recuperacao"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Backup e Recuperação", path: "/servicos/backup-recuperacao" }

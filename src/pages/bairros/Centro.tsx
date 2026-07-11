@@ -4,7 +4,7 @@ const data = {
   nome: "Centro",
   slug: "centro",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no Centro de Curitiba | Atendimento Rápido | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Centro de Curitiba | Atendimento Rápido | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Centro de Curitiba. Atendimento em escritórios, lojas e residências. Formatação, remoção de vírus e suporte técnico. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Centro de Curitiba",
   subtitulo: "Atendimento rápido no coração da cidade. Escritórios, lojas e residências.",

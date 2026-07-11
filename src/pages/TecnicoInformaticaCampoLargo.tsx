@@ -168,7 +168,7 @@ const campoLargoSchema = {
 
 const TecnicoInformaticaCampoLargo = () => {
   useEffect(() => {
-    document.title = "Técnico de Informática em Campo Largo | Assistência Técnica | Técnico Curitiba";
+    document.title = "Técnico de Informática em Campo Largo | Assistência Técnica | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -181,7 +181,7 @@ const TecnicoInformaticaCampoLargo = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Técnico de Informática em Campo Largo | Assistência Técnica | Técnico Curitiba" description="Técnico de informática em Campo Largo PR. Atendimento a domicílio para computadores e notebooks. Formatação, vírus, upgrade. a partir de R$ 99,99. Capital da Louça." path="/tecnico-informatica-campo-largo" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Campo Largo", path: "/tecnico-informatica-campo-largo" }]} />
+      <PageSEO title="Técnico de Informática em Campo Largo | Assistência Técnica | Técnico em Curitiba" description="Técnico de informática em Campo Largo PR. Atendimento a domicílio para computadores e notebooks. Formatação, vírus, upgrade. a partir de R$ 99,99. Capital da Louça." path="/tecnico-informatica-campo-largo" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Campo Largo", path: "/tecnico-informatica-campo-largo" }]} />
       <CityServiceSchema city={"Campo Largo"} citySameAs={"https://pt.wikipedia.org/wiki/Campo_Largo_(Paran%C3%A1)"} path={"/tecnico-informatica-campo-largo"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(campoLargoSchema) }} />
       <JsonLdSchema />

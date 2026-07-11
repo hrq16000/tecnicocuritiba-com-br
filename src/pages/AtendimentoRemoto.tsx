@@ -37,13 +37,13 @@ const benefits = [
 
 const AtendimentoRemoto = () => {
   useEffect(() => {
-    document.title = "Atendimento Remoto de Informática em Curitiba | Técnico Curitiba";
+    document.title = "Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba";
     trackPageView("/atendimento-remoto", "Atendimento Remoto");
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Atendimento Remoto de Informática em Curitiba | Técnico Curitiba" description="Atendimento Remoto de Informática em Curitiba | Técnico Curitiba" path="/atendimento-remoto" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]} />
+      <PageSEO title="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" description="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" path="/atendimento-remoto" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]} />
       <JsonLdSchema />
       <Header />
       <main>

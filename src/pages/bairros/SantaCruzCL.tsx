@@ -4,7 +4,7 @@ const data = {
   nome: "Santa Cruz",
   slug: "santa-cruz-campo-largo",
   cidade: "Campo Largo",
-  metaTitle: "Técnico de Informática no Santa Cruz | Campo Largo | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Santa Cruz | Campo Largo | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Santa Cruz, Campo Largo. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Santa Cruz – Campo Largo",
   subtitulo: "Atendimento técnico profissional a domicílio no Santa Cruz. Diagnóstico no local, orçamento transparente e garantia.",

@@ -4,7 +4,7 @@ const data = {
   nome: "Portão",
   slug: "portao",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no Portão Curitiba | Atendimento Residencial | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Portão Curitiba | Atendimento Residencial | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Portão, Curitiba. Atendimento em domicílio para conserto de PC e notebook. Formatação, vírus e upgrade. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Portão – Curitiba",
   subtitulo: "Atendimento residencial e comercial no Portão e região. Técnico perto de você.",

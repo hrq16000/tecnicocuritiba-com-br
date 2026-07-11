@@ -4,7 +4,7 @@ const data = {
   nome: "Borda do Campo",
   slug: "borda-do-campo-qb",
   cidade: "Quatro Barras",
-  metaTitle: "Técnico de Informática no Borda do Campo | Quatro Barras | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Borda do Campo | Quatro Barras | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Borda do Campo, Quatro Barras. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Borda do Campo – Quatro Barras",
   subtitulo: "Atendimento técnico profissional a domicílio no Borda do Campo. Diagnóstico no local, orçamento transparente e garantia.",

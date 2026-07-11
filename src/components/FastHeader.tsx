@@ -96,7 +96,7 @@ export const FastHeader = () => {
       <div className="container mx-auto flex h-full items-center justify-between gap-2">
         <a href="/" aria-label="Início" className="min-w-0 flex-shrink-0">
           <img
-            alt="Técnico Curitiba — Assistência Técnica em Informática"
+            alt="Técnico em Curitiba — Assistência Técnica em Informática"
             src="/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp"
             width="304"
             height="98"
@@ -197,7 +197,7 @@ export const FastHeader = () => {
                 )}
               </div>
               <div className="border-t border-border p-4 text-center text-xs text-muted-foreground">
-                © Técnico Curitiba — Atendimento Brasil via WhatsApp
+                © Técnico em Curitiba — Atendimento Brasil via WhatsApp
               </div>
             </nav>
           </details>

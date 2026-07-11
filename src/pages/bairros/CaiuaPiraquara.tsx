@@ -4,7 +4,7 @@ const data = {
   nome: "Caiuá",
   slug: "caiua-piraquara",
   cidade: "Piraquara",
-  metaTitle: "Técnico de Informática no Caiuá | Piraquara | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Caiuá | Piraquara | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Caiuá, Piraquara. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Caiuá – Piraquara",
   subtitulo: "Atendimento técnico profissional a domicílio no Caiuá. Diagnóstico no local, orçamento transparente e garantia.",

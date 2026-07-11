@@ -15,7 +15,7 @@ const WHATSAPP_NUMBER = "5541997452053";
 
 const RemocaoVirus = () => {
   useEffect(() => {
-    document.title = "Remoção de Vírus em Curitiba | Malware, Ransomware - Técnico Curitiba";
+    document.title = "Remoção de Vírus em Curitiba | Malware, Ransomware - Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Remoção de vírus, malware, ransomware e spyware em Curitiba. Limpeza completa do computador. Atendimento domiciliar. Suporte remoto disponível.");
@@ -31,7 +31,7 @@ const RemocaoVirus = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Remoção de Vírus em Curitiba a partir de R$ 99,99 | Técnico Curitiba" description="Remoção de vírus, malware e ransomware em Curitiba a partir de R$ 99,99. Limpeza completa, antivírus configurado e atendimento em até 30 min." path="/servicos/remocao-virus"  breadcrumbs={[
+      <PageSEO title="Remoção de Vírus em Curitiba a partir de R$ 99,99 | Técnico em Curitiba" description="Remoção de vírus, malware e ransomware em Curitiba a partir de R$ 99,99. Limpeza completa, antivírus configurado e atendimento em até 30 min." path="/servicos/remocao-virus"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Remoção de Vírus", path: "/servicos/remocao-virus" }

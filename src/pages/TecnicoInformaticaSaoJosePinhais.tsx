@@ -143,7 +143,7 @@ const localFaqs = [
 
 const TecnicoInformaticaSaoJosePinhais = () => {
   useEffect(() => {
-    document.title = "Técnico de Informática em São José dos Pinhais | Assistência Técnica | Técnico Curitiba";
+    document.title = "Técnico de Informática em São José dos Pinhais | Assistência Técnica | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -156,7 +156,7 @@ const TecnicoInformaticaSaoJosePinhais = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Técnico de Informática em São José dos Pinhais | Assistência Técnica | Técnico Curitiba" description="Técnico de informática em São José dos Pinhais. Atendimento em domicílio e empresas. Conserto de computador, formatação, remoção de vírus na região metropolitana de Curitiba." path="/tecnico-informatica-sao-jose-pinhais" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "São José dos Pinhais", path: "/tecnico-informatica-sao-jose-pinhais" }]} />
+      <PageSEO title="Técnico de Informática em São José dos Pinhais | Assistência Técnica | Técnico em Curitiba" description="Técnico de informática em São José dos Pinhais. Atendimento em domicílio e empresas. Conserto de computador, formatação, remoção de vírus na região metropolitana de Curitiba." path="/tecnico-informatica-sao-jose-pinhais" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "São José dos Pinhais", path: "/tecnico-informatica-sao-jose-pinhais" }]} />
       <CityServiceSchema city={"São José dos Pinhais"} citySameAs={"https://pt.wikipedia.org/wiki/S%C3%A3o_Jos%C3%A9_dos_Pinhais"} path={"/tecnico-informatica-sao-jose-pinhais"} />
       <JsonLdSchema />
       <Header />

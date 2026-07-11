@@ -168,7 +168,7 @@ const pinhaisSchema = {
 
 const TecnicoInformaticaPinhais = () => {
   useEffect(() => {
-    document.title = "Técnico de Informática em Pinhais | Assistência Técnica Rápida | Técnico Curitiba";
+    document.title = "Técnico de Informática em Pinhais | Assistência Técnica Rápida | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -181,7 +181,7 @@ const TecnicoInformaticaPinhais = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Técnico de Informática em Pinhais | Assistência Técnica Rápida | Técnico Curitiba" description="Técnico de informática em Pinhais PR. Atendimento rápido a domicílio. Formatação, conserto de PC e notebook, remoção de vírus. Próximo a Curitiba. a partir de R$ 99,99." path="/tecnico-informatica-pinhais" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Pinhais", path: "/tecnico-informatica-pinhais" }]} />
+      <PageSEO title="Técnico de Informática em Pinhais | Assistência Técnica Rápida | Técnico em Curitiba" description="Técnico de informática em Pinhais PR. Atendimento rápido a domicílio. Formatação, conserto de PC e notebook, remoção de vírus. Próximo a Curitiba. a partir de R$ 99,99." path="/tecnico-informatica-pinhais" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Pinhais", path: "/tecnico-informatica-pinhais" }]} />
       <CityServiceSchema city={"Pinhais"} citySameAs={"https://pt.wikipedia.org/wiki/Pinhais"} path={"/tecnico-informatica-pinhais"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pinhaisSchema) }} />
       <JsonLdSchema />

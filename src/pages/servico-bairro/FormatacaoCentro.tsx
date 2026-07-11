@@ -1,7 +1,7 @@
 import { ServicoBairroTemplate, ServicoBairroData } from "./ServicoBairroTemplate";
 
 const data: ServicoBairroData = {
-  metaTitle: "Formatação de Computador no Centro de Curitiba | Atendimento Rápido | Técnico Curitiba",
+  metaTitle: "Formatação de Computador no Centro de Curitiba | Atendimento Rápido | Técnico em Curitiba",
   metaDescription: "Formatação de computador e notebook no Centro de Curitiba. Windows 10/11, backup completo, drivers e programas. Atendimento no mesmo dia. a partir de R$ 99,99.",
   
   servico: "Formatação de Computador",

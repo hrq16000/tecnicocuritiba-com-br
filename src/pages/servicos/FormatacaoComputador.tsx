@@ -16,7 +16,7 @@ const WHATSAPP_NUMBER = "5541997452053";
 
 const FormatacaoComputador = () => {
   useEffect(() => {
-    document.title = "Formatação de Computador em Curitiba a partir de R$ 99,99 | Técnico Curitiba";
+    document.title = "Formatação de Computador em Curitiba a partir de R$ 99,99 | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Formatação de computador e notebook em Curitiba a partir de R$ 99,99. Instalação Windows 10/11, drivers e backup. Atendimento domiciliar em até 30 min.");
@@ -32,7 +32,7 @@ const FormatacaoComputador = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Formatação de Computador em Curitiba a partir de R$ 99,99 | Técnico Curitiba" description="Formatação de computador e notebook em Curitiba a partir de R$ 99,99. Instalação Windows 10/11, drivers e backup. Atendimento domiciliar em até 30 min." path="/servicos/formatacao-computador" breadcrumbs={[
+      <PageSEO title="Formatação de Computador em Curitiba a partir de R$ 99,99 | Técnico em Curitiba" description="Formatação de computador e notebook em Curitiba a partir de R$ 99,99. Instalação Windows 10/11, drivers e backup. Atendimento domiciliar em até 30 min." path="/servicos/formatacao-computador" breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Formatação de Computador", path: "/servicos/formatacao-computador" }

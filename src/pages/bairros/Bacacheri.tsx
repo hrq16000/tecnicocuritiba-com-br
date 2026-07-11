@@ -4,7 +4,7 @@ const data = {
   nome: "Bacacheri",
   slug: "bacacheri",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no Bacacheri | Curitiba | Atendimento a Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Bacacheri | Curitiba | Atendimento a Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Bacacheri, Curitiba. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio rápido. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Bacacheri – Curitiba",
   subtitulo: "Atendimento técnico profissional a domicílio no Bacacheri. Diagnóstico no local, orçamento transparente e garantia.",

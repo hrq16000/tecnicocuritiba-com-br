@@ -19,7 +19,7 @@ interface Props {
 
 export const ArrumarPCServicoCidadeTemplate = ({ servico, cidade }: Props) => {
   const path = `/arrumar-pc/servico/${servico.slug}/${cidade.slug}`;
-  const title = `${servico.nome} em ${cidade.cidade} ${cidade.estado} — Técnico online | Técnico Curitiba`;
+  const title = `${servico.nome} em ${cidade.cidade} ${cidade.estado} — Técnico online | Técnico em Curitiba`;
   const description = `${servico.nome} para ${cidade.cidade}/${cidade.estado} via WhatsApp + acesso remoto seguro. ${servico.descricao} Orçamento grátis, paga só se resolver.`;
   const msg = `Olá! Estou em ${cidade.cidade}/${cidade.estado} e preciso de ${servico.nome.toLowerCase()} pelo atendimento remoto.`;
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -35,7 +35,7 @@ export const ArrumarPCServicoCidadeTemplate = ({ servico, cidade }: Props) => {
     serviceType: servico.nome,
     provider: {
       "@type": "Organization",
-      name: "Técnico Curitiba",
+      name: "Técnico em Curitiba",
       url: "https://tecnicocuritiba.com.br",
     },
     areaServed: {

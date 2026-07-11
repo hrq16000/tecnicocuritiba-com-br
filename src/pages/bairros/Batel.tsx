@@ -4,7 +4,7 @@ const data = {
   nome: "Batel",
   slug: "batel",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no Batel Curitiba | Atendimento Premium | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Batel Curitiba | Atendimento Premium | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Batel, Curitiba. Atendimento para residências e empresas. Serviço profissional com garantia. Visita técnica a partir de a partir de R$ 99,99.",
   h1: "Técnico de Informática no Batel – Curitiba",
   subtitulo: "Atendimento profissional no Batel e arredores. Residências e empresas.",

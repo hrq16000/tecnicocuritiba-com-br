@@ -42,7 +42,7 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
   const cityLabel = local
     ? local.kind === "bairro" ? `${local.nome}, ${local.cidadeMae}` : local.nome
     : "";
-  const title = `${category.titlePrefix} em ${cityLabel} | Coleta e Entrega · Técnico Curitiba`;
+  const title = `${category.titlePrefix} em ${cityLabel} | Coleta e Entrega · Técnico em Curitiba`;
   const description = local
     ? `${category.titlePrefix} em ${cityLabel}/${local.uf} com coleta e entrega. Reparo a partir de R$ 300 com diagnóstico incluso, garantia de 90 dias e orçamento sem compromisso pelo WhatsApp.`
     : "";
@@ -61,7 +61,7 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
     "@type": "Service",
     name: `${category.titlePrefix} em ${cityLabel}`,
     serviceType: category.titlePrefix,
-    provider: { "@type": "LocalBusiness", name: "Técnico Curitiba", url: "https://tecnicocuritiba.com.br", telephone: "+5541997452053", address: { "@type": "PostalAddress", addressLocality: "Curitiba", addressRegion: "PR", addressCountry: "BR" } },
+    provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: "https://tecnicocuritiba.com.br", telephone: "+5541997452053", address: { "@type": "PostalAddress", addressLocality: "Curitiba", addressRegion: "PR", addressCountry: "BR" } },
     areaServed: { "@type": local.kind === "bairro" ? "Place" : "City", name: cityLabel, containedInPlace: { "@type": "State", name: "Paraná" } },
     description,
     offers: {
@@ -261,7 +261,7 @@ export const CategoryHub = ({ categoryId }: { categoryId: CategoryId }) => {
     "@type": "Service",
     name: category.titlePrefix,
     description,
-    provider: { "@type": "LocalBusiness", name: "Técnico Curitiba", url: "https://tecnicocuritiba.com.br" },
+    provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: "https://tecnicocuritiba.com.br" },
     areaServed: { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
   };
 

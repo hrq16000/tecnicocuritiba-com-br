@@ -26,7 +26,7 @@ const causas = [
 
 const ComputadorLento = () => {
   useEffect(() => {
-    document.title = "Computador Lento? Causas e Soluções Profissionais | Técnico Curitiba";
+    document.title = "Computador Lento? Causas e Soluções Profissionais | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Seu computador está lento? Conheça as 8 causas mais comuns e as soluções profissionais. Upgrade SSD, limpeza de vírus, formatação. Atendimento em Curitiba e região.");
@@ -41,7 +41,7 @@ const ComputadorLento = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Computador Lento? Causas e Soluções Profissionais | Técnico Curitiba" description="Seu computador está lento? Conheça as 8 causas mais comuns e as soluções profissionais. Upgrade SSD, limpeza de vírus, formatação. Atendimento em Curitiba e região." path="/servicos/computador-lento"  breadcrumbs={[
+      <PageSEO title="Computador Lento? Causas e Soluções Profissionais | Técnico em Curitiba" description="Seu computador está lento? Conheça as 8 causas mais comuns e as soluções profissionais. Upgrade SSD, limpeza de vírus, formatação. Atendimento em Curitiba e região." path="/servicos/computador-lento"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Computador Lento", path: "/servicos/computador-lento" }

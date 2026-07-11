@@ -60,7 +60,7 @@ export const WhatsAppChat = () => {
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="font-semibold">Técnico Curitiba</p>
+                  <p className="font-semibold">Técnico em Curitiba</p>
                   <p className="text-sm text-white/80">Geralmente responde em minutos</p>
                 </div>
               </div>

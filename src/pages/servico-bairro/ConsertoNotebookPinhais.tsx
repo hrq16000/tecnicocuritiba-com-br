@@ -1,7 +1,7 @@
 import { ServicoBairroTemplate, ServicoBairroData } from "./ServicoBairroTemplate";
 
 const data: ServicoBairroData = {
-  metaTitle: "Conserto de Notebook em Pinhais | Todas as Marcas | Técnico Curitiba",
+  metaTitle: "Conserto de Notebook em Pinhais | Todas as Marcas | Técnico em Curitiba",
   metaDescription: "Conserto de notebook em Pinhais. Tela, teclado, bateria, placa-mãe. Orçamento grátis, busca e entrega domiciliar.",
   
   servico: "Conserto de Notebook",

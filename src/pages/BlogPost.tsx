@@ -53,7 +53,7 @@ const BlogPost = () => {
 
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} | Blog | Técnico Curitiba`;
+      document.title = `${post.title} | Blog | Técnico em Curitiba`;
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute("content", post.excerpt);
@@ -99,18 +99,18 @@ const BlogPost = () => {
       "thumbnailUrl": heroImage,
       "author": {
         "@type": "Person",
-        "name": "Técnico Curitiba",
+        "name": "Técnico em Curitiba",
         "url": "https://tecnicocuritiba.com.br/sobre",
         "jobTitle": "Técnico de Informática Sênior",
         "worksFor": {
           "@type": "Organization",
-          "name": "Técnico Curitiba",
+          "name": "Técnico em Curitiba",
           "url": "https://tecnicocuritiba.com.br"
         }
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Técnico Curitiba",
+        "name": "Técnico em Curitiba",
         "url": "https://tecnicocuritiba.com.br",
         "logo": {
           "@type": "ImageObject",
@@ -128,7 +128,7 @@ const BlogPost = () => {
       "isAccessibleForFree": true,
       "isPartOf": {
         "@type": "Blog",
-        "name": "Blog Técnico Curitiba",
+        "name": "Blog Técnico em Curitiba",
         "url": "https://tecnicocuritiba.com.br/blog"
       },
       "about": { "@type": "Thing", "name": post.category },
@@ -186,7 +186,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>{post.title} | Blog | Técnico Curitiba</title>
+        <title>{post.title} | Blog | Técnico em Curitiba</title>
         <meta name="description" content={post.excerpt} />
         <link rel="canonical" href={`https://tecnicocuritiba.com.br/blog/${slug}`} />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -195,7 +195,7 @@ const BlogPost = () => {
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={`https://tecnicocuritiba.com.br/blog/${slug}`} />
-        <meta property="og:site_name" content="Técnico Curitiba" />
+        <meta property="og:site_name" content="Técnico em Curitiba" />
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:image" content={heroImageOg} />
         <meta property="og:image:secure_url" content={heroImageOg} />
@@ -206,14 +206,14 @@ const BlogPost = () => {
         <meta property="article:modified_time" content={`${post.date}T08:00:00-03:00`} />
         <meta property="article:section" content={post.category} />
         <meta property="article:tag" content={post.category} />
-        <meta property="article:author" content="Técnico Curitiba" />
+        <meta property="article:author" content="Técnico em Curitiba" />
         <meta property="article:publisher" content="https://tecnicocuritiba.com.br" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
         <meta name="twitter:image" content={heroImageOg} />
         <meta name="twitter:image:alt" content={post.title} />
-        <meta name="author" content="Técnico Curitiba" />
+        <meta name="author" content="Técnico em Curitiba" />
         <meta name="news_keywords" content={`${post.category}, técnico curitiba, ${post.title}`} />
         {/* Preload hero image for faster LCP */}
         <link rel="preload" as="image" href={heroImage} fetchPriority="high" />

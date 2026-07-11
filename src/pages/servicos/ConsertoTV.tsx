@@ -53,7 +53,7 @@ const cidades = [
 
 const ConsertoTV = () => {
   useEffect(() => {
-    document.title = "Conserto de TV em Curitiba e Região | Orçamento sem Compromisso | Técnico Curitiba";
+    document.title = "Conserto de TV em Curitiba e Região | Orçamento sem Compromisso | Técnico em Curitiba";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", "Conserto de TV LED, LCD, OLED e Smart TV em Curitiba e região metropolitana. Orçamento humanizado sem compromisso. Samsung, LG, Sony, TCL e todas as marcas.");
     trackPageView("/servicos/conserto-tv", "Conserto de TV");
@@ -72,7 +72,7 @@ const ConsertoTV = () => {
     description: "Serviço de conserto de TV LED, LCD, OLED e Smart TV em Curitiba e região metropolitana.",
     provider: {
       "@type": "LocalBusiness",
-      name: "Técnico Curitiba",
+      name: "Técnico em Curitiba",
       telephone: "+55-41-99745-2053",
     },
     areaServed: { "@type": "City", name: "Curitiba" },

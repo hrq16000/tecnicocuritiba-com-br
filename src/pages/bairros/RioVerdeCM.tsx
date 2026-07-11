@@ -4,7 +4,7 @@ const data = {
   nome: "Rio Verde",
   slug: "rio-verde-cm",
   cidade: "Campo Magro",
-  metaTitle: "Técnico de Informática no Rio Verde | Campo Magro | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Rio Verde | Campo Magro | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Rio Verde, Campo Magro. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Rio Verde – Campo Magro",
   subtitulo: "Atendimento técnico profissional a domicílio no Rio Verde. Diagnóstico no local, orçamento transparente e garantia.",

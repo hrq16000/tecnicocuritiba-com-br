@@ -104,7 +104,7 @@ const colomboSchema = {
 
 const TecnicoInformaticaColombo = () => {
   useEffect(() => {
-    document.title = "Técnico de Informática em Colombo PR | Atendimento a Domicílio | Técnico Curitiba";
+    document.title = "Técnico de Informática em Colombo PR | Atendimento a Domicílio | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content",
@@ -116,7 +116,7 @@ const TecnicoInformaticaColombo = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Técnico de Informática em Colombo PR | Atendimento a Domicílio | Técnico Curitiba" description="Técnico de informática em Colombo PR. Formatação, conserto de PC e notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio rápido. a partir de R$ 99,99." path="/tecnico-informatica-colombo" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Colombo", path: "/tecnico-informatica-colombo" }]} />
+      <PageSEO title="Técnico de Informática em Colombo PR | Atendimento a Domicílio | Técnico em Curitiba" description="Técnico de informática em Colombo PR. Formatação, conserto de PC e notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio rápido. a partir de R$ 99,99." path="/tecnico-informatica-colombo" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Colombo", path: "/tecnico-informatica-colombo" }]} />
       <CityServiceSchema city={"Colombo"} citySameAs={"https://pt.wikipedia.org/wiki/Colombo_(Paran%C3%A1)"} path={"/tecnico-informatica-colombo"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(colomboSchema) }} />
       <JsonLdSchema />

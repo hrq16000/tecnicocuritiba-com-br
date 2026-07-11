@@ -81,7 +81,7 @@ function buildMessage(a: Answers): string {
   const branch = a.equipamento ? getBranch(a.equipamento) : undefined;
   const sintoma = a.equipamento && a.sintoma ? getSintoma(a.equipamento, a.sintoma) : undefined;
   const lines: string[] = [];
-  lines.push("Olá! Triagem completa pelo site Técnico Curitiba ✅");
+  lines.push("Olá! Triagem completa pelo site Técnico em Curitiba ✅");
   lines.push("");
   lines.push(`🔧 *Equipamento:* ${branch?.emoji ?? ""} ${branch?.label ?? "Não informado"}`);
   if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
