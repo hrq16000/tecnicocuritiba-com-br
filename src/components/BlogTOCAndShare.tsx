@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { List, Share2, MessageCircle, Facebook } from "lucide-react";
+import { trackShareClick } from "@/lib/analytics";
 
 type Heading = { id: string; text: string; level: 2 | 3 };
 
