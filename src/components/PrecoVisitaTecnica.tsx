@@ -52,6 +52,9 @@ export const PrecoVisitaTecnica = ({ tipo, className = "", showLink = true, comp
         Visita técnica a partir de <span className="text-accent font-bold">{VISITA_MINIMA_LABEL}</span>
       </span>
       <p className={`${compact ? "text-xs" : "text-sm"} text-muted-foreground mt-0.5`}>
+        <strong>R$ 99,99</strong> a cada 30 min de atendimento • <strong>R$ 169,99</strong> por 1 hora de visita técnica (combinada previamente).
+      </p>
+      <p className={`${compact ? "text-xs" : "text-sm"} text-muted-foreground mt-0.5`}>
         {REGRA_ORCAMENTO_GRATIS}. Diagnóstico presencial é pago.
       </p>
       {showLink && (
