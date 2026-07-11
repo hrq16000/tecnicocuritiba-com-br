@@ -1,8 +1,34 @@
+import { lazy, Suspense, useEffect, useState } from "react";
+
+const SchedulingModal = lazy(() =>
+  import("@/components/scheduling/SchedulingModal").then((m) => ({ default: m.SchedulingModal }))
+);
+
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico.";
 
-const trackHeaderClick = (type: "whatsapp") => {
-  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick(type, "header"));
+const trackHeaderClick = (type: "whatsapp" | "agendar") => {
+  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick(type as "whatsapp", "header"));
+};
+
+// Rotação de CTA no header — sticky por sessão: hora WhatsApp, hora Agendar,
+// nunca os dois juntos. Preserva o WhatsAppFloat global como fallback.
+const HEADER_CTA_KEY = "header_cta_variant_v1";
+const pickHeaderVariant = (): "whatsapp" | "agendar" => {
+  if (typeof window === "undefined") return "whatsapp";
+  try {
+    const saved = sessionStorage.getItem(HEADER_CTA_KEY);
+    if (saved === "whatsapp" || saved === "agendar") return saved;
+    const variant: "whatsapp" | "agendar" = Math.random() < 0.5 ? "whatsapp" : "agendar";
+    sessionStorage.setItem(HEADER_CTA_KEY, variant);
+    // Expor no dataLayer para segmentar no GA4.
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "header_cta_variant_assigned", { variant });
+    }
+    return variant;
+  } catch {
+    return "whatsapp";
+  }
 };
 
 
