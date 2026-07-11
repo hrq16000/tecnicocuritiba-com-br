@@ -100,8 +100,8 @@ const BlogPost = () => {
       "thumbnailUrl": heroImage,
       "author": {
         "@type": "Person",
-        "name": "Técnico em Curitiba",
-        "url": "https://tecnicocuritiba.com.br/sobre",
+        "name": "Técnico Curitiba",
+        "url": "https://tecnicocuritiba.com.br/autor/tecnico-curitiba",
         "jobTitle": "Técnico de Informática Sênior",
         "worksFor": {
           "@type": "Organization",
