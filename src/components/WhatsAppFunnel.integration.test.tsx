@@ -119,7 +119,7 @@ function getLastWaUrl(): URL | null {
 }
 
 describe("WhatsAppFunnel — Cenário 1: Cliente Simples (PC > Lento)", () => {
-  it("fluxo passa direto e a URL final contém o aviso obrigatório + preços R$ 99,99 e R$ 90 estão visíveis no step inicial", async () => {
+  it("fluxo passa direto e a URL final contém o aviso obrigatório + preços R$ 99,99 e R$ 99,99 estão visíveis no step inicial", async () => {
     renderFunnel();
     await openFunnel();
 

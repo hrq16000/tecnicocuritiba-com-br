@@ -16,7 +16,7 @@ const localBusinessSchema = {
   "email": "contato@tecnicocuritiba.com.br",
   "image": `${SITE}/og-image.jpg`,
   "logo": `${SITE}/logo.png`,
-  "priceRange": "R$ 69,99 - R$ 500",
+  "priceRange": "R$ 99,99 - R$ 500",
   "currenciesAccepted": "BRL",
   "foundingDate": "1999",
   "slogan": "Assistência Técnica Nº1 de Curitiba e Região",
@@ -61,7 +61,7 @@ const faqSchema = {
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "Quanto custa o serviço de técnico de informática em Curitiba?",
-      "acceptedAnswer": { "@type": "Answer", "text": "A visita técnica começa em R$ 69,99. Orçamento no local e você só paga se aprovar. Aceitamos PIX, cartão e dinheiro." } },
+      "acceptedAnswer": { "@type": "Answer", "text": "A visita técnica começa em R$ 99,99. Orçamento no local e você só paga se aprovar. Aceitamos PIX, cartão e dinheiro." } },
     { "@type": "Question", "name": "O técnico vai até minha casa ou empresa?",
       "acceptedAnswer": { "@type": "Answer", "text": "Sim. Atendimento domiciliar em toda Curitiba e região metropolitana (São José dos Pinhais, Araucária, Campo Largo, Pinhais, Colombo). O técnico vai com todas as ferramentas." } },
     { "@type": "Question", "name": "Quanto tempo demora para o técnico chegar?",

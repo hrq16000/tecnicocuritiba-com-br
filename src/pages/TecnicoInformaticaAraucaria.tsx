@@ -128,7 +128,7 @@ const localFaqs = [
   {
     question: "Quanto custa a visita do técnico em Araucária?",
     answer:
-      "A visita técnica começa em R$ 69,99. Antes de executar qualquer serviço adicional, fazemos diagnóstico e informamos o valor com transparência.",
+      "A visita técnica começa em R$ 99,99. Antes de executar qualquer serviço adicional, fazemos diagnóstico e informamos o valor com transparência.",
   },
   {
     question: "Vocês fazem formatação e remoção de vírus em Araucária?",

@@ -100,7 +100,7 @@ ${formData.description || "Não informado"}
 
 ---
 Aguardo confirmação do agendamento.
-Li e concordo com a política de preços (A partir de R$ 69,99).`;
+Li e concordo com a política de preços (A partir de R$ 99,99).`;
 
     trackCTAClick("whatsapp", `agendamento_${formData.service}`);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -359,7 +359,7 @@ Li e concordo com a política de preços (A partir de R$ 69,99).`;
             </div>
 
             <p className="text-xs text-muted-foreground text-center">
-              💰 Visita técnica: A partir de R$ 69,99 • Orçamento sem compromisso
+              💰 Visita técnica: A partir de R$ 99,99 • Orçamento sem compromisso
             </p>
           </div>
         )}

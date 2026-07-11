@@ -53,7 +53,7 @@ export const REGRA_COLETA_SEM_VISITA = "Sem visita técnica a domicílio. Servi�
 
 // === VISITA TÉCNICA (serviços rápidos) ===
 export const VISITA_MINIMA = 69.99;
-export const VISITA_MINIMA_LABEL = "R$ 69,99";
+export const VISITA_MINIMA_LABEL = "R$ 99,99";
 
 // === MENSAGENS PADRONIZADAS ===
 export const MSG_COLETA_RESUMO = `Sem visita técnica. Coleta e entrega inclusa — taxa mínima ${COLETA_TAXA_MINIMA_LABEL} pré-aprovada.`;

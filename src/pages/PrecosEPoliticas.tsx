@@ -76,7 +76,7 @@ const servicosPrecos = [
     categoria: "Conserto e Reparo",
     icon: Wrench,
     servicos: [
-      { nome: "Diagnóstico com Coleta", valor: "R$ 90", obs: "Coleta + entrega inclusas" },
+      { nome: "Diagnóstico com Coleta", valor: "R$ 99,99", obs: "Coleta + entrega inclusas" },
       { nome: "Reparo de Notebook", valor: "A partir de R$ 300", obs: "Com coleta e entrega • Depende do defeito" },
       { nome: "Reparo de Placa de Vídeo", valor: "A partir de R$ 289", obs: "Diagnóstico + reballing/reflow • Peça não inclusa" },
       { nome: "Troca de Tela Notebook", valor: "Sob orçamento", obs: "Peça + mão de obra" },
@@ -135,7 +135,7 @@ const PrecosEPoliticas = () => {
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 69,99. Transparência total nos valores."
+        "Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 99,99. Transparência total nos valores."
       );
     }
     trackPageView("/valores", "Valores e Condições");
@@ -146,7 +146,7 @@ const PrecosEPoliticas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Tabela de Valores | Técnico de Informática Curitiba" description="Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 69,99. Transparência total nos valores." path="/valores" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Valores", path: "/valores" }]} />
+      <PageSEO title="Tabela de Valores | Técnico de Informática Curitiba" description="Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 99,99. Transparência total nos valores." path="/valores" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Valores", path: "/valores" }]} />
       <JsonLdSchema />
       <Header />
       <main>
@@ -204,7 +204,7 @@ const PrecosEPoliticas = () => {
               </p>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {[
-                  { tempo: "até 15 minutos", valor: "R$ 69,99" },
+                  { tempo: "até 15 minutos", valor: "R$ 99,99" },
                   { tempo: "até 30 minutos", valor: "R$ 99,99" },
                 ].map((t, i) => (
                   <div key={i} className={`bg-secondary rounded-xl p-6 text-center hover:-translate-y-1 transition-all stagger-item ${i === 0 ? "ring-2 ring-accent shadow-[0_0_20px_hsl(var(--accent)/0.15)]" : ""}`} style={{ animationDelay: `${i * 100}ms` }}>
@@ -460,7 +460,7 @@ const PrecosEPoliticas = () => {
                     <div className="bg-accent/10 rounded-lg p-4">
                       <p className="font-semibold text-foreground mb-2">Desistência após agendamento de coleta:</p>
                       <p className="text-muted-foreground">
-                        Será cobrada taxa de diagnóstico de <strong className="text-accent">R$ 90</strong>, 
+                        Será cobrada taxa de diagnóstico de <strong className="text-accent">R$ 99,99</strong>, 
                         que inclui logística de coleta e entrega do equipamento.
                       </p>
                     </div>
@@ -468,7 +468,7 @@ const PrecosEPoliticas = () => {
                       <p className="font-semibold text-foreground mb-2">Visita técnica presencial:</p>
                       <p className="text-muted-foreground">
                         Cobrança proporcional ao tempo de atendimento 
-                        (a partir de <strong className="text-accent">R$ 69,99</strong>).
+                        (a partir de <strong className="text-accent">R$ 99,99</strong>).
                       </p>
                     </div>
                   </div>

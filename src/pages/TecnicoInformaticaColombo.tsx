@@ -80,7 +80,7 @@ const localFaqs = [
   },
   {
     question: "Qual o valor da visita técnica em Colombo?",
-    answer: "A visita técnica começa em R$ 69,99. O diagnóstico é feito no local e o orçamento é apresentado antes de qualquer execução.",
+    answer: "A visita técnica começa em R$ 99,99. O diagnóstico é feito no local e o orçamento é apresentado antes de qualquer execução.",
   },
   {
     question: "Atendem empresas em Colombo?",

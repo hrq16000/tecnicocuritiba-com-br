@@ -89,7 +89,7 @@ function buildMessage(a: Answers): string {
   if (sintoma?.requiresColeta) {
     lines.push("");
     lines.push("📦 *Modalidade: COLETA E ENTREGA (obrigatória)*");
-    lines.push("• Mínimo R$ 300 (diagnóstico incluso) · desistiu paga só R$ 90");
+    lines.push("• Mínimo R$ 300 (diagnóstico incluso) · desistiu paga só R$ 99,99");
     lines.push("• Autorizado pelo cliente no funil");
   }
   lines.push("");
@@ -109,7 +109,7 @@ const TransparencyMini = () => (
   <div className="rounded-lg border border-border bg-card/50 p-2.5 text-[11px] text-muted-foreground leading-snug">
     <p>
       💡 <strong>Como funciona:</strong> orçamento grátis por WhatsApp · visita técnica a partir de R$ 99,99 (30 min)
-      · reparos com coleta a partir de R$ 300 · diagnóstico R$ 90 se desistir.
+      · reparos com coleta a partir de R$ 300 · diagnóstico R$ 99,99 se desistir.
     </p>
   </div>
 );
@@ -598,7 +598,7 @@ const FunnelNav = ({
 export const TransparencyNote = ({ className = "" }: { className?: string }) => (
   <p className={`text-xs text-muted-foreground leading-relaxed ${className}`}>
     📌 <strong>Transparência:</strong> orçamento grátis por WhatsApp. Visita técnica a partir de
-    {" "}R$ 99,99 (30 min) · diagnóstico R$ 90 só se cancelar · reparos com coleta a partir de R$ 300.{" "}
+    {" "}R$ 99,99 (30 min) · diagnóstico R$ 99,99 só se cancelar · reparos com coleta a partir de R$ 300.{" "}
     <a href="/termos-e-condicoes" className="underline hover:text-foreground">Ver termos</a>
   </p>
 );
