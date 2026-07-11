@@ -221,9 +221,33 @@ export async function prerenderCities(distDir) {
     }
   }
 
+  // --- /valores fallback (fora do sitemap, mas evita canonical=home para crawlers sem-JS) ---
+  {
+    const meta = {
+      path: "/valores",
+      url: `${SITE}/valores`,
+      title: "Valores e Políticas | Técnico em Curitiba",
+      description: "Tabela de valores por serviço, garantias e políticas. Visita técnica a partir de R$ 99,99.",
+    };
+    const absoluteOg = fallbackOg ? `${SITE}${fallbackOg}` : undefined;
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: meta.title,
+      url: meta.url,
+      description: meta.description,
+    };
+    let html = injectMeta(baseHtml, { ...meta, ogImage: absoluteOg, jsonLd });
+    // noindex para manter fora do índice, mas com canonical próprio
+    html = html.replace(/<\/head>/i, `    <meta name="robots" content="noindex,follow">\n  </head>`);
+    await writePage(distDir, meta.path, html);
+    written++;
+  }
+
   // eslint-disable-next-line no-console
   console.log(`[prerender-cities] wrote ${written} per-route index.html files`);
 }
+
 
 export function prerenderCitiesPlugin() {
   return {
