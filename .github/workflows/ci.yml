@@ -51,11 +51,27 @@ jobs:
           CI: "true"
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
-      - name: Run targeted E2E (whatsapp + termos + sitemap + como-funciona + nap + a11y skip-link)
-        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts
-
+      - name: Run targeted E2E (whatsapp + termos + sitemap + como-funciona + nap + a11y skip-link + seo h1/title dedup)
+        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts --retries=1 --trace=retain-on-failure
         env:
           E2E_BASE_URL: http://localhost:8080
+          CI: "true"
+      - name: Upload titles-dump.csv on failure (seo-title-dedup)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: titles-dump
+          path: test-results/**/titles-dump.csv
+          if-no-files-found: ignore
+      - name: Upload Playwright traces/screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: |
+            test-results/**/trace.zip
+            test-results/**/*.png
+          if-no-files-found: ignore
 
   indexnow:
     runs-on: ubuntu-latest
