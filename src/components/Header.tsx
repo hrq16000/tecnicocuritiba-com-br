@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 
 const SchedulingModal = lazy(() =>
   import("@/components/scheduling/SchedulingModal").then((m) => ({ default: m.SchedulingModal }))
