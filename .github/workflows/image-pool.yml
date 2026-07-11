@@ -1,0 +1,30 @@
+name: Validate blog image pool
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/lib/blogImages.ts"
+      - "scripts/validate-image-pool.mjs"
+      - ".github/workflows/image-pool.yml"
+  pull_request:
+    paths:
+      - "src/lib/blogImages.ts"
+      - "scripts/validate-image-pool.mjs"
+  schedule:
+    # Semanal (segunda 05:00 UTC) — pega deprecations do Unsplash
+    # antes que quebrem capas em produção.
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate blog image pool
+        run: node scripts/validate-image-pool.mjs
