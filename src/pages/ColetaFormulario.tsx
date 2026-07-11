@@ -299,6 +299,18 @@ const ColetaFormulario = () => {
             </p>
           </div>
 
+          {/* Honeypot anti-spam (invisível para humanos) */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            className="absolute -left-[9999px] w-px h-px opacity-0 pointer-events-none"
+          />
+
           {/* Step indicator */}
           <div className="flex items-center justify-center gap-4 md:gap-8 mb-8">
             {stepIndicator(1, "Equipamento")}
