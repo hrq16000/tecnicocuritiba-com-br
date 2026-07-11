@@ -107,7 +107,7 @@ const SuporteEmpresas = () => {
       <PageSEO title="Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico em Curitiba" description="Suporte técnico empresarial em Curitiba. TI para pequenas e médias empresas com planos mensais, nota fiscal e pagamento faturado. Manutenção de computadores corporativos." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
       <JsonLdSchema />
       <Header />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Suporte Técnico para Empresas"
           subtitle="Soluções de TI para pequenas e médias empresas em Curitiba. Planos mensais, atendimento prioritário e nota fiscal garantida."

@@ -74,7 +74,7 @@ const TecnicoInformaticaQuatroBarras = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Quatro Barras" }]} />
-      <main>
+      <main id="main-content">
         <PageHero title="Técnico de Informática em Quatro Barras" subtitle="Assistência técnica profissional em Quatro Barras. Atendimento a domicílio com diagnóstico transparente e garantia." ctaText="Falar com Técnico" />
         <BenefitsGrid benefits={benefits} title="Suporte Técnico em Quatro Barras" subtitle="Atendimento profissional para toda a cidade" />
 

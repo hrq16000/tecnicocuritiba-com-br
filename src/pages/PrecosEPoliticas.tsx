@@ -149,7 +149,7 @@ const PrecosEPoliticas = () => {
       <PageSEO title="Tabela de Valores | Técnico de Informática Curitiba" description="Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 99,99. Transparência total nos valores." path="/valores" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Valores", path: "/valores" }]} />
       <JsonLdSchema />
       <Header />
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="hero-gradient pt-10 pb-10 md:pt-12 md:pb-12 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--accent)/0.15),transparent_60%)] pointer-events-none" />

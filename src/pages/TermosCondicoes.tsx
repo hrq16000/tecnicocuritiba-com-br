@@ -119,7 +119,7 @@ const TermosCondicoes = () => {
         ctaText="Falar agora no WhatsApp"
       />
 
-      <main className="container mx-auto px-4 py-12 max-w-4xl">
+      <main id="main-content" className="container mx-auto px-4 py-12 max-w-4xl">
         {/* Pricing summary */}
         <section className="grid sm:grid-cols-2 gap-4 mb-12" aria-labelledby="precos">
           <h2 id="precos" className="sr-only">Resumo de preços</h2>

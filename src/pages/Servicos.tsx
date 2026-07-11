@@ -151,7 +151,7 @@ const Servicos = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Serviços" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Serviços de Informática Curitiba — Hoje a partir de R$ 99,99"
           subtitle="Assistência técnica completa para computadores, notebooks e redes. Atendimento profissional com garantia e preço justo."

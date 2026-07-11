@@ -37,7 +37,7 @@ export default function Status() {
   const healthy = !last || now - (last.ts || 0) > 1000 * 60 * 5;
 
   return (
-    <main className="min-h-screen bg-background text-foreground px-4 py-10 max-w-2xl mx-auto">
+    <main id="main-content" className="min-h-screen bg-background text-foreground px-4 py-10 max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-2">Status do Portal</h1>
       <p className="text-muted-foreground mb-6">
         Diagnóstico em tempo real do funcionamento do site no seu navegador.

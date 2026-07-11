@@ -278,7 +278,7 @@ const AdminFunnel = () => {
     return (
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <main className="flex-1 container mx-auto px-4 py-12 max-w-md text-center">
+        <main id="main-content" className="flex-1 container mx-auto px-4 py-12 max-w-md text-center">
           <h1 className="text-2xl font-bold mb-2">Acesso negado</h1>
           <p className="text-sm text-muted-foreground mb-4">
             Sua conta não tem permissão de administrador.
@@ -302,7 +302,7 @@ const AdminFunnel = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-6">
+      <main id="main-content" className="flex-1 container mx-auto px-4 py-6">
         <div className="flex items-center justify-between gap-2 mb-4">
           <div>
             <h1 className="text-2xl font-bold">Leads do funil</h1>

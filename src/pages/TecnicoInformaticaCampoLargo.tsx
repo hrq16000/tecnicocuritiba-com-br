@@ -187,7 +187,7 @@ const TecnicoInformaticaCampoLargo = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Campo Largo" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Técnico de Informática em Campo Largo"
           subtitle="Assistência técnica especializada na Capital da Louça. Atendimento a domicílio para residências e empresas."

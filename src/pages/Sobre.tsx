@@ -53,7 +53,7 @@ const Sobre = () => {
       <PageSEO title="Sobre Nós | Técnico em Curitiba - Assistência Técnica em Informática" description="Conheça a Técnico em Curitiba. Assistência técnica em informática com experiência, compromisso e atendimento humanizado em Curitiba e região." path="/sobre" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Sobre", path: "/sobre" }]} />
       <JsonLdSchema />
       <Header />
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 premium-gradient" />

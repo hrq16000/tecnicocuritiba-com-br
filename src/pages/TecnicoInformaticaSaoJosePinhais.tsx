@@ -161,7 +161,7 @@ const TecnicoInformaticaSaoJosePinhais = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em São José dos Pinhais" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Técnico de Informática em São José dos Pinhais"
           subtitle="Assistência técnica profissional na segunda maior cidade do Paraná. Atendimento rápido para residências e empresas."

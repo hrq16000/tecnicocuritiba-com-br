@@ -79,7 +79,7 @@ const TecnicoInformaticaPiraquara = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Piraquara" }]} />
-      <main>
+      <main id="main-content">
         <PageHero title="Técnico de Informática em Piraquara" subtitle="Assistência técnica profissional em Piraquara. Atendimento a domicílio com diagnóstico transparente e garantia." ctaText="Falar com Técnico" />
         <BenefitsGrid benefits={benefits} title="Suporte Técnico em Piraquara" subtitle="Atendimento profissional para toda a cidade" />
 

@@ -154,7 +154,7 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
           { label: data.nome },
         ]}
       />
-      <main>
+      <main id="main-content">
         {/* ═══ HERO — Premium with glow blobs & animations ═══ */}
         <section className="relative pt-10 pb-10 md:pt-14 md:pb-14 overflow-hidden hero-gradient">
           {/* Ambient glow blobs */}

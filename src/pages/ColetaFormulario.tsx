@@ -265,7 +265,7 @@ const ColetaFormulario = () => {
       <Header />
       <Breadcrumbs items={[{ label: "Coleta e Entrega", href: "/coleta-e-entrega" }, { label: "Formulário de Coleta" }]} />
 
-      <main className="py-8 md:py-12">
+      <main id="main-content" className="py-8 md:py-12">
         <div className="container mx-auto max-w-3xl px-4">
           {/* Title */}
           <div className="text-center mb-8">

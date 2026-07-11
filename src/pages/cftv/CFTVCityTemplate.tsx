@@ -50,7 +50,7 @@ const CFTVCityTemplate = ({ city, slug, metaTitle, metaDescription, neighborhood
       })}} />
 
       <Header />
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="relative pt-10 md:pt-12 overflow-hidden">
           <div className="absolute inset-0 z-0">

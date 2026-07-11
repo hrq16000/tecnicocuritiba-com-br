@@ -177,7 +177,7 @@ const PoliticaPrivacidade = () => {
       </Helmet>
 
       <Header />
-      <main className="bg-background">
+      <main id="main-content" className="bg-background">
         <PageHero
           title="Política de Privacidade"
           subtitle={`LGPD · Como tratamos seus dados pessoais. Atualizada em ${UPDATED}.`}

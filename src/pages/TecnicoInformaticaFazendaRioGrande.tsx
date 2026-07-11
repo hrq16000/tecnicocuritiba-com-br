@@ -117,7 +117,7 @@ const TecnicoInformaticaFazendaRioGrande = () => {
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Técnico em Fazenda Rio Grande" }]} />
-      <main>
+      <main id="main-content">
         <PageHero
           title="Técnico de Informática em Fazenda Rio Grande"
           subtitle="Assistência técnica profissional em Fazenda Rio Grande. Atendimento a domicílio com diagnóstico transparente e serviço garantido."

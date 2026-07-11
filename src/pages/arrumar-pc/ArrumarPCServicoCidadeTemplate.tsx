@@ -101,7 +101,7 @@ export const ArrumarPCServicoCidadeTemplate = ({ servico, cidade }: Props) => {
 
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* HERO */}
         <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/5 py-16 md:py-24">
           <div className="container mx-auto px-4">
