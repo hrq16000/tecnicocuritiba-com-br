@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { FastHeader } from "@/components/FastHeader";
+import { Header } from "@/components/Header";
 import { FastHeroSection } from "@/components/FastHeroSection";
 import { TopOfferBanner } from "@/components/TopOfferBanner";
 import { LazyOnVisible } from "@/components/LazyOnVisible";
@@ -50,7 +50,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <FastHeader />
+      <Header />
       <TopOfferBanner />
       <main id="main-content">
         <FastHeroSection />
