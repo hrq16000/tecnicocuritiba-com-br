@@ -89,6 +89,7 @@ export const BlogTOCAndShare = ({ articleSelector = "article", title, url, slug 
           target="_blank"
           rel="noopener nofollow"
           data-funnel-skip="1"
+          onClick={fire("whatsapp")}
           aria-label="Compartilhar este artigo no WhatsApp"
           className="inline-flex items-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-3 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
         >
@@ -99,6 +100,7 @@ export const BlogTOCAndShare = ({ articleSelector = "article", title, url, slug 
           href={shareFb}
           target="_blank"
           rel="noopener nofollow"
+          onClick={fire("facebook")}
           aria-label="Compartilhar este artigo no Facebook"
           className="inline-flex items-center gap-2 rounded-lg bg-[#1877F2] px-3 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
         >
@@ -109,6 +111,7 @@ export const BlogTOCAndShare = ({ articleSelector = "article", title, url, slug 
           href={shareX}
           target="_blank"
           rel="noopener nofollow"
+          onClick={fire("x")}
           aria-label="Compartilhar este artigo no X (Twitter)"
           className="inline-flex items-center gap-2 rounded-lg bg-black px-3 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
         >
