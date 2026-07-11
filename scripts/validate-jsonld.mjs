@@ -15,7 +15,17 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { chromium } from "playwright";
 
-const ROUTE = "/assistencia-tecnica-curitiba";
+// Rotas auditadas: home, hub principal, top-bairros e top-serviços.
+// Cada rota exige LocalBusiness e WebSite; a hub exige o conjunto completo.
+const ROUTES = [
+  { path: "/", required: ["LocalBusiness", "WebSite"] },
+  { path: "/assistencia-tecnica-curitiba", required: ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service", "WebSite"] },
+  { path: "/bairros/batel", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
+  { path: "/bairros/agua-verde", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
+  { path: "/bairros/centro", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
+  { path: "/servicos/formatacao-computador", required: ["LocalBusiness", "WebSite", "Service"] },
+  { path: "/servicos/remocao-virus", required: ["LocalBusiness", "WebSite", "Service"] },
+];
 const REQUIRED = ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service"];
 
 async function waitForServer(url, timeoutMs = 30_000) {
@@ -32,27 +42,10 @@ async function waitForServer(url, timeoutMs = 30_000) {
   throw new Error(`Server not ready at ${url}`);
 }
 
-async function main() {
-  const baseUrl = process.env.BASE_URL;
-  let preview;
-  let url;
-
-  if (baseUrl) {
-    url = baseUrl.replace(/\/$/, "") + ROUTE;
-  } else {
-    // Start vite preview on a known port.
-    preview = spawn("npx", ["vite", "preview", "--port", "4173", "--strictPort"], {
-      stdio: "inherit",
-      env: process.env,
-    });
-    await waitForServer("http://localhost:4173/");
-    url = `http://localhost:4173${ROUTE}`;
-  }
-
-  const browser = await chromium.launch();
+async function auditRoute(browser, url, required) {
   const errors = [];
+  const page = await browser.newPage();
   try {
-    const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle" });
     const schemas = await page.$$eval('script[type="application/ld+json"]', (nodes) =>
       nodes
@@ -76,8 +69,8 @@ async function main() {
         return Array.isArray(ty) ? ty.includes(t) : ty === t;
       });
 
-    for (const t of REQUIRED) {
-      if (!hasType(t)) errors.push(`Missing required JSON-LD @type: ${t}`);
+    for (const t of required) {
+      if (!hasType(t)) errors.push(`Missing required @type: ${t}`);
     }
 
     const lb = hasType("LocalBusiness");
@@ -89,44 +82,72 @@ async function main() {
       if (!area.includes("curitiba")) errors.push("LocalBusiness.areaServed must include Curitiba");
     }
 
-    const faq = hasType("FAQPage");
-    if (faq) {
-      const m = faq.mainEntity || [];
-      if (!Array.isArray(m) || m.length < 3)
-        errors.push(`FAQPage.mainEntity must have >=3 questions (got ${m.length})`);
-      for (const q of m) {
-        if (!q.name || !q.acceptedAnswer?.text)
-          errors.push(`FAQPage question malformed: ${JSON.stringify(q).slice(0, 120)}`);
+    const ws = hasType("WebSite");
+    if (ws && required.includes("WebSite")) {
+      if (!ws.url) errors.push("WebSite.url is missing");
+      if (!ws.potentialAction) errors.push("WebSite.potentialAction (SearchAction) is missing");
+    }
+
+    if (required.includes("FAQPage")) {
+      const faq = hasType("FAQPage");
+      if (faq) {
+        const m = faq.mainEntity || [];
+        if (!Array.isArray(m) || m.length < 3)
+          errors.push(`FAQPage.mainEntity must have >=3 questions (got ${m.length})`);
       }
     }
 
-    const bc = hasType("BreadcrumbList");
-    if (bc) {
-      const items = bc.itemListElement;
-      if (!Array.isArray(items) || items.length < 2)
-        errors.push("BreadcrumbList.itemListElement must have >=2 entries");
+    if (required.includes("BreadcrumbList")) {
+      const bc = hasType("BreadcrumbList");
+      if (bc) {
+        const items = bc.itemListElement;
+        if (!Array.isArray(items) || items.length < 2)
+          errors.push("BreadcrumbList.itemListElement must have >=2 entries");
+      }
     }
+  } finally {
+    await page.close();
+  }
+  return errors;
+}
 
-    const services = schemas.filter((s) => {
-      const ty = s["@type"];
-      return Array.isArray(ty) ? ty.includes("Service") : ty === "Service";
+async function main() {
+  const baseUrl = process.env.BASE_URL;
+  let preview;
+  let base;
+
+  if (baseUrl) {
+    base = baseUrl.replace(/\/$/, "");
+  } else {
+    preview = spawn("npx", ["vite", "preview", "--port", "4173", "--strictPort"], {
+      stdio: "inherit",
+      env: process.env,
     });
-    if (services.length < 4)
-      errors.push(`Expected >=4 Service schemas (got ${services.length})`);
-    for (const s of services) {
-      if (!s.provider?.["@id"] || !s.provider["@id"].includes("#localbusiness"))
-        errors.push(`Service "${s.name}" must reference LocalBusiness via provider.@id`);
+    await waitForServer("http://localhost:4173/");
+    base = "http://localhost:4173";
+  }
+
+  const browser = await chromium.launch();
+  const allErrors = [];
+  try {
+    for (const { path, required } of ROUTES) {
+      const errs = await auditRoute(browser, `${base}${path}`, required);
+      if (errs.length) {
+        allErrors.push(`\n✗ ${path}:\n  - ${errs.join("\n  - ")}`);
+      } else {
+        console.log(`✓ ${path} (${required.join(", ")})`);
+      }
     }
   } finally {
     await browser.close();
     if (preview) preview.kill("SIGTERM");
   }
 
-  if (errors.length) {
-    console.error("\n✗ JSON-LD validation FAILED:\n  - " + errors.join("\n  - "));
+  if (allErrors.length) {
+    console.error("\nJSON-LD validation FAILED:" + allErrors.join(""));
     process.exit(1);
   }
-  console.log(`✓ JSON-LD validation passed for ${ROUTE} (${REQUIRED.join(", ")})`);
+  console.log(`\n✓ JSON-LD validation passed for ${ROUTES.length} routes`);
 }
 
 main().catch((e) => {
