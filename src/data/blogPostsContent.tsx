@@ -10698,14 +10698,14 @@ crontab -e
   },
 
   "upgrade-ram-quando-vale-a-pena": {
-    title: "Upgrade de Memória RAM: Quando Vale a Pena e Quanto Custa em 2026",
-    excerpt: "Descubra se seu PC ganha desempenho com mais RAM, quantos GB são ideais e o preço do serviço.",
+    title: "Upgrade de RAM: quando vale a pena e quanto custa",
+    excerpt: "Descubra se seu PC ganha desempenho com mais RAM em Curitiba, quantos GB são ideais e o preço do serviço.",
     date: "2026-07-10",
     readTime: "9 min",
     category: "Hardware",
     content: (
       <>
-        <p className="lead">O <strong>upgrade de memória RAM</strong> é um dos serviços com melhor custo-benefício em informática — mas só quando o problema é realmente falta de memória. Este guia explica como identificar, quantos GB você precisa e quanto custa o serviço em Curitiba.</p>
+        <p className="lead"><strong>Upgrade de RAM: quando vale a pena e quanto custa</strong> em Curitiba? É um dos serviços com melhor custo-benefício em informática — mas só quando o problema é realmente falta de memória. Este guia explica como identificar o gargalo, quantos GB você precisa em 2026 e o preço do upgrade de memória RAM em Curitiba, com peça e mão de obra.</p>
 
         <h2>Como saber se seu PC precisa de mais RAM</h2>
         <ul>
