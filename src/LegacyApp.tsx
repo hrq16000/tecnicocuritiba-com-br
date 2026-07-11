@@ -439,8 +439,8 @@ const IdleEnhancements = () => {
     <Suspense fallback={null}>
       <Toaster />
       <Sonner />
-      <WhatsAppChatbot />
       <SocialProofProvider />
+
       <GA4ChecklistPanel />
     </Suspense>
   );
