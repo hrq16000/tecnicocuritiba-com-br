@@ -97,7 +97,12 @@ const menuGroups: Array<{
 
 export const FastHeader = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  const [variant, setVariant] = useState<"whatsapp" | "agendar">("whatsapp");
+  const [schedulingOpen, setSchedulingOpen] = useState(false);
 
+  useEffect(() => {
+    setVariant(pickHeaderVariant());
+  }, []);
 
   // Shrink-on-scroll: alterna `data-scrolled` no <html>, e o CSS troca
   // `--site-header-height` por sua versão compacta. Sem re-render do React.
