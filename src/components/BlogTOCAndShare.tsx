@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { List, Share2, MessageCircle, Facebook } from "lucide-react";
+import { trackShareClick } from "@/lib/analytics";
 
 type Heading = { id: string; text: string; level: 2 | 3 };
 
@@ -18,14 +19,17 @@ interface Props {
   articleSelector?: string;
   title: string;
   url: string; // absolute URL
+  slug?: string;
 }
 
 /**
  * Após o post renderizar, atribui IDs a H2/H3 e monta um sumário clicável (TOC)
  * + botões de compartilhamento (WhatsApp, Facebook, X). Client-only.
  */
-export const BlogTOCAndShare = ({ articleSelector = "article", title, url }: Props) => {
+export const BlogTOCAndShare = ({ articleSelector = "article", title, url, slug }: Props) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
+  const fire = (network: "whatsapp" | "facebook" | "x") => () =>
+    trackShareClick(network, { slug, title, url, location: "blog_post" });
 
   useEffect(() => {
     const root = document.querySelector(articleSelector);
@@ -85,6 +89,7 @@ export const BlogTOCAndShare = ({ articleSelector = "article", title, url }: Pro
           target="_blank"
           rel="noopener nofollow"
           data-funnel-skip="1"
+          onClick={fire("whatsapp")}
           aria-label="Compartilhar este artigo no WhatsApp"
           className="inline-flex items-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-3 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
         >
@@ -95,6 +100,7 @@ export const BlogTOCAndShare = ({ articleSelector = "article", title, url }: Pro
           href={shareFb}
           target="_blank"
           rel="noopener nofollow"
+          onClick={fire("facebook")}
           aria-label="Compartilhar este artigo no Facebook"
           className="inline-flex items-center gap-2 rounded-lg bg-[#1877F2] px-3 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
         >
@@ -105,6 +111,7 @@ export const BlogTOCAndShare = ({ articleSelector = "article", title, url }: Pro
           href={shareX}
           target="_blank"
           rel="noopener nofollow"
+          onClick={fire("x")}
           aria-label="Compartilhar este artigo no X (Twitter)"
           className="inline-flex items-center gap-2 rounded-lg bg-black px-3 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90"
         >

@@ -304,6 +304,7 @@ const BlogPost = () => {
               <BlogTOCAndShare
                 title={post.title}
                 url={`https://tecnicocuritiba.com.br/blog/${slug}`}
+                slug={slug}
               />
               {post.content}
 

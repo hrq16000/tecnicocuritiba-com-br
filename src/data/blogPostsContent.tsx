@@ -10536,14 +10536,14 @@ crontab -e
   },
 
   "meu-computador-precisa-de-formatacao": {
-    title: "Como Saber Se Meu Computador Precisa de Formatação (Guia 2026)",
-    excerpt: "Sinais claros de que seu PC precisa de formatação — e quando dá para resolver sem reinstalar o Windows.",
+    title: "Como saber se meu computador precisa de formatação",
+    excerpt: "Sinais claros de que seu PC precisa de formatação em Curitiba — e quando dá para resolver sem reinstalar o Windows.",
     date: "2026-07-10",
     readTime: "9 min",
     category: "Manutenção",
     content: (
       <>
-        <p className="lead">Nem todo computador lento precisa de formatação. Antes de reinstalar o Windows do zero, é importante entender <strong>quais sinais indicam que a formatação é mesmo necessária</strong> e quais podem ser resolvidos com uma manutenção mais leve — economizando tempo, o backup dos seus arquivos e, muitas vezes, dinheiro.</p>
+        <p className="lead"><strong>Como saber se meu computador precisa de formatação?</strong> Em Curitiba, essa é uma das dúvidas mais comuns que recebemos no WhatsApp. Nem todo computador lento precisa de formatação: antes de reinstalar o Windows do zero, é importante entender quais sinais indicam que a formatação é mesmo necessária e quais podem ser resolvidos com uma manutenção mais leve — economizando tempo, o backup dos seus arquivos e, muitas vezes, dinheiro.</p>
 
         <h2>O que é formatar um computador</h2>
         <p>Formatar significa apagar tudo o que está no disco (HD ou SSD) e reinstalar o sistema operacional do zero. É diferente de "limpar" ou "otimizar": na formatação, o Windows sai novo de fábrica, sem programas instalados, sem vírus, sem lixo acumulado.</p>
@@ -10593,14 +10593,14 @@ crontab -e
   },
 
   "quanto-custa-formatar-computador-curitiba": {
-    title: "Quanto Custa Formatar um Computador em Curitiba em 2026",
-    excerpt: "Preço médio, o que está incluso, formatação com ou sem backup, atendimento em domicílio e bancada.",
+    title: "Quanto custa formatar um computador em Curitiba (2026)",
+    excerpt: "Preço médio a partir de R$ 99,99, o que está incluso, formatação com ou sem backup, atendimento em domicílio e bancada.",
     date: "2026-07-10",
     readTime: "8 min",
     category: "Preços",
     content: (
       <>
-        <p className="lead">O <strong>preço para formatar um computador em Curitiba</strong> em 2026 varia entre R$ 99,99 e R$ 250, dependendo do tipo de serviço, do modo de atendimento (domicílio ou bancada) e se inclui backup, licença de Windows e pacote de programas. Neste guia você vê exatamente o que está incluso em cada faixa.</p>
+        <p className="lead"><strong>Quanto custa formatar um computador em Curitiba</strong> em 2026? O preço médio varia entre <strong>R$ 99,99 e R$ 250</strong>, dependendo do tipo de serviço, do modo de atendimento (domicílio ou bancada) e se inclui backup, licença de Windows e pacote de programas. Neste guia você vê exatamente o que está incluso em cada faixa e como não pagar mais caro sem necessidade.</p>
 
         <h2>Tabela de preços atual</h2>
         <ul>
@@ -10645,14 +10645,14 @@ crontab -e
   },
 
   "como-escolher-tecnico-informatica-confiavel-curitiba": {
-    title: "Como Escolher um Técnico de Informática Confiável em Curitiba",
+    title: "Como escolher um técnico de informática confiável em Curitiba",
     excerpt: "9 critérios para não cair em cilada: garantia por escrito, orçamento fechado, reputação e mais.",
     date: "2026-07-10",
     readTime: "10 min",
     category: "Guia",
     content: (
       <>
-        <p className="lead">Contratar um <strong>técnico de informática em Curitiba</strong> não é só olhar o preço. Um mau atendimento pode significar dados perdidos, Windows pirata, o mesmo defeito voltando em 15 dias, ou preço que só cresce depois que o computador está aberto. Este guia lista os 9 sinais de um técnico confiável.</p>
+        <p className="lead"><strong>Como escolher um técnico de informática confiável em Curitiba?</strong> Não é só olhar o preço. Um mau atendimento pode significar dados perdidos, Windows pirata, o mesmo defeito voltando em 15 dias, ou preço que só cresce depois que o computador está aberto. Este guia lista os 9 sinais de um técnico de informática confiável em Curitiba e RMC.</p>
 
         <h2>1. Orçamento fechado antes de começar</h2>
         <p>Técnico sério dá o valor antes de mexer no equipamento — ou cobra apenas o <strong>diagnóstico</strong> (R$ 99,99) e só depois fecha o orçamento do reparo. Fuja de "vou ver aqui e depois te aviso".</p>
@@ -10698,14 +10698,14 @@ crontab -e
   },
 
   "upgrade-ram-quando-vale-a-pena": {
-    title: "Upgrade de Memória RAM: Quando Vale a Pena e Quanto Custa em 2026",
-    excerpt: "Descubra se seu PC ganha desempenho com mais RAM, quantos GB são ideais e o preço do serviço.",
+    title: "Upgrade de RAM: quando vale a pena e quanto custa",
+    excerpt: "Descubra se seu PC ganha desempenho com mais RAM em Curitiba, quantos GB são ideais e o preço do serviço.",
     date: "2026-07-10",
     readTime: "9 min",
     category: "Hardware",
     content: (
       <>
-        <p className="lead">O <strong>upgrade de memória RAM</strong> é um dos serviços com melhor custo-benefício em informática — mas só quando o problema é realmente falta de memória. Este guia explica como identificar, quantos GB você precisa e quanto custa o serviço em Curitiba.</p>
+        <p className="lead"><strong>Upgrade de RAM: quando vale a pena e quanto custa</strong> em Curitiba? É um dos serviços com melhor custo-benefício em informática — mas só quando o problema é realmente falta de memória. Este guia explica como identificar o gargalo, quantos GB você precisa em 2026 e o preço do upgrade de memória RAM em Curitiba, com peça e mão de obra.</p>
 
         <h2>Como saber se seu PC precisa de mais RAM</h2>
         <ul>
@@ -10762,14 +10762,14 @@ crontab -e
   },
 
   "suporte-tecnico-remoto-como-funciona": {
-    title: "Suporte Técnico Remoto Funciona? Como É o Atendimento em 2026",
-    excerpt: "Como um técnico resolve problemas sem ir na sua casa, o que dá e o que não dá para consertar à distância.",
+    title: "Suporte técnico remoto funciona? Como é o atendimento",
+    excerpt: "Como um técnico em Curitiba resolve problemas sem ir na sua casa, o que dá e o que não dá para consertar à distância.",
     date: "2026-07-10",
     readTime: "8 min",
     category: "Suporte Remoto",
     content: (
       <>
-        <p className="lead">O <strong>suporte técnico remoto</strong> resolve entre 60% e 70% dos problemas de informática sem precisar de visita — mais barato, mais rápido e sem sair de casa. Neste guia você entende como funciona, o que dá e o que não dá para resolver à distância, e quando vale a pena.</p>
+        <p className="lead"><strong>Suporte técnico remoto funciona?</strong> Sim — e resolve entre 60% e 70% dos problemas de informática sem precisar de visita. Neste guia você entende <strong>como é o atendimento</strong> passo a passo em Curitiba, o que dá e o que não dá para resolver à distância pelo AnyDesk/TeamViewer, e quando o suporte técnico remoto vale mais a pena que uma visita presencial.</p>
 
         <h2>Como funciona na prática</h2>
         <ol>
