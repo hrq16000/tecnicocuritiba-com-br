@@ -4,7 +4,7 @@ const data = {
   nome: "Jardim Paraíso",
   slug: "jardim-paraiso-at",
   cidade: "Almirante Tamandaré",
-  metaTitle: "Técnico de Informática no Jardim Paraíso | Almirante Tamandaré | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Jardim Paraíso | Almirante Tamandaré | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Jardim Paraíso, Almirante Tamandaré. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Jardim Paraíso – Almirante Tamandaré",
   subtitulo: "Atendimento técnico profissional a domicílio no Jardim Paraíso. Diagnóstico no local, orçamento transparente e garantia.",

@@ -1,7 +1,7 @@
 import { ServicoBairroTemplate, ServicoBairroData } from "./ServicoBairroTemplate";
 
 const data: ServicoBairroData = {
-  metaTitle: "Formatação de Computador no Portão Curitiba | Rápido e Seguro | Técnico Curitiba",
+  metaTitle: "Formatação de Computador no Portão Curitiba | Rápido e Seguro | Técnico em Curitiba",
   metaDescription: "Formatação de computador e notebook no Portão, Curitiba. Windows 10/11, backup completo e drivers. Atendimento a domicílio no mesmo dia. a partir de R$ 99,99.",
   
   servico: "Formatação de Computador",

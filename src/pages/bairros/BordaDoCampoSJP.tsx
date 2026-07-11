@@ -4,7 +4,7 @@ const data = {
   nome: "Borda do Campo",
   slug: "borda-do-campo-sjp",
   cidade: "São José dos Pinhais",
-  metaTitle: "Técnico de Informática no Borda do Campo | São José dos Pinhais | Atendimento Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Borda do Campo | São José dos Pinhais | Atendimento Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Borda do Campo, São José dos Pinhais. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Borda do Campo – São José dos Pinhais",
   subtitulo: "Atendimento técnico profissional a domicílio no Borda do Campo. Diagnóstico no local, orçamento transparente e garantia.",

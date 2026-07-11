@@ -15,7 +15,7 @@ const WHATSAPP_NUMBER = "5541997452053";
 
 const UpgradeSsdMemoria = () => {
   useEffect(() => {
-    document.title = "Upgrade SSD e Memória RAM em Curitiba | Notebook e PC - Técnico Curitiba";
+    document.title = "Upgrade SSD e Memória RAM em Curitiba | Notebook e PC - Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Upgrade de SSD e memória RAM em Curitiba. Deixe seu notebook ou PC até 10x mais rápido. Instalação profissional com garantia. Atendimento domiciliar.");
@@ -31,7 +31,7 @@ const UpgradeSsdMemoria = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Upgrade SSD e Memória RAM em Curitiba a partir de R$ 99,99 (mão de obra) | Técnico Curitiba" description="Instalação de SSD e memória RAM em notebooks e PCs em Curitiba. Mão de obra a partir de R$ 99,99 — clonagem do Windows, garantia e visita técnica em até 30 min." path="/servicos/upgrade-ssd-memoria"  breadcrumbs={[
+      <PageSEO title="Upgrade SSD e Memória RAM em Curitiba a partir de R$ 99,99 (mão de obra) | Técnico em Curitiba" description="Instalação de SSD e memória RAM em notebooks e PCs em Curitiba. Mão de obra a partir de R$ 99,99 — clonagem do Windows, garantia e visita técnica em até 30 min." path="/servicos/upgrade-ssd-memoria"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Upgrade SSD/Memória", path: "/servicos/upgrade-ssd-memoria" }

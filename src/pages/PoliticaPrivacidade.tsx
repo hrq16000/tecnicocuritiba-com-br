@@ -6,7 +6,7 @@ import { PageHero } from "@/components/PageHero";
 import { ShieldCheck, Cookie, Database, Mail, MessageCircle, FileText } from "lucide-react";
 
 const CANONICAL = "https://tecnicocuritiba.com.br/politica-de-privacidade";
-const COMPANY = "Técnico Curitiba — Assistência Técnica em Informática";
+const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
 const CNPJ = "41.723.708/0001-58";
 const WHATSAPP = "5541997452053";
 const EMAIL = "contato@tecnicocuritiba.com.br";
@@ -165,13 +165,13 @@ const PoliticaPrivacidade = () => {
   return (
     <>
       <Helmet>
-        <title>Política de Privacidade | Técnico Curitiba</title>
+        <title>Política de Privacidade | Técnico em Curitiba</title>
         <meta
           name="description"
-          content="Política de Privacidade e LGPD do Técnico Curitiba: como coletamos, usamos e protegemos seus dados, cookies, GA4, Google Ads e seus direitos."
+          content="Política de Privacidade e LGPD do Técnico em Curitiba: como coletamos, usamos e protegemos seus dados, cookies, GA4, Google Ads e seus direitos."
         />
         <link rel="canonical" href={CANONICAL} />
-        <meta property="og:title" content="Política de Privacidade | Técnico Curitiba" />
+        <meta property="og:title" content="Política de Privacidade | Técnico em Curitiba" />
         <meta property="og:url" content={CANONICAL} />
         <meta property="og:type" content="article" />
         <meta name="robots" content="index, follow" />

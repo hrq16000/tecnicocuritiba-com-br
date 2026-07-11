@@ -156,7 +156,7 @@ const TecnicoInformaticaCuritiba = () => {
         "A assistência técnica em informática mais completa de Curitiba. Formatação, conserto de PC e notebook, remoção de vírus, upgrade SSD. ⭐ 4.9/5 - Atendimento a domicílio no mesmo dia. (41) 99745-2053"
       );
     }
-    trackPageView("/tecnico-informatica-curitiba", "Técnico Curitiba");
+    trackPageView("/tecnico-informatica-curitiba", "Técnico em Curitiba");
   }, []);
 
   return (

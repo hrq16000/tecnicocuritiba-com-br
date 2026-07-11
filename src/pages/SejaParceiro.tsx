@@ -65,7 +65,7 @@ const SejaParceiro = () => {
   });
 
   useEffect(() => {
-    document.title = "Seja Técnico Parceiro | Técnico Curitiba";
+    document.title = "Seja Técnico Parceiro | Técnico em Curitiba";
     trackPageView("/seja-parceiro", "Seja Parceiro");
   }, []);
 
@@ -95,7 +95,7 @@ const SejaParceiro = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Seja Técnico Parceiro | Trabalhe Conosco | Técnico Curitiba"
+        title="Seja Técnico Parceiro | Trabalhe Conosco | Técnico em Curitiba"
         description="Quer ser técnico parceiro? Cadastre-se e receba chamados técnicos na sua região. Flexibilidade, demanda constante e suporte profissional."
         path="/seja-parceiro"
         breadcrumbs={[{ name: "Início", path: "/" }, { name: "Seja Parceiro", path: "/seja-parceiro" }]}

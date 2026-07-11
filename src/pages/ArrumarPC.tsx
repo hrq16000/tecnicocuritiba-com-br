@@ -125,7 +125,7 @@ const ArrumarPC = () => {
     serviceType: "Suporte técnico remoto de informática",
     provider: {
       "@type": "Organization",
-      name: "Técnico Curitiba",
+      name: "Técnico em Curitiba",
       url: "https://tecnicocuritiba.com.br",
     },
     areaServed: { "@type": "Country", name: "Brasil" },
@@ -152,7 +152,7 @@ const ArrumarPC = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Arrumar PC online — Técnico de informática para todo Brasil | Técnico Curitiba"
+        title="Arrumar PC online — Técnico de informática para todo Brasil | Técnico em Curitiba"
         description="Arrume seu PC ou notebook de qualquer lugar do Brasil via WhatsApp + acesso remoto. Formatação, vírus, lentidão, tela azul, Wi-Fi. Orçamento grátis, paga só se resolver."
         path="/arrumar-pc"
         breadcrumbs={[

@@ -361,7 +361,7 @@ const Blog = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
-    document.title = "Blog Técnico Curitiba | Dicas Urgentes de PC";
+    document.title = "Blog Técnico em Curitiba | Dicas Urgentes de PC";
     trackPageView("/blog", "Blog — Explorar Conteúdo");
   }, []);
 
@@ -489,7 +489,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Blog Técnico Curitiba | Dicas Urgentes de PC"
+        title="Blog Técnico em Curitiba | Dicas Urgentes de PC"
         description="Guias rápidos para computador lento, vírus, formatação e notebook que não liga. Conteúdo local de técnico em Curitiba com WhatsApp para urgências."
         path="/blog"
         breadcrumbs={[{ name: "Início", path: "/" }, { name: "Blog", path: "/blog" }]}
@@ -518,7 +518,7 @@ const Blog = () => {
                   <span>{stats.total}+ conteúdos técnicos</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-[1.1] mb-5">
-                  <span className="block" style={{ animation: 'heroFadeUp 0.6s ease-out both' }}>Blog Técnico Curitiba</span>
+                  <span className="block" style={{ animation: 'heroFadeUp 0.6s ease-out both' }}>Blog Técnico em Curitiba</span>
                   <span className="block gradient-text-animated text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style={{ animation: 'heroFadeUp 0.6s ease-out 0.15s both' }}>PC lento, vírus e urgências</span>
                 </h1>
                 <p className="text-lg md:text-xl text-white/65 max-w-2xl mx-auto leading-relaxed" style={{ animation: 'heroFadeUp 0.7s ease-out 0.3s both' }}>

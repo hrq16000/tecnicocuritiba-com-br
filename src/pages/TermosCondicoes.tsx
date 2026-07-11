@@ -69,7 +69,7 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
-  name: "Técnico Curitiba — Assistência Técnica em Informática",
+  name: "Técnico em Curitiba — Assistência Técnica em Informática",
   url: "https://tecnicocuritiba.com.br/",
   telephone: "+5541997452053",
   areaServed: [

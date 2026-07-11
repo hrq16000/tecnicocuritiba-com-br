@@ -15,7 +15,7 @@ const WHATSAPP_NUMBER = "5541997452053";
 
 const RedesWifi = () => {
   useEffect(() => {
-    document.title = "Configuração de Redes e Wi-Fi em Curitiba | Técnico Curitiba";
+    document.title = "Configuração de Redes e Wi-Fi em Curitiba | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Configuração de redes Wi-Fi em Curitiba. Instalação de roteadores, repetidores, extensores. Internet lenta? Resolvemos! Atendimento domiciliar.");
@@ -31,7 +31,7 @@ const RedesWifi = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Configuração de Redes e Wi-Fi em Curitiba a partir de R$ 99,99 | Técnico Curitiba" description="Instalação e configuração de Wi-Fi, roteadores, repetidores e sistemas mesh em Curitiba a partir de R$ 99,99. Internet lenta? Resolvemos em até 30 min." path="/servicos/redes-wifi"  breadcrumbs={[
+      <PageSEO title="Configuração de Redes e Wi-Fi em Curitiba a partir de R$ 99,99 | Técnico em Curitiba" description="Instalação e configuração de Wi-Fi, roteadores, repetidores e sistemas mesh em Curitiba a partir de R$ 99,99. Internet lenta? Resolvemos em até 30 min." path="/servicos/redes-wifi"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Redes e Wi-Fi", path: "/servicos/redes-wifi" }

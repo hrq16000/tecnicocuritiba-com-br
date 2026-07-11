@@ -75,7 +75,7 @@ function htmlEscape(s) {
 function cityMeta(c) {
   const path = `/arrumar-pc/${c.slug}`;
   const url = `${SITE}${path}`;
-  const title = `Arrumar PC em ${c.cidade} ${c.estado} — Técnico online | Técnico Curitiba`;
+  const title = `Arrumar PC em ${c.cidade} ${c.estado} — Técnico online | Técnico em Curitiba`;
   const description = `Técnico de informática online para ${c.cidade}/${c.estado}. Formatação, vírus, lentidão, tela azul e Wi-Fi via WhatsApp + acesso remoto. Orçamento grátis, paga só se resolver.`;
   return { path, url, title, description };
 }
@@ -84,7 +84,7 @@ function categoryLocalMeta(cat, local) {
   const cityLabel = local.kind === "bairro" ? `${local.nome}, ${local.cidadeMae}` : local.nome;
   const path = `/${cat.slug}/${local.slug}`;
   const url = `${SITE}${path}`;
-  const title = `${cat.titlePrefix} em ${cityLabel} | Coleta e Entrega · Técnico Curitiba`;
+  const title = `${cat.titlePrefix} em ${cityLabel} | Coleta e Entrega · Técnico em Curitiba`;
   const description = `${cat.titlePrefix} em ${cityLabel}/PR com coleta e entrega. Reparo a partir de R$ 300 com diagnóstico incluso, garantia de 90 dias e orçamento sem compromisso pelo WhatsApp.`;
   return { path, url, title, description, cityLabel };
 }
@@ -113,7 +113,7 @@ function injectMeta(html, meta) {
   const og = [
     `<meta property="og:type" content="website">`,
     `<meta property="og:url" content="${meta.url}">`,
-    `<meta property="og:site_name" content="Técnico Curitiba">`,
+    `<meta property="og:site_name" content="Técnico em Curitiba">`,
     `<meta property="og:locale" content="pt_BR">`,
     `<meta property="og:title" content="${htmlEscape(meta.title)}">`,
     `<meta property="og:description" content="${htmlEscape(meta.description)}">`,
@@ -166,7 +166,7 @@ export async function prerenderCities(distDir) {
       "@type": "Service",
       name: `Arrumar PC online em ${c.cidade}`,
       serviceType: "Suporte técnico remoto de informática",
-      provider: { "@type": "Organization", name: "Técnico Curitiba", url: SITE },
+      provider: { "@type": "Organization", name: "Técnico em Curitiba", url: SITE },
       areaServed: { "@type": "City", name: c.cidade, containedInPlace: { "@type": "State", name: c.estadoNome } },
       description: meta.description,
       url: meta.url,
@@ -185,7 +185,7 @@ export async function prerenderCities(distDir) {
       "@type": "Service",
       name: cat.titlePrefix,
       serviceType: cat.titlePrefix,
-      provider: { "@type": "LocalBusiness", name: "Técnico Curitiba", url: SITE, telephone: "+5541997452053" },
+      provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: SITE, telephone: "+5541997452053" },
       areaServed: { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
       description: meta.description,
       url: meta.url,
@@ -205,7 +205,7 @@ export async function prerenderCities(distDir) {
         "@type": "Service",
         name: `${cat.titlePrefix} em ${meta.cityLabel}`,
         serviceType: cat.titlePrefix,
-        provider: { "@type": "LocalBusiness", name: "Técnico Curitiba", url: SITE, telephone: "+5541997452053", address: { "@type": "PostalAddress", addressLocality: "Curitiba", addressRegion: "PR", addressCountry: "BR" } },
+        provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: SITE, telephone: "+5541997452053", address: { "@type": "PostalAddress", addressLocality: "Curitiba", addressRegion: "PR", addressCountry: "BR" } },
         areaServed: { "@type": local.kind === "bairro" ? "Place" : "City", name: meta.cityLabel, containedInPlace: { "@type": "State", name: "Paraná" } },
         offers: {
           "@type": "Offer", priceCurrency: "BRL", price: "300",

@@ -153,7 +153,7 @@ const ColetaFormulario = () => {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    document.title = "Formulário de Coleta — Preencha seus Dados | Técnico Curitiba";
+    document.title = "Formulário de Coleta — Preencha seus Dados | Técnico em Curitiba";
     trackPageView("/coleta-formulario", "Formulário Coleta");
   }, []);
 
@@ -258,7 +258,7 @@ const ColetaFormulario = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Formulário de Coleta e Entrega | Técnico Curitiba"
+        title="Formulário de Coleta e Entrega | Técnico em Curitiba"
         description="Preencha o formulário para agendar a coleta do seu equipamento. TV, celular, notebook, PC. Curitiba e região."
         path="/coleta-formulario"
       />

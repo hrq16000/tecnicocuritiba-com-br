@@ -17,7 +17,7 @@ export const SocialProofSection = () => {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Técnico Curitiba - Suporte em Informática",
+    "name": "Técnico em Curitiba - Suporte em Informática",
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": stats.rating.toString(), "reviewCount": stats.totalReviews.toString(), "bestRating": "5", "worstRating": "1" },
     "review": reviews.map(review => ({
       "@type": "Review",
@@ -117,7 +117,7 @@ export const SocialProofSection = () => {
               Faça Parte dos Nossos Clientes Satisfeitos
             </h3>
             <p className="text-white/75 mb-6 max-w-2xl mx-auto leading-relaxed">
-              Junte-se às centenas de curitibanos que confiam no Técnico Curitiba para resolver seus problemas de informática.
+              Junte-se às centenas de curitibanos que confiam no Técnico em Curitiba para resolver seus problemas de informática.
             </p>
             <div className="flex justify-center">
               <Button variant="heroWhatsapp" size="lg" className="ripple-container shadow-lg" asChild>

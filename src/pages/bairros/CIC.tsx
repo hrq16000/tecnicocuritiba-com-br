@@ -4,7 +4,7 @@ const data = {
   nome: "CIC",
   slug: "cic",
   cidade: "Curitiba",
-  metaTitle: "Técnico de Informática no CIC Curitiba | Suporte Técnico | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no CIC Curitiba | Suporte Técnico | Técnico em Curitiba",
   metaDescription: "Técnico de informática no CIC (Cidade Industrial de Curitiba). Suporte para empresas e residências. Manutenção de computadores. a partir de R$ 99,99.",
   h1: "Técnico de Informática no CIC – Curitiba",
   subtitulo: "Suporte técnico para empresas e residências na Cidade Industrial de Curitiba",

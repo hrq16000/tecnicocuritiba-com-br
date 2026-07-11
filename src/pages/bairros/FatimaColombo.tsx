@@ -4,7 +4,7 @@ const data = {
   nome: "Fátima",
   slug: "fatima-colombo",
   cidade: "Colombo",
-  metaTitle: "Técnico de Informática no Fátima | Colombo | Atendimento a Domicílio | Técnico Curitiba",
+  metaTitle: "Técnico de Informática no Fátima | Colombo | Atendimento a Domicílio | Técnico em Curitiba",
   metaDescription: "Técnico de informática no Fátima, Colombo. Formatação, conserto de notebook, remoção de vírus, upgrade SSD. Atendimento a domicílio rápido. a partir de R$ 99,99.",
   h1: "Técnico de Informática no Fátima – Colombo",
   subtitulo: "Atendimento técnico profissional a domicílio no Fátima. Diagnóstico no local, orçamento transparente e garantia.",

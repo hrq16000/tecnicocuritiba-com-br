@@ -138,7 +138,7 @@ O atendimento a domicílio está disponível no mesmo dia para a maioria das reg
 
   {
     slug: "computador-liga-e-desliga-curitiba",
-    title: "Computador Liga e Desliga Sozinho | Técnico Curitiba",
+    title: "Computador Liga e Desliga Sozinho | Técnico em Curitiba",
     metaDescription: "Computador ligando e desligando sozinho em Curitiba? Veja causas, riscos e solução profissional. Diagnóstico no mesmo dia.",
     h1: "Computador Liga e Desliga Sozinho em Curitiba — O Que Está Acontecendo?",
     categoria: "Problemas de Computador",
@@ -814,7 +814,7 @@ Na maioria dos casos, a solução é limpeza interna + troca de pasta térmica �
 
   {
     slug: "notebook-desligando-sozinho-curitiba",
-    title: "Notebook Desligando Sozinho | Técnico Curitiba",
+    title: "Notebook Desligando Sozinho | Técnico em Curitiba",
     metaDescription: "Notebook desligando sozinho? Superaquecimento, bateria ou placa-mãe. Diagnóstico profissional em Curitiba.",
     h1: "Notebook Desligando Sozinho em Curitiba — Causas e Solução",
     categoria: "Notebook",
@@ -1281,7 +1281,7 @@ Recebemos semanalmente casos de upgrade de RAM mal executado na região de Curit
 
 Se você está em dúvida sobre qual RAM comprar para seu computador em Curitiba, entre em contato antes de comprar. Uma consultoria rápida pode evitar uma compra errada e um reparo desnecessário.` },
 
-  { slug: "upgrade-deu-problema", title: "Upgrade Deu Problema | Técnico Curitiba", metaDescription: "Fez upgrade e deu problema? SSD, RAM ou outro componente não funciona? Diagnóstico em Curitiba.", h1: "Upgrade Deu Problema — Como Resolver?", categoria: "Erros e Casos Reais", intro: `Upgrades de hardware são a forma mais eficiente de melhorar o desempenho de um computador. Mas quando feitos sem conhecimento técnico adequado, podem causar problemas sérios: computador que não liga, instabilidade, perda de dados ou até dano permanente. Atendemos dezenas de casos por mês de upgrades mal executados em Curitiba.`, sintomas: [{ titulo: "Não liga após upgrade", desc: "Peça incompatível ou mal instalada.", gravidade: "Simples a médio" }, { titulo: "Instabilidade após upgrade", desc: "Trava, tela azul ou reinicia. Compatibilidade ou instalação.", gravidade: "Simples a médio" }, { titulo: "Performance não melhorou", desc: "Upgrade errado para o gargalo real.", gravidade: "Simples" }], causas: [{ titulo: "Incompatibilidade de componentes", desc: "Peça que não funciona com o hardware existente.", tipo: "erro-humano" }, { titulo: "Instalação incorreta", desc: "Componente mal encaixado, cabo errado, sem pasta térmica.", tipo: "erro-humano" }, { titulo: "BIOS não configurada", desc: "Alguns upgrades exigem ajustes na BIOS para funcionar.", tipo: "erro-humano" }, { titulo: "Componente com defeito de fábrica", desc: "Peça nova já com defeito — acontece.", tipo: "hardware" }], cenarios: [{ nivel: "Simples", desc: "Reconfiguração, reencaixe, ajuste de BIOS.", tempo: "1h", custo: "R$ 99,99 a R$ 150" }, { nivel: "Médio", desc: "Troca de peça por modelo compatível.", tempo: "1 a 2 dias", custo: "R$ 150 a R$ 300" }, { nivel: "Complexo", desc: "Reparo de dano causado pelo upgrade.", tempo: "3 a 7 dias", custo: "R$ 250 a R$ 600" }], riscos: ["Continuar tentando pode piorar o dano", "Trocar mais peças por achismo desperdiça dinheiro"], diagnostico: `Análise completa do upgrade realizado, teste de compatibilidade, verificação de instalação. Custo: R$ 99,99.`, solucao: `Correção do upgrade (peça certa, instalação certa, configuração certa).`, quandoCompensa: "Na maioria dos casos — o equipamento original geralmente está intacto.", quandoNaoCompensa: "Quando o upgrade causou curto e danificou a placa-mãe.", whatsappMessage: "Olá! Fiz um upgrade e agora meu computador tem problemas. Podem ajudar?", relatedPages: [...RELATED_BASE, { label: "Erro RAM", to: "/problemas/erro-ao-instalar-memoria-ram" }, { label: "Erros Comuns em Upgrade", to: "/problemas/erros-comuns-em-upgrade" }, { label: "Upgrade SSD/Memória", to: "/servicos/upgrade-ssd-memoria" }, { label: "Computador Não Liga", to: "/problemas/computador-nao-liga-curitiba" }, { label: "Notebook Após Upgrade", to: "/problemas/notebook-apos-upgrade-nao-liga-curitiba" }], conteudoExtra: `### Os Upgrades Mais Comuns (e Erros)
+  { slug: "upgrade-deu-problema", title: "Upgrade Deu Problema | Técnico em Curitiba", metaDescription: "Fez upgrade e deu problema? SSD, RAM ou outro componente não funciona? Diagnóstico em Curitiba.", h1: "Upgrade Deu Problema — Como Resolver?", categoria: "Erros e Casos Reais", intro: `Upgrades de hardware são a forma mais eficiente de melhorar o desempenho de um computador. Mas quando feitos sem conhecimento técnico adequado, podem causar problemas sérios: computador que não liga, instabilidade, perda de dados ou até dano permanente. Atendemos dezenas de casos por mês de upgrades mal executados em Curitiba.`, sintomas: [{ titulo: "Não liga após upgrade", desc: "Peça incompatível ou mal instalada.", gravidade: "Simples a médio" }, { titulo: "Instabilidade após upgrade", desc: "Trava, tela azul ou reinicia. Compatibilidade ou instalação.", gravidade: "Simples a médio" }, { titulo: "Performance não melhorou", desc: "Upgrade errado para o gargalo real.", gravidade: "Simples" }], causas: [{ titulo: "Incompatibilidade de componentes", desc: "Peça que não funciona com o hardware existente.", tipo: "erro-humano" }, { titulo: "Instalação incorreta", desc: "Componente mal encaixado, cabo errado, sem pasta térmica.", tipo: "erro-humano" }, { titulo: "BIOS não configurada", desc: "Alguns upgrades exigem ajustes na BIOS para funcionar.", tipo: "erro-humano" }, { titulo: "Componente com defeito de fábrica", desc: "Peça nova já com defeito — acontece.", tipo: "hardware" }], cenarios: [{ nivel: "Simples", desc: "Reconfiguração, reencaixe, ajuste de BIOS.", tempo: "1h", custo: "R$ 99,99 a R$ 150" }, { nivel: "Médio", desc: "Troca de peça por modelo compatível.", tempo: "1 a 2 dias", custo: "R$ 150 a R$ 300" }, { nivel: "Complexo", desc: "Reparo de dano causado pelo upgrade.", tempo: "3 a 7 dias", custo: "R$ 250 a R$ 600" }], riscos: ["Continuar tentando pode piorar o dano", "Trocar mais peças por achismo desperdiça dinheiro"], diagnostico: `Análise completa do upgrade realizado, teste de compatibilidade, verificação de instalação. Custo: R$ 99,99.`, solucao: `Correção do upgrade (peça certa, instalação certa, configuração certa).`, quandoCompensa: "Na maioria dos casos — o equipamento original geralmente está intacto.", quandoNaoCompensa: "Quando o upgrade causou curto e danificou a placa-mãe.", whatsappMessage: "Olá! Fiz um upgrade e agora meu computador tem problemas. Podem ajudar?", relatedPages: [...RELATED_BASE, { label: "Erro RAM", to: "/problemas/erro-ao-instalar-memoria-ram" }, { label: "Erros Comuns em Upgrade", to: "/problemas/erros-comuns-em-upgrade" }, { label: "Upgrade SSD/Memória", to: "/servicos/upgrade-ssd-memoria" }, { label: "Computador Não Liga", to: "/problemas/computador-nao-liga-curitiba" }, { label: "Notebook Após Upgrade", to: "/problemas/notebook-apos-upgrade-nao-liga-curitiba" }], conteudoExtra: `### Os Upgrades Mais Comuns (e Erros)
 
 | Upgrade | Erro Comum | Como Evitar |
 |---|---|---|
@@ -1616,7 +1616,7 @@ O diagnóstico custa R$ 99,99 e identifica se o problema é software (formataç�
 
 No segundo cenário, economiza R$ 110 E resolve mais rápido.` },
 
-  { slug: "erro-apos-formatacao", title: "Erro Após Formatação | Técnico Curitiba", metaDescription: "Formatou e continua com problemas? Veja por que a formatação não resolveu e o que fazer. Curitiba.", h1: "Erro Após Formatação — Por Que Não Resolveu?", categoria: "Software / Sistema", intro: `Formatou e o problema continua? Isso acontece quando a causa raiz é hardware, não software. Os erros mais comuns após formatação são: lentidão persistente (HD com setores defeituosos), travamentos (RAM com erro) e desligamentos (superaquecimento). Nesses casos, a formatação foi desnecessária — o próximo passo é diagnóstico de hardware.`, sintomas: [{ titulo: "Continua lento após formatar", desc: "HD com setores defeituosos ou hardware subdimensionado.", gravidade: "Médio" }, { titulo: "Tela azul mesmo após formatação", desc: "RAM, HD ou driver de hardware com problema.", gravidade: "Médio" }, { titulo: "Drivers não instalados corretamente", desc: "Formatação sem os drivers corretos.", gravidade: "Simples" }], causas: [{ titulo: "Problema era hardware", desc: "Formatação só resolve software. Hardware precisa de reparo.", tipo: "hardware" }, { titulo: "Formatação mal feita", desc: "Windows instalado sem drivers, partição errada, modo errado.", tipo: "erro-humano" }, { titulo: "HD defeituoso", desc: "Mesmo com sistema novo, disco com erros causa problemas.", tipo: "hardware" }], cenarios: [{ nivel: "Simples", desc: "Instalação de drivers faltantes.", tempo: "1h", custo: "R$ 99,99 a R$ 150" }, { nivel: "Médio", desc: "Diagnóstico de hardware + correção.", tempo: "2h a 4h", custo: "R$ 150 a R$ 400" }, { nivel: "Complexo", desc: "Troca de componente defeituoso + reinstalação.", tempo: "1 a 3 dias", custo: "R$ 250 a R$ 600+" }], riscos: ["Formatar de novo não vai resolver problema de hardware", "Continuar usando com HD defeituoso pode perder dados"], diagnostico: `Diagnóstico de hardware pós-formatação: teste de HD (SMART), RAM (MemTest), temperatura, fonte. Custo: R$ 99,99.`, solucao: `Identificar e resolver o problema de hardware que a formatação não resolveu.`, quandoCompensa: "Sempre compensa diagnosticar — melhor saber a verdade do que formatar novamente.", quandoNaoCompensa: "N/A", whatsappMessage: "Olá! Formatei meu computador mas continua com problemas. Podem ajudar?", relatedPages: [...RELATED_BASE, { label: "Formatação Resolve?", to: "/problemas/formatacao-resolve-curitiba" }, { label: "Computador Lento", to: "/problemas/computador-lento-curitiba" }, { label: "Windows Lento", to: "/problemas/windows-lento-curitiba" }, { label: "Upgrade SSD", to: "/servicos/upgrade-ssd-memoria" }], conteudoExtra: `### Por Que Isso Acontece?
+  { slug: "erro-apos-formatacao", title: "Erro Após Formatação | Técnico em Curitiba", metaDescription: "Formatou e continua com problemas? Veja por que a formatação não resolveu e o que fazer. Curitiba.", h1: "Erro Após Formatação — Por Que Não Resolveu?", categoria: "Software / Sistema", intro: `Formatou e o problema continua? Isso acontece quando a causa raiz é hardware, não software. Os erros mais comuns após formatação são: lentidão persistente (HD com setores defeituosos), travamentos (RAM com erro) e desligamentos (superaquecimento). Nesses casos, a formatação foi desnecessária — o próximo passo é diagnóstico de hardware.`, sintomas: [{ titulo: "Continua lento após formatar", desc: "HD com setores defeituosos ou hardware subdimensionado.", gravidade: "Médio" }, { titulo: "Tela azul mesmo após formatação", desc: "RAM, HD ou driver de hardware com problema.", gravidade: "Médio" }, { titulo: "Drivers não instalados corretamente", desc: "Formatação sem os drivers corretos.", gravidade: "Simples" }], causas: [{ titulo: "Problema era hardware", desc: "Formatação só resolve software. Hardware precisa de reparo.", tipo: "hardware" }, { titulo: "Formatação mal feita", desc: "Windows instalado sem drivers, partição errada, modo errado.", tipo: "erro-humano" }, { titulo: "HD defeituoso", desc: "Mesmo com sistema novo, disco com erros causa problemas.", tipo: "hardware" }], cenarios: [{ nivel: "Simples", desc: "Instalação de drivers faltantes.", tempo: "1h", custo: "R$ 99,99 a R$ 150" }, { nivel: "Médio", desc: "Diagnóstico de hardware + correção.", tempo: "2h a 4h", custo: "R$ 150 a R$ 400" }, { nivel: "Complexo", desc: "Troca de componente defeituoso + reinstalação.", tempo: "1 a 3 dias", custo: "R$ 250 a R$ 600+" }], riscos: ["Formatar de novo não vai resolver problema de hardware", "Continuar usando com HD defeituoso pode perder dados"], diagnostico: `Diagnóstico de hardware pós-formatação: teste de HD (SMART), RAM (MemTest), temperatura, fonte. Custo: R$ 99,99.`, solucao: `Identificar e resolver o problema de hardware que a formatação não resolveu.`, quandoCompensa: "Sempre compensa diagnosticar — melhor saber a verdade do que formatar novamente.", quandoNaoCompensa: "N/A", whatsappMessage: "Olá! Formatei meu computador mas continua com problemas. Podem ajudar?", relatedPages: [...RELATED_BASE, { label: "Formatação Resolve?", to: "/problemas/formatacao-resolve-curitiba" }, { label: "Computador Lento", to: "/problemas/computador-lento-curitiba" }, { label: "Windows Lento", to: "/problemas/windows-lento-curitiba" }, { label: "Upgrade SSD", to: "/servicos/upgrade-ssd-memoria" }], conteudoExtra: `### Por Que Isso Acontece?
 
 Formatação é como repintar uma casa com problemas estruturais — fica bonita por fora mas os problemas continuam. O diagnóstico antes de formatar evita esse desperdício.
 
@@ -5492,7 +5492,7 @@ Sempre use "Remover hardware com segurança" antes de desconectar pendrives e HD
   // ============================================================
   {
     slug: "notebook-teclado-nao-funciona-curitiba",
-    title: "Teclado do Notebook Não Funciona? Causas e Soluções | Técnico Curitiba",
+    title: "Teclado do Notebook Não Funciona? Causas e Soluções | Técnico em Curitiba",
     metaDescription: "Teclado do notebook parou de funcionar? Teclas travadas, sem resposta ou digitando errado? Diagnóstico e reparo em Curitiba. Atendimento rápido a domicílio.",
     h1: "Teclado do Notebook Não Funciona em Curitiba? Resolvemos!",
     categoria: "Hardware",
@@ -5652,7 +5652,7 @@ Para quem não quer esperar o reparo, uma placa de som USB externa (adaptador US
   // ============================================================
   {
     slug: "erro-disco-100-porcento-curitiba",
-    title: "Disco 100% no Gerenciador de Tarefas? Solução | Técnico Curitiba",
+    title: "Disco 100% no Gerenciador de Tarefas? Solução | Técnico em Curitiba",
     metaDescription: "Disco em 100% no Windows? Computador extremamente lento por uso de disco constante? Diagnóstico e solução em Curitiba. Atendimento rápido.",
     h1: "Disco 100% no Gerenciador de Tarefas em Curitiba? Resolvemos!",
     categoria: "Software / Hardware",
@@ -5745,7 +5745,7 @@ Um SSD não tem partes móveis e acessa dados instantaneamente, eliminando o gar
   // ============================================================
   {
     slug: "computador-reiniciando-sozinho-curitiba",
-    title: "Computador Reiniciando Sozinho? Causas e Soluções | Técnico Curitiba",
+    title: "Computador Reiniciando Sozinho? Causas e Soluções | Técnico em Curitiba",
     metaDescription: "Computador reiniciando sozinho sem aviso? Pode ser superaquecimento, fonte, RAM ou Windows. Diagnóstico profissional em Curitiba. Atendimento rápido.",
     h1: "Computador Reiniciando Sozinho em Curitiba? Encontramos a Causa!",
     categoria: "Hardware / Software",
@@ -5834,7 +5834,7 @@ Um SSD não tem partes móveis e acessa dados instantaneamente, eliminando o gar
   // ============================================================
   {
     slug: "pc-nao-conecta-internet-curitiba",
-    title: "PC Não Conecta na Internet? Causas e Soluções | Técnico Curitiba",
+    title: "PC Não Conecta na Internet? Causas e Soluções | Técnico em Curitiba",
     metaDescription: "Computador ou notebook sem internet? Wi-Fi não conecta, cabo sem rede? Diagnóstico e solução em Curitiba e região. Atendimento rápido a domicílio.",
     h1: "PC ou Notebook Não Conecta na Internet em Curitiba? Resolvemos!",
     categoria: "Redes / Software",
@@ -6013,7 +6013,7 @@ O Registro do Windows é como o "cérebro" do sistema operacional. Ele armazena:
   // ============================================================
   {
     slug: "notebook-nao-carrega-curitiba",
-    title: "Notebook Não Carrega? Bateria Não Carrega | Técnico Curitiba",
+    title: "Notebook Não Carrega? Bateria Não Carrega | Técnico em Curitiba",
     metaDescription: "Notebook não carrega a bateria? Carregador não funciona? LED não acende? Diagnóstico e reparo em Curitiba. Atendimento rápido a domicílio.",
     h1: "Notebook Não Carrega em Curitiba? Diagnóstico e Solução Rápida",
     categoria: "Hardware",
@@ -6101,7 +6101,7 @@ Abre um relatório HTML com capacidade original vs atual e histórico de carga.`
   // ============================================================
   {
     slug: "pc-com-virus-ransomware-curitiba",
-    title: "PC com Vírus Ransomware? Arquivos Criptografados | Técnico Curitiba",
+    title: "PC com Vírus Ransomware? Arquivos Criptografados | Técnico em Curitiba",
     metaDescription: "Computador infectado com ransomware? Arquivos criptografados e pedido de resgate? Diagnóstico e tentativa de recuperação em Curitiba. Atendimento urgente.",
     h1: "PC com Ransomware em Curitiba? Ação Urgente Necessária",
     categoria: "Segurança",
@@ -8860,7 +8860,7 @@ Atendemos toda Curitiba e região metropolitana. Problemas de software no touchp
   // ─── mouse-nao-funciona-curitiba ───
   {
     slug: "mouse-nao-funciona-curitiba",
-    title: "Mouse Não Funciona em Curitiba — Diagnóstico e Reparo | Técnico Curitiba",
+    title: "Mouse Não Funciona em Curitiba — Diagnóstico e Reparo | Técnico em Curitiba",
     metaDescription: "Mouse parou de funcionar? Técnico em Curitiba resolve mouse com fio, sem fio e Bluetooth. Diagnóstico rápido, atendimento em domicílio. WhatsApp agora!",
     h1: "Mouse Não Funciona — Diagnóstico e Reparo em Curitiba",
     categoria: "Periféricos",
@@ -8910,7 +8910,7 @@ Atendemos toda Curitiba e região metropolitana. Problemas de software no touchp
   // ─── erro-windows-update-curitiba ───
   {
     slug: "erro-windows-update-curitiba",
-    title: "Erro no Windows Update em Curitiba — Correção Profissional | Técnico Curitiba",
+    title: "Erro no Windows Update em Curitiba — Correção Profissional | Técnico em Curitiba",
     metaDescription: "Windows Update travado ou com erro? Técnico em Curitiba corrige falhas de atualização, loops de reinicialização e erros 0x80070002. Diagnóstico rápido!",
     h1: "Erro no Windows Update — Correção Profissional em Curitiba",
     categoria: "Software / Sistemas",
@@ -8960,7 +8960,7 @@ Atendemos toda Curitiba e região metropolitana. Problemas de software no touchp
   // ─── monitor-piscando-curitiba ───
   {
     slug: "monitor-piscando-curitiba",
-    title: "Monitor Piscando em Curitiba — Diagnóstico e Reparo | Técnico Curitiba",
+    title: "Monitor Piscando em Curitiba — Diagnóstico e Reparo | Técnico em Curitiba",
     metaDescription: "Monitor piscando ou com tela intermitente? Técnico em Curitiba diagnostica e repara cabos, placas de vídeo e fontes de monitores. Atendimento rápido!",
     h1: "Monitor Piscando — Diagnóstico e Reparo em Curitiba",
     categoria: "Hardware / Periféricos",
@@ -9010,7 +9010,7 @@ Atendemos toda Curitiba e região metropolitana. Problemas de software no touchp
   // ─── notebook-tela-escura-curitiba ───
   {
     slug: "notebook-tela-escura-curitiba",
-    title: "Notebook com Tela Escura em Curitiba — Diagnóstico e Reparo | Técnico Curitiba",
+    title: "Notebook com Tela Escura em Curitiba — Diagnóstico e Reparo | Técnico em Curitiba",
     metaDescription: "Notebook com tela escura ou apagada? Técnico em Curitiba diagnostica backlight, flat cable e placa de vídeo. Atendimento em domicílio. WhatsApp agora!",
     h1: "Notebook com Tela Escura — Diagnóstico e Reparo em Curitiba",
     categoria: "Notebooks",

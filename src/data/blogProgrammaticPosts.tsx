@@ -46,7 +46,7 @@ const renderPost = (d: PostDef): React.ReactNode => (
     <p>
       <strong>
         <a href={WA} target="_blank" rel="noopener noreferrer">
-          Fale com o Técnico Curitiba no WhatsApp
+          Fale com o Técnico em Curitiba no WhatsApp
         </a>
       </strong>{" "}
       — atendimento remoto para todo o Brasil. Diagnóstico gratuito, você paga apenas se o problema for resolvido.

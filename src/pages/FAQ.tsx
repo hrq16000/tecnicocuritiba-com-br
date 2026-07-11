@@ -124,7 +124,7 @@ const faqCategories = [
 
 const FAQ = () => {
   useEffect(() => {
-    document.title = "FAQ Técnico Curitiba | Preço, Prazo e Garantia";
+    document.title = "FAQ Técnico em Curitiba | Preço, Prazo e Garantia";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -153,7 +153,7 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="FAQ Técnico Curitiba | Preço, Prazo e Garantia" description="Dúvidas sobre preço, prazo, garantia, formatação, vírus e atendimento técnico em Curitiba. Veja respostas rápidas e chame no WhatsApp." path="/faq" breadcrumbs={[{ name: "Início", path: "/" }, { name: "FAQ", path: "/faq" }]} />
+      <PageSEO title="FAQ Técnico em Curitiba | Preço, Prazo e Garantia" description="Dúvidas sobre preço, prazo, garantia, formatação, vírus e atendimento técnico em Curitiba. Veja respostas rápidas e chame no WhatsApp." path="/faq" breadcrumbs={[{ name: "Início", path: "/" }, { name: "FAQ", path: "/faq" }]} />
       <JsonLdSchema />
       <script
         type="application/ld+json"
@@ -178,7 +178,7 @@ const FAQ = () => {
                   <span>Tire suas dúvidas</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-5">
-                  FAQ Técnico Curitiba: <span className="gradient-text-animated">preço, prazo e garantia</span>
+                  FAQ Técnico em Curitiba: <span className="gradient-text-animated">preço, prazo e garantia</span>
                 </h1>
                 <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
                   Tire suas dúvidas sobre nossos serviços de informática

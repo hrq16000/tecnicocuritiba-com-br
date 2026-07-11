@@ -25,7 +25,7 @@ const tiposPlaca = [
 
 const ConsertoPlaca = () => {
   useEffect(() => {
-    document.title = "Conserto de Placa Eletrônica em Curitiba | Placa-mãe, GPU, Fonte | Técnico Curitiba";
+    document.title = "Conserto de Placa Eletrônica em Curitiba | Placa-mãe, GPU, Fonte | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Conserto de placa-mãe, placa de vídeo, placa-fonte e eletrônica em geral. Reparo em nível de componente em Curitiba. Diagnóstico profissional com coleta e entrega.");
@@ -40,7 +40,7 @@ const ConsertoPlaca = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Conserto de Placa Eletrônica em Curitiba | Placa-mãe, GPU, Fonte | Técnico Curitiba" description="Conserto de placa-mãe, placa de vídeo, placa-fonte e eletrônica em geral. Reparo em nível de componente em Curitiba. Diagnóstico profissional com coleta e entrega." path="/servicos/conserto-placa"  breadcrumbs={[
+      <PageSEO title="Conserto de Placa Eletrônica em Curitiba | Placa-mãe, GPU, Fonte | Técnico em Curitiba" description="Conserto de placa-mãe, placa de vídeo, placa-fonte e eletrônica em geral. Reparo em nível de componente em Curitiba. Diagnóstico profissional com coleta e entrega." path="/servicos/conserto-placa"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Conserto de Placa", path: "/servicos/conserto-placa" }

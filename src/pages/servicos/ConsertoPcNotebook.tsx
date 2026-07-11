@@ -16,7 +16,7 @@ const WHATSAPP_NUMBER = "5541997452053";
 
 const ConsertoPcNotebook = () => {
   useEffect(() => {
-    document.title = "Conserto de PC e Notebook em Curitiba | Hardware - Técnico Curitiba";
+    document.title = "Conserto de PC e Notebook em Curitiba | Hardware - Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", "Conserto de computador e notebook em Curitiba. Reparo de hardware, placa-mãe, fonte, tela, teclado. Diagnóstico com coleta e entrega. Garantia.");
@@ -32,7 +32,7 @@ const ConsertoPcNotebook = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Conserto de PC e Notebook em Curitiba a partir de R$ 99,99 | Técnico Curitiba" description="Conserto de computador e notebook em Curitiba a partir de R$ 99,99 (visita técnica). Hardware, placa-mãe, fonte, tela, teclado, garantia e atendimento em até 30 min." path="/servicos/conserto-pc-notebook"  breadcrumbs={[
+      <PageSEO title="Conserto de PC e Notebook em Curitiba a partir de R$ 99,99 | Técnico em Curitiba" description="Conserto de computador e notebook em Curitiba a partir de R$ 99,99 (visita técnica). Hardware, placa-mãe, fonte, tela, teclado, garantia e atendimento em até 30 min." path="/servicos/conserto-pc-notebook"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Conserto PC/Notebook", path: "/servicos/conserto-pc-notebook" }
@@ -185,7 +185,7 @@ const ConsertoPcNotebook = () => {
       <section className="py-10 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
-            Por Que Escolher a Técnico Curitiba?
+            Por Que Escolher a Técnico em Curitiba?
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[

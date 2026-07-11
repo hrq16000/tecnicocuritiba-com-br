@@ -37,12 +37,12 @@ const valores = [
 
 const Sobre = () => {
   useEffect(() => {
-    document.title = "Sobre Nós | Técnico Curitiba - Assistência Técnica em Informática";
+    document.title = "Sobre Nós | Técnico em Curitiba - Assistência Técnica em Informática";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Conheça a Técnico Curitiba. Assistência técnica em informática com experiência, compromisso e atendimento humanizado em Curitiba e região."
+        "Conheça a Técnico em Curitiba. Assistência técnica em informática com experiência, compromisso e atendimento humanizado em Curitiba e região."
       );
     }
     trackPageView("/sobre", "Sobre");
@@ -50,7 +50,7 @@ const Sobre = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Sobre Nós | Técnico Curitiba - Assistência Técnica em Informática" description="Conheça a Técnico Curitiba. Assistência técnica em informática com experiência, compromisso e atendimento humanizado em Curitiba e região." path="/sobre" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Sobre", path: "/sobre" }]} />
+      <PageSEO title="Sobre Nós | Técnico em Curitiba - Assistência Técnica em Informática" description="Conheça a Técnico em Curitiba. Assistência técnica em informática com experiência, compromisso e atendimento humanizado em Curitiba e região." path="/sobre" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Sobre", path: "/sobre" }]} />
       <JsonLdSchema />
       <Header />
       <main>
@@ -71,7 +71,7 @@ const Sobre = () => {
                   <span>Desde 2018 em Curitiba</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-5">
-                  Sobre a <span className="gradient-text-animated">Técnico Curitiba</span>
+                  Sobre a <span className="gradient-text-animated">Técnico em Curitiba</span>
                 </h1>
                 <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
                   Assistência técnica em informática com compromisso, transparência e paixão por resolver problemas
@@ -97,7 +97,7 @@ const Sobre = () => {
               </h2>
               <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
                 <p>
-                  A Técnico Curitiba nasceu da percepção de que muitas pessoas e empresas em Curitiba tinham dificuldade em encontrar um <strong className="text-foreground">técnico de informática confiável</strong>, que fosse transparente no orçamento e cumprisse prazos.
+                  A Técnico em Curitiba nasceu da percepção de que muitas pessoas e empresas em Curitiba tinham dificuldade em encontrar um <strong className="text-foreground">técnico de informática confiável</strong>, que fosse transparente no orçamento e cumprisse prazos.
                 </p>
                 <p>
                   Com experiência prática em manutenção de computadores, decidimos criar um serviço diferente: atendimento humanizado, comunicação clara, preço justo e, acima de tudo, <strong className="text-foreground">resolver o problema do cliente</strong>.

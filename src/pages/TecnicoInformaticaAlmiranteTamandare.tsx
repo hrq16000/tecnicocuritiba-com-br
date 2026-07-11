@@ -99,7 +99,7 @@ const atSchema = {
 
 const TecnicoInformaticaAlmiranteTamandare = () => {
   useEffect(() => {
-    document.title = "Técnico de Informática em Almirante Tamandaré | Atendimento Domicílio | Técnico Curitiba";
+    document.title = "Técnico de Informática em Almirante Tamandaré | Atendimento Domicílio | Técnico em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content",
@@ -111,7 +111,7 @@ const TecnicoInformaticaAlmiranteTamandare = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Técnico de Informática em Almirante Tamandaré | Atendimento Domicílio | Técnico Curitiba" description="Técnico de informática em Almirante Tamandaré PR. Formatação, conserto de PC e notebook, remoção de vírus, upgrade. Atendimento a domicílio. a partir de R$ 99,99." path="/tecnico-informatica-almirante-tamandare" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Almirante Tamandaré", path: "/tecnico-informatica-almirante-tamandare" }]} />
+      <PageSEO title="Técnico de Informática em Almirante Tamandaré | Atendimento Domicílio | Técnico em Curitiba" description="Técnico de informática em Almirante Tamandaré PR. Formatação, conserto de PC e notebook, remoção de vírus, upgrade. Atendimento a domicílio. a partir de R$ 99,99." path="/tecnico-informatica-almirante-tamandare" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Técnico de Informática", path: "/servicos" }, { name: "Almirante Tamandaré", path: "/tecnico-informatica-almirante-tamandare" }]} />
       <CityServiceSchema city={"Almirante Tamandaré"} citySameAs={"https://pt.wikipedia.org/wiki/Almirante_Tamandar%C3%A9"} path={"/tecnico-informatica-almirante-tamandare"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(atSchema) }} />
       <JsonLdSchema />
