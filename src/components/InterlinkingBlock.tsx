@@ -13,6 +13,7 @@ const atendimentoLinks = [
 ];
 
 const servicoLinks = [
+  { icon: Laptop, title: "Manutenção Notebook/PC", desc: "Hub completo em Curitiba", to: "/manutencao-notebook-pc-curitiba" },
   { icon: HardDrive, title: "Formatação", desc: "Windows 10/11 completo", to: "/servicos/formatacao-computador" },
   { icon: Shield, title: "Remoção de Vírus", desc: "Limpeza total de malware", to: "/servicos/remocao-virus" },
   { icon: Cpu, title: "Upgrade SSD/RAM", desc: "Mais velocidade e desempenho", to: "/servicos/upgrade-ssd-memoria" },
