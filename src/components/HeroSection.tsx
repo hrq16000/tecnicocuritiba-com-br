@@ -1,9 +1,6 @@
-import { lazy, Suspense, useState } from "react";
-import { MessageCircle, MapPin, Clock, Shield, Star, CheckCircle, CalendarDays } from "lucide-react";
+import { MessageCircle, MapPin, Clock, Shield, Star, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { trackCTAClick } from "@/lib/analytics";
 import { TechnicianAvailabilityInline } from "@/components/TechnicianAvailability";
-const SchedulingModal = lazy(() => import("@/components/scheduling/SchedulingModal").then((m) => ({ default: m.SchedulingModal })));
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico.";
@@ -15,21 +12,10 @@ const trustSignals = [
 ];
 
 export const HeroSection = () => {
-  const [isSchedulingOpen, setIsSchedulingOpen] = useState(false);
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-  
-  const openChatbot = () => {
-    trackCTAClick('chatbot', 'hero');
-    window.dispatchEvent(new CustomEvent('openChatbot'));
-  };
 
   return (
     <>
-    {isSchedulingOpen && (
-      <Suspense fallback={null}>
-        <SchedulingModal isOpen={isSchedulingOpen} onClose={() => setIsSchedulingOpen(false)} />
-      </Suspense>
-    )}
     <section className="hero-gradient pt-8 pb-14 sm:pt-10 md:pt-12 md:pb-18 lg:pt-14 lg:pb-24 relative overflow-hidden noise-overlay" aria-label="Técnico de informática em Curitiba">
       {/* Lightweight critical background: no extra image request before first interaction */}
       <div className="absolute inset-0 z-0">
