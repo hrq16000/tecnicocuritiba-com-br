@@ -1,6 +1,6 @@
 // Generates sitemap-index.xml + sub-sitemaps (main, servicos, bairros, marcas, problemas).
 // Runs via predev/prebuild. Parses src/App.tsx + data files; outputs to public/.
-import { readFileSync, writeFileSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 
 const BASE_URL = "https://tecnicocuritiba.com.br";
@@ -9,7 +9,11 @@ const TODAY = new Date().toISOString().slice(0, 10);
 // Rotas ficam em LegacyApp.tsx (App.tsx só orquestra o shell/Suspense).
 const appSrc = readFileSync(resolve("src/LegacyApp.tsx"), "utf8");
 const brandsSrc = readFileSync(resolve("src/lib/brandsData.ts"), "utf8");
-const problemsSrc = readFileSync(resolve("src/lib/problemaPagesData.ts"), "utf8");
+// Após o split (2026-07-11), cada slug é um arquivo em src/lib/problemas/.
+const problemasDir = resolve("src/lib/problemas");
+const problemSlugsFromDir = readdirSync(problemasDir)
+  .filter((f) => f.endsWith(".ts") && !["index.ts", "types.ts"].includes(f))
+  .map((f) => f.replace(/\.ts$/, ""));
 
 // 1) Extract literal routes from App.tsx (no params, no admin/ads, no wildcards).
 const routes = new Set();
