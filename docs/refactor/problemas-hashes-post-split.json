@@ -1,0 +1,1136 @@
+{
+  "computador-nao-liga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 1,
+    "loserIdx": null,
+    "sha256": "af5b2dd770b369e575edc0eba9460858779b6d2a9fa24629e4ce959fa8c4c504"
+  },
+  "computador-liga-e-desliga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 2,
+    "loserIdx": null,
+    "sha256": "6b2d3144d8c97f2e71b016378279c4039c51297b09e0e01244f8dd8bf151fbea"
+  },
+  "computador-lento-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 3,
+    "loserIdx": null,
+    "sha256": "e0c709c53d0b33204d0be4eb07f7f8fb1f91b2b87d3f6ca280197baa16d9828d"
+  },
+  "computador-travando-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 4,
+    "loserIdx": null,
+    "sha256": "759188203dc830a0bb411aabf744537311c2416dd762de56cac820eb908b7818"
+  },
+  "computador-sem-video-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 5,
+    "loserIdx": null,
+    "sha256": "18a7670a8f18551a98559adf10754dcfcd09ae4d9df7d1ecec0354dfbf2f15c0"
+  },
+  "computador-com-tela-preta-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 6,
+    "loserIdx": null,
+    "sha256": "4d8bd07e76b4acd71cb38c1f7b1692dccd946b9516ba5c754b75d380c8f5ff50"
+  },
+  "pc-reiniciando-sozinho-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 7,
+    "loserIdx": 159,
+    "sha256": "bdee8fd7e7a3bef198e3053aaeceeddad1597417800be1dece6542f5066bf388"
+  },
+  "pc-superaquecendo-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 8,
+    "loserIdx": null,
+    "sha256": "8c87e57a5de9b8e9b8132252a1c32a6a6337d4412e65600dbacf19b7b1198d94"
+  },
+  "pc-com-barulho-estranho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 9,
+    "loserIdx": null,
+    "sha256": "7d36b4599c5fed421a1cc70aea17812cffa2a13d138d470152460faeb49de3d1"
+  },
+  "pc-nao-reconhece-hd-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 10,
+    "loserIdx": null,
+    "sha256": "cf505ae16ba51bd5f2cb59d278eba650104c0170316015bf19028153360137aa"
+  },
+  "notebook-nao-liga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 11,
+    "loserIdx": null,
+    "sha256": "8743090efcdcf685867d75b0a5270e553e1296df03582b004ff0b4a7972618ac"
+  },
+  "notebook-lento-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 12,
+    "loserIdx": null,
+    "sha256": "5195277d5093ce2341419c35835afd0ae37f307f2a2c71817d8cc6524a638df7"
+  },
+  "notebook-esquentando-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 13,
+    "loserIdx": null,
+    "sha256": "3caa56862ac2f8d20e80c5923b317b5ea5f3f4efa728b6d7cecb1343e60c61e5"
+  },
+  "notebook-desligando-sozinho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 14,
+    "loserIdx": null,
+    "sha256": "d899dc10e15e578d3b09f6e5f07b9c4cb36c218c9df11931b64ab713b8b61040"
+  },
+  "notebook-sem-imagem-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 15,
+    "loserIdx": null,
+    "sha256": "2f46f8bb752ac8b919b3cc40588d24a107dd2643471946a2313759a3e8a193ff"
+  },
+  "notebook-com-tela-quebrada-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 16,
+    "loserIdx": 73,
+    "sha256": "5b754c865b61847ca1ec24bd5f84f1dd96c39a4417abc89b2b72e28f06657f50"
+  },
+  "notebook-nao-carrega-bateria-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 17,
+    "loserIdx": 148,
+    "sha256": "546fd85ad1dba644dd5610d21b963b69c03e13779c49bbfed30e72771d04f2f6"
+  },
+  "notebook-teclado-nao-funciona-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 18,
+    "loserIdx": 143,
+    "sha256": "3567dbb537f6692077d3a89228731434ca35b1840bab37d2328dbb477f88c275"
+  },
+  "notebook-com-agua-ou-liquido-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 19,
+    "loserIdx": null,
+    "sha256": "bbc31d80f3fca68c380d85604c358e017e27059860cd1f46be9fa230b91c9812"
+  },
+  "notebook-apos-upgrade-nao-liga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 20,
+    "loserIdx": null,
+    "sha256": "bc0d14eb0cd37dcfeec121e7bccaa4f9611596728a79885eb62baaf4be783bbb"
+  },
+  "tv-com-som-sem-imagem-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 21,
+    "loserIdx": null,
+    "sha256": "dd0afe5eb93f59c8c2df004ac071aeb1c276fcffa5c2d25ee59f904337187f1e"
+  },
+  "tv-nao-liga-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 22,
+    "loserIdx": 174,
+    "sha256": "68e66480df469618e4ac28920c102460922a9c900d4649bd70f65f15aeaa5097"
+  },
+  "tv-desligando-sozinha-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 23,
+    "loserIdx": null,
+    "sha256": "d708c5f1d135a45a4032940d88a50c051e2257902cddefb806e6017479f00a10"
+  },
+  "tv-com-tela-escura-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 24,
+    "loserIdx": null,
+    "sha256": "f22c34d1599547bbee85ed31b9bf9866083f0703265db0499110302ca910ae18"
+  },
+  "tv-com-linhas-na-tela-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 25,
+    "loserIdx": null,
+    "sha256": "a77f0b349b39f901ecc1fb5b9f50294b57f45553ed4b72d04f6f1f829abba0ea"
+  },
+  "erro-ao-instalar-memoria-ram": {
+    "strategy": "keep-winner",
+    "winnerIdx": 26,
+    "loserIdx": null,
+    "sha256": "395b596b7cc8953c915a4b7c9980675a528875e9e0326a70890493aa25a6abb7"
+  },
+  "upgrade-deu-problema": {
+    "strategy": "keep-winner",
+    "winnerIdx": 27,
+    "loserIdx": null,
+    "sha256": "683db30b7b123ecc241015c2873ea9a264a9e6856cf5a79d2ba9d3a9c8381f37"
+  },
+  "placa-mae-queimada": {
+    "strategy": "keep-winner",
+    "winnerIdx": 28,
+    "loserIdx": null,
+    "sha256": "ae1fb916bfb820c515d42d143357209439bdf3aaa6fd0eec05d549c5d1460386"
+  },
+  "gpu-desgastada": {
+    "strategy": "keep-winner",
+    "winnerIdx": 29,
+    "loserIdx": null,
+    "sha256": "b03cabab02f309439236619947d47e7f7ee0807e512894cfb394cb9a5fb8cc10"
+  },
+  "curto-em-placa-eletronica": {
+    "strategy": "keep-winner",
+    "winnerIdx": 30,
+    "loserIdx": null,
+    "sha256": "89a9557062a73cd228e20dbc9dfe00cf270dffadaaf3efe01e5a547a046f2015"
+  },
+  "windows-lento-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 31,
+    "loserIdx": null,
+    "sha256": "8bc0031740ee8075c93dbd6e5dbcb2c69c20d08cc8c412d89c670f5788183da1"
+  },
+  "computador-com-virus-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 32,
+    "loserIdx": null,
+    "sha256": "331c2a548cb50e4dccd7e36261627bfd2518f6f0b028b818f12a680ab57838bc"
+  },
+  "formatacao-resolve-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 33,
+    "loserIdx": null,
+    "sha256": "651493397be9398d3411b8ba007d808a0e1e997e39fe08a06c44e03099c26336"
+  },
+  "erro-apos-formatacao": {
+    "strategy": "keep-winner",
+    "winnerIdx": 34,
+    "loserIdx": null,
+    "sha256": "6e9a7460c1d653539d6421c7c40636d0ccfbaa3bbf6316ba29c06912ad2d37e7"
+  },
+  "pc-com-programas-pesados": {
+    "strategy": "keep-winner",
+    "winnerIdx": 35,
+    "loserIdx": null,
+    "sha256": "ecf3c5046524053a9147ad2f849d3ff3412de58176fcab7b35a91a35720110f8"
+  },
+  "vale-a-pena-consertar-computador": {
+    "strategy": "keep-winner",
+    "winnerIdx": 36,
+    "loserIdx": null,
+    "sha256": "3727505686439e3d63ca559deb403ecf3faafadfed37e509515b847e629639dc"
+  },
+  "vale-a-pena-consertar-notebook": {
+    "strategy": "keep-winner",
+    "winnerIdx": 37,
+    "loserIdx": null,
+    "sha256": "e26c3549bff800da0fb00d8d3e19c4fff524c1dc3e882ff88422e41386c52e53"
+  },
+  "quando-trocar-computador": {
+    "strategy": "keep-winner",
+    "winnerIdx": 38,
+    "loserIdx": null,
+    "sha256": "2fbb49f52c752794a3e492096a2a9b6350044bf60467442979553f1c5e38a88a"
+  },
+  "quando-nao-compensa-reparo": {
+    "strategy": "keep-winner",
+    "winnerIdx": 39,
+    "loserIdx": null,
+    "sha256": "1399972289128ac67bf7daccde541617d5e4956e3cca5e93a305c6a7d447a258"
+  },
+  "custo-reparo-vs-novo": {
+    "strategy": "keep-winner",
+    "winnerIdx": 40,
+    "loserIdx": null,
+    "sha256": "8b0e8e9bdaf0872a2fdbc9e2c2df1a28a8a125507570e653b33ce80fb2bd58d8"
+  },
+  "o-que-fazer-computador-nao-liga": {
+    "strategy": "keep-winner",
+    "winnerIdx": 41,
+    "loserIdx": null,
+    "sha256": "98f839dce20399b1c17899f6ebe00e8ec86aad0add79c5f8007720887f01ecbb"
+  },
+  "o-que-fazer-notebook-lento": {
+    "strategy": "keep-winner",
+    "winnerIdx": 42,
+    "loserIdx": null,
+    "sha256": "0a9431e1a5c1343844ab57c23cf9f23634c30946b7e6ea210b4ea26f427f7053"
+  },
+  "o-que-causa-curto-em-placa": {
+    "strategy": "keep-winner",
+    "winnerIdx": 43,
+    "loserIdx": null,
+    "sha256": "0c6927ff14eaf86bc8d47f36d0b752f3930dc9bc0a14744f75b8848ab031cfdb"
+  },
+  "erros-comuns-em-upgrade": {
+    "strategy": "keep-winner",
+    "winnerIdx": 44,
+    "loserIdx": null,
+    "sha256": "d18e46651b0a54600d1ffb60249ec152328295074939186070767d21ea9bf981"
+  },
+  "riscos-de-tentar-consertar": {
+    "strategy": "keep-winner",
+    "winnerIdx": 45,
+    "loserIdx": null,
+    "sha256": "fd023a3f585e3b9c386e0f804c6fa843032b311fac23e2c3910ca878c18c27b1"
+  },
+  "assistencia-tecnica-urgente-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 46,
+    "loserIdx": null,
+    "sha256": "7473d1dcf955bd29d55996a98719a2a688d906e11304e7c3fcba8a9d0c8bf63c"
+  },
+  "tecnico-informatica-emergencia-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 47,
+    "loserIdx": null,
+    "sha256": "f8c20a22e741fc313eee75816477738548e5433b3d587acbe57843a0a24db4f5"
+  },
+  "conserto-computador-domicilio-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 48,
+    "loserIdx": null,
+    "sha256": "2be47247065fafef5ea284616614ac7bf1c741a131e967a94be2ebb24451b3d7"
+  },
+  "manutencao-notebook-curitiba-rapido": {
+    "strategy": "keep-winner",
+    "winnerIdx": 49,
+    "loserIdx": null,
+    "sha256": "82a2e529a78d2f213d1751f0841a444c3faae94dea2223e2ff2e616c347ecc46"
+  },
+  "tecnico-computador-perto-de-mim": {
+    "strategy": "keep-winner",
+    "winnerIdx": 50,
+    "loserIdx": null,
+    "sha256": "ae4080b58dc7f849a5ffb5d8d1bbee081b24cf30f3f1ea1d2e86e2f28bd1389c"
+  },
+  "impressora-nao-imprime-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 51,
+    "loserIdx": null,
+    "sha256": "814653f973fae3738962a7b0b3aa5515b6a710fc2f4c3a5026ac24b9be7754e9"
+  },
+  "monitor-sem-sinal-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 52,
+    "loserIdx": null,
+    "sha256": "021ef265cb46898f3770f3864d2f87b1ffd5a0853850812521f0391082487532"
+  },
+  "internet-lenta-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 53,
+    "loserIdx": null,
+    "sha256": "5a812cd51b0084578ef8bca202b69eca43db35314545ea16baa433a9aca22307"
+  },
+  "teclado-mouse-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 54,
+    "loserIdx": null,
+    "sha256": "cc30e9256a63214a7dd377bf9c929eb1cc3fc7c692b574c4be54c8f82431193d"
+  },
+  "hd-externo-nao-reconhece-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 55,
+    "loserIdx": 135,
+    "sha256": "f3ecaca40f64d5f6e620025870547914151684cde34b6b364aa607c5d35528fa"
+  },
+  "tela-azul-windows-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 56,
+    "loserIdx": null,
+    "sha256": "528e24bac6e16cec4aef8daedd0396ea1ee6155a36ad86acd5540c3205009054"
+  },
+  "notebook-sem-wifi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 57,
+    "loserIdx": null,
+    "sha256": "c4e423a570f200fe00f4a1185bf0e0387dd5f92355a727a9bfd7835e5b23f21a"
+  },
+  "pc-trava-ao-jogar-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 58,
+    "loserIdx": null,
+    "sha256": "61d2aed36f718e995ebddc360bcfbfeab750894e04101cd748e6b6838c810977"
+  },
+  "computador-com-som-estranho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 59,
+    "loserIdx": null,
+    "sha256": "a238d55ea9b1ea249d89c9c5a1808444d59ee12b08d9cb58d7b1be08ba34b4b0"
+  },
+  "computador-nao-conecta-bluetooth-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 60,
+    "loserIdx": null,
+    "sha256": "14d510fff73c68af742d89990cf7e618beb7cd88c18261df6fb2a7eada566c34"
+  },
+  "pen-drive-nao-reconhece-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 61,
+    "loserIdx": null,
+    "sha256": "eb1c008b2a8632a1daf373665fe632dbfa94a6970b32961548d5b2d64d0954ba"
+  },
+  "som-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 62,
+    "loserIdx": null,
+    "sha256": "459ac02222a592a35b0f9e1c14ce2b59f60ef4386c5da8dd3bfcf01056f5b771"
+  },
+  "computador-nao-desliga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 63,
+    "loserIdx": null,
+    "sha256": "214cb960b3c921591ab7ece6e30d7fbc66480bfc49afe841529c4b012f0eebf0"
+  },
+  "erro-ao-instalar-windows-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 64,
+    "loserIdx": null,
+    "sha256": "81d7731b638a89051ef36edb38a5b2cc4232f096b3bf4e0b17c2f451a85ad2a1"
+  },
+  "notebook-superaquecendo-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 65,
+    "loserIdx": null,
+    "sha256": "44304473779114e892a078198c596bcae2dee5342c09a2de060c4794f794ad9f"
+  },
+  "camera-seguranca-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 66,
+    "loserIdx": null,
+    "sha256": "8238bb5e9c67e145ad44e1c4b67535547589d95a77e1a5bc728efbdc3fe228fa"
+  },
+  "fonte-queimada-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 67,
+    "loserIdx": null,
+    "sha256": "a53b5e37ca38ad684ffafeea5d4a19e7505b49863b514339ecf775b895d12b21"
+  },
+  "placa-mae-com-defeito-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 68,
+    "loserIdx": null,
+    "sha256": "a4c6214c76bd4477fd921a11fc41858c60c55ab992a80afb3781e32847ac325a"
+  },
+  "notebook-nao-carrega-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 69,
+    "loserIdx": null,
+    "sha256": "9f55106a7f9d3b013b11932d5f31660c522c3c0f27ed12daad9c074e64746491"
+  },
+  "pc-com-tela-preta-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 70,
+    "loserIdx": null,
+    "sha256": "40802e044ad2b1a5d89b8ad6d4032c3f4a5c9c8fe6a9f7cc2ee0fbe1f9102695"
+  },
+  "erro-disco-cheio-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 71,
+    "loserIdx": null,
+    "sha256": "9ce71083f81c7433a97159992a9d84d5d8931279e26182921071c25ba195b933"
+  },
+  "windows-travando-na-atualizacao-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 72,
+    "loserIdx": null,
+    "sha256": "2730a38ff8e4fe655197817dac9471d61def3fd828ac6e4633cf538d299a3f36"
+  },
+  "hd-fazendo-barulho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 75,
+    "loserIdx": null,
+    "sha256": "fc251a3c31fd0566a2ed08565428af347c2cce756a043316912226bfa04e60dc"
+  },
+  "teclado-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 78,
+    "loserIdx": null,
+    "sha256": "c45f4b5b065d06fc2600bb7adef22835378108221ee1990a7501afbf772376e8"
+  },
+  "pc-nao-conecta-wifi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 79,
+    "loserIdx": null,
+    "sha256": "14e7aaf9b293aa01908bf0e198d250f8102189c4aabdd275f13bbf5485bfc31c"
+  },
+  "notebook-esquentando-desligando-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 80,
+    "loserIdx": null,
+    "sha256": "e9ddd75919ed8cb698bf13f7dce02ca6af0c628272c15af9e9b278a15a55adea"
+  },
+  "erro-bios-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 81,
+    "loserIdx": null,
+    "sha256": "c0d2515044c36916c75f16437cf73d02a474939cf212b9c73b45fc7091f4405b"
+  },
+  "pc-travando-em-jogos-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 82,
+    "loserIdx": null,
+    "sha256": "a96d94e9fcadcba417d656f729f884ee62a45ee4ff29b5ca6537511deff8d9b2"
+  },
+  "backup-perdido-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 83,
+    "loserIdx": null,
+    "sha256": "a76bae43e5bcc16f3a2b99b2793a2ce6a206b756d82b7c2ca185d4b509912d73"
+  },
+  "notebook-nao-conecta-bluetooth-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 84,
+    "loserIdx": null,
+    "sha256": "18676edd5a56e6656a3f42cd61e3a31728242c5f3c034d83e13d898d05dbb07d"
+  },
+  "erro-driver-windows-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 85,
+    "loserIdx": null,
+    "sha256": "dc2c735d4cddfb6c90206ae9f865d440d4da7b3d6265e3d5eb391683eb54e914"
+  },
+  "pc-sem-imagem-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 86,
+    "loserIdx": null,
+    "sha256": "85f2a535f1ce4acb0122effe4bb1581a842b854758feaf00b04a10a3d20434b1"
+  },
+  "memoria-ram-com-defeito-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 87,
+    "loserIdx": null,
+    "sha256": "d1ac1429693a186f2ae7ff16fa3827ad030087faa316ce1500866a5103a2d006"
+  },
+  "notebook-com-tela-piscando-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 88,
+    "loserIdx": null,
+    "sha256": "594da9bf1aabba059cd2ca5634cbf9faf0f0307d0765f9a5e3b7a646b557b359"
+  },
+  "pc-fazendo-barulho-estranho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 89,
+    "loserIdx": null,
+    "sha256": "d956e3710789c4d570db271337d15b733247eb25ac7b30c9d6feaaa83bb62857"
+  },
+  "erro-particao-windows-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 90,
+    "loserIdx": null,
+    "sha256": "2196cbdde2838e2213eea02ecd7d58dfbf85a14da54fe27af449683576cd7bc8"
+  },
+  "computador-desligando-apos-segundos-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 91,
+    "loserIdx": null,
+    "sha256": "974fcfac68246d6301b7d8a2c6548f192910e435c4683c3091ccf249069fb079"
+  },
+  "notebook-touchpad-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 92,
+    "loserIdx": null,
+    "sha256": "91c06203ac9dc7520a7718b33b7811d50b04f18161d904e06dff7412a453c299"
+  },
+  "pc-nao-reconhece-segundo-monitor-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 93,
+    "loserIdx": null,
+    "sha256": "87c115ffb7418eee421735f7d70a3c27304f8ece88fe79bf962381c69d41b481"
+  },
+  "erro-atualizacao-windows-11-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 94,
+    "loserIdx": null,
+    "sha256": "eac7f35f3bfbf61283ae085713e4716a5dd517300900bca7a2d7d9403d74960d"
+  },
+  "computador-com-cheiro-de-queimado-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 95,
+    "loserIdx": null,
+    "sha256": "447a70e2b411923b8551a93f160b5354bc2a6954c580316dfcd72f766367dab3"
+  },
+  "notebook-bateria-nao-carrega-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 96,
+    "loserIdx": null,
+    "sha256": "e18b1ba3faa5748307961523a4c9c5c2d23b5fd838939a05a3a512553a96a11d"
+  },
+  "pc-com-pop-ups-e-propagandas-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 97,
+    "loserIdx": null,
+    "sha256": "a892800b233965eb52bb5bdd74a3c49a9862fbc2f065e1e4dde5dd69c8dce288"
+  },
+  "erro-0x0000007b-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 98,
+    "loserIdx": null,
+    "sha256": "f9007e07ee9de930b51edc51e48f6c631c5ca5e0178f02d4642ab99036fb9115"
+  },
+  "computador-nao-reconhece-usb-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 99,
+    "loserIdx": null,
+    "sha256": "8391e076323898f099a358c7c5954d2a9012f913f28d6cf4bd33269fe14f6b5e"
+  },
+  "pc-sem-audio-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 101,
+    "loserIdx": null,
+    "sha256": "d9d28f269ec0994d62ac5de12ce20d9ab054048a9defcb67c665463fe59fe61c"
+  },
+  "erro-disco-100-porcento-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 102,
+    "loserIdx": null,
+    "sha256": "24ff698376261dbfa898dca00a501ef2871f1609e34ce6153aa0be1edacf2d9a"
+  },
+  "computador-reiniciando-sozinho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 103,
+    "loserIdx": null,
+    "sha256": "e790727b5093e95eb1a2129b90b1f3e358acd44a535d757d0ae2e968b3d4405f"
+  },
+  "pc-nao-conecta-internet-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 104,
+    "loserIdx": null,
+    "sha256": "26132f3c3fbde10877da5f8185b6a3ad6243e8bf01af9499df8eb85ee545a076"
+  },
+  "erro-registro-windows-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 105,
+    "loserIdx": null,
+    "sha256": "baf47ea85dd79321ee795575035470fa2019703cbd9da4384686a7ada5401727"
+  },
+  "pc-com-virus-ransomware-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 107,
+    "loserIdx": null,
+    "sha256": "6aa46d2d49eabee655d09b9c0054d141e606eb6e9cf6bdabe9f1d3d872dfb63a"
+  },
+  "notebook-tela-amarelada-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 108,
+    "loserIdx": null,
+    "sha256": "b975cd9c15357a3f87d25dd84860db3517aa71592ebcab3d4b65955ab5685342"
+  },
+  "pc-nao-entra-modo-seguro-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 109,
+    "loserIdx": null,
+    "sha256": "0056f908e73fc4313aa6a2645ea347ed23f0afb6c28373506d47671ca8358d38"
+  },
+  "erro-0xc000021a-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 110,
+    "loserIdx": 129,
+    "sha256": "5db847c5061e5a984a1ee829c67884aa95567fa7c884e7a454a0642e02d00c58"
+  },
+  "computador-sem-wifi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 111,
+    "loserIdx": null,
+    "sha256": "c038e39aadf28014b202a8469a724280dcffe879cfa5d207170484865a477c73"
+  },
+  "notebook-sem-webcam-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 112,
+    "loserIdx": null,
+    "sha256": "afc70b44d292dac3f265bb3ec75dc2b442bacb3e070a9c3317ee6bbad3de1b87"
+  },
+  "erro-0xc00000e-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 113,
+    "loserIdx": null,
+    "sha256": "aac3e3cef607c67a18ffe1b6a37d08865108adfe9c96d9977ed1206cd70b2761"
+  },
+  "pc-com-tela-congelada-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 114,
+    "loserIdx": null,
+    "sha256": "2cff465643ad088af4ec23db682d79e3bf9ee2687130f3aa38649856f9eb35a2"
+  },
+  "computador-muito-barulhento-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 115,
+    "loserIdx": null,
+    "sha256": "eabc9e2192c69149ed45dc14099ebafd7da435e287d793c8c94a1d15b1060176"
+  },
+  "notebook-sem-audio-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 117,
+    "loserIdx": null,
+    "sha256": "97ea416492f1727abcf82878472684a103d2314c29a8b7d5f4d957c31e894eb0"
+  },
+  "erro-0x80070005-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 118,
+    "loserIdx": null,
+    "sha256": "af1e2864860d18d134b55df2841bc645f29b557224e6b82723bef70502f8f791"
+  },
+  "pc-desligando-sozinho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 119,
+    "loserIdx": null,
+    "sha256": "00930cb17fa341476120396c06193d66cfc8d9dfb52ae19816a07f8898c82c1c"
+  },
+  "notebook-esquentando-muito-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 120,
+    "loserIdx": null,
+    "sha256": "207d5965afb1645a7d497908820e1385464a166f1ae3d56d15ce543aa4efc89d"
+  },
+  "erro-0x80004005-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 121,
+    "loserIdx": null,
+    "sha256": "d4139a303e267823358eefd3110d305eab863d4524a8feb114c836b541c87390"
+  },
+  "erro-0x800f081f-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 125,
+    "loserIdx": null,
+    "sha256": "734752cd28f967ce673f2671ca33bdd2c4ee35ec345c0ee043698af378fe6de4"
+  },
+  "pc-sem-som-hdmi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 126,
+    "loserIdx": null,
+    "sha256": "c40119cabaaecf29f686cffec0f8f02537161550e7cbfa6695ec6185a9539ac0"
+  },
+  "monitor-piscando-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 127,
+    "loserIdx": null,
+    "sha256": "69217b87c5f1928218afbfc92590b33622b026f4ac2caf80279006daa89bb3e9"
+  },
+  "pc-nao-reconhece-usb-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 130,
+    "loserIdx": null,
+    "sha256": "2afbeef06e6401227d0142238b7f1b482855e9c115aad100ec3d2ab0faf9e822"
+  },
+  "wifi-caindo-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 131,
+    "loserIdx": null,
+    "sha256": "23f0d54fb49e264564d5a4d5884e160a1f4e9b73decd4adbb66315a2ce50f339"
+  },
+  "notebook-tela-preta-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 132,
+    "loserIdx": null,
+    "sha256": "5bd7320982f7a63b583994f50c2bed17a2aa432e295ef70f1cfc66c2e249a1a6"
+  },
+  "erro-0x80240034-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 133,
+    "loserIdx": null,
+    "sha256": "1db4bb59c4bce0694439ad10541b15262604e4b293075c6764bfb47ea0674ee5"
+  },
+  "pc-nao-conecta-bluetooth-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 134,
+    "loserIdx": null,
+    "sha256": "274c85cf9298237cf135b413ad698cd5b2ecf20467b65246f3e0f976b01af771"
+  },
+  "notebook-desliga-sozinho-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 137,
+    "loserIdx": null,
+    "sha256": "3cb46ce8e8e09ee0a3a6ea2c1f063d5c5172d61d93c6ae1ba50e2a823fde7091"
+  },
+  "erro-0x80070057-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 138,
+    "loserIdx": null,
+    "sha256": "5e044fe02462c32bcb89eea088b006cf4f6507f0eebefe150f5e0dc08bc9542d"
+  },
+  "placa-de-video-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 141,
+    "loserIdx": null,
+    "sha256": "dfabe712c8fb030eda277177dd52eaedc7f2659fcaec3d5789f85c74026fd5d6"
+  },
+  "ssd-nao-reconhece-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 142,
+    "loserIdx": null,
+    "sha256": "8835414d462506e2eb75a9af7e37523d591e7f5621a2827809f2ae892984da16"
+  },
+  "pc-travando-jogos-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 149,
+    "loserIdx": null,
+    "sha256": "2904381fb5349592b883c54b5aec35246920279829b824543da9832ad9335610"
+  },
+  "cabo-rede-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 151,
+    "loserIdx": null,
+    "sha256": "b1aed1c4858d3ad2fac2cf2c252780797b290746918659b7ff4633358a9e7ec8"
+  },
+  "notebook-sem-som-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 157,
+    "loserIdx": null,
+    "sha256": "2bbc5ce93af1aca05a5732e1a9910aa29cbe805203f92167f2b55c37763996b7"
+  },
+  "mouse-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 160,
+    "loserIdx": null,
+    "sha256": "47eaa1e6c4ce0a05cf0fa226fc6c4acf600a8c6defac764984ce4ce184a2b660"
+  },
+  "erro-windows-update-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 161,
+    "loserIdx": null,
+    "sha256": "2bb6c448b1f610613f8ea50044d1fb6c2eec80f0ef6a25720ff60fa123991aef"
+  },
+  "notebook-tela-escura-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 163,
+    "loserIdx": null,
+    "sha256": "f70fc2af2f13fe5880cec6a06cba8cd7208614bb421c634f1b7bca9178466750"
+  },
+  "celular-nao-liga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 164,
+    "loserIdx": null,
+    "sha256": "81f617c4805b5cb01238313f1d2e808c58a18a4ccaa90da37cb42ce94f91bdb8"
+  },
+  "celular-tela-quebrada-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 165,
+    "loserIdx": null,
+    "sha256": "f75617f0fd8dedc1e2b3487b1f037e087199cca4e4f3ccd94778ab980518bb1e"
+  },
+  "celular-lento-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 166,
+    "loserIdx": null,
+    "sha256": "13aaf8f6bdb088255e3545265f86519ee2ed3d3936c4bd97d4b82270e712edb3"
+  },
+  "celular-com-virus-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 167,
+    "loserIdx": null,
+    "sha256": "cc84ba691f9091703d21b412e89de45a5f285d5cbd109c86d62f9ea6950f7dc2"
+  },
+  "celular-nao-carrega-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 168,
+    "loserIdx": null,
+    "sha256": "3c0df8efcd76aa3cbe902c1abd7a7f39b37ecc1ec077c3af57978ebb46a4df35"
+  },
+  "celular-bateria-inchada-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 169,
+    "loserIdx": null,
+    "sha256": "178bd1384983f600efc01b7182a4c44c4e8e2846cd878ea95ed63439a79d9039"
+  },
+  "celular-molhou-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 170,
+    "loserIdx": null,
+    "sha256": "7fca6f3e8731f027167e686ab76164c6df641a7a155d339ab87ed1ab047ca3d0"
+  },
+  "celular-touch-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 171,
+    "loserIdx": null,
+    "sha256": "94b297fb5a8109948a204793a9b2093d3c96c7fbbde8bddfaffa9cf9eff1c12e"
+  },
+  "celular-sem-sinal-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 172,
+    "loserIdx": null,
+    "sha256": "c5d1601ce3def7e956f9812e5143527ed43756778da0a64210a6c6fc75b44f2d"
+  },
+  "celular-camera-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 173,
+    "loserIdx": null,
+    "sha256": "5f01b3b397c1149fdd1e863c7b3a77b448c2907fd6c411a42e9dfa762429e684"
+  },
+  "tv-sem-imagem-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 175,
+    "loserIdx": null,
+    "sha256": "6bffa5a6ff4e32d538c6caa96308cb13827158616315d2773e64ef7cd9049d59"
+  },
+  "tv-som-sem-video-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 176,
+    "loserIdx": null,
+    "sha256": "eff597b411242477d5cfab1be75bfb673c23f9e492669aa4575ed91746129ef5"
+  },
+  "tv-listras-na-tela-curitiba": {
+    "strategy": "hybrid-merge",
+    "winnerIdx": 177,
+    "loserIdx": 206,
+    "sha256": "f498e36f45bc863a9eac4a0a2dfc2fd9db923c75beb7f452005c7eb7aac7ab7b"
+  },
+  "tv-manchas-na-tela-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 178,
+    "loserIdx": null,
+    "sha256": "0e9d5818f063fae5d31ae3bec8ef8fc5ae40f4107a34612bdecb178bb5fe4c1b"
+  },
+  "tv-desliga-sozinha-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 179,
+    "loserIdx": null,
+    "sha256": "42831633276db369fc6fa9968e3ea3647550bce8f0365b72b3fcec92cf95f89a"
+  },
+  "smart-tv-lenta-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 180,
+    "loserIdx": null,
+    "sha256": "fd5e266f2c283274bfa9123460bac83d25d171da6eedab6d1d505771f7793c7e"
+  },
+  "tv-sem-wifi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 181,
+    "loserIdx": null,
+    "sha256": "2a30d32c6426a618b70911f7ddc8898c7454e47a72fc8b1e1dad5d4f039935af"
+  },
+  "tv-sem-som-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 182,
+    "loserIdx": null,
+    "sha256": "7af82442efb92eb0bbf5c9e96a84da218512dc718c012715196fea2c75704100"
+  },
+  "tv-tela-quebrada-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 183,
+    "loserIdx": null,
+    "sha256": "c9e484d4233ebd6f130cb3a1de6b681537f71f528cf47ab640b7ae98f59e698a"
+  },
+  "radio-nao-liga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 184,
+    "loserIdx": null,
+    "sha256": "36bd2cfc31ba19f651b64b7408a3b5803349cb8a87a584bbf05695dc38997be9"
+  },
+  "som-chiando-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 185,
+    "loserIdx": null,
+    "sha256": "056e87ad4028e33d9a7aa048502b423c755d268ea8183fbb594405df5fbdd9f6"
+  },
+  "caixa-som-sem-bluetooth-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 186,
+    "loserIdx": null,
+    "sha256": "e82babab7a481b67cfe2de9d92f908ca28c7a1efde9f80197ffced054b338eaf"
+  },
+  "caixa-som-sem-audio-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 187,
+    "loserIdx": null,
+    "sha256": "18deba49cc4a3fef6b6b7f60d2931571bcfef86f30035dededc1b9acd4a8f49e"
+  },
+  "caixa-som-nao-carrega-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 188,
+    "loserIdx": null,
+    "sha256": "54c4b8636bc8e3e5e597bb7870609087426f99f4659886c76ff540f68e6045fc"
+  },
+  "amplificador-nao-liga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 189,
+    "loserIdx": null,
+    "sha256": "acb40224b5826a46c26188e4de9f5ad9a59f9c382075475273f5468ee6dbe033"
+  },
+  "receiver-sem-som-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 190,
+    "loserIdx": null,
+    "sha256": "d06fa9773d869763861ba31a607bafc44ddcaf43a299c23c65716620ce7194a1"
+  },
+  "alto-falante-queimado-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 191,
+    "loserIdx": null,
+    "sha256": "ec2eeff0c91046d1a37bdcd7f49f0f05e472bc1e3f3539525a2c6b427a700cf3"
+  },
+  "som-automotivo-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 192,
+    "loserIdx": null,
+    "sha256": "8a6801b0f5126d00cd56149a563bba52c2752ea902e3e411f55a0bb4ca3d73e2"
+  },
+  "quanto-custa-trocar-tela-celular-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 193,
+    "loserIdx": null,
+    "sha256": "8b029ab9db78b1a89f1e26b9a55755ad8e92ab37c00deaf0bf64423819099729"
+  },
+  "quanto-custa-trocar-tela-tv-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 194,
+    "loserIdx": null,
+    "sha256": "55ea1f7ed3d7b95cacd5a8464ceb5f0cbd14e46f8c504b4cb571938b450cf496"
+  },
+  "por-que-display-e-caro-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 195,
+    "loserIdx": null,
+    "sha256": "7e83721ffebf75b9ec1ecddbc14d3eb4bc0472249d1bcec1b9ec149818279b1f"
+  },
+  "tv-travando-lenta-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 196,
+    "loserIdx": null,
+    "sha256": "ed0d6757798e887b318c623be0300f93fda3aa390e85ac2df1980cdd66b9aed5"
+  },
+  "tv-sem-hdmi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 197,
+    "loserIdx": null,
+    "sha256": "c7e3d98305fa9fc66b15aee070ca6b68b2ccfb777297fae48ad07c660c377f58"
+  },
+  "tv-imagem-fantasma-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 198,
+    "loserIdx": null,
+    "sha256": "2dec5e359e228e967b3d40cc0973bd1478fe542f03f1225c865faf82e8d0a866"
+  },
+  "tv-demora-ligar-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 199,
+    "loserIdx": null,
+    "sha256": "ebc1365d2691238fbe1fa6658a2dbe177962bb6a71c4153fa8c7dc358d8bc86c"
+  },
+  "tv-cheiro-queimado-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 200,
+    "loserIdx": null,
+    "sha256": "e1e48685ed29a7dabece0919de3c9d713974efee93919671a1716a3466e3a8c5"
+  },
+  "tv-controle-nao-funciona-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 201,
+    "loserIdx": null,
+    "sha256": "01f507811f3ec21afd8f90f008e0aaeddff3859939a4524a8f7a36867e5e8ad0"
+  },
+  "tv-sem-cores-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 202,
+    "loserIdx": null,
+    "sha256": "5381e36ce1f333fca15bf895d0f0169842f85689769bffaefc86a1f982eeb421"
+  },
+  "tv-nao-conecta-wifi-bluetooth-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 203,
+    "loserIdx": null,
+    "sha256": "fd0a89299d35a5494cb61d537f0275ec016687dd21e0f9772fcdebe9b5bcfc9d"
+  },
+  "tv-pixel-morto-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 204,
+    "loserIdx": null,
+    "sha256": "6721e4803978065df7d2d7a6219577d440d9f1e79699b60821becafa3f0b7251"
+  },
+  "celular-listras-na-tela-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 205,
+    "loserIdx": null,
+    "sha256": "f485002f6ec8ecd2a8f82e7ea6c18deb4578d4f13b0da3b400c82251a4d93549"
+  },
+  "listras-tela-celular-apos-atualizacao-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 207,
+    "loserIdx": null,
+    "sha256": "66df790726bcaddcb93d9dd07734ffcef03739a45b4e0d3ffcf492086ed8696f"
+  },
+  "tv-listras-horizontais-verticais-conserto-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 208,
+    "loserIdx": null,
+    "sha256": "c63490bae45746850ba1ff2dd9d95d8a78d982ad3d8014d229f7f260ca88d475"
+  },
+  "reparo-placa-mae-notebook-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 209,
+    "loserIdx": null,
+    "sha256": "34d9517cdc7d499684f0ef12f0f3067b468a16e2e485abf876e5323843cdc414"
+  },
+  "reparo-placa-mae-celular-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 210,
+    "loserIdx": null,
+    "sha256": "67c4225ffd1f7d65b89d5b44cade88d2b7505c4590c3ee71b79742a67e1bf02c"
+  },
+  "reparo-placa-principal-tv-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 211,
+    "loserIdx": null,
+    "sha256": "13eabeb72755f056095802951e750a32b7dde4b4475b424eed0791fe83ca6446"
+  },
+  "reparo-placa-som-amplificador-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 212,
+    "loserIdx": null,
+    "sha256": "895e815932c7dd7b90b51ee28ef8550c5f39393f56d71e3d152c272a2509905f"
+  },
+  "por-que-conserto-placa-mae-custa-caro-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 213,
+    "loserIdx": null,
+    "sha256": "dbc9f9ae3fced298a938fa7cb7eb2029c527d08f6ceed79af948ad4b113e607a"
+  },
+  "reflow-bga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 214,
+    "loserIdx": null,
+    "sha256": "d1c499b2b6f588354b6048b66c7a8daf431392c8df2537574f762627ab789996"
+  },
+  "reballing-bga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 215,
+    "loserIdx": null,
+    "sha256": "ea0eea0c8ed35496673de4dc8de2e21ae91bbc44dba6a9de10efe6ad644bdf91"
+  },
+  "troca-chip-bga-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 216,
+    "loserIdx": null,
+    "sha256": "a5d945e53d0ff1514cff98e8235da21190815459161da8599cc08ef3b38e0b23"
+  },
+  "microsoldagem-celular-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 217,
+    "loserIdx": null,
+    "sha256": "509ffdfde70321fa58d1cf262beb7287032354aea3347323d7b56e98057dba3c"
+  },
+  "recapacitacao-placa-eletronica-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 218,
+    "loserIdx": null,
+    "sha256": "44c1f0941b8cfcbe33a95e1f86e47ac2c8a9be048954a264a9a49ac6c36df4e5"
+  },
+  "impressora-papel-preso-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 219,
+    "loserIdx": null,
+    "sha256": "b2f4471c15ab0977380c3a92815eca6e8c2ee15f4119934b6926d45a11de2a0a"
+  },
+  "impressora-tinta-nao-sai-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 220,
+    "loserIdx": null,
+    "sha256": "8cc7cdaedfc5e270faabdabcf7b81ddf00639b4c235ea73f7ac542428146fe2e"
+  },
+  "impressora-erro-conexao-usb-wifi-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 221,
+    "loserIdx": null,
+    "sha256": "d26a3a9eaa7ba33b1b675cf25eb2789fd37da71f2f66a6bd12dfd90cc55a83d1"
+  },
+  "impressora-cartucho-nao-reconhece-curitiba": {
+    "strategy": "keep-winner",
+    "winnerIdx": 222,
+    "loserIdx": null,
+    "sha256": "1cf66899edf43c13db07a6fe7357389b4fd9f97bfbdda34f4c9a15d7f4d58d51"
+  }
+}
