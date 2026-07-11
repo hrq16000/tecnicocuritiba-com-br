@@ -6,7 +6,8 @@ import { resolve } from "node:path";
 const BASE_URL = "https://tecnicocuritiba.com.br";
 const TODAY = new Date().toISOString().slice(0, 10);
 
-const appSrc = readFileSync(resolve("src/App.tsx"), "utf8");
+// Rotas ficam em LegacyApp.tsx (App.tsx só orquestra o shell/Suspense).
+const appSrc = readFileSync(resolve("src/LegacyApp.tsx"), "utf8");
 const brandsSrc = readFileSync(resolve("src/lib/brandsData.ts"), "utf8");
 const problemsSrc = readFileSync(resolve("src/lib/problemaPagesData.ts"), "utf8");
 
