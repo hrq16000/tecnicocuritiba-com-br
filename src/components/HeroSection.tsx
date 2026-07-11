@@ -87,15 +87,10 @@ export const HeroSection = () => {
             
             <div className="flex flex-col sm:flex-row gap-3.5 justify-center lg:justify-start opacity-0 animate-[heroFadeUp_0.5s_ease-out_0.6s_forwards]">
               <Button variant="heroWhatsapp" className="animate-pulse-soft hover-glow-cta ripple-container shadow-lg hover:scale-[1.03] transition-transform" asChild>
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Chamar técnico no WhatsApp">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Chamar técnico no WhatsApp" data-cta-location="hero_whatsapp">
                   <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
                   Chamar Técnico Agora
                 </a>
-              </Button>
-              
-              <Button variant="heroCta" className="ripple-container hover-glow-cta shadow-lg hover:scale-[1.03] transition-transform" onClick={() => setIsSchedulingOpen(true)} aria-label="Agendar atendimento técnico online">
-                <CalendarDays className="h-5 w-5 md:h-6 md:w-6" />
-                Agendar Atendimento
               </Button>
             </div>
 
