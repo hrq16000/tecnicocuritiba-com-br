@@ -12,6 +12,7 @@ const AtendimentoDomicilio = lazy(() => import("./pages/AtendimentoDomicilio"));
 const AtendimentoRemoto = lazy(() => import("./pages/AtendimentoRemoto"));
 const SuporteEmpresas = lazy(() => import("./pages/SuporteEmpresas"));
 const EmpresaTICuritiba = lazy(() => import("./pages/EmpresaTICuritiba"));
+const ManutencaoNotebookPCCuritiba = lazy(() => import("./pages/ManutencaoNotebookPCCuritiba"));
 const PrecosEPoliticas = lazy(() => import("./pages/PrecosEPoliticas"));
 const TecnicoInformaticaCuritiba = lazy(() => import("./pages/TecnicoInformaticaCuritiba"));
 const TecnicoInformaticaSaoJosePinhais = lazy(() => import("./pages/TecnicoInformaticaSaoJosePinhais"));
