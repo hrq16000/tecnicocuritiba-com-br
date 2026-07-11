@@ -65,7 +65,8 @@ export const IMAGE_POOL = [
   `https://images.unsplash.com/photo-1550745165-9bc0b252726f?${BASE}`,
   `https://images.unsplash.com/photo-1535378620166-273708d44e4c?${BASE}`,
   `https://images.unsplash.com/photo-1542831371-29b0f74f9713?${BASE}`,
-  `https://images.unsplash.com/photo-1515879218367-8466d910auj7?${BASE}`,
+  // fixed 2026-07-11 — id anterior 404
+  `https://images.unsplash.com/photo-1517336714731-489689fd1ca8?${BASE}`,
   `https://images.unsplash.com/photo-1483058712412-4245e9b90334?${BASE}`,
   `https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?${BASE}`,
   `https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?${BASE}`,
