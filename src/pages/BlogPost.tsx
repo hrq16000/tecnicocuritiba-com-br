@@ -11,6 +11,7 @@ import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { Calendar, Clock, ArrowLeft, CheckCircle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { getUniqueImage } from "@/lib/blogImages";
+import { BlogCoverImage, OPTIMIZED_BLOG_COVER_SLUGS, getBlogCoverAbsoluteUrl } from "@/components/BlogCoverImage";
 import { getCategoryCover } from "@/lib/categoryCovers";
 import { withOgVersion } from "@/lib/ogCacheBust";
 import { programmaticPosts } from "@/data/blogProgrammaticPosts";
