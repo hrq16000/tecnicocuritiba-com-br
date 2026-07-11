@@ -483,8 +483,28 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
           <ServiceLocalLinks currentCity={data.cidade} currentNeighborhood={data.nome} />
         </AnimatedSection>
 
+        <AnimatedSection>
+          <section className="py-8 bg-secondary/30" aria-labelledby="empresa-ti-link">
+            <div className="container mx-auto px-4 max-w-4xl text-center">
+              <h2 id="empresa-ti-link" className="text-xl md:text-2xl font-bold text-foreground mb-3">
+                Precisa de suporte de TI para empresa no {data.nome}?
+              </h2>
+              <p className="text-muted-foreground mb-4">
+                Atendemos escritórios, clínicas e comércios no {data.nome} com contratos mensais, SLA e infraestrutura de rede.
+              </p>
+              <Link
+                to="/empresa-de-ti-curitiba"
+                className="inline-flex items-center gap-2 text-accent font-semibold hover:underline"
+              >
+                Ver plano de empresa de TI em Curitiba →
+              </Link>
+            </div>
+          </section>
+        </AnimatedSection>
+
         <AnimatedSection><TrustSection /></AnimatedSection>
         <AnimatedSection><CTASection /></AnimatedSection>
+
       </main>
       <BlocoInteligencia compact />
       <Footer />
