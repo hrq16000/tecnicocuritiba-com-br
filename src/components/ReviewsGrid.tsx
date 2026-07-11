@@ -134,6 +134,9 @@ export const ReviewsGrid = ({
                       src={r.author_photo_url}
                       alt={r.author_name}
                       loading="lazy"
+                      width={40}
+                      height={40}
+                      decoding="async"
                       className="w-10 h-10 rounded-full object-cover"
                     />
                   ) : (
