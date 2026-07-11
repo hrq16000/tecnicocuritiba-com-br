@@ -10534,5 +10534,303 @@ crontab -e
       </>
     ),
   },
+
+  "meu-computador-precisa-de-formatacao": {
+    title: "Como Saber Se Meu Computador Precisa de Formatação (Guia 2026)",
+    excerpt: "Sinais claros de que seu PC precisa de formatação — e quando dá para resolver sem reinstalar o Windows.",
+    date: "2026-07-10",
+    readTime: "9 min",
+    category: "Manutenção",
+    content: (
+      <>
+        <p className="lead">Nem todo computador lento precisa de formatação. Antes de reinstalar o Windows do zero, é importante entender <strong>quais sinais indicam que a formatação é mesmo necessária</strong> e quais podem ser resolvidos com uma manutenção mais leve — economizando tempo, o backup dos seus arquivos e, muitas vezes, dinheiro.</p>
+
+        <h2>O que é formatar um computador</h2>
+        <p>Formatar significa apagar tudo o que está no disco (HD ou SSD) e reinstalar o sistema operacional do zero. É diferente de "limpar" ou "otimizar": na formatação, o Windows sai novo de fábrica, sem programas instalados, sem vírus, sem lixo acumulado.</p>
+
+        <h2>7 sinais claros de que seu PC precisa formatar</h2>
+        <ul>
+          <li><strong>Windows extremamente lento</strong> mesmo depois de limpar arquivos temporários e desinstalar programas.</li>
+          <li><strong>Telas azuis frequentes</strong> (BSOD) sem causa aparente de hardware.</li>
+          <li><strong>Vírus persistente</strong> que o antivírus não consegue remover.</li>
+          <li><strong>Programas travando</strong> logo depois de abrir, mesmo os leves.</li>
+          <li><strong>Boot demorando 3+ minutos</strong> mesmo com SSD.</li>
+          <li><strong>Erros de sistema</strong> ao instalar atualizações do Windows Update.</li>
+          <li><strong>Perfil de usuário corrompido</strong> — a área de trabalho não carrega direito.</li>
+        </ul>
+
+        <h2>Quando NÃO precisa formatar</h2>
+        <p>Se o computador está lento mas o problema é hardware (pouca RAM, HD antigo), <Link to="/servicos/upgrade-ssd-memoria">um upgrade de SSD ou memória</Link> resolve sem formatar. Se o vírus é recente e simples, uma <Link to="/servicos/remocao-virus">remoção de vírus profissional</Link> mantém seus programas e arquivos intactos. Se o Windows só está "sujo", uma limpeza profunda com CCleaner + reset das configurações resolve.</p>
+
+        <h2>Como fazemos a formatação</h2>
+        <p>Nosso processo padrão em Curitiba:</p>
+        <ol>
+          <li>Backup completo dos seus arquivos (documentos, fotos, favoritos, e-mails).</li>
+          <li>Instalação do Windows 10 ou 11 original com licença.</li>
+          <li>Instalação de drivers oficiais do fabricante.</li>
+          <li>Pacote de programas essenciais (navegador, Office, antivírus, leitor de PDF).</li>
+          <li>Ativação e atualização completa do sistema.</li>
+          <li>Restauração dos arquivos do backup na área correta.</li>
+        </ol>
+
+        <h2>Tempo médio e preço</h2>
+        <p>A formatação leva entre <strong>2 e 4 horas</strong> dependendo da máquina. O serviço custa a partir de <strong>R$ 99,99</strong>, com garantia de 90 dias. Fazemos <Link to="/atendimento-domicilio">atendimento em domicílio em toda Curitiba e RMC</Link>.</p>
+
+        <h2>FAQ</h2>
+        <h3>Vou perder meus arquivos?</h3>
+        <p>Não. Fazemos backup antes da formatação e restauramos tudo depois.</p>
+        <h3>Preciso ter o CD do Windows?</h3>
+        <p>Não. Instalamos com mídia oficial e ativamos com a licença digital vinculada à sua placa-mãe (Windows 10/11).</p>
+        <h3>A formatação resolve travamento por hardware?</h3>
+        <p>Não. Se o problema for HD com defeito, memória ruim ou placa-mãe, formatar não resolve — por isso o <Link to="/servicos/diagnostico">diagnóstico técnico</Link> vem antes.</p>
+
+        <div className="bg-accent/10 rounded-xl p-6 my-8">
+          <h3 className="text-accent font-bold mb-2">Precisa de ajuda em Curitiba? Chame no WhatsApp</h3>
+          <p className="text-muted-foreground mb-0">Atendimento em domicílio no mesmo dia — Curitiba, São José dos Pinhais, Araucária, Pinhais e RMC. A partir de R$ 99,99 com garantia de 90 dias.</p>
+        </div>
+      </>
+    ),
+  },
+
+  "quanto-custa-formatar-computador-curitiba": {
+    title: "Quanto Custa Formatar um Computador em Curitiba em 2026",
+    excerpt: "Preço médio, o que está incluso, formatação com ou sem backup, atendimento em domicílio e bancada.",
+    date: "2026-07-10",
+    readTime: "8 min",
+    category: "Preços",
+    content: (
+      <>
+        <p className="lead">O <strong>preço para formatar um computador em Curitiba</strong> em 2026 varia entre R$ 99,99 e R$ 250, dependendo do tipo de serviço, do modo de atendimento (domicílio ou bancada) e se inclui backup, licença de Windows e pacote de programas. Neste guia você vê exatamente o que está incluso em cada faixa.</p>
+
+        <h2>Tabela de preços atual</h2>
+        <ul>
+          <li><strong>Formatação simples (bancada):</strong> a partir de R$ 99,99 — reinstalação limpa do Windows + drivers + programas básicos.</li>
+          <li><strong>Formatação com backup completo:</strong> R$ 149,99 — inclui salvar seus arquivos, formatar e restaurar tudo.</li>
+          <li><strong>Formatação em domicílio (Curitiba):</strong> R$ 169,99 pela primeira hora de visita técnica.</li>
+          <li><strong>Formatação + upgrade de SSD:</strong> a partir de R$ 249,99 (serviço) + preço do SSD.</li>
+        </ul>
+
+        <h2>O que está incluso na formatação padrão</h2>
+        <ul>
+          <li>Windows 10 ou 11 original (usando a licença digital do equipamento).</li>
+          <li>Todos os drivers oficiais do fabricante.</li>
+          <li>Navegador, leitor de PDF, compactador, antivírus gratuito.</li>
+          <li>Pacote Office LibreOffice ou o Office existente na sua conta Microsoft.</li>
+          <li>Atualizações do Windows Update aplicadas antes da entrega.</li>
+          <li><strong>Garantia de 90 dias</strong> no serviço.</li>
+        </ul>
+
+        <h2>Domicílio ou bancada: qual escolher?</h2>
+        <p><strong>Bancada</strong> (levar até o técnico) é mais barato e ideal quando o PC não liga, tem defeito de hardware ou vai receber upgrade. <strong>Domicílio</strong> compensa quando você não quer desmontar o setup, tem dados sensíveis ou precisa de rapidez. Fazemos <Link to="/servicos/coleta-entrega">coleta e entrega gratuita em bairros centrais de Curitiba</Link>.</p>
+
+        <h2>Cuidado com preços muito abaixo do mercado</h2>
+        <p>Formatação por R$ 40 ou R$ 60 quase sempre significa: Windows pirata, sem drivers oficiais, sem backup ou sem garantia. É a receita para o problema voltar em 2 semanas. O <Link to="/como-escolher-tecnico-informatica-confiavel-curitiba">técnico confiável emite recibo, dá garantia por escrito e usa software original</Link>.</p>
+
+        <h2>FAQ</h2>
+        <h3>Formata notebook e desktop pelo mesmo preço?</h3>
+        <p>Sim, o preço-base é o mesmo (R$ 99,99). Alguns notebooks ultrafinos podem cobrar taxa adicional se precisarem abrir para instalar SSD.</p>
+        <h3>Preciso pagar a licença do Windows?</h3>
+        <p>Se o PC já veio com Windows original de fábrica, não. A licença fica gravada na placa-mãe. Se for uma máquina montada sem licença, o Windows 11 Home custa cerca de R$ 700 (ou usamos gratuito com marca d'água).</p>
+        <h3>Quanto tempo demora?</h3>
+        <p>De 2 a 4 horas com máquina razoável. Em domicílio, geralmente a primeira hora é o diagnóstico + backup, e a formatação continua enquanto o técnico atende outros serviços na sua casa.</p>
+        <h3>Vocês atendem outras cidades da RMC?</h3>
+        <p>Sim — <Link to="/tecnico-informatica-sao-jose-pinhais">São José dos Pinhais</Link>, <Link to="/tecnico-informatica-araucaria">Araucária</Link>, <Link to="/tecnico-informatica-campo-largo">Campo Largo</Link>, <Link to="/tecnico-informatica-pinhais">Pinhais</Link> e outras.</p>
+
+        <div className="bg-accent/10 rounded-xl p-6 my-8">
+          <h3 className="text-accent font-bold mb-2">Precisa de ajuda em Curitiba? Chame no WhatsApp</h3>
+          <p className="text-muted-foreground mb-0">Orçamento gratuito pelo WhatsApp e agendamento no mesmo dia. <Link to="/servicos/formatacao-computador">Veja mais sobre o serviço de formatação</Link>.</p>
+        </div>
+      </>
+    ),
+  },
+
+  "como-escolher-tecnico-informatica-confiavel-curitiba": {
+    title: "Como Escolher um Técnico de Informática Confiável em Curitiba",
+    excerpt: "9 critérios para não cair em cilada: garantia por escrito, orçamento fechado, reputação e mais.",
+    date: "2026-07-10",
+    readTime: "10 min",
+    category: "Guia",
+    content: (
+      <>
+        <p className="lead">Contratar um <strong>técnico de informática em Curitiba</strong> não é só olhar o preço. Um mau atendimento pode significar dados perdidos, Windows pirata, o mesmo defeito voltando em 15 dias, ou preço que só cresce depois que o computador está aberto. Este guia lista os 9 sinais de um técnico confiável.</p>
+
+        <h2>1. Orçamento fechado antes de começar</h2>
+        <p>Técnico sério dá o valor antes de mexer no equipamento — ou cobra apenas o <strong>diagnóstico</strong> (R$ 99,99) e só depois fecha o orçamento do reparo. Fuja de "vou ver aqui e depois te aviso".</p>
+
+        <h2>2. Garantia por escrito de 90 dias</h2>
+        <p>A lei brasileira exige mínimo 90 dias de garantia em serviço. Um bom técnico entrega recibo com o defeito, a solução aplicada e o prazo de garantia. Sem recibo, você não tem como reclamar.</p>
+
+        <h2>3. Windows original (licenciado)</h2>
+        <p>Windows pirata trava, dá tela azul, não recebe atualizações de segurança e pode conter malware embutido. Um técnico confiável usa a <strong>licença digital gravada na sua placa-mãe</strong> ou vende uma licença nova.</p>
+
+        <h2>4. Backup antes de qualquer coisa</h2>
+        <p>Nunca aceite formatar sem backup dos seus arquivos. Bom técnico faz o backup, mostra a pasta salva e só depois inicia a formatação. Veja como <Link to="/blog/backup-como-proteger-seus-arquivos">funciona o backup profissional</Link>.</p>
+
+        <h2>5. Endereço fixo ou reputação online</h2>
+        <p>Prefira quem tem loja física em Curitiba, CNPJ ativo e avaliações no Google (nota 4.5+). Perfis 100% novos ou sem endereço são sinal amarelo.</p>
+
+        <h2>6. Atende no domicílio (opcional)</h2>
+        <p>Muitos serviços — configuração de rede, instalação de impressora, backup, remoção de vírus — são muito mais convenientes em domicílio. Verifique se o técnico atende sua região: <Link to="/tecnico-informatica-curitiba">Curitiba</Link>, <Link to="/tecnico-informatica-sao-jose-pinhais">SJP</Link>, <Link to="/tecnico-informatica-pinhais">Pinhais</Link>, etc.</p>
+
+        <h2>7. Tempo de atendimento realista</h2>
+        <p>"Formato em 30 minutos" é mentira. Uma formatação séria (com backup, drivers, atualizações, Office) leva 2 a 4 horas. Desconfie de prazos milagrosos.</p>
+
+        <h2>8. Peças novas com nota fiscal</h2>
+        <p>Se o serviço envolver troca de SSD, memória ou fonte, o técnico deve entregar a nota da peça. Assim você tem garantia do fabricante (1 a 5 anos) independente da garantia do serviço.</p>
+
+        <h2>9. Comunicação clara pelo WhatsApp</h2>
+        <p>Técnico bom explica o que vai fazer em linguagem simples, envia fotos do problema e do reparo, e responde dúvidas mesmo depois da entrega. Fuja de quem some depois do pagamento.</p>
+
+        <h2>FAQ</h2>
+        <h3>Quanto custa uma visita técnica em Curitiba?</h3>
+        <p>A partir de R$ 169,99 pela primeira hora combinada. Diagnóstico em bancada é R$ 99,99.</p>
+        <h3>Posso pagar depois da entrega?</h3>
+        <p>Sim. Nosso padrão é pagamento por Pix ou cartão só quando você aprova o serviço concluído.</p>
+        <h3>Como sei que o técnico é da empresa mesmo?</h3>
+        <p>Enviamos o nome e foto do técnico pelo WhatsApp antes do atendimento. Ele chega identificado.</p>
+
+        <div className="bg-accent/10 rounded-xl p-6 my-8">
+          <h3 className="text-accent font-bold mb-2">Precisa de ajuda em Curitiba? Chame no WhatsApp</h3>
+          <p className="text-muted-foreground mb-0">Orçamento por escrito, garantia de 90 dias, Windows original. Atendimento em Curitiba e toda RMC.</p>
+        </div>
+      </>
+    ),
+  },
+
+  "upgrade-ram-quando-vale-a-pena": {
+    title: "Upgrade de Memória RAM: Quando Vale a Pena e Quanto Custa em 2026",
+    excerpt: "Descubra se seu PC ganha desempenho com mais RAM, quantos GB são ideais e o preço do serviço.",
+    date: "2026-07-10",
+    readTime: "9 min",
+    category: "Hardware",
+    content: (
+      <>
+        <p className="lead">O <strong>upgrade de memória RAM</strong> é um dos serviços com melhor custo-benefício em informática — mas só quando o problema é realmente falta de memória. Este guia explica como identificar, quantos GB você precisa e quanto custa o serviço em Curitiba.</p>
+
+        <h2>Como saber se seu PC precisa de mais RAM</h2>
+        <ul>
+          <li>Abre o Gerenciador de Tarefas (Ctrl+Shift+Esc) e a memória fica acima de 80% em uso normal.</li>
+          <li>PC trava ao abrir várias abas do navegador junto com Word/Excel.</li>
+          <li>HD ou SSD fica 100% de uso porque o Windows está "paginando" (usando disco como RAM).</li>
+          <li>Programas fecham sozinhos com aviso de "memória insuficiente".</li>
+          <li>Vídeos e videochamadas travam mesmo com internet boa.</li>
+        </ul>
+
+        <h2>Quantos GB você precisa em 2026</h2>
+        <ul>
+          <li><strong>4 GB:</strong> só para navegar leve. Não recomendado para Windows 11.</li>
+          <li><strong>8 GB:</strong> uso doméstico (navegar, Netflix, Office simples).</li>
+          <li><strong>16 GB:</strong> ideal para maioria — home office, várias abas, jogos leves.</li>
+          <li><strong>32 GB ou mais:</strong> edição de vídeo, jogos pesados, programação, virtualização.</li>
+        </ul>
+
+        <h2>Quando NÃO vale a pena</h2>
+        <p>Se o PC está lento por HD antigo, o gargalo é o disco — <Link to="/servicos/upgrade-ssd-memoria">trocar por SSD</Link> faz muito mais diferença. Se o processador é antigo (i3 de 2ª geração, Celeron de 10 anos), a máquina não vai render mesmo com 32 GB. E se a placa-mãe já está no limite (16 GB, por exemplo), não adianta comprar 32 GB.</p>
+
+        <h2>Quanto custa o upgrade em Curitiba</h2>
+        <ul>
+          <li><strong>Memória 8 GB DDR4:</strong> R$ 120 a R$ 180.</li>
+          <li><strong>Memória 16 GB DDR4:</strong> R$ 220 a R$ 340.</li>
+          <li><strong>Memória 16 GB DDR5:</strong> R$ 380 a R$ 500.</li>
+          <li><strong>Mão de obra (instalação + teste):</strong> a partir de R$ 99,99, com garantia de 90 dias.</li>
+        </ul>
+        <p>Notebook ou desktop pelo mesmo preço de serviço. Fazemos o teste de estabilidade (MemTest86) antes de entregar.</p>
+
+        <h2>Como fazemos o upgrade</h2>
+        <ol>
+          <li>Diagnóstico do modelo da placa-mãe, tipo de memória (DDR3/4/5), slots livres, frequência máxima suportada.</li>
+          <li>Orçamento fechado com opções de peça.</li>
+          <li>Instalação com pulseira antiestática.</li>
+          <li>Teste de 30 minutos com MemTest86.</li>
+          <li>Verificação de reconhecimento no Windows.</li>
+        </ol>
+
+        <h2>FAQ</h2>
+        <h3>Posso misturar memórias de fabricantes diferentes?</h3>
+        <p>Funciona na maioria dos casos, mas o ideal é usar par idêntico (mesma marca, capacidade e frequência) para ativar o Dual Channel — que dá até 15% mais desempenho.</p>
+        <h3>Preciso reinstalar o Windows depois?</h3>
+        <p>Não. A memória é reconhecida automaticamente.</p>
+        <h3>Meu notebook suporta 32 GB?</h3>
+        <p>Depende do modelo. Consultamos a especificação da placa-mãe antes de vender a peça.</p>
+
+        <div className="bg-accent/10 rounded-xl p-6 my-8">
+          <h3 className="text-accent font-bold mb-2">Precisa de ajuda em Curitiba? Chame no WhatsApp</h3>
+          <p className="text-muted-foreground mb-0">Diagnóstico gratuito e orçamento fechado antes de comprar. <Link to="/servicos/upgrade-ssd-memoria">Saiba mais sobre upgrade de SSD e memória</Link>.</p>
+        </div>
+      </>
+    ),
+  },
+
+  "suporte-tecnico-remoto-como-funciona": {
+    title: "Suporte Técnico Remoto Funciona? Como É o Atendimento em 2026",
+    excerpt: "Como um técnico resolve problemas sem ir na sua casa, o que dá e o que não dá para consertar à distância.",
+    date: "2026-07-10",
+    readTime: "8 min",
+    category: "Suporte Remoto",
+    content: (
+      <>
+        <p className="lead">O <strong>suporte técnico remoto</strong> resolve entre 60% e 70% dos problemas de informática sem precisar de visita — mais barato, mais rápido e sem sair de casa. Neste guia você entende como funciona, o que dá e o que não dá para resolver à distância, e quando vale a pena.</p>
+
+        <h2>Como funciona na prática</h2>
+        <ol>
+          <li>Você entra em contato pelo WhatsApp e explica o problema.</li>
+          <li>O técnico envia um link (AnyDesk ou similar) — você abre e passa o código.</li>
+          <li>Ele vê sua tela em tempo real e mexe no PC como se estivesse na sua casa.</li>
+          <li>Você acompanha tudo o que está sendo feito. A conexão fecha ao final.</li>
+        </ol>
+        <p>É seguro: sem o seu código, ninguém entra. Ao fechar o programa, o acesso é revogado.</p>
+
+        <h2>O que dá para resolver por acesso remoto</h2>
+        <ul>
+          <li>Remoção de vírus e adwares (barras estranhas no navegador).</li>
+          <li>Windows lento, otimização, limpeza de arquivos temporários.</li>
+          <li>Configuração de e-mail (Outlook, Gmail, Thunderbird).</li>
+          <li>Instalação de programas (Office, antivírus, impressoras via IP).</li>
+          <li>Correção de erros do Windows Update e drivers.</li>
+          <li>Configuração de nuvem (Google Drive, OneDrive, Dropbox).</li>
+          <li>Recuperação de arquivos apagados (quando o disco ainda funciona).</li>
+          <li>Suporte a sistemas empresariais (ERPs, TOTVS, sistemas web).</li>
+        </ul>
+
+        <h2>O que NÃO dá para resolver remoto</h2>
+        <ul>
+          <li>PC que não liga (obvious, precisa energia).</li>
+          <li>Tela quebrada, teclado com defeito físico.</li>
+          <li>Troca de peças (SSD, memória, bateria, tela).</li>
+          <li>Formatação sem apoio de alguém do lado (precisa apertar tecla no boot).</li>
+          <li>Problemas de rede física (cabo, roteador queimado).</li>
+        </ul>
+
+        <h2>Quanto custa e quanto tempo leva</h2>
+        <p>Cobrança por sessão de até 30 minutos: <strong>R$ 99,99</strong>. A maioria dos atendimentos remotos resolve em uma sessão. Comparando com uma visita técnica (R$ 169,99 pela primeira hora), você economiza tempo e dinheiro.</p>
+
+        <h2>É seguro? E meus dados?</h2>
+        <p>Sim, desde que:</p>
+        <ul>
+          <li>Você use um técnico com CNPJ e reputação (não aceite acesso de "amigos" desconhecidos).</li>
+          <li>Você acompanhe o atendimento na tela.</li>
+          <li>Você feche o programa de acesso ao final.</li>
+          <li>Você troque senhas sensíveis (banco, e-mail principal) depois se quiser extra segurança.</li>
+        </ul>
+        <p>Nunca fornecemos senha de banco ou instalamos programa que peça acesso administrativo sem explicar o motivo.</p>
+
+        <h2>FAQ</h2>
+        <h3>Preciso instalar alguma coisa antes?</h3>
+        <p>Só o programa que enviamos no link (AnyDesk). É gratuito, portátil, e não fica instalado.</p>
+        <h3>Funciona em Mac também?</h3>
+        <p>Sim, o AnyDesk tem versão para macOS.</p>
+        <h3>Se não resolver, cobra?</h3>
+        <p>Não. Se identificarmos que o problema exige visita ou peça, não cobramos a sessão remota.</p>
+        <h3>Atendem só Curitiba?</h3>
+        <p>Não. <Link to="/atendimento-remoto">Suporte remoto atende todo o Brasil</Link>. A visita presencial fica para <Link to="/tecnico-informatica-curitiba">Curitiba e RMC</Link>.</p>
+
+        <div className="bg-accent/10 rounded-xl p-6 my-8">
+          <h3 className="text-accent font-bold mb-2">Precisa de ajuda em Curitiba? Chame no WhatsApp</h3>
+          <p className="text-muted-foreground mb-0">Suporte remoto imediato pelo WhatsApp. Só cobra se resolver. <Link to="/atendimento-remoto">Ver detalhes do atendimento remoto</Link>.</p>
+        </div>
+      </>
+    ),
+  },
 };
+
 
