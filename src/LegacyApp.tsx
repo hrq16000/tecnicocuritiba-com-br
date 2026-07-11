@@ -459,6 +459,7 @@ const App = () => (
             <Route path="/arrumar-pc/:cidade" element={<ArrumarPCCity />} />
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
             <Route path="/empresa-de-ti-curitiba" element={<EmpresaTICuritiba />} />
+            <Route path="/manutencao-notebook-pc-curitiba" element={<ManutencaoNotebookPCCuritiba />} />
             <Route path="/precos-e-politicas" element={<PrecosEPoliticas />} />
             <Route path="/valores" element={<PrecosEPoliticas />} />
             
