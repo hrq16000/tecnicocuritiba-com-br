@@ -475,6 +475,17 @@ const App = () => (
             <Route path="/tecnico-informatica-piraquara" element={<TecnicoInformaticaPiraquara />} />
             <Route path="/tecnico-informatica-campo-magro" element={<TecnicoInformaticaCampoMagro />} />
             <Route path="/tecnico-informatica-quatro-barras" element={<TecnicoInformaticaQuatroBarras />} />
+
+            {/* Aliases /tecnico-em-* → redirecionam para as páginas canônicas (evita conteúdo duplicado) */}
+            <Route path="/tecnico-em-curitiba" element={<Navigate to="/tecnico-informatica-curitiba" replace />} />
+            <Route path="/tecnico-em-sao-jose-dos-pinhais" element={<Navigate to="/tecnico-informatica-sao-jose-pinhais" replace />} />
+            <Route path="/tecnico-em-araucaria" element={<Navigate to="/tecnico-informatica-araucaria" replace />} />
+            <Route path="/tecnico-em-campo-largo" element={<Navigate to="/tecnico-informatica-campo-largo" replace />} />
+            <Route path="/tecnico-em-pinhais" element={<Navigate to="/tecnico-informatica-pinhais" replace />} />
+            <Route path="/tecnico-em-colombo" element={<Navigate to="/tecnico-informatica-colombo" replace />} />
+            <Route path="/tecnico-em-fazenda-rio-grande" element={<Navigate to="/tecnico-informatica-fazenda-rio-grande" replace />} />
+
+
             
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/contato" element={<Contato />} />
