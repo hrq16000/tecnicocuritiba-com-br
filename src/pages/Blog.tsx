@@ -9,6 +9,7 @@ import { FloatingParticles } from "@/components/FloatingParticles";
 import { trackPageView } from "@/lib/analytics";
 import { IMAGES } from "@/lib/images";
 import { getUniqueImage, getUniqueImageSrcSet, COVER_SIZES } from "@/lib/blogImages";
+import { BlogCoverImage, OPTIMIZED_BLOG_COVER_SLUGS } from "@/components/BlogCoverImage";
 import { getCategoryCover } from "@/lib/categoryCovers";
 import { problemaSummaries } from "@/lib/problemaSummaries";
 import { programmaticPostsMeta } from "@/data/blogProgrammaticPosts";
