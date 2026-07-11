@@ -485,6 +485,16 @@ const App = () => (
             <Route path="/tecnico-em-colombo" element={<Navigate to="/tecnico-informatica-colombo" replace />} />
             <Route path="/tecnico-em-fazenda-rio-grande" element={<Navigate to="/tecnico-informatica-fazenda-rio-grande" replace />} />
 
+            {/* Aliases de serviço com keyword-alvo → páginas canônicas (evita duplicidade) */}
+            <Route path="/formatacao-de-computador-curitiba" element={<Navigate to="/servicos/formatacao-computador" replace />} />
+            <Route path="/remocao-de-virus-curitiba" element={<Navigate to="/servicos/remocao-virus" replace />} />
+            <Route path="/upgrade-ssd-curitiba" element={<Navigate to="/servicos/upgrade-ssd-memoria" replace />} />
+            <Route path="/upgrade-memoria-ram-curitiba" element={<Navigate to="/servicos/upgrade-ssd-memoria" replace />} />
+            <Route path="/conserto-de-notebook-curitiba" element={<Navigate to="/servicos/conserto-notebook-curitiba" replace />} />
+            <Route path="/suporte-tecnico-remoto" element={<Navigate to="/atendimento-remoto" replace />} />
+            <Route path="/assistencia-tecnica-empresas-curitiba" element={<Navigate to="/suporte-empresas" replace />} />
+
+
 
             
             <Route path="/sobre" element={<Sobre />} />
