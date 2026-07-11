@@ -144,6 +144,32 @@ export const trackCTAClick = (ctaType: 'whatsapp' | 'phone' | 'chatbot', locatio
   }
 };
 
+// Track social-share button clicks on blog posts (WhatsApp, Facebook, X, ...)
+export const trackShareClick = (
+  network: 'whatsapp' | 'facebook' | 'x' | 'twitter' | 'linkedin' | 'copy',
+  context: { slug?: string; title?: string; url?: string; location?: string } = {},
+) => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  const utm = getUtmContext();
+  const deviceCtx = getDeviceContext();
+  const payload = {
+    event_category: 'engagement',
+    event_label: `share_${network}`,
+    method: network,
+    content_type: 'article',
+    item_id: context.slug || window.location.pathname,
+    share_title: context.title,
+    share_url: context.url || window.location.href,
+    share_location: context.location || 'blog_post',
+    page_path: window.location.pathname,
+    ...deviceCtx,
+    ...utm,
+  };
+  // GA4 canonical `share` event + custom `share_click` mirror for Looker.
+  window.gtag('event', 'share', payload);
+  window.gtag('event', 'share_click', payload);
+};
+
 // Track page views
 export const trackPageView = (pagePath: string, pageTitle: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
