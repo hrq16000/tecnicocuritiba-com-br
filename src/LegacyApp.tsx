@@ -20,6 +20,7 @@ const TecnicoInformaticaAraucaria = lazy(() => import("./pages/TecnicoInformatic
 const TecnicoInformaticaCampoLargo = lazy(() => import("./pages/TecnicoInformaticaCampoLargo"));
 const TecnicoInformaticaPinhais = lazy(() => import("./pages/TecnicoInformaticaPinhais"));
 const Sobre = lazy(() => import("./pages/Sobre"));
+const Autor = lazy(() => import("./pages/Autor"));
 const Contato = lazy(() => import("./pages/Contato"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
