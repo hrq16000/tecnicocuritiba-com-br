@@ -25,8 +25,8 @@ const faq = [
     a: "A partir de R$ 99,99 por até 30 minutos de inspeção superficial (sem abertura de equipamentos). Existe um combo opcional de até 2 horas por R$ 299,99 para serviços mais longos. Não inclui peças, estacionamento nem abertura de placas.",
   },
   {
-    q: "Como funciona a taxa de diagnóstico em bancada de R$ 90?",
-    a: "Quando o equipamento vai para análise em bancada (com coleta ou entrega no parceiro), realizamos diagnóstico completo. Se você aprovar o reparo, esse valor entra no preço final. Se desistir após o diagnóstico, é cobrada apenas a taxa de R$ 90.",
+    q: "Como funciona a taxa de diagnóstico em bancada de R$ 99,99?",
+    a: "Quando o equipamento vai para análise em bancada (com coleta ou entrega no parceiro), realizamos diagnóstico completo. Se você aprovar o reparo, esse valor entra no preço final. Se desistir após o diagnóstico, é cobrada apenas a taxa de R$ 99,99.",
   },
   {
     q: "Por que reparos de placa têm valor mínimo de R$ 300?",
@@ -76,7 +76,7 @@ const localBusinessJsonLd = {
     { "@type": "City", name: "Curitiba" },
     { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
   ],
-  priceRange: "R$ 90 – R$ 500",
+  priceRange: "R$ 99,99 – R$ 500",
   sameAs: ["https://wa.me/5541997452053"],
   contactPoint: {
     "@type": "ContactPoint",
@@ -90,14 +90,14 @@ const localBusinessJsonLd = {
 const TermosCondicoes = () => {
   const title = "Termos, Preços e Condições | Assistência Técnica Curitiba";
   const description =
-    "Conserto de placas em Curitiba: orçamento grátis pelo WhatsApp, visita técnica a partir de R$ 99,99, diagnóstico R$ 90, reparo mínimo R$ 300. Política transparente.";
+    "Conserto de placas em Curitiba: orçamento grátis pelo WhatsApp, visita técnica a partir de R$ 99,99, diagnóstico R$ 99,99, reparo mínimo R$ 300. Política transparente.";
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="keywords" content="conserto de placas Curitiba, diagnóstico R$ 90, visita técnica R$ 99,90, reparo mínimo R$ 300, orçamento grátis WhatsApp, assistência técnica Curitiba" />
+        <meta name="keywords" content="conserto de placas Curitiba, diagnóstico R$ 99,99, visita técnica R$ 99,90, reparo mínimo R$ 300, orçamento grátis WhatsApp, assistência técnica Curitiba" />
         <link rel="canonical" href={CANONICAL} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -142,7 +142,7 @@ const TermosCondicoes = () => {
               icon: Wrench,
               tone: "text-amber-600",
               title: "Diagnóstico em bancada",
-              price: "R$ 90",
+              price: "R$ 99,99",
               desc: "Cobrado apenas se você desistir após análise/coleta. Se aprovar o reparo, entra no valor final.",
             },
             {
@@ -169,7 +169,7 @@ const TermosCondicoes = () => {
             {[
               { icon: MessageCircle, title: "1. Orçamento por WhatsApp", desc: "Você manda fotos e detalhes. Resposta em até 30 min em horário comercial." },
               { icon: Home, title: "2. Visita técnica (opcional)", desc: "A partir de R$ 99,99 por até 30 min. Combo 2h por R$ 299,99 para serviços mais longos." },
-              { icon: Wrench, title: "3. Diagnóstico em bancada", desc: "Para casos complexos (placas, consoles, TVs). R$ 90 só se você cancelar o reparo." },
+              { icon: Wrench, title: "3. Diagnóstico em bancada", desc: "Para casos complexos (placas, consoles, TVs). R$ 99,99 só se você cancelar o reparo." },
               { icon: ShieldCheck, title: "4. Reparo aprovado", desc: "Valor mínimo R$ 300 para eletrônicos complexos. Acima de R$ 500, autorização prévia." },
               { icon: CheckCircle2, title: "5. Garantia de 90 dias", desc: "Sobre o serviço executado. Peças seguem garantia do fabricante." },
             ].map((s) => (

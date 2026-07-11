@@ -12,8 +12,11 @@
 // === VALORES ===
 export const COLETA_TAXA_MINIMA = 300;
 export const COLETA_TAXA_MINIMA_LABEL = `R$ ${COLETA_TAXA_MINIMA}`;
-export const DIAGNOSTICO_VALOR = 90;
-export const DIAGNOSTICO_VALOR_LABEL = `R$ ${DIAGNOSTICO_VALOR}`;
+export const DIAGNOSTICO_VALOR = 99.99;
+export const DIAGNOSTICO_VALOR_LABEL = "R$ 99,99";
+export const VISITA_HORA_COMBINADA = 169.99;
+export const VISITA_HORA_COMBINADA_LABEL = "R$ 169,99";
+export const FRACAO_PRECO_LABEL = "R$ 99,99 a cada 30 min • 1h de visita técnica (combinada) R$ 169,99";
 
 // === PRAZOS ===
 export const PRAZO_RAPIDO = "2 a 3 dias úteis"; // Celular, Rádio, Caixa de Som
@@ -52,8 +55,8 @@ export const REGRA_ORCAMENTO_PRECISO = `Orçamento preciso somente com compromis
 export const REGRA_COLETA_SEM_VISITA = "Sem visita técnica a domicílio. Serviço realizado em laboratório com coleta e entrega.";
 
 // === VISITA TÉCNICA (serviços rápidos) ===
-export const VISITA_MINIMA = 69.99;
-export const VISITA_MINIMA_LABEL = "R$ 69,99";
+export const VISITA_MINIMA = 99.99;
+export const VISITA_MINIMA_LABEL = "R$ 99,99";
 
 // === MENSAGENS PADRONIZADAS ===
 export const MSG_COLETA_RESUMO = `Sem visita técnica. Coleta e entrega inclusa — taxa mínima ${COLETA_TAXA_MINIMA_LABEL} pré-aprovada.`;

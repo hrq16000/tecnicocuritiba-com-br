@@ -128,7 +128,7 @@ const localFaqs = [
   {
     question: "Quanto custa a visita técnica em Pinhais?",
     answer:
-      "A visita técnica começa em R$ 69,99. Após o diagnóstico, informamos o orçamento antes de realizar qualquer serviço.",
+      "A visita técnica começa em R$ 99,99. Após o diagnóstico, informamos o orçamento antes de realizar qualquer serviço.",
   },
   {
     question: "Vocês fazem suporte remoto para clientes de Pinhais?",

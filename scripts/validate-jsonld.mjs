@@ -15,18 +15,37 @@ import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
 import { chromium } from "playwright";
 
-// Rotas auditadas: home, hub principal, top-bairros e top-serviços.
-// Cada rota exige LocalBusiness e WebSite; a hub exige o conjunto completo.
+// Rotas auditadas dinamicamente: home + hub + todas as rotas de /bairros e /servicos
+// derivadas do sitemap-main.xml + sitemap-bairros.xml + sitemap-servicos.xml. Um sample
+// completo (opt-in via FULL=1) audita 100% das rotas de bairro/serviço; padrão audita
+// primeiras N (default 12) para manter CI barato.
+import fs from "node:fs";
+import path from "node:path";
+
+function readSitemap(file) {
+  const p = path.resolve(file);
+  if (!fs.existsSync(p)) return [];
+  const xml = fs.readFileSync(p, "utf8");
+  const matches = [...xml.matchAll(/<loc>https:\/\/tecnicocuritiba\.com\.br(\/[^<]*)<\/loc>/g)];
+  return matches.map((m) => m[1]);
+}
+
+const FULL = process.env.FULL === "1";
+const SAMPLE = Number(process.env.SAMPLE || 12);
+const bairros = readSitemap("public/sitemap-bairros.xml").filter((p) => p.startsWith("/bairros/"));
+const servicos = readSitemap("public/sitemap-servicos.xml").filter((p) => p.startsWith("/servicos/"));
+
+const pick = (arr) => (FULL ? arr : arr.slice(0, SAMPLE));
+
 const ROUTES = [
   { path: "/", required: ["LocalBusiness", "WebSite"] },
+  { path: "/empresa-de-ti-curitiba", required: ["LocalBusiness", "WebSite", "BreadcrumbList", "FAQPage", "Service"] },
   { path: "/assistencia-tecnica-curitiba", required: ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service", "WebSite"] },
-  { path: "/bairros/batel", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
-  { path: "/bairros/agua-verde", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
-  { path: "/bairros/centro", required: ["LocalBusiness", "WebSite", "BreadcrumbList"] },
-  { path: "/servicos/formatacao-computador", required: ["LocalBusiness", "WebSite", "Service"] },
-  { path: "/servicos/remocao-virus", required: ["LocalBusiness", "WebSite", "Service"] },
+  ...pick(bairros).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "BreadcrumbList"] })),
+  ...pick(servicos).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "Service"] })),
 ];
 const REQUIRED = ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service"];
+
 
 async function waitForServer(url, timeoutMs = 30_000) {
   const start = Date.now();

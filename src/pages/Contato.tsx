@@ -163,7 +163,7 @@ const Contato = () => {
                   "Atendimento mesmo para dúvidas simples",
                   "Resposta rápida via WhatsApp",
                   "Agendamento flexível conforme sua disponibilidade",
-                  "Serviços a partir de R$ 69,99",
+                  "Serviços a partir de R$ 99,99",
                 ].map((item, index) => (
                   <div key={index} className="group flex items-center gap-3 glass-card gradient-border rounded-lg p-4 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] transition-all duration-300 stagger-item" style={{ animationDelay: `${index * 50}ms` }}>
                     <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />

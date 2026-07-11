@@ -128,7 +128,7 @@ const localFaqs = [
   {
     question: "Quanto custa a visita técnica em Campo Largo?",
     answer:
-      "A visita técnica começa em R$ 69,99. Após o diagnóstico, o orçamento é informado antes de qualquer execução.",
+      "A visita técnica começa em R$ 99,99. Após o diagnóstico, o orçamento é informado antes de qualquer execução.",
   },
   {
     question: "Quais serviços são mais comuns em Campo Largo?",
