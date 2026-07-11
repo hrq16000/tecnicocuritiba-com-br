@@ -1,5 +1,10 @@
 # Auditoria de Duplicatas — problemaPagesData
 
+<!--
+TODO 2026-07-25: revisar Search Console (posição/CTR/impressões) para as 8 URLs merged.
+TODO 2026-08-08: segunda verificação de ranking. Se alguma URL regrediu, considerar A/B com title/h1 do loser em UMA URL isolada.
+-->
+
 23 slugs duplicados, 33 entries perdedoras hoje.
 
 ## `pc-reiniciando-sozinho-curitiba`

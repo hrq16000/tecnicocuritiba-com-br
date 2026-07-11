@@ -289,3 +289,39 @@ Base sólida de SEO técnico, blog e cobertura local — o site já opera acima 
 - [ ] **GetNinjas / 99 Serviços** — perfil ativo para leads + backlink.
 - [ ] **Google Alerts** para "Técnico em Curitiba" (link building reativo).
 - [ ] Se for anunciar no Facebook/Instagram: **Meta Pixel** + eventos server-side.
+
+## Split de problemaPagesData — 2026-07-11
+
+**Estratégia:** hybrid merge — winner SEO fields (`title` / `h1` / `metaDescription`) + loser body para 8 slugs; demais 181 slugs mantidos byte-a-byte do winner original.
+
+### 8 slugs promovidos (winner idx → loser body idx)
+
+| Slug | Winner | Loser (corpo) |
+|---|---|---|
+| pc-reiniciando-sozinho-curitiba | 7 | 159 |
+| notebook-com-tela-quebrada-curitiba | 16 | 73 |
+| notebook-nao-carrega-bateria-curitiba | 17 | 148 |
+| notebook-teclado-nao-funciona-curitiba | 18 | 143 |
+| tv-nao-liga-curitiba | 22 | 174 |
+| hd-externo-nao-reconhece-curitiba | 55 | 135 |
+| erro-0xc000021a-curitiba | 110 | 129 |
+| tv-listras-na-tela-curitiba | 177 | 206 |
+
+### 33 orphans descartados
+
+Duplicatas mortas (não serviam nenhuma rota via `array.find`) foram removidas do bundle. Detalhe por slug em `docs/refactor/problemas-duplicates-review.md`.
+
+### Delta bundle
+
+- Chunk `problemaPagesData` pós-split: **1066.41 kB / 308.39 kB gz** (fonte anterior monolítica ~1.4 MB raw).
+- Redução ~25% no chunk, com 8 corpos maiores promovidos compensados pela remoção de 33 orphans.
+
+### Integridade
+
+- Hashes 189/189 OK (`scripts/verify-problemas-split.mjs`).
+- SEO guard: `title`/`h1`/`metaDescription` dos 8 merged idênticos ao winner original (8/8 OK).
+- `bunx tsgo --noEmit`: 0 erros.
+- `bunx vitest run src/lib/problemas`: 4/4 verdes.
+- Estrutura: 189 arquivos em `src/lib/problemas/[slug].ts` + `index.ts` + `types.ts`; shim em `src/lib/problemaPagesData.ts` preserva imports legados.
+
+**Nota:** Revisar Search Console em 2026-07-25 e 2026-08-08 para validar impacto de ranking nos 8 URLs merged.
