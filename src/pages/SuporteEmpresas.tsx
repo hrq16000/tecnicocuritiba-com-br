@@ -303,6 +303,24 @@ const SuporteEmpresas = () => {
         </section>
 
         <TrustSection />
+
+        <section className="py-10 bg-secondary/40" aria-labelledby="hub-empresa-ti">
+          <div className="container mx-auto px-4 max-w-4xl text-center">
+            <h2 id="hub-empresa-ti" className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+              Conheça o hub oficial: Empresa de TI em Curitiba
+            </h2>
+            <p className="text-muted-foreground mb-5">
+              Página dedicada com FAQ corporativo, bairros comerciais atendidos (Batel, Centro Cívico, Ecoville) e planos mensais com SLA.
+            </p>
+            <a
+              href="/empresa-de-ti-curitiba"
+              className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-semibold px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+            >
+              Ver hub Empresa de TI Curitiba →
+            </a>
+          </div>
+        </section>
+
         <CTASection />
       </main>
       <RealImageSection imageKey="servidores" secondaryImageKey="redesWifi" layout="duo" caption="Infraestrutura de rede empresarial" secondaryCaption="Configuração profissional de redes corporativas" />
