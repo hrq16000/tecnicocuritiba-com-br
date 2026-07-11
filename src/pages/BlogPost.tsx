@@ -66,14 +66,16 @@ const BlogPost = () => {
 
   // Compute hero image (Discover requires large 1200px+ image)
   const categoryCover = slug ? getCategoryCover(slug) : null;
-  const heroImage = categoryCover
-    ? `https://tecnicocuritiba.com.br${categoryCover.src}`
-    : post?.image
-    ? (typeof post.image === 'string' && post.image.startsWith('http')
-        ? post.image
-        : `https://tecnicocuritiba.com.br${post.image}`)
-    : (slug ? getUniqueImage(slug).replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=80') + '&w=1600&h=900' : '');
-  const heroImageOg = withOgVersion(heroImage);
+  const optimizedCoverUrl = slug ? getBlogCoverAbsoluteUrl(slug) : null;
+  const heroImage = optimizedCoverUrl
+    ?? (categoryCover
+      ? `https://tecnicocuritiba.com.br${categoryCover.src}`
+      : post?.image
+      ? (typeof post.image === 'string' && post.image.startsWith('http')
+          ? post.image
+          : `https://tecnicocuritiba.com.br${post.image}`)
+      : (slug ? getUniqueImage(slug).replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=80') + '&w=1600&h=900' : ''));
+  const heroImageOg = optimizedCoverUrl ?? withOgVersion(heroImage);
 
   // Compute word count from content (rough estimate via readTime)
   const wordCount = post ? Math.round(parseInt(post.readTime) * 220) : 1500;
