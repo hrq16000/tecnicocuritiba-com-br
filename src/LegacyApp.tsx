@@ -503,6 +503,8 @@ const App = () => (
 
             
             <Route path="/sobre" element={<Sobre />} />
+            <Route path="/autor/tecnico-curitiba" element={<Autor />} />
+
             <Route path="/contato" element={<Contato />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
