@@ -6,7 +6,7 @@ const BUILD_DATE = new Date().toISOString();
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": `${SITE}/#organization`,
   "name": "Técnico em Curitiba - Suporte em Informática",
   "alternateName": ["Técnico de Informática Curitiba", "Assistência Técnica Curitiba"],
