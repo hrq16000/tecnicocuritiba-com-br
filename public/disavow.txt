@@ -1,0 +1,23 @@
+# Disavow file for tecnicocuritiba.com.br
+# Generated: 2026-07-11
+# Purpose: neutralize suspected PBN/spam backlinks previously flagged by audit.
+# Upload to: https://search.google.com/search-console/disavow-links
+#
+# Strategy: domain-level disavow (safer than URL-level) for confirmed
+# PBN/toxic sources. Review quarterly and remove entries that recover
+# organically.
+
+# --- Suspected PBN cluster (padrão de rede própria detectado) ---
+domain:precisodeumprofissional.com.br
+
+# --- Diretórios/agregadores de baixa qualidade (adicionar conforme auditoria) ---
+# Exemplos comuns em nichos de assistência técnica no BR — descomente
+# APENAS após confirmar em Semrush/Ahrefs que o domínio linka para você:
+# domain:achaki.com.br
+# domain:solutudo.com.br
+# domain:apontador.com.br
+# domain:telelistas.net
+# domain:guiamais.com.br
+
+# --- Spam/scraper genéricos (padrão .xyz/.top/.tk) ---
+# Adicione aqui domínios detectados como scrapers do seu conteúdo.
