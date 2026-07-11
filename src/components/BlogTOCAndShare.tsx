@@ -26,8 +26,10 @@ interface Props {
  * Após o post renderizar, atribui IDs a H2/H3 e monta um sumário clicável (TOC)
  * + botões de compartilhamento (WhatsApp, Facebook, X). Client-only.
  */
-export const BlogTOCAndShare = ({ articleSelector = "article", title, url }: Props) => {
+export const BlogTOCAndShare = ({ articleSelector = "article", title, url, slug }: Props) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
+  const fire = (network: "whatsapp" | "facebook" | "x") => () =>
+    trackShareClick(network, { slug, title, url, location: "blog_post" });
 
   useEffect(() => {
     const root = document.querySelector(articleSelector);
