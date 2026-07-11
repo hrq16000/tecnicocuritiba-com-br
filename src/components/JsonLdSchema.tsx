@@ -13,7 +13,6 @@ const localBusinessSchema = {
   "description": "Técnico de informática em Curitiba e região metropolitana. Formatação, conserto de computadores e notebooks, remoção de vírus, upgrade SSD, redes. Atendimento domiciliar no mesmo dia.",
   "url": SITE,
   "telephone": "+55-41-99745-2053",
-  "email": "contato@tecnicocuritiba.com.br",
   "image": `${SITE}/og-image.jpg`,
   "logo": `${SITE}/logo.png`,
   "priceRange": "R$ 99,99 - R$ 500",
