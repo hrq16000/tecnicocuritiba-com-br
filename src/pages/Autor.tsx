@@ -54,9 +54,10 @@ const Autor = () => {
           name="description"
           content="Conheça o autor por trás do Técnico em Curitiba: experiência real em manutenção de PCs, notebooks e suporte técnico em Curitiba e região."
         />
+        <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
       </Helmet>
-      <JsonLdSchema data={personSchema} />
       <Header />
+
 
       <main id="main-content" className="container mx-auto max-w-3xl px-4 pb-16 pt-28 md:pt-32">
         <article>
