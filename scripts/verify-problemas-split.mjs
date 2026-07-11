@@ -41,7 +41,14 @@ const MERGES = [
   ["erro-0xc000021a-curitiba", 110],
   ["tv-listras-na-tela-curitiba", 177],
 ];
-const orig = await import(resolve("/tmp/original-problemas.mjs"));
+// Recover winner SEO fields from the pre-split original snapshot.
+const origText = readFileSync("/tmp/orig-problemas.ts", "utf8");
+function extractWinner(slug) {
+  const re = new RegExp(`slug:\\s*"${slug}",[\\s\\S]*?title:\\s*"((?:[^"\\\\]|\\\\.)*)",[\\s\\S]*?metaDescription:\\s*"((?:[^"\\\\]|\\\\.)*)",[\\s\\S]*?h1:\\s*"((?:[^"\\\\]|\\\\.)*)",`);
+  const m = origText.match(re);
+  if (!m) throw new Error(`winner not found in snapshot: ${slug}`);
+  return { title: JSON.parse(`"${m[1]}"`), metaDescription: JSON.parse(`"${m[2]}"`), h1: JSON.parse(`"${m[3]}"`) };
+}
 let seoFails = 0;
 for (const [slug, widx] of MERGES) {
   const winner = orig.problemaPagesData[widx - 1];
