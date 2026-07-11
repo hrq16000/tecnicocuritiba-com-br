@@ -19,6 +19,7 @@ interface Props {
   articleSelector?: string;
   title: string;
   url: string; // absolute URL
+  slug?: string;
 }
 
 /**
