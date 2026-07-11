@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { trackPageView } from "@/lib/analytics";
+import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { Calendar, Clock, ArrowLeft, CheckCircle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { getUniqueImage } from "@/lib/blogImages";
@@ -16,6 +16,7 @@ import { withOgVersion } from "@/lib/ogCacheBust";
 import { programmaticPosts } from "@/data/blogProgrammaticPosts";
 import type { BlogPostContent } from "@/data/blogPostsContent";
 import { BlogPostFAQ } from "@/components/BlogPostFAQ";
+import { BlogTOCAndShare } from "@/components/BlogTOCAndShare";
 
 
 // blogPostsContentBase lives in its own chunk (src/data/blogPostsContent.tsx)
@@ -300,6 +301,10 @@ const BlogPost = () => {
               </AspectRatio>
             </div>
             <article className="max-w-3xl mx-auto prose prose-lg prose-headings:text-primary prose-headings:font-heading prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-accent">
+              <BlogTOCAndShare
+                title={post.title}
+                url={`https://tecnicocuritiba.com.br/blog/${slug}`}
+              />
               {post.content}
 
               {post.category === "CFTV" && (
@@ -340,12 +345,9 @@ const BlogPost = () => {
                     href={`https://wa.me/5541997452053?text=${encodeURIComponent(`Olá! Li o artigo "${post.title}" e preciso de ajuda.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-cta="blog-article-bottom"
-                    data-click-location={`blog/${slug}`}
+                    data-cta-location={`blog_article_bottom_${slug ?? ""}`}
                     className="inline-flex items-center justify-center gap-2 bg-[hsl(145,63%,42%)] hover:bg-[hsl(145,63%,36%)] text-white font-bold px-6 py-3 rounded-xl shadow-md transition-colors whitespace-nowrap"
-                    onClick={() => {
-                      try { (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag?.("event", "click_whatsapp", { click_location: `blog/${slug}` }); } catch { /* noop */ }
-                    }}
+                    onClick={() => trackCTAClick("whatsapp", `blog_article_bottom_${slug ?? ""}`)}
                   >
                     <CheckCircle className="h-5 w-5" />
                     WhatsApp Agora

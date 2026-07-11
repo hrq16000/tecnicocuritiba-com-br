@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, MessageCircle, Users, ArrowRight, Mail, Clock } from "lucide-react";
+import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { useMemo } from "react";
 
@@ -107,9 +107,8 @@ const NAP = {
   region: "PR",
   country: "BR",
   postal: "80000-000",
+  // Contato exclusivamente via WhatsApp — não expor número na UI.
   phone: "+5541997452053",
-  phoneDisplay: "(41) 9 9745-2053",
-  email: "contato@tecnicocuritiba.com.br",
   url: "https://tecnicocuritiba.com.br",
   geo: { lat: -25.4284, lng: -49.2733 },
   hours: "Seg–Sáb · 08h às 20h",
@@ -127,7 +126,6 @@ const localBusinessSchema = {
   logo: "https://tecnicocuritiba.com.br/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp",
   url: NAP.url,
   telephone: NAP.phone,
-  email: NAP.email,
   priceRange: "$$",
   currenciesAccepted: "BRL",
   paymentAccepted: "Cash, Credit Card, Debit Card, PIX",
@@ -294,9 +292,9 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* NAP — sinal forte para SEO local */}
+        {/* NAP — sinal forte para SEO local (sem email; contato só via WhatsApp/funil) */}
         <address
-          className="not-italic grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 border-t border-white/[0.08] pt-6 pb-2 text-white/80 text-sm"
+          className="not-italic grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-white/[0.08] pt-6 pb-2 text-white/80 text-sm"
           aria-label="Informações de contato"
         >
           <div className="flex items-start gap-2">
@@ -311,14 +309,7 @@ export const Footer = () => {
             <MessageCircle className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
             <div>
               <div className="font-semibold text-white/90">WhatsApp</div>
-              <a href="https://wa.me/5541997452053?text=Ol%C3%A1!%20Preciso%20de%20suporte%20t%C3%A9cnico." target="_blank" rel="noopener noreferrer" onClick={() => trackFooterWhatsApp("footer_nap")} className="hover:text-white">Clique para chamar no WhatsApp</a>
-            </div>
-          </div>
-          <div className="flex items-start gap-2">
-            <Mail className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
-            <div>
-              <div className="font-semibold text-white/90">E-mail</div>
-              <a href={`mailto:${NAP.email}`} className="hover:text-white break-all">{NAP.email}</a>
+              <a href="https://wa.me/5541997452053?text=Ol%C3%A1!%20Preciso%20de%20suporte%20t%C3%A9cnico." target="_blank" rel="noopener noreferrer" onClick={() => trackFooterWhatsApp("footer_nap")} className="hover:text-white">Iniciar atendimento pelo WhatsApp</a>
             </div>
           </div>
           <div className="flex items-start gap-2">

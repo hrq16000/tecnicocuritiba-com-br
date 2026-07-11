@@ -83,3 +83,45 @@ const posts = parsePosts();
 const xml = buildRss(posts);
 writeFileSync(resolve("public/rss.xml"), xml);
 console.log(`rss.xml gerado com ${Math.min(posts.length, 50)} posts.`);
+
+// ---------- sitemap-news.xml (Google News) ----------
+// Regra do Google: só posts das últimas 48h costumam entrar; nós emitimos os
+// últimos 30 dias, cabe ao Google filtrar. Regeramos a cada build para não
+// depender de commit manual.
+const NOW = Date.now();
+const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+const newsPosts = posts
+  .filter((p) => {
+    const t = new Date(p.date + "T08:00:00-03:00").getTime();
+    return !Number.isNaN(t) && NOW - t <= THIRTY_DAYS;
+  })
+  .sort((a, b) => (a.date < b.date ? 1 : -1))
+  .slice(0, 1000); // limite oficial do Google News
+
+const newsUrls = newsPosts
+  .map(
+    (p) => `  <url>
+    <loc>${BASE_URL}/blog/${p.slug}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Técnico em Curitiba</news:name>
+        <news:language>pt</news:language>
+      </news:publication>
+      <news:publication_date>${p.date}T08:00:00-03:00</news:publication_date>
+      <news:title>${escapeXml(p.title)}</news:title>
+      <news:keywords>${escapeXml(`${p.category}, técnico curitiba, informática`)}</news:keywords>
+    </news:news>
+    <lastmod>${p.date}</lastmod>
+  </url>`,
+  )
+  .join("\n");
+
+const newsXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+${newsUrls}
+</urlset>
+`;
+writeFileSync(resolve("public/sitemap-news.xml"), newsXml);
+console.log(`sitemap-news.xml gerado com ${newsPosts.length} posts recentes.`);
+
