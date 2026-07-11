@@ -12,6 +12,7 @@ const AtendimentoDomicilio = lazy(() => import("./pages/AtendimentoDomicilio"));
 const AtendimentoRemoto = lazy(() => import("./pages/AtendimentoRemoto"));
 const SuporteEmpresas = lazy(() => import("./pages/SuporteEmpresas"));
 const EmpresaTICuritiba = lazy(() => import("./pages/EmpresaTICuritiba"));
+const ManutencaoNotebookPCCuritiba = lazy(() => import("./pages/ManutencaoNotebookPCCuritiba"));
 const PrecosEPoliticas = lazy(() => import("./pages/PrecosEPoliticas"));
 const TecnicoInformaticaCuritiba = lazy(() => import("./pages/TecnicoInformaticaCuritiba"));
 const TecnicoInformaticaSaoJosePinhais = lazy(() => import("./pages/TecnicoInformaticaSaoJosePinhais"));
@@ -458,6 +459,7 @@ const App = () => (
             <Route path="/arrumar-pc/:cidade" element={<ArrumarPCCity />} />
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
             <Route path="/empresa-de-ti-curitiba" element={<EmpresaTICuritiba />} />
+            <Route path="/manutencao-notebook-pc-curitiba" element={<ManutencaoNotebookPCCuritiba />} />
             <Route path="/precos-e-politicas" element={<PrecosEPoliticas />} />
             <Route path="/valores" element={<PrecosEPoliticas />} />
             

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, HelpCircle, DollarSign, Wrench, Search, Truck, AlertTriangle, Monitor, Cpu, Wifi, Shield, HardDrive, Tv, CircuitBoard, Server, Camera, MapPin, BookOpen, MessageCircle, AlertCircle } from "lucide-react";
+import { ArrowRight, HelpCircle, DollarSign, Wrench, Search, Truck, AlertTriangle, Monitor, Cpu, Wifi, Shield, HardDrive, Tv, CircuitBoard, Server, Camera, MapPin, BookOpen, MessageCircle, AlertCircle, Laptop } from "lucide-react";
 
 const atendimentoLinks = [
   { icon: HelpCircle, title: "Como Funciona", desc: "Passo a passo do atendimento", to: "/como-funciona" },
@@ -13,6 +13,7 @@ const atendimentoLinks = [
 ];
 
 const servicoLinks = [
+  { icon: Laptop, title: "Manutenção Notebook/PC", desc: "Hub completo em Curitiba", to: "/manutencao-notebook-pc-curitiba" },
   { icon: HardDrive, title: "Formatação", desc: "Windows 10/11 completo", to: "/servicos/formatacao-computador" },
   { icon: Shield, title: "Remoção de Vírus", desc: "Limpeza total de malware", to: "/servicos/remocao-virus" },
   { icon: Cpu, title: "Upgrade SSD/RAM", desc: "Mais velocidade e desempenho", to: "/servicos/upgrade-ssd-memoria" },
