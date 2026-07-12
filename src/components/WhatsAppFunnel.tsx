@@ -767,9 +767,12 @@ export const WhatsAppFunnel = () => {
             <p className="text-sm font-medium">3. Conte um pouco mais — assim resolvemos mais rápido.</p>
 
             <div>
-              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Quando o problema começou?</p>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">{whenLabel}</p>
               <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-quando">
-                {["Hoje", "Ontem", "Última semana", "Este mês", "Mais de 1 mês", "Sempre foi assim"].map((v) => (
+                {(isEventual
+                  ? ["Agora há pouco", "Hoje", "Ontem", "Esta semana", "Há mais tempo"]
+                  : ["Hoje", "Ontem", "Última semana", "Este mês", "Mais de 1 mês", "Sempre foi assim"]
+                ).map((v) => (
                   <button
                     key={v}
                     type="button"
@@ -784,23 +787,25 @@ export const WhatsAppFunnel = () => {
               </div>
             </div>
 
-            <div>
-              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Com que frequência acontece?</p>
-              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-frequencia">
-                {["O tempo todo", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado", "Aleatório"].map((v) => (
-                  <button
-                    key={v}
-                    type="button"
-                    onClick={() => update({ ctxFrequencia: v })}
-                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
-                      answers.ctxFrequencia === v
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-card hover:border-primary/60"
-                    }`}
-                  >{v}</button>
-                ))}
+            {askFrequency && (
+              <div>
+                <p className="text-xs font-semibold mb-1.5 text-foreground/80">Com que frequência acontece?</p>
+                <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-frequencia">
+                  {["O tempo todo", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado", "Aleatório"].map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => update({ ctxFrequencia: v })}
+                      className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                        answers.ctxFrequencia === v
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-card hover:border-primary/60"
+                      }`}
+                    >{v}</button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <div>
               <p className="text-xs font-semibold mb-1.5 text-foreground/80">Já tentou alguma coisa?</p>
