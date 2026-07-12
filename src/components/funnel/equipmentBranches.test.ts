@@ -2,9 +2,9 @@ import { describe, it, expect } from "vitest";
 import { EQUIPMENT_BRANCHES, getBranch, getSintoma } from "./equipmentBranches";
 
 describe("equipmentBranches", () => {
-  it("expõe os 6 equipamentos esperados", () => {
+  it("expõe os 7 equipamentos esperados (com Surface separado)", () => {
     const ids = EQUIPMENT_BRANCHES.map((b) => b.id).sort();
-    expect(ids).toEqual(["celular", "outro", "pc", "som", "tv", "videogame"]);
+    expect(ids).toEqual(["celular", "outro", "pc", "som", "surface", "tv", "videogame"]);
   });
 
   it("'não liga' sempre exige Coleta e Entrega", () => {
