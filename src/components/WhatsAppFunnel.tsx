@@ -430,7 +430,7 @@ export const WhatsAppFunnel = () => {
         : { ok: false, reason: "Confirme ciência do valor mínimo de R$ 99,99." };
     }
     return { ok: true };
-  }, [answers, isOutro, requiresColeta]);
+  }, [answers, isOutro, requiresColeta, askFrequency, isEventual]);
 
   const canAdvance = useMemo(() => validateStep(step).ok, [validateStep, step]);
 
