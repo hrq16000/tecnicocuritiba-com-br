@@ -163,6 +163,7 @@ function buildMessage(a: Answers): string {
   }
   lines.push("");
   lines.push("— Estou ciente das políticas e termos: tecnicocuritiba.com.br/termos-e-condicoes");
+  lines.push(`— Triagem: TRG-${Date.now().toString(36).toUpperCase()} · v2026.07.1`);
   // Garante o aviso obrigatório no final, vindo da fonte única (`funnelWarning.ts`).
   return withVideoWarning(lines.join("\n"));
 }
