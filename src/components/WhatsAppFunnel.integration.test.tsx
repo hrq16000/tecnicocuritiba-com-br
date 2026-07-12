@@ -135,7 +135,7 @@ describe("WhatsAppFunnel — Cenário 1: Cliente Simples (PC > Lento)", () => {
     expect(dialogText()).toMatch(/Triagem completa/i);
     expect(dialogText()).toMatch(/Próximo passo no WhatsApp/i);
 
-    await clickButton(/Abrir WhatsApp/i);
+    await clickButton(/Agendar agora/i);
     await waitForWaCall();
 
     const url = getLastWaUrl();
@@ -171,7 +171,7 @@ describe("WhatsAppFunnel — Cenário 2: Barreira de Fogo (TV > Não liga)", () 
     expect(continueIsDisabled()).toBe(false);
 
     await clickButton("Continuar");           // → step 3
-    await clickButton(/Abrir WhatsApp/i);
+    await clickButton(/Agendar agora/i);
     await waitForWaCall();
 
     const url = getLastWaUrl();
@@ -196,7 +196,7 @@ describe("WhatsAppFunnel — Cenário 3: Tela Quebrada (Celular)", () => {
 
     await clickAcceptCheckbox();
     await clickButton("Continuar");           // → step 3
-    await clickButton(/Abrir WhatsApp/i);
+    await clickButton(/Agendar agora/i);
     await waitForWaCall();
 
     const url = getLastWaUrl();
