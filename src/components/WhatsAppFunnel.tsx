@@ -596,21 +596,120 @@ export const WhatsAppFunnel = () => {
           </div>
         )}
 
-        {/* Step 2 — regra Coleta e Entrega (condicional) */}
-        {step === 2 && requiresColeta && sintomaObj && branch && (
-          <div className="space-y-2.5" data-funnel-field="coleta">
-            <ColetaRequiredCard
-              equipamento={branch.label}
-              sintoma={sintomaObj.label}
-              accepted={answers.coletaAccepted}
-              onAcceptChange={(v) => update({ coletaAccepted: v })}
-            />
-            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(2)} />
+        {/* Step 2 — Contexto detalhado (SEMPRE exibido) */}
+        {step === 2 && (
+          <div className="space-y-2.5">
+            <p className="text-sm font-medium">3. Conte um pouco mais — assim resolvemos mais rápido.</p>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Quando o problema começou?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-quando">
+                {["Hoje", "Ontem", "Última semana", "Este mês", "Mais de 1 mês", "Sempre foi assim"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxQuando: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxQuando === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Com que frequência acontece?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-frequencia">
+                {["O tempo todo", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado", "Aleatório"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxFrequencia: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxFrequencia === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Já tentou alguma coisa?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-tentou">
+                {["Nada ainda", "Reiniciei", "Formatei", "Troquei cabo/carregador", "Já foi em outra assistência"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxTentou: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxTentou === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Qual a urgência?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-urgencia">
+                {["Hoje", "Esta semana", "Sem pressa"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxUrgencia: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxUrgencia === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} onAttempt={() => attemptAdvance(2)} />
           </div>
         )}
 
-        {/* Step 3 — confirmação e envio (compacto) */}
+        {/* Step 3 — Modalidade (SEMPRE exibido; conteúdo condicional) */}
         {step === 3 && (
+          <div className="space-y-2.5">
+            {requiresColeta && sintomaObj && branch ? (
+              <div data-funnel-field="coleta">
+                <ColetaRequiredCard
+                  equipamento={branch.label}
+                  sintoma={sintomaObj.label}
+                  accepted={answers.coletaAccepted}
+                  onAcceptChange={(v) => update({ coletaAccepted: v })}
+                />
+              </div>
+            ) : (
+              <div className="rounded-lg border border-border bg-card/50 p-3 space-y-2 text-[12px] leading-snug">
+                <p className="text-sm font-semibold text-foreground">4. Como preferimos atender no seu caso</p>
+                <p className="text-foreground/80">
+                  Pelo que você descreveu, provavelmente conseguimos resolver por <strong>atendimento remoto</strong> ou{" "}
+                  <strong>visita técnica</strong> (mín. R$ 99,99 · 30 min). Se durante o diagnóstico surgir necessidade de bancada,
+                  te avisamos antes — nada é feito sem sua autorização.
+                </p>
+                <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                  <li>Orçamento sempre por WhatsApp, sem surpresa.</li>
+                  <li>Peças originais e garantia por escrito.</li>
+                  <li>Coleta e Entrega opcional a partir de R$ 300 (se você preferir não receber o técnico).</li>
+                </ul>
+              </div>
+            )}
+            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(3)} />
+          </div>
+        )}
+
+        {/* Step 4 — Confirmação final e envio */}
+        {step === 4 && (
           <div className="space-y-2.5">
             <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-2.5 flex gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
@@ -625,6 +724,8 @@ export const WhatsAppFunnel = () => {
             <div className="rounded-lg border border-border bg-card/50 p-2.5 space-y-0.5 text-[11px] leading-snug">
               {branch && <p>📦 <strong>{branch.label}</strong>{answers.marca ? ` — ${answers.marca}` : ""}</p>}
               {sintomaObj && <p>⚠️ {sintomaObj.label}</p>}
+              {answers.ctxQuando && <p>🕒 Começou: {answers.ctxQuando} · {answers.ctxFrequencia}</p>}
+              {answers.ctxUrgencia && <p>⚡ Urgência: {answers.ctxUrgencia}</p>}
               {requiresColeta && <p className="text-amber-700 dark:text-amber-400">🚚 Coleta autorizada · mín. R$ 300</p>}
             </div>
 
