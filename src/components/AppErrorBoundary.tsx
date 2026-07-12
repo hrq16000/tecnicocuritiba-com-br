@@ -1,10 +1,17 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
 const WHATSAPP_URL = "https://wa.me/5541997452053?text=Ol%C3%A1!%20O%20site%20travou%20no%20meu%20celular.%20Preciso%20de%20atendimento%20t%C3%A9cnico.";
+const RELOAD_KEY = "__app_boundary_reload__";
 
 type Props = { children: ReactNode };
 type State = { hasError: boolean };
 
+/**
+ * Estratégia: erros em runtime são quase sempre chunks obsoletos após deploy
+ * ou falhas transitórias. Em vez de mostrar uma tela que fere confiança,
+ * tentamos UM auto-reload silencioso guardado por sessionStorage. Só depois
+ * do 2º erro consecutivo mostramos o fallback com CTA WhatsApp.
+ */
 export class AppErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false };
 
@@ -14,10 +21,30 @@ export class AppErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error("[app:error-boundary]", { error, info });
+    if (typeof window === "undefined") return;
+    try {
+      const already = sessionStorage.getItem(RELOAD_KEY);
+      if (!already) {
+        sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
+        // auto-recovery: recarrega uma única vez por sessão
+        window.setTimeout(() => window.location.reload(), 50);
+      }
+    } catch {
+      /* storage indisponível: segue para fallback UI */
+    }
   }
 
   render() {
     if (!this.state.hasError) return this.props.children;
+
+    // Enquanto o auto-reload dispara, evita piscar a tela de erro.
+    if (typeof window !== "undefined") {
+      try {
+        if (sessionStorage.getItem(RELOAD_KEY)) {
+          return <div aria-hidden className="fixed inset-0 bg-background" />;
+        }
+      } catch { /* noop */ }
+    }
 
     return (
       <main className="flex min-h-screen items-center justify-center bg-background px-4 py-20 text-foreground">
@@ -37,7 +64,10 @@ export class AppErrorBoundary extends Component<Props, State> {
             </a>
             <button
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                try { sessionStorage.removeItem(RELOAD_KEY); } catch { /* noop */ }
+                window.location.reload();
+              }}
               className="inline-flex min-h-11 items-center justify-center rounded-lg border border-border px-4 font-semibold text-foreground"
             >
               Recarregar página
