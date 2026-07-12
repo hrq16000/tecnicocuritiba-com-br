@@ -20,31 +20,13 @@ export class AppErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
+    // Sem auto-reload: reloads inesperados quebram fluxos ativos (ex: funil aberto).
+    // Apenas logamos e mostramos o fallback com CTA WhatsApp.
     console.error("[app:error-boundary]", { error, info });
-    if (typeof window === "undefined") return;
-    try {
-      const already = sessionStorage.getItem(RELOAD_KEY);
-      if (!already) {
-        sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
-        // auto-recovery: recarrega uma única vez por sessão
-        window.setTimeout(() => window.location.reload(), 50);
-      }
-    } catch {
-      /* storage indisponível: segue para fallback UI */
-    }
   }
 
   render() {
     if (!this.state.hasError) return this.props.children;
-
-    // Enquanto o auto-reload dispara, evita piscar a tela de erro.
-    if (typeof window !== "undefined") {
-      try {
-        if (sessionStorage.getItem(RELOAD_KEY)) {
-          return <div aria-hidden className="fixed inset-0 bg-background" />;
-        }
-      } catch { /* noop */ }
-    }
 
     return (
       <main className="flex min-h-screen items-center justify-center bg-background px-4 py-20 text-foreground">
