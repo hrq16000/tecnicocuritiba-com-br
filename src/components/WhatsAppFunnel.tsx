@@ -29,11 +29,24 @@ import { ColetaRequiredCard } from "@/components/funnel/ColetaRequiredCard";
 import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
 import { withVideoWarning } from "@/lib/funnelWarning";
 import { bipAndAttention } from "@/lib/attentionBip";
+import { logFunnelDiag } from "@/lib/funnelDiagnostics";
 
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WA_HOSTS = ["wa.me", "api.whatsapp.com"];
-const STORAGE_KEY = "wa_funnel_answers_v4";
+// Persistência do progresso do funil — sobrevive a reloads e retorno do WhatsApp.
+const STORAGE_KEY = "wa_funnel_state_v5";
+const LEGACY_KEYS = ["wa_funnel_answers_v4"];
+
+type PersistedState = {
+  answers: Answers;
+  step: number;
+  originLocation: string;
+  updatedAt: number;
+};
+// Se o progresso for mais antigo que isso, descarta (evita rehidratar semanas depois).
+const MAX_STATE_AGE_MS = 1000 * 60 * 60 * 24 * 3; // 3 dias
+
 
 interface Answers {
   equipamento: Equipment | null;
