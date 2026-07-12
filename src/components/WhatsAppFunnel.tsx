@@ -236,6 +236,30 @@ export const WhatsAppFunnel = () => {
     trackFunnelStep(step, answers.equipamento, answers.sintoma, originLocation);
   }, [open, step, answers.equipamento, answers.sintoma, originLocation]);
 
+  // Sinaliza abertura via atributo no body para que floats/sticky se escondam.
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (open) document.body.setAttribute("data-funnel-open", "1");
+    else document.body.removeAttribute("data-funnel-open");
+    return () => document.body.removeAttribute("data-funnel-open");
+  }, [open]);
+
+  // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
+  const attentionSelector = useCallback((s: number): string | null => {
+    if (s === 0) return "[data-funnel-field='equipamento']";
+    if (s === 1) return isOutro
+      ? "[data-funnel-field='descricao']"
+      : !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+    if (s === 2) return "[data-funnel-field='coleta']";
+    if (s === 3) return "[data-funnel-field='minimum']";
+    return null;
+  }, [answers.marca, isOutro]);
+
+  const attemptAdvance = useCallback((s: number) => {
+    const sel = attentionSelector(s);
+    if (sel) bipAndAttention(sel);
+  }, [attentionSelector]);
+
   // ---------- Derivations ----------
   const branch = answers.equipamento ? getBranch(answers.equipamento) : undefined;
   const sintomaObj = answers.equipamento && answers.sintoma
