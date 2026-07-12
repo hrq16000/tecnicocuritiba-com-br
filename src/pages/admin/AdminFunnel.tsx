@@ -455,7 +455,10 @@ const AdminFunnel = () => {
           <span>{page + 1} / {totalPages}</span>
           <Button size="sm" variant="outline" disabled={page + 1 >= totalPages} onClick={() => setPage((p) => p + 1)}>Próxima</Button>
         </div>
+
+        <FunnelDiagnosticsPanel />
       </main>
+
 
       {/* Detail Sheet */}
       <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
