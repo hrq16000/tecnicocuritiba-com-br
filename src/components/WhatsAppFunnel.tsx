@@ -489,23 +489,38 @@ export const WhatsAppFunnel = () => {
 
 
   const submit = useCallback(async () => {
-    // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
-    for (const s of [0, 1, 2, 3, 4]) {
-      const v = validateStep(s);
-      if (!v.ok) {
-        trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
-        setStep(s);
-        // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
-        setTimeout(() => {
-          const sel = attentionSelector(s);
-          if (sel) bipAndAttention(sel);
-        }, 30);
-        return;
-      }
+    // Bloqueio anti-duplo-clique: usa ref para evitar corrida com o setState.
+    const now = Date.now();
+    if (submittingRef.current) {
+      logFunnelDiag("submit_blocked_reentrant", { sinceLast: now - lastSubmitAtRef.current });
+      return;
     }
+    if (now - lastSubmitAtRef.current < 1500) {
+      logFunnelDiag("submit_blocked_debounce", { sinceLast: now - lastSubmitAtRef.current });
+      return;
+    }
+    lastSubmitAtRef.current = now;
     submittingRef.current = true;
-    try {
+    setSubmitting(true);
+    logFunnelDiag("submit_start", { origin: originLocation, step });
 
+    try {
+      // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
+      for (const s of [0, 1, 2, 3, 4]) {
+        const v = validateStep(s);
+        if (!v.ok) {
+          trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
+          logFunnelDiag("submit_invalid", { step: s, reason: v.reason });
+          setStep(s);
+          persist({ step: s });
+          // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
+          setTimeout(() => {
+            const sel = attentionSelector(s);
+            if (sel) bipAndAttention(sel);
+          }, 30);
+          return;
+        }
+      }
 
       const baseMessage = buildMessage(answers);
       // Mesmo com preset (mensagem vinda de outro CTA), o aviso obrigatório
@@ -513,7 +528,6 @@ export const WhatsAppFunnel = () => {
       const finalMessage = withVideoWarning(
         presetMessage ? `${presetMessage}\n\n---\n${baseMessage}` : baseMessage,
       );
-
 
       try {
         await recordSubmission({
@@ -530,6 +544,7 @@ export const WhatsAppFunnel = () => {
         // eslint-disable-next-line no-console
         console.warn("[funnel] submission insert failed", err);
         trackFunnelBlocked("insert_failed", answers.equipamento);
+        logFunnelDiag("submit_insert_failed", { error: String(err) });
       }
 
       const url = new URL(`https://wa.me/${WHATSAPP_NUMBER}`);
@@ -545,13 +560,14 @@ export const WhatsAppFunnel = () => {
         minimumAccepted: answers.minimumAccepted,
       });
       trackCTAClick("whatsapp", `funnel_${originLocation}`);
+      logFunnelDiag("submit_ok", { origin: originLocation });
 
       window.open(url.toString(), "_blank", "noopener,noreferrer");
       setOpen(false);
-      // Após enviar, volta ao início para uma nova triagem futura.
+      // Após enviar, limpa progresso persistido — próxima abertura começa do zero.
       setAnswers(EMPTY);
-      persist(EMPTY);
       setStep(0);
+      try { localStorage.removeItem(STORAGE_KEY); } catch { /* noop */ }
       // Redireciona a aba atual para a página de confirmação — dá contexto
       // caso o usuário volte, e é onde o GA4 registra o funil completo.
       try {
@@ -559,11 +575,21 @@ export const WhatsAppFunnel = () => {
         url2.searchParams.set("origem", originLocation);
         window.history.pushState({}, "", url2.pathname + url2.search);
         window.dispatchEvent(new PopStateEvent("popstate"));
-      } catch { /* noop */ }
+      } catch (err) {
+        logFunnelDiag("submit_nav_failed", { error: String(err) });
+      }
+    } catch (err) {
+      // Nunca deixa uma exceção estourar do handler e disparar o ErrorBoundary
+      // (era uma das causas do "reset" percebido do funil).
+      // eslint-disable-next-line no-console
+      console.error("[funnel] submit failed", err);
+      logFunnelDiag("submit_exception", { error: String(err) });
     } finally {
-      setTimeout(() => { submittingRef.current = false; }, 250);
+      setSubmitting(false);
+      setTimeout(() => { submittingRef.current = false; }, 400);
     }
-  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep, attentionSelector, isOutro, persist]);
+  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep, attentionSelector, persist, step]);
+
 
   const handleOpenChange = (v: boolean) => {
     if (!v) trackFunnelClose(step, answers.equipamento);
