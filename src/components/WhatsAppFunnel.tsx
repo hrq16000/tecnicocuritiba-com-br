@@ -412,8 +412,8 @@ export const WhatsAppFunnel = () => {
       return { ok: true };
     }
     if (s === 2) {
-      if (!answers.ctxQuando) return { ok: false, reason: "Diga quando o problema começou." };
-      if (!answers.ctxFrequencia) return { ok: false, reason: "Diga com que frequência acontece." };
+      if (!answers.ctxQuando) return { ok: false, reason: isEventual ? "Diga quando aconteceu." : "Diga quando o problema começou." };
+      if (askFrequency && !answers.ctxFrequencia) return { ok: false, reason: "Diga com que frequência acontece." };
       if (!answers.ctxTentou) return { ok: false, reason: "Diga se já tentou alguma coisa." };
       if (!answers.ctxUrgencia) return { ok: false, reason: "Informe a urgência." };
       return { ok: true };
