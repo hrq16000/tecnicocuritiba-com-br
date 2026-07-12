@@ -383,6 +383,7 @@ export const WhatsAppFunnel = () => {
     answers.minimumAccepted,
     isOutro,
     requiresColeta,
+    askFrequency,
   ]);
 
   const attemptAdvance = useCallback((s: number) => {
