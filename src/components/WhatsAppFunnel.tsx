@@ -510,7 +510,7 @@ export const WhatsAppFunnel = () => {
         const v = validateStep(s);
         if (!v.ok) {
           trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
-          logFunnelDiag("submit_invalid", { step: s, reason: v.reason });
+          logFunnelDiag("submit_invalid", { step: s, reason: v.ok ? "" : v.reason });
           setStep(s);
           persist({ step: s });
           // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
