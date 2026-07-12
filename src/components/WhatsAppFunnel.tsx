@@ -88,12 +88,19 @@ function appendUtms(url: URL) {
 function buildMessage(a: Answers): string {
   const branch = a.equipamento ? getBranch(a.equipamento) : undefined;
   const sintoma = a.equipamento && a.sintoma ? getSintoma(a.equipamento, a.sintoma) : undefined;
+  const isOutro = a.equipamento === "outro";
   const lines: string[] = [];
   lines.push("Olá! Triagem completa pelo site Técnico em Curitiba ✅");
   lines.push("");
   lines.push(`🔧 *Equipamento:* ${branch?.emoji ?? ""} ${branch?.label ?? "Não informado"}`);
-  if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
-  if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
+  if (isOutro) {
+    if (a.outroEquipamento.trim()) lines.push(`• Qual equipamento: ${a.outroEquipamento.trim()}`);
+    if (a.outroProblema.trim()) lines.push(`• O que aconteceu: ${a.outroProblema.trim()}`);
+    if (a.outroIdade.trim()) lines.push(`• Idade do equipamento: ${a.outroIdade.trim()}`);
+  } else {
+    if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
+    if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
+  }
   if (sintoma?.requiresColeta) {
     lines.push("");
     lines.push("📦 *Modalidade: COLETA E ENTREGA (obrigatória)*");
