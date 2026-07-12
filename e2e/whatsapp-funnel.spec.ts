@@ -85,7 +85,7 @@ test.describe("WhatsAppFunnel v3 — funil ramificado por equipamento (texto-onl
     await page.waitForLoadState("networkidle");
     const dialog = await openFunnel(page);
 
-    await dialog.getByRole("button", { name: /Outro \/ Só orçamento/i }).click();
+    await dialog.getByRole("button", { name: /^Outro$/i }).click();
     const nextBtn = dialog.getByRole("button", { name: /Continuar/i });
     await expect(nextBtn).toBeDisabled();
     await dialog.getByPlaceholder(/Conte o equipamento/i).fill("Equipamento desconhecido, quero saber se compensa.");
