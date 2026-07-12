@@ -59,7 +59,7 @@ test.describe("WhatsAppFunnel v3 — funil ramificado por equipamento (texto-onl
 
     await expect(dialog.getByText(/Triagem completa/i)).toBeVisible();
     await expect(dialog.getByText(/sem áudio/i)).toBeVisible();
-    const submit = dialog.getByRole("button", { name: /Abrir WhatsApp/i });
+    const submit = dialog.getByRole("button", { name: /Agendar agora/i });
     await expect(submit).toBeDisabled();
     await dialog.getByLabel(/valor mínimo.*R\$ 99,99/i).click();
     await expect(submit).toBeEnabled();
@@ -85,10 +85,12 @@ test.describe("WhatsAppFunnel v3 — funil ramificado por equipamento (texto-onl
     await page.waitForLoadState("networkidle");
     const dialog = await openFunnel(page);
 
-    await dialog.getByRole("button", { name: /Outro \/ Só orçamento/i }).click();
+    await dialog.getByRole("button", { name: /^Outro$/i }).click();
     const nextBtn = dialog.getByRole("button", { name: /Continuar/i });
     await expect(nextBtn).toBeDisabled();
-    await dialog.getByPlaceholder(/Conte o equipamento/i).fill("Equipamento desconhecido, quero saber se compensa.");
+    await dialog.getByPlaceholder(/Ex: micro-ondas/i).fill("Micro-ondas Consul");
+    await dialog.getByPlaceholder(/Conte o defeito/i).fill("Não esquenta desde ontem, faz barulho estranho.");
+    await dialog.getByRole("button", { name: /^1–3 anos$/ }).click();
     await expect(nextBtn).toBeEnabled();
   });
 

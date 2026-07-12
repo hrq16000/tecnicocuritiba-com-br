@@ -42,6 +42,10 @@ interface Answers {
   coletaAccepted: boolean;
   minimumAccepted: boolean;
   descricao: string;
+  // Campos específicos do branch "Outro"
+  outroEquipamento: string;
+  outroProblema: string;
+  outroIdade: string;
 }
 
 const EMPTY: Answers = {
@@ -51,6 +55,9 @@ const EMPTY: Answers = {
   coletaAccepted: false,
   minimumAccepted: false,
   descricao: "",
+  outroEquipamento: "",
+  outroProblema: "",
+  outroIdade: "",
 };
 
 
@@ -81,12 +88,19 @@ function appendUtms(url: URL) {
 function buildMessage(a: Answers): string {
   const branch = a.equipamento ? getBranch(a.equipamento) : undefined;
   const sintoma = a.equipamento && a.sintoma ? getSintoma(a.equipamento, a.sintoma) : undefined;
+  const isOutro = a.equipamento === "outro";
   const lines: string[] = [];
   lines.push("Olá! Triagem completa pelo site Técnico em Curitiba ✅");
   lines.push("");
   lines.push(`🔧 *Equipamento:* ${branch?.emoji ?? ""} ${branch?.label ?? "Não informado"}`);
-  if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
-  if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
+  if (isOutro) {
+    if (a.outroEquipamento.trim()) lines.push(`• Qual equipamento: ${a.outroEquipamento.trim()}`);
+    if (a.outroProblema.trim()) lines.push(`• O que aconteceu: ${a.outroProblema.trim()}`);
+    if (a.outroIdade.trim()) lines.push(`• Idade do equipamento: ${a.outroIdade.trim()}`);
+  } else {
+    if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
+    if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
+  }
   if (sintoma?.requiresColeta) {
     lines.push("");
     lines.push("📦 *Modalidade: COLETA E ENTREGA (obrigatória)*");
@@ -255,13 +269,18 @@ export const WhatsAppFunnel = () => {
   // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
   const attentionSelector = useCallback((s: number): string | null => {
     if (s === 0) return "[data-funnel-field='equipamento']";
-    if (s === 1) return isOutro
-      ? "[data-funnel-field='descricao']"
-      : !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+    if (s === 1) {
+      if (isOutro) {
+        if (!answers.outroEquipamento.trim()) return "[data-funnel-field='outro-equipamento']";
+        if (!answers.outroProblema.trim()) return "[data-funnel-field='outro-problema']";
+        return "[data-funnel-field='outro-idade']";
+      }
+      return !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+    }
     if (s === 2) return "[data-funnel-field='coleta']";
     if (s === 3) return "[data-funnel-field='minimum']";
     return null;
-  }, [answers.marca, isOutro]);
+  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, isOutro]);
 
   const attemptAdvance = useCallback((s: number) => {
     const sel = attentionSelector(s);
@@ -278,9 +297,10 @@ export const WhatsAppFunnel = () => {
     }
     if (s === 1) {
       if (isOutro) {
-        return answers.descricao.trim().length > 5
-          ? { ok: true }
-          : { ok: false, reason: "Descreva seu caso com pelo menos 6 caracteres." };
+        if (answers.outroEquipamento.trim().length < 2) return { ok: false, reason: "Informe qual o equipamento." };
+        if (answers.outroProblema.trim().length < 5) return { ok: false, reason: "Conte brevemente o que aconteceu." };
+        if (!answers.outroIdade.trim()) return { ok: false, reason: "Informe a idade aproximada do equipamento." };
+        return { ok: true };
       }
       if (!answers.marca) return { ok: false, reason: "Selecione a marca/tipo." };
       if (!answers.sintoma) return { ok: false, reason: "Selecione o problema." };
@@ -343,11 +363,8 @@ export const WhatsAppFunnel = () => {
         setStep(s);
         // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
         setTimeout(() => {
-          const sel = s === 0 ? "[data-funnel-field='equipamento']"
-            : s === 1 ? (isOutro ? "[data-funnel-field='descricao']" : (!answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']"))
-            : s === 2 ? "[data-funnel-field='coleta']"
-            : "[data-funnel-field='minimum']";
-          bipAndAttention(sel);
+          const sel = attentionSelector(s);
+          if (sel) bipAndAttention(sel);
         }, 30);
         return;
       }
@@ -397,10 +414,14 @@ export const WhatsAppFunnel = () => {
 
       window.open(url.toString(), "_blank", "noopener,noreferrer");
       setOpen(false);
+      // Após enviar, volta ao início para uma nova triagem futura.
+      setAnswers(EMPTY);
+      persist(EMPTY);
+      setStep(0);
     } finally {
       setTimeout(() => { submittingRef.current = false; }, 250);
     }
-  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep]);
+  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep, attentionSelector, isOutro, persist]);
 
   const handleOpenChange = (v: boolean) => {
     if (!v) trackFunnelClose(step, answers.equipamento);
@@ -460,16 +481,53 @@ export const WhatsAppFunnel = () => {
         {step === 1 && branch && (
           <div className="space-y-2.5">
             {isOutro ? (
-              <>
-                <p className="text-sm font-medium">Descreva seu caso</p>
-                <Textarea
-                  data-funnel-field="descricao"
-                  rows={4}
-                  placeholder="Conte o equipamento, marca, o que aconteceu e quando começou…"
-                  value={answers.descricao}
-                  onChange={(e) => update({ descricao: e.target.value })}
-                />
-              </>
+              <div className="space-y-2.5">
+                <div>
+                  <p className="text-sm font-medium mb-1.5">Qual é o equipamento?</p>
+                  <input
+                    data-funnel-field="outro-equipamento"
+                    type="text"
+                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Ex: micro-ondas, drone, projetor…"
+                    value={answers.outroEquipamento}
+                    maxLength={80}
+                    onChange={(e) => update({ outroEquipamento: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-1.5">O que aconteceu?</p>
+                  <Textarea
+                    data-funnel-field="outro-problema"
+                    rows={3}
+                    placeholder="Conte o defeito e quando começou…"
+                    value={answers.outroProblema}
+                    maxLength={400}
+                    onChange={(e) => update({ outroProblema: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-1.5">Quantos anos tem o equipamento?</p>
+                  <div className="flex flex-wrap gap-1.5" data-funnel-field="outro-idade">
+                    {["< 1 ano", "1–3 anos", "3–5 anos", "5–10 anos", "10+ anos", "Não sei"].map((idade) => (
+                      <button
+                        key={idade}
+                        type="button"
+                        onClick={() => update({ outroIdade: idade })}
+                        className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                          answers.outroIdade === idade
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border bg-card hover:border-primary/60"
+                        }`}
+                      >
+                        {idade}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-2.5 text-[11px] leading-snug">
+                  💰 <strong>Valor mínimo R$ 99,99</strong> para qualquer atendimento/serviço — inclusive orçamento fora do padrão. Reparos com coleta a partir de R$ 300.
+                </div>
+              </div>
             ) : (
               <>
                 <div>
@@ -598,7 +656,7 @@ export const WhatsAppFunnel = () => {
                 className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
               >
                 <MessageCircle className="h-4 w-4" />
-                Abrir WhatsApp
+                Agendar agora
               </Button>
             </div>
           </div>
