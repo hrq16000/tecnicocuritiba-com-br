@@ -425,14 +425,24 @@ export const WhatsAppFunnel = () => {
    * todos os fluxos. A etapa 3 (modalidade) troca de conteúdo conforme houver
    * ou não `requiresColeta`; a etapa 2 (contexto) é sempre igual.
    */
-  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
-  const back = () => setStep((s) => Math.max(s - 1, 0));
+  const next = () => setStep((s) => {
+    const n = Math.min(s + 1, TOTAL_STEPS - 1);
+    persist({ step: n });
+    return n;
+  });
+  const back = () => setStep((s) => {
+    const n = Math.max(s - 1, 0);
+    persist({ step: n });
+    return n;
+  });
 
   const reset = () => {
     setAnswers(EMPTY);
-    persist(EMPTY);
     setStep(0);
+    persist({ answers: EMPTY, step: 0 });
+    logFunnelDiag("reset");
   };
+
 
   // ---------- Auto-advance + foco no próximo campo ----------
   // Snapshot das respostas ao entrar em cada step: só auto-avança se o usuário
