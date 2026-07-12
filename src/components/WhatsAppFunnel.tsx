@@ -195,7 +195,19 @@ export const WhatsAppFunnel = () => {
         localStorage.removeItem(STORAGE_KEY);
         return;
       }
-      if (parsed.answers) setAnswers({ ...EMPTY, ...parsed.answers });
+      if (parsed.answers) {
+        const safe: Answers = { ...EMPTY, ...parsed.answers };
+        // Se o equipamento persistido não existe mais, reseta as respostas
+        // dependentes — evita render contra sintoma inexistente (tela de erro).
+        if (safe.equipamento && !getBranch(safe.equipamento)) {
+          safe.equipamento = null;
+          safe.marca = "";
+          safe.sintoma = "";
+        } else if (safe.equipamento && safe.sintoma && !getSintoma(safe.equipamento, safe.sintoma)) {
+          safe.sintoma = "";
+        }
+        setAnswers(safe);
+      }
       if (typeof parsed.step === "number") setStep(Math.min(Math.max(parsed.step, 0), 4));
       if (parsed.originLocation) setOriginLocation(parsed.originLocation);
     } catch { /* noop */ }
