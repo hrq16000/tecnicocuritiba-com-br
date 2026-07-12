@@ -103,7 +103,10 @@ const InstantNavigation = ({
       handlePreloadError((event as Event & { payload?: unknown }).payload ?? new Error("vite:preloadError"));
     };
     const onLoad = () => {
-      try { sessionStorage.removeItem(PRELOAD_RELOAD_KEY); } catch { /* noop */ }
+      try {
+        sessionStorage.removeItem(PRELOAD_RELOAD_KEY);
+        sessionStorage.removeItem("__app_boundary_reload__");
+      } catch { /* noop */ }
     };
     window.addEventListener("vite:preloadError", onPreloadError);
     window.addEventListener("load", onLoad);
