@@ -181,22 +181,10 @@ export const WhatsAppFunnel = () => {
   // Restore cached state (answers + step + origem). Descarta se antigo demais.
   useEffect(() => {
     try {
-      // Migra chaves legadas descartando (mantemos apenas answers no v4 antigo).
+      // Chaves legadas apenas removidas — as estruturas antigas de sintomas
+      // podem apontar para ids que não existem mais e provocariam render vazio.
       LEGACY_KEYS.forEach((k) => {
-        try {
-          const legacyRaw = localStorage.getItem(k);
-          if (legacyRaw && !localStorage.getItem(STORAGE_KEY)) {
-            const legacyAnswers = JSON.parse(legacyRaw);
-            const migrated: PersistedState = {
-              answers: { ...EMPTY, ...legacyAnswers },
-              step: 0,
-              originLocation: "cta",
-              updatedAt: Date.now(),
-            };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
-          }
-          localStorage.removeItem(k);
-        } catch { /* noop */ }
+        try { localStorage.removeItem(k); } catch { /* noop */ }
       });
 
       const raw = localStorage.getItem(STORAGE_KEY);
