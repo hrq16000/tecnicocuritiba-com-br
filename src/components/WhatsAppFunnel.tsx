@@ -370,6 +370,49 @@ export const WhatsAppFunnel = () => {
     setStep(0);
   };
 
+  // ---------- Auto-advance + foco no próximo campo ----------
+  // Snapshot das respostas ao entrar em cada step: só auto-avança se o usuário
+  // efetivamente interagiu (evita pular etapa 3 sem coleta ao chegar nela).
+  const stepEntryRef = useRef<string>("");
+  useEffect(() => {
+    if (!open) return;
+    stepEntryRef.current = JSON.stringify(answers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, open]);
+
+  // Auto-advance com pulso quando o step fica válido após interação do usuário.
+  useEffect(() => {
+    if (!open) return;
+    if (step === 0) return; // step 0 já auto-avança no clique do equipamento
+    if (step >= TOTAL_STEPS - 1) return; // etapa final envia manualmente
+    if (!canAdvance) return;
+    // Só auto-avança se algo mudou desde a entrada nesta etapa.
+    if (JSON.stringify(answers) === stepEntryRef.current) return;
+
+    const dialogEl = document.querySelector<HTMLElement>('[role="dialog"]');
+    dialogEl?.classList.add("wa-attention");
+    const t = window.setTimeout(() => {
+      dialogEl?.classList.remove("wa-attention");
+      setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+    }, 420);
+    return () => {
+      window.clearTimeout(t);
+      dialogEl?.classList.remove("wa-attention");
+    };
+  }, [open, step, canAdvance, answers]);
+
+  // Move o foco visual para o próximo campo faltante ao interagir.
+  useEffect(() => {
+    if (!open) return;
+    const sel = attentionSelector(step);
+    if (!sel) return;
+    const el = document.querySelector<HTMLElement>(sel);
+    if (!el) return;
+    el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [open, step, answers, attentionSelector]);
+
+
+
 
   const submit = useCallback(async () => {
     // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
