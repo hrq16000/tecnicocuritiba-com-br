@@ -840,6 +840,7 @@ export const WhatsAppFunnel = () => {
               </Button>
               <Button
                 onClick={submit}
+                data-cta-location={`funnel_${originLocation}`}
                 className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
               >
                 <MessageCircle className="h-4 w-4" />
