@@ -29,11 +29,24 @@ import { ColetaRequiredCard } from "@/components/funnel/ColetaRequiredCard";
 import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
 import { withVideoWarning } from "@/lib/funnelWarning";
 import { bipAndAttention } from "@/lib/attentionBip";
+import { logFunnelDiag } from "@/lib/funnelDiagnostics";
 
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WA_HOSTS = ["wa.me", "api.whatsapp.com"];
-const STORAGE_KEY = "wa_funnel_answers_v4";
+// Persistência do progresso do funil — sobrevive a reloads e retorno do WhatsApp.
+const STORAGE_KEY = "wa_funnel_state_v5";
+const LEGACY_KEYS = ["wa_funnel_answers_v4"];
+
+type PersistedState = {
+  answers: Answers;
+  step: number;
+  originLocation: string;
+  updatedAt: number;
+};
+// Se o progresso for mais antigo que isso, descarta (evita rehidratar semanas depois).
+const MAX_STATE_AGE_MS = 1000 * 60 * 60 * 24 * 3; // 3 dias
+
 
 interface Answers {
   equipamento: Equipment | null;
@@ -155,30 +168,61 @@ export const WhatsAppFunnel = () => {
   const [answers, setAnswers] = useState<Answers>(EMPTY);
   const [originLocation, setOriginLocation] = useState("cta");
   const [presetMessage, setPresetMessage] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const submittingRef = useRef(false);
+  const lastSubmitAtRef = useRef(0);
   const sessionId = useMemo(() => getSessionId(), []);
 
-  // Restore cached answers
+  // Restore cached state (answers + step + origem). Descarta se antigo demais.
   useEffect(() => {
     try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        setAnswers({ ...EMPTY, ...parsed });
+      // Migra chaves legadas descartando (mantemos apenas answers no v4 antigo).
+      LEGACY_KEYS.forEach((k) => {
+        try {
+          const legacyRaw = localStorage.getItem(k);
+          if (legacyRaw && !localStorage.getItem(STORAGE_KEY)) {
+            const legacyAnswers = JSON.parse(legacyRaw);
+            const migrated: PersistedState = {
+              answers: { ...EMPTY, ...legacyAnswers },
+              step: 0,
+              originLocation: "cta",
+              updatedAt: Date.now(),
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+          }
+          localStorage.removeItem(k);
+        } catch { /* noop */ }
+      });
+
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as PersistedState;
+      if (!parsed || typeof parsed !== "object") return;
+      if (parsed.updatedAt && Date.now() - parsed.updatedAt > MAX_STATE_AGE_MS) {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
       }
+      if (parsed.answers) setAnswers({ ...EMPTY, ...parsed.answers });
+      if (typeof parsed.step === "number") setStep(Math.min(Math.max(parsed.step, 0), 4));
+      if (parsed.originLocation) setOriginLocation(parsed.originLocation);
     } catch { /* noop */ }
   }, []);
 
-  const persist = useCallback((a: Answers) => {
+  const persist = useCallback((patch: Partial<PersistedState>) => {
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(a));
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const prev: PersistedState = raw
+        ? (JSON.parse(raw) as PersistedState)
+        : { answers: EMPTY, step: 0, originLocation: "cta", updatedAt: Date.now() };
+      const next: PersistedState = { ...prev, ...patch, updatedAt: Date.now() };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch { /* noop */ }
   }, []);
 
   const update = useCallback((patch: Partial<Answers>) => {
     setAnswers((prev) => {
       const next = { ...prev, ...patch };
-      persist(next);
+      persist({ answers: next });
       return next;
     });
   }, [persist]);
@@ -190,11 +234,13 @@ export const WhatsAppFunnel = () => {
     lastOpenRef.current = now;
     setOriginLocation(loc);
     setPresetMessage(preset ?? null);
-    setStep(0);
     setOpen(true);
+    persist({ originLocation: loc });
     captureUtmsFromUrl();
     trackFunnelOpen(loc, !!preset);
-  }, []);
+    logFunnelDiag("open", { location: loc, hasPreset: !!preset });
+  }, [persist]);
+
 
   // Global click interception for any WhatsApp anchor
   useEffect(() => {
@@ -268,7 +314,9 @@ export const WhatsAppFunnel = () => {
   useEffect(() => {
     if (!open) return;
     trackFunnelStep(step, answers.equipamento, answers.sintoma, originLocation);
+    logFunnelDiag("step", { equipamento: answers.equipamento, sintoma: answers.sintoma }, step);
   }, [open, step, answers.equipamento, answers.sintoma, originLocation]);
+
 
   // Sinaliza abertura via atributo no body para que floats/sticky se escondam.
   useEffect(() => {
@@ -379,14 +427,24 @@ export const WhatsAppFunnel = () => {
    * todos os fluxos. A etapa 3 (modalidade) troca de conteúdo conforme houver
    * ou não `requiresColeta`; a etapa 2 (contexto) é sempre igual.
    */
-  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
-  const back = () => setStep((s) => Math.max(s - 1, 0));
+  const next = () => setStep((s) => {
+    const n = Math.min(s + 1, TOTAL_STEPS - 1);
+    persist({ step: n });
+    return n;
+  });
+  const back = () => setStep((s) => {
+    const n = Math.max(s - 1, 0);
+    persist({ step: n });
+    return n;
+  });
 
   const reset = () => {
     setAnswers(EMPTY);
-    persist(EMPTY);
     setStep(0);
+    persist({ answers: EMPTY, step: 0 });
+    logFunnelDiag("reset");
   };
+
 
   // ---------- Auto-advance + foco no próximo campo ----------
   // Snapshot das respostas ao entrar em cada step: só auto-avança se o usuário
@@ -433,23 +491,38 @@ export const WhatsAppFunnel = () => {
 
 
   const submit = useCallback(async () => {
-    // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
-    for (const s of [0, 1, 2, 3, 4]) {
-      const v = validateStep(s);
-      if (!v.ok) {
-        trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
-        setStep(s);
-        // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
-        setTimeout(() => {
-          const sel = attentionSelector(s);
-          if (sel) bipAndAttention(sel);
-        }, 30);
-        return;
-      }
+    // Bloqueio anti-duplo-clique: usa ref para evitar corrida com o setState.
+    const now = Date.now();
+    if (submittingRef.current) {
+      logFunnelDiag("submit_blocked_reentrant", { sinceLast: now - lastSubmitAtRef.current });
+      return;
     }
+    if (now - lastSubmitAtRef.current < 1500) {
+      logFunnelDiag("submit_blocked_debounce", { sinceLast: now - lastSubmitAtRef.current });
+      return;
+    }
+    lastSubmitAtRef.current = now;
     submittingRef.current = true;
-    try {
+    setSubmitting(true);
+    logFunnelDiag("submit_start", { origin: originLocation, step });
 
+    try {
+      // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
+      for (const s of [0, 1, 2, 3, 4]) {
+        const v = validateStep(s);
+        if (!v.ok) {
+          trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
+          logFunnelDiag("submit_invalid", { step: s, reason: "reason" in v ? v.reason : "" });
+          setStep(s);
+          persist({ step: s });
+          // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
+          setTimeout(() => {
+            const sel = attentionSelector(s);
+            if (sel) bipAndAttention(sel);
+          }, 30);
+          return;
+        }
+      }
 
       const baseMessage = buildMessage(answers);
       // Mesmo com preset (mensagem vinda de outro CTA), o aviso obrigatório
@@ -457,7 +530,6 @@ export const WhatsAppFunnel = () => {
       const finalMessage = withVideoWarning(
         presetMessage ? `${presetMessage}\n\n---\n${baseMessage}` : baseMessage,
       );
-
 
       try {
         await recordSubmission({
@@ -474,6 +546,7 @@ export const WhatsAppFunnel = () => {
         // eslint-disable-next-line no-console
         console.warn("[funnel] submission insert failed", err);
         trackFunnelBlocked("insert_failed", answers.equipamento);
+        logFunnelDiag("submit_insert_failed", { error: String(err) });
       }
 
       const url = new URL(`https://wa.me/${WHATSAPP_NUMBER}`);
@@ -489,13 +562,14 @@ export const WhatsAppFunnel = () => {
         minimumAccepted: answers.minimumAccepted,
       });
       trackCTAClick("whatsapp", `funnel_${originLocation}`);
+      logFunnelDiag("submit_ok", { origin: originLocation });
 
       window.open(url.toString(), "_blank", "noopener,noreferrer");
       setOpen(false);
-      // Após enviar, volta ao início para uma nova triagem futura.
+      // Após enviar, limpa progresso persistido — próxima abertura começa do zero.
       setAnswers(EMPTY);
-      persist(EMPTY);
       setStep(0);
+      try { localStorage.removeItem(STORAGE_KEY); } catch { /* noop */ }
       // Redireciona a aba atual para a página de confirmação — dá contexto
       // caso o usuário volte, e é onde o GA4 registra o funil completo.
       try {
@@ -503,11 +577,21 @@ export const WhatsAppFunnel = () => {
         url2.searchParams.set("origem", originLocation);
         window.history.pushState({}, "", url2.pathname + url2.search);
         window.dispatchEvent(new PopStateEvent("popstate"));
-      } catch { /* noop */ }
+      } catch (err) {
+        logFunnelDiag("submit_nav_failed", { error: String(err) });
+      }
+    } catch (err) {
+      // Nunca deixa uma exceção estourar do handler e disparar o ErrorBoundary
+      // (era uma das causas do "reset" percebido do funil).
+      // eslint-disable-next-line no-console
+      console.error("[funnel] submit failed", err);
+      logFunnelDiag("submit_exception", { error: String(err) });
     } finally {
-      setTimeout(() => { submittingRef.current = false; }, 250);
+      setSubmitting(false);
+      setTimeout(() => { submittingRef.current = false; }, 400);
     }
-  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep, attentionSelector, isOutro, persist]);
+  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep, attentionSelector, persist, step]);
+
 
   const handleOpenChange = (v: boolean) => {
     if (!v) trackFunnelClose(step, answers.equipamento);
@@ -840,12 +924,17 @@ export const WhatsAppFunnel = () => {
               </Button>
               <Button
                 onClick={submit}
+                type="button"
+                disabled={submitting || !answers.minimumAccepted}
                 data-cta-location={`funnel_${originLocation}`}
-                className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
+                data-funnel-submit="1"
+                aria-busy={submitting}
+                className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2 disabled:opacity-70"
               >
-                <MessageCircle className="h-4 w-4" />
-                Agendar agora
+                <MessageCircle className={`h-4 w-4 ${submitting ? "animate-pulse" : ""}`} />
+                {submitting ? "Abrindo WhatsApp…" : "Agendar agora"}
               </Button>
+
             </div>
           </div>
         )}
