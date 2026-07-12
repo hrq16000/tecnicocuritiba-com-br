@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Package, Clock, Wrench, ShieldCheck } from "lucide-react";
 import {
   COLETA_TAXA_MINIMA_LABEL,
@@ -64,8 +63,8 @@ export const ColetaRequiredCard = ({ equipamento, sintoma, accepted, onAcceptCha
         />
         <span className="text-xs leading-snug">
           Estou ciente e autorizo a <strong>Coleta e Entrega</strong> nessas condições. Concordo com os{" "}
-          <Link to="/termos-e-condicoes" className="underline hover:text-foreground">termos</Link> e a{" "}
-          <Link to="/coleta-e-entrega" className="underline hover:text-foreground">política de coleta</Link>.
+          <a href="/termos-e-condicoes" className="underline hover:text-foreground">termos</a> e a{" "}
+          <a href="/coleta-e-entrega" className="underline hover:text-foreground">política de coleta</a>.
         </span>
       </label>
     </div>
