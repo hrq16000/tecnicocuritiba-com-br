@@ -22,6 +22,7 @@ export const WhatsAppFloat = () => {
       onClick={handleClick}
       data-cta-location="float"
       data-wa-funnel="required"
+      data-hide-when-funnel
       data-testid="whatsapp-float"
       aria-label="Falar com técnico pelo WhatsApp"
       className={cn(

@@ -28,6 +28,7 @@ import {
 import { ColetaRequiredCard } from "@/components/funnel/ColetaRequiredCard";
 import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
 import { withVideoWarning } from "@/lib/funnelWarning";
+import { bipAndAttention } from "@/lib/attentionBip";
 
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -235,6 +236,14 @@ export const WhatsAppFunnel = () => {
     trackFunnelStep(step, answers.equipamento, answers.sintoma, originLocation);
   }, [open, step, answers.equipamento, answers.sintoma, originLocation]);
 
+  // Sinaliza abertura via atributo no body para que floats/sticky se escondam.
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (open) document.body.setAttribute("data-funnel-open", "1");
+    else document.body.removeAttribute("data-funnel-open");
+    return () => document.body.removeAttribute("data-funnel-open");
+  }, [open]);
+
   // ---------- Derivations ----------
   const branch = answers.equipamento ? getBranch(answers.equipamento) : undefined;
   const sintomaObj = answers.equipamento && answers.sintoma
@@ -242,6 +251,22 @@ export const WhatsAppFunnel = () => {
     : undefined;
   const requiresColeta = !!sintomaObj?.requiresColeta;
   const isOutro = answers.equipamento === "outro";
+
+  // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
+  const attentionSelector = useCallback((s: number): string | null => {
+    if (s === 0) return "[data-funnel-field='equipamento']";
+    if (s === 1) return isOutro
+      ? "[data-funnel-field='descricao']"
+      : !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+    if (s === 2) return "[data-funnel-field='coleta']";
+    if (s === 3) return "[data-funnel-field='minimum']";
+    return null;
+  }, [answers.marca, isOutro]);
+
+  const attemptAdvance = useCallback((s: number) => {
+    const sel = attentionSelector(s);
+    if (sel) bipAndAttention(sel);
+  }, [attentionSelector]);
 
   // ---------- Navigation ----------
   // 4 steps: 0 equip, 1 marca/sintoma (ou descrição), 2 coleta (condicional), 3 confirmação
@@ -316,6 +341,14 @@ export const WhatsAppFunnel = () => {
       if (!v.ok) {
         trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
         setStep(s);
+        // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
+        setTimeout(() => {
+          const sel = s === 0 ? "[data-funnel-field='equipamento']"
+            : s === 1 ? (isOutro ? "[data-funnel-field='descricao']" : (!answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']"))
+            : s === 2 ? "[data-funnel-field='coleta']"
+            : "[data-funnel-field='minimum']";
+          bipAndAttention(sel);
+        }, 30);
         return;
       }
     }
@@ -377,20 +410,19 @@ export const WhatsAppFunnel = () => {
   // ---------- UI ----------
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-lg max-h-[92vh] overflow-y-auto p-5 sm:p-6">
-        <DialogHeader className="space-y-1">
-          <DialogTitle className="flex items-center gap-2 text-lg">
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto p-3 sm:p-5 gap-2">
+        <DialogHeader className="space-y-0.5">
+          <DialogTitle className="flex items-center gap-2 text-base sm:text-lg">
             <Lock className="h-4 w-4 text-primary" />
-            Triagem antes do atendimento
+            Triagem — {step + 1}/{TOTAL_STEPS}
           </DialogTitle>
-          <DialogDescription className="text-xs">
-            Para garantir um atendimento rápido e preciso, o WhatsApp humano abre <strong>somente após a triagem</strong>.
-            Etapa {step + 1} de {TOTAL_STEPS}.
+          <DialogDescription className="text-[11px] sm:text-xs">
+            O WhatsApp humano abre <strong>após a triagem</strong>. Seg–Sáb · 08h–20h · resposta em ~30 min.
           </DialogDescription>
         </DialogHeader>
 
         {/* Progress */}
-        <div className="flex gap-1 mb-1">
+        <div className="flex gap-1">
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
             <div
               key={i}
@@ -401,23 +433,23 @@ export const WhatsAppFunnel = () => {
 
         {/* Step 0 — equipamento */}
         {step === 0 && (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <TransparencyMini />
             <p className="text-sm font-medium">1. Qual o equipamento?</p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2" data-funnel-field="equipamento">
               {EQUIPMENT_BRANCHES.map((b) => (
                 <button
                   key={b.id}
                   type="button"
                   onClick={() => { update({ equipamento: b.id, marca: "", sintoma: "" }); next(); }}
-                  className={`text-left p-3 rounded-lg border transition-colors ${
+                  className={`text-left p-2.5 rounded-lg border transition-colors ${
                     answers.equipamento === b.id
                       ? "border-primary bg-accent/10"
                       : "border-border bg-card hover:border-primary/60"
                   }`}
                 >
-                  <p className="text-2xl">{b.emoji}</p>
-                  <p className="text-sm font-semibold mt-0.5">{b.label}</p>
+                  <p className="text-xl leading-none">{b.emoji}</p>
+                  <p className="text-[13px] font-semibold mt-1">{b.label}</p>
                 </button>
               ))}
             </div>
@@ -426,12 +458,13 @@ export const WhatsAppFunnel = () => {
 
         {/* Step 1 — marca + sintoma (ou descrição livre para "outro") */}
         {step === 1 && branch && (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {isOutro ? (
               <>
                 <p className="text-sm font-medium">Descreva seu caso</p>
                 <Textarea
-                  rows={5}
+                  data-funnel-field="descricao"
+                  rows={4}
                   placeholder="Conte o equipamento, marca, o que aconteceu e quando começou…"
                   value={answers.descricao}
                   onChange={(e) => update({ descricao: e.target.value })}
@@ -441,13 +474,13 @@ export const WhatsAppFunnel = () => {
               <>
                 <div>
                   <p className="text-sm font-medium mb-1.5">{branch.marcaLabel}</p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1.5" data-funnel-field="marca">
                     {branch.marcaOptions.map((m) => (
                       <button
                         key={m}
                         type="button"
                         onClick={() => update({ marca: m })}
-                        className={`px-2.5 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                        className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
                           answers.marca === m
                             ? "border-primary bg-primary text-primary-foreground"
                             : "border-border bg-card hover:border-primary/60"
@@ -460,13 +493,13 @@ export const WhatsAppFunnel = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium mb-1.5">Qual é o problema?</p>
-                  <div className="grid gap-1.5">
+                  <div className="grid gap-1.5" data-funnel-field="sintoma">
                     {branch.sintomas.map((s) => (
                       <button
                         key={s.id}
                         type="button"
                         onClick={() => update({ sintoma: s.id })}
-                        className={`text-left p-2.5 rounded-lg border text-sm flex items-center justify-between gap-2 transition-colors ${
+                        className={`text-left p-2 rounded-lg border text-sm flex items-center justify-between gap-2 transition-colors ${
                           answers.sintoma === s.id
                             ? "border-primary bg-accent/10"
                             : "border-border bg-card hover:border-primary/60"
@@ -484,70 +517,63 @@ export const WhatsAppFunnel = () => {
                 </div>
               </>
             )}
-            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} />
+            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} onAttempt={() => attemptAdvance(1)} />
           </div>
         )}
 
         {/* Step 2 — regra Coleta e Entrega (condicional) */}
         {step === 2 && requiresColeta && sintomaObj && branch && (
-          <div className="space-y-3">
+          <div className="space-y-2.5" data-funnel-field="coleta">
             <ColetaRequiredCard
               equipamento={branch.label}
               sintoma={sintomaObj.label}
               accepted={answers.coletaAccepted}
               onAcceptChange={(v) => update({ coletaAccepted: v })}
             />
-            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" />
+            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(2)} />
           </div>
         )}
 
-        {/* Step 3 — confirmação e envio */}
+        {/* Step 3 — confirmação e envio (compacto) */}
         {step === 3 && (
-          <div className="space-y-3">
-            <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-3 flex gap-2.5">
+          <div className="space-y-2.5">
+            <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-2.5 flex gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-              <div className="text-xs leading-snug">
+              <div className="text-[11px] leading-snug">
                 <p className="font-semibold text-foreground">Triagem completa! 🎉</p>
-                <p className="text-foreground/70 mt-0.5">
-                  Vamos abrir o WhatsApp já com todas as informações. Resposta em até 30 min em horário comercial.
+                <p className="text-foreground/70">
+                  Abriremos o WhatsApp com sua triagem. Resposta em ~30 min · Seg–Sáb 08h–20h.
                 </p>
               </div>
             </div>
 
-            <div className="rounded-lg border border-border bg-card/50 p-3 space-y-1 text-xs">
+            <div className="rounded-lg border border-border bg-card/50 p-2.5 space-y-0.5 text-[11px] leading-snug">
               {branch && <p>📦 <strong>{branch.label}</strong>{answers.marca ? ` — ${answers.marca}` : ""}</p>}
               {sintomaObj && <p>⚠️ {sintomaObj.label}</p>}
-              {requiresColeta && <p className="text-amber-700 dark:text-amber-400">📦 Coleta e Entrega · mín. R$ 300 (autorizado)</p>}
+              {requiresColeta && <p className="text-amber-700 dark:text-amber-400">🚚 Coleta autorizada · mín. R$ 300</p>}
             </div>
 
-            <div className="rounded-lg border border-amber-500/50 bg-amber-500/10 p-3 text-xs leading-snug">
-              <p className="font-bold text-foreground mb-1">📸 Próximo passo no WhatsApp (obrigatório)</p>
-              <p className="text-foreground/80">
-                Assim que o chat abrir, envie <strong>fotos do equipamento por completo</strong> (incluindo a{" "}
-                <strong>etiqueta traseira</strong> com modelo/série) e um <strong>vídeo do defeito acontecendo</strong>.
-                O vídeo precisa estar <strong>sem áudio e sem ruídos de fundo</strong> (mute o microfone, ambiente em
-                silêncio). <strong>Sem o envio das fotos e do vídeo, o atendimento não será iniciado.</strong>
+            <details className="rounded-lg border border-amber-500/50 bg-amber-500/10 p-2.5 text-[11px] leading-snug group">
+              <summary className="cursor-pointer font-bold text-foreground list-none flex items-center justify-between">
+                <span>📸 Próximo passo no WhatsApp (obrigatório)</span>
+                <span className="text-[10px] text-muted-foreground group-open:hidden">ver</span>
+              </summary>
+              <p className="text-foreground/80 mt-1.5">
+                Envie <strong>fotos do equipamento</strong> (incluindo <strong>etiqueta traseira</strong> com modelo/série) e um
+                {" "}<strong>vídeo do defeito acontecendo</strong> — sem áudio, ambiente em silêncio. Sem fotos e vídeo, o atendimento não inicia.
               </p>
-            </div>
-
-
+            </details>
 
             <Textarea
               placeholder="Quer acrescentar algo? (opcional)"
-              rows={3}
+              rows={2}
               value={answers.descricao}
               onChange={(e) => update({ descricao: e.target.value })}
               maxLength={500}
+              className="text-sm"
             />
 
-            <p className="text-[11px] text-muted-foreground">
-              Ao continuar você concorda com os{" "}
-              <a href="/termos-e-condicoes" className="underline hover:text-foreground" onClick={() => setOpen(false)}>
-                Termos e Condições
-              </a>.
-            </p>
-
-            <div className="flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3">
+            <div className="flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 p-2.5" data-funnel-field="minimum">
               <Checkbox
                 id="min-val-confirm"
                 checked={answers.minimumAccepted}
@@ -555,18 +581,20 @@ export const WhatsAppFunnel = () => {
                 className="mt-0.5"
               />
               <label htmlFor="min-val-confirm" className="cursor-pointer text-[11px] leading-snug text-foreground/85">
-                Estou ciente que o valor mínimo para atendimento/visita é <strong>R$ 99,99</strong> e que o WhatsApp só abre após a triagem.
+                Ciente: valor mínimo <strong>R$ 99,99</strong> · WhatsApp abre após triagem · aceito os
+                {" "}<a href="/termos-e-condicoes" className="underline hover:text-foreground" onClick={() => setOpen(false)}>Termos</a>.
               </label>
             </div>
 
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={back} className="gap-1">
-                <ArrowLeft className="h-4 w-4" /> Voltar
+            <div className="flex gap-2 pt-0.5">
+              <Button variant="outline" size="sm" onClick={back} className="gap-1 px-2.5" aria-label="Voltar">
+                <ArrowLeft className="h-4 w-4" /> <span className="hidden sm:inline">Voltar</span>
               </Button>
-              <Button variant="outline" size="sm" onClick={reset}>Recomeçar</Button>
+              <Button variant="outline" size="sm" onClick={reset} className="px-2.5" aria-label="Recomeçar triagem">
+                <span className="sm:hidden">↺</span><span className="hidden sm:inline">Recomeçar</span>
+              </Button>
               <Button
                 onClick={submit}
-                disabled={!answers.minimumAccepted}
                 className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
               >
                 <MessageCircle className="h-4 w-4" />
@@ -582,15 +610,26 @@ export const WhatsAppFunnel = () => {
 
 // ---------- helpers ----------
 const FunnelNav = ({
-  onBack, onNext, canNext, nextLabel = "Continuar",
-}: { onBack: () => void; onNext: () => void; canNext: boolean; nextLabel?: string }) => (
+  onBack, onNext, canNext, nextLabel = "Continuar", onAttempt,
+}: { onBack: () => void; onNext: () => void; canNext: boolean; nextLabel?: string; onAttempt?: () => void }) => (
   <div className="flex gap-2 pt-1">
     <Button variant="outline" size="sm" onClick={onBack} className="gap-1">
       <ArrowLeft className="h-4 w-4" /> Voltar
     </Button>
-    <Button onClick={onNext} disabled={!canNext} className="ml-auto gap-1">
-      {nextLabel} <ArrowRight className="h-4 w-4" />
-    </Button>
+    <span
+      className="ml-auto"
+      onClickCapture={(e) => {
+        if (!canNext) {
+          e.stopPropagation();
+          e.preventDefault();
+          onAttempt?.();
+        }
+      }}
+    >
+      <Button onClick={onNext} disabled={!canNext} className="gap-1">
+        {nextLabel} <ArrowRight className="h-4 w-4" />
+      </Button>
+    </span>
   </div>
 );
 
