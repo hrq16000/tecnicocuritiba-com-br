@@ -532,7 +532,7 @@ export const WhatsAppFunnel = () => {
             <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-2.5 flex gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
               <div className="text-[11px] leading-snug">
-                <p className="font-semibold text-foreground">Tudo pronto!</p>
+                <p className="font-semibold text-foreground">Triagem completa! 🎉</p>
                 <p className="text-foreground/70">
                   Abriremos o WhatsApp com sua triagem. Resposta em ~30 min · Seg–Sáb 08h–20h.
                 </p>
@@ -547,7 +547,7 @@ export const WhatsAppFunnel = () => {
 
             <details className="rounded-lg border border-amber-500/50 bg-amber-500/10 p-2.5 text-[11px] leading-snug group">
               <summary className="cursor-pointer font-bold text-foreground list-none flex items-center justify-between">
-                <span>📸 O que enviar no WhatsApp (obrigatório)</span>
+                <span>📸 Próximo passo no WhatsApp (obrigatório)</span>
                 <span className="text-[10px] text-muted-foreground group-open:hidden">ver</span>
               </summary>
               <p className="text-foreground/80 mt-1.5">
