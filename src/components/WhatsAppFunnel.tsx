@@ -269,13 +269,18 @@ export const WhatsAppFunnel = () => {
   // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
   const attentionSelector = useCallback((s: number): string | null => {
     if (s === 0) return "[data-funnel-field='equipamento']";
-    if (s === 1) return isOutro
-      ? "[data-funnel-field='descricao']"
-      : !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+    if (s === 1) {
+      if (isOutro) {
+        if (!answers.outroEquipamento.trim()) return "[data-funnel-field='outro-equipamento']";
+        if (!answers.outroProblema.trim()) return "[data-funnel-field='outro-problema']";
+        return "[data-funnel-field='outro-idade']";
+      }
+      return !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+    }
     if (s === 2) return "[data-funnel-field='coleta']";
     if (s === 3) return "[data-funnel-field='minimum']";
     return null;
-  }, [answers.marca, isOutro]);
+  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, isOutro]);
 
   const attemptAdvance = useCallback((s: number) => {
     const sel = attentionSelector(s);
@@ -292,9 +297,10 @@ export const WhatsAppFunnel = () => {
     }
     if (s === 1) {
       if (isOutro) {
-        return answers.descricao.trim().length > 5
-          ? { ok: true }
-          : { ok: false, reason: "Descreva seu caso com pelo menos 6 caracteres." };
+        if (answers.outroEquipamento.trim().length < 2) return { ok: false, reason: "Informe qual o equipamento." };
+        if (answers.outroProblema.trim().length < 5) return { ok: false, reason: "Conte brevemente o que aconteceu." };
+        if (!answers.outroIdade.trim()) return { ok: false, reason: "Informe a idade aproximada do equipamento." };
+        return { ok: true };
       }
       if (!answers.marca) return { ok: false, reason: "Selecione a marca/tipo." };
       if (!answers.sintoma) return { ok: false, reason: "Selecione o problema." };
