@@ -878,6 +878,7 @@ const App = () => (
             <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
             <Route path="/privacidade" element={<Navigate to="/politica-de-privacidade" replace />} />
             <Route path="/funil-indisponivel" element={<FunilIndisponivel />} />
+            <Route path="/obrigado" element={<Obrigado />} />
 
             {/* Admin */}
             <Route path="/admin" element={<Navigate to="/admin/funnel" replace />} />
