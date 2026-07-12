@@ -435,6 +435,14 @@ export const WhatsAppFunnel = () => {
       setAnswers(EMPTY);
       persist(EMPTY);
       setStep(0);
+      // Redireciona a aba atual para a página de confirmação — dá contexto
+      // caso o usuário volte, e é onde o GA4 registra o funil completo.
+      try {
+        const url2 = new URL("/obrigado", window.location.origin);
+        url2.searchParams.set("origem", originLocation);
+        window.history.pushState({}, "", url2.pathname + url2.search);
+        window.dispatchEvent(new PopStateEvent("popstate"));
+      } catch { /* noop */ }
     } finally {
       setTimeout(() => { submittingRef.current = false; }, 250);
     }
