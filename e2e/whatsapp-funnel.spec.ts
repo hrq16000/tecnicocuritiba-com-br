@@ -88,7 +88,9 @@ test.describe("WhatsAppFunnel v3 — funil ramificado por equipamento (texto-onl
     await dialog.getByRole("button", { name: /^Outro$/i }).click();
     const nextBtn = dialog.getByRole("button", { name: /Continuar/i });
     await expect(nextBtn).toBeDisabled();
-    await dialog.getByPlaceholder(/Conte o equipamento/i).fill("Equipamento desconhecido, quero saber se compensa.");
+    await dialog.getByPlaceholder(/Ex: micro-ondas/i).fill("Micro-ondas Consul");
+    await dialog.getByPlaceholder(/Conte o defeito/i).fill("Não esquenta desde ontem, faz barulho estranho.");
+    await dialog.getByRole("button", { name: /^1–3 anos$/ }).click();
     await expect(nextBtn).toBeEnabled();
   });
 
