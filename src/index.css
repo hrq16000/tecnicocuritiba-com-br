@@ -411,6 +411,25 @@
     animation-play-state: paused;
   }
 
+  /* ── Focus feedback for missing/required fields (funnel) ── */
+  @keyframes waAttention {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--destructive) / 0.55); transform: scale(1); }
+    50%      { box-shadow: 0 0 0 6px hsl(var(--destructive) / 0);    transform: scale(1.015); }
+  }
+  .wa-attention {
+    animation: waAttention 0.7s var(--anim-ease-in-out) 3;
+    outline: 2px solid hsl(var(--destructive) / 0.85);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  /* ── Esconder floats/sticky quando o funil WhatsApp está aberto ── */
+  body[data-funnel-open="1"] [data-hide-when-funnel] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+  }
+
   /* ── Ripple Effect ── */
   .ripple-container {
     position: relative;
