@@ -860,18 +860,51 @@ export const WhatsAppFunnel = () => {
                 />
               </div>
             ) : (
-              <div className="rounded-lg border border-border bg-card/50 p-3 space-y-2 text-[12px] leading-snug">
-                <p className="text-sm font-semibold text-foreground">4. Como preferimos atender no seu caso</p>
-                <p className="text-foreground/80">
-                  Pelo que você descreveu, provavelmente conseguimos resolver por <strong>atendimento remoto</strong> ou{" "}
-                  <strong>visita técnica</strong> (mín. R$ 99,99 · 30 min). Se durante o diagnóstico surgir necessidade de bancada,
-                  te avisamos antes — nada é feito sem sua autorização.
-                </p>
-                <ul className="ml-4 list-disc space-y-1 text-foreground/70">
-                  <li>Orçamento sempre por WhatsApp, sem surpresa.</li>
-                  <li>Peças originais e garantia por escrito.</li>
-                  <li>Coleta e Entrega opcional a partir de R$ 300 (se você preferir não receber o técnico).</li>
-                </ul>
+              <div className="rounded-lg border border-border bg-card/50 p-3 space-y-2 text-[12px] leading-snug" data-funnel-route={route}>
+                <p className="text-sm font-semibold text-foreground">4. Modalidade indicada para o seu caso</p>
+                {route === "remoto" && (
+                  <>
+                    <p className="text-foreground/80">
+                      Pelas informações fornecidas, o serviço pode ser compatível com{" "}
+                      <strong>atendimento remoto</strong>, pois o computador está funcionando e a solicitação envolve
+                      instalação, configuração ou ajuste de software. A confirmação será feita no WhatsApp.
+                    </p>
+                    <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                      <li>Valor mínimo <strong>R$ 99,99</strong>.</li>
+                      <li>Requer acesso à internet e ao computador ligado.</li>
+                      <li>Se aparecer defeito físico durante o atendimento, indicamos coleta e entrega.</li>
+                    </ul>
+                  </>
+                )}
+                {route === "visita" && (
+                  <>
+                    <p className="text-foreground/80">
+                      Pelas informações fornecidas, seu caso pode ser avaliado por <strong>visita técnica</strong> em
+                      PC/Notebook. Se for identificada necessidade de bancada, coleta ou peças, você será informado antes —
+                      nada é feito sem sua autorização.
+                    </p>
+                    <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                      <li><strong>R$ 99,99</strong> por até 30 min · <strong>R$ 169,99</strong> por 1h combinada.</li>
+                      <li>A visita não garante o reparo. Peças não inclusas.</li>
+                      <li>Casos que exigem bancada seguem para coleta e entrega.</li>
+                    </ul>
+                  </>
+                )}
+                {route === "coleta" && (
+                  <>
+                    <p className="text-foreground/80">
+                      Pelas informações fornecidas, este equipamento precisa ser encaminhado por{" "}
+                      <strong>Coleta e Entrega</strong> para avaliação técnica em laboratório.
+                      {sintomaObj?.hint ? <> Sintoma informado: <em>{sintomaObj.hint}</em>.</> : null}
+                    </p>
+                    <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                      <li>Valor mínimo <strong>R$ 299,99</strong> (coleta, entrega e diagnóstico). Peças não inclusas.</li>
+                      <li>Reparos até <strong>R$ 300</strong> podem ser executados sem nova autorização; acima disso, orçamento é enviado antes.</li>
+                      <li>Em caso de cancelamento, cobrança de <strong>R$ 99,99</strong> pelo diagnóstico.</li>
+                      <li>Prazo estimado: <strong>3 a 60 dias úteis</strong> (pode ser maior se houver encomenda).</li>
+                    </ul>
+                  </>
+                )}
               </div>
             )}
             <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(3)} />
