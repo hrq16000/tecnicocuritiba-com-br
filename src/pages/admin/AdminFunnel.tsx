@@ -18,6 +18,8 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { FunnelDiagnosticsPanel } from "@/components/admin/FunnelDiagnosticsPanel";
+
 import {
   Loader2, Download, Search, RefreshCw, LogOut, Filter, FileText, FileSpreadsheet, ChevronDown,
 } from "lucide-react";
