@@ -46,6 +46,11 @@ interface Answers {
   outroEquipamento: string;
   outroProblema: string;
   outroIdade: string;
+  // Contexto detalhado (Etapa 2 — sempre visível)
+  ctxQuando: string;     // ex: "Hoje", "Ontem", "Última semana", "Mais de 1 mês", "Sempre foi assim"
+  ctxFrequencia: string; // ex: "Todo momento", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado"
+  ctxTentou: string;     // ex: "Nada", "Reiniciei", "Formatei", "Já foi em outra assistência"
+  ctxUrgencia: string;   // ex: "Hoje", "Nesta semana", "Sem pressa"
 }
 
 const EMPTY: Answers = {
@@ -58,6 +63,10 @@ const EMPTY: Answers = {
   outroEquipamento: "",
   outroProblema: "",
   outroIdade: "",
+  ctxQuando: "",
+  ctxFrequencia: "",
+  ctxTentou: "",
+  ctxUrgencia: "",
 };
 
 
@@ -100,6 +109,17 @@ function buildMessage(a: Answers): string {
   } else {
     if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
     if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
+  }
+  // Contexto detalhado (Etapa 2)
+  const ctx: string[] = [];
+  if (a.ctxQuando) ctx.push(`quando começou: *${a.ctxQuando}*`);
+  if (a.ctxFrequencia) ctx.push(`frequência: *${a.ctxFrequencia}*`);
+  if (a.ctxTentou) ctx.push(`já tentou: *${a.ctxTentou}*`);
+  if (a.ctxUrgencia) ctx.push(`urgência: *${a.ctxUrgencia}*`);
+  if (ctx.length) {
+    lines.push("");
+    lines.push("🧭 *Contexto:*");
+    ctx.forEach((c) => lines.push(`• ${c}`));
   }
   if (sintoma?.requiresColeta) {
     lines.push("");
@@ -277,10 +297,16 @@ export const WhatsAppFunnel = () => {
       }
       return !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
     }
-    if (s === 2) return "[data-funnel-field='coleta']";
-    if (s === 3) return "[data-funnel-field='minimum']";
+    if (s === 2) {
+      if (!answers.ctxQuando) return "[data-funnel-field='ctx-quando']";
+      if (!answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
+      if (!answers.ctxTentou) return "[data-funnel-field='ctx-tentou']";
+      return "[data-funnel-field='ctx-urgencia']";
+    }
+    if (s === 3) return "[data-funnel-field='coleta']";
+    if (s === 4) return "[data-funnel-field='minimum']";
     return null;
-  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, isOutro]);
+  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, answers.ctxQuando, answers.ctxFrequencia, answers.ctxTentou, isOutro]);
 
   const attemptAdvance = useCallback((s: number) => {
     const sel = attentionSelector(s);
@@ -288,8 +314,9 @@ export const WhatsAppFunnel = () => {
   }, [attentionSelector]);
 
   // ---------- Navigation ----------
-  // 4 steps: 0 equip, 1 marca/sintoma (ou descrição), 2 coleta (condicional), 3 confirmação
-  const TOTAL_STEPS = 4;
+  // 5 steps SEM saltos: 0 equip, 1 marca/sintoma (ou "outro"), 2 contexto detalhado,
+  // 3 modalidade/coleta (sempre exibido), 4 confirmação final.
+  const TOTAL_STEPS = 5;
   /** Validação por etapa — fonte única de verdade para botão e guard de submit. */
   const validateStep = useCallback((s: number): { ok: true } | { ok: false; reason: string } => {
     if (s === 0) {
@@ -307,12 +334,19 @@ export const WhatsAppFunnel = () => {
       return { ok: true };
     }
     if (s === 2) {
+      if (!answers.ctxQuando) return { ok: false, reason: "Diga quando o problema começou." };
+      if (!answers.ctxFrequencia) return { ok: false, reason: "Diga com que frequência acontece." };
+      if (!answers.ctxTentou) return { ok: false, reason: "Diga se já tentou alguma coisa." };
+      if (!answers.ctxUrgencia) return { ok: false, reason: "Informe a urgência." };
+      return { ok: true };
+    }
+    if (s === 3) {
       if (requiresColeta && !answers.coletaAccepted) {
         return { ok: false, reason: "Aceite a modalidade Coleta e Entrega para continuar." };
       }
       return { ok: true };
     }
-    if (s === 3) {
+    if (s === 4) {
       return answers.minimumAccepted
         ? { ok: true }
         : { ok: false, reason: "Confirme ciência do valor mínimo de R$ 99,99." };
@@ -323,29 +357,12 @@ export const WhatsAppFunnel = () => {
   const canAdvance = useMemo(() => validateStep(step).ok, [validateStep, step]);
 
   /**
-   * Avança para o próximo step. NÃO valida com `validateStep` aqui porque o
-   * botão "Continuar" já é desabilitado por `canAdvance` (validação reativa) e,
-   * no auto-advance da seleção de equipamento, o `setAnswers` ainda não foi
-   * comitado quando `next()` roda — validar aqui daria falso negativo.
-   * A trava final fica em `submit()`, que revalida todas as etapas.
+   * Avança para o próximo step. Sem saltos — TODAS as etapas são exibidas para
+   * todos os fluxos. A etapa 3 (modalidade) troca de conteúdo conforme houver
+   * ou não `requiresColeta`; a etapa 2 (contexto) é sempre igual.
    */
-  const next = () => {
-    setStep((s) => {
-      let n = s + 1;
-      // "Outro" pula regra de coleta
-      if (s === 1 && isOutro) n = 3;
-      // Sem coleta → pula step 2
-      if (s === 1 && !requiresColeta && !isOutro) n = 3;
-      return Math.min(n, TOTAL_STEPS - 1);
-    });
-  };
-
-  const back = () => setStep((s) => {
-    let p = s - 1;
-    if (s === 3 && !requiresColeta && !isOutro) p = 1;
-    if (s === 3 && isOutro) p = 1;
-    return Math.max(p, 0);
-  });
+  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+  const back = () => setStep((s) => Math.max(s - 1, 0));
 
   const reset = () => {
     setAnswers(EMPTY);
@@ -355,8 +372,8 @@ export const WhatsAppFunnel = () => {
 
 
   const submit = useCallback(async () => {
-    // Guard final: revalida todas as etapas antes de liberar o WhatsApp
-    for (const s of [0, 1, 2, 3]) {
+    // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
+    for (const s of [0, 1, 2, 3, 4]) {
       const v = validateStep(s);
       if (!v.ok) {
         trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
@@ -418,6 +435,14 @@ export const WhatsAppFunnel = () => {
       setAnswers(EMPTY);
       persist(EMPTY);
       setStep(0);
+      // Redireciona a aba atual para a página de confirmação — dá contexto
+      // caso o usuário volte, e é onde o GA4 registra o funil completo.
+      try {
+        const url2 = new URL("/obrigado", window.location.origin);
+        url2.searchParams.set("origem", originLocation);
+        window.history.pushState({}, "", url2.pathname + url2.search);
+        window.dispatchEvent(new PopStateEvent("popstate"));
+      } catch { /* noop */ }
     } finally {
       setTimeout(() => { submittingRef.current = false; }, 250);
     }
@@ -579,21 +604,120 @@ export const WhatsAppFunnel = () => {
           </div>
         )}
 
-        {/* Step 2 — regra Coleta e Entrega (condicional) */}
-        {step === 2 && requiresColeta && sintomaObj && branch && (
-          <div className="space-y-2.5" data-funnel-field="coleta">
-            <ColetaRequiredCard
-              equipamento={branch.label}
-              sintoma={sintomaObj.label}
-              accepted={answers.coletaAccepted}
-              onAcceptChange={(v) => update({ coletaAccepted: v })}
-            />
-            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(2)} />
+        {/* Step 2 — Contexto detalhado (SEMPRE exibido) */}
+        {step === 2 && (
+          <div className="space-y-2.5">
+            <p className="text-sm font-medium">3. Conte um pouco mais — assim resolvemos mais rápido.</p>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Quando o problema começou?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-quando">
+                {["Hoje", "Ontem", "Última semana", "Este mês", "Mais de 1 mês", "Sempre foi assim"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxQuando: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxQuando === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Com que frequência acontece?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-frequencia">
+                {["O tempo todo", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado", "Aleatório"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxFrequencia: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxFrequencia === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Já tentou alguma coisa?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-tentou">
+                {["Nada ainda", "Reiniciei", "Formatei", "Troquei cabo/carregador", "Já foi em outra assistência"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxTentou: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxTentou === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Qual a urgência?</p>
+              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-urgencia">
+                {["Hoje", "Esta semana", "Sem pressa"].map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => update({ ctxUrgencia: v })}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                      answers.ctxUrgencia === v
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card hover:border-primary/60"
+                    }`}
+                  >{v}</button>
+                ))}
+              </div>
+            </div>
+
+            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} onAttempt={() => attemptAdvance(2)} />
           </div>
         )}
 
-        {/* Step 3 — confirmação e envio (compacto) */}
+        {/* Step 3 — Modalidade (SEMPRE exibido; conteúdo condicional) */}
         {step === 3 && (
+          <div className="space-y-2.5">
+            {requiresColeta && sintomaObj && branch ? (
+              <div data-funnel-field="coleta">
+                <ColetaRequiredCard
+                  equipamento={branch.label}
+                  sintoma={sintomaObj.label}
+                  accepted={answers.coletaAccepted}
+                  onAcceptChange={(v) => update({ coletaAccepted: v })}
+                />
+              </div>
+            ) : (
+              <div className="rounded-lg border border-border bg-card/50 p-3 space-y-2 text-[12px] leading-snug">
+                <p className="text-sm font-semibold text-foreground">4. Como preferimos atender no seu caso</p>
+                <p className="text-foreground/80">
+                  Pelo que você descreveu, provavelmente conseguimos resolver por <strong>atendimento remoto</strong> ou{" "}
+                  <strong>visita técnica</strong> (mín. R$ 99,99 · 30 min). Se durante o diagnóstico surgir necessidade de bancada,
+                  te avisamos antes — nada é feito sem sua autorização.
+                </p>
+                <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                  <li>Orçamento sempre por WhatsApp, sem surpresa.</li>
+                  <li>Peças originais e garantia por escrito.</li>
+                  <li>Coleta e Entrega opcional a partir de R$ 300 (se você preferir não receber o técnico).</li>
+                </ul>
+              </div>
+            )}
+            <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(3)} />
+          </div>
+        )}
+
+        {/* Step 4 — Confirmação final e envio */}
+        {step === 4 && (
           <div className="space-y-2.5">
             <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-2.5 flex gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-600 mt-0.5 flex-shrink-0" />
@@ -608,6 +732,8 @@ export const WhatsAppFunnel = () => {
             <div className="rounded-lg border border-border bg-card/50 p-2.5 space-y-0.5 text-[11px] leading-snug">
               {branch && <p>📦 <strong>{branch.label}</strong>{answers.marca ? ` — ${answers.marca}` : ""}</p>}
               {sintomaObj && <p>⚠️ {sintomaObj.label}</p>}
+              {answers.ctxQuando && <p>🕒 Começou: {answers.ctxQuando} · {answers.ctxFrequencia}</p>}
+              {answers.ctxUrgencia && <p>⚡ Urgência: {answers.ctxUrgencia}</p>}
               {requiresColeta && <p className="text-amber-700 dark:text-amber-400">🚚 Coleta autorizada · mín. R$ 300</p>}
             </div>
 
