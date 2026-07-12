@@ -372,8 +372,8 @@ export const WhatsAppFunnel = () => {
 
 
   const submit = useCallback(async () => {
-    // Guard final: revalida todas as etapas antes de liberar o WhatsApp
-    for (const s of [0, 1, 2, 3]) {
+    // Guard final: revalida TODAS as etapas antes de liberar o WhatsApp
+    for (const s of [0, 1, 2, 3, 4]) {
       const v = validateStep(s);
       if (!v.ok) {
         trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
