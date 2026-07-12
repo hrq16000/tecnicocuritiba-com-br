@@ -7,7 +7,10 @@ const SCHEDULE_MESSAGE =
   "Olá! Quero agendar um atendimento técnico. Pode me ajudar com horários disponíveis?";
 
 const trackHeroWhatsApp = () => {
-  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick("whatsapp", "hero"));
+  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick("whatsapp", "hero_primary"));
+};
+const trackStickyMobileWhatsApp = () => {
+  import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick("whatsapp", "sticky_mobile"));
 };
 const trackHeroSchedule = () => {
   import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick("chatbot", "hero_schedule"));
