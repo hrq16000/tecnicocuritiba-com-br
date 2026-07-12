@@ -110,6 +110,17 @@ function buildMessage(a: Answers): string {
     if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
     if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
   }
+  // Contexto detalhado (Etapa 2)
+  const ctx: string[] = [];
+  if (a.ctxQuando) ctx.push(`quando começou: *${a.ctxQuando}*`);
+  if (a.ctxFrequencia) ctx.push(`frequência: *${a.ctxFrequencia}*`);
+  if (a.ctxTentou) ctx.push(`já tentou: *${a.ctxTentou}*`);
+  if (a.ctxUrgencia) ctx.push(`urgência: *${a.ctxUrgencia}*`);
+  if (ctx.length) {
+    lines.push("");
+    lines.push("🧭 *Contexto:*");
+    ctx.forEach((c) => lines.push(`• ${c}`));
+  }
   if (sintoma?.requiresColeta) {
     lines.push("");
     lines.push("📦 *Modalidade: COLETA E ENTREGA (obrigatória)*");
