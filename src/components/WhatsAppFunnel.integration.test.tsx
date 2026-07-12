@@ -118,22 +118,46 @@ function getLastWaUrl(): URL | null {
   return null;
 }
 
+async function fillContextIntermittent() {
+  // Etapa 2: progressivo + intermitente (ex: PC / Lento).
+  await clickButton("Hoje");
+  await clickButton("Só às vezes");
+  await clickButton("Nada ainda");
+  await clickButton("Próximas 72 horas úteis (3 dias úteis)");
+}
+
+async function fillContextEventual() {
+  // Etapa 2: sintoma eventual (ex: TV não liga, celular tela trincada).
+  // Frequência NÃO aparece.
+  await clickButton("Hoje");
+  await clickButton("Nada ainda");
+  await clickButton("Próximas 72 horas úteis (3 dias úteis)");
+}
+
 describe("WhatsAppFunnel — Cenário 1: Cliente Simples (PC > Lento)", () => {
-  it("fluxo passa direto e a URL final contém o aviso obrigatório + preços R$ 99,99 e R$ 99,99 estão visíveis no step inicial", async () => {
+  it("passa por triagem, mostra rota de VISITA e envia mensagem correta ao WhatsApp", async () => {
     renderFunnel();
     await openFunnel();
 
-    // Step 0 mostra o bloco de transparência com os preços
     expect(dialogText()).toMatch(/R\$ 99,99/);
-    expect(dialogText()).toMatch(/R\$ 90/);
 
-    await clickButton("PC / Notebook");       // step 0 → step 1
+    await clickButton("PC / Notebook");
     await clickButton("Dell");
     await clickButton("Lento / travando");
+    await clickButton("Continuar");           // step 1 → 2 (contexto)
 
-    await clickButton("Continuar");           // pula step 2 → step 3
+    await fillContextIntermittent();
+    await clickButton("Continuar");           // step 2 → 3 (modalidade: visita)
+
+    expect(dialogText()).toMatch(/Visita t[ée]cnica/i);
+    await clickButton("Continuar");           // step 3 → 4 (final)
+
     expect(dialogText()).toMatch(/Triagem completa/i);
-    expect(dialogText()).toMatch(/Próximo passo no WhatsApp/i);
+    // Marca ciência do valor mínimo antes de submeter
+    const dialog = await screen.findByRole("dialog");
+    const cb = dialog.querySelector<HTMLInputElement>("#min-val-confirm");
+    if (!cb) throw new Error("checkbox mínimo não encontrado");
+    await act(async () => { cb.click(); });
 
     await clickButton(/Agendar agora/i);
     await waitForWaCall();
@@ -144,23 +168,26 @@ describe("WhatsAppFunnel — Cenário 1: Cliente Simples (PC > Lento)", () => {
     expect(text).toContain("PC / Notebook");
     expect(text).toContain("Dell");
     expect(text).toContain("Lento");
+    expect(text).toMatch(/VISITA T[ÉE]CNICA/);
     expect(text.endsWith(VIDEO_WARNING)).toBe(true);
   });
 });
 
 
 describe("WhatsAppFunnel — Cenário 2: Barreira de Fogo (TV > Não liga)", () => {
-  it("bloqueia avanço até aceite da Coleta e mensagem final inclui R$ 300 + COLETA", async () => {
+  it("bloqueia avanço até aceite da Coleta e mensagem final inclui R$ 299,99 + COLETA", async () => {
     renderFunnel();
     await openFunnel();
 
     await clickButton("TV");
     await clickButton("Samsung");
     await clickButton("Não liga");
-    await clickButton("Continuar");           // step 1 → step 2 (coleta)
+    await clickButton("Continuar");           // step 1 → 2 (contexto)
+
+    await fillContextEventual();
+    await clickButton("Continuar");           // step 2 → 3 (coleta)
 
     expect(dialogText()).toMatch(/Coleta e Entrega/i);
-    expect(dialogText()).toMatch(/R\$ 300/);
     expect(continueIsDisabled()).toBe(true);
 
     // Tentativa de forçar avanço sem aceite — não pode abrir wa.me
@@ -170,7 +197,12 @@ describe("WhatsAppFunnel — Cenário 2: Barreira de Fogo (TV > Não liga)", () 
     await clickAcceptCheckbox();
     expect(continueIsDisabled()).toBe(false);
 
-    await clickButton("Continuar");           // → step 3
+    await clickButton("Continuar");           // → step 4
+    const dialog = await screen.findByRole("dialog");
+    const cb = dialog.querySelector<HTMLInputElement>("#min-val-confirm");
+    if (!cb) throw new Error("checkbox mínimo não encontrado");
+    await act(async () => { cb.click(); });
+
     await clickButton(/Agendar agora/i);
     await waitForWaCall();
 
@@ -178,7 +210,7 @@ describe("WhatsAppFunnel — Cenário 2: Barreira de Fogo (TV > Não liga)", () 
     expect(url).not.toBeNull();
     const text = url!.searchParams.get("text") || "";
     expect(text).toContain("COLETA E ENTREGA");
-    expect(text).toContain("R$ 300");
+    expect(text).toContain("R$ 299,99");
     expect(text).toContain("Não liga");
     expect(text.endsWith(VIDEO_WARNING)).toBe(true);
   });
@@ -192,10 +224,18 @@ describe("WhatsAppFunnel — Cenário 3: Tela Quebrada (Celular)", () => {
     await clickButton("Celular / Tablet");
     await clickButton("iPhone (Apple)");
     await clickButton("Tela trincada / quebrada");
-    await clickButton("Continuar");           // → step 2 (coleta)
+    await clickButton("Continuar");           // → step 2 (contexto)
+
+    await fillContextEventual();
+    await clickButton("Continuar");           // → step 3 (coleta)
 
     await clickAcceptCheckbox();
-    await clickButton("Continuar");           // → step 3
+    await clickButton("Continuar");           // → step 4
+    const dialog = await screen.findByRole("dialog");
+    const cb = dialog.querySelector<HTMLInputElement>("#min-val-confirm");
+    if (!cb) throw new Error("checkbox mínimo não encontrado");
+    await act(async () => { cb.click(); });
+
     await clickButton(/Agendar agora/i);
     await waitForWaCall();
 

@@ -23,7 +23,9 @@ import {
   EQUIPMENT_BRANCHES,
   getBranch,
   getSintoma,
+  resolveRoute,
   type Equipment,
+  type ServiceRoute,
 } from "@/components/funnel/equipmentBranches";
 import { ColetaRequiredCard } from "@/components/funnel/ColetaRequiredCard";
 import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
@@ -35,8 +37,11 @@ import { logFunnelDiag } from "@/lib/funnelDiagnostics";
 const WHATSAPP_NUMBER = "5541997452053";
 const WA_HOSTS = ["wa.me", "api.whatsapp.com"];
 // Persistência do progresso do funil — sobrevive a reloads e retorno do WhatsApp.
-const STORAGE_KEY = "wa_funnel_state_v5";
-const LEGACY_KEYS = ["wa_funnel_answers_v4"];
+// v6: nova estrutura de sintomas com metadados (route/eventual/intermittent).
+// Qualquer estado anterior é descartado silenciosamente para evitar renders
+// contra sintomas que deixaram de existir (causa raiz da tela de erro anterior).
+const STORAGE_KEY = "wa_funnel_state_v6";
+const LEGACY_KEYS = ["wa_funnel_answers_v4", "wa_funnel_state_v5"];
 
 type PersistedState = {
   answers: Answers;
@@ -134,20 +139,31 @@ function buildMessage(a: Answers): string {
     lines.push("🧭 *Contexto:*");
     ctx.forEach((c) => lines.push(`• ${c}`));
   }
-  if (sintoma?.requiresColeta) {
-    lines.push("");
-    lines.push("📦 *Modalidade: COLETA E ENTREGA (obrigatória)*");
-    lines.push("• Mínimo R$ 300 (diagnóstico incluso) · desistiu paga só R$ 99,99");
-    lines.push("• Autorizado pelo cliente no funil");
+  const route = resolveRoute(a.equipamento, a.sintoma);
+  lines.push("");
+  if (route === "coleta") {
+    lines.push("📦 *Modalidade indicada: COLETA E ENTREGA*");
+    lines.push("• Valor mínimo R$ 299,99 · peças não inclusas");
+    lines.push("• Reparos até R$ 300 sem nova autorização; acima disso, orçamento antes");
+    lines.push("• Em caso de desistência: R$ 99,99 pelo diagnóstico");
+    lines.push("• Prazo estimado: 3 a 60 dias úteis");
+  } else if (route === "visita") {
+    lines.push("🧰 *Modalidade indicada: VISITA TÉCNICA (PC/Notebook)*");
+    lines.push("• R$ 99,99 por até 30 min · R$ 169,99 por 1h combinada");
+    lines.push("• Peças não inclusas · visita não garante reparo");
+  } else {
+    lines.push("💻 *Modalidade indicada: ATENDIMENTO REMOTO*");
+    lines.push("• Valor mínimo R$ 99,99 · requer computador ligado e acesso à internet");
   }
   lines.push("");
-  lines.push("💰 *Valor mínimo:* cliente confirmou ciência do mínimo de R$ 99,99 para atendimento/visita.");
+  lines.push("✅ Registro de ciência e aceite eletrônico dos termos e valores apresentados no funil.");
   if (a.descricao.trim()) {
     lines.push("");
     lines.push(`📝 ${a.descricao.trim()}`);
   }
   lines.push("");
   lines.push("— Estou ciente das políticas e termos: tecnicocuritiba.com.br/termos-e-condicoes");
+  lines.push(`— Triagem: TRG-${Date.now().toString(36).toUpperCase()} · v2026.07.1`);
   // Garante o aviso obrigatório no final, vindo da fonte única (`funnelWarning.ts`).
   return withVideoWarning(lines.join("\n"));
 }
@@ -176,22 +192,10 @@ export const WhatsAppFunnel = () => {
   // Restore cached state (answers + step + origem). Descarta se antigo demais.
   useEffect(() => {
     try {
-      // Migra chaves legadas descartando (mantemos apenas answers no v4 antigo).
+      // Chaves legadas apenas removidas — as estruturas antigas de sintomas
+      // podem apontar para ids que não existem mais e provocariam render vazio.
       LEGACY_KEYS.forEach((k) => {
-        try {
-          const legacyRaw = localStorage.getItem(k);
-          if (legacyRaw && !localStorage.getItem(STORAGE_KEY)) {
-            const legacyAnswers = JSON.parse(legacyRaw);
-            const migrated: PersistedState = {
-              answers: { ...EMPTY, ...legacyAnswers },
-              step: 0,
-              originLocation: "cta",
-              updatedAt: Date.now(),
-            };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
-          }
-          localStorage.removeItem(k);
-        } catch { /* noop */ }
+        try { localStorage.removeItem(k); } catch { /* noop */ }
       });
 
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -202,7 +206,19 @@ export const WhatsAppFunnel = () => {
         localStorage.removeItem(STORAGE_KEY);
         return;
       }
-      if (parsed.answers) setAnswers({ ...EMPTY, ...parsed.answers });
+      if (parsed.answers) {
+        const safe: Answers = { ...EMPTY, ...parsed.answers };
+        // Se o equipamento persistido não existe mais, reseta as respostas
+        // dependentes — evita render contra sintoma inexistente (tela de erro).
+        if (safe.equipamento && !getBranch(safe.equipamento)) {
+          safe.equipamento = null;
+          safe.marca = "";
+          safe.sintoma = "";
+        } else if (safe.equipamento && safe.sintoma && !getSintoma(safe.equipamento, safe.sintoma)) {
+          safe.sintoma = "";
+        }
+        setAnswers(safe);
+      }
       if (typeof parsed.step === "number") setStep(Math.min(Math.max(parsed.step, 0), 4));
       if (parsed.originLocation) setOriginLocation(parsed.originLocation);
     } catch { /* noop */ }
@@ -333,6 +349,12 @@ export const WhatsAppFunnel = () => {
     : undefined;
   const requiresColeta = !!sintomaObj?.requiresColeta;
   const isOutro = answers.equipamento === "outro";
+  // Modalidade calculada dinamicamente pelo par equipamento+sintoma.
+  const route: ServiceRoute = resolveRoute(answers.equipamento, answers.sintoma);
+  // Pergunta contextual só aparece se fizer sentido para o sintoma.
+  const askFrequency = !!sintomaObj?.intermittent;
+  const isEventual = !!sintomaObj?.eventual;
+  const whenLabel = isEventual ? "Quando aconteceu?" : "Quando o problema começou?";
 
   // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
   const attentionSelector = useCallback((s: number): string | null => {
@@ -350,7 +372,7 @@ export const WhatsAppFunnel = () => {
     }
     if (s === 2) {
       if (!answers.ctxQuando) return "[data-funnel-field='ctx-quando']";
-      if (!answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
+      if (askFrequency && !answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
       if (!answers.ctxTentou) return "[data-funnel-field='ctx-tentou']";
       if (!answers.ctxUrgencia) return "[data-funnel-field='ctx-urgencia']";
       return null;
@@ -372,6 +394,7 @@ export const WhatsAppFunnel = () => {
     answers.minimumAccepted,
     isOutro,
     requiresColeta,
+    askFrequency,
   ]);
 
   const attemptAdvance = useCallback((s: number) => {
@@ -400,8 +423,8 @@ export const WhatsAppFunnel = () => {
       return { ok: true };
     }
     if (s === 2) {
-      if (!answers.ctxQuando) return { ok: false, reason: "Diga quando o problema começou." };
-      if (!answers.ctxFrequencia) return { ok: false, reason: "Diga com que frequência acontece." };
+      if (!answers.ctxQuando) return { ok: false, reason: isEventual ? "Diga quando aconteceu." : "Diga quando o problema começou." };
+      if (askFrequency && !answers.ctxFrequencia) return { ok: false, reason: "Diga com que frequência acontece." };
       if (!answers.ctxTentou) return { ok: false, reason: "Diga se já tentou alguma coisa." };
       if (!answers.ctxUrgencia) return { ok: false, reason: "Informe a urgência." };
       return { ok: true };
@@ -418,7 +441,7 @@ export const WhatsAppFunnel = () => {
         : { ok: false, reason: "Confirme ciência do valor mínimo de R$ 99,99." };
     }
     return { ok: true };
-  }, [answers, isOutro, requiresColeta]);
+  }, [answers, isOutro, requiresColeta, askFrequency, isEventual]);
 
   const canAdvance = useMemo(() => validateStep(step).ok, [validateStep, step]);
 
@@ -755,9 +778,12 @@ export const WhatsAppFunnel = () => {
             <p className="text-sm font-medium">3. Conte um pouco mais — assim resolvemos mais rápido.</p>
 
             <div>
-              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Quando o problema começou?</p>
+              <p className="text-xs font-semibold mb-1.5 text-foreground/80">{whenLabel}</p>
               <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-quando">
-                {["Hoje", "Ontem", "Última semana", "Este mês", "Mais de 1 mês", "Sempre foi assim"].map((v) => (
+                {(isEventual
+                  ? ["Agora há pouco", "Hoje", "Ontem", "Esta semana", "Há mais tempo"]
+                  : ["Hoje", "Ontem", "Última semana", "Este mês", "Mais de 1 mês", "Sempre foi assim"]
+                ).map((v) => (
                   <button
                     key={v}
                     type="button"
@@ -772,23 +798,25 @@ export const WhatsAppFunnel = () => {
               </div>
             </div>
 
-            <div>
-              <p className="text-xs font-semibold mb-1.5 text-foreground/80">Com que frequência acontece?</p>
-              <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-frequencia">
-                {["O tempo todo", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado", "Aleatório"].map((v) => (
-                  <button
-                    key={v}
-                    type="button"
-                    onClick={() => update({ ctxFrequencia: v })}
-                    className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
-                      answers.ctxFrequencia === v
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-card hover:border-primary/60"
-                    }`}
-                  >{v}</button>
-                ))}
+            {askFrequency && (
+              <div>
+                <p className="text-xs font-semibold mb-1.5 text-foreground/80">Com que frequência acontece?</p>
+                <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-frequencia">
+                  {["O tempo todo", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado", "Aleatório"].map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => update({ ctxFrequencia: v })}
+                      className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                        answers.ctxFrequencia === v
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-card hover:border-primary/60"
+                      }`}
+                    >{v}</button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <div>
               <p className="text-xs font-semibold mb-1.5 text-foreground/80">Já tentou alguma coisa?</p>
@@ -843,18 +871,51 @@ export const WhatsAppFunnel = () => {
                 />
               </div>
             ) : (
-              <div className="rounded-lg border border-border bg-card/50 p-3 space-y-2 text-[12px] leading-snug">
-                <p className="text-sm font-semibold text-foreground">4. Como preferimos atender no seu caso</p>
-                <p className="text-foreground/80">
-                  Pelo que você descreveu, provavelmente conseguimos resolver por <strong>atendimento remoto</strong> ou{" "}
-                  <strong>visita técnica</strong> (mín. R$ 99,99 · 30 min). Se durante o diagnóstico surgir necessidade de bancada,
-                  te avisamos antes — nada é feito sem sua autorização.
-                </p>
-                <ul className="ml-4 list-disc space-y-1 text-foreground/70">
-                  <li>Orçamento sempre por WhatsApp, sem surpresa.</li>
-                  <li>Peças originais e garantia por escrito.</li>
-                  <li>Coleta e Entrega opcional a partir de R$ 300 (se você preferir não receber o técnico).</li>
-                </ul>
+              <div className="rounded-lg border border-border bg-card/50 p-3 space-y-2 text-[12px] leading-snug" data-funnel-route={route}>
+                <p className="text-sm font-semibold text-foreground">4. Modalidade indicada para o seu caso</p>
+                {route === "remoto" && (
+                  <>
+                    <p className="text-foreground/80">
+                      Pelas informações fornecidas, o serviço pode ser compatível com{" "}
+                      <strong>atendimento remoto</strong>, pois o computador está funcionando e a solicitação envolve
+                      instalação, configuração ou ajuste de software. A confirmação será feita no WhatsApp.
+                    </p>
+                    <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                      <li>Valor mínimo <strong>R$ 99,99</strong>.</li>
+                      <li>Requer acesso à internet e ao computador ligado.</li>
+                      <li>Se aparecer defeito físico durante o atendimento, indicamos coleta e entrega.</li>
+                    </ul>
+                  </>
+                )}
+                {route === "visita" && (
+                  <>
+                    <p className="text-foreground/80">
+                      Pelas informações fornecidas, seu caso pode ser avaliado por <strong>visita técnica</strong> em
+                      PC/Notebook. Se for identificada necessidade de bancada, coleta ou peças, você será informado antes —
+                      nada é feito sem sua autorização.
+                    </p>
+                    <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                      <li><strong>R$ 99,99</strong> por até 30 min · <strong>R$ 169,99</strong> por 1h combinada.</li>
+                      <li>A visita não garante o reparo. Peças não inclusas.</li>
+                      <li>Casos que exigem bancada seguem para coleta e entrega.</li>
+                    </ul>
+                  </>
+                )}
+                {route === "coleta" && (
+                  <>
+                    <p className="text-foreground/80">
+                      Pelas informações fornecidas, este equipamento precisa ser encaminhado por{" "}
+                      <strong>Coleta e Entrega</strong> para avaliação técnica em laboratório.
+                      {sintomaObj?.hint ? <> Sintoma informado: <em>{sintomaObj.hint}</em>.</> : null}
+                    </p>
+                    <ul className="ml-4 list-disc space-y-1 text-foreground/70">
+                      <li>Valor mínimo <strong>R$ 299,99</strong> (coleta, entrega e diagnóstico). Peças não inclusas.</li>
+                      <li>Reparos até <strong>R$ 300</strong> podem ser executados sem nova autorização; acima disso, orçamento é enviado antes.</li>
+                      <li>Em caso de cancelamento, cobrança de <strong>R$ 99,99</strong> pelo diagnóstico.</li>
+                      <li>Prazo estimado: <strong>3 a 60 dias úteis</strong> (pode ser maior se houver encomenda).</li>
+                    </ul>
+                  </>
+                )}
               </div>
             )}
             <FunnelNav onBack={back} onNext={next} canNext={canAdvance} nextLabel="Continuar" onAttempt={() => attemptAdvance(3)} />

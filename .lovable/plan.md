@@ -1,34 +1,119 @@
-# Plano — melhorias pós-refresh dos 5 posts long-tail
 
-## Concluído nesta rodada
+# Reestruturação Inteligente do Funil de Triagem
 
-- **Refresh dos 5 posts long-tail**: H1/title, meta description, primeiro parágrafo (`.lead`) e nomes exatos das keywords aplicados em `src/pages/Blog.tsx` (index) e `src/data/blogPostsContent.tsx` (conteúdo). FAQs já estavam no formato final.
-- **GA4 share tracking**: novo helper `trackShareClick(network, ctx)` em `src/lib/analytics.ts` disparando os eventos `share` (canônico do GA4) + `share_click`. Ligado nos botões WhatsApp/Facebook/X do `BlogTOCAndShare`, com `slug`, `title`, `url` e `location`.
-- **CLS residual**: `width={40} height={40}` + `decoding="async"` no avatar do `ReviewsGrid`. Cards do Blog já tinham dimensões explícitas (`1200x630` capa, `800x400` fallback, `500x280` grid, `1600x900` hero do post).
+Objetivo: transformar o `WhatsAppFunnel` atual (baseado em condicionais espalhadas no JSX e num único `equipmentBranches.ts` plano) numa máquina de estados centralizada, orientada por dados, com perguntas contextuais por equipamento, modalidade calculada automaticamente e sem regressões nas áreas externas (SEO, rotas, páginas institucionais).
 
-## Pendências que precisam de arquivo/decisão do cliente
+Todo o trabalho fica confinado a `src/components/funnel/*`, `src/lib/funnel*`, `src/components/WhatsAppFunnel.tsx` e testes. Nenhuma alteração em SEO, rotas, páginas institucionais, header/footer, WhatsAppFloat, número de WhatsApp (`5541997452053`), Cloud/Supabase ou páginas `/problema/*`.
 
-- **/sobre com CNPJ real, endereço e foto do técnico**: aguardando envio dos arquivos (foto real do técnico + string do CNPJ + endereço formatado) para atualizar `src/pages/Sobre.tsx`, `JsonLdSchema` (LocalBusiness) e `Footer`.
-- **Lighthouse real em produção**: rodar `bun run lh:mobile` + `bun run lh:prod` no ambiente CI ou local com a build de produção após o próximo deploy. Sandbox atual não roda Chrome headless com throttling determinístico — o número que sair daqui não é confiável. O que hoje mais provavelmente puxa LCP acima de 2.5s em mobile 4G:
-  1. Hero da home (`FastHeroSection`) — validar se o LCP é a imagem hero (com `fetchPriority="high"`) ou um bloco de texto abaixo do fold.
-  2. Vendor chunk único (ver abaixo) — força o parse de ~250 KB antes do primeiro paint no mobile lento.
-  3. Fontes: já com `font-display: swap` e preconnect Google Fonts, mas 3 variantes ainda é aceitável — trocar para 2 pesos derruba TBT em ~30 ms.
-  4. GTM/GA4 carrega com `defer` — se ainda estiver como script no `<head>` sem `defer`, mover para o fim do body.
+## 1. Nova arquitetura (data-driven)
 
-## Não seguir (regressões conhecidas)
+Novo diretório `src/components/funnel/engine/`:
 
-- **`manualChunks` mais granular**: já foi testado e caiu na TDZ `Cannot access 'kf' before initialization` em produção. A regra atual (`"vendor"` único) é intencional e está documentada no `vite.config.ts`. Só voltar a esse tópico depois de auditoria com `import-analyzer` para eliminar imports circulares entre React/Router/Radix.
-- **AVIF com fallback via `<picture>`**: exige refator dos componentes de imagem (`Blog.tsx`, `BlogPost.tsx`, `RealImageSection`, hero) e conversão em build (`vite-imagetools` + assets locais). Hoje o site serve capas via Unsplash (`?auto=format`) — Unsplash já negocia AVIF/WebP automaticamente via `Accept`. Portanto, ganho marginal para as imagens hospedadas por eles; ganho real virá quando migrarmos as capas para assets estáticos. Fica como próxima fase (fase 6).
+- `types.ts` — tipos `Equipment`, `ServiceRoute` (`remote | visita | coleta`), `Symptom`, `Question`, `TriageState`, `TriageAction`, `PricingRule`.
+- `config.ts` — objeto único com WhatsApp number, nome da empresa, textos de termos, valores (R$ 99,99 / R$ 169,99 / R$ 299,99 / faixas de TV, som, videogame, celular), prazos (3–60 dias úteis), versão da triagem (`TRIAGE_VERSION = "2026.07.1"`). Reaproveita `coletaConfig.ts` onde possível.
+- `equipments.ts` — array declarativo por equipamento (`pc`, `tv`, `celular`, `surface`, `som`, `videogame`, `outro`) com: label, emoji, perguntas de identificação, lista de sintomas, e para cada sintoma uma função `route(context)` que devolve `remote | visita | coleta`. Substitui `equipmentBranches.ts` (mantém arquivo antigo como re-export shim para não quebrar testes existentes).
+- `questions.ts` — `getQuestionsForEquipment(state)` e `getQuestionsForSymptom(state)` retornam a lista de perguntas contextuais (usadas na etapa "detalhes").
+- `routing.ts` — `determineServiceRoute(state)` aplica as regras (remoto só p/ PC ligando + instalação; visita só p/ PC em serviços rápidos; coleta obrigatória p/ TV, celular, tablet, Surface, som, receiver, áudio, videogame, outro, PC que não liga, defeito de placa, dano físico).
+- `pricing.ts` — `getPricingRules(route, equipment, symptom)` devolve `{ min, label, prazo, disclaimers, faixas? }`.
+- `messages.ts` — `buildTriageSummary(state)` e `buildWhatsAppMessage(state)` (formato legível, sem campos vazios, com identificador de triagem `TRG-<timestamp>` e versão).
+- `machine.ts` — reducer puro `triageReducer(state, action)` com ações `SELECT_EQUIPMENT`, `ANSWER`, `NEXT`, `BACK`, `ACCEPT_TERMS`, `RESET`, `HYDRATE`. Faz `resetDependentAnswers()` ao trocar equipamento/sintoma. Calcula `completedSteps`, `validationErrors`, `currentStep` derivados. Não permite `NEXT` sem validação.
+- `validation.ts` — `validateCurrentStep(state)` e `getFirstIncompleteField(state)`.
+- `persistence.ts` — `loadState` / `saveState` / `clearState` em `localStorage` sob `wa_funnel_state_v6` com campo `version`. Se `version` diferir da atual, descarta (corrige a "tela de erro" causada por estado antigo). TTL de 3 dias.
 
-## Próximos passos (sem dependência do cliente)
+## 2. Etapas (dinâmicas)
 
-1. Auditar hero da home no Chrome DevTools > Performance > LCP: se o LCP for texto/gradiente e não a imagem, remover `fetchPriority="high"` da hero (economiza banda no mobile).
-2. Migrar as capas dos 10 posts mais lidos para assets locais em `src/assets/blog/*.avif|webp|jpg` + `<picture>` com AVIF/WebP/JPG — abre caminho para o item AVIF acima.
-3. Coletar 10+ reviews reais no Google Business antes de publicar `AggregateRating` no Schema.
+Ordem: `equipment → deviceDetails → symptom → contextualAnswers → serviceRoute → urgency → termsAccepted → finalReview`.
 
-## Fora do Lovable (recap curto)
+Etapas condicionais adicionais só aparecem quando `getQuestionsForSymptom` devolver perguntas (ex: molhou → "quando aconteceu / tentou ligar"). O total de etapas exibido na barra de progresso é `state.steps.length` calculado dinamicamente.
 
-- Google Business Profile ativo com NAP idêntico ao site.
-- Fotos reais (fachada, bancada, técnico) para substituir stock.
-- Backlinks locais (Apontador, Guiamais, ACP, portais paranaenses).
-- Coleta ativa de reviews via T+24h/T+72h no WhatsApp.
+Regras-chave já validadas nas perguntas:
+
+- "Outro" pede: equipamento + marca + modelo? + idade + liga? + o que aconteceu + queda/líquido/queimado + tentativa anterior + informação adicional. Após responder, mostra o aviso do valor mínimo R$ 99,99.
+- Substituir opção "Outro / Só orçamento" por apenas "Outro" (já está OK, confirmar).
+- Substituir "Hoje" por "Próximas 72 horas úteis — até 3 dias úteis".
+- Botão final: "Agendar agora" (sem "Continuar para WhatsApp" / "Enviar" / "Finalizar").
+- Perguntas de frequência só aparecem para sintomas intermitentes (`symptom.intermittent === true`).
+- Perguntas "Quando começou?" vs "Quando aconteceu?" diferenciadas por `symptom.eventual === true`.
+
+## 3. Modalidade
+
+`determineServiceRoute` (regras exatas do briefing):
+
+```text
+remote  ← equipment=pc  && liga=normal && objetivo∈{instalar, configurar} && semDefeitoFísico
+visita  ← equipment=pc  && (serviço rápido no local)  && !defeitoBancada
+coleta  ← default para todos os demais (TV, celular, tablet, Surface, som,
+          receiver, áudio, videogame, outro, PC que não liga / placa / dano)
+```
+
+A etapa "modalidade" nunca oferece alternativa quando só há uma compatível — apenas explica em linguagem simples. Nunca exibe o texto genérico antigo "provavelmente conseguimos resolver por remoto ou visita".
+
+## 4. Termos (registro de ciência)
+
+Etapa dedicada, com checkboxes separados por modalidade (coleta tem 3 aceites: valor mínimo, R$ 99,99 em caso de desistência, prazo 3–60 dias úteis). Nenhum pré-marcado. Ao aceitar, grava `{ acceptedAt, modalidade, termsVersion }` no estado e na mensagem final. Rotulado como "registro de ciência e aceite eletrônico" (nunca "assinatura digital").
+
+## 5. Correção da tela de erro (causa raiz)
+
+Diagnóstico esperado a partir do código atual:
+
+- `wa_funnel_state_v5` guardava `step` numérico fixo. Se o array de etapas mudar (ex: rota "outro"), o step persistido aponta para uma etapa inexistente → `undefined.map` no render → AppErrorBoundary.
+- Auto-advance via `setTimeout` sem cleanup dispara duas transições em sequência quando o usuário clica rápido.
+- Handler global de clique em `<a href="wa.me/...">` reabre o funil enquanto ainda está submetendo, ressetando o estado.
+
+Correções:
+
+1. `persistence.ts` versiona o estado (`version: TRIAGE_VERSION`); mismatch → descarta silenciosamente.
+2. `machine.ts` só aceita `NEXT` se `validateCurrentStep(state).ok`; guarda `isTransitioning` no reducer.
+3. `useEffect` de auto-advance com `clearTimeout` no cleanup e trava `transitioningRef`.
+4. Handler global ignora cliques quando `submittingRef.current === true` **ou** quando o anchor está dentro de `[data-funnel-root]` (evita reabrir a partir do próprio botão final).
+5. Novo `FunnelErrorBoundary` local: se algo explodir no modal, mostra "Reiniciar triagem" (chama `RESET` + `clearState`), sem derrubar a página inteira. `AppErrorBoundary` continua como fallback global.
+
+## 6. UX / Mobile / Acessibilidade
+
+- `DialogContent`: `max-w-[560px]` desktop, `w-[calc(100vw-1rem)] max-h-[100dvh]` mobile, header fixo + área scrollável + footer fixo.
+- Ao selecionar opção, move foco para o próximo campo obrigatório (`getFirstIncompleteField`) e, quando a etapa fica completa, aplica pulso curto no indicador de progresso e chama `next()` após 400ms. Respeita `prefers-reduced-motion`.
+- Botão "Continuar" continua existindo como fallback acessível (não obrigatório usar).
+- Bip só toca em tentativa explícita de avançar com campo faltando (nunca ao abrir).
+- Focus trap do Radix Dialog já cobre a11y; adicionar `aria-live="polite"` na área de erro.
+- `data-funnel-open="1"` no `<body>` (já existe) — CSS já esconde floats/sticky; confirmar.
+
+## 7. Mensagem WhatsApp
+
+`buildWhatsAppMessage` produz texto limpo, sem JSON, sem campos vazios, com bloco final:
+
+```text
+Confirmo que li e aceitei as condições apresentadas no funil.
+Triagem: TRG-<timestamp> · v2026.07.1
+```
+
+Se `window.open` for bloqueado: fallback exibe caixa com botão "Copiar mensagem" e link `wa.me`; preserva todo o estado.
+
+## 8. Testes
+
+- `src/components/funnel/engine/machine.test.ts` — reducer + validação + roteamento (todos os cenários 1–22 do briefing).
+- `src/components/funnel/engine/routing.test.ts` — cada regra de modalidade.
+- `src/components/WhatsAppFunnel.integration.test.tsx` — atualizado para novos rótulos e etapas.
+- `e2e/whatsapp-funnel.spec.ts` — atualizado: TV → coleta obrigatória, PC lento + funcionando → visita, PC instalar programa → remoto, Outro → pergunta idade + valor mínimo. Mantém teste de "Agendar agora" mobile e dedup de eventos.
+
+## Arquivos afetados
+
+Novos:
+- `src/components/funnel/engine/{types,config,equipments,questions,routing,pricing,messages,machine,validation,persistence}.ts`
+- `src/components/funnel/engine/FunnelErrorBoundary.tsx`
+- `src/components/funnel/engine/__tests__/*.test.ts`
+
+Editados:
+- `src/components/WhatsAppFunnel.tsx` — reescrito para consumir a engine (mantém API pública: eventos `wa-funnel:open`, atributos `data-funnel-*`, número de WhatsApp).
+- `src/components/funnel/equipmentBranches.ts` — vira shim que re-exporta os tipos antigos a partir de `engine/equipments.ts` para não quebrar `equipmentBranches.test.ts`.
+- `src/components/WhatsAppFunnel.integration.test.tsx`, `e2e/whatsapp-funnel.spec.ts`, `e2e/agendar-agora-mobile.spec.ts` — atualizados.
+
+Não tocados: `Header`, `Footer`, `WhatsAppFloat`, `AppErrorBoundary`, páginas, SEO, sitemaps, `coletaConfig.ts` (apenas lido).
+
+## Fora de escopo (não neste turno)
+
+Os itens abaixo do briefing original ficam para turnos seguintes, para manter esta entrega focada e revisável:
+- Página `/obrigado` com mensagens separadas WhatsApp × ligação.
+- JSON-LD `FAQPage` + `LocalBusiness` novos.
+- Otimização de imagens / lazy loading em `/problema/*`.
+
+Após aprovação deste plano, implemento a engine e a integração, rodo `tsgo` + `vitest run` + o Playwright do funil para validar antes de encerrar.
