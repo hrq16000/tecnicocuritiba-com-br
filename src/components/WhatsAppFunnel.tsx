@@ -297,10 +297,16 @@ export const WhatsAppFunnel = () => {
       }
       return !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
     }
-    if (s === 2) return "[data-funnel-field='coleta']";
-    if (s === 3) return "[data-funnel-field='minimum']";
+    if (s === 2) {
+      if (!answers.ctxQuando) return "[data-funnel-field='ctx-quando']";
+      if (!answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
+      if (!answers.ctxTentou) return "[data-funnel-field='ctx-tentou']";
+      return "[data-funnel-field='ctx-urgencia']";
+    }
+    if (s === 3) return "[data-funnel-field='coleta']";
+    if (s === 4) return "[data-funnel-field='minimum']";
     return null;
-  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, isOutro]);
+  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, answers.ctxQuando, answers.ctxFrequencia, answers.ctxTentou, isOutro]);
 
   const attemptAdvance = useCallback((s: number) => {
     const sel = attentionSelector(s);
@@ -308,8 +314,9 @@ export const WhatsAppFunnel = () => {
   }, [attentionSelector]);
 
   // ---------- Navigation ----------
-  // 4 steps: 0 equip, 1 marca/sintoma (ou descrição), 2 coleta (condicional), 3 confirmação
-  const TOTAL_STEPS = 4;
+  // 5 steps SEM saltos: 0 equip, 1 marca/sintoma (ou "outro"), 2 contexto detalhado,
+  // 3 modalidade/coleta (sempre exibido), 4 confirmação final.
+  const TOTAL_STEPS = 5;
   /** Validação por etapa — fonte única de verdade para botão e guard de submit. */
   const validateStep = useCallback((s: number): { ok: true } | { ok: false; reason: string } => {
     if (s === 0) {
@@ -327,12 +334,19 @@ export const WhatsAppFunnel = () => {
       return { ok: true };
     }
     if (s === 2) {
+      if (!answers.ctxQuando) return { ok: false, reason: "Diga quando o problema começou." };
+      if (!answers.ctxFrequencia) return { ok: false, reason: "Diga com que frequência acontece." };
+      if (!answers.ctxTentou) return { ok: false, reason: "Diga se já tentou alguma coisa." };
+      if (!answers.ctxUrgencia) return { ok: false, reason: "Informe a urgência." };
+      return { ok: true };
+    }
+    if (s === 3) {
       if (requiresColeta && !answers.coletaAccepted) {
         return { ok: false, reason: "Aceite a modalidade Coleta e Entrega para continuar." };
       }
       return { ok: true };
     }
-    if (s === 3) {
+    if (s === 4) {
       return answers.minimumAccepted
         ? { ok: true }
         : { ok: false, reason: "Confirme ciência do valor mínimo de R$ 99,99." };
@@ -343,26 +357,12 @@ export const WhatsAppFunnel = () => {
   const canAdvance = useMemo(() => validateStep(step).ok, [validateStep, step]);
 
   /**
-   * Avança para o próximo step. NÃO valida com `validateStep` aqui porque o
-   * botão "Continuar" já é desabilitado por `canAdvance` (validação reativa) e,
-   * no auto-advance da seleção de equipamento, o `setAnswers` ainda não foi
-   * comitado quando `next()` roda — validar aqui daria falso negativo.
-   * A trava final fica em `submit()`, que revalida todas as etapas.
+   * Avança para o próximo step. Sem saltos — TODAS as etapas são exibidas para
+   * todos os fluxos. A etapa 3 (modalidade) troca de conteúdo conforme houver
+   * ou não `requiresColeta`; a etapa 2 (contexto) é sempre igual.
    */
-  const next = () => {
-    setStep((s) => {
-      let n = s + 1;
-      // "Outro" pula regra de coleta
-      if (s === 1 && isOutro) n = 3;
-      // Sem coleta → pula step 2
-      if (s === 1 && !requiresColeta && !isOutro) n = 3;
-      return Math.min(n, TOTAL_STEPS - 1);
-    });
-  };
-
-  const back = () => setStep((s) => {
-    let p = s - 1;
-    if (s === 3 && !requiresColeta && !isOutro) p = 1;
+  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+  const back = () => setStep((s) => Math.max(s - 1, 0));
     if (s === 3 && isOutro) p = 1;
     return Math.max(p, 0);
   });
