@@ -36,6 +36,7 @@ export const TopOfferBanner = () => {
       <div
         role="region"
         data-testid="top-offer-banner"
+        data-hide-when-funnel
         aria-label="Oferta: serviço rápido até 30 minutos por R$ 99,99"
         style={{ zIndex: "var(--z-top-offer)" as unknown as number }}
         className="fixed left-0 right-0 top-[var(--site-header-height)] flex min-h-[var(--top-offer-height)] w-full items-center overflow-hidden bg-gradient-to-r from-accent via-accent to-primary text-white shadow-md"
