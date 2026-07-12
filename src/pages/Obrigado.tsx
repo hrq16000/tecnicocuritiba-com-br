@@ -33,7 +33,7 @@ const Obrigado = () => {
       <PageSEO
         title="Pedido recebido · Técnico em Curitiba"
         description="Sua triagem foi enviada. Continue a conversa no WhatsApp — Seg–Sáb 08h–20h, resposta em ~30 min."
-        canonical="https://tecnicocuritiba.com.br/obrigado"
+        path="/obrigado"
         noindex
       />
       <main className="min-h-screen bg-background px-4 py-14 sm:py-20">
