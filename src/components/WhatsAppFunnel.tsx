@@ -922,12 +922,17 @@ export const WhatsAppFunnel = () => {
               </Button>
               <Button
                 onClick={submit}
+                type="button"
+                disabled={submitting || !answers.minimumAccepted}
                 data-cta-location={`funnel_${originLocation}`}
-                className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
+                data-funnel-submit="1"
+                aria-busy={submitting}
+                className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2 disabled:opacity-70"
               >
-                <MessageCircle className="h-4 w-4" />
-                Agendar agora
+                <MessageCircle className={`h-4 w-4 ${submitting ? "animate-pulse" : ""}`} />
+                {submitting ? "Abrindo WhatsApp…" : "Agendar agora"}
               </Button>
+
             </div>
           </div>
         )}
