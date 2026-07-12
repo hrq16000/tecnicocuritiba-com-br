@@ -363,9 +363,6 @@ export const WhatsAppFunnel = () => {
    */
   const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
   const back = () => setStep((s) => Math.max(s - 1, 0));
-    if (s === 3 && isOutro) p = 1;
-    return Math.max(p, 0);
-  });
 
   const reset = () => {
     setAnswers(EMPTY);
