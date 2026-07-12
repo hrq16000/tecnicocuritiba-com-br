@@ -593,25 +593,13 @@ export const WhatsAppFunnel = () => {
               <Button variant="outline" size="sm" onClick={reset} className="px-2.5" aria-label="Recomeçar triagem">
                 <span className="sm:hidden">↺</span><span className="hidden sm:inline">Recomeçar</span>
               </Button>
-              <span
-                className="ml-auto"
-                onClickCapture={(e) => {
-                  if (!answers.minimumAccepted) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    attemptAdvance(3);
-                  }
-                }}
+              <Button
+                onClick={submit}
+                className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
               >
-                <Button
-                  onClick={submit}
-                  disabled={!answers.minimumAccepted}
-                  className="bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  Abrir WhatsApp
-                </Button>
-              </span>
+                <MessageCircle className="h-4 w-4" />
+                Abrir WhatsApp
+              </Button>
             </div>
           </div>
         )}
