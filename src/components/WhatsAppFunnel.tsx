@@ -139,14 +139,24 @@ function buildMessage(a: Answers): string {
     lines.push("🧭 *Contexto:*");
     ctx.forEach((c) => lines.push(`• ${c}`));
   }
-  if (sintoma?.requiresColeta) {
-    lines.push("");
-    lines.push("📦 *Modalidade: COLETA E ENTREGA (obrigatória)*");
-    lines.push("• Mínimo R$ 300 (diagnóstico incluso) · desistiu paga só R$ 99,99");
-    lines.push("• Autorizado pelo cliente no funil");
+  const route = resolveRoute(a.equipamento, a.sintoma);
+  lines.push("");
+  if (route === "coleta") {
+    lines.push("📦 *Modalidade indicada: COLETA E ENTREGA*");
+    lines.push("• Valor mínimo R$ 299,99 · peças não inclusas");
+    lines.push("• Reparos até R$ 300 sem nova autorização; acima disso, orçamento antes");
+    lines.push("• Em caso de desistência: R$ 99,99 pelo diagnóstico");
+    lines.push("• Prazo estimado: 3 a 60 dias úteis");
+  } else if (route === "visita") {
+    lines.push("🧰 *Modalidade indicada: VISITA TÉCNICA (PC/Notebook)*");
+    lines.push("• R$ 99,99 por até 30 min · R$ 169,99 por 1h combinada");
+    lines.push("• Peças não inclusas · visita não garante reparo");
+  } else {
+    lines.push("💻 *Modalidade indicada: ATENDIMENTO REMOTO*");
+    lines.push("• Valor mínimo R$ 99,99 · requer computador ligado e acesso à internet");
   }
   lines.push("");
-  lines.push("💰 *Valor mínimo:* cliente confirmou ciência do mínimo de R$ 99,99 para atendimento/visita.");
+  lines.push("✅ Registro de ciência e aceite eletrônico dos termos e valores apresentados no funil.");
   if (a.descricao.trim()) {
     lines.push("");
     lines.push(`📝 ${a.descricao.trim()}`);
