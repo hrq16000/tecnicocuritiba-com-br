@@ -656,7 +656,7 @@ export const WhatsAppFunnel = () => {
                 className="ml-auto bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white gap-2"
               >
                 <MessageCircle className="h-4 w-4" />
-                Abrir WhatsApp
+                Agendar agora
               </Button>
             </div>
           </div>
