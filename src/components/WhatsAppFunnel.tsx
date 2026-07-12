@@ -481,16 +481,53 @@ export const WhatsAppFunnel = () => {
         {step === 1 && branch && (
           <div className="space-y-2.5">
             {isOutro ? (
-              <>
-                <p className="text-sm font-medium">Descreva seu caso</p>
-                <Textarea
-                  data-funnel-field="descricao"
-                  rows={4}
-                  placeholder="Conte o equipamento, marca, o que aconteceu e quando começou…"
-                  value={answers.descricao}
-                  onChange={(e) => update({ descricao: e.target.value })}
-                />
-              </>
+              <div className="space-y-2.5">
+                <div>
+                  <p className="text-sm font-medium mb-1.5">Qual é o equipamento?</p>
+                  <input
+                    data-funnel-field="outro-equipamento"
+                    type="text"
+                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Ex: micro-ondas, drone, projetor…"
+                    value={answers.outroEquipamento}
+                    maxLength={80}
+                    onChange={(e) => update({ outroEquipamento: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-1.5">O que aconteceu?</p>
+                  <Textarea
+                    data-funnel-field="outro-problema"
+                    rows={3}
+                    placeholder="Conte o defeito e quando começou…"
+                    value={answers.outroProblema}
+                    maxLength={400}
+                    onChange={(e) => update({ outroProblema: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-1.5">Quantos anos tem o equipamento?</p>
+                  <div className="flex flex-wrap gap-1.5" data-funnel-field="outro-idade">
+                    {["< 1 ano", "1–3 anos", "3–5 anos", "5–10 anos", "10+ anos", "Não sei"].map((idade) => (
+                      <button
+                        key={idade}
+                        type="button"
+                        onClick={() => update({ outroIdade: idade })}
+                        className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                          answers.outroIdade === idade
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border bg-card hover:border-primary/60"
+                        }`}
+                      >
+                        {idade}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-2.5 text-[11px] leading-snug">
+                  💰 <strong>Valor mínimo R$ 99,99</strong> para qualquer atendimento/serviço — inclusive orçamento fora do padrão. Reparos com coleta a partir de R$ 300.
+                </div>
+              </div>
             ) : (
               <>
                 <div>
