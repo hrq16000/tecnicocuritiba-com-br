@@ -46,6 +46,11 @@ interface Answers {
   outroEquipamento: string;
   outroProblema: string;
   outroIdade: string;
+  // Contexto detalhado (Etapa 2 — sempre visível)
+  ctxQuando: string;     // ex: "Hoje", "Ontem", "Última semana", "Mais de 1 mês", "Sempre foi assim"
+  ctxFrequencia: string; // ex: "Todo momento", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado"
+  ctxTentou: string;     // ex: "Nada", "Reiniciei", "Formatei", "Já foi em outra assistência"
+  ctxUrgencia: string;   // ex: "Hoje", "Nesta semana", "Sem pressa"
 }
 
 const EMPTY: Answers = {
@@ -58,6 +63,10 @@ const EMPTY: Answers = {
   outroEquipamento: "",
   outroProblema: "",
   outroIdade: "",
+  ctxQuando: "",
+  ctxFrequencia: "",
+  ctxTentou: "",
+  ctxUrgencia: "",
 };
 
 
