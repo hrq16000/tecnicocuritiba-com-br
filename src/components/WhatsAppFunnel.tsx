@@ -23,7 +23,9 @@ import {
   EQUIPMENT_BRANCHES,
   getBranch,
   getSintoma,
+  resolveRoute,
   type Equipment,
+  type ServiceRoute,
 } from "@/components/funnel/equipmentBranches";
 import { ColetaRequiredCard } from "@/components/funnel/ColetaRequiredCard";
 import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
@@ -35,8 +37,11 @@ import { logFunnelDiag } from "@/lib/funnelDiagnostics";
 const WHATSAPP_NUMBER = "5541997452053";
 const WA_HOSTS = ["wa.me", "api.whatsapp.com"];
 // Persistência do progresso do funil — sobrevive a reloads e retorno do WhatsApp.
-const STORAGE_KEY = "wa_funnel_state_v5";
-const LEGACY_KEYS = ["wa_funnel_answers_v4"];
+// v6: nova estrutura de sintomas com metadados (route/eventual/intermittent).
+// Qualquer estado anterior é descartado silenciosamente para evitar renders
+// contra sintomas que deixaram de existir (causa raiz da tela de erro anterior).
+const STORAGE_KEY = "wa_funnel_state_v6";
+const LEGACY_KEYS = ["wa_funnel_answers_v4", "wa_funnel_state_v5"];
 
 type PersistedState = {
   answers: Answers;
