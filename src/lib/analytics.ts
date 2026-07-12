@@ -115,6 +115,15 @@ export const trackCTAClick = (ctaType: 'whatsapp' | 'phone' | 'chatbot', locatio
       window.gtag('event', 'click_call', payload);
     }
 
+    // Event name específico por botão — ex.: click_whatsapp_hero_primary,
+    // click_whatsapp_sticky_mobile, click_whatsapp_float, click_whatsapp_header.
+    // Permite criar Key Events por origem sem depender só do param cta_location.
+    const safeLoc = String(location).toLowerCase().replace(/[^a-z0-9_]+/g, '_').slice(0, 40);
+    if (safeLoc) {
+      const specific = ctaType === 'phone' ? `click_call_${safeLoc}` : `click_${ctaType}_${safeLoc}`;
+      window.gtag('event', specific, payload);
+    }
+
     // generate_lead + conversão do Ads disparam APENAS no primeiro clique da
     // sessão (dedup via lead_id em sessionStorage). Cliques repetidos viram
     // engajamento (cta_click) e não contam como novo lead/conversão.
