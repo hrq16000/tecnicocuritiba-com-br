@@ -53,10 +53,12 @@ function installClickGuard() {
       const tracked = window.__ctaTracked;
       const trackedRecent = tracked && Date.now() - tracked.t < 500;
 
+      if (ctaLoc) return;
+
       if (import.meta.env.PROD) {
         // Só bloqueia quando NÃO há data-cta-location E nenhum evento
         // recente — evita falsos positivos em fluxos que já rastreiam.
-        if (!ctaLoc && !trackedRecent) {
+        if (!trackedRecent) {
           e.preventDefault();
           e.stopPropagation();
           reportBlock("missing_cta_location", {
