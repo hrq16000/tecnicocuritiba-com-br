@@ -314,7 +314,9 @@ export const WhatsAppFunnel = () => {
   useEffect(() => {
     if (!open) return;
     trackFunnelStep(step, answers.equipamento, answers.sintoma, originLocation);
+    logFunnelDiag("step", { equipamento: answers.equipamento, sintoma: answers.sintoma }, step);
   }, [open, step, answers.equipamento, answers.sintoma, originLocation]);
+
 
   // Sinaliza abertura via atributo no body para que floats/sticky se escondam.
   useEffect(() => {
