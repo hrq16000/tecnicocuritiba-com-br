@@ -338,6 +338,12 @@ export const WhatsAppFunnel = () => {
     : undefined;
   const requiresColeta = !!sintomaObj?.requiresColeta;
   const isOutro = answers.equipamento === "outro";
+  // Modalidade calculada dinamicamente pelo par equipamento+sintoma.
+  const route: ServiceRoute = resolveRoute(answers.equipamento, answers.sintoma);
+  // Pergunta contextual só aparece se fizer sentido para o sintoma.
+  const askFrequency = !!sintomaObj?.intermittent;
+  const isEventual = !!sintomaObj?.eventual;
+  const whenLabel = isEventual ? "Quando aconteceu?" : "Quando o problema começou?";
 
   // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
   const attentionSelector = useCallback((s: number): string | null => {
