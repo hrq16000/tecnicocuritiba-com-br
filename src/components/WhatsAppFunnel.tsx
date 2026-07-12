@@ -50,7 +50,7 @@ interface Answers {
   ctxQuando: string;     // ex: "Hoje", "Ontem", "Última semana", "Mais de 1 mês", "Sempre foi assim"
   ctxFrequencia: string; // ex: "Todo momento", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado"
   ctxTentou: string;     // ex: "Nada", "Reiniciei", "Formatei", "Já foi em outra assistência"
-  ctxUrgencia: string;   // ex: "Hoje", "Nesta semana", "Sem pressa"
+  ctxUrgencia: string;   // ex: "Próximas 72 horas úteis (3 dias úteis)", "Esta semana", "Sem pressa"
 }
 
 const EMPTY: Answers = {
@@ -293,20 +293,38 @@ export const WhatsAppFunnel = () => {
       if (isOutro) {
         if (!answers.outroEquipamento.trim()) return "[data-funnel-field='outro-equipamento']";
         if (!answers.outroProblema.trim()) return "[data-funnel-field='outro-problema']";
-        return "[data-funnel-field='outro-idade']";
+        if (!answers.outroIdade.trim()) return "[data-funnel-field='outro-idade']";
+        return null;
       }
-      return !answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']";
+      if (!answers.marca) return "[data-funnel-field='marca']";
+      if (!answers.sintoma) return "[data-funnel-field='sintoma']";
+      return null;
     }
     if (s === 2) {
       if (!answers.ctxQuando) return "[data-funnel-field='ctx-quando']";
       if (!answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
       if (!answers.ctxTentou) return "[data-funnel-field='ctx-tentou']";
-      return "[data-funnel-field='ctx-urgencia']";
+      if (!answers.ctxUrgencia) return "[data-funnel-field='ctx-urgencia']";
+      return null;
     }
-    if (s === 3) return "[data-funnel-field='coleta']";
-    if (s === 4) return "[data-funnel-field='minimum']";
+    if (s === 3) return requiresColeta && !answers.coletaAccepted ? "[data-funnel-field='coleta']" : null;
+    if (s === 4) return !answers.minimumAccepted ? "[data-funnel-field='minimum']" : null;
     return null;
-  }, [answers.marca, answers.outroEquipamento, answers.outroProblema, answers.ctxQuando, answers.ctxFrequencia, answers.ctxTentou, isOutro]);
+  }, [
+    answers.marca,
+    answers.sintoma,
+    answers.outroEquipamento,
+    answers.outroProblema,
+    answers.outroIdade,
+    answers.ctxQuando,
+    answers.ctxFrequencia,
+    answers.ctxTentou,
+    answers.ctxUrgencia,
+    answers.coletaAccepted,
+    answers.minimumAccepted,
+    isOutro,
+    requiresColeta,
+  ]);
 
   const attemptAdvance = useCallback((s: number) => {
     const sel = attentionSelector(s);
@@ -709,7 +727,7 @@ export const WhatsAppFunnel = () => {
             <div>
               <p className="text-xs font-semibold mb-1.5 text-foreground/80">Qual a urgência?</p>
               <div className="flex flex-wrap gap-1.5" data-funnel-field="ctx-urgencia">
-                {["Hoje", "Esta semana", "Sem pressa"].map((v) => (
+                {["Próximas 72 horas úteis (3 dias úteis)", "Esta semana", "Sem pressa"].map((v) => (
                   <button
                     key={v}
                     type="button"
