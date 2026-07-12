@@ -42,6 +42,7 @@ const ArrumarPCServicoCidade = lazy(() => import("./pages/arrumar-pc/ArrumarPCSe
 const TermosCondicoes = lazy(() => import("./pages/TermosCondicoes"));
 const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
 const FunilIndisponivel = lazy(() => import("./pages/FunilIndisponivel"));
+const Obrigado = lazy(() => import("./pages/Obrigado"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
 const AdminReviews = lazy(() => import("./pages/admin/AdminReviews"));
