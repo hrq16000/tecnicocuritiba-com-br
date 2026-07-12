@@ -90,16 +90,6 @@ export const FastHeroSection = () => {
                   Resposta em ~5 min · Orçamento grátis
                 </span>
               </a>
-              <button
-                type="button"
-                onClick={() => setShowScheduling(true)}
-                data-cta-location="hero_secondary"
-                aria-label="Agendar atendimento técnico"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/5 px-5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15 sm:text-base"
-              >
-                <span aria-hidden="true">📅</span>
-                Prefiro agendar
-              </button>
             </div>
 
             {/* Linha de cobertura abaixo da CTA — não compete com o botão */}
