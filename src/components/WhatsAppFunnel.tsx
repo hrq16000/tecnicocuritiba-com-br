@@ -361,7 +361,7 @@ export const WhatsAppFunnel = () => {
     }
     if (s === 2) {
       if (!answers.ctxQuando) return "[data-funnel-field='ctx-quando']";
-      if (!answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
+      if (askFrequency && !answers.ctxFrequencia) return "[data-funnel-field='ctx-frequencia']";
       if (!answers.ctxTentou) return "[data-funnel-field='ctx-tentou']";
       if (!answers.ctxUrgencia) return "[data-funnel-field='ctx-urgencia']";
       return null;
