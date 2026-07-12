@@ -614,15 +614,26 @@ export const WhatsAppFunnel = () => {
 
 // ---------- helpers ----------
 const FunnelNav = ({
-  onBack, onNext, canNext, nextLabel = "Continuar",
-}: { onBack: () => void; onNext: () => void; canNext: boolean; nextLabel?: string }) => (
+  onBack, onNext, canNext, nextLabel = "Continuar", onAttempt,
+}: { onBack: () => void; onNext: () => void; canNext: boolean; nextLabel?: string; onAttempt?: () => void }) => (
   <div className="flex gap-2 pt-1">
     <Button variant="outline" size="sm" onClick={onBack} className="gap-1">
       <ArrowLeft className="h-4 w-4" /> Voltar
     </Button>
-    <Button onClick={onNext} disabled={!canNext} className="ml-auto gap-1">
-      {nextLabel} <ArrowRight className="h-4 w-4" />
-    </Button>
+    <span
+      className="ml-auto"
+      onClickCapture={(e) => {
+        if (!canNext) {
+          e.stopPropagation();
+          e.preventDefault();
+          onAttempt?.();
+        }
+      }}
+    >
+      <Button onClick={onNext} disabled={!canNext} className="gap-1">
+        {nextLabel} <ArrowRight className="h-4 w-4" />
+      </Button>
+    </span>
   </div>
 );
 
