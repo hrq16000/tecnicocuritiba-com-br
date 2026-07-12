@@ -42,6 +42,10 @@ interface Answers {
   coletaAccepted: boolean;
   minimumAccepted: boolean;
   descricao: string;
+  // Campos específicos do branch "Outro"
+  outroEquipamento: string;
+  outroProblema: string;
+  outroIdade: string;
 }
 
 const EMPTY: Answers = {
@@ -51,6 +55,9 @@ const EMPTY: Answers = {
   coletaAccepted: false,
   minimumAccepted: false,
   descricao: "",
+  outroEquipamento: "",
+  outroProblema: "",
+  outroIdade: "",
 };
 
 
