@@ -341,6 +341,14 @@ export const WhatsAppFunnel = () => {
       if (!v.ok) {
         trackFunnelBlocked(`submit_invalid_step_${s}`, answers.equipamento);
         setStep(s);
+        // Feedback UX: bip + pulse no campo faltante da etapa que falhou.
+        setTimeout(() => {
+          const sel = s === 0 ? "[data-funnel-field='equipamento']"
+            : s === 1 ? (isOutro ? "[data-funnel-field='descricao']" : (!answers.marca ? "[data-funnel-field='marca']" : "[data-funnel-field='sintoma']"))
+            : s === 2 ? "[data-funnel-field='coleta']"
+            : "[data-funnel-field='minimum']";
+          bipAndAttention(sel);
+        }, 30);
         return;
       }
     }
