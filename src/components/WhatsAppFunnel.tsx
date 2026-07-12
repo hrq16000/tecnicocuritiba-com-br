@@ -168,30 +168,61 @@ export const WhatsAppFunnel = () => {
   const [answers, setAnswers] = useState<Answers>(EMPTY);
   const [originLocation, setOriginLocation] = useState("cta");
   const [presetMessage, setPresetMessage] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const submittingRef = useRef(false);
+  const lastSubmitAtRef = useRef(0);
   const sessionId = useMemo(() => getSessionId(), []);
 
-  // Restore cached answers
+  // Restore cached state (answers + step + origem). Descarta se antigo demais.
   useEffect(() => {
     try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        setAnswers({ ...EMPTY, ...parsed });
+      // Migra chaves legadas descartando (mantemos apenas answers no v4 antigo).
+      LEGACY_KEYS.forEach((k) => {
+        try {
+          const legacyRaw = localStorage.getItem(k);
+          if (legacyRaw && !localStorage.getItem(STORAGE_KEY)) {
+            const legacyAnswers = JSON.parse(legacyRaw);
+            const migrated: PersistedState = {
+              answers: { ...EMPTY, ...legacyAnswers },
+              step: 0,
+              originLocation: "cta",
+              updatedAt: Date.now(),
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+          }
+          localStorage.removeItem(k);
+        } catch { /* noop */ }
+      });
+
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as PersistedState;
+      if (!parsed || typeof parsed !== "object") return;
+      if (parsed.updatedAt && Date.now() - parsed.updatedAt > MAX_STATE_AGE_MS) {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
       }
+      if (parsed.answers) setAnswers({ ...EMPTY, ...parsed.answers });
+      if (typeof parsed.step === "number") setStep(Math.min(Math.max(parsed.step, 0), 4));
+      if (parsed.originLocation) setOriginLocation(parsed.originLocation);
     } catch { /* noop */ }
   }, []);
 
-  const persist = useCallback((a: Answers) => {
+  const persist = useCallback((patch: Partial<PersistedState>) => {
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(a));
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const prev: PersistedState = raw
+        ? (JSON.parse(raw) as PersistedState)
+        : { answers: EMPTY, step: 0, originLocation: "cta", updatedAt: Date.now() };
+      const next: PersistedState = { ...prev, ...patch, updatedAt: Date.now() };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch { /* noop */ }
   }, []);
 
   const update = useCallback((patch: Partial<Answers>) => {
     setAnswers((prev) => {
       const next = { ...prev, ...patch };
-      persist(next);
+      persist({ answers: next });
       return next;
     });
   }, [persist]);
@@ -203,11 +234,13 @@ export const WhatsAppFunnel = () => {
     lastOpenRef.current = now;
     setOriginLocation(loc);
     setPresetMessage(preset ?? null);
-    setStep(0);
     setOpen(true);
+    persist({ originLocation: loc });
     captureUtmsFromUrl();
     trackFunnelOpen(loc, !!preset);
-  }, []);
+    logFunnelDiag("open", { location: loc, hasPreset: !!preset });
+  }, [persist]);
+
 
   // Global click interception for any WhatsApp anchor
   useEffect(() => {
