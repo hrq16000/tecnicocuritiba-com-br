@@ -414,10 +414,14 @@ export const WhatsAppFunnel = () => {
 
       window.open(url.toString(), "_blank", "noopener,noreferrer");
       setOpen(false);
+      // Após enviar, volta ao início para uma nova triagem futura.
+      setAnswers(EMPTY);
+      persist(EMPTY);
+      setStep(0);
     } finally {
       setTimeout(() => { submittingRef.current = false; }, 250);
     }
-  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep]);
+  }, [answers, branch, sintomaObj, requiresColeta, originLocation, presetMessage, sessionId, validateStep, attentionSelector, isOutro, persist]);
 
   const handleOpenChange = (v: boolean) => {
     if (!v) trackFunnelClose(step, answers.equipamento);
