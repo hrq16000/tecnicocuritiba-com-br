@@ -244,6 +244,14 @@ export const WhatsAppFunnel = () => {
     return () => document.body.removeAttribute("data-funnel-open");
   }, [open]);
 
+  // ---------- Derivations ----------
+  const branch = answers.equipamento ? getBranch(answers.equipamento) : undefined;
+  const sintomaObj = answers.equipamento && answers.sintoma
+    ? getSintoma(answers.equipamento, answers.sintoma)
+    : undefined;
+  const requiresColeta = !!sintomaObj?.requiresColeta;
+  const isOutro = answers.equipamento === "outro";
+
   // Selector de campos a "pulsar" quando o usuário tenta avançar sem preencher.
   const attentionSelector = useCallback((s: number): string | null => {
     if (s === 0) return "[data-funnel-field='equipamento']";
@@ -259,14 +267,6 @@ export const WhatsAppFunnel = () => {
     const sel = attentionSelector(s);
     if (sel) bipAndAttention(sel);
   }, [attentionSelector]);
-
-  // ---------- Derivations ----------
-  const branch = answers.equipamento ? getBranch(answers.equipamento) : undefined;
-  const sintomaObj = answers.equipamento && answers.sintoma
-    ? getSintoma(answers.equipamento, answers.sintoma)
-    : undefined;
-  const requiresColeta = !!sintomaObj?.requiresColeta;
-  const isOutro = answers.equipamento === "outro";
 
   // ---------- Navigation ----------
   // 4 steps: 0 equip, 1 marca/sintoma (ou descrição), 2 coleta (condicional), 3 confirmação
