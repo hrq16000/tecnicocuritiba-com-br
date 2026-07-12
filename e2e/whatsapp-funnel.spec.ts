@@ -59,7 +59,7 @@ test.describe("WhatsAppFunnel v3 — funil ramificado por equipamento (texto-onl
 
     await expect(dialog.getByText(/Triagem completa/i)).toBeVisible();
     await expect(dialog.getByText(/sem áudio/i)).toBeVisible();
-    const submit = dialog.getByRole("button", { name: /Abrir WhatsApp/i });
+    const submit = dialog.getByRole("button", { name: /Agendar agora/i });
     await expect(submit).toBeDisabled();
     await dialog.getByLabel(/valor mínimo.*R\$ 99,99/i).click();
     await expect(submit).toBeEnabled();
