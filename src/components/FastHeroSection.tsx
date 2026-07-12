@@ -132,19 +132,25 @@ export const FastHeroSection = () => {
       </div>
 
       {/* Sticky CTA mobile: ponto de retorno permanente para WhatsApp durante scroll */}
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[var(--z-mobile-drawer)] flex justify-center px-3 pb-[max(12px,env(safe-area-inset-bottom))] sm:hidden">
+      <div
+        data-hide-when-funnel
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-[var(--z-mobile-drawer)] flex justify-center px-3 pb-[max(12px,env(safe-area-inset-bottom))] sm:hidden"
+      >
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={trackHeroWhatsApp}
-          data-cta-location="hero_sticky_mobile"
-          aria-label="WhatsApp — R$ 99,99, resposta em ~5 min"
-          className="pointer-events-auto inline-flex w-full max-w-md items-center justify-center gap-2 rounded-full bg-[hsl(var(--whatsapp))] px-5 py-3 text-sm font-extrabold text-primary-foreground shadow-[0_12px_30px_-8px_rgba(0,0,0,0.45)]"
+          onClick={trackStickyMobileWhatsApp}
+          data-cta-location="sticky_mobile"
+          aria-label="WhatsApp — R$ 99,99, resposta em ~5 min, Seg-Sáb 8h-20h"
+          className="pointer-events-auto inline-flex w-full max-w-md flex-col items-center justify-center gap-0 rounded-full bg-[hsl(var(--whatsapp))] px-5 py-2.5 text-sm font-extrabold text-primary-foreground shadow-[0_12px_30px_-8px_rgba(0,0,0,0.45)] wa-pulse"
         >
-          <span aria-hidden="true">💬</span>
-          WhatsApp · R$ 99,99
-          <span className="text-[11px] font-medium text-white/85">· resposta ~5 min</span>
+          <span className="flex items-center gap-2">
+            <span aria-hidden="true">💬</span>
+            WhatsApp · R$ 99,99
+            <span className="text-[11px] font-medium text-white/85">· ~5 min</span>
+          </span>
+          <span className="text-[10px] font-medium text-white/85">🕒 Seg–Sáb · 08h–20h</span>
         </a>
       </div>
 
