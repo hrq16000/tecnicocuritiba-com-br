@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, MessageCircle, ArrowLeft, Clock, ShieldCheck } from "lucide-react";
-import PageSEO from "@/components/PageSEO";
+import { PageSEO } from "@/components/PageSEO";
 import { trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
