@@ -117,6 +117,50 @@ const RedesWifi = () => {
 
       <RealImageSection imageKey="servidores" caption="Rack de rede e equipamentos configurados profissionalmente" />
 
+      {/* Galeria — O que está incluso no atendimento Wi-Fi */}
+      <ServiceGallery
+        title="O Que Está Incluso no Atendimento de Wi-Fi"
+        subtitle="Etapas visíveis do serviço, desde o mapa de cobertura até a otimização final."
+        bgClass="bg-secondary"
+        items={[
+          { imageKey: "redesWifi", caption: "Análise de sinal e mapa de cobertura por cômodo" },
+          { imageKey: "servidores", caption: "Instalação e configuração de roteador / mesh / access points" },
+          { imageKey: "ferramentas", caption: "Cabeamento estruturado e organização do rack" },
+          { imageKey: "diagnostico", caption: "Ajuste de canais 2,4 GHz / 5 GHz e banda ideal" },
+          { imageKey: "segurancaDigital", caption: "Segurança WPA3, rede de visitantes e bloqueio de intrusos" },
+          { imageKey: "clienteSatisfeito", caption: "Teste de velocidade em cada ambiente antes da entrega" },
+        ]}
+      />
+
+      {/* Triagem antes da visita — reduz visitas improdutivas */}
+      <section className="py-10 bg-background border-y border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-6">
+              Triagem: O que Testar Antes da Visita de Wi-Fi
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                { q: "Outros dispositivos também caem?", a: "Se apenas 1 aparelho falha, o problema costuma ser dele (driver/adaptador). Se todos caem, é rede/roteador — vale visita." },
+                { q: "O sinal cai só em cômodos específicos?", a: "Sinal fraco em partes da casa indica cobertura insuficiente — normalmente resolve com repetidor ou mesh. Trazer planta do imóvel ajuda." },
+                { q: "Reiniciou modem e roteador por 30s cada?", a: "Passo obrigatório antes de qualquer diagnóstico. Se após o restart continua lento, provavelmente é canal congestionado ou firmware." },
+                { q: "A velocidade contratada está sendo entregue no cabo?", a: "Teste via cabo ethernet direto no modem. Se o cabo entrega 100% e o Wi-Fi não, o gargalo é o Wi-Fi. Se o cabo já vem baixo, é problema do provedor." },
+                { q: "Quantos dispositivos ficam ligados simultaneamente?", a: "Roteadores básicos travam com mais de 15-20 dispositivos ativos. Câmeras, IoT e streams contam. Casa com muitos aparelhos precisa mesh dual-band." },
+                { q: "Sinais de que não compensa reparar seu roteador antigo?", a: "Aparelhos com mais de 5 anos, sem Wi-Fi 5 (AC) e sem 5 GHz devem ser substituídos — o custo de reparo é maior que o de um roteador novo." },
+              ].map((f, i) => (
+                <details key={i} className="bg-secondary rounded-lg p-4 border border-border group">
+                  <summary className="font-semibold text-foreground cursor-pointer list-none flex items-center justify-between">
+                    {f.q}
+                    <span className="text-muted-foreground group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Problemas Comuns */}
       <section className="py-10 bg-secondary">
         <div className="container mx-auto px-4">
