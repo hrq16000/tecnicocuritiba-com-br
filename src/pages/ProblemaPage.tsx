@@ -89,6 +89,15 @@ const ProblemaPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [data, setData] = useState<ProblemaPageData | undefined>(undefined);
   const [loading, setLoading] = useState(true);
+  const heroWaRef = useRef<HTMLButtonElement>(null);
+  const heroCallRef = useRef<HTMLButtonElement>(null);
+  const footerWaRef = useRef<HTMLButtonElement>(null);
+
+  // Visibilidade dos CTAs — dispara `cta_visible` uma vez por CTA/página.
+  useCTAVisibility(heroWaRef, `problema_${slug ?? "unknown"}_hero_whatsapp`, { problema: slug ?? "unknown" });
+  useCTAVisibility(heroCallRef, `problema_${slug ?? "unknown"}_hero_call`, { problema: slug ?? "unknown" });
+  useCTAVisibility(footerWaRef, `problema_${slug ?? "unknown"}_footer_whatsapp`, { problema: slug ?? "unknown" });
+
 
   useEffect(() => {
     if (!slug) { setLoading(false); return; }
