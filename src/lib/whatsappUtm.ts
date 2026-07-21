@@ -38,7 +38,13 @@ function readEntryUtms(): Record<string, string> {
   }
 }
 
-function withUtm(href: string, medium: string, campaign: string, location: string): string {
+function withUtm(
+  href: string,
+  medium: string,
+  campaign: string,
+  location: string,
+  extras: { bairro?: string; servico?: string; problema?: string } = {},
+): string {
   try {
     const u = new URL(href, window.location.origin);
     const text = u.searchParams.get("text");
@@ -54,7 +60,14 @@ function withUtm(href: string, medium: string, campaign: string, location: strin
     if (!u.searchParams.has("utm_medium")) u.searchParams.set("utm_medium", medium);
     if (!u.searchParams.has("utm_campaign")) u.searchParams.set("utm_campaign", campaign);
 
-    // 3) Marca o local de clique (sempre).
+    // 3) utm_term/utm_content derivados de data-cta-* (bairro/servico/problema).
+    const termParts = [extras.bairro, extras.servico, extras.problema].filter(Boolean) as string[];
+    if (termParts.length && !u.searchParams.has("utm_term")) {
+      u.searchParams.set("utm_term", termParts.join("|").slice(0, 100));
+    }
+    if (!u.searchParams.has("utm_content")) u.searchParams.set("utm_content", location);
+
+    // 4) Marca o local de clique (sempre).
     u.searchParams.set("click_location", location);
 
     // Mantém text por último para preservar ordem/encoding
@@ -124,7 +137,13 @@ export function initWhatsAppUtm() {
         (anchor.closest("[data-cta-location]") as HTMLElement | null)?.dataset.ctaLocation ||
         anchor.dataset.ctaLocation ||
         medium;
-      anchor.href = withUtm(anchor.href, medium, campaign, location);
+      const scope = (anchor.closest("[data-cta-bairro],[data-cta-servico],[data-cta-problema]") as HTMLElement | null) || anchor;
+      const extras = {
+        bairro: scope.dataset.ctaBairro || undefined,
+        servico: scope.dataset.ctaServico || undefined,
+        problema: scope.dataset.ctaProblema || undefined,
+      };
+      anchor.href = withUtm(anchor.href, medium, campaign, location, extras);
       anchor.dataset.utmApplied = "1";
 
       // Validação + log debug — antes do navegador seguir o link.

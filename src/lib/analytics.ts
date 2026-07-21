@@ -81,6 +81,7 @@ export interface CTAContext {
   problema?: string;   // slug do problema (/problemas/*) quando aplicável
   equipamento?: string;
   servico?: string;    // slug do serviço (/servicos/*)
+  bairro?: string;     // slug do bairro (/servicos/*/[bairro] ou /bairros/*)
 }
 // Fallback "unknown" — nunca perde o clique por falta de contexto.
 const withUnknown = (v: string | undefined | null): string => {
@@ -93,7 +94,28 @@ const normalizeCtx = (context: CTAContext = {}) => ({
   problema: withUnknown(context.problema),
   equipamento: withUnknown(context.equipamento),
   servico: withUnknown(context.servico),
+  bairro: withUnknown(context.bairro),
 });
+// Registro local (localStorage) de contexto "unknown" para alertar o admin.
+const recordUnknownAlerts = (
+  ctaType: 'whatsapp' | 'phone' | 'chatbot',
+  ctx: ReturnType<typeof normalizeCtx>,
+  route: string,
+) => {
+  if (ctaType === 'chatbot') return;
+  if (typeof window === 'undefined') return;
+  try {
+    // Import dinâmico evita ciclo e mantém o bundle inicial enxuto.
+    import('./errorAlerts').then(({ recordAlertEvent }) => {
+      if (ctx.modalidade === 'unknown') {
+        recordAlertEvent({ kind: 'unknown_modalidade', route });
+      }
+      if (ctx.problema === 'unknown' && route.startsWith('/problemas/')) {
+        recordAlertEvent({ kind: 'unknown_problema', route });
+      }
+    }).catch(() => { /* noop */ });
+  } catch { /* noop */ }
+};
 export const trackCTAClick = (
   ctaType: 'whatsapp' | 'phone' | 'chatbot',
   location: string,
@@ -130,6 +152,9 @@ export const trackCTAClick = (
       ...deviceCtx,
       ...utm,
     };
+
+    // Registra alertas locais quando modalidade/problema chegam como "unknown".
+    recordUnknownAlerts(ctaType, ctx, window.location.pathname);
 
     // cta_click sempre dispara (mede CTR / engajamento por dispositivo)
     window.gtag('event', 'cta_click', payload);
@@ -305,6 +330,16 @@ export const trackInternalLink = (ctx: InternalLinkContext) => {
       ...payload,
       severity: 'error',
     });
+    try {
+      import('./errorAlerts').then(({ recordAlertEvent }) => {
+        recordAlertEvent({
+          kind: 'internal_link_broken',
+          from: ctx.fromPath,
+          to: ctx.toPath,
+          label: ctx.label,
+        });
+      }).catch(() => { /* noop */ });
+    } catch { /* noop */ }
   }
 };
 

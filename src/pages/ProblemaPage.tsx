@@ -16,6 +16,8 @@ import type { ProblemaPageData } from "@/lib/problemaPagesData";
 import ReactMarkdown from "react-markdown";
 import { IMAGES } from "@/lib/images";
 import { RealImageSection } from "@/components/RealImageSection";
+import { buildContextualMessage } from "@/lib/whatsappMessage";
+import { Download } from "lucide-react";
 
 // Whitelist canônica de slugs válidos em /servicos/* — usada para validar
 // linkagem interna em /problemas/* e evitar 404 silenciosos.
@@ -193,13 +195,22 @@ const ProblemaPage = () => {
         ? 'coleta'
         : 'visita';
 
+  const problemaLabel = data.h1.split("—")[0].trim();
+  const contextualMsg = buildContextualMessage({
+    equipamento: data.categoria,
+    problema: data.slug,
+    problemaLabel,
+    modalidade: modalidadeSugerida,
+    fallback: data.whatsappMessage,
+  });
+
   const handleWhatsApp = () => {
     trackCTAClick("whatsapp", `problema_${data.slug}`, {
       problema: data.slug,
       equipamento: data.categoria,
       modalidade: modalidadeSugerida,
     });
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(data.whatsappMessage)}`, "_blank");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(contextualMsg)}`, "_blank");
   };
 
   const handleLigar = () => {
@@ -210,6 +221,31 @@ const ProblemaPage = () => {
     });
     window.location.href = `tel:+55${WHATSAPP_NUMBER}`;
   };
+
+  const handleDownloadChecklist = (kind: "wifi" | "tv") => {
+    trackCTAClick("chatbot", `problema_${data.slug}_checklist_${kind}`, {
+      problema: data.slug,
+      equipamento: data.categoria,
+      modalidade: modalidadeSugerida,
+    });
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'checklist_download', {
+        event_category: 'engagement',
+        checklist_kind: kind,
+        problema: data.slug,
+        page_path: window.location.pathname,
+      });
+    }
+  };
+
+  // Detecta se este problema deve exibir o checklist "Antes da visita".
+  const catLower = `${data.categoria} ${data.h1}`.toLowerCase();
+  const checklistKind: "wifi" | "tv" | null =
+    /wi-?fi|rede|internet|roteador/.test(catLower)
+      ? "wifi"
+      : /\btv\b|smart tv|televis/.test(catLower)
+        ? "tv"
+        : null;
 
   // LocalBusiness JSON-LD — reforça sinal local para /problemas/* (SEO Curitiba).
   const localBusinessSchema = {
@@ -660,6 +696,38 @@ const ProblemaPage = () => {
             </div>
           </div>
         </section>
+        </AnimatedSection>
+      )}
+
+      {/* Download do checklist "Antes da visita" — apenas Wi-Fi e TV */}
+      {checklistKind && (
+        <AnimatedSection>
+          <section className="py-8 bg-accent/5 border-y border-accent/10">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto text-center space-y-3">
+                <div className="inline-flex items-center gap-2 bg-accent/15 text-accent px-4 py-2 rounded-full text-sm font-semibold">
+                  <Download className="h-4 w-4" /> Checklist gratuito
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                  Antes da visita: {checklistKind === "wifi" ? "conferir Wi-Fi" : "conferir sua Smart TV"}
+                </h3>
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+                  Baixe um PDF de 1 página com verificações rápidas que resolvem 30% dos casos sem chamado técnico e agilizam o atendimento quando necessário.
+                </p>
+                <div className="pt-2">
+                  <a
+                    href={`/downloads/checklist-antes-da-visita-${checklistKind}.pdf`}
+                    download
+                    onClick={() => handleDownloadChecklist(checklistKind)}
+                    className="inline-flex items-center gap-2 rounded-lg bg-accent text-white px-5 py-2.5 font-semibold hover:bg-accent/90 transition-colors"
+                    data-cta-location={`problema_${data.slug}_checklist_${checklistKind}`}
+                  >
+                    <Download className="h-4 w-4" /> Baixar checklist ({checklistKind === "wifi" ? "Wi-Fi" : "TV"}) em PDF
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
         </AnimatedSection>
       )}
 

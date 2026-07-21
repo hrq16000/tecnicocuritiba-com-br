@@ -252,10 +252,35 @@ const RedesWifi = () => {
         </div>
       </section>
 
-
+      {/* Checklist "Antes da visita" (Wi-Fi) — PDF gratuito */}
+      <section className="py-8 bg-accent/5 border-y border-accent/10">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">Antes de chamar: baixe o checklist de Wi-Fi</h3>
+          <p className="text-sm text-muted-foreground mb-4">1 página com verificações rápidas que resolvem cerca de 30% dos casos sem visita técnica.</p>
+          <a
+            href="/downloads/checklist-antes-da-visita-wifi.pdf"
+            download
+            onClick={() => {
+              if (typeof window !== "undefined" && window.gtag) {
+                window.gtag("event", "checklist_download", {
+                  event_category: "engagement",
+                  checklist_kind: "wifi",
+                  servico: "redes-wifi",
+                  page_path: window.location.pathname,
+                });
+              }
+            }}
+            className="inline-flex items-center gap-2 rounded-lg bg-accent text-white px-5 py-2.5 font-semibold hover:bg-accent/90 transition-colors"
+            data-cta-location="servico_redes-wifi_checklist"
+          >
+            📥 Baixar checklist Wi-Fi em PDF
+          </a>
+        </div>
+      </section>
 
       <InterlinkingBlock />
       <Footer />
+
     </div>
   );
 };

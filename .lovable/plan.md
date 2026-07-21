@@ -1,54 +1,70 @@
-Escopo grande — vou dividir em 3 fases entregáveis. Confirme antes de eu executar tudo de uma vez, ou aprove a Fase 1 primeiro.
 
-## Fase 1 — Analytics & Tracking (rápido, baixo risco)
+## Escopo
 
-**1.1 Fallback "unknown" em `trackCTAClick`**
-- `src/lib/analytics.ts`: normalizar `context` — quando `modalidade`, `problema` ou `equipamento` vierem `undefined/null/""`, gravar `"unknown"` no payload GA4. Nunca perder o evento.
+Seis frentes, ordenadas por dependência técnica. Todas preservam SEO, funil e regras existentes.
 
-**1.2 Evento separado para links internos em `/problemas/*`**
-- Novo helper `trackInternalLink(fromProblema, toRoute, linkLabel)` → event_name `internal_link_click` com `problema_categoria`, `servico_slug`, `link_label`, `page_path`.
-- Aplicar em `ProblemaPage.tsx` no bloco "Serviços Relacionados" e nos `relatedPages` (só quando `to` começar com `/servicos/`).
+### 1. Mensagem WhatsApp pré-preenchida com contexto
+- Criar helper `src/lib/whatsappMessage.ts` com `buildContextualMessage({ bairro, modalidade, problema, servico, equipamento })`.
+- Template: `"Olá! Vim do site — [equipamento] com [problema] em [bairro]. Modalidade sugerida: [modalidade]. Pode me atender?"`. Fallbacks silenciosos quando faltar campo (sem "unknown" no texto visível).
+- Integrar em: `ProblemaPage.tsx` (hero + footer CTA), páginas `/servicos/*` já instrumentadas (RedesWifi, ConsertoTV) e páginas `/servico-bairro/*` novas.
+- Detectar bairro via slug da rota (`useLocation`) — sem geolocalização nova.
 
-**1.3 Validação de links internos + evento de erro**
-- Em `ProblemaPage.tsx`, importar a lista canônica de serviços (`src/pages/servicos/`). Ao renderizar cada link, se `to` começar com `/servicos/` e o slug não existir na whitelist, disparar `trackInternalLink` com `event_name: internal_link_broken` (severity=error) e adicionar `data-broken="true"` para inspeção.
-- Whitelist derivada estaticamente de `src/pages/hubs/categories.ts` ou array explícito curado.
+### 2. UTMs automáticos em WhatsApp + Ligação
+- Estender `src/lib/whatsappUtm.ts` para adicionar `utm_content=<slug-do-problema-ou-servico>` e `utm_term=<bairro>` quando disponíveis via `data-cta-*` no anchor.
+- Ligação: como `tel:` não aceita query, capturar no evento GA4 `click_call` via `trackCTAClick` já existente (adicionar `bairro`, `servico`, `problema` ao contexto).
+- Marcar CTAs relevantes com `data-cta-bairro` / `data-cta-servico` em `ProblemaPage`, páginas de serviço e bairros.
 
-**1.4 Scroll depth + visibilidade de CTAs**
-- Novo hook `useScrollDepth()` (25/50/75/100%) e `useCTAVisibility(ref, id)` via `IntersectionObserver`. Eventos: `scroll_depth` (com `depth_percent`, `problema`) e `cta_visible` (com `cta_id`, `time_to_visible_ms`).
-- Instrumentar `ProblemaPage.tsx` — botões WhatsApp Agora, Ligar Agora e CTA final.
+### 3. JSON-LD por página de bairro (LocalBusiness + Service + areaServed)
+- Criar `src/components/BairroSchema.tsx` que emite dois blocos JSON-LD:
+  - `LocalBusiness` com `areaServed: { @type: "Neighborhood", name: <bairro>, containedInPlace: Curitiba }`.
+  - `Service` com `serviceType`, `provider`, `areaServed` idem.
+- Injetar nas 6 páginas bairro criadas (Wi-Fi Batel/Bacacheri; TV Batel/Boqueirão/Cabral/Bacacheri) e no template `ServicoBairroTemplate.tsx` para futuras.
 
-## Fase 2 — Conteúdo Wi-Fi & TV Smart
+### 4. Checklist PDF "Antes da visita"
+- Gerar dois PDFs estáticos em `public/downloads/`:
+  - `checklist-antes-visita-wifi.pdf`
+  - `checklist-antes-visita-tv-smart.pdf`
+- Conteúdo curto (1 página): itens de triagem, o que ter em mãos, prazos, contato WA.
+- Gerar com reportlab (skill/pdf) usando DejaVu Sans (acentos PT-BR), tokens visuais da marca.
+- Adicionar botão de download em:
+  - `ProblemaPage.tsx` (bloco final, se categoria for `wifi` ou `tv`)
+  - `/servicos/redes-wifi` e `/servicos/conserto-tv` (bloco após FAQ)
+- Rastrear com `trackCTAClick('download', ...)` (novo tipo) → estender union `ctaType` para incluir `'download'`. Manter compat: nada muda para whatsapp/phone/chatbot.
 
-**2.1 Galeria WebP nas páginas de Wi-Fi e TV Smart**
-- Usar `IMAGES` existente em `src/lib/images.ts` (assets já WebP via CDN). Novo componente `<ServiceGallery items={[…]} />` com `<figure>/<figcaption>`, `loading="lazy"`, `decoding="async"`, alt semântico.
-- Adicionar em `src/pages/servicos/RedesWifi.tsx` (galeria "O que está incluso no atendimento Wi-Fi") e `src/pages/servicos/ConsertoTV.tsx` + `ManutencaoTV.tsx` (galeria "Processo de reparo/troca de tela").
+### 5. Alertas admin para picos de erros
+- Criar `src/lib/errorAlerts.ts`: agrega em `localStorage` (janela 24h) contadores de eventos `internal_link_broken`, `obrigado_modalidade_invalida`, `cta_click` com `modalidade='unknown'` OU `problema='unknown'` em rotas onde deveriam existir.
+- Painel novo: adicionar seção em `src/components/admin/FunnelDiagnosticsPanel.tsx` (ou componente irmão) mostrando:
+  - Top 10 links quebrados (from → to, contagem)
+  - Total unknown modalidade/problema últimas 24h
+  - Badge vermelho quando qualquer contador > threshold (unknown > 5, broken > 0).
+- Instrumentar `trackInternalLink` e `trackCTAClick` para gravar entradas locais além de enviar ao GA4.
 
-**2.2 FAQs de triagem**
-- Adicionar bloco `<FAQSection>` extra nessas 3 páginas com 5–6 perguntas focadas em triagem (o que testar antes, sinais de falha, quando não compensa), reutilizando o catálogo de `sintomas` já presente em `src/lib/problemas/` (Wi-Fi e TV) para consistência SEO.
-- FAQPage JSON-LD dessas perguntas via `PageSEO`/JsonLdSchema.
-
-## Fase 3 — Páginas por bairro (Wi-Fi + TV Smart)
-
-**3.1 Template por bairro para 2 serviços**
-- Reaproveitar padrão existente `src/pages/servico-bairro/`. Criar rotas:
-  - `/servicos/redes-wifi/curitiba/:bairro`
-  - `/servicos/conserto-tv/curitiba/:bairro`
-- Bairros iniciais (top 8 por busca): Batel, Água Verde, Boqueirão, Cabral, Portão, CIC, Santa Felicidade, Bacacheri.
-- Cada página: H1 único, 2 parágrafos exclusivos por bairro (referências locais, tempo de deslocamento), CTAs abrindo o funil com `origin=bairro-<slug>-<servico>`, breadcrumbs, LocalBusiness+Service JSON-LD, links para o hub `/servicos/<servico>` e para problemas relacionados.
-- Registrar no gerador de sitemap (`scripts/generate-sitemaps.mjs`) e no `check-sitemap-problemas.mjs` (novo `check-sitemap-bairros-servico.mjs`).
-
-**3.2 CI guard**
-- Contagem esperada: 2 serviços × 8 bairros = 16 URLs adicionais. Bloquear PR se divergir.
-
----
+### 6. Validação de links internos em /problema/* (endurecer)
+- Já existe `VALID_SERVICO_SLUGS` na fase anterior. Consolidar:
+  - Extrair lista canônica em `src/lib/validServicoSlugs.ts` (gerada a partir de `src/pages/arrumar-pc/services.ts` + rotas registradas em `LegacyApp.tsx`).
+  - `isValidInternalTarget(path)` retorna boolean; usar em cada `<Link>`/`<a>` interno renderizado por `ProblemaPage`.
+  - Ao renderizar link inválido: renderizar mesmo assim mas disparar `trackInternalLink({ valid: false })` → GA4 recebe `internal_link_broken`.
+  - Adicionar teste unitário `src/lib/validServicoSlugs.test.ts` cobrindo slugs conhecidos.
+- Script CI: `scripts/check-problemas-internal-links.mjs` varre `src/lib/problemas/*.ts`, extrai links `/servicos/...` e falha o build se algum não estiver na whitelist. Ganchar em `.github/workflows/ci.yml`.
 
 ## Detalhes técnicos
 
-- Payload GA4 será filtrado por `Object.entries` para nunca enviar `undefined`; strings vazias viram `"unknown"`.
-- IntersectionObserver com `threshold: 0.5` e `once: true` por CTA para evitar spam.
-- Todos os novos eventos passam por `sanitizeEvent` já existente (ou criar se não houver).
-- Nenhuma alteração em regras de triagem/funil — apenas leitura de estado.
+- **Bairro detection**: rotas `/servicos/:servico/:bairro` já existem via `ServicoBairroTemplate`. Ler `params.bairro` e passar via prop/contexto ao `WhatsAppFloat`/CTAs locais. Em `ProblemaPage`, não há bairro — omitir campo do template.
+- **PDF**: gerar uma única vez em `/tmp`, mover para `public/downloads/` (commitado). Não gerar em runtime.
+- **CI**: adicionar step após `bun install`:
+  ```yaml
+  - name: Validate problema internal links
+    run: node scripts/check-problemas-internal-links.mjs
+  ```
+- **Backward-compat**: nenhum evento GA4 existente muda de nome/schema; só adicionamos campos opcionais.
 
-Total estimado: ~14 arquivos alterados/criados, +2 CI checks.
+## Fora do escopo
 
-**Aprovar tudo ou executar só a Fase 1 primeiro?**
+- Não mexer no fluxo do funil, modalidades, preços ou textos das etapas.
+- Não alterar `analytics.ts` além de aceitar `'download'` como tipo e propagar novos campos de contexto (`bairro`).
+- Não gerar novas páginas de bairro além das já existentes.
+
+## Arquivos afetados (estimativa)
+
+Novos: `whatsappMessage.ts`, `BairroSchema.tsx`, `errorAlerts.ts`, `validServicoSlugs.ts` (+ teste), 2 PDFs, `check-problemas-internal-links.mjs`, componente admin de alertas.
+Editados: `whatsappUtm.ts`, `analytics.ts` (mínimo), `ProblemaPage.tsx`, `RedesWifi.tsx`, `ConsertoTV.tsx`, 6 páginas de bairro, `ServicoBairroTemplate.tsx`, `FunnelDiagnosticsPanel.tsx`, `ci.yml`.

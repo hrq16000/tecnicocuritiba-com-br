@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { readFunnelDiag, clearFunnelDiag, type FunnelDiagEvent } from "@/lib/funnelDiagnostics";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, Trash2, Activity } from "lucide-react";
+import { ErrorAlertsPanel } from "./ErrorAlertsPanel";
 
 /**
  * Painel de diagnóstico local do funil.
@@ -25,6 +26,8 @@ export function FunnelDiagnosticsPanel() {
   const hasReset = events.some((e) => e.name === "reset");
 
   return (
+    <>
+    <ErrorAlertsPanel />
     <section className="mt-8 rounded-lg border border-border bg-card/40 p-4">
       <header className="flex items-center justify-between gap-2 mb-3">
         <div>
@@ -92,5 +95,6 @@ export function FunnelDiagnosticsPanel() {
         no console em tempo real.
       </p>
     </section>
+    </>
   );
 }

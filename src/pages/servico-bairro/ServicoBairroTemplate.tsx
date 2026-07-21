@@ -13,6 +13,9 @@ import { Footer } from "@/components/Footer";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { BairroSchema } from "@/components/BairroSchema";
+import { buildContextualMessage } from "@/lib/whatsappMessage";
+import { Download } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -49,10 +52,51 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
     trackPageView(`/servicos/${data.servicoSlug}/${data.bairroSlug}`, `${data.servico} - ${data.bairro}`);
   }, [data]);
 
+  // Modalidade sugerida (para GA4) — Wi-Fi/software = remoto, TV = coleta, default = visita.
+  const modalidadeSugerida: "remoto" | "visita" | "coleta" =
+    /(wifi|redes|virus|formatacao|backup)/i.test(data.servicoSlug)
+      ? "remoto"
+      : /(tv|conserto-tv)/i.test(data.servicoSlug)
+        ? "coleta"
+        : "visita";
+
   const handleWhatsAppClick = () => {
-    trackCTAClick("whatsapp", `${data.servicoSlug}-${data.bairroSlug}`);
-    const message = encodeURIComponent(`Olá! Preciso de ${data.servico.toLowerCase()} no ${data.bairro}. Qual a disponibilidade?`);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+    trackCTAClick("whatsapp", `${data.servicoSlug}-${data.bairroSlug}`, {
+      servico: data.servicoSlug,
+      bairro: data.bairroSlug,
+      modalidade: modalidadeSugerida,
+    });
+    const message = buildContextualMessage({
+      servico: data.servicoSlug,
+      servicoLabel: data.servico,
+      bairroLabel: data.bairro,
+      modalidade: modalidadeSugerida,
+    });
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+  };
+
+  // Detecta checklist "Antes da visita".
+  const checklistKind: "wifi" | "tv" | null = /wifi|redes/i.test(data.servicoSlug)
+    ? "wifi"
+    : /tv/i.test(data.servicoSlug)
+      ? "tv"
+      : null;
+
+  const handleChecklist = (kind: "wifi" | "tv") => {
+    trackCTAClick("chatbot", `${data.servicoSlug}-${data.bairroSlug}_checklist_${kind}`, {
+      servico: data.servicoSlug,
+      bairro: data.bairroSlug,
+      modalidade: modalidadeSugerida,
+    });
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "checklist_download", {
+        event_category: "engagement",
+        checklist_kind: kind,
+        servico: data.servicoSlug,
+        bairro: data.bairroSlug,
+        page_path: window.location.pathname,
+      });
+    }
   };
 
   const jsonLd = {
@@ -79,6 +123,17 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
         { name: data.bairro, path: `/servicos/${data.servicoSlug}/${data.bairroSlug}` }
       ]} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BairroSchema
+        bairro={data.bairro}
+        cidade={data.cidade}
+        servico={data.servico}
+        servicoSlug={data.servicoSlug}
+        bairroSlug={data.bairroSlug}
+        descricao={data.metaDescription}
+        precoBase={data.precoBase}
+      />
+
+
       
       <Header />
       <Breadcrumbs
@@ -128,11 +183,27 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center reveal-text" data-reveal-delay="300">
-              <Button size="lg" variant="whatsapp" onClick={handleWhatsAppClick} className="hover:scale-105 transition-transform">
+            <div
+              className="flex flex-col sm:flex-row gap-4 justify-center reveal-text"
+              data-reveal-delay="300"
+              data-cta-bairro={data.bairroSlug}
+              data-cta-servico={data.servicoSlug}
+            >
+              <Button size="lg" variant="whatsapp" onClick={handleWhatsAppClick} className="hover:scale-105 transition-transform" data-cta-location={`bairro_${data.bairroSlug}_${data.servicoSlug}_hero`}>
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Agendar no {data.bairro}
               </Button>
+              {checklistKind && (
+                <a
+                  href={`/downloads/checklist-antes-da-visita-${checklistKind}.pdf`}
+                  download
+                  onClick={() => handleChecklist(checklistKind)}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-white/10 text-white px-5 py-2.5 font-semibold hover:bg-white/20 transition-colors"
+                  data-cta-location={`bairro_${data.bairroSlug}_${data.servicoSlug}_checklist`}
+                >
+                  <Download className="h-4 w-4" /> Checklist em PDF
+                </a>
+              )}
             </div>
           </div>
         </div>
