@@ -177,18 +177,37 @@
         setTimeout(function () {
           if (document.documentElement.dataset.hydrated === "1") return;
           try {
+            if (sessionStorage.getItem('__hydra_bar_dismissed') === '1') return;
+          } catch (e) {}
+          try {
             if (window.gtag) window.gtag('event', 'hydration_timeout', { non_interaction: true });
           } catch (e) {}
           var bar = document.createElement('div');
+          bar.id = '__hydra_bar';
           bar.setAttribute('role', 'alert');
-          bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0a0a0f;color:#fff;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;font:600 14px Inter,sans-serif;border-top:1px solid rgba(255,255,255,.18)';
+          bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0a0a0f;color:#fff;padding:14px 44px 14px 16px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;font:600 14px Inter,sans-serif;border-top:1px solid rgba(255,255,255,.18)';
           bar.innerHTML = '<span>Conexão lenta? Fale agora mesmo:</span>' +
             '<a href="https://wa.me/5541997452053?text=Ol%C3%A1!%20Preciso%20de%20suporte%20t%C3%A9cnico." data-cta-location="hydration_timeout_bar" style="background:hsl(145,63%,42%);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none">WhatsApp Agora</a>' +
             '<a href="/diagnostico-60s" style="background:hsl(24,92%,52%);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none">Diagnóstico 60s</a>' +
-            '<button type="button" id="__hydra_reload" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:10px 14px;border-radius:10px;cursor:pointer">Recarregar</button>';
+            '<button type="button" id="__hydra_reload" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:10px 14px;border-radius:10px;cursor:pointer">Recarregar</button>' +
+            '<button type="button" id="__hydra_close" aria-label="Fechar aviso" title="Fechar" style="position:absolute;top:6px;right:8px;background:transparent;color:#fff;border:0;font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;opacity:.75">×</button>';
           document.body.appendChild(bar);
-          var btn = document.getElementById('__hydra_reload');
-          if (btn) btn.addEventListener('click', function () { location.reload(); });
+          var reloadBtn = document.getElementById('__hydra_reload');
+          if (reloadBtn) reloadBtn.addEventListener('click', function () { location.reload(); });
+          function dismiss(persist) {
+            if (bar && bar.parentNode) bar.parentNode.removeChild(bar);
+            if (obs) obs.disconnect();
+            if (persist) { try { sessionStorage.setItem('__hydra_bar_dismissed', '1'); } catch (e) {} }
+          }
+          var closeBtn = document.getElementById('__hydra_close');
+          if (closeBtn) closeBtn.addEventListener('click', function () { dismiss(true); });
+          // Auto-hide se a hidratação acontecer depois que a barra apareceu.
+          var obs = new MutationObserver(function () {
+            if (document.documentElement.dataset.hydrated === "1") dismiss(false);
+          });
+          obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-hydrated'] });
+          // Fallback: some após 45s mesmo sem hidratação para não travar a tela.
+          setTimeout(function () { dismiss(false); }, 45000);
         }, DELAY);
       })();
     </script>
