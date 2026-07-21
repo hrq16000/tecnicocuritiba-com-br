@@ -55,8 +55,10 @@ function meta(p) {
   if (p === "/") return { changefreq: "weekly", priority: "1.0" };
   if (p.startsWith("/bairros/")) return { changefreq: "monthly", priority: "0.7" };
   if (p.startsWith("/marcas/")) return { changefreq: "monthly", priority: "0.7" };
-  if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) return { changefreq: "monthly", priority: "0.8" };
-  if (p.startsWith("/servicos/") || p.startsWith("/conserto-")) return { changefreq: "weekly", priority: "0.85" };
+  // /problemas/* e /servicos/* são as rotas de maior valor de conversão —
+  // priorizamos com peso alto e crawl semanal para indexação acelerada.
+  if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) return { changefreq: "weekly", priority: "0.9" };
+  if (p.startsWith("/servicos/") || p.startsWith("/conserto-")) return { changefreq: "weekly", priority: "0.9" };
   return { changefreq: "weekly", priority: "0.8" };
 }
 
