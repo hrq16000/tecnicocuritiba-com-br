@@ -93,6 +93,12 @@ function normalizeModalidade(v: string | null): Modalidade {
   return "desconhecida";
 }
 
+const FUNNEL_STORAGE_KEYS = [
+  "wa_funnel_state_v6",
+  "wa_funnel_state_v5",
+  "wa_funnel_answers_v4",
+];
+
 const Obrigado = () => {
   const params = useMemo(
     () =>
@@ -102,15 +108,37 @@ const Obrigado = () => {
     [],
   );
   const origem = params.get("origem") || "direto";
-  const modalidade = normalizeModalidade(params.get("modalidade"));
-  const equipamento = params.get("equipamento") || "";
+  const rawModalidade = params.get("modalidade");
+  const modalidade = normalizeModalidade(rawModalidade);
+  const equipamento = (params.get("equipamento") || "").slice(0, 80);
+  // Validação extra: se veio modalidade inválida (não vazia, mas fora do enum),
+  // marcamos como suspeita para telemetria; nunca reabrimos o funil.
+  const modalidadeInvalida = !!rawModalidade && modalidade === "desconhecida";
 
   const copy = COPY[modalidade];
   const Icon = copy.icon;
 
   useEffect(() => {
-    trackCTAClick("whatsapp", `thankyou_${origem}_${modalidade}`);
-  }, [origem, modalidade]);
+    // Limpa qualquer estado persistente do funil — garante que o usuário
+    // nunca volte para uma etapa anterior ao chegar em /obrigado, mesmo
+    // se o parâmetro veio ausente ou corrompido.
+    try {
+      for (const k of FUNNEL_STORAGE_KEYS) window.localStorage.removeItem(k);
+      window.sessionStorage.removeItem("wa_funnel_state_v6");
+    } catch { /* noop */ }
+
+    trackCTAClick("whatsapp", `thankyou_${origem}_${modalidade}`, {
+      modalidade,
+      equipamento: equipamento || undefined,
+    });
+    if (modalidadeInvalida && typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "obrigado_modalidade_invalida", {
+        event_category: "diagnostics",
+        raw_modalidade: rawModalidade,
+        origem,
+      });
+    }
+  }, [origem, modalidade, equipamento, modalidadeInvalida, rawModalidade]);
 
   const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Olá! Cheguei aqui pela página de confirmação (${copy.badge}) — preciso reabrir a conversa.`,

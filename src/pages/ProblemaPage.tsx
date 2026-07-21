@@ -135,9 +135,31 @@ const ProblemaPage = () => {
     );
   }
 
+  // Heurística leve para modalidade sugerida a partir da categoria (não
+  // substitui o motor do funil; serve apenas para segmentar eventos GA4).
+  const modalidadeSugerida: 'remoto' | 'visita' | 'coleta' =
+    /software|vírus|virus|lento|wifi|rede|impressora/i.test(data.categoria)
+      ? 'remoto'
+      : /tv|som|videogame|celular|placa|hardware|não liga|nao liga/i.test(`${data.categoria} ${data.h1}`)
+        ? 'coleta'
+        : 'visita';
+
   const handleWhatsApp = () => {
-    trackCTAClick("whatsapp", data.slug);
+    trackCTAClick("whatsapp", `problema_${data.slug}`, {
+      problema: data.slug,
+      equipamento: data.categoria,
+      modalidade: modalidadeSugerida,
+    });
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(data.whatsappMessage)}`, "_blank");
+  };
+
+  const handleLigar = () => {
+    trackCTAClick("phone", `problema_${data.slug}`, {
+      problema: data.slug,
+      equipamento: data.categoria,
+      modalidade: modalidadeSugerida,
+    });
+    window.location.href = `tel:+55${WHATSAPP_NUMBER}`;
   };
 
   // LocalBusiness JSON-LD — reforça sinal local para /problemas/* (SEO Curitiba).
@@ -178,9 +200,14 @@ const ProblemaPage = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <link rel="canonical" href={`https://tecnicocuritiba.com.br/problemas/${data.slug}`} />
-        {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
-        {breadcrumbSchema && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>}
-        <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+        {/* Pré-carrega recursos críticos para melhorar LCP em /problemas/*. */}
+        <link rel="preconnect" href="https://wa.me" crossOrigin="" />
+        <link rel="dns-prefetch" href="//wa.me" />
+        {/* JSON-LD unificado em um único bloco (@graph) para reduzir scripts. */}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [localBusinessSchema, ...(faqSchema ? [faqSchema] : []), ...(breadcrumbSchema ? [breadcrumbSchema] : [])],
+        })}</script>
       </Helmet>
       <Header />
       <Breadcrumbs items={[{ label: data.categoria, href: "/servicos" }, { label: data.h1.split("—")[0].trim() }]} />
@@ -195,9 +222,14 @@ const ProblemaPage = () => {
             <p className="text-sm text-white/80 mb-6">
               📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
             </p>
-            <Button size="lg" variant="cta" onClick={handleWhatsApp}>
-              <MessageCircle className="mr-2 h-5 w-5" /> Falar com Técnico Agora
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
+                <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
+              </Button>
+              <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
+                📞 Ligar Agora
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -224,6 +256,28 @@ const ProblemaPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Bloco de links internos contextuais — SEO local + navegação por
+          serviço mais buscado em Curitiba. */}
+      <section className="py-6 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+            <Link to="/servicos/conserto-notebook-curitiba" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              🔧 Conserto de Notebook em Curitiba
+            </Link>
+            <Link to="/servicos/formatacao-computador" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              💻 Formatação com backup completo
+            </Link>
+            <Link to="/servicos/remocao-virus" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              🛡️ Remoção de vírus e ransomware
+            </Link>
+            <Link to="/coleta-e-entrega" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              🚚 Coleta e entrega em Curitiba
+            </Link>
+          </div>
+        </div>
+      </section>
+
 
       {/* Imagem ilustrativa pós-hero */}
       <RealImageSection imageKey="diagnostico" secondaryImageKey="bancadaTecnica" layout="duo" caption="Diagnóstico com multímetro em placa eletrônica" secondaryCaption="Bancada técnica profissional" />
@@ -554,9 +608,14 @@ const ProblemaPage = () => {
         <div className="container mx-auto text-center px-4 relative z-10">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">{data.h1.split("—")[0].trim()}?</h2>
           <p className="text-white/80 mb-6 max-w-xl mx-auto">Nosso técnico identifica o problema com diagnóstico preciso. Atendimento em Curitiba e região metropolitana.</p>
-          <Button size="lg" variant="cta" onClick={handleWhatsApp}>
-            <MessageCircle className="mr-2 h-5 w-5" /> Falar com Técnico Agora
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_footer`}>
+              <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
+            </Button>
+            <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_footer_call`}>
+              📞 Ligar Agora
+            </Button>
+          </div>
         </div>
       </section>
       </AnimatedSection>

@@ -78,9 +78,12 @@ Allow: /
 
 User-agent: *
 Allow: /
+Allow: /problemas/
+Allow: /servicos/
 Crawl-delay: 2
 
 Disallow: /ads/
+Disallow: /admin/
 
 # Sitemap index (preferido) + sitemaps individuais
 Sitemap: https://tecnicocuritiba.com.br/sitemap-index.xml

@@ -76,7 +76,17 @@ const ensureLeadId = (ctaType: 'whatsapp' | 'phone' | 'chatbot'): { leadId: stri
 };
 
 // Track CTA clicks for conversions
-export const trackCTAClick = (ctaType: 'whatsapp' | 'phone' | 'chatbot', location: string) => {
+export interface CTAContext {
+  modalidade?: 'remoto' | 'visita' | 'coleta' | 'desconhecida';
+  problema?: string;   // slug do problema (/problemas/*) quando aplicável
+  equipamento?: string;
+  servico?: string;    // slug do serviço (/servicos/*)
+}
+export const trackCTAClick = (
+  ctaType: 'whatsapp' | 'phone' | 'chatbot',
+  location: string,
+  context: CTAContext = {},
+) => {
   if (typeof window !== 'undefined') {
     window.__lastCtaType = ctaType;
     window.__lastCtaLocation = location;
@@ -101,6 +111,12 @@ export const trackCTAClick = (ctaType: 'whatsapp' | 'phone' | 'chatbot', locatio
       value: 1,
       lead_id: leadId,
       app_version: appVersion,
+      // Contexto de triagem — permite segmentar conversões por
+      // modalidade (remoto/visita/coleta), problema e equipamento.
+      modalidade: context.modalidade,
+      problema: context.problema,
+      equipamento: context.equipamento,
+      servico: context.servico,
       ...deviceCtx,
       ...utm,
     };
