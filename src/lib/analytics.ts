@@ -111,6 +111,12 @@ export const trackCTAClick = (
       value: 1,
       lead_id: leadId,
       app_version: appVersion,
+      // Contexto de triagem — permite segmentar conversões por
+      // modalidade (remoto/visita/coleta), problema e equipamento.
+      modalidade: context.modalidade,
+      problema: context.problema,
+      equipamento: context.equipamento,
+      servico: context.servico,
       ...deviceCtx,
       ...utm,
     };
