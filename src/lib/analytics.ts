@@ -77,22 +77,35 @@ const ensureLeadId = (ctaType: 'whatsapp' | 'phone' | 'chatbot'): { leadId: stri
 
 // Track CTA clicks for conversions
 export interface CTAContext {
-  modalidade?: 'remoto' | 'visita' | 'coleta' | 'desconhecida';
+  modalidade?: 'remoto' | 'visita' | 'coleta' | 'desconhecida' | 'unknown';
   problema?: string;   // slug do problema (/problemas/*) quando aplicável
   equipamento?: string;
   servico?: string;    // slug do serviço (/servicos/*)
 }
+// Fallback "unknown" — nunca perde o clique por falta de contexto.
+const withUnknown = (v: string | undefined | null): string => {
+  if (v === undefined || v === null) return 'unknown';
+  const s = String(v).trim();
+  return s === '' ? 'unknown' : s;
+};
+const normalizeCtx = (context: CTAContext = {}) => ({
+  modalidade: withUnknown(context.modalidade),
+  problema: withUnknown(context.problema),
+  equipamento: withUnknown(context.equipamento),
+  servico: withUnknown(context.servico),
+});
 export const trackCTAClick = (
   ctaType: 'whatsapp' | 'phone' | 'chatbot',
   location: string,
   context: CTAContext = {},
 ) => {
+  const safeLocation = withUnknown(location);
   if (typeof window !== 'undefined') {
     window.__lastCtaType = ctaType;
-    window.__lastCtaLocation = location;
+    window.__lastCtaLocation = safeLocation;
     (window as unknown as { __ctaTracked?: { type: string; location: string; t: number } }).__ctaTracked = {
       type: ctaType,
-      location,
+      location: safeLocation,
       t: Date.now(),
     };
   }
@@ -101,22 +114,19 @@ export const trackCTAClick = (
     const deviceCtx = getDeviceContext();
     const { leadId, isNew } = ensureLeadId(ctaType);
     const appVersion = (window as unknown as { __APP_VERSION__?: string }).__APP_VERSION__ || 'dev';
+    const ctx = normalizeCtx(context);
     const payload = {
       event_category: 'engagement',
-      event_label: `${ctaType}_${location}`,
+      event_label: `${ctaType}_${safeLocation}`,
       cta_type: ctaType,
-      cta_location: location,
-      click_location: location,
+      cta_location: safeLocation,
+      click_location: safeLocation,
       page_path: window.location.pathname,
       value: 1,
       lead_id: leadId,
       app_version: appVersion,
-      // Contexto de triagem — permite segmentar conversões por
-      // modalidade (remoto/visita/coleta), problema e equipamento.
-      modalidade: context.modalidade,
-      problema: context.problema,
-      equipamento: context.equipamento,
-      servico: context.servico,
+      // Contexto de triagem — nunca envia undefined; ausência vira "unknown".
+      ...ctx,
       ...deviceCtx,
       ...utm,
     };
@@ -262,5 +272,70 @@ export const attachScrollDepthTracking = () => {
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
+};
+
+// ---------- Internal-link tracking + validação ----------
+// Emite eventos separados para cliques em links internos dentro de
+// /problemas/*. Permite responder "que serviço engajou mais depois do
+// diagnóstico?" e detectar links quebrados na produção.
+export interface InternalLinkContext {
+  fromPath: string;        // rota de origem (ex: /problemas/notebook-nao-liga)
+  fromCategoria?: string;  // categoria do problema
+  toPath: string;          // rota de destino
+  label: string;           // texto visível do link
+  valid?: boolean;         // resultado da validação (default true)
+}
+export const trackInternalLink = (ctx: InternalLinkContext) => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  const payload = {
+    event_category: 'navigation',
+    event_label: `${ctx.fromPath} -> ${ctx.toPath}`,
+    from_path: withUnknown(ctx.fromPath),
+    from_categoria: withUnknown(ctx.fromCategoria),
+    to_path: withUnknown(ctx.toPath),
+    to_servico_slug: ctx.toPath.startsWith('/servicos/')
+      ? ctx.toPath.replace('/servicos/', '').split('/')[0]
+      : 'unknown',
+    link_label: withUnknown(ctx.label),
+    page_path: window.location.pathname,
+  };
+  window.gtag('event', 'internal_link_click', payload);
+  if (ctx.valid === false) {
+    window.gtag('event', 'internal_link_broken', {
+      ...payload,
+      severity: 'error',
+    });
+  }
+};
+
+// ---------- CTA visibility ----------
+// Dispara `cta_visible` UMA vez por CTA/página, com o tempo (ms) desde o load
+// até o botão entrar no viewport. Métrica de "quanto o usuário rolou antes
+// de ver o CTA".
+const CTA_SEEN_KEY = 'cta_visible_v1';
+const readCtaSeen = (): Record<string, string[]> => {
+  try { return JSON.parse(sessionStorage.getItem(CTA_SEEN_KEY) || '{}'); } catch { return {}; }
+};
+const writeCtaSeen = (m: Record<string, string[]>) => {
+  try { sessionStorage.setItem(CTA_SEEN_KEY, JSON.stringify(m)); } catch { /* noop */ }
+};
+export const trackCTAVisible = (ctaId: string, extra: Record<string, unknown> = {}) => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  const pagePath = window.location.pathname;
+  const map = readCtaSeen();
+  const seen = map[pagePath] || [];
+  if (seen.includes(ctaId)) return;
+  seen.push(ctaId);
+  map[pagePath] = seen;
+  writeCtaSeen(map);
+  const perfNow = typeof performance !== 'undefined' ? Math.round(performance.now()) : 0;
+  window.gtag('event', 'cta_visible', {
+    event_category: 'engagement',
+    event_label: ctaId,
+    cta_id: ctaId,
+    time_to_visible_ms: perfNow,
+    page_path: pagePath,
+    ...extra,
+  });
 };
 

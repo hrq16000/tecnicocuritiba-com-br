@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -10,11 +10,51 @@ import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Helmet } from "react-helmet";
-import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
+import { useCTAVisibility } from "@/hooks/useCTAVisibility";
 import type { ProblemaPageData } from "@/lib/problemaPagesData";
 import ReactMarkdown from "react-markdown";
 import { IMAGES } from "@/lib/images";
 import { RealImageSection } from "@/components/RealImageSection";
+
+// Whitelist canônica de slugs válidos em /servicos/* — usada para validar
+// linkagem interna em /problemas/* e evitar 404 silenciosos.
+const VALID_SERVICO_SLUGS = new Set<string>([
+  "conserto-notebook-curitiba",
+  "conserto-pc-notebook",
+  "conserto-placa",
+  "conserto-tv",
+  "conserto-celular",
+  "manutencao-tv",
+  "formatacao-computador",
+  "remocao-virus",
+  "redes-wifi",
+  "backup-recuperacao",
+  "montagem-pc",
+  "upgrade-ssd-memoria",
+  "computador-lento",
+  "computador-nao-liga",
+]);
+// Rotas fora de /servicos/* que também são destinos válidos para links contextuais.
+const VALID_EXTRA_ROUTES = new Set<string>([
+  "/coleta-e-entrega",
+  "/coleta-formulario",
+  "/diagnostico-tecnico",
+  "/como-funciona",
+  "/precos-e-politicas",
+  "/atendimento-domicilio",
+  "/atendimento-remoto",
+]);
+const isValidInternalTarget = (to: string): boolean => {
+  if (!to) return false;
+  if (to.startsWith("/servicos/")) {
+    const slug = to.replace("/servicos/", "").split("/")[0];
+    return VALID_SERVICO_SLUGS.has(slug);
+  }
+  if (to.startsWith("/problemas/") || to.startsWith("/marcas/") || to.startsWith("/bairros/")) return true;
+  return VALID_EXTRA_ROUTES.has(to);
+};
+
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -49,6 +89,15 @@ const ProblemaPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [data, setData] = useState<ProblemaPageData | undefined>(undefined);
   const [loading, setLoading] = useState(true);
+  const heroWaRef = useRef<HTMLButtonElement>(null);
+  const heroCallRef = useRef<HTMLButtonElement>(null);
+  const footerWaRef = useRef<HTMLButtonElement>(null);
+
+  // Visibilidade dos CTAs — dispara `cta_visible` uma vez por CTA/página.
+  useCTAVisibility(heroWaRef, `problema_${slug ?? "unknown"}_hero_whatsapp`, { problema: slug ?? "unknown" });
+  useCTAVisibility(heroCallRef, `problema_${slug ?? "unknown"}_hero_call`, { problema: slug ?? "unknown" });
+  useCTAVisibility(footerWaRef, `problema_${slug ?? "unknown"}_footer_whatsapp`, { problema: slug ?? "unknown" });
+
 
   useEffect(() => {
     if (!slug) { setLoading(false); return; }
@@ -223,10 +272,10 @@ const ProblemaPage = () => {
               📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
+              <Button ref={heroWaRef} size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
                 <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
               </Button>
-              <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
+              <Button ref={heroCallRef} size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
                 📞 Ligar Agora
               </Button>
             </div>
@@ -262,18 +311,33 @@ const ProblemaPage = () => {
       <section className="py-6 bg-background border-b border-border">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-            <Link to="/servicos/conserto-notebook-curitiba" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              🔧 Conserto de Notebook em Curitiba
-            </Link>
-            <Link to="/servicos/formatacao-computador" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              💻 Formatação com backup completo
-            </Link>
-            <Link to="/servicos/remocao-virus" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              🛡️ Remoção de vírus e ransomware
-            </Link>
-            <Link to="/coleta-e-entrega" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              🚚 Coleta e entrega em Curitiba
-            </Link>
+            {[
+              { to: "/servicos/conserto-notebook-curitiba", label: "🔧 Conserto de Notebook em Curitiba" },
+              { to: "/servicos/formatacao-computador", label: "💻 Formatação com backup completo" },
+              { to: "/servicos/remocao-virus", label: "🛡️ Remoção de vírus e ransomware" },
+              { to: "/coleta-e-entrega", label: "🚚 Coleta e entrega em Curitiba" },
+            ].map((link) => {
+              const valid = isValidInternalTarget(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  data-broken={valid ? undefined : "true"}
+                  onClick={() =>
+                    trackInternalLink({
+                      fromPath: `/problemas/${data.slug}`,
+                      fromCategoria: data.categoria,
+                      toPath: link.to,
+                      label: link.label,
+                      valid,
+                    })
+                  }
+                  className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -609,7 +673,7 @@ const ProblemaPage = () => {
           <h2 className="text-2xl md:text-3xl font-bold mb-4">{data.h1.split("—")[0].trim()}?</h2>
           <p className="text-white/80 mb-6 max-w-xl mx-auto">Nosso técnico identifica o problema com diagnóstico preciso. Atendimento em Curitiba e região metropolitana.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_footer`}>
+            <Button ref={footerWaRef} size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_footer`}>
               <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
             </Button>
             <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_footer_call`}>
@@ -627,11 +691,28 @@ const ProblemaPage = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-xl font-bold text-primary mb-6 text-center">Páginas Relacionadas</h2>
             <div className="grid sm:grid-cols-3 gap-3">
-              {data.relatedPages.map((link) => (
-                <Link key={link.to} to={link.to} className="flex items-center gap-2 bg-background rounded-lg p-3 text-sm font-medium text-foreground hover:text-accent hover:shadow-md transition-all border border-border">
-                  <ArrowRight className="h-4 w-4 text-accent flex-shrink-0" />{link.label}
-                </Link>
-              ))}
+              {data.relatedPages.map((link) => {
+                const valid = isValidInternalTarget(link.to);
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    data-broken={valid ? undefined : "true"}
+                    onClick={() =>
+                      trackInternalLink({
+                        fromPath: `/problemas/${data.slug}`,
+                        fromCategoria: data.categoria,
+                        toPath: link.to,
+                        label: link.label,
+                        valid,
+                      })
+                    }
+                    className="flex items-center gap-2 bg-background rounded-lg p-3 text-sm font-medium text-foreground hover:text-accent hover:shadow-md transition-all border border-border"
+                  >
+                    <ArrowRight className="h-4 w-4 text-accent flex-shrink-0" />{link.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
