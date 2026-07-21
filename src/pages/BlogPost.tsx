@@ -77,6 +77,15 @@ const BlogPost = () => {
       : (slug ? getUniqueImage(slug).replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=80') + '&w=1600&h=900' : ''));
   const heroImageOg = optimizedCoverUrl ?? withOgVersion(heroImage);
 
+  // Preload AVIF/WebP variants for Unsplash-hosted covers (better LCP).
+  const isUnsplashHero = heroImage.includes("images.unsplash.com");
+  const heroAvif = isUnsplashHero
+    ? heroImage.replace(/([?&])(fm|w|q)=[^&]+/g, "").replace(/[?&]+$/, "") + (heroImage.includes("?") ? "&" : "?") + "fm=avif&w=1200&q=55"
+    : null;
+  const heroWebp = isUnsplashHero
+    ? heroImage.replace(/([?&])(fm|w|q)=[^&]+/g, "").replace(/[?&]+$/, "") + (heroImage.includes("?") ? "&" : "?") + "fm=webp&w=1200&q=65"
+    : null;
+
   // Compute word count from content (rough estimate via readTime)
   const wordCount = post ? Math.round(parseInt(post.readTime) * 220) : 1500;
 
@@ -219,8 +228,10 @@ const BlogPost = () => {
         <meta name="twitter:image:alt" content={post.title} />
         <meta name="author" content="Técnico em Curitiba" />
         <meta name="news_keywords" content={`${post.category}, técnico curitiba, ${post.title}`} />
-        {/* Preload hero image for faster LCP */}
-        <link rel="preload" as="image" href={heroImage} fetchPriority="high" />
+        {/* Preload hero image for faster LCP — AVIF preferred, WebP fallback */}
+        {heroAvif && <link rel="preload" as="image" href={heroAvif} type="image/avif" fetchPriority="high" />}
+        {heroWebp && <link rel="preload" as="image" href={heroWebp} type="image/webp" fetchPriority="high" />}
+        {!heroAvif && <link rel="preload" as="image" href={heroImage} fetchPriority="high" />}
       </Helmet>
       <JsonLdSchema />
       <Header />
