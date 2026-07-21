@@ -140,12 +140,47 @@ const ProblemaPage = () => {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(data.whatsappMessage)}`, "_blank");
   };
 
+  // LocalBusiness JSON-LD — reforça sinal local para /problemas/* (SEO Curitiba).
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "ComputerRepairService"],
+    "@id": "https://tecnicocuritiba.com.br/#organization",
+    name: "Técnico em Curitiba",
+    url: "https://tecnicocuritiba.com.br",
+    telephone: "+55-41-99745-2053",
+    priceRange: "R$ 99,99 - R$ 500",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Curitiba",
+      addressRegion: "PR",
+      addressCountry: "BR",
+    },
+    areaServed: [
+      { "@type": "City", name: "Curitiba" },
+      { "@type": "City", name: "São José dos Pinhais" },
+      { "@type": "City", name: "Pinhais" },
+      { "@type": "City", name: "Colombo" },
+      { "@type": "City", name: "Araucária" },
+      { "@type": "City", name: "Campo Largo" },
+    ],
+  };
+
+  const cidadesAtendidas = [
+    { nome: "Curitiba", href: "/tecnico-informatica-curitiba" },
+    { nome: "São José dos Pinhais", href: "/tecnico-informatica-sao-jose-dos-pinhais" },
+    { nome: "Pinhais", href: "/tecnico-informatica-pinhais" },
+    { nome: "Colombo", href: "/tecnico-informatica-colombo" },
+    { nome: "Araucária", href: "/tecnico-informatica-araucaria" },
+    { nome: "Campo Largo", href: "/tecnico-informatica-campo-largo" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
         <link rel="canonical" href={`https://tecnicocuritiba.com.br/problemas/${data.slug}`} />
         {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
         {breadcrumbSchema && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>}
+        <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       </Helmet>
       <Header />
       <Breadcrumbs items={[{ label: data.categoria, href: "/servicos" }, { label: data.h1.split("—")[0].trim() }]} />
@@ -157,6 +192,9 @@ const ProblemaPage = () => {
             <span className="inline-block bg-accent/20 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-4">{data.categoria}</span>
             <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">{data.h1}</h1>
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{data.intro.split("\n")[0]}</p>
+            <p className="text-sm text-white/80 mb-6">
+              📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
+            </p>
             <Button size="lg" variant="cta" onClick={handleWhatsApp}>
               <MessageCircle className="mr-2 h-5 w-5" /> Falar com Técnico Agora
             </Button>
@@ -164,8 +202,32 @@ const ProblemaPage = () => {
         </div>
       </section>
 
+      {/* Áreas atendidas — reforço de SEO local */}
+      <section className="py-6 bg-secondary/50 border-y border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto text-center">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground mb-3">
+              Atendemos {data.h1.split("—")[0].trim().toLowerCase()} em:
+            </p>
+            <ul className="flex flex-wrap justify-center gap-2 text-sm">
+              {cidadesAtendidas.map((c) => (
+                <li key={c.href}>
+                  <Link
+                    to={c.href}
+                    className="inline-block rounded-full border border-border bg-background px-3 py-1 text-foreground hover:border-primary/60 hover:text-primary"
+                  >
+                    {c.nome}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Imagem ilustrativa pós-hero */}
       <RealImageSection imageKey="diagnostico" secondaryImageKey="bancadaTecnica" layout="duo" caption="Diagnóstico com multímetro em placa eletrônica" secondaryCaption="Bancada técnica profissional" />
+
 
       <AnimatedSection>
       {/* Introdução completa */}

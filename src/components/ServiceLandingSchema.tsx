@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { validateAndInjectSchema } from "@/lib/schemaValidation";
+import { DynamicAggregateRating } from "@/components/DynamicAggregateRating";
 
 /**
  * JSON-LD por landing de serviço: Service + Offer + FAQPage + WebPage + Speakable.
@@ -115,7 +116,17 @@ export const ServiceLandingSchema = ({
     };
   }, [serviceName, description, path, priceFrom, category, faqs, dateModified]);
 
-  return null;
+  // AggregateRating dinâmico: só emite JSON-LD quando há >= 10 reviews reais
+  // (guard duplo em DynamicAggregateRating). Se não houver, não injeta nada.
+  const serviceSlug = path.split("/").filter(Boolean).pop();
+  return (
+    <DynamicAggregateRating
+      itemId={`${BASE_URL}${path}#service`}
+      itemType="Service"
+      itemName={serviceName}
+      service={serviceSlug}
+    />
+  );
 };
 
 export default ServiceLandingSchema;
