@@ -598,6 +598,8 @@ export const WhatsAppFunnel = () => {
       try {
         const url2 = new URL("/obrigado", window.location.origin);
         url2.searchParams.set("origem", originLocation);
+        url2.searchParams.set("modalidade", route);
+        if (answers.equipamento) url2.searchParams.set("equipamento", answers.equipamento);
         window.history.pushState({}, "", url2.pathname + url2.search);
         window.dispatchEvent(new PopStateEvent("popstate"));
       } catch (err) {
