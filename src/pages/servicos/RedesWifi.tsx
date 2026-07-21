@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
+import { ServiceGallery } from "@/components/ServiceGallery";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
@@ -24,7 +25,7 @@ const RedesWifi = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackCTAClick("whatsapp", "redes-wifi");
+    trackCTAClick("whatsapp", "redes-wifi", { servico: "redes-wifi", modalidade: "visita" });
     const message = encodeURIComponent("Olá! Preciso de ajuda com minha rede Wi-Fi. Podem me ajudar?");
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
   };
