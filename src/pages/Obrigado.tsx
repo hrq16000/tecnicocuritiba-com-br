@@ -131,12 +131,17 @@ const Obrigado = () => {
       modalidade,
       equipamento: equipamento || undefined,
     });
-    if (modalidadeInvalida && typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "obrigado_modalidade_invalida", {
-        event_category: "diagnostics",
-        raw_modalidade: rawModalidade,
-        origem,
-      });
+    if (modalidadeInvalida) {
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "obrigado_modalidade_invalida", {
+          event_category: "diagnostics",
+          raw_modalidade: rawModalidade,
+          origem,
+        });
+      }
+      import("@/lib/errorAlerts").then(({ recordAlertEvent }) => {
+        recordAlertEvent({ kind: "obrigado_modalidade_invalida", route: "/obrigado" });
+      }).catch(() => { /* noop */ });
     }
   }, [origem, modalidade, equipamento, modalidadeInvalida, rawModalidade]);
 
