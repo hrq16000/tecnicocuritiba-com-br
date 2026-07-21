@@ -13,6 +13,9 @@ import { Footer } from "@/components/Footer";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { BairroSchema } from "@/components/BairroSchema";
+import { buildContextualMessage } from "@/lib/whatsappMessage";
+import { Download } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -49,10 +52,51 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
     trackPageView(`/servicos/${data.servicoSlug}/${data.bairroSlug}`, `${data.servico} - ${data.bairro}`);
   }, [data]);
 
+  // Modalidade sugerida (para GA4) — Wi-Fi/software = remoto, TV = coleta, default = visita.
+  const modalidadeSugerida: "remoto" | "visita" | "coleta" =
+    /(wifi|redes|virus|formatacao|backup)/i.test(data.servicoSlug)
+      ? "remoto"
+      : /(tv|conserto-tv)/i.test(data.servicoSlug)
+        ? "coleta"
+        : "visita";
+
   const handleWhatsAppClick = () => {
-    trackCTAClick("whatsapp", `${data.servicoSlug}-${data.bairroSlug}`);
-    const message = encodeURIComponent(`Olá! Preciso de ${data.servico.toLowerCase()} no ${data.bairro}. Qual a disponibilidade?`);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+    trackCTAClick("whatsapp", `${data.servicoSlug}-${data.bairroSlug}`, {
+      servico: data.servicoSlug,
+      bairro: data.bairroSlug,
+      modalidade: modalidadeSugerida,
+    });
+    const message = buildContextualMessage({
+      servico: data.servicoSlug,
+      servicoLabel: data.servico,
+      bairroLabel: data.bairro,
+      modalidade: modalidadeSugerida,
+    });
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+  };
+
+  // Detecta checklist "Antes da visita".
+  const checklistKind: "wifi" | "tv" | null = /wifi|redes/i.test(data.servicoSlug)
+    ? "wifi"
+    : /tv/i.test(data.servicoSlug)
+      ? "tv"
+      : null;
+
+  const handleChecklist = (kind: "wifi" | "tv") => {
+    trackCTAClick("chatbot", `${data.servicoSlug}-${data.bairroSlug}_checklist_${kind}`, {
+      servico: data.servicoSlug,
+      bairro: data.bairroSlug,
+      modalidade: modalidadeSugerida,
+    });
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "checklist_download", {
+        event_category: "engagement",
+        checklist_kind: kind,
+        servico: data.servicoSlug,
+        bairro: data.bairroSlug,
+        page_path: window.location.pathname,
+      });
+    }
   };
 
   const jsonLd = {
