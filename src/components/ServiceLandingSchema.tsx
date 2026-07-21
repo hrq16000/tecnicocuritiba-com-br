@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { validateAndInjectSchema } from "@/lib/schemaValidation";
+import { DynamicAggregateRating } from "@/components/DynamicAggregateRating";
 
 /**
  * JSON-LD por landing de serviço: Service + Offer + FAQPage + WebPage + Speakable.
