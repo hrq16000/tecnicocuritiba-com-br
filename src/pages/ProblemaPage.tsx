@@ -272,10 +272,10 @@ const ProblemaPage = () => {
               📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
+              <Button ref={heroWaRef} size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
                 <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
               </Button>
-              <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
+              <Button ref={heroCallRef} size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
                 📞 Ligar Agora
               </Button>
             </div>
