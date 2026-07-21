@@ -673,7 +673,7 @@ const ProblemaPage = () => {
           <h2 className="text-2xl md:text-3xl font-bold mb-4">{data.h1.split("—")[0].trim()}?</h2>
           <p className="text-white/80 mb-6 max-w-xl mx-auto">Nosso técnico identifica o problema com diagnóstico preciso. Atendimento em Curitiba e região metropolitana.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_footer`}>
+            <Button ref={footerWaRef} size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_footer`}>
               <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
             </Button>
             <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_footer_call`}>
