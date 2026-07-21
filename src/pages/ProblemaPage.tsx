@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -10,11 +10,51 @@ import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Helmet } from "react-helmet";
-import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
+import { useCTAVisibility } from "@/hooks/useCTAVisibility";
 import type { ProblemaPageData } from "@/lib/problemaPagesData";
 import ReactMarkdown from "react-markdown";
 import { IMAGES } from "@/lib/images";
 import { RealImageSection } from "@/components/RealImageSection";
+
+// Whitelist canônica de slugs válidos em /servicos/* — usada para validar
+// linkagem interna em /problemas/* e evitar 404 silenciosos.
+const VALID_SERVICO_SLUGS = new Set<string>([
+  "conserto-notebook-curitiba",
+  "conserto-pc-notebook",
+  "conserto-placa",
+  "conserto-tv",
+  "conserto-celular",
+  "manutencao-tv",
+  "formatacao-computador",
+  "remocao-virus",
+  "redes-wifi",
+  "backup-recuperacao",
+  "montagem-pc",
+  "upgrade-ssd-memoria",
+  "computador-lento",
+  "computador-nao-liga",
+]);
+// Rotas fora de /servicos/* que também são destinos válidos para links contextuais.
+const VALID_EXTRA_ROUTES = new Set<string>([
+  "/coleta-e-entrega",
+  "/coleta-formulario",
+  "/diagnostico-tecnico",
+  "/como-funciona",
+  "/precos-e-politicas",
+  "/atendimento-domicilio",
+  "/atendimento-remoto",
+]);
+const isValidInternalTarget = (to: string): boolean => {
+  if (!to) return false;
+  if (to.startsWith("/servicos/")) {
+    const slug = to.replace("/servicos/", "").split("/")[0];
+    return VALID_SERVICO_SLUGS.has(slug);
+  }
+  if (to.startsWith("/problemas/") || to.startsWith("/marcas/") || to.startsWith("/bairros/")) return true;
+  return VALID_EXTRA_ROUTES.has(to);
+};
+
 
 const WHATSAPP_NUMBER = "5541997452053";
 
