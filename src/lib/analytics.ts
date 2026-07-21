@@ -77,22 +77,35 @@ const ensureLeadId = (ctaType: 'whatsapp' | 'phone' | 'chatbot'): { leadId: stri
 
 // Track CTA clicks for conversions
 export interface CTAContext {
-  modalidade?: 'remoto' | 'visita' | 'coleta' | 'desconhecida';
+  modalidade?: 'remoto' | 'visita' | 'coleta' | 'desconhecida' | 'unknown';
   problema?: string;   // slug do problema (/problemas/*) quando aplicável
   equipamento?: string;
   servico?: string;    // slug do serviço (/servicos/*)
 }
+// Fallback "unknown" — nunca perde o clique por falta de contexto.
+const withUnknown = (v: string | undefined | null): string => {
+  if (v === undefined || v === null) return 'unknown';
+  const s = String(v).trim();
+  return s === '' ? 'unknown' : s;
+};
+const normalizeCtx = (context: CTAContext = {}) => ({
+  modalidade: withUnknown(context.modalidade),
+  problema: withUnknown(context.problema),
+  equipamento: withUnknown(context.equipamento),
+  servico: withUnknown(context.servico),
+});
 export const trackCTAClick = (
   ctaType: 'whatsapp' | 'phone' | 'chatbot',
   location: string,
   context: CTAContext = {},
 ) => {
+  const safeLocation = withUnknown(location);
   if (typeof window !== 'undefined') {
     window.__lastCtaType = ctaType;
-    window.__lastCtaLocation = location;
+    window.__lastCtaLocation = safeLocation;
     (window as unknown as { __ctaTracked?: { type: string; location: string; t: number } }).__ctaTracked = {
       type: ctaType,
-      location,
+      location: safeLocation,
       t: Date.now(),
     };
   }
@@ -101,22 +114,19 @@ export const trackCTAClick = (
     const deviceCtx = getDeviceContext();
     const { leadId, isNew } = ensureLeadId(ctaType);
     const appVersion = (window as unknown as { __APP_VERSION__?: string }).__APP_VERSION__ || 'dev';
+    const ctx = normalizeCtx(context);
     const payload = {
       event_category: 'engagement',
-      event_label: `${ctaType}_${location}`,
+      event_label: `${ctaType}_${safeLocation}`,
       cta_type: ctaType,
-      cta_location: location,
-      click_location: location,
+      cta_location: safeLocation,
+      click_location: safeLocation,
       page_path: window.location.pathname,
       value: 1,
       lead_id: leadId,
       app_version: appVersion,
-      // Contexto de triagem — permite segmentar conversões por
-      // modalidade (remoto/visita/coleta), problema e equipamento.
-      modalidade: context.modalidade,
-      problema: context.problema,
-      equipamento: context.equipamento,
-      servico: context.servico,
+      // Contexto de triagem — nunca envia undefined; ausência vira "unknown".
+      ...ctx,
       ...deviceCtx,
       ...utm,
     };
