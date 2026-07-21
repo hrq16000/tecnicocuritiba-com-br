@@ -274,3 +274,68 @@ export const attachScrollDepthTracking = () => {
   window.addEventListener('scroll', onScroll, { passive: true });
 };
 
+// ---------- Internal-link tracking + validação ----------
+// Emite eventos separados para cliques em links internos dentro de
+// /problemas/*. Permite responder "que serviço engajou mais depois do
+// diagnóstico?" e detectar links quebrados na produção.
+export interface InternalLinkContext {
+  fromPath: string;        // rota de origem (ex: /problemas/notebook-nao-liga)
+  fromCategoria?: string;  // categoria do problema
+  toPath: string;          // rota de destino
+  label: string;           // texto visível do link
+  valid?: boolean;         // resultado da validação (default true)
+}
+export const trackInternalLink = (ctx: InternalLinkContext) => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  const payload = {
+    event_category: 'navigation',
+    event_label: `${ctx.fromPath} -> ${ctx.toPath}`,
+    from_path: withUnknown(ctx.fromPath),
+    from_categoria: withUnknown(ctx.fromCategoria),
+    to_path: withUnknown(ctx.toPath),
+    to_servico_slug: ctx.toPath.startsWith('/servicos/')
+      ? ctx.toPath.replace('/servicos/', '').split('/')[0]
+      : 'unknown',
+    link_label: withUnknown(ctx.label),
+    page_path: window.location.pathname,
+  };
+  window.gtag('event', 'internal_link_click', payload);
+  if (ctx.valid === false) {
+    window.gtag('event', 'internal_link_broken', {
+      ...payload,
+      severity: 'error',
+    });
+  }
+};
+
+// ---------- CTA visibility ----------
+// Dispara `cta_visible` UMA vez por CTA/página, com o tempo (ms) desde o load
+// até o botão entrar no viewport. Métrica de "quanto o usuário rolou antes
+// de ver o CTA".
+const CTA_SEEN_KEY = 'cta_visible_v1';
+const readCtaSeen = (): Record<string, string[]> => {
+  try { return JSON.parse(sessionStorage.getItem(CTA_SEEN_KEY) || '{}'); } catch { return {}; }
+};
+const writeCtaSeen = (m: Record<string, string[]>) => {
+  try { sessionStorage.setItem(CTA_SEEN_KEY, JSON.stringify(m)); } catch { /* noop */ }
+};
+export const trackCTAVisible = (ctaId: string, extra: Record<string, unknown> = {}) => {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  const pagePath = window.location.pathname;
+  const map = readCtaSeen();
+  const seen = map[pagePath] || [];
+  if (seen.includes(ctaId)) return;
+  seen.push(ctaId);
+  map[pagePath] = seen;
+  writeCtaSeen(map);
+  const perfNow = typeof performance !== 'undefined' ? Math.round(performance.now()) : 0;
+  window.gtag('event', 'cta_visible', {
+    event_category: 'engagement',
+    event_label: ctaId,
+    cta_id: ctaId,
+    time_to_visible_ms: perfNow,
+    page_path: pagePath,
+    ...extra,
+  });
+};
+
