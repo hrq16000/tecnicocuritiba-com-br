@@ -200,27 +200,6 @@ const ProblemaPage = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <link rel="canonical" href={`https://tecnicocuritiba.com.br/problemas/${data.slug}`} />
-        {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
-        {breadcrumbSchema && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>}
-        <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
-      </Helmet>
-      <Header />
-      <Breadcrumbs items={[{ label: data.categoria, href: "/servicos" }, { label: data.h1.split("—")[0].trim() }]} />
-
-      {/* Hero */}
-      <section className="pt-10 pb-10 hero-gradient">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block bg-accent/20 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-4">{data.categoria}</span>
-            <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">{data.h1}</h1>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{data.intro.split("\n")[0]}</p>
-            <p className="text-sm text-white/80 mb-6">
-              📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
-            </p>
-  return (
-    <div className="min-h-screen bg-background">
-      <Helmet>
-        <link rel="canonical" href={`https://tecnicocuritiba.com.br/problemas/${data.slug}`} />
         {/* Pré-carrega recursos críticos para melhorar LCP em /problemas/*. */}
         <link rel="preconnect" href="https://wa.me" crossOrigin="" />
         <link rel="dns-prefetch" href="//wa.me" />
