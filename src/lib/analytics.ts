@@ -153,6 +153,9 @@ export const trackCTAClick = (
       ...utm,
     };
 
+    // Registra alertas locais quando modalidade/problema chegam como "unknown".
+    recordUnknownAlerts(ctaType, ctx, window.location.pathname);
+
     // cta_click sempre dispara (mede CTR / engajamento por dispositivo)
     window.gtag('event', 'cta_click', payload);
 
