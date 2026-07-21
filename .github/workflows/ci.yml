@@ -27,6 +27,8 @@ jobs:
         run: npm run build
       - name: Sitemap /problemas/* guard (189 unique)
         run: node scripts/check-sitemap-problemas.mjs
+      - name: /problemas/* internal-link guard (whitelist canônica)
+        run: node scripts/check-problemas-internal-links.mjs
       - name: Brand consistency (og:site_name / Organization.name / LocalBusiness.name)
         run: node scripts/check-brand-consistency.mjs
       - name: JSON-LD validation
