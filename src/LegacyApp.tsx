@@ -377,6 +377,12 @@ const RemocaoVirusPinhais = lazy(() => import("./pages/servico-bairro/RemocaoVir
 const ConsertoNotebookPinhais = lazy(() => import("./pages/servico-bairro/ConsertoNotebookPinhais"));
 const UpgradeSsdPinhais = lazy(() => import("./pages/servico-bairro/UpgradeSsdPinhais"));
 const RedesWifiPinhais = lazy(() => import("./pages/servico-bairro/RedesWifiPinhais"));
+const RedesWifiBatel = lazy(() => import("./pages/servico-bairro/RedesWifiBatel"));
+const RedesWifiBacacheri = lazy(() => import("./pages/servico-bairro/RedesWifiBacacheri"));
+const ConsertoTVBatel = lazy(() => import("./pages/servico-bairro/ConsertoTVBatel"));
+const ConsertoTVBoqueirao = lazy(() => import("./pages/servico-bairro/ConsertoTVBoqueirao"));
+const ConsertoTVCabral = lazy(() => import("./pages/servico-bairro/ConsertoTVCabral"));
+const ConsertoTVBacacheri = lazy(() => import("./pages/servico-bairro/ConsertoTVBacacheri"));
 
 // Dynamic service+city page
 const ServicoCidadePage = lazy(() => import("./pages/servico-bairro/ServicoCidadePage"));
@@ -852,6 +858,13 @@ const App = () => (
             <Route path="/servicos/conserto-pc-notebook/pinhais" element={<ConsertoNotebookPinhais />} />
             <Route path="/servicos/upgrade-ssd-memoria/pinhais" element={<UpgradeSsdPinhais />} />
             <Route path="/servicos/redes-wifi/pinhais" element={<RedesWifiPinhais />} />
+            <Route path="/servicos/redes-wifi/batel" element={<RedesWifiBatel />} />
+            <Route path="/servicos/redes-wifi/bacacheri" element={<RedesWifiBacacheri />} />
+            <Route path="/servicos/conserto-tv/batel" element={<ConsertoTVBatel />} />
+            <Route path="/servicos/conserto-tv/boqueirao" element={<ConsertoTVBoqueirao />} />
+            <Route path="/servicos/conserto-tv/cabral" element={<ConsertoTVCabral />} />
+            <Route path="/servicos/conserto-tv/bacacheri" element={<ConsertoTVBacacheri />} />
+            
             
             {/* Dynamic service+city route (catches all new combinations) */}
             <Route path="/servicos/:servico/:cidade" element={<ServicoCidadePage />} />
