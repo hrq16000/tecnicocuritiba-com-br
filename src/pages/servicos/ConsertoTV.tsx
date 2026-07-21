@@ -61,7 +61,7 @@ const ConsertoTV = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackCTAClick("whatsapp", "conserto-tv");
+    trackCTAClick("whatsapp", "conserto-tv", { servico: "conserto-tv", equipamento: "tv", modalidade: "coleta" });
     const msg = encodeURIComponent("Olá! Preciso de orçamento para conserto de TV. Qual o procedimento?");
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
   };
@@ -120,6 +120,52 @@ const ConsertoTV = () => {
               <MessageCircle className="mr-2 h-5 w-5" />
               Solicitar Orçamento via WhatsApp
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Galeria — Processo de reparo/troca de tela de Smart TV */}
+      <ServiceGallery
+        title="Processo de Reparo e Troca de Tela em Smart TVs"
+        subtitle="Do diagnóstico em bancada à devolução do equipamento — o que acontece em cada etapa."
+        bgClass="bg-background"
+        items={[
+          { imageKey: "coletaEntrega", caption: "Coleta agendada na sua casa com embalagem apropriada", altOverride: "Coleta de Smart TV para conserto em Curitiba" },
+          { imageKey: "bancadaTecnica", caption: "Diagnóstico em bancada com fonte controlada e multímetro" },
+          { imageKey: "placaMae", caption: "Reparo em nível de componente na placa T-CON / Main / Fonte" },
+          { imageKey: "estacaoSolda", caption: "Retrabalho SMD e troca de capacitores com estação de solda" },
+          { imageKey: "smartTv", caption: "Substituição de painel LED / troca de display quando aplicável", altOverride: "Troca de tela em Smart TV" },
+          { imageKey: "clienteSatisfeito", caption: "Testes de 24-48h e devolução com garantia por escrito" },
+        ]}
+      />
+
+      {/* Triagem antes de acionar o serviço */}
+      <section className="py-10 bg-secondary border-y border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-6">
+              Triagem: O Que Verificar Antes de Solicitar o Conserto
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                { q: "TV liga mas tela permanece escura?", a: "Sinal claro de falha no backlight (LED) ou inverter. Encoste uma lanterna na tela — se enxergar imagem apagada, é o backlight. Reparo médio, compensa na maioria dos modelos." },
+                { q: "Aparecem listras verticais/horizontais?", a: "Falha em placa T-CON ou flat cable frouxo. Balançar o flat pode piorar. Não insista com tapinhas — pode inutilizar o painel." },
+                { q: "Tela quebrada ou trincada por dentro?", a: "Troca de painel custa entre 70% e 90% do valor de uma TV nova. Na maioria dos casos NÃO compensa reparar — orientamos com honestidade." },
+                { q: "TV desliga sozinha após alguns minutos?", a: "Quase sempre capacitores inflados na fonte. Reparo simples e barato quando pego cedo — evita queimar a placa main." },
+                { q: "Sem sinal HDMI em uma porta específica?", a: "Teste outra porta HDMI e outro cabo antes. Se só uma porta falhou, é reparo pontual; se todas falharam, é a placa main." },
+                { q: "Smart TV lenta ou travando apps?", a: "Antes do reparo, faça reset de fábrica e limpe cache. Se persistir, pode ser eMMC (memória) degradado — analisamos custo x benefício." },
+                { q: "Idade da TV: quando não compensa?", a: "Acima de 8-10 anos + defeito de painel/main = geralmente não compensa. Abaixo disso e com defeito localizado, o reparo tende a valer." },
+                { q: "Preparação para a coleta:", a: "Separe o controle remoto, cabo de força e nota fiscal (se tiver). Anote o modelo exato (etiqueta traseira). Isso agiliza o orçamento em até 48h." },
+              ].map((f, i) => (
+                <details key={i} className="bg-background rounded-lg p-4 border border-border group">
+                  <summary className="font-semibold text-foreground cursor-pointer list-none flex items-center justify-between">
+                    {f.q}
+                    <span className="text-muted-foreground group-open:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{f.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>
