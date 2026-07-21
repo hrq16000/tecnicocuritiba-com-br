@@ -32,6 +32,7 @@ const dynamicPrefixes = ["/problemas/", "/marcas/", "/bairros/", "/tecnico-infor
 
 const isValid = (to) => {
   if (!to) return false;
+  if (to === "/servicos" || to === "/servicos/") return true;
   if (to.startsWith("/servicos/")) {
     const slug = to.replace("/servicos/", "").split("/")[0];
     return validServicos.has(slug);
