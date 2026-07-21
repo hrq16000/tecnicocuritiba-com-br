@@ -123,6 +123,17 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
         { name: data.bairro, path: `/servicos/${data.servicoSlug}/${data.bairroSlug}` }
       ]} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BairroSchema
+        bairro={data.bairro}
+        cidade={data.cidade}
+        servico={data.servico}
+        servicoSlug={data.servicoSlug}
+        bairroSlug={data.bairroSlug}
+        descricao={data.metaDescription}
+        precoBase={data.precoBase}
+      />
+
+
       
       <Header />
       <Breadcrumbs
@@ -172,11 +183,27 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center reveal-text" data-reveal-delay="300">
-              <Button size="lg" variant="whatsapp" onClick={handleWhatsAppClick} className="hover:scale-105 transition-transform">
+            <div
+              className="flex flex-col sm:flex-row gap-4 justify-center reveal-text"
+              data-reveal-delay="300"
+              data-cta-bairro={data.bairroSlug}
+              data-cta-servico={data.servicoSlug}
+            >
+              <Button size="lg" variant="whatsapp" onClick={handleWhatsAppClick} className="hover:scale-105 transition-transform" data-cta-location={`bairro_${data.bairroSlug}_${data.servicoSlug}_hero`}>
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Agendar no {data.bairro}
               </Button>
+              {checklistKind && (
+                <a
+                  href={`/downloads/checklist-antes-da-visita-${checklistKind}.pdf`}
+                  download
+                  onClick={() => handleChecklist(checklistKind)}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-white/10 text-white px-5 py-2.5 font-semibold hover:bg-white/20 transition-colors"
+                  data-cta-location={`bairro_${data.bairroSlug}_${data.servicoSlug}_checklist`}
+                >
+                  <Download className="h-4 w-4" /> Checklist em PDF
+                </a>
+              )}
             </div>
           </div>
         </div>
