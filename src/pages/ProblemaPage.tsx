@@ -135,9 +135,31 @@ const ProblemaPage = () => {
     );
   }
 
+  // Heurística leve para modalidade sugerida a partir da categoria (não
+  // substitui o motor do funil; serve apenas para segmentar eventos GA4).
+  const modalidadeSugerida: 'remoto' | 'visita' | 'coleta' =
+    /software|vírus|virus|lento|wifi|rede|impressora/i.test(data.categoria)
+      ? 'remoto'
+      : /tv|som|videogame|celular|placa|hardware|não liga|nao liga/i.test(`${data.categoria} ${data.h1}`)
+        ? 'coleta'
+        : 'visita';
+
   const handleWhatsApp = () => {
-    trackCTAClick("whatsapp", data.slug);
+    trackCTAClick("whatsapp", `problema_${data.slug}`, {
+      problema: data.slug,
+      equipamento: data.categoria,
+      modalidade: modalidadeSugerida,
+    });
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(data.whatsappMessage)}`, "_blank");
+  };
+
+  const handleLigar = () => {
+    trackCTAClick("phone", `problema_${data.slug}`, {
+      problema: data.slug,
+      equipamento: data.categoria,
+      modalidade: modalidadeSugerida,
+    });
+    window.location.href = `tel:+55${WHATSAPP_NUMBER}`;
   };
 
   // LocalBusiness JSON-LD — reforça sinal local para /problemas/* (SEO Curitiba).
