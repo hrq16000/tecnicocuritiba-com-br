@@ -8,6 +8,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { IMAGES } from "@/lib/images";
 import { Button } from "@/components/ui/button";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { ServiceGallery } from "@/components/ServiceGallery";
 import { Link } from "react-router-dom";
 import {
   MessageCircle, Tv, Shield, Clock, CheckCircle,
