@@ -217,9 +217,40 @@ const ProblemaPage = () => {
             <p className="text-sm text-white/80 mb-6">
               📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
             </p>
-            <Button size="lg" variant="cta" onClick={handleWhatsApp}>
-              <MessageCircle className="mr-2 h-5 w-5" /> Falar com Técnico Agora
-            </Button>
+  return (
+    <div className="min-h-screen bg-background">
+      <Helmet>
+        <link rel="canonical" href={`https://tecnicocuritiba.com.br/problemas/${data.slug}`} />
+        {/* Pré-carrega recursos críticos para melhorar LCP em /problemas/*. */}
+        <link rel="preconnect" href="https://wa.me" crossOrigin="" />
+        <link rel="dns-prefetch" href="//wa.me" />
+        {/* JSON-LD unificado em um único bloco (@graph) para reduzir scripts. */}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [localBusinessSchema, ...(faqSchema ? [faqSchema] : []), ...(breadcrumbSchema ? [breadcrumbSchema] : [])],
+        })}</script>
+      </Helmet>
+      <Header />
+      <Breadcrumbs items={[{ label: data.categoria, href: "/servicos" }, { label: data.h1.split("—")[0].trim() }]} />
+
+      {/* Hero */}
+      <section className="pt-10 pb-10 hero-gradient">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="inline-block bg-accent/20 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-4">{data.categoria}</span>
+            <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">{data.h1}</h1>
+            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{data.intro.split("\n")[0]}</p>
+            <p className="text-sm text-white/80 mb-6">
+              📍 Atendimento em Curitiba e região metropolitana · Seg–Sáb 08h–20h
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
+                <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
+              </Button>
+              <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
+                📞 Ligar Agora
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -246,6 +277,28 @@ const ProblemaPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Bloco de links internos contextuais — SEO local + navegação por
+          serviço mais buscado em Curitiba. */}
+      <section className="py-6 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+            <Link to="/servicos/conserto-notebook-curitiba" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              🔧 Conserto de Notebook em Curitiba
+            </Link>
+            <Link to="/servicos/formatacao-computador" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              💻 Formatação com backup completo
+            </Link>
+            <Link to="/servicos/remocao-virus" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              🛡️ Remoção de vírus e ransomware
+            </Link>
+            <Link to="/coleta-e-entrega" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
+              🚚 Coleta e entrega em Curitiba
+            </Link>
+          </div>
+        </div>
+      </section>
+
 
       {/* Imagem ilustrativa pós-hero */}
       <RealImageSection imageKey="diagnostico" secondaryImageKey="bancadaTecnica" layout="duo" caption="Diagnóstico com multímetro em placa eletrônica" secondaryCaption="Bancada técnica profissional" />
