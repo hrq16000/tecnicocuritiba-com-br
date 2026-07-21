@@ -311,18 +311,33 @@ const ProblemaPage = () => {
       <section className="py-6 bg-background border-b border-border">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-            <Link to="/servicos/conserto-notebook-curitiba" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              🔧 Conserto de Notebook em Curitiba
-            </Link>
-            <Link to="/servicos/formatacao-computador" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              💻 Formatação com backup completo
-            </Link>
-            <Link to="/servicos/remocao-virus" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              🛡️ Remoção de vírus e ransomware
-            </Link>
-            <Link to="/coleta-e-entrega" className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent">
-              🚚 Coleta e entrega em Curitiba
-            </Link>
+            {[
+              { to: "/servicos/conserto-notebook-curitiba", label: "🔧 Conserto de Notebook em Curitiba" },
+              { to: "/servicos/formatacao-computador", label: "💻 Formatação com backup completo" },
+              { to: "/servicos/remocao-virus", label: "🛡️ Remoção de vírus e ransomware" },
+              { to: "/coleta-e-entrega", label: "🚚 Coleta e entrega em Curitiba" },
+            ].map((link) => {
+              const valid = isValidInternalTarget(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  data-broken={valid ? undefined : "true"}
+                  onClick={() =>
+                    trackInternalLink({
+                      fromPath: `/problemas/${data.slug}`,
+                      fromCategoria: data.categoria,
+                      toPath: link.to,
+                      label: link.label,
+                      valid,
+                    })
+                  }
+                  className="rounded-lg border border-border bg-card p-3 hover:border-accent hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
