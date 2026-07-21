@@ -16,6 +16,8 @@ import type { ProblemaPageData } from "@/lib/problemaPagesData";
 import ReactMarkdown from "react-markdown";
 import { IMAGES } from "@/lib/images";
 import { RealImageSection } from "@/components/RealImageSection";
+import { buildContextualMessage } from "@/lib/whatsappMessage";
+import { Download } from "lucide-react";
 
 // Whitelist canônica de slugs válidos em /servicos/* — usada para validar
 // linkagem interna em /problemas/* e evitar 404 silenciosos.
@@ -193,13 +195,22 @@ const ProblemaPage = () => {
         ? 'coleta'
         : 'visita';
 
+  const problemaLabel = data.h1.split("—")[0].trim();
+  const contextualMsg = buildContextualMessage({
+    equipamento: data.categoria,
+    problema: data.slug,
+    problemaLabel,
+    modalidade: modalidadeSugerida,
+    fallback: data.whatsappMessage,
+  });
+
   const handleWhatsApp = () => {
     trackCTAClick("whatsapp", `problema_${data.slug}`, {
       problema: data.slug,
       equipamento: data.categoria,
       modalidade: modalidadeSugerida,
     });
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(data.whatsappMessage)}`, "_blank");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(contextualMsg)}`, "_blank");
   };
 
   const handleLigar = () => {
@@ -210,6 +221,31 @@ const ProblemaPage = () => {
     });
     window.location.href = `tel:+55${WHATSAPP_NUMBER}`;
   };
+
+  const handleDownloadChecklist = (kind: "wifi" | "tv") => {
+    trackCTAClick("chatbot", `problema_${data.slug}_checklist_${kind}`, {
+      problema: data.slug,
+      equipamento: data.categoria,
+      modalidade: modalidadeSugerida,
+    });
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'checklist_download', {
+        event_category: 'engagement',
+        checklist_kind: kind,
+        problema: data.slug,
+        page_path: window.location.pathname,
+      });
+    }
+  };
+
+  // Detecta se este problema deve exibir o checklist "Antes da visita".
+  const catLower = `${data.categoria} ${data.h1}`.toLowerCase();
+  const checklistKind: "wifi" | "tv" | null =
+    /wi-?fi|rede|internet|roteador/.test(catLower)
+      ? "wifi"
+      : /\btv\b|smart tv|televis/.test(catLower)
+        ? "tv"
+        : null;
 
   // LocalBusiness JSON-LD — reforça sinal local para /problemas/* (SEO Curitiba).
   const localBusinessSchema = {
