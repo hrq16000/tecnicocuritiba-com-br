@@ -272,9 +272,57 @@ jobs:
         run: npx vite preview --port 8080 &
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
-      - name: Crawl /blog + /problemas/* for broken images
+      - name: Crawl /blog + /problemas/* for broken images/fonts/CSS
         env:
           BASE_URL: http://localhost:8080
           SAMPLE: "25"
-        run: node scripts/check-images-404.mjs
+        run: node scripts/check-images-404.mjs | tee images-404.log
+      - name: Upload images-404 log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: images-404
+          path: images-404.log
+          if-no-files-found: ignore
+
+  pr-summary:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: [lighthouse-heavy-posts, images-404]
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Baixar artefatos de perf/imagens
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Montar resumo
+        id: build
+        run: |
+          {
+            echo "## 📊 Resultados de CI — perf & assets"
+            echo ""
+            if [ -f artifacts/heavy-posts-diff.md ]; then
+              echo "### Lighthouse (heavy posts)"
+              head -c 6000 artifacts/heavy-posts-diff.md
+              echo ""
+            else
+              echo "_Lighthouse diff indisponível._"
+            fi
+            echo ""
+            if [ -f artifacts/images-404.log ]; then
+              echo "### Crawler de assets (imagens/fontes/CSS)"
+              echo '```'
+              tail -c 3000 artifacts/images-404.log
+              echo '```'
+            fi
+          } > pr-summary.md
+      - name: Comentar no PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: ci-perf-summary
+          path: pr-summary.md
+
 
