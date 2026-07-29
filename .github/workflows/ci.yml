@@ -215,6 +215,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
+      - name: Cache Lighthouse + Chromium (reduz variação de transferência)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/lighthouse
+            ~/.cache/ms-playwright
+            ~/.npm
+            ~/.cache/puppeteer
+          key: lh-heavy-${{ runner.os }}-${{ hashFiles('scripts/lh-heavy-posts.mjs') }}
+          restore-keys: |
+            lh-heavy-${{ runner.os }}-
       - name: Install Lighthouse
         run: npm i -g lighthouse@12
       - name: Run Lighthouse (10 heavy posts, mobile + desktop) with regression gate
@@ -224,7 +236,7 @@ jobs:
           MAX_BYTES_REGRESSION_PCT: "15"
           LH_FAIL_ON_REGRESSION: "1"
         run: node scripts/lh-heavy-posts.mjs
-      - name: Upload Lighthouse heavy-posts artifacts
+      - name: Upload Lighthouse heavy-posts artifacts (JSON + MD + HTML)
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -232,5 +244,31 @@ jobs:
           path: |
             docs/perf/heavy-posts-latest.json
             docs/perf/heavy-posts-diff.md
+            docs/perf/heavy-posts-report.html
             docs/perf/heavy-posts-baseline.json
+            docs/perf/heavy-posts-slugs.json
           if-no-files-found: ignore
+
+  images-404:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+      - name: Build
+        run: npm run build
+      - name: Start preview
+        run: npx vite preview --port 8080 &
+      - name: Wait for server
+        run: npx wait-on http://localhost:8080 --timeout 60000
+      - name: Crawl /blog + /problemas/* for broken images
+        env:
+          BASE_URL: http://localhost:8080
+          SAMPLE: "25"
+        run: node scripts/check-images-404.mjs
+
