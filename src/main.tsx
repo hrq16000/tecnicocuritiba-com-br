@@ -2,9 +2,12 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { initErrorReporter, APP_BUILD_INFO } from "./lib/errorReporter";
 import { installCtaRuntimeGuard } from "./lib/ctaRuntimeGuard";
+import { initSentry, attachSentryRouteTracker } from "./lib/sentry";
 
 initErrorReporter();
 installCtaRuntimeGuard();
+// Sentry só ativa quando VITE_SENTRY_DSN está definido no build (no-op sem DSN).
+initSentry().then(() => attachSentryRouteTracker());
 // Tema único (claro): remove qualquer `dark` herdado, força color-scheme light
 // e zera flags antigas no localStorage para ignorar preferências do usuário.
 try {
