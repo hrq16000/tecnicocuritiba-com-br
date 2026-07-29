@@ -60,8 +60,12 @@ jobs:
           BASE_URL: http://localhost:8080
           MAX_URLS: "80"
         run: node scripts/check-sitemap-urls.mjs
-      - name: Run targeted E2E (+ jsonld-presence)
-        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts e2e/funnel-mobile-no-skip.spec.ts e2e/jsonld-presence.spec.ts --retries=1 --trace=retain-on-failure
+      - name: SEO /atendimento (title/desc/H1/JSON-LD)
+        env:
+          E2E_BASE_URL: http://localhost:8080
+        run: node scripts/check-atendimento-seo.mjs
+      - name: Run targeted E2E (+ jsonld-presence + atendimento-whatsapp)
+        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts e2e/funnel-mobile-no-skip.spec.ts e2e/jsonld-presence.spec.ts e2e/atendimento-whatsapp.spec.ts --retries=1 --trace=retain-on-failure
         env:
           E2E_BASE_URL: http://localhost:8080
           CI: "true"
