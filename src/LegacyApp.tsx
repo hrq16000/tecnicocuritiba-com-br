@@ -470,6 +470,7 @@ const App = () => (
             <Route path="/atendimento-remoto" element={<AtendimentoRemoto />} />
             <Route path="/atendimento" element={<AtendimentoHub />} />
             <Route path="/atendimento/:cidade" element={<AtendimentoCidade />} />
+            <Route path="/atendimento/:cidade/:bairro" element={<AtendimentoCidadeBairro />} />
             <Route path="/arrumar-pc" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/online" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/servico/:servico/:cidade" element={<ArrumarPCServicoCidade />} />
