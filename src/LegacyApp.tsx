@@ -37,6 +37,8 @@ const SejaParceiro = lazy(() => import("./pages/SejaParceiro"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AssistenciaTecnicaCuritiba = lazy(() => import("./pages/AssistenciaTecnicaCuritiba"));
 const ArrumarPC = lazy(() => import("./pages/ArrumarPC"));
+const AtendimentoHub = lazy(() => import("./pages/AtendimentoHub"));
+const AtendimentoCidade = lazy(() => import("./pages/AtendimentoCidade"));
 const ArrumarPCCity = lazy(() => import("./pages/arrumar-pc/ArrumarPCCity"));
 const ArrumarPCServicoCidade = lazy(() => import("./pages/arrumar-pc/ArrumarPCServicoCidade"));
 const TermosCondicoes = lazy(() => import("./pages/TermosCondicoes"));
