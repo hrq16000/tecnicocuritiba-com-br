@@ -22,6 +22,9 @@ const WHATSAPP_NUMBER = "5541997452053";
  */
 export default function AtendimentoCidade() {
   const { cidade: cidadeSlug } = useParams<{ cidade: string }>();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category") || undefined;
+  const symptomSlug = searchParams.get("symptomSlug") || undefined;
   const cidade = useMemo(
     () => CIDADES.find((c) => c.slug === cidadeSlug),
     [cidadeSlug],
@@ -36,8 +39,12 @@ export default function AtendimentoCidade() {
   const waHref = buildWhatsAppUrl({
     bairroLabel: cidade.nome,
     servicoLabel: "atendimento técnico",
+    category,
+    symptomSlug,
     fallback: `Olá! Preciso de atendimento técnico em ${cidade.nome}. Pode me ajudar?`,
   });
+  const ctaContext = { servico: "atendimento_cidade", bairro: cidade.slug, category, symptomSlug };
+
 
   const serviceLd = {
     "@context": "https://schema.org",
