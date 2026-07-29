@@ -5,7 +5,6 @@ import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { trackCTAClick } from "@/lib/analytics";
 import { buildWhatsAppUrl } from "@/lib/whatsappMessage";
 import { CIDADES, SERVICOS } from "@/lib/servicoCidadeData";
