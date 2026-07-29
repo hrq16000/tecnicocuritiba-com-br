@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { buildWhatsAppUrl } from "@/lib/whatsappMessage";
 import { CIDADES, SERVICOS } from "@/lib/servicoCidadeData";
+import { getBairrosByCidade } from "@/lib/atendimentoBairrosData";
 import { MessageCircle, MapPin, Clock, Shield, CheckCircle, Wrench } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5541997452053";
