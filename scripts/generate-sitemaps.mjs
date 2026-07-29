@@ -40,13 +40,21 @@ const problemSlugs = problemSlugsFromDir;
 for (const s of brandSlugs) routes.add(`/marcas/${s}`);
 for (const s of problemSlugs) routes.add(`/problemas/${s}`);
 
-// Expande /atendimento/:cidade a partir de CIDADES em src/lib/servicoCidadeData.ts
+// Expande /atendimento/:cidade e /atendimento/:cidade/:bairro
 try {
   const cidadesSrc = readFileSync(resolve("src/lib/servicoCidadeData.ts"), "utf8");
   const cidadesBlock = cidadesSrc.match(/export const CIDADES[\s\S]*?\];/);
   if (cidadesBlock) {
     const citySlugs = [...cidadesBlock[0].matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
     for (const s of citySlugs) routes.add(`/atendimento/${s}`);
+  }
+  const bairrosSrc = readFileSync(resolve("src/lib/atendimentoBairrosData.ts"), "utf8");
+  // Parseia BAIRROS_ATENDIMENTO: mapeia "cidade-slug": [ {slug: "..."} ]
+  const re = /"?([a-z0-9-]+)"?\s*:\s*\[([^\]]*)\]/g;
+  for (const m of bairrosSrc.matchAll(re)) {
+    const cidade = m[1];
+    const bairros = [...m[2].matchAll(/slug:\s*"([^"]+)"/g)].map((b) => b[1]);
+    for (const b of bairros) routes.add(`/atendimento/${cidade}/${b}`);
   }
 } catch { /* opcional */ }
 

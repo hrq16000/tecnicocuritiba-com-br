@@ -39,6 +39,7 @@ const AssistenciaTecnicaCuritiba = lazy(() => import("./pages/AssistenciaTecnica
 const ArrumarPC = lazy(() => import("./pages/ArrumarPC"));
 const AtendimentoHub = lazy(() => import("./pages/AtendimentoHub"));
 const AtendimentoCidade = lazy(() => import("./pages/AtendimentoCidade"));
+const AtendimentoCidadeBairro = lazy(() => import("./pages/AtendimentoCidadeBairro"));
 const ArrumarPCCity = lazy(() => import("./pages/arrumar-pc/ArrumarPCCity"));
 const ArrumarPCServicoCidade = lazy(() => import("./pages/arrumar-pc/ArrumarPCServicoCidade"));
 const TermosCondicoes = lazy(() => import("./pages/TermosCondicoes"));
@@ -469,6 +470,7 @@ const App = () => (
             <Route path="/atendimento-remoto" element={<AtendimentoRemoto />} />
             <Route path="/atendimento" element={<AtendimentoHub />} />
             <Route path="/atendimento/:cidade" element={<AtendimentoCidade />} />
+            <Route path="/atendimento/:cidade/:bairro" element={<AtendimentoCidadeBairro />} />
             <Route path="/arrumar-pc" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/online" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/servico/:servico/:cidade" element={<ArrumarPCServicoCidade />} />
