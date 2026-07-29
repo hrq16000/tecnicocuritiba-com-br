@@ -151,11 +151,9 @@ export default function AtendimentoCidade() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_hero`, {
-                    servico: "atendimento_cidade",
-                    bairro: cidade.slug,
-                  })
+                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_hero`, ctaContext)
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Falar no WhatsApp agora
