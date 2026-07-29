@@ -55,11 +55,17 @@ jobs:
           CI: "true"
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
-      - name: Run targeted E2E (whatsapp + termos + sitemap + como-funciona + nap + a11y skip-link + seo h1/title dedup)
-        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts e2e/funnel-mobile-no-skip.spec.ts --retries=1 --trace=retain-on-failure
+      - name: Sitemap URLs válidas (200 + canônico bate)
+        env:
+          BASE_URL: http://localhost:8080
+          MAX_URLS: "80"
+        run: node scripts/check-sitemap-urls.mjs
+      - name: Run targeted E2E (+ jsonld-presence)
+        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts e2e/funnel-mobile-no-skip.spec.ts e2e/jsonld-presence.spec.ts --retries=1 --trace=retain-on-failure
         env:
           E2E_BASE_URL: http://localhost:8080
           CI: "true"
+
       - name: Upload titles-dump.csv on failure (seo-title-dedup)
         if: failure()
         uses: actions/upload-artifact@v4
@@ -266,9 +272,57 @@ jobs:
         run: npx vite preview --port 8080 &
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
-      - name: Crawl /blog + /problemas/* for broken images
+      - name: Crawl /blog + /problemas/* for broken images/fonts/CSS
         env:
           BASE_URL: http://localhost:8080
           SAMPLE: "25"
-        run: node scripts/check-images-404.mjs
+        run: node scripts/check-images-404.mjs | tee images-404.log
+      - name: Upload images-404 log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: images-404
+          path: images-404.log
+          if-no-files-found: ignore
+
+  pr-summary:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: [lighthouse-heavy-posts, images-404]
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Baixar artefatos de perf/imagens
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Montar resumo
+        id: build
+        run: |
+          {
+            echo "## 📊 Resultados de CI — perf & assets"
+            echo ""
+            if [ -f artifacts/heavy-posts-diff.md ]; then
+              echo "### Lighthouse (heavy posts)"
+              head -c 6000 artifacts/heavy-posts-diff.md
+              echo ""
+            else
+              echo "_Lighthouse diff indisponível._"
+            fi
+            echo ""
+            if [ -f artifacts/images-404.log ]; then
+              echo "### Crawler de assets (imagens/fontes/CSS)"
+              echo '```'
+              tail -c 3000 artifacts/images-404.log
+              echo '```'
+            fi
+          } > pr-summary.md
+      - name: Comentar no PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: ci-perf-summary
+          path: pr-summary.md
+
 

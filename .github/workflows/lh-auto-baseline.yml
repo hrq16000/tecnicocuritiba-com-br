@@ -1,0 +1,82 @@
+name: lh-auto-baseline
+
+# Atualiza o baseline do Lighthouse dos 10 posts mais pesados semanalmente,
+# somente quando não há regressão acima dos limites configurados.
+on:
+  schedule:
+    - cron: "0 6 * * 1" # segundas 06:00 UTC (03:00 BRT)
+  workflow_dispatch:
+
+jobs:
+  refresh-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Cache Lighthouse + Chromium
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/lighthouse
+            ~/.cache/ms-playwright
+            ~/.npm
+            ~/.cache/puppeteer
+          key: lh-auto-${{ runner.os }}-${{ hashFiles('scripts/lh-heavy-posts.mjs') }}
+          restore-keys: |
+            lh-auto-${{ runner.os }}-
+      - name: Install Lighthouse
+        run: npm i -g lighthouse@12
+      - name: Auto-select top 10 heavy posts
+        env:
+          BASE_URL: https://tecnicocuritiba.com.br
+        run: node scripts/lh-heavy-posts.mjs --auto-select || true
+      - name: Run Lighthouse contra baseline atual
+        id: lh
+        env:
+          BASE_URL: https://tecnicocuritiba.com.br
+          MAX_LCP_REGRESSION_MS: "400"
+          MAX_BYTES_REGRESSION_PCT: "15"
+          LH_FAIL_ON_REGRESSION: "0" # não falha o job; decidimos abaixo
+        run: node scripts/lh-heavy-posts.mjs | tee lh-run.log
+      - name: Atualizar baseline se sem regressão
+        id: decide
+        run: |
+          if grep -q "Sem regressões" docs/perf/heavy-posts-diff.md; then
+            echo "update=true" >> "$GITHUB_OUTPUT"
+            cp docs/perf/heavy-posts-latest.json docs/perf/heavy-posts-baseline.json
+          else
+            echo "update=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Regressões detectadas — baseline mantido."
+          fi
+      - name: Abrir PR com novo baseline
+        if: steps.decide.outputs.update == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/lh-baseline-auto
+          commit-message: "chore(perf): atualização automática do baseline Lighthouse"
+          title: "chore(perf): atualização automática do baseline Lighthouse (heavy posts)"
+          body: |
+            Baseline Lighthouse atualizado automaticamente porque a run atual
+            não apresentou regressões acima dos limites (LCP ≤ +400ms, bytes ≤ +15%).
+            Ver `docs/perf/heavy-posts-diff.md` e `heavy-posts-report.html`.
+          add-paths: |
+            docs/perf/heavy-posts-baseline.json
+            docs/perf/heavy-posts-slugs.json
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lh-auto-baseline
+          path: |
+            docs/perf/heavy-posts-latest.json
+            docs/perf/heavy-posts-diff.md
+            docs/perf/heavy-posts-report.html
+            docs/perf/heavy-posts-slugs.json
+          if-no-files-found: ignore
