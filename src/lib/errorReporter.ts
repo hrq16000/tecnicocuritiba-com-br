@@ -71,6 +71,7 @@ const report = (kind: string, payload: Record<string, unknown>) => {
       });
     }
   } catch { /* noop */ }
+  forwardToSentry(kind, entry);
 };
 
 export const initErrorReporter = () => {
