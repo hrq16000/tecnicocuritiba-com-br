@@ -30,9 +30,11 @@ export default function AtendimentoCidade() {
   const title = `Atendimento Técnico em ${cidade.nome} | Orçamento no WhatsApp | Técnico em Curitiba`;
   const description = `Atendimento técnico de informática em ${cidade.nome}. Domicílio, coleta ou remoto. Orçamento no WhatsApp a partir de R$ 99,99, com garantia de 90 dias.`;
   const url = `https://tecnicocuritiba.com.br/atendimento/${cidade.slug}`;
+  const path = `/atendimento/${cidade.slug}`;
   const waHref = buildWhatsAppUrl({
-    number: WHATSAPP_NUMBER,
-    text: `Olá! Preciso de atendimento técnico em ${cidade.nome}. Pode me ajudar?`,
+    bairroLabel: cidade.nome,
+    servicoLabel: "atendimento técnico",
+    fallback: `Olá! Preciso de atendimento técnico em ${cidade.nome}. Pode me ajudar?`,
   });
 
   const serviceLd = {
@@ -68,9 +70,9 @@ export default function AtendimentoCidade() {
 
   return (
     <>
-      <PageSEO title={title} description={description} url={url} />
-      <JsonLdSchema schema={serviceLd} />
-      <JsonLdSchema schema={breadcrumbLd} />
+      <PageSEO title={title} description={description} path={path} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
         <Breadcrumbs
