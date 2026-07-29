@@ -260,9 +260,10 @@ export default function AtendimentoCidadeBairro() {
                   trackCTAClick(
                     "whatsapp",
                     `atendimento_${cidade.slug}_${bairro.slug}_final`,
-                    { servico: "atendimento_bairro", bairro: `${cidade.slug}/${bairro.slug}` },
+                    ctaContext,
                   )
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Chamar no WhatsApp
