@@ -40,12 +40,23 @@ const problemSlugs = problemSlugsFromDir;
 for (const s of brandSlugs) routes.add(`/marcas/${s}`);
 for (const s of problemSlugs) routes.add(`/problemas/${s}`);
 
+// Expande /atendimento/:cidade a partir de CIDADES em src/lib/servicoCidadeData.ts
+try {
+  const cidadesSrc = readFileSync(resolve("src/lib/servicoCidadeData.ts"), "utf8");
+  const cidadesBlock = cidadesSrc.match(/export const CIDADES[\s\S]*?\];/);
+  if (cidadesBlock) {
+    const citySlugs = [...cidadesBlock[0].matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+    for (const s of citySlugs) routes.add(`/atendimento/${s}`);
+  }
+} catch { /* opcional */ }
+
 // 3) Categorize.
 const buckets = { bairros: [], marcas: [], problemas: [], servicos: [], main: [] };
 for (const p of [...routes].sort()) {
   if (p.startsWith("/bairros/")) buckets.bairros.push(p);
   else if (p.startsWith("/marcas")) buckets.marcas.push(p);
   else if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) buckets.problemas.push(p);
+  else if (p.startsWith("/atendimento")) buckets.servicos.push(p);
   else if (p.startsWith("/servicos") || /^\/conserto-.+-curitiba$/.test(p) || p.startsWith("/conserto-tv/") || p.startsWith("/conserto-som/") || p.startsWith("/conserto-videogame/") || p.startsWith("/conserto-celular/")) buckets.servicos.push(p);
   else buckets.main.push(p);
 }
@@ -59,6 +70,8 @@ function meta(p) {
   // priorizamos com peso alto e crawl semanal para indexação acelerada.
   if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) return { changefreq: "weekly", priority: "0.9" };
   if (p.startsWith("/servicos/") || p.startsWith("/conserto-")) return { changefreq: "weekly", priority: "0.9" };
+  if (p.startsWith("/atendimento/")) return { changefreq: "weekly", priority: "0.85" };
+  if (p === "/atendimento") return { changefreq: "weekly", priority: "0.8" };
   return { changefreq: "weekly", priority: "0.8" };
 }
 

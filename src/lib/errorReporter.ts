@@ -27,6 +27,21 @@ const push = (entry: Record<string, unknown>) => {
   if (window.__APP_ERRORS__.length > MAX_BUFFER) window.__APP_ERRORS__.shift();
 };
 
+const forwardToSentry = (kind: string, payload: Record<string, unknown>) => {
+  // Import dinâmico para não puxar Sentry em bundles onde o módulo já não foi carregado.
+  import("./sentry").then(({ isSentryEnabled, sentryCapture, sentryMessage }) => {
+    if (!isSentryEnabled()) return;
+    const msg = String(payload.message || kind);
+    const err = payload.stack ? new Error(msg) : null;
+    if (err) {
+      (err as Error & { stack?: string }).stack = String(payload.stack);
+      sentryCapture(err, { tags: { error_kind: kind }, extra: payload });
+    } else {
+      sentryMessage(msg, { tags: { error_kind: kind }, extra: payload });
+    }
+  }).catch(() => { /* noop */ });
+};
+
 const report = (kind: string, payload: Record<string, unknown>) => {
   const entry = {
     kind,
@@ -56,6 +71,7 @@ const report = (kind: string, payload: Record<string, unknown>) => {
       });
     }
   } catch { /* noop */ }
+  forwardToSentry(kind, entry);
 };
 
 export const initErrorReporter = () => {

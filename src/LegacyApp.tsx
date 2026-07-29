@@ -37,6 +37,8 @@ const SejaParceiro = lazy(() => import("./pages/SejaParceiro"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AssistenciaTecnicaCuritiba = lazy(() => import("./pages/AssistenciaTecnicaCuritiba"));
 const ArrumarPC = lazy(() => import("./pages/ArrumarPC"));
+const AtendimentoHub = lazy(() => import("./pages/AtendimentoHub"));
+const AtendimentoCidade = lazy(() => import("./pages/AtendimentoCidade"));
 const ArrumarPCCity = lazy(() => import("./pages/arrumar-pc/ArrumarPCCity"));
 const ArrumarPCServicoCidade = lazy(() => import("./pages/arrumar-pc/ArrumarPCServicoCidade"));
 const TermosCondicoes = lazy(() => import("./pages/TermosCondicoes"));
@@ -465,6 +467,8 @@ const App = () => (
             <Route path="/servicos" element={<Servicos />} />
             <Route path="/atendimento-domicilio" element={<AtendimentoDomicilio />} />
             <Route path="/atendimento-remoto" element={<AtendimentoRemoto />} />
+            <Route path="/atendimento" element={<AtendimentoHub />} />
+            <Route path="/atendimento/:cidade" element={<AtendimentoCidade />} />
             <Route path="/arrumar-pc" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/online" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/servico/:servico/:cidade" element={<ArrumarPCServicoCidade />} />
