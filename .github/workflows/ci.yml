@@ -83,6 +83,40 @@ jobs:
             test-results/**/*.png
           if-no-files-found: ignore
 
+  a11y:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Build
+        run: npm run build
+      - name: Start preview
+        run: npx vite preview --port 8080 &
+      - name: Wait for server
+        run: npx wait-on http://localhost:8080 --timeout 60000
+      - name: Axe a11y (fail em serious/critical)
+        env:
+          E2E_BASE_URL: http://localhost:8080
+        run: npx playwright test e2e/a11y-axe.spec.ts --reporter=list 2>&1 | tee a11y-report.log
+      - name: Upload a11y report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-report
+          path: |
+            a11y-report.log
+            test-results/**/*
+          if-no-files-found: ignore
+
+
   indexnow:
     runs-on: ubuntu-latest
     needs: [build, e2e]
