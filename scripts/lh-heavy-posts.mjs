@@ -84,14 +84,38 @@ const rows = ["| slug | form | LCP antes | LCP depois | Δ LCP | bytes antes | b
 const fmt = (n) => (n == null ? "—" : Math.round(n).toLocaleString("pt-BR"));
 const delta = (a, b) => (a == null || b == null ? "—" : `${b - a >= 0 ? "+" : ""}${Math.round(b - a).toLocaleString("pt-BR")}`);
 
+// Regression thresholds (env-overridable)
+const MAX_LCP_REGRESSION_MS = Number(process.env.MAX_LCP_REGRESSION_MS || 400);
+const MAX_BYTES_REGRESSION_PCT = Number(process.env.MAX_BYTES_REGRESSION_PCT || 15);
+const regressions = [];
+
 for (const slug of SLUGS) {
   for (const ff of ["mobile", "desktop"]) {
     const a = baseline[slug]?.[ff] || {};
     const b = current[slug]?.[ff] || {};
     rows.push(`| ${slug} | ${ff} | ${fmt(a.lcp)} | ${fmt(b.lcp)} | ${delta(a.lcp, b.lcp)} | ${fmt(a.bytes)} | ${fmt(b.bytes)} | ${delta(a.bytes, b.bytes)} |`);
+    if (a.lcp != null && b.lcp != null && b.lcp - a.lcp > MAX_LCP_REGRESSION_MS) {
+      regressions.push(`${slug} [${ff}] LCP +${Math.round(b.lcp - a.lcp)}ms (> ${MAX_LCP_REGRESSION_MS}ms)`);
+    }
+    if (a.bytes != null && b.bytes != null && a.bytes > 0) {
+      const pct = ((b.bytes - a.bytes) / a.bytes) * 100;
+      if (pct > MAX_BYTES_REGRESSION_PCT) {
+        regressions.push(`${slug} [${ff}] bytes +${pct.toFixed(1)}% (> ${MAX_BYTES_REGRESSION_PCT}%)`);
+      }
+    }
   }
 }
 
-const md = `# Lighthouse — 10 posts pesados (${new Date().toISOString()})\n\nBase: ${BASE}\n\n${rows.join("\n")}\n`;
+const summary = regressions.length
+  ? `\n## ⚠️ Regressões acima do limite\n\n- ${regressions.join("\n- ")}\n`
+  : `\n## ✓ Sem regressões acima do limite (LCP ≤ +${MAX_LCP_REGRESSION_MS}ms; bytes ≤ +${MAX_BYTES_REGRESSION_PCT}%)\n`;
+
+const md = `# Lighthouse — 10 posts pesados (${new Date().toISOString()})\n\nBase: ${BASE}\n${summary}\n${rows.join("\n")}\n`;
 writeFileSync(REPORT_PATH, md);
 console.log(`\n✓ diff em ${REPORT_PATH}`);
+
+if (regressions.length) {
+  console.error(`\n✗ ${regressions.length} regressão(ões) acima do limite:\n - ${regressions.join("\n - ")}`);
+  if (process.env.LH_FAIL_ON_REGRESSION === "1") process.exit(1);
+}
+

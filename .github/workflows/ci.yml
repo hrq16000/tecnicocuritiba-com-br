@@ -56,7 +56,7 @@ jobs:
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
       - name: Run targeted E2E (whatsapp + termos + sitemap + como-funciona + nap + a11y skip-link + seo h1/title dedup)
-        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts --retries=1 --trace=retain-on-failure
+        run: npx playwright test e2e/whatsapp-funnel.spec.ts e2e/termos-e-condicoes.spec.ts e2e/seo-sitemap-robots.spec.ts e2e/como-funciona-mobile.spec.ts e2e/nap-consistency.spec.ts e2e/a11y-skiplink.spec.ts e2e/seo-h1.spec.ts e2e/seo-title-dedup.spec.ts e2e/funnel-mobile-no-skip.spec.ts --retries=1 --trace=retain-on-failure
         env:
           E2E_BASE_URL: http://localhost:8080
           CI: "true"
@@ -145,3 +145,92 @@ jobs:
           if-no-files-found: ignore
 
 
+
+  jsonld-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+      - name: Build
+        run: npm run build
+      - name: Start preview
+        run: npx vite preview --port 8080 &
+      - name: Wait for server
+        run: npx wait-on http://localhost:8080 --timeout 60000
+      - name: Audit JSON-LD (/obrigado + /problemas/*)
+        env:
+          BASE_URL: http://localhost:8080
+        run: node scripts/audit-jsonld-obrigado-problemas.mjs | tee jsonld-audit.log
+      - name: Upload JSON-LD audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jsonld-audit
+          path: jsonld-audit.log
+          if-no-files-found: ignore
+
+  ga4-utms:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Build
+        run: npm run build
+      - name: Start preview
+        run: npx vite preview --port 8080 &
+      - name: Wait for server
+        run: npx wait-on http://localhost:8080 --timeout 60000
+      - name: Validate GA4 UTMs (origem/bairro/servico)
+        env:
+          BASE_URL: http://localhost:8080
+        run: node scripts/validate-ga4-utms.mjs | tee ga4-utms.log
+      - name: Upload GA4/UTM log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ga4-utms
+          path: ga4-utms.log
+          if-no-files-found: ignore
+
+  lighthouse-heavy-posts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Lighthouse
+        run: npm i -g lighthouse@12
+      - name: Run Lighthouse (10 heavy posts, mobile + desktop) with regression gate
+        env:
+          BASE_URL: https://tecnicocuritiba.com.br
+          MAX_LCP_REGRESSION_MS: "400"
+          MAX_BYTES_REGRESSION_PCT: "15"
+          LH_FAIL_ON_REGRESSION: "1"
+        run: node scripts/lh-heavy-posts.mjs
+      - name: Upload Lighthouse heavy-posts artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lh-heavy-posts
+          path: |
+            docs/perf/heavy-posts-latest.json
+            docs/perf/heavy-posts-diff.md
+            docs/perf/heavy-posts-baseline.json
+          if-no-files-found: ignore
