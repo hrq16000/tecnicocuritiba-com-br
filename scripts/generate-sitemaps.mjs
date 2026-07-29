@@ -70,6 +70,8 @@ function meta(p) {
   // priorizamos com peso alto e crawl semanal para indexação acelerada.
   if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) return { changefreq: "weekly", priority: "0.9" };
   if (p.startsWith("/servicos/") || p.startsWith("/conserto-")) return { changefreq: "weekly", priority: "0.9" };
+  if (p.startsWith("/atendimento/")) return { changefreq: "weekly", priority: "0.85" };
+  if (p === "/atendimento") return { changefreq: "weekly", priority: "0.8" };
   return { changefreq: "weekly", priority: "0.8" };
 }
 
