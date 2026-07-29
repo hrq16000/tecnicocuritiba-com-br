@@ -262,11 +262,9 @@ export default function AtendimentoCidade() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_final`, {
-                    servico: "atendimento_cidade",
-                    bairro: cidade.slug,
-                  })
+                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_final`, ctaContext)
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Chamar no WhatsApp
