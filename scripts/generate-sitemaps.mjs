@@ -56,6 +56,7 @@ for (const p of [...routes].sort()) {
   if (p.startsWith("/bairros/")) buckets.bairros.push(p);
   else if (p.startsWith("/marcas")) buckets.marcas.push(p);
   else if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) buckets.problemas.push(p);
+  else if (p.startsWith("/atendimento")) buckets.servicos.push(p);
   else if (p.startsWith("/servicos") || /^\/conserto-.+-curitiba$/.test(p) || p.startsWith("/conserto-tv/") || p.startsWith("/conserto-som/") || p.startsWith("/conserto-videogame/") || p.startsWith("/conserto-celular/")) buckets.servicos.push(p);
   else buckets.main.push(p);
 }
