@@ -25,6 +25,9 @@ export default function AtendimentoCidadeBairro() {
     cidade: string;
     bairro: string;
   }>();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category") || undefined;
+  const symptomSlug = searchParams.get("symptomSlug") || undefined;
   const cidade = useMemo(
     () => CIDADES.find((c) => c.slug === cidadeSlug),
     [cidadeSlug],
@@ -47,8 +50,18 @@ export default function AtendimentoCidadeBairro() {
   const waHref = buildWhatsAppUrl({
     bairroLabel: localLabel,
     servicoLabel: "atendimento técnico",
+    category,
+    symptomSlug,
     fallback: `Olá! Preciso de atendimento técnico em ${localLabel}. Pode me ajudar?`,
   });
+
+  const ctaContext = {
+    servico: "atendimento_bairro",
+    bairro: `${cidade.slug}/${bairro.slug}`,
+    category,
+    symptomSlug,
+  };
+
 
   const serviceLd = {
     "@context": "https://schema.org",
