@@ -467,6 +467,8 @@ const App = () => (
             <Route path="/servicos" element={<Servicos />} />
             <Route path="/atendimento-domicilio" element={<AtendimentoDomicilio />} />
             <Route path="/atendimento-remoto" element={<AtendimentoRemoto />} />
+            <Route path="/atendimento" element={<AtendimentoHub />} />
+            <Route path="/atendimento/:cidade" element={<AtendimentoCidade />} />
             <Route path="/arrumar-pc" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/online" element={<ArrumarPC />} />
             <Route path="/arrumar-pc/servico/:servico/:cidade" element={<ArrumarPCServicoCidade />} />
