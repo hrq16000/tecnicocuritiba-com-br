@@ -209,6 +209,35 @@ export default function AtendimentoCidade() {
             <li>Executamos o serviço com peças originais (quando aplicável) e emitimos garantia de 90 dias por escrito.</li>
           </ol>
 
+          {bairros.length > 0 && (
+            <>
+              <h2 className="text-2xl font-bold mb-4">Bairros atendidos em {cidade.nome}</h2>
+              <ul className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 mb-10">
+                {bairros.map((b) => (
+                  <li key={b.slug}>
+                    <Link
+                      className="hover:underline text-primary"
+                      to={`/atendimento/${cidade.slug}/${b.slug}`}
+                    >
+                      Atendimento em {b.nome}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          <h2 className="text-2xl font-bold mb-4">Dúvidas frequentes — {cidade.nome}</h2>
+          <div className="space-y-4 mb-10">
+            {faqs.map((f) => (
+              <details key={f.q} className="rounded-xl border p-4">
+                <summary className="font-semibold cursor-pointer">{f.q}</summary>
+                <p className="mt-2 text-muted-foreground">{f.a}</p>
+              </details>
+            ))}
+          </div>
+
+
           <div className="rounded-2xl bg-primary/10 p-6 text-center">
             <h2 className="text-2xl font-bold mb-2">Precisa hoje em {cidade.nome}?</h2>
             <p className="mb-4 text-muted-foreground">
