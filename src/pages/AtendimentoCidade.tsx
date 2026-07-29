@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
