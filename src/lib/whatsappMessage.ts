@@ -11,8 +11,11 @@ export interface WaMessageContext {
   equipamento?: string;
   servico?: string;
   servicoLabel?: string;
+  category?: string;     // categoria da triagem (ex: notebook, tv, wifi)
+  symptomSlug?: string;  // sintoma da triagem (ex: nao-liga, tela-preta)
   fallback?: string;    // mensagem base se nada de contexto existir
 }
+
 
 const modalidadeText: Record<string, string> = {
   remoto: "atendimento remoto",
@@ -33,12 +36,16 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
   const prb = ctx.problemaLabel || (ctx.problema ? humanize(ctx.problema) : "");
   const brr = ctx.bairroLabel || (ctx.bairro ? humanize(ctx.bairro) : "");
   const svc = ctx.servicoLabel || (ctx.servico ? humanize(ctx.servico) : "");
+  const cat = ctx.category ? humanize(ctx.category) : "";
+  const sym = ctx.symptomSlug ? humanize(ctx.symptomSlug) : "";
 
   const bits: string[] = [];
-  if (eqp && prb) bits.push(`${eqp}: ${prb.toLowerCase()}`);
+  if (cat && sym) bits.push(`${cat}: ${sym.toLowerCase()}`);
+  else if (eqp && prb) bits.push(`${eqp}: ${prb.toLowerCase()}`);
   else if (prb) bits.push(prb);
   else if (svc) bits.push(`preciso de ${svc.toLowerCase()}`);
   else if (eqp) bits.push(`equipamento: ${eqp}`);
+  else if (cat) bits.push(cat);
 
   if (brr) bits.push(`em ${brr}`);
   if (bits.length) parts.push(bits.join(" "));
@@ -49,6 +56,12 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
       : undefined;
   if (mod) parts.push(`Modalidade sugerida: ${mod}.`);
 
+  // Trace de triagem — permite ao atendente identificar de qual sintoma veio.
+  if (ctx.category || ctx.symptomSlug) {
+    const trace = [ctx.category, ctx.symptomSlug].filter(Boolean).join("/");
+    if (trace) parts.push(`[ref: ${trace}]`);
+  }
+
   parts.push("Podem me atender?");
 
   const msg = parts.join(" ").replace(/\s+/g, " ").trim();
@@ -57,6 +70,7 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
 }
 
 const WHATSAPP_NUMBER = "5541997452053";
+
 
 export function buildWhatsAppUrl(ctx: WaMessageContext = {}, number = WHATSAPP_NUMBER): string {
   const text = buildContextualMessage(ctx);

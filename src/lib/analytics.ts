@@ -82,6 +82,8 @@ export interface CTAContext {
   equipamento?: string;
   servico?: string;    // slug do serviço (/servicos/*)
   bairro?: string;     // slug do bairro (/servicos/*/[bairro] ou /bairros/*)
+  category?: string;     // categoria de triagem (ex: notebook, tv, wifi)
+  symptomSlug?: string;  // sintoma específico da triagem (ex: nao-liga, tela-preta)
 }
 // Fallback "unknown" — nunca perde o clique por falta de contexto.
 const withUnknown = (v: string | undefined | null): string => {
@@ -95,7 +97,10 @@ const normalizeCtx = (context: CTAContext = {}) => ({
   equipamento: withUnknown(context.equipamento),
   servico: withUnknown(context.servico),
   bairro: withUnknown(context.bairro),
+  category: withUnknown(context.category),
+  symptom_slug: withUnknown(context.symptomSlug),
 });
+
 // Registro local (localStorage) de contexto "unknown" para alertar o admin.
 const recordUnknownAlerts = (
   ctaType: 'whatsapp' | 'phone' | 'chatbot',

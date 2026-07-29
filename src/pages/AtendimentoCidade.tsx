@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
@@ -21,6 +22,9 @@ const WHATSAPP_NUMBER = "5541997452053";
  */
 export default function AtendimentoCidade() {
   const { cidade: cidadeSlug } = useParams<{ cidade: string }>();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category") || undefined;
+  const symptomSlug = searchParams.get("symptomSlug") || undefined;
   const cidade = useMemo(
     () => CIDADES.find((c) => c.slug === cidadeSlug),
     [cidadeSlug],
@@ -35,8 +39,12 @@ export default function AtendimentoCidade() {
   const waHref = buildWhatsAppUrl({
     bairroLabel: cidade.nome,
     servicoLabel: "atendimento técnico",
+    category,
+    symptomSlug,
     fallback: `Olá! Preciso de atendimento técnico em ${cidade.nome}. Pode me ajudar?`,
   });
+  const ctaContext = { servico: "atendimento_cidade", bairro: cidade.slug, category, symptomSlug };
+
 
   const serviceLd = {
     "@context": "https://schema.org",
@@ -143,11 +151,9 @@ export default function AtendimentoCidade() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_hero`, {
-                    servico: "atendimento_cidade",
-                    bairro: cidade.slug,
-                  })
+                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_hero`, ctaContext)
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Falar no WhatsApp agora
@@ -256,11 +262,9 @@ export default function AtendimentoCidade() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_final`, {
-                    servico: "atendimento_cidade",
-                    bairro: cidade.slug,
-                  })
+                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_final`, ctaContext)
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Chamar no WhatsApp

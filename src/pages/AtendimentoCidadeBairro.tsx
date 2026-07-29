@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
@@ -24,6 +25,9 @@ export default function AtendimentoCidadeBairro() {
     cidade: string;
     bairro: string;
   }>();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category") || undefined;
+  const symptomSlug = searchParams.get("symptomSlug") || undefined;
   const cidade = useMemo(
     () => CIDADES.find((c) => c.slug === cidadeSlug),
     [cidadeSlug],
@@ -46,8 +50,18 @@ export default function AtendimentoCidadeBairro() {
   const waHref = buildWhatsAppUrl({
     bairroLabel: localLabel,
     servicoLabel: "atendimento técnico",
+    category,
+    symptomSlug,
     fallback: `Olá! Preciso de atendimento técnico em ${localLabel}. Pode me ajudar?`,
   });
+
+  const ctaContext = {
+    servico: "atendimento_bairro",
+    bairro: `${cidade.slug}/${bairro.slug}`,
+    category,
+    symptomSlug,
+  };
+
 
   const serviceLd = {
     "@context": "https://schema.org",
@@ -158,11 +172,9 @@ export default function AtendimentoCidadeBairro() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_${bairro.slug}_hero`, {
-                    servico: "atendimento_bairro",
-                    bairro: `${cidade.slug}/${bairro.slug}`,
-                  })
+                  trackCTAClick("whatsapp", `atendimento_${cidade.slug}_${bairro.slug}_hero`, ctaContext)
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Falar no WhatsApp agora
@@ -248,9 +260,10 @@ export default function AtendimentoCidadeBairro() {
                   trackCTAClick(
                     "whatsapp",
                     `atendimento_${cidade.slug}_${bairro.slug}_final`,
-                    { servico: "atendimento_bairro", bairro: `${cidade.slug}/${bairro.slug}` },
+                    ctaContext,
                   )
                 }
+
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Chamar no WhatsApp
