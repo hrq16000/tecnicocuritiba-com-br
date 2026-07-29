@@ -11,8 +11,11 @@ export interface WaMessageContext {
   equipamento?: string;
   servico?: string;
   servicoLabel?: string;
+  category?: string;     // categoria da triagem (ex: notebook, tv, wifi)
+  symptomSlug?: string;  // sintoma da triagem (ex: nao-liga, tela-preta)
   fallback?: string;    // mensagem base se nada de contexto existir
 }
+
 
 const modalidadeText: Record<string, string> = {
   remoto: "atendimento remoto",
