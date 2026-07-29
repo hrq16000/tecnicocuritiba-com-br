@@ -40,6 +40,16 @@ const problemSlugs = problemSlugsFromDir;
 for (const s of brandSlugs) routes.add(`/marcas/${s}`);
 for (const s of problemSlugs) routes.add(`/problemas/${s}`);
 
+// Expande /atendimento/:cidade a partir de CIDADES em src/lib/servicoCidadeData.ts
+try {
+  const cidadesSrc = readFileSync(resolve("src/lib/servicoCidadeData.ts"), "utf8");
+  const cidadesBlock = cidadesSrc.match(/export const CIDADES[\s\S]*?\];/);
+  if (cidadesBlock) {
+    const citySlugs = [...cidadesBlock[0].matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+    for (const s of citySlugs) routes.add(`/atendimento/${s}`);
+  }
+} catch { /* opcional */ }
+
 // 3) Categorize.
 const buckets = { bairros: [], marcas: [], problemas: [], servicos: [], main: [] };
 for (const p of [...routes].sort()) {
