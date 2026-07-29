@@ -131,6 +131,19 @@ export const trackCTAClick = (
       t: Date.now(),
     };
   }
+  // Sentry breadcrumb — correlaciona cliques de CTA com eventuais erros na
+  // mesma sessão (origem/bairro/serviço/modalidade viram data do breadcrumb).
+  try {
+    import("./sentry").then(({ sentryBreadcrumb }) => {
+      sentryBreadcrumb({
+        category: "cta",
+        type: "user",
+        level: "info",
+        message: `cta_${ctaType}:${safeLocation}`,
+        data: { cta_type: ctaType, cta_location: safeLocation, ...normalizeCtx(context) },
+      });
+    }).catch(() => { /* noop */ });
+  } catch { /* noop */ }
   if (typeof window !== 'undefined' && window.gtag) {
     const utm = getUtmContext();
     const deviceCtx = getDeviceContext();
