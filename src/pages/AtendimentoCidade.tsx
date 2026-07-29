@@ -59,6 +59,41 @@ export default function AtendimentoCidade() {
     },
   };
 
+  const bairros = getBairrosByCidade(cidade.slug);
+
+  const faqs = [
+    {
+      q: `Vocês atendem em ${cidade.nome}?`,
+      a: `Sim. Cobrimos ${cidade.nome} e toda a região metropolitana de Curitiba. Domicílio, coleta ou 100% remoto conforme o problema.`,
+    },
+    {
+      q: `Qual o valor mínimo do atendimento em ${cidade.nome}?`,
+      a: `A partir de R$ 99,99, com orçamento gratuito pelo WhatsApp antes de qualquer visita.`,
+    },
+    {
+      q: `Em quanto tempo o técnico chega em ${cidade.nome}?`,
+      a: `Sempre que possível no mesmo dia. Confirmamos janela e prazo por WhatsApp assim que você descrever o problema.`,
+    },
+    {
+      q: "Tem garantia?",
+      a: "Sim. 90 dias por escrito no serviço executado, sem letra miúda.",
+    },
+    {
+      q: "Aceitam Pix, cartão e transferência?",
+      a: "Sim. Pix, cartão de débito/crédito e transferência. Emitimos nota quando solicitado.",
+    },
+  ];
+
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -74,6 +109,7 @@ export default function AtendimentoCidade() {
       <PageSEO title={title} description={description} path={path} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
         <Breadcrumbs
