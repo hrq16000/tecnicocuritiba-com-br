@@ -228,11 +228,11 @@ export const Header = () => {
               </div>
               <div className="grid gap-2 border-b border-border p-4">
                 {variant === "whatsapp" ? (
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackHeaderClick("whatsapp")} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-4 text-sm font-bold text-primary-foreground">
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackHeaderClick("whatsapp")} aria-label="Falar com o técnico no WhatsApp — atendimento a partir de R$ 99,99" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-4 text-sm font-bold text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                     <span aria-hidden="true">☏</span> Falar no WhatsApp
                   </a>
                 ) : (
-                  <button type="button" onClick={() => { trackHeaderClick("agendar"); setSchedulingOpen(true); }} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground">
+                  <button type="button" onClick={() => { trackHeaderClick("agendar"); setSchedulingOpen(true); }} aria-label="Agendar visita técnica" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-accent px-4 text-sm font-bold text-accent-foreground">
                     <span aria-hidden="true">📅</span> Agendar visita técnica
                   </button>
                 )}
