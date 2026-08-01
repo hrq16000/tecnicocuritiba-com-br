@@ -39,7 +39,7 @@ const pick = (arr) => (FULL ? arr : arr.slice(0, SAMPLE));
 
 const ROUTES = [
   { path: "/", required: ["LocalBusiness", "WebSite"] },
-  { path: "/empresa-de-ti-curitiba", required: ["LocalBusiness", "WebSite", "BreadcrumbList", "FAQPage", "Service"] },
+  { path: "/suporte-empresas", required: ["LocalBusiness", "WebSite", "BreadcrumbList", "FAQPage", "Service"] },
   { path: "/assistencia-tecnica-curitiba", required: ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service", "WebSite"] },
   ...pick(bairros).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "BreadcrumbList"] })),
   ...pick(servicos).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "Service"] })),
@@ -66,7 +66,12 @@ async function auditRoute(browser, url, required) {
   const page = await browser.newPage();
   try {
     await page.goto(url, { waitUntil: "networkidle" });
-    const schemas = await page.$$eval('script[type="application/ld+json"]', (nodes) =>
+    // Seções lazy injetam schemas ao entrar no viewport: rola até o fim antes de coletar.
+    for (let i = 0; i < 2; i++) {
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(1200);
+    }
+    const raw = await page.$$eval('script[type="application/ld+json"]', (nodes) =>
       nodes
         .map((n) => {
           try {
@@ -77,6 +82,12 @@ async function auditRoute(browser, url, required) {
         })
         .filter(Boolean),
     );
+
+    // Achata @graph e arrays para que hasType enxergue nós aninhados.
+    const schemas = raw.flatMap((s) => {
+      const arr = Array.isArray(s) ? s : [s];
+      return arr.flatMap((n) => (Array.isArray(n?.["@graph"]) ? [n, ...n["@graph"]] : [n]));
+    });
 
     for (const s of schemas) {
       if (s.__parseError) errors.push(`JSON parse error: ${s.__parseError}`);
