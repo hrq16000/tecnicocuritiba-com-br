@@ -45,7 +45,7 @@ const ManutencaoTV = () => {
       <ServiceLandingSchema
         serviceName="Manutenção e Conserto de TV LED, LCD e Smart TV"
         description="Manutenção e Conserto de TV LED, LCD e Smart TV em Curitiba e região metropolitana. Diagnóstico profissional, orçamento aprovado antes do reparo e garantia de 90 dias."
-        path="/servicos/manutencao-t-v"
+        path="/servicos/manutencao-tv"
         priceFrom={99.99}
         category="Conserto de TV"
         faqs={[
@@ -55,7 +55,7 @@ const ManutencaoTV = () => {
           { question: "Qual a garantia?", answer: "90 dias sobre o serviço executado." },
         ]}
       />
-      <PageSEO title="Manutenção e Conserto de TV em Curitiba | LED, LCD, Smart TV | Técnico em Curitiba" description="Conserto de TV LED, LCD e Smart TV em Curitiba. Diagnóstico em bancada, reparo de placa, fonte e backlight. Coleta e entrega. Técnico com experiência." path="/servicos/manutencao-t-v"  breadcrumbs={[
+      <PageSEO title="Manutenção e Conserto de TV em Curitiba | LED, LCD, Smart TV | Técnico em Curitiba" description="Conserto de TV LED, LCD e Smart TV em Curitiba. Diagnóstico em bancada, reparo de placa, fonte e backlight. Coleta e entrega. Técnico com experiência." path="/servicos/manutencao-tv"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: "Manutenção de TV", path: "/servicos/manutencao-tv" }
