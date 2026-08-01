@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick, trackPageView } from "@/lib/analytics";
+import { SiteBaseSchema } from "@/components/SiteBaseSchema";
 import {
   MessageCircle,
   Gamepad2,
@@ -342,6 +343,7 @@ export default function AssistenciaTecnicaCuritiba() {
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SiteBaseSchema />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       {servicesJsonLd.map((svc, i) => (
         <script

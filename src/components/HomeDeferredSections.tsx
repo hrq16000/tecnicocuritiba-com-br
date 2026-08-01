@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, useInRouterContext } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
-import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LazyOnVisible } from "@/components/LazyOnVisible";
 
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
@@ -39,7 +38,6 @@ const SectionFallback = ({ height = "400px" }: { height?: string }) => (
 const DeferredContent = () => (
   <>
     <PageSEO title="Técnico de Informática Curitiba | Hoje R$ 99,99" description="Técnico de informática em Curitiba hoje. Conserto de PC/notebook, formatação, vírus e SSD a partir de R$ 99,99. Chame no WhatsApp." path="/" />
-    <JsonLdSchema />
 
     <LazyOnVisible minHeight="120px" rootMargin="-240px 0px"><Suspense fallback={<SectionFallback height="120px" />}><TechBrandsMarquee /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><PainSection /></Suspense></LazyOnVisible>

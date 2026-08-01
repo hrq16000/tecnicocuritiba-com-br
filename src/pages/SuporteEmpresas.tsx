@@ -73,7 +73,7 @@ const SuporteEmpresas = () => {
 
     // Schemas Service para sinais Premium PJ
     import("@/lib/schemaValidation").then(({ validateAndInjectSchema }) => {
-      const baseProvider = { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: "https://tecnicocuritiba.com.br/", areaServed: "Curitiba e região metropolitana" };
+      const baseProvider = { "@id": "https://tecnicocuritiba.com.br/#organization", "@type": "LocalBusiness", name: "Técnico em Curitiba", url: "https://tecnicocuritiba.com.br/", areaServed: "Curitiba e região metropolitana" };
       const services = [
         { id: "service-faturado", name: "Pagamento Faturado PJ", desc: "Atendimento técnico corporativo com pagamento faturado (boleto/30 dias) para empresas em Curitiba." },
         { id: "service-nfe", name: "Emissão de NF-e", desc: "Nota fiscal eletrônica em todos os atendimentos PJ, conforme legislação do Município de Curitiba." },
