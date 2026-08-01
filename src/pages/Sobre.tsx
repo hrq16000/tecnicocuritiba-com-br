@@ -113,7 +113,40 @@ const Sobre = () => {
           </div>
         </section>
 
+        {/* Dados da empresa (transparência / E-E-A-T) */}
+        <section className="py-8 md:py-10 bg-background" aria-labelledby="dados-empresa">
+          <div className="container mx-auto">
+            <div className="max-w-3xl mx-auto rounded-2xl border border-border bg-card p-6 md:p-8">
+              <h2 id="dados-empresa" className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                Dados da empresa
+              </h2>
+              <dl className="grid gap-3 sm:grid-cols-2 text-sm">
+                <div>
+                  <dt className="font-semibold text-foreground">Razão social</dt>
+                  <dd className="text-muted-foreground">Técnico em Curitiba — Assistência Técnica em Informática</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground">CNPJ</dt>
+                  <dd className="text-muted-foreground">41.723.708/0001-58</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground">Atendimento</dt>
+                  <dd className="text-muted-foreground">Curitiba e Região Metropolitana — domicílio, remoto e coleta</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground">Horário</dt>
+                  <dd className="text-muted-foreground">Seg–Sáb · 08h às 20h</dd>
+                </div>
+              </dl>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Empresa formalizada, com nota fiscal e garantia por escrito em todo serviço executado.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Valores */}
+
         <section className="py-8 md:py-10 bg-secondary relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
