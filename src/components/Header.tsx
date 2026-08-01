@@ -146,34 +146,19 @@ export const Header = () => {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          {variant === "whatsapp" ? (
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackHeaderClick("whatsapp")}
-              aria-label="Falar com técnico no WhatsApp"
-              data-cta-variant="whatsapp"
-              className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-sm transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
-            >
-              <span aria-hidden="true">☏</span>
-              <span>WhatsApp</span>
-            </a>
-          ) : (
-            <button
-              type="button"
-              onClick={() => {
-                trackHeaderClick("agendar");
-                setSchedulingOpen(true);
-              }}
-              aria-label="Agendar visita técnica"
-              data-cta-variant="agendar"
-              className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-accent px-3 text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90 sm:min-w-24"
-            >
-              <span aria-hidden="true">📅</span>
-              <span>Agendar</span>
-            </button>
-          )}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackHeaderClick("whatsapp")}
+            aria-label="Falar com técnico no WhatsApp"
+            data-cta-variant="whatsapp"
+            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-sm transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
+          >
+            <span aria-hidden="true">☏</span>
+            <span>WhatsApp</span>
+          </a>
+
 
 
 
