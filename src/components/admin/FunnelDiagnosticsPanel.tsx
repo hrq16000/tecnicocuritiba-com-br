@@ -130,8 +130,8 @@ export function FunnelDiagnosticsPanel() {
               </tr>
             </thead>
             <tbody>
-              {[...events].reverse().map((e, idx) => {
-                const isErr = e.name.includes("exception") || e.name.includes("failed") || e.name.includes("blocked");
+              {[...filtered].reverse().map((e, idx) => {
+                const isErr = isError(e);
                 return (
                   <tr key={idx} className={`border-t border-border ${isErr ? "bg-red-500/5" : ""}`}>
                     <td className="px-2 py-1 whitespace-nowrap text-muted-foreground">
