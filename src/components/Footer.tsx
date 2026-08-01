@@ -94,6 +94,8 @@ const infoLinks = [
   { label: "Blog", to: "/blog" },
   { label: "FAQ", to: "/faq" },
   { label: "Sobre Nós", to: "/sobre" },
+  { label: "Gestor Responsável", to: "/gestor-responsavel" },
+
   { label: "Contato", to: "/contato" },
   { label: "Termos e Condições", to: "/termos-e-condicoes" },
   { label: "Política de Privacidade", to: "/politica-de-privacidade" },
