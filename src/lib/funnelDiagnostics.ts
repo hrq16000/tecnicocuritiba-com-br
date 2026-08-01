@@ -8,6 +8,8 @@
  * Também emite `console.debug` quando `window.__funnelDebug = true`,
  * e reencaminha para GA4 via o pipeline `funnelAnalytics.track`.
  */
+import { sentryBreadcrumb, sentryMessage } from "./sentry";
+
 const KEY = "wa_funnel_diag_v1";
 const MAX = 60;
 
@@ -39,6 +41,9 @@ function safeWrite(events: FunnelDiagEvent[]) {
   }
 }
 
+/** Eventos que representam falha real do funil — viram alerta no Sentry. */
+const CRITICAL = /(exception|failed|blocked|invalid|reset)/i;
+
 export function logFunnelDiag(name: string, data?: Record<string, unknown>, step?: number) {
   const ev: FunnelDiagEvent = { ts: Date.now(), name, step, data };
   const buf = safeRead();
@@ -47,6 +52,18 @@ export function logFunnelDiag(name: string, data?: Record<string, unknown>, step
   if (typeof window !== "undefined" && (window as unknown as { __funnelDebug?: boolean }).__funnelDebug) {
     // eslint-disable-next-line no-console
     console.debug(`[funnel:diag] ${name}`, ev);
+  }
+
+  // Telemetria em produção: breadcrumb sempre, alerta nos eventos críticos.
+  const ctx = {
+    funnel_event: name,
+    step: step ?? null,
+    route: typeof window !== "undefined" ? window.location.pathname : "server",
+    ...(data || {}),
+  };
+  sentryBreadcrumb({ category: "wa_funnel", message: name, level: CRITICAL.test(name) ? "error" : "info", data: ctx });
+  if (CRITICAL.test(name)) {
+    sentryMessage(`[funnel] ${name}`, { level: "error", tags: { funnel_event: name }, extra: ctx });
   }
 }
 
