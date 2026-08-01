@@ -19,10 +19,18 @@ const errors = [];
 const rows = [];
 
 for (const route of PILOT_ROUTES) {
-  const url = `${BASE}${route.path}`;
   let res;
   try {
-    res = await fetch(url, { redirect: "manual" });
+    res = await fetch(`${BASE}${route.path}`, { redirect: "manual" });
+    // `vite preview` só resolve o index.html do diretório com barra final;
+    // em produção o host serve o arquivo estático direto. Tentamos ambos.
+    if (res.status === 200) {
+      const peek = (await res.clone().text()).match(/<link\s+rel=["']canonical["'][^>]*href=["']([^"']*)["']/i)?.[1];
+      if (peek !== `${SITE}${route.path}`) {
+        const alt = await fetch(`${BASE}${route.path}/`, { redirect: "manual" });
+        if (alt.status === 200) res = alt;
+      }
+    }
   } catch (e) {
     errors.push(`${route.path}: falha de rede (${e.message})`);
     continue;
