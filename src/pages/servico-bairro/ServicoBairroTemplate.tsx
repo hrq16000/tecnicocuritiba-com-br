@@ -16,6 +16,7 @@ import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { BairroSchema } from "@/components/BairroSchema";
 import { buildContextualMessage } from "@/lib/whatsappMessage";
 import { Download } from "lucide-react";
+import { SiteBaseSchema } from "@/components/SiteBaseSchema";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -123,6 +124,7 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
         { name: data.bairro, path: `/servicos/${data.servicoSlug}/${data.bairroSlug}` }
       ]} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SiteBaseSchema />
       <BairroSchema
         bairro={data.bairro}
         cidade={data.cidade}

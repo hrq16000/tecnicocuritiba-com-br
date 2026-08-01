@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { FastHeroSection } from "@/components/FastHeroSection";
 import { TopOfferBanner } from "@/components/TopOfferBanner";
 import { LazyOnVisible } from "@/components/LazyOnVisible";
+import { JsonLdSchema } from "@/components/JsonLdSchema";
 
 const HomeDeferredSections = lazy(() => import("@/components/HomeDeferredSections"));
 const PricingBanner = lazy(() => import("@/components/PricingBanner").then((m) => ({ default: m.PricingBanner })));
@@ -50,6 +51,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <JsonLdSchema />
       <Header />
       <TopOfferBanner />
       <main id="main-content">

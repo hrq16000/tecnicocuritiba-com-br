@@ -13,6 +13,7 @@ import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { SERVICOS, CIDADES, getServico, getCidade, getFaqPorServico } from "@/lib/servicoCidadeData";
 import { ServiceCityLinks } from "@/components/ServiceCityLinks";
 import NotFound from "@/pages/NotFound";
+import { SiteBaseSchema } from "@/components/SiteBaseSchema";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -91,6 +92,7 @@ const ServicoCidadePage = () => {
   return (
     <div className="min-h-screen bg-background">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SiteBaseSchema />
       <Header />
       <Breadcrumbs
         items={[
