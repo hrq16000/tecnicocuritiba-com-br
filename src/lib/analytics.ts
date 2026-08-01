@@ -84,6 +84,8 @@ export interface CTAContext {
   bairro?: string;     // slug do bairro (/servicos/*/[bairro] ou /bairros/*)
   category?: string;     // categoria de triagem (ex: notebook, tv, wifi)
   symptomSlug?: string;  // sintoma específico da triagem (ex: nao-liga, tela-preta)
+  cidade?: string;       // slug da cidade (/atendimento/:cidade)
+  urgencia?: string;     // urgência declarada na triagem
 }
 // Fallback "unknown" — nunca perde o clique por falta de contexto.
 const withUnknown = (v: string | undefined | null): string => {
@@ -99,6 +101,8 @@ const normalizeCtx = (context: CTAContext = {}) => ({
   bairro: withUnknown(context.bairro),
   category: withUnknown(context.category),
   symptom_slug: withUnknown(context.symptomSlug),
+  cidade: withUnknown(context.cidade),
+  urgencia: withUnknown(context.urgencia),
 });
 
 // Registro local (localStorage) de contexto "unknown" para alertar o admin.
@@ -121,6 +125,69 @@ const recordUnknownAlerts = (
     }).catch(() => { /* noop */ });
   } catch { /* noop */ }
 };
+// Agrega o clique por cidade/bairro (localStorage) para o painel admin.
+const recordGeoMetric = (
+  ctaType: 'whatsapp' | 'phone' | 'chatbot',
+  ctx: ReturnType<typeof normalizeCtx>,
+  location: string,
+  route: string,
+) => {
+  if (ctaType === 'chatbot') return;
+  try {
+    import('./ctaMetrics').then(({ recordCtaMetric, inferGeoFromRoute }) => {
+      const geo = inferGeoFromRoute(route);
+      const bairroCtx = ctx.bairro !== 'unknown' ? ctx.bairro.split('/').pop() || ctx.bairro : geo.bairro;
+      recordCtaMetric({
+        kind: ctaType,
+        location,
+        route,
+        cidade: ctx.cidade !== 'unknown' ? ctx.cidade : geo.cidade,
+        bairro: bairroCtx,
+        servico: ctx.servico,
+        category: ctx.category,
+        symptom: ctx.symptom_slug,
+        modalidade: ctx.modalidade,
+      });
+    }).catch(() => { /* noop */ });
+  } catch { /* noop */ }
+};
+
+/**
+ * Seleção de sintoma na triagem (inclusive sintomas leves que viram visita).
+ * Envia category/symptom_slug como propriedades do evento + breadcrumb Sentry.
+ */
+export const trackSymptomSelect = (
+  category: string,
+  symptomSlug: string,
+  context: CTAContext & { step?: string; severity?: 'leve' | 'medio' | 'grave' } = {},
+) => {
+  const ctx = normalizeCtx(context);
+  const payload = {
+    event_category: 'triagem',
+    event_label: `${withUnknown(category)}/${withUnknown(symptomSlug)}`,
+    ...ctx,
+    category: withUnknown(category),
+    symptom_slug: withUnknown(symptomSlug),
+    triage_step: withUnknown(context.step),
+    severity: withUnknown(context.severity),
+    page_path: typeof window !== 'undefined' ? window.location.pathname : 'ssr',
+  };
+  try {
+    import('./sentry').then(({ sentryBreadcrumb }) => {
+      sentryBreadcrumb({
+        category: 'triagem',
+        type: 'user',
+        level: 'info',
+        message: `symptom_select:${payload.event_label}`,
+        data: payload,
+      });
+    }).catch(() => { /* noop */ });
+  } catch { /* noop */ }
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'symptom_select', payload);
+  }
+};
+
 export const trackCTAClick = (
   ctaType: 'whatsapp' | 'phone' | 'chatbot',
   location: string,
@@ -173,6 +240,8 @@ export const trackCTAClick = (
 
     // Registra alertas locais quando modalidade/problema chegam como "unknown".
     recordUnknownAlerts(ctaType, ctx, window.location.pathname);
+    // Agrega o clique por cidade/bairro para o painel /admin/metricas.
+    recordGeoMetric(ctaType, ctx, safeLocation, window.location.pathname);
 
     // cta_click sempre dispara (mede CTR / engajamento por dispositivo)
     window.gtag('event', 'cta_click', payload);
