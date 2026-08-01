@@ -18,6 +18,10 @@ export interface WaMessageContext {
   urgencia?: string;     // ex: "72h", "agendado"
   /** Valor/condição comercial exibido no assunto (default: mínimo padrão). */
   condicao?: string;
+  /** Origem da campanha (utm_source) — entra no rastro [ref: ...]. */
+  utmSource?: string;
+  /** Click ID do Google Ads — entra no rastro [ref: ...] para casar conversão. */
+  gclid?: string;
   fallback?: string;    // mensagem base se nada de contexto existir
 }
 
@@ -93,20 +97,41 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
   // Só cita a condição comercial quando há assunto — evita ruído no CTA genérico.
   if (subject) lines.push(`Condição: ${clean(ctx.condicao) || DEFAULT_CONDICAO}.`);
 
-  // Trace de triagem — permite ao atendente identificar de qual sintoma veio.
+  // Trace de triagem + origem — permite ao atendente identificar de qual
+  // sintoma e de qual campanha veio o contato (gclid casa com o Google Ads).
   const trace = [clean(ctx.category), clean(ctx.symptomSlug)].filter(Boolean).join("/");
-  if (trace) lines.push(`[ref: ${trace}]`);
+  const src = clean(ctx.utmSource);
+  const gid = clean(ctx.gclid);
+  const refParts = [
+    trace,
+    src ? `via ${src}` : "",
+    gid ? `gclid ${gid.slice(0, 24)}` : "",
+  ].filter(Boolean);
+  if (refParts.length > 0) lines.push(`[ref: ${refParts.join(" · ")}]`);
 
   lines.push("Podem me atender?");
 
   const msg = lines.join("\n").trim();
-  if (!subject && !mod && !urg && ctx.fallback) return ctx.fallback;
+  if (!subject && !mod && !urg && !clean(ctx.gclid) && ctx.fallback) return ctx.fallback;
   return msg;
 }
 
-const WHATSAPP_NUMBER = "5541997452053";
+import { NAP_PHONE_DIGITS } from "./nap";
+
+const WHATSAPP_NUMBER = NAP_PHONE_DIGITS;
 
 export function buildWhatsAppUrl(ctx: WaMessageContext = {}, number = WHATSAPP_NUMBER): string {
-  const text = buildContextualMessage(ctx);
+  // Origem da sessão (utm_source/gclid) entra automaticamente quando o
+  // chamador não informou — sem isso o clique perde a atribuição da campanha.
+  const withOrigin: WaMessageContext = { ...ctx };
+  if (typeof window !== "undefined" && (!withOrigin.utmSource || !withOrigin.gclid)) {
+    try {
+      const stored = JSON.parse(sessionStorage.getItem("utm_payload_v1") || "{}") as Record<string, string>;
+      const sp = new URLSearchParams(window.location.search);
+      withOrigin.utmSource = withOrigin.utmSource || sp.get("utm_source") || stored.utm_source || undefined;
+      withOrigin.gclid = withOrigin.gclid || sp.get("gclid") || stored.gclid || undefined;
+    } catch { /* noop */ }
+  }
+  const text = buildContextualMessage(withOrigin);
   return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 }
