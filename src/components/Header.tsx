@@ -236,11 +236,6 @@ export const Header = () => {
         </div>
         </div>
       </header>
-      {schedulingOpen ? (
-        <Suspense fallback={null}>
-          <SchedulingModal isOpen={schedulingOpen} onClose={() => setSchedulingOpen(false)} />
-        </Suspense>
-      ) : null}
     </>
   );
 };
