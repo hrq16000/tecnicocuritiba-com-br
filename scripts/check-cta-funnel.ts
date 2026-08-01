@@ -54,9 +54,11 @@ for (const file of files) {
 
 const funnel = readFileSync(join(ROOT, "src/components/WhatsAppFunnel.tsx"), "utf8");
 const analytics = readFileSync(join(ROOT, "src/lib/funnelAnalytics.ts"), "utf8");
-if (!funnel.includes("R$ 99,99") || !funnel.includes("minimumAccepted") || !funnel.includes("disabled={!answers.minimumAccepted}")) {
+const minimumGuard = /disabled=\{[^}]*!answers\.minimumAccepted[^}]*\}/.test(funnel);
+if (!funnel.includes("R$ 99,99") || !funnel.includes("minimumAccepted") || !minimumGuard) {
   violations.push("src/components/WhatsAppFunnel.tsx deve exigir confirmação do valor mínimo R$ 99,99 antes de abrir WhatsApp");
 }
+
 if (!analytics.includes("click_location") || !analytics.includes("app_version")) {
   violations.push("src/lib/funnelAnalytics.ts deve enviar click_location e app_version em todos os eventos do wa-funnel");
 }

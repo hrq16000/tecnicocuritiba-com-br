@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import { RealImageSection } from "@/components/RealImageSection";
+import { TriagemPJ } from "@/components/b2b/TriagemPJ";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
@@ -60,12 +61,12 @@ const diferenciais = [
 
 const SuporteEmpresas = () => {
   useEffect(() => {
-    document.title = "Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico em Curitiba";
+    document.title = "Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Suporte técnico empresarial em Curitiba. TI para pequenas e médias empresas com planos mensais, nota fiscal e pagamento faturado. Manutenção de computadores corporativos."
+        "Suporte de TI para empresas em Curitiba: contratos mensais com SLA, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado."
       );
     }
     trackPageView("/suporte-empresas", "Suporte Empresas");
@@ -104,7 +105,7 @@ const SuporteEmpresas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Suporte Técnico para Empresas em Curitiba | TI Corporativo | Técnico em Curitiba" description="Suporte técnico empresarial em Curitiba. TI para pequenas e médias empresas com planos mensais, nota fiscal e pagamento faturado. Manutenção de computadores corporativos." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
+      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: contratos mensais com SLA, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
       <JsonLdSchema />
       <Header />
       <main id="main-content">
@@ -119,6 +120,8 @@ const SuporteEmpresas = () => {
           title="Serviços para Sua Empresa"
           subtitle="Suporte técnico empresarial completo e profissional"
         />
+
+        <TriagemPJ />
 
         {/* O Que Está Incluso */}
         <section className="py-8 md:py-10 bg-background">

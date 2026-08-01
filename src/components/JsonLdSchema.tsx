@@ -17,16 +17,16 @@ const localBusinessSchema = {
   "logo": `${SITE}/logo.png`,
   "priceRange": "R$ 99,99 - R$ 500",
   "currenciesAccepted": "BRL",
-  "foundingDate": "1999",
+  "foundingDate": "1998",
   "slogan": "Assistência Técnica Nº1 de Curitiba e Região",
   "paymentAccepted": "Dinheiro, Cartão de Crédito, Cartão de Débito, PIX, Transferência Bancária",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Curitiba",
     "addressRegion": "PR",
-    "postalCode": "80000-000",
     "addressCountry": "BR"
   },
+
   "geo": { "@type": "GeoCoordinates", "latitude": "-25.4284", "longitude": "-49.2733" },
   "areaServed": [
     { "@type": "City", "name": "Curitiba", "sameAs": "https://pt.wikipedia.org/wiki/Curitiba" },

@@ -24,7 +24,9 @@
     "ci:seo": "npm run build && npm run validate:jsonld && npm run test:e2e",
     "indexnow:ping": "node scripts/indexnow-ping.mjs",
     "check:cta-funnel": "bun scripts/check-cta-funnel.ts",
-    "preview:category-prompts": "bun scripts/preview-category-prompts.ts"
+    "preview:category-prompts": "bun scripts/preview-category-prompts.ts",
+    "cwv:guard": "node scripts/check-cwv-guard.mjs .lighthouseci .lighthouseci-mobile",
+    "check:pilot": "node scripts/check-pilot-routes.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
