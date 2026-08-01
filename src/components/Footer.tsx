@@ -194,7 +194,8 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackFooterWhatsApp("footer_primary")}
-              className="inline-flex items-center gap-2 bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] hover:scale-105 hover:shadow-[var(--shadow-whatsapp)] text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 group"
+              aria-label="Chamar o técnico no WhatsApp"
+              className="inline-flex min-h-11 items-center gap-2 bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] hover:scale-105 hover:shadow-[var(--shadow-whatsapp)] text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <MessageCircle className="h-4 w-4 flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
               <span>Chamar no WhatsApp</span>

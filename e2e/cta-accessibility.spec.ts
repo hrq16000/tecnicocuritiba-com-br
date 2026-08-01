@@ -7,7 +7,8 @@ import { test, expect, type Page } from "@playwright/test";
 
 const ROUTES = ["/", "/atendimento/curitiba", "/servicos/redes-wifi"];
 
-const CTA_SELECTOR = 'a[href*="wa.me"], [data-cta-location]';
+// Botões (não links inline de texto corrido): têm cantos arredondados/fundo.
+const CTA_SELECTOR = 'a[href*="wa.me"][class*="rounded"], [data-cta-location][class*="rounded"]';
 
 async function ctas(page: Page) {
   return page.locator(CTA_SELECTOR).evaluateAll((els) =>
