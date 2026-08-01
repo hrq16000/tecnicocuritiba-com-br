@@ -2,13 +2,23 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { Button } from "@/components/ui/button";
-import { aggregateByGeo, clearCtaMetrics, getCtaMetrics, type CtaMetricEvent } from "@/lib/ctaMetrics";
+import {
+  aggregateByGeo,
+  buildEventsCsv,
+  buildGeoCsv,
+  clearCtaMetrics,
+  downloadCsv,
+  filterByWindow,
+  getCtaMetrics,
+  type CtaMetricEvent,
+  type MetricsWindow,
+} from "@/lib/ctaMetrics";
 
-const WINDOWS = [
-  { label: "24h", ms: 24 * 60 * 60 * 1000 },
-  { label: "7 dias", ms: 7 * 24 * 60 * 60 * 1000 },
-  { label: "30 dias", ms: 30 * 24 * 60 * 60 * 1000 },
-  { label: "Tudo", ms: Number.POSITIVE_INFINITY },
+const WINDOWS: { label: string; key: MetricsWindow }[] = [
+  { label: "24h", key: "24h" },
+  { label: "7 dias", key: "7d" },
+  { label: "30 dias", key: "30d" },
+  { label: "Tudo", key: "all" },
 ];
 
 const fmt = (t: number) => (t ? new Date(t).toLocaleString("pt-BR") : "—");
@@ -19,16 +29,15 @@ const fmt = (t: number) => (t ? new Date(t).toLocaleString("pt-BR") : "—");
  */
 const AdminMetricas = () => {
   const [events, setEvents] = useState<CtaMetricEvent[]>([]);
-  const [windowMs, setWindowMs] = useState(WINDOWS[1].ms);
+  const [win, setWin] = useState<MetricsWindow>("7d");
 
   useEffect(() => {
     setEvents(getCtaMetrics());
   }, []);
 
-  const filtered = useMemo(() => {
-    const min = Date.now() - windowMs;
-    return events.filter((e) => e.t >= min);
-  }, [events, windowMs]);
+  const filtered = useMemo(() => filterByWindow(events, win), [events, win]);
+
+  const stamp = () => new Date().toISOString().slice(0, 10);
 
   const rows = useMemo(() => aggregateByGeo(filtered), [filtered]);
   const totals = useMemo(
@@ -60,12 +69,31 @@ const AdminMetricas = () => {
             <Button
               key={w.label}
               size="sm"
-              variant={windowMs === w.ms ? "default" : "outline"}
-              onClick={() => setWindowMs(w.ms)}
+              variant={win === w.key ? "default" : "outline"}
+              onClick={() => setWin(w.key)}
+              aria-pressed={win === w.key}
             >
               {w.label}
             </Button>
           ))}
+          <Button
+            size="sm"
+            variant="secondary"
+            data-testid="export-geo-csv"
+            disabled={filtered.length === 0}
+            onClick={() => downloadCsv(`metricas-cidade-bairro-${win}-${stamp()}.csv`, buildGeoCsv(win, events))}
+          >
+            Baixar CSV (cidade/bairro)
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            data-testid="export-events-csv"
+            disabled={filtered.length === 0}
+            onClick={() => downloadCsv(`metricas-eventos-${win}-${stamp()}.csv`, buildEventsCsv(win, events))}
+          >
+            Baixar CSV (eventos)
+          </Button>
           <Button
             size="sm"
             variant="ghost"
