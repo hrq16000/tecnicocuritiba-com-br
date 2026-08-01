@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/nap";
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { useMemo } from "react";
@@ -101,26 +102,13 @@ const infoLinks = [
   { label: "Política de Privacidade", to: "/politica-de-privacidade" },
 ];
 
-// NAP (Name · Address · Phone) — fonte única de verdade para SEO local
-const NAP = {
-  name: "Técnico em Curitiba — Assistência Técnica em Informática",
-  street: "Atendimento a domicílio e coleta",
-  city: "Curitiba",
-  region: "PR",
-  country: "BR",
-  // Contato exclusivamente via WhatsApp — não expor número na UI.
-  phone: "+5541997452053",
-  url: "https://tecnicocuritiba.com.br",
-  geo: { lat: -25.4284, lng: -49.2733 },
-  hours: "Seg–Sáb · 08h às 20h",
-};
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
   name: NAP.name,
-  alternateName: "Técnico em Curitiba",
+  alternateName: NAP.alternateName,
   description:
     "Assistência técnica em informática a domicílio em Curitiba e Região Metropolitana: formatação, conserto de PC/notebook, remoção de vírus, upgrade de SSD/memória, redes Wi-Fi e suporte para empresas.",
   image: "https://tecnicocuritiba.com.br/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp",
@@ -130,13 +118,7 @@ const localBusinessSchema = {
   priceRange: "$$",
   currenciesAccepted: "BRL",
   paymentAccepted: "Cash, Credit Card, Debit Card, PIX",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: NAP.street,
-    addressLocality: NAP.city,
-    addressRegion: NAP.region,
-    addressCountry: NAP.country,
-  },
+  address: napPostalAddress(),
   geo: {
     "@type": "GeoCoordinates",
     latitude: NAP.geo.lat,
@@ -152,24 +134,8 @@ const localBusinessSchema = {
     name: c,
     containedInPlace: { "@type": "State", name: "Paraná" },
   })),
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "08:00",
-      closes: "20:00",
-    },
-  ],
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      telephone: NAP.phone,
-      contactType: "customer support",
-      areaServed: "BR",
-      availableLanguage: ["Portuguese", "pt-BR"],
-      url: "https://wa.me/5541997452053",
-    },
-  ],
+  openingHoursSpecification: napOpeningHours(),
+  contactPoint: napContactPoint(),
   knowsAbout: [
     "Formatação de computador",
     "Remoção de vírus e malware",

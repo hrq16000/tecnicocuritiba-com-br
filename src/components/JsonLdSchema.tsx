@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { validateAndInjectSchema } from '@/lib/schemaValidation';
+import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from '@/lib/nap';
 
 const SITE = "https://tecnicocuritiba.com.br";
 const BUILD_DATE = new Date().toISOString();
@@ -12,20 +13,15 @@ const localBusinessSchema = {
   "alternateName": ["Técnico de Informática Curitiba", "Assistência Técnica Curitiba"],
   "description": "Técnico de informática em Curitiba e região metropolitana. Formatação, conserto de computadores e notebooks, remoção de vírus, upgrade SSD, redes. Atendimento domiciliar no mesmo dia.",
   "url": SITE,
-  "telephone": "+55-41-99745-2053",
+  "telephone": NAP.phone,
   "image": `${SITE}/og-image.jpg`,
   "logo": `${SITE}/logo.png`,
   "priceRange": "R$ 99,99 - R$ 500",
   "currenciesAccepted": "BRL",
-  "foundingDate": "1998",
+  "foundingDate": NAP.foundingDate,
   "slogan": "Assistência Técnica Nº1 de Curitiba e Região",
   "paymentAccepted": "Dinheiro, Cartão de Crédito, Cartão de Débito, PIX, Transferência Bancária",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Curitiba",
-    "addressRegion": "PR",
-    "addressCountry": "BR"
-  },
+  "address": napPostalAddress(),
 
   "geo": { "@type": "GeoCoordinates", "latitude": "-25.4284", "longitude": "-49.2733" },
   "areaServed": [
@@ -41,11 +37,8 @@ const localBusinessSchema = {
     { "@type": "City", "name": "Quatro Barras" },
     { "@type": "City", "name": "Campo Magro" }
   ],
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
-  ],
-  "sameAs": ["https://wa.me/5541997452053"],
+  "openingHoursSpecification": napOpeningHours(),
+  "sameAs": [NAP.whatsappUrl],
   "knowsAbout": [
     "Manutenção de computadores", "Conserto de notebooks", "Formatação Windows",
     "Remoção de vírus", "Upgrade de hardware", "Configuração de redes",
@@ -95,14 +88,8 @@ const organizationSchema = {
   "alternateName": "Técnico de Informática Curitiba",
   "url": SITE,
   "logo": `${SITE}/logo.png`,
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+55-41-99745-2053",
-    "contactType": "customer service",
-    "availableLanguage": "Portuguese",
-    "areaServed": "BR-PR"
-  },
-  "sameAs": ["https://wa.me/5541997452053"]
+  "contactPoint": napContactPoint(),
+  "sameAs": [NAP.whatsappUrl]
 };
 
 // WebPage com Speakable — extração prioritária para Bing Copilot / AI Overviews
