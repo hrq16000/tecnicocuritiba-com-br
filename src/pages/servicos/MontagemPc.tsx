@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { Link } from "react-router-dom";
 import { Monitor, CheckCircle, Cpu, Gamepad2, Briefcase, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,19 @@ const MontagemPc = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Montagem de PC Gamer e Workstation"
+        description="Montagem de PC Gamer e Workstation em Curitiba e região metropolitana. Diagnóstico profissional, orçamento aprovado antes do reparo e garantia de 90 dias."
+        path="/servicos/montagem-pc"
+        priceFrom={99.99}
+        category="Montagem de Computadores"
+        faqs={[
+          { question: "Posso escolher as peças?", answer: "Sim. Você pode fornecer as peças ou montar a lista junto com o técnico conforme o orçamento e o uso." },
+          { question: "Vocês vendem as peças?", answer: "Indicamos lojas parceiras com bons preços; a compra pode ser feita por você ou intermediada." },
+          { question: "Qual a garantia da montagem?", answer: "As peças mantêm a garantia do fabricante e o serviço de montagem tem 90 dias." },
+          { question: "Quanto tempo demora?", answer: "Com todas as peças em mãos, de 1 a 2 dias úteis, com entrega em Curitiba e região." },
+        ]}
+      />
       <PageSEO title="Montagem de PC Gamer e Workstation em Curitiba | Técnico em Curitiba" description="Montagem de PC Gamer e Workstation em Curitiba. Computador personalizado para jogos, trabalho ou edição. Configuração ideal para seu orçamento." path="/servicos/montagem-pc"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },

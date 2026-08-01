@@ -49,6 +49,7 @@ const FunilIndisponivel = lazy(() => import("./pages/FunilIndisponivel"));
 const Obrigado = lazy(() => import("./pages/Obrigado"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
+const AdminMetricas = lazy(() => import("./pages/admin/AdminMetricas"));
 const AdminReviews = lazy(() => import("./pages/admin/AdminReviews"));
 const AdminVitals = lazy(() => import("./pages/admin/AdminVitals"));
 const ConsertoImpressoraCuritiba = lazy(() => import("./pages/ConsertoImpressoraCuritiba"));
@@ -907,6 +908,7 @@ const App = () => (
             <Route path="/admin" element={<Navigate to="/admin/funnel" replace />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/funnel" element={<AdminFunnel />} />
+            <Route path="/admin/metricas" element={<AdminMetricas />} />
             <Route path="/admin/reviews" element={<AdminReviews />} />
             <Route path="/admin/vitals" element={<AdminVitals />} />
             <Route path="/conserto-impressora-curitiba" element={<ConsertoImpressoraCuritiba />} />

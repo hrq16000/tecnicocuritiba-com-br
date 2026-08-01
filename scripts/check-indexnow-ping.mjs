@@ -17,6 +17,21 @@ const HOST = "tecnicocuritiba.com.br";
 const KEY = "f783ab585dfa9e6b017cb058009cccae";
 const KEY_FILE = path.join(process.cwd(), "public", `${KEY}.txt`);
 
+// Coleta URLs dos sitemaps locais para a resubmissão POST.
+function collectSitemapUrls() {
+  const dir = path.join(process.cwd(), "public");
+  const out = [];
+  for (const f of fs.readdirSync(dir)) {
+    if (!/^sitemap.*\.xml$/.test(f)) continue;
+    const xml = fs.readFileSync(path.join(dir, f), "utf8");
+    for (const m of xml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)) {
+      if (m[1].endsWith(".xml")) continue;
+      out.push(m[1]);
+    }
+  }
+  return [...new Set(out)];
+}
+
 let failed = 0;
 const log = (ok, msg) => { console.log(`${ok ? "✓" : "✗"} ${msg}`); if (!ok) failed++; };
 
@@ -55,6 +70,28 @@ if (sitemapsChanged && SUPABASE_URL && ANON) {
     log(r.ok, `edge function indexnow-ping GET → ${r.status} (${body.slice(0, 80)})`);
   } catch (e) {
     log(false, `edge function indexnow-ping GET falhou: ${e.message}`);
+  }
+
+  // POST real de resubmissão — falha o build em status != 200 ou corpo inválido.
+  try {
+    const urls = collectSitemapUrls().slice(0, 200);
+    const r = await fetch(`${SUPABASE_URL}/functions/v1/indexnow-ping`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${ANON}`,
+        apikey: ANON,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ urls: urls.length ? urls : [`https://${HOST}/`] }),
+    });
+    const text = await r.text();
+    let json = null;
+    try { json = JSON.parse(text); } catch { /* corpo não-JSON */ }
+    const okBody = !!json && (json.ok === true || Array.isArray(json.results) || typeof json.submitted === "number");
+    log(r.status === 200, `edge function indexnow-ping POST → HTTP ${r.status}`);
+    log(okBody, `resposta do POST é JSON válido de submissão (${text.slice(0, 120)})`);
+  } catch (e) {
+    log(false, `edge function indexnow-ping POST falhou: ${e.message}`);
   }
 } else if (sitemapsChanged) {
   console.log("  (edge function não testada — SUPABASE_URL/ANON ausentes; soft-skip)");
