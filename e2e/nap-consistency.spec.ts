@@ -40,7 +40,13 @@ for (const route of ROUTES) {
   test(`NAP consistente em ${route}`, async ({ page }) => {
     await page.goto(route);
     await page.waitForLoadState("networkidle");
+    // A home injeta LocalBusiness/Organization via footer lazy-mounted.
+    for (let i = 0; i < 6; i++) {
+      await page.mouse.wheel(0, 3000);
+      await page.waitForTimeout(400);
+    }
     await page.waitForTimeout(1500);
+    await expect(page.locator("footer")).toHaveCount(1);
 
     const nodes = await graph(page);
     expect(nodes.length, `sem JSON-LD em ${route}`).toBeGreaterThan(0);
