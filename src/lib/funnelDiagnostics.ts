@@ -8,6 +8,8 @@
  * Também emite `console.debug` quando `window.__funnelDebug = true`,
  * e reencaminha para GA4 via o pipeline `funnelAnalytics.track`.
  */
+import { sentryBreadcrumb, sentryMessage } from "./sentry";
+
 const KEY = "wa_funnel_diag_v1";
 const MAX = 60;
 
