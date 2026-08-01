@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/nap";
+import { NAP, napContactPoint, napOpeningHours } from "@/lib/nap";
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { useMemo } from "react";
@@ -118,7 +118,6 @@ const localBusinessSchema = {
   priceRange: "$$",
   currenciesAccepted: "BRL",
   paymentAccepted: "Cash, Credit Card, Debit Card, PIX",
-  address: napPostalAddress(),
   geo: {
     "@type": "GeoCoordinates",
     latitude: NAP.geo.lat,

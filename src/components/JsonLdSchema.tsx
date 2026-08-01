@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { validateAndInjectSchema } from '@/lib/schemaValidation';
-import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from '@/lib/nap';
+import { NAP, napContactPoint, napOpeningHours } from '@/lib/nap';
 
 const SITE = "https://tecnicocuritiba.com.br";
 const BUILD_DATE = new Date().toISOString();
@@ -21,7 +21,6 @@ const localBusinessSchema = {
   "foundingDate": NAP.foundingDate,
   "slogan": "Assistência Técnica Nº1 de Curitiba e Região",
   "paymentAccepted": "Dinheiro, Cartão de Crédito, Cartão de Débito, PIX, Transferência Bancária",
-  "address": napPostalAddress(),
 
   "geo": { "@type": "GeoCoordinates", "latitude": "-25.4284", "longitude": "-49.2733" },
   "areaServed": [

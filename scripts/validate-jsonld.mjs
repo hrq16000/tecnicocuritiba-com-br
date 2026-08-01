@@ -37,13 +37,20 @@ const servicos = readSitemap("public/sitemap-servicos.xml").filter((p) => p.star
 
 const pick = (arr) => (FULL ? arr : arr.slice(0, SAMPLE));
 
-const ROUTES = [
+const ALL_ROUTES = [
   { path: "/", required: ["LocalBusiness", "WebSite"] },
   { path: "/suporte-empresas", required: ["LocalBusiness", "WebSite", "BreadcrumbList", "FAQPage", "Service"] },
   { path: "/assistencia-tecnica-curitiba", required: ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service", "WebSite"] },
   ...pick(bairros).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "BreadcrumbList"] })),
   ...pick(servicos).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "Service"] })),
 ];
+
+// Execução em lotes (para caber no tempo do CI/sandbox):
+//   OFFSET=0 LIMIT=25 FULL=1 node scripts/validate-jsonld.mjs
+const OFFSET = Number(process.env.OFFSET || 0);
+const LIMIT = Number(process.env.LIMIT || 0);
+const ROUTES = LIMIT > 0 ? ALL_ROUTES.slice(OFFSET, OFFSET + LIMIT) : ALL_ROUTES.slice(OFFSET);
+console.log(`[jsonld] auditando ${ROUTES.length}/${ALL_ROUTES.length} rotas (offset=${OFFSET})`);
 const REQUIRED = ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service"];
 
 
@@ -157,7 +164,9 @@ async function main() {
     base = "http://localhost:4173";
   }
 
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(
+    process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {},
+  );
   const allErrors = [];
   try {
     for (const { path, required } of ROUTES) {
