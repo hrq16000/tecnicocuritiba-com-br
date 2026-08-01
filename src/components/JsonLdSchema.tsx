@@ -86,6 +86,10 @@ const organizationSchema = {
   "@id": `${SITE}/#organization`,
   "name": "Técnico em Curitiba",
   "alternateName": "Técnico de Informática Curitiba",
+  "legalName": "Técnico em Curitiba — Assistência Técnica em Informática",
+  "taxID": "41.723.708/0001-58",
+  "vatID": "41723708000158",
+
   "url": SITE,
   "logo": `${SITE}/logo.png`,
   "contactPoint": napContactPoint(),
