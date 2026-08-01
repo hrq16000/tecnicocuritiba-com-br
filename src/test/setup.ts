@@ -3,7 +3,7 @@ import { beforeEach } from "vitest";
 const isBrowserEnv = typeof window !== "undefined";
 
 if (isBrowserEnv) {
-  await import("@testing-library/jest-dom");
+  await import("@testing-library/jest-dom" as string);
 
   Object.defineProperty(window, "matchMedia", {
     writable: true,
