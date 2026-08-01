@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { abs } from "./utils/baseUrl";
 
 // SEO gate — cada URL indexável deve ter exatamente 1 <h1>.
 // Amostra 50 URLs do sitemap para manter o CI rápido.
@@ -43,7 +44,7 @@ test.describe("SEO: cada URL indexável tem exatamente 1 <h1>", () => {
     const failures: Array<{ url: string; count: number }> = [];
 
     for (const url of sampled) {
-      const res = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => null);
+      const res = await page.goto(abs(url), { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => null);
       if (!res || !res.ok()) {
         failures.push({ url, count: -1 });
         continue;

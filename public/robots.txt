@@ -88,6 +88,11 @@ Disallow: /admin/
 # Sitemap index (preferido) + sitemaps individuais
 Sitemap: https://tecnicocuritiba.com.br/sitemap-index.xml
 Sitemap: https://tecnicocuritiba.com.br/sitemap.xml
+Sitemap: https://tecnicocuritiba.com.br/sitemap-main.xml
+Sitemap: https://tecnicocuritiba.com.br/sitemap-servicos.xml
+Sitemap: https://tecnicocuritiba.com.br/sitemap-problemas.xml
+Sitemap: https://tecnicocuritiba.com.br/sitemap-bairros.xml
+Sitemap: https://tecnicocuritiba.com.br/sitemap-marcas.xml
 Sitemap: https://tecnicocuritiba.com.br/sitemap-news.xml
 
 Host: https://tecnicocuritiba.com.br

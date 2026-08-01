@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { abs } from "./utils/baseUrl";
 
 // SEO gate — nenhuma página indexável pode ter <title> duplicado com outra.
 // Amostra 50 URLs. Em falha, salva CSV para inspeção.
@@ -41,7 +42,7 @@ test.describe("SEO: <title> único por URL", () => {
     const rows: Array<{ url: string; title: string }> = [];
 
     for (const url of sampled) {
-      const res = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => null);
+      const res = await page.goto(abs(url), { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => null);
       if (!res || !res.ok()) continue;
       // Aguarda react-helmet-async escrever o <title>.
       await page.waitForFunction(() => !!document.title && document.title !== "", { timeout: 5000 }).catch(() => null);

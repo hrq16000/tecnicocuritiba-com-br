@@ -23,6 +23,8 @@ jobs:
         run: npm run lint --silent || echo "::warning::lint reported issues"
       - name: Typecheck (tsc)
         run: npx tsc -p tsconfig.app.json --noEmit
+      - name: Unit tests (vitest — inclui guard do sitemap-problemas)
+        run: npm run test:unit
       - name: CTA funnel gate
         run: npm run check:cta-funnel
       - name: Build
