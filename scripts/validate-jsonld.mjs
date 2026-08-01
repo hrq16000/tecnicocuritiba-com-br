@@ -164,7 +164,9 @@ async function main() {
     base = "http://localhost:4173";
   }
 
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(
+    process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {},
+  );
   const allErrors = [];
   try {
     for (const { path, required } of ROUTES) {
