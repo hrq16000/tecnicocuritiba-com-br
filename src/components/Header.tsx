@@ -74,13 +74,8 @@ const menuGroups: Array<{
 
 export const Header = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-  const [variant, setVariant] = useState<"whatsapp" | "agendar">("whatsapp");
-  const [schedulingOpen, setSchedulingOpen] = useState(false);
   const menuRef = useRef<HTMLDetailsElement>(null);
 
-  useEffect(() => {
-    setVariant(pickHeaderVariant());
-  }, []);
 
   // Fecha o menu ao clicar fora, tocar fora, ou pressionar Escape.
   useEffect(() => {
