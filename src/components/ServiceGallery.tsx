@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { IMAGES } from "@/lib/images";
 
 export interface GalleryItem {
@@ -17,8 +18,29 @@ interface Props {
  * Galeria acessível (WebP via Unsplash `?fm=webp`), com legendas e alt semântico.
  * `loading="lazy"` + `decoding="async"` para preservar LCP/INP.
  */
-export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-background" }: Props) => (
-  <section className={`py-10 ${bgClass}`} aria-labelledby="service-gallery-title">
+export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-background" }: Props) => {
+  const ref = useRef<HTMLElement | null>(null);
+
+  // Guard de desenvolvimento: a galeria precisa ficar ANTES do <footer> no DOM.
+  // Se alguém renderizar o bloco como sibling fora do layout, avisa no console.
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    const el = ref.current;
+    const footer = document.querySelector("footer");
+    if (!el || !footer) return;
+    const footerFollows = !!(el.compareDocumentPosition(footer) & Node.DOCUMENT_POSITION_FOLLOWING);
+    if (!footerFollows) {
+      // eslint-disable-next-line no-console
+      console.error(
+        "[ServiceGallery] renderizada APÓS o <footer> — mova o bloco para dentro do layout da página.",
+        { title, route: window.location.pathname },
+      );
+    }
+  }, [title]);
+
+  return (
+  <section
+    ref={ref} className={`py-10 ${bgClass}`} aria-labelledby="service-gallery-title">
     <div className="container mx-auto px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8">
@@ -55,4 +77,5 @@ export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-backgroun
       </div>
     </div>
   </section>
-);
+  );
+};
