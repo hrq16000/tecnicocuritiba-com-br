@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { RealImageSection } from "@/components/RealImageSection";
 import { Link } from "react-router-dom";
 import { Power, CheckCircle, AlertCircle, MessageCircle, ArrowRight, Wrench, Shield } from "lucide-react";
@@ -39,6 +40,19 @@ const ComputadorNaoLiga = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Diagnóstico de Computador que Não Liga"
+        description="Diagnóstico de Computador que Não Liga em Curitiba e região metropolitana. Diagnóstico profissional, orçamento aprovado antes do reparo e garantia de 90 dias."
+        path="/servicos/computador-nao-liga"
+        priceFrom={99.99}
+        category="Conserto de Computadores"
+        faqs={[
+          { question: "Computador não liga: o que testar antes de chamar o técnico?", answer: "Teste outra tomada, confira o cabo de força e o botão da fonte, e observe se há LED aceso ou ventoinha girando — essas informações agilizam o diagnóstico." },
+          { question: "Notebook não liga mesmo na tomada, é a bateria?", answer: "Pode ser a bateria, a fonte carregadora ou o circuito de carga da placa. O diagnóstico define qual, sem troca de peça no escuro." },
+          { question: "O diagnóstico é cobrado?", answer: "A visita parte de R$ 99,99 e o orçamento do reparo é apresentado antes de qualquer serviço." },
+          { question: "Há garantia no reparo?", answer: "Sim: 90 dias de garantia nos serviços de hardware executados." },
+        ]}
+      />
       <PageSEO title="Computador Não Liga? Causas e Soluções | Técnico em Curitiba" description="Computador ou notebook não liga? Veja as causas mais comuns e quando procurar um técnico. Diagnóstico profissional em Curitiba e região. Atendimento a domicílio." path="/servicos/computador-nao-liga"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { RealImageSection } from "@/components/RealImageSection";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import { Link } from "react-router-dom";
@@ -41,6 +42,19 @@ const ManutencaoTV = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Manutenção e Conserto de TV LED, LCD e Smart TV"
+        description="Manutenção e Conserto de TV LED, LCD e Smart TV em Curitiba e região metropolitana. Diagnóstico profissional, orçamento aprovado antes do reparo e garantia de 90 dias."
+        path="/servicos/manutencao-t-v"
+        priceFrom={99.99}
+        category="Conserto de TV"
+        faqs={[
+          { question: "TV liga mas fica com tela preta, tem conserto?", answer: "Na maioria dos casos sim — geralmente é backlight ou placa de fonte, com reparo em bancada." },
+          { question: "Vocês fazem coleta da TV?", answer: "Sim. Coletamos, diagnosticamos em bancada e devolvemos após o reparo aprovado." },
+          { question: "Troca de tela compensa?", answer: "Em painéis grandes raramente compensa; apresentamos o comparativo entre reparo e substituição antes de aprovar." },
+          { question: "Qual a garantia?", answer: "90 dias sobre o serviço executado." },
+        ]}
+      />
       <PageSEO title="Manutenção e Conserto de TV em Curitiba | LED, LCD, Smart TV | Técnico em Curitiba" description="Conserto de TV LED, LCD e Smart TV em Curitiba. Diagnóstico em bancada, reparo de placa, fonte e backlight. Coleta e entrega. Técnico com experiência." path="/servicos/manutencao-t-v"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },

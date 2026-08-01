@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { RealImageSection } from "@/components/RealImageSection";
 import { Link } from "react-router-dom";
 import { Gauge, CheckCircle, AlertCircle, MessageCircle, ArrowRight, Clock, Shield, Wrench } from "lucide-react";
@@ -41,6 +42,19 @@ const ComputadorLento = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Otimização de Computador Lento"
+        description="Otimização de Computador Lento em Curitiba e região metropolitana. Diagnóstico profissional, orçamento aprovado antes do reparo e garantia de 90 dias."
+        path="/servicos/computador-lento"
+        priceFrom={99.99}
+        category="Manutenção de Computadores"
+        faqs={[
+          { question: "Por que meu computador ficou lento?", answer: "As causas mais comuns são HD mecânico saturado, pouca memória RAM, excesso de programas na inicialização, vírus e superaquecimento por sujeira interna." },
+          { question: "Trocar por SSD resolve?", answer: "Na maioria dos casos sim: a troca por SSD é o upgrade com maior ganho percebido, reduzindo o tempo de inicialização de minutos para segundos." },
+          { question: "Preciso formatar para o PC voltar a ser rápido?", answer: "Nem sempre. Fazemos diagnóstico antes e só indicamos formatação quando limpeza, upgrade e remoção de malware não resolvem." },
+          { question: "Quanto custa o atendimento?", answer: "A visita técnica em Curitiba parte de R$ 99,99, com orçamento aprovado antes de qualquer reparo." },
+        ]}
+      />
       <PageSEO title="Computador Lento? Causas e Soluções Profissionais | Técnico em Curitiba" description="Seu computador está lento? Conheça as 8 causas mais comuns e as soluções profissionais. Upgrade SSD, limpeza de vírus, formatação. Atendimento em Curitiba e região." path="/servicos/computador-lento"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },

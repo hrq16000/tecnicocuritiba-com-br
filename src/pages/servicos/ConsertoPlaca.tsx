@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { RealImageSection } from "@/components/RealImageSection";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import { Link } from "react-router-dom";
@@ -40,6 +41,19 @@ const ConsertoPlaca = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Conserto de Placa Eletrônica e Placa-Mãe"
+        description="Conserto de Placa Eletrônica e Placa-Mãe em Curitiba e região metropolitana. Diagnóstico profissional, orçamento aprovado antes do reparo e garantia de 90 dias."
+        path="/servicos/conserto-placa"
+        priceFrom={99.99}
+        category="Reparo Eletrônico em Nível de Componente"
+        faqs={[
+          { question: "Vale a pena consertar a placa-mãe?", answer: "Vale quando o custo do reparo fica bem abaixo da substituição do equipamento. Informamos a comparação antes de aprovar." },
+          { question: "Quanto tempo leva o reparo em bancada?", answer: "Entre 3 e 7 dias úteis, dependendo da disponibilidade dos componentes." },
+          { question: "Tem coleta e entrega?", answer: "Sim, com coleta agendada em Curitiba e região metropolitana." },
+          { question: "Qual a garantia do reparo de placa?", answer: "90 dias sobre o defeito reparado." },
+        ]}
+      />
       <PageSEO title="Conserto de Placa Eletrônica em Curitiba | Placa-mãe, GPU, Fonte | Técnico em Curitiba" description="Conserto de placa-mãe, placa de vídeo, placa-fonte e eletrônica em geral. Reparo em nível de componente em Curitiba. Diagnóstico profissional com coleta e entrega." path="/servicos/conserto-placa"  breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
