@@ -5,6 +5,8 @@ import { execSync } from "node:child_process";
 import { componentTagger } from "lovable-tagger";
 // @ts-expect-error - JS plugin without types
 import { prerenderCitiesPlugin } from "./scripts/prerender-cities.mjs";
+// @ts-expect-error - JS plugin without types
+import { prerenderPilotPlugin } from "./scripts/prerender-pilot.mjs";
 
 const resolveAppVersion = () => {
   if (process.env.APP_VERSION) return process.env.APP_VERSION;
@@ -47,6 +49,7 @@ export default defineConfig(({ mode }) => ({
     googleSiteVerificationPlugin(),
     mode === "development" && componentTagger(),
     prerenderCitiesPlugin(),
+    prerenderPilotPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {

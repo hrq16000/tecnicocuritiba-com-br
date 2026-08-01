@@ -108,7 +108,6 @@ const NAP = {
   city: "Curitiba",
   region: "PR",
   country: "BR",
-  postal: "80000-000",
   // Contato exclusivamente via WhatsApp — não expor número na UI.
   phone: "+5541997452053",
   url: "https://tecnicocuritiba.com.br",
@@ -136,7 +135,6 @@ const localBusinessSchema = {
     streetAddress: NAP.street,
     addressLocality: NAP.city,
     addressRegion: NAP.region,
-    postalCode: NAP.postal,
     addressCountry: NAP.country,
   },
   geo: {

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { SchemaDedup } from "@/components/SchemaDedup";
 import { captureUtmsFromUrl } from "@/lib/utmCapture";
 import { RouteLoader } from "@/components/RouteLoader";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
@@ -11,7 +12,6 @@ const Servicos = lazy(() => import("./pages/Servicos"));
 const AtendimentoDomicilio = lazy(() => import("./pages/AtendimentoDomicilio"));
 const AtendimentoRemoto = lazy(() => import("./pages/AtendimentoRemoto"));
 const SuporteEmpresas = lazy(() => import("./pages/SuporteEmpresas"));
-const EmpresaTICuritiba = lazy(() => import("./pages/EmpresaTICuritiba"));
 const ManutencaoNotebookPCCuritiba = lazy(() => import("./pages/ManutencaoNotebookPCCuritiba"));
 const PrecosEPoliticas = lazy(() => import("./pages/PrecosEPoliticas"));
 const TecnicoInformaticaCuritiba = lazy(() => import("./pages/TecnicoInformaticaCuritiba"));
@@ -461,6 +461,7 @@ const App = () => (
       <AppErrorBoundary>
       <BrowserRouter>
         <ScrollToTop />
+        <SchemaDedup />
         <AppInit />
         <Suspense fallback={<RouteLoader />}>
           <Routes>
@@ -478,7 +479,8 @@ const App = () => (
             <Route path="/arrumar-pc/servico/:servico/:cidade" element={<ArrumarPCServicoCidade />} />
             <Route path="/arrumar-pc/:cidade" element={<ArrumarPCCity />} />
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
-            <Route path="/empresa-de-ti-curitiba" element={<EmpresaTICuritiba />} />
+            {/* Consolidação B2B: página-mãe única em /suporte-empresas (elimina canibalização). */}
+            <Route path="/empresa-de-ti-curitiba" element={<Navigate to="/suporte-empresas" replace />} />
             <Route path="/manutencao-notebook-pc-curitiba" element={<ManutencaoNotebookPCCuritiba />} />
             <Route path="/precos-e-politicas" element={<PrecosEPoliticas />} />
             <Route path="/valores" element={<PrecosEPoliticas />} />
