@@ -282,7 +282,7 @@ export const Footer = () => {
             <Clock className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
             <div>
               <div className="font-semibold text-white/90">Horário</div>
-              <div>{NAP.hours}</div>
+              <div>{NAP.hoursLabel}</div>
             </div>
           </div>
         </address>
