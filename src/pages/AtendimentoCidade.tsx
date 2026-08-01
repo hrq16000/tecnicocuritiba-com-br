@@ -121,6 +121,7 @@ export default function AtendimentoCidade() {
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
         <Breadcrumbs
+          emitSchema={false}
           items={[
             { label: "Início", href: "/" },
             { label: "Atendimento" },

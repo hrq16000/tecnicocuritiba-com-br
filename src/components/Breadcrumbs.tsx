@@ -9,10 +9,14 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
+  /** Emite o JSON-LD BreadcrumbList. Use false quando a página já injeta o seu. */
+  emitSchema?: boolean;
 }
 
-const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
-  const allItems = [{ label: "Início", href: "/" }, ...items];
+const Breadcrumbs = ({ items, emitSchema = true }: BreadcrumbsProps) => {
+  // Evita "Início" duplicado quando a página já o passa na lista.
+  const hasHome = items[0]?.href === "/" || items[0]?.label === "Início";
+  const allItems = hasHome ? items : [{ label: "Início", href: "/" }, ...items];
 
   const schemaData = {
     "@context": "https://schema.org",
@@ -27,11 +31,11 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
 
   return (
     <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      {emitSchema ? (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
+        </Helmet>
+      ) : null}
       <nav
         aria-label="Breadcrumb"
         className="bg-muted/50 border-b border-border"

@@ -141,6 +141,7 @@ export default function GestorResponsavel() {
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
         <Breadcrumbs
+          emitSchema={false}
           items={[
             { label: "Início", href: "/" },
             { label: "Sobre", href: "/sobre" },

@@ -25,7 +25,7 @@ export default function AtendimentoHub() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
-        <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: "Atendimento" }]} />
+        <Breadcrumbs emitSchema={false} items={[{ label: "Início", href: "/" }, { label: "Atendimento" }]} />
         <section className="max-w-4xl mx-auto py-8 md:py-12">
           <h1 className="text-3xl md:text-5xl font-bold mb-3">Atendimento técnico na Grande Curitiba</h1>
           <p className="text-lg text-muted-foreground mb-8">
