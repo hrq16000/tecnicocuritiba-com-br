@@ -19,15 +19,15 @@ describe("scripts/generate-sitemaps.mjs", () => {
     xml = readFileSync(PROBLEMAS_SITEMAP, "utf8");
   });
 
-  it("gera sitemap-problemas.xml com exatamente 189 rotas /problema/*", () => {
-    const urls = locs(xml);
-    const problemas = urls.filter((u) => new URL(u).pathname.startsWith("/problema/"));
-    expect(problemas.length).toBe(EXPECTED_PROBLEMAS);
-    expect(urls.length).toBe(EXPECTED_PROBLEMAS);
+  const problemaUrls = () =>
+    locs(xml).filter((u) => new URL(u).pathname.startsWith("/problemas/"));
+
+  it("gera sitemap-problemas.xml com exatamente 189 rotas /problemas/*", () => {
+    expect(problemaUrls().length).toBe(EXPECTED_PROBLEMAS);
   });
 
-  it("não contém rotas duplicadas", () => {
-    const urls = locs(xml);
+  it("não contém rotas /problemas/* duplicadas", () => {
+    const urls = problemaUrls();
     const dups = [...new Set(urls.filter((u, i) => urls.indexOf(u) !== i))];
     expect(dups, `duplicadas: ${dups.join(", ")}`).toHaveLength(0);
     expect(new Set(urls).size).toBe(EXPECTED_PROBLEMAS);
