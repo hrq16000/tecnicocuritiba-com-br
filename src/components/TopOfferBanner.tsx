@@ -58,7 +58,8 @@ export const TopOfferBanner = () => {
               onClick={openFunnel}
               data-wa-medium="top_banner"
               data-cta-location="top_banner"
-              className="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 font-extrabold text-[hsl(var(--whatsapp))] shadow-sm transition-transform hover:scale-105"
+              aria-label="Chamar o técnico agora no WhatsApp — serviço rápido por R$ 99,99"
+              className="inline-flex min-h-11 flex-shrink-0 items-center gap-1 rounded-full bg-white px-3 py-1 font-extrabold text-[hsl(var(--whatsapp))] shadow-sm transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-accent"
             >
               Chamar agora <span aria-hidden="true">→</span>
             </a>

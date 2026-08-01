@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { NAP } from "@/lib/nap";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
@@ -75,7 +76,7 @@ export default function GestorResponsavel() {
     description: `Técnico de informática atuando em Curitiba e região metropolitana desde ${DESDE}, responsável pelo padrão de diagnóstico, orçamento e garantia dos atendimentos.`,
     url: URL,
     image: `${SITE}/og-image.jpg`,
-    telephone: "+55-41-99745-2053",
+    telephone: NAP.phone,
     knowsLanguage: "pt-BR",
     knowsAbout: [
       "Manutenção de computadores",
@@ -103,7 +104,7 @@ export default function GestorResponsavel() {
     name: "Técnico em Curitiba - Suporte em Informática",
     url: SITE,
     logo: `${SITE}/logo.png`,
-    telephone: "+55-41-99745-2053",
+    telephone: NAP.phone,
     foundingDate: DESDE,
     founder: { "@id": `${URL}#gestor` },
     employee: { "@id": `${URL}#gestor` },

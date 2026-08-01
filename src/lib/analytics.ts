@@ -36,13 +36,18 @@ export const gtagReportConversion = (url?: string) => {
 const getUtmContext = () => {
   if (typeof window === 'undefined') return {};
   const p = new URLSearchParams(window.location.search);
+  // Fallback para a sessão: o gclid/utm chega na landing e precisa sobreviver
+  // à navegação interna até o clique no CTA.
+  let stored: Record<string, string> = {};
+  try { stored = JSON.parse(sessionStorage.getItem('utm_payload_v1') || '{}'); } catch { /* noop */ }
+  const pick = (k: string) => p.get(k) || stored[k] || undefined;
   return {
-    utm_source: p.get('utm_source') || undefined,
-    utm_medium: p.get('utm_medium') || undefined,
-    utm_campaign: p.get('utm_campaign') || undefined,
-    utm_term: p.get('utm_term') || undefined,
-    utm_content: p.get('utm_content') || undefined,
-    gclid: p.get('gclid') || undefined,
+    utm_source: pick('utm_source'),
+    utm_medium: pick('utm_medium'),
+    utm_campaign: pick('utm_campaign'),
+    utm_term: pick('utm_term'),
+    utm_content: pick('utm_content'),
+    gclid: pick('gclid'),
   };
 };
 
@@ -147,6 +152,8 @@ const recordGeoMetric = (
         category: ctx.category,
         symptom: ctx.symptom_slug,
         modalidade: ctx.modalidade,
+        utmSource: withUnknown(getUtmContext().utm_source),
+        gclid: withUnknown(getUtmContext().gclid),
       });
     }).catch(() => { /* noop */ });
   } catch { /* noop */ }
@@ -212,7 +219,13 @@ export const trackCTAClick = (
         type: "user",
         level: "info",
         message: `cta_${ctaType}:${safeLocation}`,
-        data: { cta_type: ctaType, cta_location: safeLocation, ...normalizeCtx(context) },
+        data: {
+          cta_type: ctaType,
+          cta_location: safeLocation,
+          ...normalizeCtx(context),
+          ...getUtmContext(),
+          page_url: typeof window !== 'undefined' ? window.location.href : 'ssr',
+        },
       });
     }).catch(() => { /* noop */ });
   } catch { /* noop */ }

@@ -15,7 +15,31 @@ export interface CtaMetricEvent {
   category: string;
   symptom: string;
   modalidade: string;
+  /** Origem da campanha no momento do clique (utm_source ou "unknown"). */
+  utmSource?: string;
+  /** Google Ads click id quando presente na sessão. */
+  gclid?: string;
 }
+
+/** Janelas de análise suportadas pelo painel. */
+export type MetricsWindow = "24h" | "7d" | "30d" | "all";
+
+const WINDOW_MS: Record<MetricsWindow, number> = {
+  "24h": 24 * 60 * 60 * 1000,
+  "7d": 7 * 24 * 60 * 60 * 1000,
+  "30d": 30 * 24 * 60 * 60 * 1000,
+  all: Number.POSITIVE_INFINITY,
+};
+
+export const filterByWindow = (
+  events: CtaMetricEvent[],
+  window: MetricsWindow,
+  now = Date.now(),
+): CtaMetricEvent[] => {
+  const span = WINDOW_MS[window];
+  if (!Number.isFinite(span)) return events;
+  return events.filter((e) => now - e.t <= span);
+};
 
 const KEY = "cta_metrics_v1";
 const MAX_EVENTS = 800;
@@ -91,4 +115,71 @@ export const aggregateByGeo = (events: CtaMetricEvent[] = read()): GeoAggregate[
     map.set(key, cur);
   }
   return [...map.values()].sort((a, b) => b.total - a.total);
+};
+
+const csvCell = (v: unknown): string => {
+  const s = String(v ?? "");
+  // Neutraliza fórmulas (CSV injection) e escapa aspas/quebras.
+  const safe = /^[=+\-@]/.test(s) ? `'${s}` : s;
+  return `"${safe.replace(/"/g, '""')}"`;
+};
+
+/** CSV agregado por cidade/bairro para a janela escolhida. */
+export const buildGeoCsv = (window: MetricsWindow = "30d", events: CtaMetricEvent[] = read()): string => {
+  const scoped = filterByWindow(events, window);
+  const rows = aggregateByGeo(scoped);
+  const header = ["janela", "cidade", "bairro", "whatsapp", "ligacoes", "total", "ultimo_clique", "rotas"];
+  const lines = [header.map(csvCell).join(",")];
+  for (const r of rows) {
+    lines.push(
+      [
+        window,
+        r.cidade,
+        r.bairro,
+        r.whatsapp,
+        r.phone,
+        r.total,
+        r.lastAt ? new Date(r.lastAt).toISOString() : "",
+        r.routes.join(" | "),
+      ]
+        .map(csvCell)
+        .join(","),
+    );
+  }
+  return `\ufeff${lines.join("\n")}\n`;
+};
+
+/** CSV bruto (um evento por linha) — útil para cruzar com o GA4. */
+export const buildEventsCsv = (window: MetricsWindow = "30d", events: CtaMetricEvent[] = read()): string => {
+  const scoped = filterByWindow(events, window);
+  const header = [
+    "data", "tipo", "origem_botao", "rota", "cidade", "bairro",
+    "servico", "categoria", "sintoma", "modalidade", "utm_source", "gclid",
+  ];
+  const lines = [header.map(csvCell).join(",")];
+  for (const e of scoped) {
+    lines.push(
+      [
+        new Date(e.t).toISOString(), e.kind, e.location, e.route, e.cidade, e.bairro,
+        e.servico, e.category, e.symptom, e.modalidade, e.utmSource || "unknown", e.gclid || "unknown",
+      ]
+        .map(csvCell)
+        .join(","),
+    );
+  }
+  return `\ufeff${lines.join("\n")}\n`;
+};
+
+/** Dispara o download de um CSV no browser. */
+export const downloadCsv = (filename: string, csv: string) => {
+  if (typeof window === "undefined") return;
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
