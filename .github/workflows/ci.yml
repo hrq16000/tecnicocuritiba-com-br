@@ -33,6 +33,8 @@ jobs:
         run: node scripts/check-sitemap-problemas.mjs
       - name: /problemas/* internal-link guard (whitelist canônica)
         run: node scripts/check-problemas-internal-links.mjs
+      - name: PC assembly service gate (capacidades, política de peças, garantia, checklist)
+        run: node scripts/check-pc-assembly-service.mjs
       - name: Brand consistency (og:site_name / Organization.name / LocalBusiness.name)
         run: node scripts/check-brand-consistency.mjs
       - name: JSON-LD validation

@@ -31,7 +31,7 @@ export const FastHeroSection = () => {
 
       <div className="container relative z-10 mx-auto">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="order-2 text-center lg:order-1 lg:text-left">
+          <div className="order-1 text-center lg:text-left">
             {/* Prova de autoridade mensurável (substitui o "+20 anos" abstrato) */}
             <div className="mb-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-full border border-white/15 bg-white/[0.08] px-4 py-2 backdrop-blur-md lg:justify-start">
               <span className="text-sm font-semibold tracking-wide text-yellow-300" aria-hidden="true">★ 4.9/5</span>
@@ -103,7 +103,7 @@ export const FastHeroSection = () => {
             </p>
           </div>
 
-          <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
+          <div className="order-2 flex justify-center lg:justify-end">
             <div className="relative">
               <img
                 alt="Técnico de informática profissional realizando conserto de computador em Curitiba"
