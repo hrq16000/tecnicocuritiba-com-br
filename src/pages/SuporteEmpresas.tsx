@@ -4,6 +4,11 @@ import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
 import BusinessHero from "@/components/b2b/BusinessHero";
 import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
+import SupportModelComparison from "@/components/b2b/SupportModelComparison";
+import ThirdPartyLimits from "@/components/b2b/ThirdPartyLimits";
+import BusinessInlineCTA from "@/components/b2b/BusinessInlineCTA";
+import BusinessContinuityPillars from "@/components/b2b/BusinessContinuityPillars";
 
 import { BenefitsGrid } from "@/components/BenefitsGrid";
 import { TrustSection } from "@/components/TrustSection";
@@ -16,8 +21,7 @@ import { TriagemPJ } from "@/components/b2b/TriagemPJ";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import PageSummaryBand from "@/components/PageSummaryBand";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
-import { Button } from "@/components/ui/button";
-import { MessageCircle, Headphones, Clock, Building, CreditCard, FileText, CheckCircle, Users, Shield } from "lucide-react";
+import { Headphones, Clock, Building, CreditCard, FileText, Users, Shield } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico para minha empresa.";
@@ -163,10 +167,47 @@ const SuporteEmpresas = () => {
           subtitle="Suporte técnico empresarial completo e profissional"
         />
 
+        <BusinessContinuityPillars
+          id="pilares-operacionais"
+          title="Pilares do atendimento empresarial"
+          intro="Quatro frentes que sustentam a operação no dia a dia. Cada pilar leva ao serviço correspondente — sem criar pacote, plano ou mensalidade."
+          pillars={[
+            {
+              icon: Users,
+              title: "Computadores e usuários",
+              description: "Lentidão, falhas, configurações, estações de trabalho e suporte ao usuário que depende do equipamento para produzir.",
+              to: "/servicos/manutencao-de-computador",
+              linkLabel: "Manutenção de computador",
+            },
+            {
+              icon: Building,
+              title: "Redes e conectividade",
+              description: "Wi-Fi, comunicação entre setores, impressoras em rede, compartilhamento de arquivos e estabilidade da conexão local.",
+              to: "/servicos/redes-wifi",
+              linkLabel: "Redes e Wi-Fi",
+            },
+            {
+              icon: Shield,
+              title: "Prevenção e continuidade",
+              description: "Manutenção preventiva, backup, avaliação de riscos, organização do ambiente e recomendações antes da parada acontecer.",
+              to: "/servicos/backup-recuperacao",
+              linkLabel: "Backup e recuperação",
+            },
+            {
+              icon: Headphones,
+              title: "Atendimento remoto e presencial",
+              description: "Triagem da demanda, definição da modalidade compatível e limites do que pode ser resolvido sem deslocamento.",
+              to: "/atendimento-remoto",
+              linkLabel: "Atendimento remoto",
+            },
+          ]}
+        />
+
         <PageSummaryBand
           className="container mx-auto px-4"
           summary="Suporte técnico empresarial em Curitiba para estações de trabalho, rede, impressão e continuidade da operação — atendimento avulso ou recorrente, com limites de escopo explícitos."
           items={[
+            { id: "pilares-operacionais", label: "Pilares do atendimento" },
             { id: "contextos-empresariais", label: "Contextos empresariais atendidos" },
             { id: "antes-do-suporte", label: "O que registrar antes do chamado" },
             { id: "avulso-ou-recorrente", label: "Avulso ou recorrente" },
@@ -175,6 +216,7 @@ const SuporteEmpresas = () => {
             { id: "faq-empresas", label: "Perguntas frequentes" },
           ]}
         />
+
 
         <TriagemPJ />
 
@@ -214,7 +256,7 @@ const SuporteEmpresas = () => {
                   <ul className="space-y-2 text-muted-foreground text-sm">
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-                      Atendimento remoto prioritário
+                      Atendimento remoto conforme escopo autorizado
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
@@ -309,69 +351,39 @@ const SuporteEmpresas = () => {
               })}
             </div>
 
-            <div className="text-center mt-10">
-              <Button variant="whatsapp" size="lg" asChild>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleCTAClick}
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Solicitar Proposta
-                </a>
-              </Button>
-            </div>
           </div>
         </section>
 
         {/* Contextos empresariais atendidos */}
-        <section className="py-8 md:py-10 bg-background" id="contextos-empresariais" style={{scrollMarginTop:"6rem"}}  aria-labelledby="contextos-titulo">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <h2 id="contextos-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
-              Contextos empresariais que podem precisar de suporte
-            </h2>
-            <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
-              Atendemos empresas de diferentes segmentos com suporte de informática generalista. Abaixo estão contextos
-              operacionais comuns — e não promessas de especialização setorial.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-muted/30 rounded-xl p-6 border border-primary/5">
-                <h3 className="font-semibold text-foreground mb-2 text-lg">Escritórios que trabalham com arquivos sensíveis</h3>
-                <p className="text-muted-foreground text-sm">
-                  Estações de trabalho, impressão e digitalização, organização de arquivos, backup, múltiplos monitores,
-                  conectividade e atendimento remoto — com atenção à continuidade durante períodos de prazo importante.
-                  Não prestamos suporte especializado a sistemas judiciais, certificados digitais complexos ou assinatura
-                  eletrônica avançada, nem prometemos conformidade regulatória.
-                </p>
-              </div>
-              <div className="bg-muted/30 rounded-xl p-6 border border-primary/5">
-                <h3 className="font-semibold text-foreground mb-2 text-lg">Recepções e postos de atendimento ao público</h3>
-                <p className="text-muted-foreground text-sm">
-                  Computador da recepção, impressora em rede, Wi-Fi, arquivos, câmera e áudio para atendimento, acesso a
-                  sistemas de terceiros e continuidade do posto de trabalho. O suporte de informática não inclui
-                  manutenção de equipamentos médicos, laboratoriais ou outros dispositivos especializados.
-                </p>
-              </div>
-              <div className="bg-muted/30 rounded-xl p-6 border border-primary/5">
-                <h3 className="font-semibold text-foreground mb-2 text-lg">Operações com períodos de fechamento</h3>
-                <p className="text-muted-foreground text-sm">
-                  Aumento temporário de uso, vários programas abertos ao mesmo tempo, impressoras, armazenamento, backup,
-                  estações e acesso remoto. Nesses casos o planejamento preventivo antecede o período crítico. Não
-                  prometemos suporte especializado a software contábil ou fiscal de terceiros.
-                </p>
-              </div>
-              <div className="bg-muted/30 rounded-xl p-6 border border-primary/5">
-                <h3 className="font-semibold text-foreground mb-2 text-lg">Profissionais que usam arquivos e programas exigentes</h3>
-                <p className="text-muted-foreground text-sm">
+        <BusinessContextGrid
+          id="contextos-empresariais"
+          title="Contextos empresariais que podem precisar de suporte"
+          intro="Atendemos empresas de diferentes segmentos com suporte de informática generalista. Abaixo estão contextos operacionais comuns — e não promessas de especialização setorial."
+          contexts={[
+            {
+              title: "Escritórios que trabalham com arquivos sensíveis",
+              body: "Estações de trabalho, impressão e digitalização, organização de arquivos, backup, múltiplos monitores, conectividade e atendimento remoto — com atenção à continuidade durante períodos de prazo importante. Não prestamos suporte especializado a sistemas judiciais, certificados digitais complexos ou assinatura eletrônica avançada, nem prometemos conformidade regulatória.",
+            },
+            {
+              title: "Recepções e postos de atendimento ao público",
+              body: "Computador da recepção, impressora em rede, Wi-Fi, arquivos, câmera e áudio para atendimento, acesso a sistemas de terceiros e continuidade do posto de trabalho. O suporte de informática não inclui manutenção de equipamentos médicos, laboratoriais ou outros dispositivos especializados.",
+            },
+            {
+              title: "Operações com períodos de fechamento",
+              body: "Aumento temporário de uso, vários programas abertos ao mesmo tempo, impressoras, armazenamento, backup, estações e acesso remoto. Nesses casos o planejamento preventivo antecede o período crítico. Não prometemos suporte especializado a software contábil ou fiscal de terceiros.",
+            },
+            {
+              title: "Profissionais que usam arquivos e programas exigentes",
+              body: (
+                <>
                   Estações de trabalho, memória, armazenamento, múltiplos monitores, refrigeração, backup e rede — além da{" "}
                   <Link to="/servicos/montagem-pc#workstations" className="text-primary underline underline-offset-4">montagem de workstation</Link>{" "}
                   a partir do levantamento de requisitos. Não citamos desempenho garantido em software específico.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+                </>
+              ),
+            },
+          ]}
+        />
 
         {/* O que registrar antes de solicitar suporte */}
         <section className="py-8 md:py-10 bg-secondary" id="antes-do-suporte" style={{scrollMarginTop:"6rem"}}  aria-labelledby="antes-titulo">
@@ -414,114 +426,84 @@ const SuporteEmpresas = () => {
         </section>
 
         {/* Atendimento avulso ou recorrente */}
-        <section className="py-8 md:py-10 bg-background" id="avulso-ou-recorrente" style={{scrollMarginTop:"6rem"}}  aria-labelledby="modelos-titulo">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <h2 id="modelos-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
-              Atendimento avulso ou recorrente
-            </h2>
-            <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
-              São dois modelos de organização do atendimento. Nenhum deles é automaticamente melhor: a escolha depende do
-              número de equipamentos, da frequência das demandas e de como a empresa prefere acompanhar o histórico.
-            </p>
+        <SupportModelComparison
+          id="avulso-ou-recorrente"
+          title="Atendimento avulso ou recorrente"
+          intro="São dois modelos de organização do atendimento. Nenhum deles é automaticamente melhor: a escolha depende do número de equipamentos, da frequência das demandas e de como a empresa prefere acompanhar o histórico."
+          avulso={{
+            title: "Atendimento avulso",
+            lead: "Indicado para problema pontual, computador específico, instalação, ajuste, falha de rede, diagnóstico, manutenção, suporte remoto ou demanda sem recorrência prevista.",
+            bullets: [
+              "Escopo definido por solicitação",
+              "Prioridade conforme agenda disponível",
+              "Valor conforme diagnóstico e autorização prévia",
+              "Peças e serviços externos cobrados à parte",
+              "Não há disponibilidade permanente",
+            ],
+          }}
+          recorrente={{
+            title: "Atendimento recorrente",
+            lead: "Faz sentido quando existem vários computadores, demandas frequentes, necessidade de manutenção preventiva, usuários que precisam de suporte periódico, rede compartilhada, backup que exige revisão e necessidade de histórico organizado.",
+            note: "O modelo recorrente depende de levantamento inicial: quantidade de equipamentos, usuários, frequência, modalidades, escopo, horários, prioridades e responsabilidades. Não trabalhamos com suporte ilimitado, franquia fixa de horas, monitoramento permanente ou tempo de resposta garantido.",
+          }}
+          rows={[
+            ["Uso", "Demanda pontual", "Necessidades frequentes"],
+            ["Escopo", "Definido por chamado", "Definido por acordo"],
+            ["Histórico", "Por atendimento", "Acompanhamento organizado"],
+            ["Preventiva", "Contratada separadamente", "Pode fazer parte do escopo"],
+            ["Prioridade", "Conforme agenda", "Conforme regra acordada"],
+            ["Valor", "Conforme serviço", "Conforme levantamento"],
+          ]}
+          decisionNote="O atendimento recorrente não significa suporte ilimitado. Frequência, prioridade, modalidades e responsabilidades precisam ser definidas no escopo contratado."
+        />
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-secondary rounded-xl p-6">
-                <h3 className="text-xl font-bold text-foreground mb-3">Atendimento avulso</h3>
-                <p className="text-muted-foreground text-sm mb-3">
-                  Indicado para problema pontual, computador específico, instalação, ajuste, falha de rede, diagnóstico,
-                  manutenção, suporte remoto ou demanda sem recorrência prevista.
-                </p>
-                <ul className="space-y-2 text-muted-foreground text-sm list-disc pl-5">
-                  <li>Escopo definido por solicitação</li>
-                  <li>Prioridade conforme agenda disponível</li>
-                  <li>Valor conforme diagnóstico e autorização prévia</li>
-                  <li>Peças e serviços externos cobrados à parte</li>
-                  <li>Não há disponibilidade permanente</li>
-                </ul>
-              </div>
-              <div className="bg-secondary rounded-xl p-6">
-                <h3 className="text-xl font-bold text-foreground mb-3">Atendimento recorrente</h3>
-                <p className="text-muted-foreground text-sm mb-3">
-                  Faz sentido quando existem vários computadores, demandas frequentes, necessidade de manutenção
-                  preventiva, usuários que precisam de suporte periódico, rede compartilhada, backup que exige revisão e
-                  necessidade de histórico organizado.
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  O modelo recorrente depende de levantamento inicial: quantidade de equipamentos, usuários, frequência,
-                  modalidades, escopo, horários, prioridades e responsabilidades. Não trabalhamos com suporte ilimitado,
-                  franquia fixa de horas, monitoramento permanente ou tempo de resposta garantido.
-                </p>
-              </div>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm border border-border rounded-xl overflow-hidden">
-                <caption className="sr-only">Comparação entre atendimento avulso e recorrente</caption>
-                <thead className="bg-muted/50">
-                  <tr>
-                    <th scope="col" className="text-left p-3 font-semibold text-foreground">Critério</th>
-                    <th scope="col" className="text-left p-3 font-semibold text-foreground">Avulso</th>
-                    <th scope="col" className="text-left p-3 font-semibold text-foreground">Recorrente</th>
-                  </tr>
-                </thead>
-                <tbody className="text-muted-foreground">
-                  {[
-                    ["Uso", "Demanda pontual", "Necessidades frequentes"],
-                    ["Escopo", "Definido por chamado", "Definido por acordo"],
-                    ["Histórico", "Por atendimento", "Acompanhamento organizado"],
-                    ["Preventiva", "Contratada separadamente", "Pode fazer parte do escopo"],
-                    ["Prioridade", "Conforme agenda", "Conforme regra acordada"],
-                    ["Valor", "Conforme serviço", "Conforme levantamento"],
-                  ].map(([c, a, r]) => (
-                    <tr key={c} className="border-t border-border">
-                      <th scope="row" className="text-left p-3 font-medium text-foreground">{c}</th>
-                      <td className="p-3">{a}</td>
-                      <td className="p-3">{r}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
+        <BusinessInlineCTA
+          title="Descrever a necessidade da empresa"
+          description="Conte o equipamento afetado, o impacto na operação e quantas pessoas estão paradas. A triagem indica a modalidade e o próximo passo antes de qualquer execução."
+          whatsappUrl={whatsappUrl}
+          ctaLabel="Descrever a necessidade da empresa"
+          ctaLocation="suporte_empresas_inline"
+          onClick={handleCTAClick}
+        />
 
         {/* Limites por contexto e sistemas de terceiros */}
-        <section className="py-8 md:py-10 bg-secondary" id="limites-terceiros" style={{scrollMarginTop:"6rem"}}  aria-labelledby="limites-titulo">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <h2 id="limites-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
-              O que depende de fornecedor, autorização ou especialização
-            </h2>
-            <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
-              Parte dos problemas relatados no dia a dia não está no computador, e sim em um sistema mantido por
-              terceiros: software empresarial, sistema contábil, prontuário, sistema judicial, ERP, CRM, certificado
-              digital, e-mail corporativo, domínio, provedor, operadora, fabricante ou o próprio administrador da empresa.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-background rounded-xl p-6">
-                <h3 className="font-semibold text-foreground mb-3">O suporte pode</h3>
-                <ul className="space-y-2 text-muted-foreground text-sm list-disc pl-5">
-                  <li>Verificar o computador e o ambiente local</li>
-                  <li>Validar conectividade e rede</li>
-                  <li>Registrar o erro e as evidências</li>
-                  <li>Auxiliar na comunicação com o fornecedor</li>
-                  <li>Executar procedimentos autorizados pela empresa</li>
-                  <li>Configurar componentes compatíveis</li>
-                </ul>
-              </div>
-              <div className="bg-background rounded-xl p-6 border border-destructive/30">
-                <h3 className="font-semibold text-foreground mb-3">O suporte não promete</h3>
-                <ul className="space-y-2 text-muted-foreground text-sm list-disc pl-5">
-                  <li>Corrigir código de sistema de terceiros</li>
-                  <li>Liberar licença ou redefinir credencial de terceiro</li>
-                  <li>Alterar política corporativa</li>
-                  <li>Garantir funcionamento de plataforma externa</li>
-                  <li>Substituir o suporte oficial do fornecedor</li>
-                  <li>Burlar restrições ou assumir responsabilidade por indisponibilidade externa</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ThirdPartyLimits
+          id="limites-terceiros"
+          title="O que depende de fornecedor, autorização ou especialização"
+          intro="Parte dos problemas relatados no dia a dia não está no computador, e sim em um sistema mantido por terceiros: software empresarial, sistema contábil, prontuário, sistema judicial, ERP, CRM, certificado digital, e-mail corporativo, domínio, provedor, operadora, fabricante ou o próprio administrador da empresa."
+          columns={[
+            {
+              title: "O suporte pode",
+              items: [
+                "Verificar o computador e o ambiente local",
+                "Validar conectividade e rede",
+                "Registrar o erro e as evidências",
+                "Auxiliar na comunicação com o fornecedor",
+                "Executar procedimentos autorizados pela empresa",
+                "Configurar componentes compatíveis",
+              ],
+            },
+            {
+              title: "O suporte não promete",
+              tone: "warning",
+              items: [
+                "Corrigir código de sistema de terceiros",
+                "Liberar licença ou redefinir credencial de terceiro",
+                "Alterar política corporativa",
+                "Garantir funcionamento de plataforma externa",
+                "Substituir o suporte oficial do fornecedor",
+                "Burlar restrições ou assumir responsabilidade por indisponibilidade externa",
+              ],
+            },
+          ]}
+          footer={
+            <>
+              Boas práticas de proteção de arquivos e acessos estão detalhadas em{" "}
+              <Link to="/seguranca-dos-dados" className="text-primary underline underline-offset-4">segurança dos dados</Link>.
+            </>
+          }
+        />
+
 
         {/* Sistemas, credenciais e acessos de terceiros */}
         <section className="py-8 md:py-10 bg-background" id="credenciais-e-acessos" style={{scrollMarginTop:"6rem"}}  aria-labelledby="credenciais-titulo">
