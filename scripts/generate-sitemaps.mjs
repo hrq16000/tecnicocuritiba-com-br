@@ -33,6 +33,9 @@ for (const m of appSrc.matchAll(/<Route\s+path="([^"]+)"\s+element=\{<Navigate/g
 }
 for (const p of redirectPaths) routes.delete(p);
 
+// Páginas com <meta name="robots" content="noindex"> não entram no sitemap.
+for (const p of ["/avaliar", "/obrigado", "/funil-indisponivel"]) routes.delete(p);
+
 // 2) Expand dynamic routes from data files.
 const brandSlugs = [...brandsSrc.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
 const problemSlugs = problemSlugsFromDir;
@@ -87,7 +90,8 @@ function buildUrlset(paths) {
   const urls = paths
     .map((p) => {
       const { changefreq, priority } = meta(p);
-      return `  <url><loc>${BASE_URL}${p}</loc><lastmod>${TODAY}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
+      // Sem <lastmod>: não temos timestamp real de alteração por página.
+      return `  <url><loc>${BASE_URL}${p}</loc><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
     })
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
