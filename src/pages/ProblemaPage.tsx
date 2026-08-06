@@ -370,6 +370,7 @@ const ProblemaPage = () => {
             <TrustStrip />
             <PageTableOfContents
               items={[
+                ...(curated?.tocItems ?? []),
                 { id: "sintomas", label: "Sintomas do problema" },
                 { id: "causas", label: "Causas reais" },
                 { id: "cenarios", label: "Cenários e prazos" },
@@ -379,6 +380,10 @@ const ProblemaPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Blocos curados do cluster de sintomas (Rodada 3R) */}
+      {curated ? <CuratedSymptomSections block={curated} /> : null}
+
 
       {/* Áreas atendidas — reforço de SEO local */}
       <section className="py-6 bg-secondary/50 border-y border-border">
