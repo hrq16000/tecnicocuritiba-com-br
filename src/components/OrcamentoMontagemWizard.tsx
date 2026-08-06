@@ -71,6 +71,8 @@ const labelOf = (list: readonly { id: string; label: string }[], id: string) =>
 export function OrcamentoMontagemWizard() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(INITIAL);
+  const [fotos, setFotos] = useState<string[]>([]);
+  const [numeroOS, setNumeroOS] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) => {
