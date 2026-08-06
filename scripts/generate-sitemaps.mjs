@@ -87,7 +87,8 @@ function buildUrlset(paths) {
   const urls = paths
     .map((p) => {
       const { changefreq, priority } = meta(p);
-      return `  <url><loc>${BASE_URL}${p}</loc><lastmod>${TODAY}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
+      // Sem <lastmod>: não temos timestamp real de alteração por página.
+      return `  <url><loc>${BASE_URL}${p}</loc><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
     })
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
