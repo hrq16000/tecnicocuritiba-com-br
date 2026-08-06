@@ -56,6 +56,18 @@ const FAQ = [
     a: "Não. O prazo exibido é uma estimativa que depende de diagnóstico, aprovação do orçamento e disponibilidade de peças. Qualquer alteração é comunicada pelo WhatsApp.",
   },
   {
+    q: "Consigo ver quando cada etapa foi atualizada?",
+    a: "Sim. Quando a OS é localizada, a página mostra a data e a hora de abertura, da última atualização e o histórico com cada mudança de etapa e de prazo registrada pelo técnico.",
+  },
+  {
+    q: "Posso compartilhar ou reabrir a consulta depois?",
+    a: "Sim. Use o botão de copiar link ou o QR code exibido na consulta: ambos abrem a página já com o número da OS preenchido, sem precisar digitar de novo no celular.",
+  },
+  {
+    q: "Perdi o link de avaliação. Como recebo de novo?",
+    a: "Na própria consulta há o botão \"Reenviar link de avaliação\", que abre o WhatsApp com o mesmo link e os mesmos parâmetros de origem usados no envio original.",
+  },
+  {
     q: "A consulta mostra dados pessoais?",
     a: "Não. A página mostra apenas etapa, prazo estimado e observações públicas do atendimento. Nome, telefone e conteúdo do equipamento não são exibidos.",
   },
