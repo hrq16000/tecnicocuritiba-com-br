@@ -163,7 +163,7 @@ const MontagemPcComoFunciona = () => {
                 Falar no WhatsApp
               </Button>
             </span>
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="border-border text-foreground hover:bg-secondary">
               <Link to="/servicos/montagem-pc#orcamento-wizard">Montar meu orçamento no site</Link>
             </Button>
           </div>
