@@ -57,6 +57,37 @@ const isValidInternalTarget = (to: string): boolean => {
   return VALID_EXTRA_ROUTES.has(to);
 };
 
+/**
+ * Taxonomia de breadcrumb: mapeia a categoria do problema para o destino
+ * canônico do serviço correspondente. Evita apontar todas as categorias
+ * para /servicos (destino genérico) e mantém a hierarquia
+ * Início > Problemas > Categoria (serviço canônico) > Problema.
+ */
+const CATEGORIA_CANONICAL: Array<[RegExp, string]> = [
+  [/notebook/i, "/servicos/conserto-notebook-curitiba"],
+  [/placa|solda|bga|chip/i, "/servicos/conserto-placa"],
+  [/\btv\b|smart ?tv|televis/i, "/servicos/conserto-tv"],
+  [/celular|smartphone|tablet/i, "/servicos/conserto-celular"],
+  [/wi-?fi|rede|roteador|internet|impressora/i, "/servicos/redes-wifi"],
+  [/v[ií]rus|malware|ransomware/i, "/servicos/remocao-virus"],
+  [/format|windows|sistema operacional|software/i, "/servicos/formatacao-computador"],
+  [/backup|recupera[çc][ãa]o|dados|hd|ssd corrompid/i, "/servicos/backup-recuperacao"],
+  [/upgrade|mem[óo]ria|ssd/i, "/servicos/upgrade-ssd-memoria"],
+  [/montagem|gamer|desktop novo/i, "/servicos/montagem-pc"],
+  [/lento|desempenho|travando/i, "/servicos/computador-lento"],
+  [/n[ãa]o liga|sem imagem|fonte/i, "/servicos/computador-nao-liga"],
+];
+
+const HUB_PROBLEMAS = "/problemas-reais-e-casos";
+
+const canonicalDestinoCategoria = (categoria: string, h1 = ""): string => {
+  const alvo = `${categoria} ${h1}`;
+  for (const [re, to] of CATEGORIA_CANONICAL) {
+    if (re.test(alvo) && isValidInternalTarget(to)) return to;
+  }
+  return "/servicos/conserto-pc-notebook";
+};
+
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -151,13 +182,16 @@ const ProblemaPage = () => {
     })),
   } : null;
 
+  const categoriaHref = data ? canonicalDestinoCategoria(data.categoria, data.h1) : "/servicos";
+
   const breadcrumbSchema = data ? {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Início", item: "https://tecnicocuritiba.com.br/" },
-      { "@type": "ListItem", position: 2, name: data.categoria, item: "https://tecnicocuritiba.com.br/servicos" },
-      { "@type": "ListItem", position: 3, name: data.h1.split("—")[0].trim(), item: `https://tecnicocuritiba.com.br/problemas/${data.slug}` },
+      { "@type": "ListItem", position: 2, name: "Problemas comuns", item: `https://tecnicocuritiba.com.br${HUB_PROBLEMAS}` },
+      { "@type": "ListItem", position: 3, name: data.categoria, item: `https://tecnicocuritiba.com.br${categoriaHref}` },
+      { "@type": "ListItem", position: 4, name: data.h1.split("—")[0].trim(), item: `https://tecnicocuritiba.com.br/problemas/${data.slug}` },
     ],
   } : null;
 
@@ -295,7 +329,14 @@ const ProblemaPage = () => {
         })}</script>
       </Helmet>
       <Header />
-      <Breadcrumbs items={[{ label: data.categoria, href: "/servicos" }, { label: data.h1.split("—")[0].trim() }]} />
+      <Breadcrumbs
+        emitSchema={false}
+        items={[
+          { label: "Problemas comuns", href: HUB_PROBLEMAS },
+          { label: data.categoria, href: categoriaHref },
+          { label: data.h1.split("—")[0].trim() },
+        ]}
+      />
 
       {/* Hero */}
       <section className="pt-10 pb-10 hero-gradient">
