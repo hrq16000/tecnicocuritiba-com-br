@@ -11,6 +11,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import TrustStrip from "@/components/TrustStrip";
+import PageTableOfContents from "@/components/PageTableOfContents";
+
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -119,7 +122,23 @@ const ConsertoNotebookCuritiba = () => {
           </div>
         </div>
       </section>
+      {/* Padrão visual 3P (serviços): confiança + sumário logo abaixo do hero */}
+      <section className="py-6 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto space-y-4">
+            <TrustStrip />
+            <PageTableOfContents
+              items={[
+                { id: "orcamento", label: "Calculadora de orçamento" },
+                { id: "reparos", label: "Reparos que fazemos" },
+                { id: "problemas-comuns", label: "Sintomas mais atendidos" },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
       <RealImageSection imageKey="notebookReparo" caption="Reparo profissional de notebooks em Curitiba" />
+
 
       <section className="py-6 bg-accent/5 border-y border-accent/10">
         <div className="container mx-auto">
@@ -130,14 +149,14 @@ const ConsertoNotebookCuritiba = () => {
       </section>
 
       {/* Calculadora de orçamento — acima da dobra */}
-      <section className="py-10 bg-background">
+      <section id="orcamento" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <OrcamentoNotebookCalculator />
         </div>
       </section>
 
       {/* Reparos que fazemos */}
-      <section className="py-16 bg-background">
+      <section id="reparos" className="py-16 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-8 reveal-text">
             Reparos de Notebook que Fazemos em Curitiba
@@ -171,7 +190,7 @@ const ConsertoNotebookCuritiba = () => {
       </section>
 
       {/* Problemas comuns */}
-      <section className="py-10 bg-secondary">
+      <section id="problemas-comuns" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Problemas de Notebook que Mais Atendemos
