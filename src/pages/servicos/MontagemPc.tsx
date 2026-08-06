@@ -254,7 +254,13 @@ const MontagemPc = () => {
               <a
                 href="/checklist-montagem-pc.pdf"
                 download
-                onClick={() => trackCTAClick("download", "checklist_montagem_pc")}
+                onClick={() =>
+                  window.gtag?.("event", "checklist_download", {
+                    event_category: "engagement",
+                    event_label: "checklist_montagem_pc",
+                    page_path: "/servicos/montagem-pc",
+                  })
+                }
               >
                 <FileDown className="mr-2 h-5 w-5" />
                 Baixar checklist final em PDF
