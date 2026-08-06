@@ -252,6 +252,8 @@ const BackupRecuperacao = () => {
               { q: "Quanto tempo demora a recuperação?", a: "Recuperação lógica leva de 2 a 24 horas. Casos mais complexos podem levar alguns dias. Avaliamos cada caso." },
               { q: "Vocês garantem a recuperação?", a: "Não cobramos se não conseguirmos recuperar os dados. Você só paga pelo sucesso." },
               { q: "Como funciona o backup automático?", a: "Configuramos sincronização automática com serviços de nuvem ou HD externo. Seus arquivos são salvos sem você precisar fazer nada." },
+              { q: "O técnico precisa conhecer minha senha?", a: "Somente o acesso estritamente necessário é solicitado, sempre com autorização e explicação do procedimento. Senhas, códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem." },
+              { q: "Quem deve resolver problemas em sistemas de terceiros?", a: "Licença, disponibilidade, erro interno e recuperação de conta são responsabilidade do fornecedor do sistema. O atendimento técnico verifica o computador, a conectividade e registra o erro para apoiar esse contato." },
             ].map((item, index) => (
               <div key={index} className="bg-secondary p-6 rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 stagger-item" style={{ animationDelay: `${index * 80}ms` }}>
                 <h3 className="font-bold text-foreground mb-2">{item.q}</h3>
