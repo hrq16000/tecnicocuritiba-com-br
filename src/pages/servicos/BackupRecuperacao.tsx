@@ -42,6 +42,8 @@ const BackupRecuperacao = () => {
           { question: "E se o HD estiver fazendo barulho?", answer: "Ruído indica falha física grave. Não ligue mais o computador e acione o técnico para avaliação em bancada." },
           { question: "Quanto tempo demora a recuperação?", answer: "Recuperação lógica leva de 2 a 24 horas. Casos físicos podem levar alguns dias, sempre com prazo informado antes." },
           { question: "Vocês garantem a recuperação?", answer: "Não cobramos pelo resgate quando os dados não são recuperados. Você só paga pelo sucesso." },
+          { question: "O técnico precisa conhecer minha senha?", answer: "Somente o acesso estritamente necessário é solicitado, sempre com autorização e explicação do procedimento. Senhas, códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem." },
+          { question: "Quem deve resolver problemas em sistemas de terceiros?", answer: "Licença, disponibilidade, erro interno e recuperação de conta são responsabilidade do fornecedor do sistema. O atendimento técnico verifica o computador, a conectividade e registra o erro para apoiar esse contato." },
         ]}
       />
       <PageSEO title="Backup e Recuperação de Dados em Curitiba | Técnico em Curitiba" description="Backup e recuperação de dados em Curitiba. Resgate de arquivos de HD, SSD, pendrive. Recuperação de dados deletados. Atendimento especializado." path="/servicos/backup-recuperacao"  breadcrumbs={[
@@ -158,7 +160,86 @@ const BackupRecuperacao = () => {
         </div>
       </section>
 
+      {/* Sistemas, credenciais e acessos de terceiros */}
+      <section className="py-10 bg-background">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-3xl font-heading font-bold text-foreground mb-4 reveal-text">
+            Sistemas, credenciais e acessos de terceiros
+          </h2>
+          <p className="text-muted-foreground mb-6">
+            Boa parte dos dados de uma empresa vive em sistemas mantidos por outras companhias: e-mail corporativo,
+            ERP, CRM, prontuário, sistema contábil, certificado digital, domínio e provedor de nuvem. O atendimento
+            técnico atua no computador, na rede e nos arquivos locais — e a divisão de responsabilidades abaixo evita
+            expectativas erradas na hora de recuperar acesso ou restaurar informação.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-secondary p-6 rounded-xl">
+              <h3 className="font-bold text-foreground mb-3">Responsabilidade do cliente</h3>
+              <ul className="text-muted-foreground text-sm space-y-1.5 list-disc pl-4">
+                <li>Possuir licença legítima dos sistemas usados</li>
+                <li>Indicar quem autoriza alterações</li>
+                <li>Manter acesso ao e-mail de recuperação</li>
+                <li>Preservar os códigos de autenticação</li>
+                <li>Conhecer o fornecedor de cada sistema</li>
+                <li>Manter contratos e cadastros atualizados</li>
+                <li>Informar restrições internas de acesso</li>
+                <li>Manter backup dos dados críticos</li>
+                <li>Não compartilhar senha sem necessidade</li>
+              </ul>
+            </div>
+            <div className="bg-secondary p-6 rounded-xl">
+              <h3 className="font-bold text-foreground mb-3">Responsabilidade do técnico</h3>
+              <ul className="text-muted-foreground text-sm space-y-1.5 list-disc pl-4">
+                <li>Solicitar apenas o acesso necessário</li>
+                <li>Explicar o procedimento antes de executar</li>
+                <li>Evitar armazenar credenciais</li>
+                <li>Encerrar sessões ao final do atendimento</li>
+                <li>Não alterar configuração além do autorizado</li>
+                <li>Registrar limitações encontradas</li>
+                <li>Orientar o contato com o fornecedor quando necessário</li>
+                <li>Não burlar proteções ou restrições</li>
+              </ul>
+            </div>
+            <div className="bg-secondary p-6 rounded-xl">
+              <h3 className="font-bold text-foreground mb-3">Responsabilidade do fornecedor</h3>
+              <ul className="text-muted-foreground text-sm space-y-1.5 list-disc pl-4">
+                <li>Licença e disponibilidade do sistema</li>
+                <li>Servidor e infraestrutura própria</li>
+                <li>Correção de erro interno do software</li>
+                <li>Atualizações e versões</li>
+                <li>Recuperação de conta</li>
+                <li>Suporte ao próprio sistema</li>
+                <li>Regras de autenticação e integração</li>
+                <li>Documentação oficial</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-6 space-y-3">
+            <p className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-foreground text-sm">
+              O acesso ao computador não garante acesso ou correção de sistemas mantidos por terceiros.
+            </p>
+            <p className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-foreground text-sm">
+              Senhas, códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem.
+            </p>
+            <p className="p-4 rounded-lg bg-secondary text-muted-foreground text-sm">
+              Quando o problema pertence ao sistema externo, pode ser necessário acionar o fornecedor responsável.
+            </p>
+          </div>
+
+          <p className="mt-6 text-sm text-muted-foreground">
+            Precisa organizar isso no ambiente da empresa? Veja como funciona o{" "}
+            <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
+              suporte técnico empresarial
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
       {/* FAQ */}
+
       <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -171,6 +252,8 @@ const BackupRecuperacao = () => {
               { q: "Quanto tempo demora a recuperação?", a: "Recuperação lógica leva de 2 a 24 horas. Casos mais complexos podem levar alguns dias. Avaliamos cada caso." },
               { q: "Vocês garantem a recuperação?", a: "Não cobramos se não conseguirmos recuperar os dados. Você só paga pelo sucesso." },
               { q: "Como funciona o backup automático?", a: "Configuramos sincronização automática com serviços de nuvem ou HD externo. Seus arquivos são salvos sem você precisar fazer nada." },
+              { q: "O técnico precisa conhecer minha senha?", a: "Somente o acesso estritamente necessário é solicitado, sempre com autorização e explicação do procedimento. Senhas, códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem." },
+              { q: "Quem deve resolver problemas em sistemas de terceiros?", a: "Licença, disponibilidade, erro interno e recuperação de conta são responsabilidade do fornecedor do sistema. O atendimento técnico verifica o computador, a conectividade e registra o erro para apoiar esse contato." },
             ].map((item, index) => (
               <div key={index} className="bg-secondary p-6 rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 stagger-item" style={{ animationDelay: `${index * 80}ms` }}>
                 <h3 className="font-bold text-foreground mb-2">{item.q}</h3>
