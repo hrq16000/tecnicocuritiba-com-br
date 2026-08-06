@@ -186,8 +186,41 @@ const FormatacaoComputador = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="antes-de-autorizar" title="Antes da formatação">
+              <p>
+                O backup dos arquivos é combinado antes de iniciar. Sem backup confirmado, a
+                reinstalação não é executada.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="verificamos" title="O que precisa ser confirmado">
+              <p>
+                Versão do Windows, licenças, drivers do equipamento e quais programas legítimos
+                precisam voltar após a reinstalação.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="O que não está incluso automaticamente">
+              <p>
+                Formatar não corrige defeito de hardware nem substitui diagnóstico. Programas
+                licenciados por terceiros dependem das chaves do cliente.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-formatacao-meio"
+              message="Olá! Quero avaliar se meu computador precisa de formatação."
+              hint="Conte o sintoma: nem toda lentidão se resolve com formatação."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-secondary">
+      <section id="faq" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes sobre Formatação
