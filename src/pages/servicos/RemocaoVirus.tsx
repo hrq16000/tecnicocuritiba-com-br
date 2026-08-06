@@ -204,8 +204,41 @@ const RemocaoVirus = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos" title="Sinais que merecem atenção">
+              <p>
+                Pop-ups fora do navegador, página inicial trocada, extensões desconhecidas e
+                programas que voltam a iniciar sozinhos.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Cuidados com senhas e contas">
+              <p>
+                Depois da limpeza, recomenda-se trocar senhas importantes a partir de outro
+                dispositivo. Não solicitamos senhas bancárias em nenhum momento.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="Limites da remoção">
+              <p>
+                A limpeza não garante ausência de reinfecção nem recuperação de contas invadidas.
+                Casos com dados críticos exigem backup antes da intervenção.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-remocao-virus-meio"
+              message="Olá! Meu computador apresenta sinais de infecção. Podem avaliar?"
+              hint="Descreva os sintomas para orientarmos os primeiros cuidados."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes
