@@ -97,7 +97,7 @@ const ConsertoPcNotebook = () => {
       </section>
 
       {/* Tipos de Conserto */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="o-que-consertamos" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
