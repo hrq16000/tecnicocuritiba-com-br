@@ -38,9 +38,14 @@ type Review = {
   created_at: string;
   client_phone: string | null;
   service_closed_at: string | null;
+  moderation_action?: string | null;
+  moderation_reason?: string | null;
+  moderated_at?: string | null;
+  published_notified_at?: string | null;
 };
 
-type Filter = "all" | "pending" | "published" | "hidden";
+type Filter = "all" | "pending" | "published" | "hidden" | "rejected";
+
 
 const emptyForm: Partial<Review> = {
   author_name: "",
