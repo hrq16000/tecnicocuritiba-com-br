@@ -83,6 +83,16 @@ const RedesWifi = () => {
         </div>
       </section>
       <RealImageSection imageKey="redesWifi" caption="Infraestrutura de rede profissional" />
+      <ServiceHeroSummary
+        summary="Configuração de rede Wi-Fi e cabeada com avaliação de cobertura, interferência, roteador, access point e dispositivos em rede — incluindo impressoras apenas no aspecto de conectividade."
+        items={[
+          { id: "triagem", label: "Triagem antes da visita" },
+          { id: "problemas", label: "Problemas que resolvemos" },
+          { id: "solucoes", label: "Soluções por necessidade" },
+          { id: "perifericos-em-rede", label: "Impressoras em rede" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Serviços de Rede */}
       <section className="py-10 bg-background relative">
