@@ -182,13 +182,16 @@ const ProblemaPage = () => {
     })),
   } : null;
 
+  const categoriaHref = data ? canonicalDestinoCategoria(data.categoria, data.h1) : "/servicos";
+
   const breadcrumbSchema = data ? {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Início", item: "https://tecnicocuritiba.com.br/" },
-      { "@type": "ListItem", position: 2, name: data.categoria, item: "https://tecnicocuritiba.com.br/servicos" },
-      { "@type": "ListItem", position: 3, name: data.h1.split("—")[0].trim(), item: `https://tecnicocuritiba.com.br/problemas/${data.slug}` },
+      { "@type": "ListItem", position: 2, name: "Problemas comuns", item: `https://tecnicocuritiba.com.br${HUB_PROBLEMAS}` },
+      { "@type": "ListItem", position: 3, name: data.categoria, item: `https://tecnicocuritiba.com.br${categoriaHref}` },
+      { "@type": "ListItem", position: 4, name: data.h1.split("—")[0].trim(), item: `https://tecnicocuritiba.com.br/problemas/${data.slug}` },
     ],
   } : null;
 
