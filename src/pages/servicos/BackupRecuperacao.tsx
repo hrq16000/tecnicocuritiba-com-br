@@ -83,6 +83,15 @@ const BackupRecuperacao = () => {
       </section>
 
       <RealImageSection imageKey="componentesSsd" caption="HD e SSD — recuperamos seus dados com segurança" />
+      <ServiceHeroSummary
+        summary="Diagnóstico de mídias com falha e tentativa de recuperação de arquivos, com sigilo do conteúdo e os limites técnicos informados antes de qualquer procedimento."
+        items={[
+          { id: "servicos", label: "Nossos serviços" },
+          { id: "niveis", label: "Níveis de recuperação" },
+          { id: "credenciais", label: "Credenciais e acessos" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Alerta Importante */}
       <section className="py-6 bg-destructive/10 border-y border-destructive/20">
