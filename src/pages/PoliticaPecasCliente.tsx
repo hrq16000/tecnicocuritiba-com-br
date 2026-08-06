@@ -34,7 +34,7 @@ const FAQS = [
   {
     question: "Qual o prazo para troca de uma peça reprovada na conferência?",
     answer:
-      "O equipamento fica aguardando a peça substituta por até 7 dias corridos sem custo de armazenagem. Após esse prazo, combinamos por WhatsApp a devolução no estado ou a continuidade do serviço.",
+      "O equipamento fica aguardando a peça substituta por até 10 dias corridos sem custo de armazenagem. Após esse prazo, combinamos por WhatsApp a devolução no estado ou a continuidade do serviço.",
   },
   {
     question: "Vocês garantem desempenho, FPS ou fazem overclock?",
@@ -189,7 +189,7 @@ export default function PoliticaPecasCliente() {
                 </tr>
                 <tr className="border-t">
                   <td className="p-3">Aguardando peça substituta do cliente</td>
-                  <td className="p-3">Até 7 dias corridos sem custo</td>
+                  <td className="p-3">Até 10 dias corridos sem custo</td>
                 </tr>
                 <tr className="border-t">
                   <td className="p-3">Montagem completa com peças aprovadas</td>
