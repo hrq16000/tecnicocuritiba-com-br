@@ -35,6 +35,8 @@ jobs:
         run: node scripts/check-problemas-internal-links.mjs
       - name: PC assembly service gate (capacidades, política de peças, garantia, checklist)
         run: node scripts/check-pc-assembly-service.mjs
+      - name: Visual wave 3Q gate (padrão de serviços, âncoras, CTAs e limites)
+        run: node scripts/check-visual-wave-3q.mjs
       - name: Brand consistency (og:site_name / Organization.name / LocalBusiness.name)
         run: node scripts/check-brand-consistency.mjs
       - name: JSON-LD validation
