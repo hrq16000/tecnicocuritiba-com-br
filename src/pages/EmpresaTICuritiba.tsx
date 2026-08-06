@@ -116,7 +116,17 @@ export default function EmpresaTICuritiba() {
           </Button>
         </header>
 
-        <section className="max-w-5xl mx-auto mb-14" aria-labelledby="servicos-empresas">
+        <PageSummaryBand
+          summary="Suporte técnico, redes e infraestrutura para empresas em Curitiba e Região Metropolitana, com atendimento avulso, contrato mensal ou projetos de infraestrutura."
+          items={[
+            { id: "servicos-empresas", label: "O que fazemos para empresas" },
+            { id: "bairros-comerciais", label: "Polos comerciais atendidos" },
+            { id: "cidades-rmc", label: "Região Metropolitana" },
+            { id: "faq-empresas", label: "Perguntas frequentes" },
+          ]}
+        />
+
+        <section className="max-w-5xl mx-auto mb-14 scroll-mt-24" aria-labelledby="servicos-empresas">
           <h2 id="servicos-empresas" className="text-2xl md:text-3xl font-heading font-bold text-center mb-8">O que fazemos para empresas</h2>
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICOS_EMPRESAS.map((s) => (
