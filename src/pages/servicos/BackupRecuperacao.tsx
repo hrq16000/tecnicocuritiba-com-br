@@ -172,83 +172,92 @@ const BackupRecuperacao = () => {
         </div>
       </section>
 
-      {/* Sistemas, credenciais e acessos de terceiros */}
-      <section id="credenciais" className="py-10 bg-background scroll-mt-24">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-3xl font-heading font-bold text-foreground mb-4 reveal-text">
-            Sistemas, credenciais e acessos de terceiros
-          </h2>
-          <p className="text-muted-foreground mb-6">
-            Boa parte dos dados de uma empresa vive em sistemas mantidos por outras companhias: e-mail corporativo,
-            ERP, CRM, prontuário, sistema contábil, certificado digital, domínio e provedor de nuvem. O atendimento
-            técnico atua no computador, na rede e nos arquivos locais — e a divisão de responsabilidades abaixo evita
-            expectativas erradas na hora de recuperar acesso ou restaurar informação.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-secondary p-6 rounded-xl">
-              <h3 className="font-bold text-foreground mb-3">Responsabilidade do cliente</h3>
-              <ul className="text-muted-foreground text-sm space-y-1.5 list-disc pl-4">
-                <li>Possuir licença legítima dos sistemas usados</li>
-                <li>Indicar quem autoriza alterações</li>
-                <li>Manter acesso ao e-mail de recuperação</li>
-                <li>Preservar os códigos de autenticação</li>
-                <li>Conhecer o fornecedor de cada sistema</li>
-                <li>Manter contratos e cadastros atualizados</li>
-                <li>Informar restrições internas de acesso</li>
-                <li>Manter backup dos dados críticos</li>
-                <li>Não compartilhar senha sem necessidade</li>
-              </ul>
-            </div>
-            <div className="bg-secondary p-6 rounded-xl">
-              <h3 className="font-bold text-foreground mb-3">Responsabilidade do técnico</h3>
-              <ul className="text-muted-foreground text-sm space-y-1.5 list-disc pl-4">
-                <li>Solicitar apenas o acesso necessário</li>
-                <li>Explicar o procedimento antes de executar</li>
-                <li>Evitar armazenar credenciais</li>
-                <li>Encerrar sessões ao final do atendimento</li>
-                <li>Não alterar configuração além do autorizado</li>
-                <li>Registrar limitações encontradas</li>
-                <li>Orientar o contato com o fornecedor quando necessário</li>
-                <li>Não burlar proteções ou restrições</li>
-              </ul>
-            </div>
-            <div className="bg-secondary p-6 rounded-xl">
-              <h3 className="font-bold text-foreground mb-3">Responsabilidade do fornecedor</h3>
-              <ul className="text-muted-foreground text-sm space-y-1.5 list-disc pl-4">
-                <li>Licença e disponibilidade do sistema</li>
-                <li>Servidor e infraestrutura própria</li>
-                <li>Correção de erro interno do software</li>
-                <li>Atualizações e versões</li>
-                <li>Recuperação de conta</li>
-                <li>Suporte ao próprio sistema</li>
-                <li>Regras de autenticação e integração</li>
-                <li>Documentação oficial</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-3">
-            <p className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-foreground text-sm">
-              O acesso ao computador não garante acesso ou correção de sistemas mantidos por terceiros.
-            </p>
-            <p className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-foreground text-sm">
-              Senhas, códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem.
-            </p>
-            <p className="p-4 rounded-lg bg-secondary text-muted-foreground text-sm">
-              Quando o problema pertence ao sistema externo, pode ser necessário acionar o fornecedor responsável.
-            </p>
-          </div>
-
-          <p className="mt-6 text-sm text-muted-foreground">
-            Precisa organizar isso no ambiente da empresa? Veja como funciona o{" "}
+      {/* Sistemas, credenciais e acessos de terceiros — padrão visual empresarial (3T) */}
+      <ThirdPartyLimits
+        id="credenciais"
+        title="Sistemas, credenciais e acessos de terceiros"
+        intro="Boa parte dos dados de uma empresa vive em sistemas mantidos por outras companhias: e-mail corporativo, ERP, CRM, prontuário, sistema contábil, certificado digital, domínio e provedor de nuvem. O atendimento técnico atua no computador, na rede e nos arquivos locais — e a divisão de responsabilidades abaixo evita expectativas erradas na hora de recuperar acesso ou restaurar informação."
+        columns={[
+          {
+            title: "Responsabilidade do cliente",
+            items: [
+              "Possuir licença legítima dos sistemas usados",
+              "Indicar quem autoriza alterações",
+              "Manter acesso ao e-mail de recuperação",
+              "Preservar os códigos de autenticação",
+              "Conhecer o fornecedor de cada sistema",
+              "Manter contratos e cadastros atualizados",
+              "Informar restrições internas de acesso",
+              "Manter backup dos dados críticos",
+              "Não compartilhar senha sem necessidade",
+            ],
+          },
+          {
+            title: "Responsabilidade do técnico",
+            items: [
+              "Solicitar apenas o acesso necessário",
+              "Explicar o procedimento antes de executar",
+              "Evitar armazenar credenciais",
+              "Encerrar sessões ao final do atendimento",
+              "Não alterar configuração além do autorizado",
+              "Registrar limitações encontradas",
+              "Orientar o contato com o fornecedor quando necessário",
+              "Não burlar proteções ou restrições",
+            ],
+          },
+          {
+            title: "Responsabilidade do fornecedor",
+            tone: "warning",
+            items: [
+              "Licença e disponibilidade do sistema",
+              "Servidor e infraestrutura própria",
+              "Correção de erro interno do software",
+              "Atualizações e versões",
+              "Recuperação de conta",
+              "Suporte ao próprio sistema",
+              "Regras de autenticação e integração",
+              "Documentação oficial",
+            ],
+          },
+        ]}
+        footer={
+          <>
+            O acesso ao computador não garante acesso ou correção de sistemas mantidos por terceiros. Senhas,
+            códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem. Quando o problema
+            pertence ao sistema externo, pode ser necessário acionar o fornecedor responsável. Precisa organizar isso
+            no ambiente da empresa? Veja como funciona o{" "}
             <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
               suporte técnico empresarial
             </Link>
             .
-          </p>
-        </div>
-      </section>
+          </>
+        }
+      />
+
+      <BusinessContextGrid
+        id="contextos-backup"
+        title="Contextos de empresa que exigem cópia de segurança"
+        intro="Situações operacionais comuns em pequenas e médias empresas de Curitiba. A recomendação varia conforme o volume de arquivos, o número de usuários e o que já está em sistemas de terceiros."
+        contexts={[
+          {
+            title: "Escritórios com arquivos e prazos",
+            body: "Documentos, planilhas e processos concentrados em poucas estações. Cópia local e em nuvem reduzem a perda quando o disco falha. Limite: arquivos que só existem dentro de sistemas do fornecedor dependem da exportação oferecida por ele.",
+          },
+          {
+            title: "Recepções e postos de atendimento",
+            body: "Computadores compartilhados por vários usuários, com cadastros e comprovantes salvos localmente. Organizar pastas e rotina de cópia evita retrabalho. Limite: contas e permissões de sistema externo continuam com o fornecedor.",
+          },
+          {
+            title: "Operações com período de maior demanda",
+            body: "Fechamento contábil, campanhas ou temporada com uso intenso. A verificação da cópia é feita antes do pico, dentro do escopo autorizado. Limite: não há prioridade automática de atendimento sem escopo definido.",
+          },
+          {
+            title: "Estações que rodam arquivos pesados",
+            body: "Projetos, imagens e vídeos ocupam muito espaço e nem sempre cabem na nuvem contratada. A avaliação indica o que é viável em disco externo ou armazenamento local. Limite: recuperação de mídia já danificada não tem garantia de resultado.",
+          },
+        ]}
+      />
+
 
       {/* Caixas editoriais (3Q) + CTA intermediário */}
       <section className="py-8 bg-background">
