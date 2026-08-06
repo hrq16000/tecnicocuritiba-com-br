@@ -190,7 +190,7 @@ const RedesWifi = () => {
       </section>
 
       {/* Soluções */}
-      <section className="py-10 bg-background">
+      <section id="solucoes" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Soluções para Cada Necessidade
