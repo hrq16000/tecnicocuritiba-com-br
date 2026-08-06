@@ -94,6 +94,7 @@ const BackupRecuperacao = () => {
           { id: "servicos", label: "Nossos serviços" },
           { id: "niveis", label: "Níveis de recuperação" },
           { id: "credenciais", label: "Credenciais e acessos" },
+          { id: "contextos-backup", label: "Backup em empresas" },
           { id: "faq", label: "Perguntas frequentes" },
         ]}
       />
