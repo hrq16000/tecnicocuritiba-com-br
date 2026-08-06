@@ -67,7 +67,7 @@ const SuporteEmpresas = () => {
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Suporte de TI para empresas em Curitiba: contratos mensais com SLA, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado."
+        "Suporte de TI para empresas em Curitiba: atendimento avulso ou recorrente, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado."
       );
     }
     trackPageView("/suporte-empresas", "Suporte Empresas");
@@ -79,7 +79,7 @@ const SuporteEmpresas = () => {
         { id: "service-faturado", name: "Pagamento Faturado PJ", desc: "Atendimento técnico corporativo com pagamento faturado (boleto/30 dias) para empresas em Curitiba." },
         { id: "service-nfe", name: "Emissão de NF-e", desc: "Nota fiscal eletrônica em todos os atendimentos PJ, conforme legislação do Município de Curitiba." },
         { id: "service-infra", name: "Projetos de Infraestrutura de TI", desc: "Cabeamento estruturado, redes Wi-Fi corporativas, racks e configuração de servidores para PMEs." },
-        { id: "service-premium", name: "Atendimento Premium PJ", desc: "SLA prioritário, técnico dedicado e janela de atendimento garantida para contratos mensais." },
+        { id: "service-premium", name: "Atendimento Recorrente PJ", desc: "Acompanhamento técnico recorrente definido por levantamento inicial: equipamentos, usuários, frequência, escopo e prioridades." },
       ];
       services.forEach((s) => {
         validateAndInjectSchema(s.id, {
@@ -106,13 +106,13 @@ const SuporteEmpresas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: contratos mensais com SLA, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
+      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: atendimento avulso ou recorrente, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
       <JsonLdSchema />
       <Header />
       <main id="main-content">
         <PageHero
           title="Suporte Técnico para Empresas"
-          subtitle="Soluções de TI para pequenas e médias empresas em Curitiba. Planos mensais, atendimento prioritário e nota fiscal garantida."
+          subtitle="Soluções de TI para pequenas e médias empresas em Curitiba. Atendimento avulso ou recorrente, escopo definido por solicitação e nota fiscal em todos os serviços."
           ctaText="Solicitar Proposta Comercial"
         />
 
