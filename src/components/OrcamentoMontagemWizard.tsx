@@ -391,6 +391,20 @@ export function OrcamentoMontagemWizard() {
         )}
       </div>
 
+      {step === STEPS.length - 1 && (
+        <div className="mt-4 rounded-xl border border-border bg-background p-4">
+          <Button type="button" variant="outline" onClick={baixarOS} disabled={!form.aceite} className="w-full">
+            <FileDown className="mr-2 h-4 w-4" />
+            Baixar Ordem de Serviço em PDF
+          </Button>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {numeroOS
+              ? `Ordem de serviço ${numeroOS} gerada. O número segue junto na mensagem do WhatsApp como comprovante de abertura do pedido.`
+              : "Gera um PDF com tudo que você preencheu (uso, peças, fotos informadas, local e condições) para você guardar e enviar junto no WhatsApp."}
+          </p>
+        </div>
+      )}
+
       <p className="mt-4 text-xs text-muted-foreground flex gap-2 items-start">
         <CheckCircle className="h-4 w-4 shrink-0 text-accent mt-0.5" />
         Nada é enviado automaticamente: a mensagem abre no seu WhatsApp para você revisar antes de mandar.
