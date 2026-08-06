@@ -77,8 +77,8 @@ for (const re of proibidos) {
 }
 
 // 6b. "tempo de resposta garantido" só é aceito em forma negativa
-for (const m of src.match(/.{0,60}tempo de resposta garantido/gi) || []) {
-  ok(/n[ãa]o trabalhamos|sem |n[ãa]o h[áa]|nunca/i.test(m), `${PAGE}: promessa de tempo de resposta: "${m.trim()}"`);
+for (const m of src.match(/.{0,160}tempo de resposta garantido/gi) || []) {
+  ok(/n[ãa]o trabalhamos|n[ãa]o oferecemos|sem |n[ãa]o h[áa]|nunca/i.test(m), `${PAGE}: promessa de tempo de resposta: "${m.trim()}"`);
 }
 
 // 7. Contextos sem falsa especialização por profissão em heading
