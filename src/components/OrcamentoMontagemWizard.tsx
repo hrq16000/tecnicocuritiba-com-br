@@ -182,15 +182,24 @@ export function OrcamentoMontagemWizard() {
     if (registradas.current.has(numero)) return;
     registradas.current.add(numero);
     try {
+      const digits = form.celular.replace(/\D/g, "");
       await supabase.from("ordens_servico").insert({
         numero,
         etapa: "aberta",
         descricao_curta: `Montagem de PC — ${labelOf(USOS, form.uso) || "uso não informado"}`.slice(0, 400),
         cidade: form.cidade || null,
         bairro: form.bairro.trim() || null,
+        telefone: digits.length >= 10 && digits.length <= 13 ? digits : null,
+        equipamento: "Desktop / montagem de PC",
+        sintomas: [
+          form.modelo.trim() ? `Configuração pretendida: ${form.modelo.trim()}` : "",
+          form.pecasLista.trim() ? `Peças do cliente: ${form.pecasLista.trim()}` : "",
+          anexos.length ? `Anexos informados: ${anexos.join(", ")}` : "",
+        ].filter(Boolean).join("\n").slice(0, 2000) || null,
         prazo_estimado: "Definido após diagnóstico e aprovação do orçamento.",
         observacao_publica: "Pedido registrado pelo site. Aguardando contato para confirmar escopo.",
       });
+
     } catch {
       /* acompanhamento é opcional: não bloqueia o atendimento */
     }
