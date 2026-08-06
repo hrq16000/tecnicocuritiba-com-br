@@ -257,7 +257,7 @@ const SuporteEmpresas = () => {
                   <ul className="space-y-2 text-muted-foreground text-sm">
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-                      Atendimento remoto prioritário
+                      Atendimento remoto conforme escopo autorizado
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
@@ -352,19 +352,6 @@ const SuporteEmpresas = () => {
               })}
             </div>
 
-            <div className="text-center mt-10">
-              <Button variant="whatsapp" size="lg" asChild>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleCTAClick}
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Solicitar Proposta
-                </a>
-              </Button>
-            </div>
           </div>
         </section>
 
