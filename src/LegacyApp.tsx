@@ -488,6 +488,8 @@ const App = () => (
             <Route path="/arrumar-pc/servico/:servico/:cidade" element={<ArrumarPCServicoCidade />} />
             <Route path="/arrumar-pc/:cidade" element={<ArrumarPCCity />} />
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
+            <Route path="/guias/organizacao-de-ti-para-escritorios" element={<OrganizacaoTIEscritorios />} />
+            <Route path="/guias/como-escolher-workstation" element={<ComoEscolherWorkstation />} />
             {/* Consolidação B2B: página-mãe única em /suporte-empresas (elimina canibalização). */}
             <Route path="/empresa-de-ti-curitiba" element={<Navigate to="/suporte-empresas" replace />} />
             <Route path="/manutencao-notebook-pc-curitiba" element={<ManutencaoNotebookPCCuritiba />} />
