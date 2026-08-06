@@ -89,7 +89,7 @@ export default function PoliticaPecasCliente() {
 
       <main id="main-content">
         <section className="container mx-auto px-4 py-10 md:py-14 max-w-4xl">
-          <h1 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-foreground">
             Política de Peças do Cliente
           </h1>
           <p className="tldr text-lg text-muted-foreground mb-8" data-speakable>
@@ -116,7 +116,7 @@ export default function PoliticaPecasCliente() {
             </Button>
           </div>
 
-          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-foreground">
             <PackageSearch className="h-6 w-6 text-primary" aria-hidden />
             1. Compatibilidade
           </h2>
@@ -136,7 +136,7 @@ export default function PoliticaPecasCliente() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-foreground">
             <ShieldCheck className="h-6 w-6 text-primary" aria-hidden />
             2. Procedência
           </h2>
@@ -153,7 +153,7 @@ export default function PoliticaPecasCliente() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-foreground">
             <CheckCircle className="h-6 w-6 text-primary" aria-hidden />
             3. Integridade
           </h2>
@@ -170,13 +170,13 @@ export default function PoliticaPecasCliente() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-foreground">
             <Clock className="h-6 w-6 text-primary" aria-hidden />
             4. Prazos de troca e permanência
           </h2>
           <div className="overflow-x-auto mb-10">
             <table className="w-full text-sm border rounded-xl overflow-hidden">
-              <thead className="bg-muted">
+              <thead className="bg-muted text-foreground">
                 <tr>
                   <th className="text-left p-3">Situação</th>
                   <th className="text-left p-3">Prazo</th>
@@ -203,13 +203,13 @@ export default function PoliticaPecasCliente() {
             </table>
           </div>
 
-          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-foreground">
             <ShieldCheck className="h-6 w-6 text-primary" aria-hidden />
             5. Garantia da peça x garantia da mão de obra
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 mb-10">
             <div className="rounded-xl border p-4">
-              <div className="font-semibold mb-2">Garantia da peça</div>
+              <div className="font-semibold mb-2 text-foreground">Garantia da peça</div>
               <p className="text-sm text-muted-foreground">
                 Responsabilidade do fabricante ou do vendedor que emitiu a nota. Prazo, logística e
                 aprovação de troca seguem as regras deles. Auxiliamos com o laudo técnico do
@@ -217,7 +217,7 @@ export default function PoliticaPecasCliente() {
               </p>
             </div>
             <div className="rounded-xl border p-4">
-              <div className="font-semibold mb-2">Garantia da mão de obra — 90 dias</div>
+              <div className="font-semibold mb-2 text-foreground">Garantia da mão de obra — 90 dias</div>
               <p className="text-sm text-muted-foreground">
                 Cobre montagem, cabeamento, configuração de BIOS/UEFI, instalação de drivers
                 oficiais e ajustes dentro das especificações do fabricante. Não cobre overclock,
@@ -226,7 +226,7 @@ export default function PoliticaPecasCliente() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-3 flex items-center gap-2 text-foreground">
             <Calculator className="h-6 w-6 text-primary" aria-hidden />
             6. Valor do equipamento, seguro e venda no estado
           </h2>
@@ -238,7 +238,7 @@ export default function PoliticaPecasCliente() {
           </p>
           <div className="overflow-x-auto mb-4">
             <table className="w-full text-sm border rounded-xl overflow-hidden">
-              <thead className="bg-muted">
+              <thead className="bg-muted text-foreground">
                 <tr>
                   <th className="text-left p-3">Idade do equipamento</th>
                   <th className="text-left p-3">Faixa usual de valor técnico</th>
@@ -279,7 +279,7 @@ export default function PoliticaPecasCliente() {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Dúvidas frequentes</h2>
+          <h2 className="text-2xl font-bold mb-4 text-foreground">Dúvidas frequentes</h2>
           <div className="space-y-3 mb-10">
             {FAQS.map((f) => (
               <details key={f.question} className="rounded-xl border p-4">
@@ -290,7 +290,7 @@ export default function PoliticaPecasCliente() {
           </div>
 
           <div className="rounded-2xl bg-primary/10 p-6 text-center">
-            <h2 className="text-2xl font-bold mb-2">Vai fornecer suas peças?</h2>
+            <h2 className="text-2xl font-bold mb-2 text-foreground">Vai fornecer suas peças?</h2>
             <p className="mb-4 text-muted-foreground">
               Mande a lista pelo WhatsApp e conferimos a compatibilidade antes de você fechar
               qualquer compra.
