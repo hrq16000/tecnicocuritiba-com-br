@@ -377,6 +377,66 @@ export default function StatusOS() {
           ))}
         </div>
 
+        {/* Transparência e consentimento LGPD antes da consulta */}
+        <div className="mt-6 rounded-xl border bg-muted/30 p-4">
+          <h2 className="text-sm font-semibold">Antes de consultar: o que será exibido</h2>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+            <li>Etapa atual, progresso, prazo estimado e observações públicas da OS.</li>
+            <li>
+              Dados sensíveis da entrada (sintomas relatados e fotos enviadas pelo portal) só aparecem
+              depois que você autorizar a exibição nesta tela.
+            </li>
+            <li>O celular nunca é exibido completo — apenas no formato mascarado (41) ****-9999.</li>
+            <li>A consulta tem limite de tentativas por celular e por número de OS para evitar abuso.</li>
+          </ul>
+          <label className="mt-3 flex items-start gap-2 text-sm">
+            <input
+              type="checkbox"
+              className="mt-1 h-4 w-4 accent-primary"
+              checked={consentimento}
+              onChange={(e) => {
+                setConsentimento(e.target.checked);
+                if (!e.target.checked) setRevelarSensiveis(false);
+                try {
+                  if (e.target.checked) localStorage.setItem(CONSENT_KEY, new Date().toISOString());
+                  else localStorage.removeItem(CONSENT_KEY);
+                } catch { /* storage indisponível */ }
+                track("status_os_consentimento", { aceito: e.target.checked });
+              }}
+            />
+            <span className="text-muted-foreground">
+              Autorizo a consulta e a exibição dos dados da minha Ordem de Serviço neste dispositivo.
+              Consulte a{" "}
+              <Link className="underline" to="/politica-de-privacidade">
+                Política de Privacidade
+              </Link>{" "}
+              ou solicite a{" "}
+              <Link className="underline" to="/exclusao-de-dados">
+                exclusão dos dados e anexos
+              </Link>
+              .
+            </span>
+          </label>
+          <button
+            type="button"
+            className="mt-3 text-xs font-medium text-muted-foreground underline"
+            onClick={() => {
+              setConsentimento(false);
+              setRevelarSensiveis(false);
+              setLista([]);
+              setNumero("");
+              setCelular("");
+              setErro(null);
+              try {
+                localStorage.removeItem(CONSENT_KEY);
+              } catch { /* storage indisponível */ }
+              track("status_os_descartar_sessao");
+            }}
+          >
+            Descartar dados desta sessão neste dispositivo
+          </button>
+        </div>
+
         <form onSubmit={buscar} className="mt-4 flex flex-col gap-3 sm:flex-row">
           {modo === "numero" ? (
             <Input
@@ -391,20 +451,34 @@ export default function StatusOS() {
           ) : (
             <Input
               value={celular}
-              onChange={(e) => setCelular(e.target.value)}
+              onChange={(e) => setCelular(mascararCelular(e.target.value))}
               placeholder="(41) 99999-9999"
               aria-label="Celular cadastrado no atendimento"
               className="h-12 text-base"
               inputMode="tel"
               autoComplete="tel"
-              maxLength={20}
+              maxLength={16}
             />
           )}
-          <Button type="submit" size="lg" className="h-12" disabled={loading}>
+          <Button type="submit" size="lg" className="h-12" disabled={loading || !consentimento}>
             <Search className="mr-2 h-4 w-4" />
             {loading ? "Consultando..." : "Consultar"}
           </Button>
         </form>
+        {!consentimento && (
+          <p className="mt-2 text-xs text-muted-foreground">
+            Marque a autorização acima para liberar a consulta.
+          </p>
+        )}
+
+        {loading && (
+          <div className="mt-6 space-y-3" aria-hidden="true">
+            <div className="h-6 w-1/2 animate-pulse rounded bg-muted" />
+            <div className="h-24 animate-pulse rounded-xl bg-muted" />
+            <div className="h-40 animate-pulse rounded-xl bg-muted" />
+          </div>
+        )}
+
 
         {lento && loading && (
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
