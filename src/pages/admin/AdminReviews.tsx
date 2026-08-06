@@ -17,7 +17,7 @@ import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Loader2, Download, Plus, Check, EyeOff, Eye, Trash2, ShieldCheck, Star, MessageCircle } from "lucide-react";
-import { t24WaLink, t72WaLink, reviewWindow } from "@/lib/reviewRequest";
+import { t24WaLink, t72WaLink, reviewWindow, publishedWaLink } from "@/lib/reviewRequest";
 import { pingIndexNow } from "@/lib/indexNow";
 
 type Review = {
@@ -38,9 +38,14 @@ type Review = {
   created_at: string;
   client_phone: string | null;
   service_closed_at: string | null;
+  moderation_action?: string | null;
+  moderation_reason?: string | null;
+  moderated_at?: string | null;
+  published_notified_at?: string | null;
 };
 
-type Filter = "all" | "pending" | "published" | "hidden";
+type Filter = "all" | "pending" | "published" | "hidden" | "rejected";
+
 
 const emptyForm: Partial<Review> = {
   author_name: "",
@@ -77,6 +82,8 @@ const AdminReviews = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
+  const [bairroFilter, setBairroFilter] = useState<string>("all");
+  const [servicoFilter, setServicoFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [form, setForm] = useState<Partial<Review>>(emptyForm);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -100,22 +107,31 @@ const AdminReviews = () => {
     if (isAdmin) void fetchReviews();
   }, [isAdmin]);
 
+  const bairros = useMemo(
+    () => [...new Set(reviews.map((r) => r.neighborhood).filter(Boolean) as string[])].sort(),
+    [reviews],
+  );
+  const servicos = useMemo(
+    () => [...new Set(reviews.map((r) => r.service_slug).filter(Boolean) as string[])].sort(),
+    [reviews],
+  );
+
   const filtered = useMemo(() => {
     return reviews.filter((r) => {
-      if (filter === "pending" && (r.verified || !r.published)) {
-        // pendente = ainda não verificado
-        if (r.verified) return false;
-      }
+      if (filter === "pending" && (r.verified || r.moderation_action === "rejected")) return false;
       if (filter === "published" && !(r.verified && r.published)) return false;
       if (filter === "hidden" && r.published) return false;
+      if (filter === "rejected" && r.moderation_action !== "rejected") return false;
+      if (bairroFilter !== "all" && (r.neighborhood ?? "") !== bairroFilter) return false;
+      if (servicoFilter !== "all" && (r.service_slug ?? "") !== servicoFilter) return false;
       if (search) {
         const s = search.toLowerCase();
-        const hay = `${r.author_name} ${r.comment ?? ""} ${r.neighborhood ?? ""} ${r.city ?? ""} ${r.service_slug ?? ""}`.toLowerCase();
+        const hay = `${r.author_name} ${r.comment ?? ""} ${r.neighborhood ?? ""} ${r.city ?? ""} ${r.service_slug ?? ""} ${r.client_phone ?? ""}`.toLowerCase();
         if (!hay.includes(s)) return false;
       }
       return true;
     });
-  }, [reviews, filter, search]);
+  }, [reviews, filter, bairroFilter, servicoFilter, search]);
 
   const stats = useMemo(() => {
     const pub = reviews.filter((r) => r.verified && r.published);
@@ -125,35 +141,74 @@ const AdminReviews = () => {
     return {
       total: reviews.length,
       published: pub.length,
-      pending: reviews.filter((r) => !r.verified).length,
+      pending: reviews.filter((r) => !r.verified && r.moderation_action !== "rejected").length,
       hidden: reviews.filter((r) => !r.published).length,
       avg,
     };
   }, [reviews]);
 
+  /** Grava a trilha de auditoria da moderação (ação, motivo, quem e quando). */
+  async function moderate(
+    r: Review,
+    action: "approved" | "rejected" | "hidden" | "republished",
+    changes: Partial<Review>,
+    reason?: string,
+  ) {
+    const audit = {
+      ...changes,
+      moderation_action: action,
+      moderation_reason: reason?.slice(0, 500) ?? null,
+      moderated_at: new Date().toISOString(),
+      moderated_by: session?.user?.id ?? null,
+    };
+    const { error } = await supabase.from("reviews").update(audit).eq("id", r.id);
+    if (error) {
+      toast({ title: "Erro", description: error.message, variant: "destructive" });
+      return false;
+    }
+    setReviews((prev) => prev.map((x) => (x.id === r.id ? { ...x, ...audit } as Review : x)));
+    return true;
+  }
+
   async function togglePublished(r: Review) {
     const next = !r.published;
-    const { error } = await supabase
-      .from("reviews")
-      .update({ published: next })
-      .eq("id", r.id);
-    if (error) return toast({ title: "Erro", description: error.message, variant: "destructive" });
-    setReviews((prev) => prev.map((x) => (x.id === r.id ? { ...x, published: next } : x)));
-    if (next && r.verified) void pingIndexNow(indexNowUrlsForReview(r));
+    const reason = next ? undefined : (prompt("Motivo para ocultar (opcional):") ?? undefined);
+    const ok = await moderate(r, next ? "republished" : "hidden", { published: next }, reason);
+    if (ok && next && r.verified) void pingIndexNow(indexNowUrlsForReview(r));
   }
 
   async function approve(r: Review) {
-    const { error } = await supabase
-      .from("reviews")
-      .update({ verified: true, published: true })
-      .eq("id", r.id);
-    if (error) return toast({ title: "Erro", description: error.message, variant: "destructive" });
-    setReviews((prev) =>
-      prev.map((x) => (x.id === r.id ? { ...x, verified: true, published: true } : x)),
-    );
+    const ok = await moderate(r, "approved", { verified: true, published: true });
+    if (!ok) return;
     void pingIndexNow(indexNowUrlsForReview(r));
     toast({ title: "Review aprovada", description: "IndexNow notificado para Bing/Yandex." });
   }
+
+  async function reject(r: Review) {
+    const reason = prompt("Motivo da rejeição (fica registrado na auditoria):");
+    if (reason === null) return;
+    const ok = await moderate(r, "rejected", { verified: false, published: false }, reason);
+    if (ok) toast({ title: "Review rejeitada", description: "Motivo registrado na auditoria." });
+  }
+
+  /** Abre o WhatsApp avisando o cliente que a avaliação foi publicada. */
+  async function notifyPublished(r: Review) {
+    const phone = r.client_phone?.replace(/\D/g, "") ?? "";
+    if (phone.length < 10) {
+      toast({ title: "Telefone ausente", description: "Edite a review e preencha o WhatsApp do cliente.", variant: "destructive" });
+      return;
+    }
+    const url = publishedWaLink(phone, {
+      clientName: r.author_name,
+      service: r.service_slug ?? undefined,
+      neighborhood: r.neighborhood ?? undefined,
+    });
+    window.open(url, "_blank", "noopener,noreferrer");
+    const now = new Date().toISOString();
+    const { error } = await supabase.from("reviews").update({ published_notified_at: now }).eq("id", r.id);
+    if (!error) setReviews((prev) => prev.map((x) => (x.id === r.id ? { ...x, published_notified_at: now } : x)));
+  }
+
 
   async function remove(id: string) {
     if (!confirm("Excluir esta review permanentemente?")) return;
@@ -321,7 +376,7 @@ const AdminReviews = () => {
           </div>
 
           <div className="flex flex-col md:flex-row gap-3 mb-4">
-            <Input placeholder="Buscar por nome, comentário, bairro..." value={search} onChange={(e) => setSearch(e.target.value)} className="md:max-w-md" />
+            <Input placeholder="Buscar por nome, comentário, bairro, telefone..." value={search} onChange={(e) => setSearch(e.target.value)} className="md:max-w-md" />
             <Select value={filter} onValueChange={(v) => setFilter(v as Filter)}>
               <SelectTrigger className="md:w-48"><SelectValue /></SelectTrigger>
               <SelectContent>
@@ -329,9 +384,25 @@ const AdminReviews = () => {
                 <SelectItem value="pending">Pendentes (não verificadas)</SelectItem>
                 <SelectItem value="published">Publicadas</SelectItem>
                 <SelectItem value="hidden">Ocultas</SelectItem>
+                <SelectItem value="rejected">Rejeitadas</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={bairroFilter} onValueChange={setBairroFilter}>
+              <SelectTrigger className="md:w-44"><SelectValue placeholder="Bairro" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos os bairros</SelectItem>
+                {bairros.map((b) => <SelectItem key={b} value={b}>{b}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <Select value={servicoFilter} onValueChange={setServicoFilter}>
+              <SelectTrigger className="md:w-48"><SelectValue placeholder="Serviço" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos os serviços</SelectItem>
+                {servicos.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
+
 
           {loading ? (
             <div className="flex justify-center py-12"><Loader2 className="w-6 h-6 animate-spin" /></div>
@@ -366,15 +437,42 @@ const AdminReviews = () => {
                       {r.review_date && <span>📅 {new Date(r.review_date).toLocaleDateString("pt-BR")}</span>}
                       {r.source && <span>· {r.source}</span>}
                     </div>
+                    {r.moderated_at && (
+                      <p className="mt-2 rounded-md bg-muted/50 px-2 py-1 text-xs text-muted-foreground">
+                        🛡️ Auditoria: <strong>{r.moderation_action}</strong> em{" "}
+                        {new Date(r.moderated_at).toLocaleString("pt-BR")}
+                        {r.moderation_reason ? ` · motivo: ${r.moderation_reason}` : ""}
+                        {r.published_notified_at
+                          ? ` · cliente avisado em ${new Date(r.published_notified_at).toLocaleDateString("pt-BR")}`
+                          : ""}
+                      </p>
+                    )}
                   </div>
                   <div className="flex gap-2 md:flex-col md:w-40">
                     {!r.verified && (
-                      <Button size="sm" onClick={() => approve(r)} className="flex-1"><Check className="w-4 h-4 mr-1" />Aprovar</Button>
+                      <>
+                        <Button size="sm" onClick={() => approve(r)} className="flex-1"><Check className="w-4 h-4 mr-1" />Aprovar</Button>
+                        <Button size="sm" variant="destructive" onClick={() => reject(r)} className="flex-1">Rejeitar</Button>
+                      </>
                     )}
+
                     <Button size="sm" variant="outline" onClick={() => togglePublished(r)} className="flex-1">
                       {r.published ? <><EyeOff className="w-4 h-4 mr-1" />Ocultar</> : <><Eye className="w-4 h-4 mr-1" />Publicar</>}
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => openEdit(r)} className="flex-1">Editar</Button>
+                    {r.verified && r.published && (
+                      <Button
+                        size="sm"
+                        variant={r.published_notified_at ? "outline" : "default"}
+                        className="flex-1"
+                        title={r.client_phone ? "Avisar cliente que a avaliação foi publicada" : "Telefone não cadastrado"}
+                        disabled={!r.client_phone || r.client_phone.replace(/\D/g, "").length < 10}
+                        onClick={() => notifyPublished(r)}
+                      >
+                        <MessageCircle className="w-4 h-4 mr-1" />
+                        {r.published_notified_at ? "Reavisar" : "Avisar"}
+                      </Button>
+                    )}
                     {(() => {
                       const baseDate = r.service_closed_at ?? r.review_date ?? r.created_at;
                       const win = reviewWindow(baseDate);

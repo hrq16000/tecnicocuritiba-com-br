@@ -145,9 +145,14 @@ export type Database = {
           created_at: string
           google_review_url: string | null
           id: string
+          moderated_at: string | null
+          moderated_by: string | null
+          moderation_action: string | null
+          moderation_reason: string | null
           neighborhood: string | null
           publish_consent: boolean
           published: boolean
+          published_notified_at: string | null
           rating: number
           review_date: string
           service_closed_at: string | null
@@ -166,9 +171,14 @@ export type Database = {
           created_at?: string
           google_review_url?: string | null
           id?: string
+          moderated_at?: string | null
+          moderated_by?: string | null
+          moderation_action?: string | null
+          moderation_reason?: string | null
           neighborhood?: string | null
           publish_consent?: boolean
           published?: boolean
+          published_notified_at?: string | null
           rating: number
           review_date?: string
           service_closed_at?: string | null
@@ -187,9 +197,14 @@ export type Database = {
           created_at?: string
           google_review_url?: string | null
           id?: string
+          moderated_at?: string | null
+          moderated_by?: string | null
+          moderation_action?: string | null
+          moderation_reason?: string | null
           neighborhood?: string | null
           publish_consent?: boolean
           published?: boolean
+          published_notified_at?: string | null
           rating?: number
           review_date?: string
           service_closed_at?: string | null

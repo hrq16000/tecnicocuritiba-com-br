@@ -137,3 +137,27 @@ export const posOsWaLink = (
   phone: string,
   ctx: ReviewRequestContext & { osNumber?: string },
 ) => buildWaMeUrl(phone, buildPosOsMessage(ctx));
+
+/**
+ * Mensagem de agradecimento enviada quando a avaliação do cliente é aprovada
+ * e publicada no site (fecha o ciclo e reforça a prova social).
+ */
+export const buildPublishedMessage = (
+  ctx: ReviewRequestContext & { osNumber?: string },
+): string => {
+  const nome = firstName(ctx.clientName);
+  const os = ctx.osNumber ? ` (OS ${ctx.osNumber})` : "";
+  return (
+    `Olá, ${nome}! Sua avaliação${os} foi publicada no nosso site ⭐\n` +
+    `Muito obrigado por dedicar esse tempo — isso ajuda outros moradores de Curitiba ` +
+    `a encontrarem atendimento confiável.\n\n` +
+    `Ver no site: ${SITE_URL}/avaliacoes\n\n` +
+    `Se quiser remover ou ajustar o depoimento, é só responder por aqui.`
+  );
+};
+
+export const publishedWaLink = (
+  phone: string,
+  ctx: ReviewRequestContext & { osNumber?: string },
+) => buildWaMeUrl(phone, buildPublishedMessage(ctx));
+
