@@ -204,6 +204,9 @@ export function OrcamentoMontagemWizard() {
     );
   };
 
+  const baseFieldCls =
+    "w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent";
+
   const fieldCls = (k: FieldKey) =>
     cn(
       "w-full rounded-xl border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent",
@@ -299,7 +302,7 @@ export function OrcamentoMontagemWizard() {
           </label>
           <input
             id="wz-orcamento"
-            className={fieldCls("uso").replace("animate-field-alert", "")}
+            className={baseFieldCls}
             maxLength={60}
             placeholder="Ex.: até R$ 5.000"
             value={form.orcamento}
@@ -363,7 +366,7 @@ export function OrcamentoMontagemWizard() {
                 accept="image/*,video/*"
                 multiple
                 className={cn(
-                  fieldCls("uso").replace("animate-field-alert", ""),
+                  baseFieldCls,
                   "file:mr-3 file:rounded-lg file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-white",
                 )}
                 onChange={(e) =>
@@ -417,7 +420,7 @@ export function OrcamentoMontagemWizard() {
           </label>
           <input
             id="wz-bairro"
-            className={fieldCls("uso").replace("animate-field-alert", "")}
+            className={baseFieldCls}
             maxLength={60}
             placeholder="Ex.: Batel"
             value={form.bairro}
