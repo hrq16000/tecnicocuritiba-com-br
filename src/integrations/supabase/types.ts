@@ -139,12 +139,14 @@ export type Database = {
           author_name: string
           author_photo_url: string | null
           city: string | null
+          client_contact: string | null
           client_phone: string | null
           comment: string
           created_at: string
           google_review_url: string | null
           id: string
           neighborhood: string | null
+          publish_consent: boolean
           published: boolean
           rating: number
           review_date: string
@@ -158,12 +160,14 @@ export type Database = {
           author_name: string
           author_photo_url?: string | null
           city?: string | null
+          client_contact?: string | null
           client_phone?: string | null
           comment: string
           created_at?: string
           google_review_url?: string | null
           id?: string
           neighborhood?: string | null
+          publish_consent?: boolean
           published?: boolean
           rating: number
           review_date?: string
@@ -177,12 +181,14 @@ export type Database = {
           author_name?: string
           author_photo_url?: string | null
           city?: string | null
+          client_contact?: string | null
           client_phone?: string | null
           comment?: string
           created_at?: string
           google_review_url?: string | null
           id?: string
           neighborhood?: string | null
+          publish_consent?: boolean
           published?: boolean
           rating?: number
           review_date?: string

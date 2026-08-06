@@ -47,6 +47,7 @@ const TermosCondicoes = lazy(() => import("./pages/TermosCondicoes"));
 const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
 const FunilIndisponivel = lazy(() => import("./pages/FunilIndisponivel"));
 const Obrigado = lazy(() => import("./pages/Obrigado"));
+const Avaliar = lazy(() => import("./pages/Avaliar"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
 const AdminMetricas = lazy(() => import("./pages/admin/AdminMetricas"));
@@ -434,9 +435,9 @@ const IdleEnhancements = () => {
 
   useEffect(() => {
     const activate = () => setEnabled(true);
-    const idleId = typeof window.requestIdleCallback === "function"
+    const idleId: number = typeof window.requestIdleCallback === "function"
       ? window.requestIdleCallback(activate, { timeout: 4500 })
-      : globalThis.setTimeout(activate, 2500);
+      : (globalThis.setTimeout(activate, 2500) as unknown as number);
 
     return () => {
       if (typeof window.cancelIdleCallback === "function") {
@@ -911,6 +912,7 @@ const App = () => (
             <Route path="/privacidade" element={<Navigate to="/politica-de-privacidade" replace />} />
             <Route path="/funil-indisponivel" element={<FunilIndisponivel />} />
             <Route path="/obrigado" element={<Obrigado />} />
+            <Route path="/avaliar" element={<Avaliar />} />
 
             {/* Admin */}
             <Route path="/admin" element={<Navigate to="/admin/funnel" replace />} />

@@ -5,6 +5,8 @@ import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle, FileDown, ImagePlus, M
 import { Button } from "@/components/ui/button";
 import { bip } from "@/lib/attentionBip";
 import { trackCTAClick } from "@/lib/analytics";
+import { buildSiteReviewUrl } from "@/lib/reviewRequest";
+import { WhatsAppQr } from "@/components/WhatsAppQr";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
 import { baixarOrdemServicoPdf, gerarNumeroOS } from "@/lib/ordemServicoPdf";
 import { cn } from "@/lib/utils";
@@ -158,6 +160,9 @@ export function OrcamentoMontagemWizard() {
       local ? `Local: ${local}.` : "",
       "Li e aceito os termos e condições, a política de peças do cliente e a mão de obra a partir de R$ 99,99 com orçamento aprovado antes do serviço.",
       "Autorizo o uso dos meus dados e arquivos para atendimento e emissão da ordem de serviço (LGPD).",
+      numeroOS
+        ? `Depois do serviço posso avaliar por aqui: ${buildSiteReviewUrl({ service: "montagem-pc", neighborhood: form.bairro.trim() || undefined, os: numeroOS, medium: "whatsapp_os" })}`
+        : "",
       "[ref: wizard/montagem-pc]",
       "Podem me atender?",
     ].filter(Boolean);
@@ -168,6 +173,16 @@ export function OrcamentoMontagemWizard() {
     if (!validate(4)) return;
     const numero = numeroOS || gerarNumeroOS();
     setNumeroOS(numero);
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "os_pdf_download", {
+        event_category: "engagement",
+        os_numero: numero,
+        servico: "montagem_pc",
+        bairro: form.bairro.trim() || "nao_informado",
+        cidade: form.cidade,
+        anexos: anexos.length,
+      });
+    }
     trackCTAClick("whatsapp", "montagem_pc_wizard_os_pdf", {
       servico: "montagem_pc",
       category: form.uso,
@@ -527,6 +542,20 @@ export function OrcamentoMontagemWizard() {
             <FileDown className="mr-2 h-4 w-4" />
             Baixar Ordem de Serviço em PDF
           </Button>
+          <div className="mt-4 grid gap-4 sm:grid-cols-[auto,1fr] sm:items-center">
+            <WhatsAppQr
+              size={132}
+              campaign="wizard_montagem_pc"
+              servico="montagem-pc"
+              bairro={form.bairro.trim() || undefined}
+              message="Olá! Fiz o orçamento de montagem no site e quero continuar."
+              label="Escaneie para abrir a conversa no celular"
+            />
+            <p className="text-xs text-muted-foreground">
+              Prefere continuar pelo celular? Aponte a câmera para o QR code — o link já leva o histórico do orçamento
+              e a origem da página para o atendimento.
+            </p>
+          </div>
           <p className="mt-2 text-xs text-muted-foreground">
             {numeroOS
               ? `Ordem de serviço ${numeroOS} gerada. O número segue junto na mensagem do WhatsApp como comprovante de abertura do pedido.`

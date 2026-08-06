@@ -1,8 +1,9 @@
-import { MessageCircle, Clock } from "lucide-react";
+import { MessageCircle, Clock, FileCheck2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   t24WaLink,
   t72WaLink,
+  posOsWaLink,
   reviewWindow,
   type ReviewRequestContext,
 } from "@/lib/reviewRequest";
@@ -13,6 +14,8 @@ interface Props {
   /** ISO do momento em que o atendimento foi fechado. */
   serviceClosedAt: string;
   context: ReviewRequestContext;
+  /** Número da Ordem de Serviço, quando houver (entra na mensagem pós-OS). */
+  osNumber?: string;
   compact?: boolean;
 }
 
@@ -28,11 +31,13 @@ export const ReviewRequestButtons = ({
   clientPhone,
   serviceClosedAt,
   context,
+  osNumber,
   compact = false,
 }: Props) => {
   const window = reviewWindow(serviceClosedAt);
   const t24 = t24WaLink(clientPhone, context);
   const t72 = t72WaLink(clientPhone, context);
+  const posOs = posOsWaLink(clientPhone, { ...context, osNumber });
 
   const size = compact ? "sm" : "default";
 
@@ -69,6 +74,18 @@ export const ReviewRequestButtons = ({
         <a href={t72} target="_blank" rel="noopener noreferrer">
           <Clock className="w-4 h-4 mr-1" />
           Lembrete (72h)
+        </a>
+      </Button>
+
+      <Button
+        asChild
+        size={size}
+        variant="secondary"
+        title="Enviar agora a mensagem pós-OS com o link de avaliação por estrelas no site"
+      >
+        <a href={posOs} target="_blank" rel="noopener noreferrer">
+          <FileCheck2 className="w-4 h-4 mr-1" />
+          Pós-OS + avaliação
         </a>
       </Button>
 

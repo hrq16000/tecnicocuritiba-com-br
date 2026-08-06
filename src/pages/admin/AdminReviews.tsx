@@ -30,6 +30,7 @@ type Review = {
   city: string | null;
   neighborhood: string | null;
   source: string | null;
+  publish_consent?: boolean | null;
   google_review_url: string | null;
   verified: boolean;
   published: boolean;
@@ -351,6 +352,11 @@ const AdminReviews = () => {
                       </div>
                       {r.verified ? <Badge variant="default">Verificada</Badge> : <Badge variant="secondary">Pendente</Badge>}
                       {r.published ? <Badge variant="outline">Publicada</Badge> : <Badge variant="destructive">Oculta</Badge>}
+                      {r.source === "site" && (
+                        <Badge variant={r.publish_consent ? "default" : "secondary"}>
+                          {r.publish_consent ? "Site · autorizada" : "Site · sem autorização"}
+                        </Badge>
+                      )}
                     </div>
                     {r.comment && <p className="text-sm text-muted-foreground mb-2">"{r.comment}"</p>}
                     <div className="text-xs text-muted-foreground flex gap-3 flex-wrap">
