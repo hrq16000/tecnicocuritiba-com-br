@@ -43,6 +43,8 @@ const MontagemPc = () => {
           { question: "Posso levar minhas próprias peças?", answer: "Sim, sem restrição de procedência. Conferimos compatibilidade e integridade antes de montar e registramos qualquer problema encontrado." },
           { question: "Quem cobre a garantia se a peça der defeito?", answer: "A garantia da peça é do fabricante ou vendedor. A garantia de 90 dias que oferecemos cobre a mão de obra de montagem e configuração." },
           { question: "Vocês fazem overclock ou garantem FPS?", answer: "Não. Trabalhamos dentro das especificações do fabricante e garantimos montagem correta, estabilidade em teste de carga e temperaturas dentro do esperado." },
+          { question: "Vocês montam workstation?", answer: "Sim. Montamos e avaliamos estações de trabalho para cargas exigentes. A configuração é definida por levantamento de requisitos: programas usados, tamanho dos arquivos, monitores, armazenamento, expansão e orçamento." },
+          { question: "É possível garantir desempenho em um programa específico?", answer: "Não. A montagem correta não garante desempenho específico em um programa. A configuração é definida a partir dos requisitos oficiais da aplicação, do tipo de projeto e do orçamento disponível." },
           { question: "Quanto tempo demora?", answer: "Com todas as peças em mãos, de 1 a 2 dias úteis, incluindo o tempo de stress test." },
         ]}
       />
