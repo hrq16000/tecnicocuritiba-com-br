@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Activity } from "lucide-react";
 
 export type Signal = { label: string; to: string };
@@ -34,13 +33,13 @@ export const ProblemSignals = ({
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">
           {signals.slice(0, 6).map((s) => (
             <li key={s.to}>
-              <Link
-                to={s.to}
+              <a
+                href={s.to}
                 className="flex min-h-12 items-center gap-2 rounded-lg border border-dashed border-border bg-card/50 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Activity className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                 {s.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
