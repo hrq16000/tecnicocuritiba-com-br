@@ -265,6 +265,26 @@ export function OrcamentoMontagemWizard() {
                 value={form.pecasLista}
                 onChange={(e) => set("pecasLista", e.target.value)}
               />
+              <label className="block font-bold text-foreground" htmlFor="wz-fotos">
+                Fotos das peças (opcional)
+              </label>
+              <input
+                id="wz-fotos"
+                type="file"
+                accept="image/*"
+                multiple
+                className={cn(inputCls, "file:mr-3 file:rounded-lg file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-white")}
+                onChange={(e) =>
+                  setFotos(Array.from(e.target.files || []).slice(0, 10).map((f) => f.name))
+                }
+              />
+              {fotos.length > 0 && (
+                <p className="text-sm text-foreground flex items-start gap-2">
+                  <ImagePlus className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                  {fotos.length} foto(s) selecionada(s): {fotos.join(", ")}. Elas ficam registradas na ordem de
+                  serviço — anexe as imagens direto na conversa do WhatsApp ao enviar.
+                </p>
+              )}
               <p className="text-sm text-muted-foreground">
                 Peças fornecidas por você seguem a{" "}
                 <Link to="/politica-pecas-cliente" className="text-primary underline underline-offset-4">
