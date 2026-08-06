@@ -51,6 +51,8 @@ const Avaliar = lazy(() => import("./pages/Avaliar"));
 const Avaliacoes = lazy(() => import("./pages/Avaliacoes"));
 const ComoAvaliar = lazy(() => import("./pages/ComoAvaliar"));
 const ExclusaoDados = lazy(() => import("./pages/ExclusaoDados"));
+const StatusOS = lazy(() => import("./pages/StatusOS"));
+
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
 const AdminMetricas = lazy(() => import("./pages/admin/AdminMetricas"));
