@@ -95,6 +95,8 @@ const RedesWifi = () => {
           { id: "problemas", label: "Problemas que resolvemos" },
           { id: "solucoes", label: "Soluções por necessidade" },
           { id: "perifericos-em-rede", label: "Impressoras em rede" },
+          { id: "rede-empresarial", label: "Rede em empresas" },
+          { id: "limites-rede", label: "Limites e fornecedores" },
           { id: "faq", label: "Perguntas frequentes" },
         ]}
       />
