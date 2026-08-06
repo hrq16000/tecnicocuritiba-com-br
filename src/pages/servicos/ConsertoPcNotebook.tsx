@@ -85,6 +85,15 @@ const ConsertoPcNotebook = () => {
           </div>
         </div>
       </section>
+      <ServiceHeroSummary
+        summary="Diagnóstico de hardware em computadores e notebooks: fonte, placa-mãe, memória, armazenamento, refrigeração e periféricos internos, com orçamento antes da execução."
+        items={[
+          { id: "o-que-consertamos", label: "O que consertamos" },
+          { id: "problemas-comuns", label: "Problemas comuns" },
+          { id: "como-funciona", label: "Como funciona o conserto" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
       <RealImageSection imageKey="notebookReparo" caption="Reparo profissional de notebooks e PCs" />
 
       {/* Aviso Coleta */}
