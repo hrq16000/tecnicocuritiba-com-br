@@ -38,10 +38,11 @@ const MontagemPc = () => {
         priceFrom={99.99}
         category="Montagem de Computadores"
         faqs={[
-          { question: "Posso escolher as peças?", answer: "Sim. Você pode fornecer as peças ou montar a lista junto com o técnico conforme o orçamento e o uso." },
-          { question: "Vocês vendem as peças?", answer: "Indicamos lojas parceiras com bons preços; a compra pode ser feita por você ou intermediada." },
-          { question: "Qual a garantia da montagem?", answer: "As peças mantêm a garantia do fabricante e o serviço de montagem tem 90 dias." },
-          { question: "Quanto tempo demora?", answer: "Com todas as peças em mãos, de 1 a 2 dias úteis, com entrega em Curitiba e região." },
+          { question: "Vocês montam PC do zero?", answer: "Sim. Montamos desktops, PC Gamer e workstations a partir de peças novas, com escolha de componentes, montagem, BIOS/UEFI, drivers oficiais e testes finais." },
+          { question: "Posso levar minhas próprias peças?", answer: "Sim, sem restrição de procedência. Conferimos compatibilidade e integridade antes de montar e registramos qualquer problema encontrado." },
+          { question: "Quem cobre a garantia se a peça der defeito?", answer: "A garantia da peça é do fabricante ou vendedor. A garantia de 90 dias que oferecemos cobre a mão de obra de montagem e configuração." },
+          { question: "Vocês fazem overclock ou garantem FPS?", answer: "Não. Trabalhamos dentro das especificações do fabricante e garantimos montagem correta, estabilidade em teste de carga e temperaturas dentro do esperado." },
+          { question: "Quanto tempo demora?", answer: "Com todas as peças em mãos, de 1 a 2 dias úteis, incluindo o tempo de stress test." },
         ]}
       />
       <PageSEO title="Montagem de PC Gamer e Workstation em Curitiba | Técnico em Curitiba" description="Montagem de PC Gamer e Workstation em Curitiba. Computador personalizado para jogos, trabalho ou edição. Configuração ideal para seu orçamento." path="/servicos/montagem-pc"  breadcrumbs={[
