@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Search, MessageCircle, CheckCircle2, Circle, Clock, Copy, Check, Star, History,
-  Share2, Smartphone, Hash, RefreshCw, AlertTriangle,
+  Share2, Smartphone, Hash, RefreshCw, AlertTriangle, FileDown,
 } from "lucide-react";
 import { buildSiteReviewUrl } from "@/lib/reviewRequest";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
