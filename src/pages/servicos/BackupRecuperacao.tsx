@@ -98,7 +98,7 @@ const BackupRecuperacao = () => {
       </section>
 
       {/* Serviços */}
-      <section className="py-10 bg-background relative">
+      <section id="servicos" className="py-10 bg-background relative scroll-mt-24">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-3xl" />
         </div>
