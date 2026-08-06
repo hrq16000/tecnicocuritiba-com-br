@@ -9,6 +9,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import TrustStrip from "@/components/TrustStrip";
+import PageTableOfContents from "@/components/PageTableOfContents";
+
 import { Helmet } from "react-helmet";
 import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
 import { useCTAVisibility } from "@/hooks/useCTAVisibility";
@@ -360,6 +363,23 @@ const ProblemaPage = () => {
         </div>
       </section>
 
+      {/* Padrão visual 3P (sintomas): confiança + sumário navegável logo abaixo do CTA */}
+      <section className="py-6 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto space-y-4">
+            <TrustStrip />
+            <PageTableOfContents
+              items={[
+                { id: "sintomas", label: "Sintomas do problema" },
+                { id: "causas", label: "Causas reais" },
+                { id: "cenarios", label: "Cenários e prazos" },
+                { id: "riscos", label: "Riscos de não agir" },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Áreas atendidas — reforço de SEO local */}
       <section className="py-6 bg-secondary/50 border-y border-border">
         <div className="container mx-auto px-4">
@@ -439,7 +459,8 @@ const ProblemaPage = () => {
 
       <AnimatedSection>
       {/* Sintomas */}
-      <section className="py-10 bg-secondary">
+      <section id="sintomas" className="py-10 bg-secondary scroll-mt-24">
+
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4 text-center">Sintomas — Identifique o Seu Caso</h2>
@@ -460,7 +481,8 @@ const ProblemaPage = () => {
 
       <AnimatedSection>
       {/* Causas Reais */}
-      <section className="py-10 bg-background">
+      <section id="causas" className="py-10 bg-background scroll-mt-24">
+
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4 text-center">Causas Reais — Por Que Isso Acontece</h2>
@@ -486,7 +508,8 @@ const ProblemaPage = () => {
 
       <AnimatedSection>
       {/* Cenários */}
-      <section className="py-10 bg-secondary">
+      <section id="cenarios" className="py-10 bg-secondary scroll-mt-24">
+
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4 text-center">Cenários — Simples, Médio e Complexo</h2>
@@ -509,7 +532,8 @@ const ProblemaPage = () => {
 
       <AnimatedSection>
       {/* Riscos */}
-      <section className="py-10 bg-background">
+      <section id="riscos" className="py-10 bg-background scroll-mt-24">
+
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-6">
