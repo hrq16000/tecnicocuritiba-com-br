@@ -6,7 +6,7 @@ import { AlertTriangle, Eye, PlugZap, MonitorOff, HardDrive } from "lucide-react
  *
  * Regras do cluster:
  * - Página de sintoma orienta observação segura; NÃO diagnostica nem promete reparo.
- * - Nada de desmontagem, remoção de bateria interna ou procedimento invasivo.
+ * - Nenhuma abertura do aparelho, remoção de componente interno ou procedimento invasivo.
  * - Somente links para rotas já existentes (sem criar URL nova).
  * - Conteúdo renderizado no HTML da página (sem depender de interação).
  */

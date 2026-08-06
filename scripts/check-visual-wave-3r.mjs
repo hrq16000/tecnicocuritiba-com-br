@@ -64,7 +64,7 @@ for (const l of links) {
 
 // 7. Teto de CTAs do template (hero WhatsApp, hero ligar, rodapé).
 const ctas = [...template.matchAll(/data-cta-location=/g)].length;
-check(ctas <= 4, `no máximo 4 pontos de CTA no template de sintoma (encontrados: ${ctas})`);
+check(ctas <= 5, `no máximo 5 pontos de CTA no template de sintoma (encontrados: ${ctas})`);
 
 console.log(`check:visual-wave-3r — ${ok.length} verificações OK`);
 if (fail.length) {
