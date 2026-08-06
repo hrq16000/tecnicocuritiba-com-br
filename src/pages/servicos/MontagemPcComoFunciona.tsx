@@ -136,10 +136,10 @@ const MontagemPcComoFunciona = () => {
         <div className="container mx-auto px-4 pt-24">
           <Breadcrumbs
             items={[
-              { name: "Início", path: "/" },
-              { name: "Serviços", path: "/servicos" },
-              { name: "Montagem de PC", path: "/servicos/montagem-pc" },
-              { name: "Como funciona", path: PATH },
+              { label: "Início", href: "/" },
+              { label: "Serviços", href: "/servicos" },
+              { label: "Montagem de PC", href: "/servicos/montagem-pc" },
+              { label: "Como funciona", href: PATH },
             ]}
             emitSchema={false}
           />
