@@ -281,6 +281,13 @@ export default function Avaliar() {
               {sending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               Enviar avaliação
             </Button>
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              Tratamos seus dados conforme a LGPD. Veja a{" "}
+              <Link to="/politica-de-privacidade" className="text-primary underline underline-offset-4">
+                política de privacidade
+              </Link>
+              .
+            </p>
           </form>
         )}
       </main>

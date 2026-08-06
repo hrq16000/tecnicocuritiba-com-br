@@ -65,6 +65,7 @@ interface FormState {
   orcamento: string;
   cidade: string;
   bairro: string;
+  periodo: string;
   aceite: boolean;
   lgpd: boolean;
 }
@@ -77,6 +78,7 @@ const INITIAL: FormState = {
   orcamento: "",
   cidade: "",
   bairro: "",
+  periodo: "",
   aceite: false,
   lgpd: false,
 };
@@ -158,6 +160,7 @@ export function OrcamentoMontagemWizard() {
       anexos.length ? `Vou anexar ${anexos.length} arquivo(s) (fotos/vídeos das peças) aqui no WhatsApp.` : "",
       form.orcamento.trim() ? `Faixa de investimento: ${form.orcamento.trim()}.` : "",
       local ? `Local: ${local}.` : "",
+      form.periodo ? `Período preferido para contato/atendimento: ${form.periodo}.` : "",
       "Li e aceito os termos e condições, a política de peças do cliente e a mão de obra a partir de R$ 99,99 com orçamento aprovado antes do serviço.",
       "Autorizo o uso dos meus dados e arquivos para atendimento e emissão da ordem de serviço (LGPD).",
       numeroOS
@@ -441,8 +444,22 @@ export function OrcamentoMontagemWizard() {
             value={form.bairro}
             onChange={(e) => set("bairro", e.target.value)}
           />
+          <label className="block font-bold text-foreground" htmlFor="wz-periodo">
+            Período preferido para o contato (opcional)
+          </label>
+          <select
+            id="wz-periodo"
+            className={baseFieldCls}
+            value={form.periodo}
+            onChange={(e) => set("periodo", e.target.value)}
+          >
+            <option value="">Tanto faz</option>
+            <option value="Manhã (08h–12h)">Manhã (08h–12h)</option>
+            <option value="Tarde (13h–18h)">Tarde (13h–18h)</option>
+          </select>
         </div>
       )}
+
 
       {step === 4 && (
         <div className="space-y-4">
@@ -498,7 +515,7 @@ export function OrcamentoMontagemWizard() {
               <span>
                 Autorizo o uso dos dados e arquivos informados (fotos/vídeos das peças, cidade e bairro) para
                 atendimento, orçamento e emissão da ordem de serviço, conforme a{" "}
-                <Link to="/politica-privacidade" className="text-primary underline underline-offset-4">
+                <Link to="/politica-de-privacidade" className="text-primary underline underline-offset-4">
                   política de privacidade
                 </Link>
                 . Os dados ficam apenas no seu dispositivo e no WhatsApp enviado por você; nada é armazenado em
