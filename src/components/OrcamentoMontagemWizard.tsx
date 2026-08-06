@@ -126,8 +126,8 @@ export function OrcamentoMontagemWizard() {
     if (err) return setError(err);
     trackCTAClick("whatsapp", "montagem_pc_wizard", {
       servico: "montagem_pc",
-      uso: form.uso,
-      pecas: form.pecasOrigem,
+      category: form.uso,
+      equipamento: form.pecasOrigem,
       cidade: form.cidade,
       bairro: form.bairro || undefined,
     });
