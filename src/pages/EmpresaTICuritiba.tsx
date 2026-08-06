@@ -31,20 +31,21 @@ const CIDADES_RMC = [
 ];
 
 const SERVICOS_EMPRESAS = [
-  { icon: Headphones, title: "Suporte Técnico Recorrente", desc: "Contratos mensais com SLA e atendimento prioritário para escritórios e indústrias." },
-  { icon: Shield, title: "Segurança e Antivírus Corporativo", desc: "Bitdefender/ESET, políticas de acesso, backup em nuvem e prevenção de ransomware." },
+  { icon: Headphones, title: "Suporte Técnico Recorrente", desc: "Acompanhamento recorrente com escopo, frequência e prioridades definidos em levantamento inicial." },
+  { icon: Shield, title: "Segurança e Antivírus Corporativo", desc: "Bitdefender/ESET, políticas de acesso, backup em nuvem e medidas de redução de risco de ransomware." },
   { icon: Building2, title: "Infraestrutura de Rede", desc: "Cabeamento estruturado, Wi-Fi empresarial (UniFi/Mikrotik), VLANs e VPN site-to-site." },
-  { icon: Clock, title: "Atendimento Emergencial", desc: "Chamados críticos em até 2 horas úteis. Zero downtime para PDVs e servidores." },
+  { icon: Clock, title: "Chamados Críticos", desc: "Priorização de chamados que param a operação (PDV, servidor, rede), conforme agenda disponível no momento." },
 ];
 
 const FAQ = [
-  { q: "Vocês atendem empresas em Curitiba?", a: "Sim. Atuamos há mais de 20 anos com suporte técnico de TI para empresas, escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Oferecemos contratos mensais, atendimento avulso e projetos de infraestrutura." },
-  { q: "Qual o valor da hora técnica para empresas?", a: "A visita técnica corporativa começa em R$ 99,99 (até 30 min). Uma hora de atendimento presencial (combinada previamente) sai por R$ 169,99. Contratos mensais têm valor negociado a partir de R$ 300/mês (até 5 equipamentos) com SLA e atendimento prioritário." },
-  { q: "Fazem contrato mensal de suporte?", a: "Sim. Oferecemos planos mensais com SLA definido, atendimento remoto ilimitado e visitas presenciais programadas. Ideal para empresas que precisam de estabilidade e resposta rápida sem custo variável alto." },
+  { q: "Vocês atendem empresas em Curitiba?", a: "Sim. Atuamos há mais de 20 anos com suporte técnico de TI para empresas, escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Trabalhamos com atendimento avulso por chamado, acompanhamento recorrente e projetos de infraestrutura." },
+  { q: "Qual o valor da hora técnica para empresas?", a: "A visita técnica corporativa começa em R$ 99,99 (até 30 min). Uma hora de atendimento presencial (combinada previamente) sai por R$ 169,99. O acompanhamento recorrente tem valor definido caso a caso, após levantamento de equipamentos, usuários e escopo." },
+  { q: "Como funciona o atendimento recorrente?", a: "Antes de qualquer proposta fazemos um levantamento do parque: quantidade de equipamentos, usuários, sistemas críticos e rotinas de backup. A partir disso definimos escopo, frequência de visitas e prioridade dos chamados por escrito." },
   { q: "Atendem em quais bairros e cidades?", a: "Curitiba (todos os bairros — com foco em Batel, Centro, Centro Cívico, Alto da Glória, Água Verde e Ecoville) e Região Metropolitana: São José dos Pinhais, Araucária, Pinhais, Colombo, Campo Largo, Fazenda Rio Grande e Almirante Tamandaré." },
   { q: "Fazem projetos de rede, cabeamento e Wi-Fi empresarial?", a: "Sim. Projetamos e instalamos redes cabeadas (categoria 5e/6), Wi-Fi corporativo com controladoras UniFi/Aruba/Mikrotik, VLANs, VPN entre filiais e segmentação para PDV/visitantes." },
   { q: "Emitem nota fiscal?", a: "Sim, todos os serviços para empresas são emitidos com NFS-e do Município de Curitiba." },
 ];
+
 
 const BREADCRUMBS = [
   { name: "Início", path: "/" },
