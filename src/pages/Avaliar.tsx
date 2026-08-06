@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useSearchParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -70,6 +70,25 @@ export default function Avaliar() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot preenchido = bot: finge sucesso e não grava nada.
+    if (website.trim()) {
+      track("review_spam_blocked", { reason: "honeypot" });
+      setDone(true);
+      return;
+    }
+    if (Date.now() - openedAt.current < 4000) {
+      track("review_spam_blocked", { reason: "too_fast" });
+      toast({
+        title: "Só um instante",
+        description: "Confira sua avaliação e envie novamente em alguns segundos.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (alreadySent) {
+      toast({ title: "Avaliação já registrada", description: "Já recebemos sua avaliação para este atendimento." });
+      return;
+    }
     if (!canSubmit) {
       toast({
         title: "Faltam informações",
