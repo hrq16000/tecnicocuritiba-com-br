@@ -18,6 +18,9 @@ const track = (event: string, params: Record<string, unknown> = {}) => {
   }
 };
 
+/** Chave local de dedupe: 1 avaliação por OS (ou por serviço, sem OS). */
+const dedupeKey = (os: string, servico: string) => `rv_sent:${os || servico || "geral"}`;
+
 export default function Avaliar() {
   const [params] = useSearchParams();
   const presetService = params.get("servico") ?? "";
@@ -33,8 +36,15 @@ export default function Avaliar() {
   const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
+  /** Honeypot: bots preenchem, humanos não veem. */
+  const [website, setWebsite] = useState("");
+  const [alreadySent, setAlreadySent] = useState(false);
+  const openedAt = useRef<number>(Date.now());
 
   useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem(dedupeKey(presetOs, presetService))) {
+      setAlreadySent(true);
+    }
     track("review_link_open", {
       utm_source: params.get("utm_source") ?? "direct",
       utm_medium: params.get("utm_medium") ?? "none",
@@ -47,9 +57,16 @@ export default function Avaliar() {
   }, []);
 
   const canSubmit = useMemo(
-    () => rating >= 1 && name.trim().length >= 2 && comment.trim().length >= 5 && consent && !sending,
-    [rating, name, comment, consent, sending],
+    () =>
+      rating >= 1 &&
+      name.trim().length >= 2 &&
+      comment.trim().length >= 5 &&
+      consent &&
+      !sending &&
+      !alreadySent,
+    [rating, name, comment, consent, sending, alreadySent],
   );
+
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
