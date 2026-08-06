@@ -164,6 +164,106 @@ const MontagemPc = () => {
         </div>
       </section>
 
+      {/* Peças fornecidas pelo cliente */}
+      <section className="py-10 bg-background" id="pecas-do-cliente">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6">
+            Política para peças fornecidas pelo cliente
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Trabalhamos com peças compradas por você, novas ou usadas. Para evitar mal-entendidos, as regras abaixo valem para todo build montado com material do cliente.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { title: "Compatibilidade", desc: "Conferimos socket, chipset, perfil de memória, altura do cooler, comprimento da GPU e conectores da fonte antes de montar. Se algo for incompatível, o build é pausado e você decide como seguir." },
+              { title: "Procedência", desc: "Aceitamos peças de qualquer origem, inclusive usadas ou de marketplace. Não conseguimos atestar autenticidade nem histórico de uso de peça que não passou por nós." },
+              { title: "Integridade", desc: "Peça recebida é conferida visualmente (pinos, conectores, sinais de oxidação ou reparo prévio) e registrada na abertura da ordem. Dano preexistente é apontado antes da montagem." },
+              { title: "Prazos de troca", desc: "Se uma peça sua apresentar defeito, o acionamento da garantia é feito por você junto ao vendedor. Guardamos o equipamento por até 10 dias corridos aguardando a reposição; após esse prazo, o restante é devolvido montado ou desmontado, conforme sua escolha." },
+              { title: "Garantia da peça", desc: "É sempre do fabricante ou do vendedor. Não assumimos garantia sobre componente que não fornecemos." },
+              { title: "Garantia da mão de obra", desc: "90 dias sobre montagem e configuração feitas por nós: fixação, cabeamento, aplicação de pasta térmica, ajustes de BIOS/UEFI e instalação de drivers." },
+            ].map((item) => (
+              <div key={item.title} className="bg-secondary p-6 rounded-xl">
+                <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Garantia delimitada */}
+      <section className="py-10 bg-secondary" id="garantia">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6">
+            Garantia da montagem e da configuração
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="bg-background p-6 rounded-xl">
+              <h3 className="font-bold text-foreground mb-2">Montagem — 90 dias</h3>
+              <p className="text-muted-foreground text-sm">Fixação de componentes, cabeamento, gerenciamento de fluxo de ar, aplicação de pasta térmica e conexões da fonte.</p>
+            </div>
+            <div className="bg-background p-6 rounded-xl">
+              <h3 className="font-bold text-foreground mb-2">Configuração — 90 dias</h3>
+              <p className="text-muted-foreground text-sm">Ajustes de BIOS/UEFI aplicados por nós, instalação do sistema e drivers oficiais, curvas de ventoinha e configuração de boot.</p>
+            </div>
+            <div className="bg-background p-6 rounded-xl border border-destructive/30">
+              <h3 className="font-bold text-foreground mb-2">Não coberto</h3>
+              <p className="text-muted-foreground text-sm">Overclock (não realizamos), defeito de peça, dano por queda, líquido, surto elétrico ou transporte, alterações feitas por terceiros, software pirata e desempenho esperado em jogo ou programa específico.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Checklist final de entrega */}
+      <section className="py-10 bg-background" id="checklist-entrega">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-3">
+            Checklist final antes da entrega
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Todo computador montado passa por estas verificações. Elas comprovam funcionamento e estabilidade — não prometem FPS nem pontuação em benchmark.
+          </p>
+          <ol className="max-w-3xl mx-auto space-y-4">
+            {[
+              { t: "Compatibilidade conferida", d: "Socket, chipset, memória, dimensões físicas e conectores validados peça a peça." },
+              { t: "Fonte e consumo", d: "Cálculo de consumo do conjunto, conferência dos conectores PCIe/EPS e folga de potência." },
+              { t: "Refrigeração", d: "Pasta térmica aplicada, cooler assentado, fluxo de ar do gabinete definido (entrada/saída) e curvas de ventoinha ajustadas." },
+              { t: "BIOS/UEFI", d: "Firmware atualizado quando aplicável, perfil de memória (XMP/EXPO) habilitado dentro da especificação, ordem de boot, data/hora e Secure Boot conforme o sistema instalado." },
+              { t: "Drivers oficiais", d: "Chipset, GPU, rede, áudio e periféricos instalados a partir dos sites dos fabricantes — sem pacotes automáticos de terceiros." },
+              { t: "Teste de memória", d: "Varredura de memória completa para descartar módulo ou perfil instável." },
+              { t: "Teste de temperatura e estabilidade", d: "Stress test completo de CPU, GPU e conjunto sob carga prolongada, com monitoramento térmico e verificação de throttling, travamento ou reinício." },
+            ].map((item, i) => (
+              <li key={item.t} className="flex gap-4 bg-secondary p-5 rounded-xl">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-white font-bold flex items-center justify-center">{i + 1}</span>
+                <div>
+                  <h3 className="font-bold text-foreground">{item.t}</h3>
+                  <p className="text-muted-foreground text-sm">{item.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Navegação contextual entre serviços relacionados */}
+      <section className="py-8 bg-secondary" aria-labelledby="relacionados-montagem">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 id="relacionados-montagem" className="text-2xl font-heading font-bold text-foreground mb-4">
+            Não é montagem nova? Veja o serviço certo
+          </h2>
+          <ul className="grid md:grid-cols-2 gap-4">
+            <li className="bg-background p-5 rounded-xl">
+              <Link to="/servicos/conserto-pc-notebook" className="font-bold text-accent hover:underline">Manutenção de computador</Link>
+              <p className="text-sm text-muted-foreground mt-1">Máquina já montada que trava, esquenta, faz barulho ou não liga: diagnóstico e reparo, sem troca de plataforma.</p>
+            </li>
+            <li className="bg-background p-5 rounded-xl">
+              <Link to="/servicos/upgrade-ssd-memoria" className="font-bold text-accent hover:underline">Upgrade de SSD e memória RAM</Link>
+              <p className="text-sm text-muted-foreground mt-1">Quer só mais desempenho no PC atual sem montar outro: avaliamos se o upgrade compensa antes de qualquer compra.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-10 bg-secondary">
         <div className="container mx-auto px-4">
@@ -172,11 +272,16 @@ const MontagemPc = () => {
           </h2>
           <div className="max-w-3xl mx-auto space-y-6">
             {[
-              { q: "Posso escolher as peças?", a: "Claro! Você pode trazer suas peças ou escolher junto conosco. Damos sugestões baseadas no seu orçamento e necessidade." },
-              { q: "Vocês vendem as peças?", a: "Podemos ajudar na compra das peças em lojas parceiras com bons preços, ou você pode adquirir por conta própria." },
-              { q: "Qual a garantia?", a: "As peças têm garantia do fabricante. O serviço de montagem tem garantia de 90 dias." },
-              { q: "Quanto tempo demora?", a: "Com todas as peças disponíveis, a montagem leva de 1 a 2 dias úteis." },
-              { q: "Vocês entregam?", a: "Sim! Entregamos o PC pronto na sua casa em toda Curitiba e região." },
+              { q: "Vocês montam PC do zero?", a: "Sim. Montamos desktops, PC Gamer e workstations a partir de peças novas, incluindo escolha da lista de componentes, montagem, BIOS/UEFI, drivers oficiais e testes finais." },
+              { q: "Posso levar minhas próprias peças?", a: "Pode. Aceitamos peças fornecidas pelo cliente sem restrição de procedência, inclusive usadas. Conferimos compatibilidade e integridade antes de montar e registramos qualquer problema encontrado." },
+              { q: "Quem cobre a garantia se a peça der defeito?", a: "A garantia da peça é do fabricante ou do vendedor e o acionamento é feito por você. Nossa garantia de 90 dias cobre a mão de obra: montagem e configuração." },
+              { q: "Qual o prazo se uma peça precisar ser trocada?", a: "Guardamos o equipamento por até 10 dias corridos aguardando a peça de reposição. Passado esse prazo, devolvemos o conjunto montado ou desmontado, como você preferir." },
+              { q: "Vocês fazem overclock?", a: "Não. Trabalhamos dentro das especificações do fabricante, incluindo perfis de memória homologados (XMP/EXPO). Overclock manual não é executado nem coberto por garantia." },
+              { q: "Vocês garantem quantos FPS o PC vai rodar?", a: "Não. Desempenho em jogos e programas depende de título, resolução, drivers e atualizações. Garantimos montagem correta, estabilidade comprovada em teste de carga e temperaturas dentro do esperado." },
+              { q: "Quais testes são feitos antes da entrega?", a: "Compatibilidade, cálculo de fonte/consumo, refrigeração, ajustes de BIOS/UEFI, drivers oficiais, teste de memória e stress test completo com monitoramento de temperatura e estabilidade." },
+              { q: "Quanto custa?", a: "O orçamento depende das peças e do escopo, e é fechado antes de qualquer serviço. A mão de obra técnica parte de R$ 99,99." },
+              { q: "Quanto tempo demora?", a: "Com todas as peças em mãos, de 1 a 2 dias úteis — o stress test exige tempo de máquina ligada sob carga." },
+              { q: "Vocês entregam?", a: "Sim, entregamos o PC pronto em Curitiba e região metropolitana." },
             ].map((item, index) => (
               <div key={index} className="bg-background p-6 rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 stagger-item" style={{ animationDelay: `${index * 80}ms` }}>
                 <h3 className="font-bold text-foreground mb-2">{item.q}</h3>
