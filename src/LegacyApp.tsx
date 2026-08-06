@@ -57,6 +57,7 @@ const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
 const AdminMetricas = lazy(() => import("./pages/admin/AdminMetricas"));
 const AdminReviews = lazy(() => import("./pages/admin/AdminReviews"));
+const AdminOS = lazy(() => import("./pages/admin/AdminOS"));
 const AdminVitals = lazy(() => import("./pages/admin/AdminVitals"));
 const ConsertoImpressoraCuritiba = lazy(() => import("./pages/ConsertoImpressoraCuritiba"));
 const AssistenciaEletrodomesticosInteligentesCuritiba = lazy(() => import("./pages/AssistenciaEletrodomesticosInteligentesCuritiba"));
@@ -929,6 +930,7 @@ const App = () => (
             <Route path="/admin/funnel" element={<AdminFunnel />} />
             <Route path="/admin/metricas" element={<AdminMetricas />} />
             <Route path="/admin/reviews" element={<AdminReviews />} />
+            <Route path="/admin/os" element={<AdminOS />} />
             <Route path="/admin/vitals" element={<AdminVitals />} />
             <Route path="/conserto-impressora-curitiba" element={<ConsertoImpressoraCuritiba />} />
             <Route path="/assistencia-eletrodomesticos-inteligentes-curitiba" element={<AssistenciaEletrodomesticosInteligentesCuritiba />} />
