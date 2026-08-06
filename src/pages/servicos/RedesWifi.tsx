@@ -209,6 +209,53 @@ const RedesWifi = () => {
         </div>
       </section>
 
+      {/* Impressoras e periféricos como dispositivos de rede */}
+      <section className="py-10 bg-background" id="perifericos-em-rede">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-3">
+            Impressoras e periféricos: suporte de rede, não de hardware
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Tratamos impressoras, câmeras, NAS, TVs e demais periféricos como dispositivos conectados à rede. Resolvemos o que impede o aparelho de ser encontrado e usado — não fazemos reparo mecânico ou eletrônico desses equipamentos.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="bg-secondary p-6 rounded-xl">
+              <h3 className="font-bold text-foreground mb-3">O que fazemos</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {[
+                  "Conectar a impressora à rede Wi-Fi ou cabeada e reservar IP fixo no roteador",
+                  "Instalar e configurar o driver oficial do fabricante nos computadores da casa ou do escritório",
+                  "Compartilhar a impressora entre vários dispositivos, incluindo celular e notebook",
+                  "Corrigir impressora \"offline\" causada por troca de roteador, mudança de senha ou faixa de IP",
+                  "Configurar digitalização em rede, scan para pasta e scan para e-mail quando o aparelho suporta",
+                  "Isolar periféricos e câmeras em rede de visitantes ou VLAN separada",
+                  "Ajustar firewall, descoberta de rede e perfil público/privado no Windows",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2"><CheckCircle className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" /><span>{t}</span></li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-secondary p-6 rounded-xl border border-destructive/30">
+              <h3 className="font-bold text-foreground mb-3">O que não fazemos</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {[
+                  "Reparo mecânico de impressora: tracionamento de papel, engrenagens, cabeçote ou fusor",
+                  "Reparo eletrônico de placa lógica de impressora ou periférico",
+                  "Recarga de cartucho, reset de chip de toner ou desbloqueio de contador",
+                  "Conserto físico de câmeras, NAS, TVs e demais periféricos",
+                  "Garantia sobre limitação do próprio aparelho ou do firmware do fabricante",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2"><span className="text-destructive flex-shrink-0">✕</span><span>{t}</span></li>
+                ))}
+              </ul>
+              <p className="text-xs text-muted-foreground mt-4">
+                Quando o problema é físico, informamos na visita e indicamos a assistência autorizada da marca. Nesse caso, cobramos apenas o diagnóstico de rede já realizado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-10 bg-secondary">
         <div className="container mx-auto px-4">
@@ -222,6 +269,12 @@ const RedesWifi = () => {
               { q: "Preciso trocar meu roteador?", a: "Depende. Avaliamos seu equipamento atual e recomendamos troca apenas se necessário. Muitas vezes, uma boa configuração resolve." },
               { q: "Vocês instalam o equipamento?", a: "Sim! Instalamos e configuramos roteadores, repetidores, sistemas Mesh e redes cabeadas." },
               { q: "Qual a diferença entre 2.4GHz e 5GHz?", a: "2.4GHz tem maior alcance mas menor velocidade. 5GHz é mais rápido mas tem menor alcance. Configuramos ambas para uso ideal." },
+              { q: "Vocês configuram impressora em rede?", a: "Sim. Conectamos a impressora à rede, reservamos IP fixo, instalamos o driver oficial nos computadores e liberamos o compartilhamento entre os dispositivos. É suporte de rede e configuração." },
+              { q: "Minha impressora aparece como offline. Vocês resolvem?", a: "Na maioria dos casos sim: o aparelho costuma perder o endereço após troca de roteador, mudança de senha ou alteração da faixa de IP. Se o problema for físico ou de placa, informamos na hora e indicamos a autorizada." },
+              { q: "Vocês consertam impressora que não puxa papel ou está borrando?", a: "Não. Falhas mecânicas e eletrônicas de impressora — tracionamento, cabeçote, fusor, placa lógica — são de assistência autorizada da marca. Nosso escopo é o aparelho como dispositivo de rede." },
+              { q: "Trabalham com recarga de cartucho ou reset de toner?", a: "Não. Não fazemos recarga, reset de chip nem desbloqueio de contador." },
+              { q: "Dá para digitalizar direto para uma pasta da rede?", a: "Sim, quando a impressora multifuncional oferece esse recurso. Configuramos scan para pasta compartilhada ou para e-mail conforme o modelo permitir." },
+              { q: "Vocês configuram câmeras, NAS e TVs na rede?", a: "Configuramos esses equipamentos como dispositivos de rede: endereçamento, acesso remoto quando suportado e isolamento em rede separada. O conserto físico deles não faz parte do serviço." },
             ].map((item, index) => (
               <div key={index} className="bg-background p-6 rounded-xl hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 stagger-item" style={{ animationDelay: `${index * 80}ms` }}>
                 <h3 className="font-bold text-foreground mb-2">{item.q}</h3>
