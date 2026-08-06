@@ -67,7 +67,6 @@ const proibidos = [
   /suporte ilimitado (?!não)/i,
   /atendimento prioritário/i,
   /remoto prioritário/i,
-  /tempo de resposta garantido(?! )/,
   /24 horas por dia/i,
   /R\$\s?\d/,
   /\/m[êe]s/i,
@@ -75,6 +74,11 @@ const proibidos = [
 for (const re of proibidos) {
   const m = src.match(re);
   ok(!m, `${PAGE}: termo proibido na rodada 3S: "${m ? m[0] : re}"`);
+}
+
+// 6b. "tempo de resposta garantido" só é aceito em forma negativa
+for (const m of src.match(/.{0,60}tempo de resposta garantido/gi) || []) {
+  ok(/n[ãa]o trabalhamos|sem |n[ãa]o h[áa]|nunca/i.test(m), `${PAGE}: promessa de tempo de resposta: "${m.trim()}"`);
 }
 
 // 7. Contextos sem falsa especialização por profissão em heading
