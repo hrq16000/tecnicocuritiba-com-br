@@ -44,7 +44,7 @@ export const BusinessHero = ({
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_20%_0%,hsl(var(--accent)/0.10),transparent_70%)]"
     />
-    <div className="container relative mx-auto px-4 py-8 md:py-12">
+    <div className="container relative mx-auto px-4 pb-8 pt-24 md:pb-12 md:pt-28">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent">
@@ -78,7 +78,7 @@ export const BusinessHero = ({
               </a>
             </Button>
             {secondary ? (
-              <Button variant="outline" asChild className="w-full sm:w-auto">
+              <Button variant="outline" asChild className="w-full text-foreground sm:w-auto">
                 <Link to={secondary.to}>
                   {secondary.label}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
