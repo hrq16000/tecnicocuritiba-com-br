@@ -735,6 +735,20 @@ export default function StatusOS() {
               </Button>
             </div>
 
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-3 h-12 w-full"
+              disabled={gerandoPdf}
+              onClick={baixarPdf}
+            >
+              <FileDown className="mr-2 h-4 w-4" />
+              {gerandoPdf ? "Gerando comprovante…" : "Baixar comprovante em PDF"}
+            </Button>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Inclui a timeline, prazos, histórico e as fotos enviadas (quando exibidas nesta tela).
+            </p>
+
             {qr && (
               <figure className="mt-4 flex flex-col items-center rounded-lg border bg-background p-4">
                 <img src={qr} alt={`QR code para acompanhar a OS ${os.numero}`} width={200} height={200} loading="lazy" />
