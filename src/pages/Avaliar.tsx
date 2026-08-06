@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Star, Loader2, CheckCircle2 } from "lucide-react";
-import { NAP_NAME, NAP_PHONE_DIGITS } from "@/lib/nap";
+import { NAP, NAP_PHONE_DIGITS } from "@/lib/nap";
 
 const track = (event: string, params: Record<string, unknown> = {}) => {
   if (typeof window !== "undefined" && window.gtag) {
@@ -93,7 +93,7 @@ export default function Avaliar() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Avaliar atendimento | {NAP_NAME}</title>
+        <title>Avaliar atendimento | {NAP.alternateName}</title>
         <meta
           name="description"
           content="Conte como foi o atendimento técnico em Curitiba: dê sua nota de 1 a 5 estrelas e autorize a publicação do seu depoimento no site."
