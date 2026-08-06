@@ -108,15 +108,35 @@ const SuporteEmpresas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: atendimento avulso ou recorrente, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
+      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: atendimento avulso ou recorrente, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={BREADCRUMBS} />
       <JsonLdSchema />
+      <BusinessPageSchema
+        id="suporte-empresas"
+        path="/suporte-empresas"
+        name="Suporte Técnico Empresarial em Curitiba"
+        description="Suporte de TI para empresas em Curitiba: estações de trabalho, rede, impressão, backup e continuidade da operação, em atendimento avulso ou recorrente."
+        breadcrumbs={BREADCRUMBS}
+        faq={FAQ_EMPRESAS}
+      />
       <Header />
       <main id="main-content">
-        <PageHero
+        <BusinessHero
+          eyebrow="Suporte técnico empresarial em Curitiba"
           title="Suporte Técnico para Empresas"
-          subtitle="Soluções de TI para pequenas e médias empresas em Curitiba. Atendimento avulso ou recorrente, escopo definido por solicitação e nota fiscal em todos os serviços."
-          ctaText="Solicitar Proposta Comercial"
+          titleSuffix="Estações de trabalho, rede, impressão e continuidade da operação"
+          description="Atendimento de informática para pequenas e médias empresas em Curitiba e região. Escopo definido por solicitação no avulso, ou por levantamento inicial no acompanhamento recorrente — sempre com autorização antes da execução."
+          whatsappUrl={whatsappUrl}
+          ctaLabel="Solicitar proposta comercial"
+          ctaLocation="suporte_empresas_hero"
+          secondary={{ label: "Ver preços e políticas", to: "/precos-e-politicas" }}
+          signals={[
+            "Nota fiscal em todos os atendimentos",
+            "Pagamento faturado para PJ",
+            "Remoto e presencial",
+            "Limites de escopo declarados",
+          ]}
         />
+
 
         <BenefitsGrid
           benefits={services}
