@@ -21,13 +21,13 @@ const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico para minha empresa."
 const services = [
   {
     icon: Headphones,
-    title: "Suporte Contínuo",
-    description: "Acompanhamento técnico permanente para sua empresa funcionar sem interrupções. Planos mensais com atendimento prioritário.",
+    title: "Avulso ou Recorrente",
+    description: "Atendimento por chamado, quando a demanda é pontual, ou acompanhamento recorrente definido a partir de um levantamento inicial.",
   },
   {
     icon: Clock,
-    title: "SLA Personalizado",
-    description: "Tempo de resposta garantido conforme a necessidade do seu negócio. Atendimento emergencial quando você mais precisa.",
+    title: "Escopo Definido",
+    description: "Cada solicitação tem escopo, autorização e prioridade acordados antes da execução. Sem promessa de disponibilidade permanente.",
   },
   {
     icon: Building,
@@ -40,6 +40,7 @@ const services = [
     description: "Aceitamos pagamento faturado para empresas. Nota fiscal emitida em todos os serviços realizados.",
   },
 ];
+
 
 const diferenciais = [
   {
