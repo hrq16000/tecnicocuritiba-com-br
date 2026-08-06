@@ -559,7 +559,7 @@ const SuporteEmpresas = () => {
               <li><Link to="/servicos/redes-wifi" className="text-primary underline underline-offset-4">Redes e Wi-Fi</Link> — rede local, cabeamento e cobertura.</li>
               <li><Link to="/atendimento-remoto" className="text-primary underline underline-offset-4">Atendimento remoto</Link> — o que resolvemos sem deslocamento.</li>
               <li><Link to="/precos-e-politicas" className="text-primary underline underline-offset-4">Preços e políticas</Link> — diagnóstico, aprovação e garantia.</li>
-              <li><Link to="/guias/organizacao-ti-pequenos-escritorios" className="text-primary underline underline-offset-4">Organização de TI para pequenos escritórios</Link> — guia prático de preparação.</li>
+              <li><Link to="/guias/organizacao-de-ti-para-escritorios" className="text-primary underline underline-offset-4">Organização de TI para pequenos escritórios</Link> — guia prático de preparação.</li>
             </ul>
           </div>
         </section>
