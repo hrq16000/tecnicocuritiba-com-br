@@ -3,6 +3,7 @@ import { Building2, Shield, Clock, Headphones, MapPin, CheckCircle, MessageCircl
 import { Button } from "@/components/ui/button";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageSummaryBand from "@/components/PageSummaryBand";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import { useEffect } from "react";
 
@@ -127,7 +128,7 @@ export default function EmpresaTICuritiba() {
         />
 
         <section className="max-w-5xl mx-auto mb-14 scroll-mt-24" aria-labelledby="servicos-empresas">
-          <h2 id="servicos-empresas" className="text-2xl md:text-3xl font-heading font-bold text-center mb-8">O que fazemos para empresas</h2>
+          <h2 id="servicos-empresas" className="scroll-mt-24 text-2xl md:text-3xl font-heading font-bold text-center mb-8">O que fazemos para empresas</h2>
           <div className="grid md:grid-cols-2 gap-5">
             {SERVICOS_EMPRESAS.map((s) => (
               <div key={s.title} className="bg-card border border-border rounded-xl p-5 hover:border-accent/40 transition-colors">
@@ -145,7 +146,7 @@ export default function EmpresaTICuritiba() {
         </section>
 
         <section className="max-w-5xl mx-auto mb-14" aria-labelledby="bairros-comerciais">
-          <h2 id="bairros-comerciais" className="text-2xl md:text-3xl font-heading font-bold text-center mb-2">Atendimento nos principais polos comerciais</h2>
+          <h2 id="bairros-comerciais" className="scroll-mt-24 text-2xl md:text-3xl font-heading font-bold text-center mb-2">Atendimento nos principais polos comerciais</h2>
           <p className="text-center text-muted-foreground mb-8">Empresas em Curitiba — clique no bairro e veja detalhes locais.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {BAIRROS_COMERCIAIS.map((b) => (
@@ -162,7 +163,7 @@ export default function EmpresaTICuritiba() {
         </section>
 
         <section className="max-w-5xl mx-auto mb-14" aria-labelledby="cidades-rmc">
-          <h2 id="cidades-rmc" className="text-2xl md:text-3xl font-heading font-bold text-center mb-8">Também atendemos a Região Metropolitana</h2>
+          <h2 id="cidades-rmc" className="scroll-mt-24 text-2xl md:text-3xl font-heading font-bold text-center mb-8">Também atendemos a Região Metropolitana</h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             {CIDADES_RMC.map((c) => (
               <Link
@@ -177,7 +178,7 @@ export default function EmpresaTICuritiba() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-14" aria-labelledby="faq-empresas">
-          <h2 id="faq-empresas" className="text-2xl md:text-3xl font-heading font-bold text-center mb-8">Perguntas frequentes — empresas</h2>
+          <h2 id="faq-empresas" className="scroll-mt-24 text-2xl md:text-3xl font-heading font-bold text-center mb-8">Perguntas frequentes — empresas</h2>
           <div className="space-y-3">
             {FAQ.map((f, i) => (
               <details key={i} className="bg-card border border-border rounded-lg p-4 group">
