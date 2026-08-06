@@ -112,7 +112,7 @@ export default function PoliticaPecasCliente() {
               </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link to="/servicos/montagem-pc">Ver serviço de montagem</Link>
+              <Link to="/servicos/montagem-pc" className="text-foreground">Ver serviço de montagem</Link>
             </Button>
           </div>
 
@@ -175,7 +175,7 @@ export default function PoliticaPecasCliente() {
             4. Prazos de troca e permanência
           </h2>
           <div className="overflow-x-auto mb-10">
-            <table className="w-full text-sm border rounded-xl overflow-hidden">
+            <table className="w-full min-w-[520px] text-sm border rounded-xl overflow-hidden text-foreground">
               <thead className="bg-muted text-foreground">
                 <tr>
                   <th className="text-left p-3">Situação</th>
@@ -237,7 +237,7 @@ export default function PoliticaPecasCliente() {
             ou em uma venda no estado.
           </p>
           <div className="overflow-x-auto mb-4">
-            <table className="w-full text-sm border rounded-xl overflow-hidden">
+            <table className="w-full min-w-[520px] text-sm border rounded-xl overflow-hidden text-foreground">
               <thead className="bg-muted text-foreground">
                 <tr>
                   <th className="text-left p-3">Idade do equipamento</th>
