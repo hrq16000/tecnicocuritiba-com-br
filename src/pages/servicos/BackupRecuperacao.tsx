@@ -138,7 +138,7 @@ const BackupRecuperacao = () => {
       <RealImageSection imageKey="diagnostico" caption="Diagnóstico técnico para backup e recuperação segura" />
 
       {/* Tipos de Recuperação */}
-      <section className="py-10 bg-secondary">
+      <section id="niveis" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Níveis de Recuperação
