@@ -203,8 +203,41 @@ const ConsertoPcNotebook = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos">
+              <p>
+                Fonte, placa-mãe, memória, armazenamento, refrigeração e periféricos internos são
+                testados antes de qualquer indicação de peça.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="Quando o equipamento precisa de bancada">
+              <p>
+                Reparos em nível de componente e falhas intermitentes exigem análise em bancada, com
+                coleta combinada antes da retirada.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Peças e autorização">
+              <p>
+                Nenhuma peça é trocada sem aprovação. Peça e mão de obra têm garantias distintas,
+                registradas na ordem de serviço.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-conserto-pc-notebook-meio"
+              message="Olá! Meu computador apresenta um defeito de hardware. Podem avaliar?"
+              hint="Descreva o sintoma e recebemos o caso pela triagem, sem compromisso."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes
