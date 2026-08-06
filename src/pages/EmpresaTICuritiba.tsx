@@ -5,7 +5,9 @@ import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PageSummaryBand from "@/components/PageSummaryBand";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
-import { useEffect } from "react";
+import BusinessHero from "@/components/b2b/BusinessHero";
+import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+
 
 const WHATSAPP_URL = "https://wa.me/5541997452053?text=" + encodeURIComponent("Olá! Quero suporte de TI para minha empresa em Curitiba.");
 
