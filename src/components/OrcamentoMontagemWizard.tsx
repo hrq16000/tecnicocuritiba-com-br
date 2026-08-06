@@ -469,7 +469,24 @@ export function OrcamentoMontagemWizard() {
             value={form.bairro}
             onChange={(e) => set("bairro", e.target.value)}
           />
+          <label className="block font-bold text-foreground" htmlFor="wz-celular">
+            Celular com WhatsApp (opcional, libera a consulta em /status-os)
+          </label>
+          <input
+            id="wz-celular"
+            className={baseFieldCls}
+            inputMode="tel"
+            maxLength={20}
+            placeholder="Ex.: (41) 99999-9999"
+            value={form.celular}
+            onChange={(e) => set("celular", e.target.value)}
+          />
+          <p className="text-sm text-muted-foreground">
+            Usado apenas para localizar a sua ordem de serviço na consulta pública. Nunca é exibido
+            completo: a página mostra somente o formato (41) ****-9999.
+          </p>
           <label className="block font-bold text-foreground" htmlFor="wz-periodo">
+
             Período preferido para o contato (opcional)
           </label>
           <select
