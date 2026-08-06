@@ -4,6 +4,7 @@ import { FastHeroSection } from "@/components/FastHeroSection";
 import { TopOfferBanner } from "@/components/TopOfferBanner";
 import { LazyOnVisible } from "@/components/LazyOnVisible";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
+import { ProblemSignals } from "@/components/ProblemSignals";
 
 const HomeDeferredSections = lazy(() => import("@/components/HomeDeferredSections"));
 const PricingBanner = lazy(() => import("@/components/PricingBanner").then((m) => ({ default: m.PricingBanner })));
@@ -56,6 +57,8 @@ const Index = () => {
       <TopOfferBanner />
       <main id="main-content">
         <FastHeroSection />
+
+        <ProblemSignals />
 
         {showNearFold ? (
           <section className="py-6 bg-background">

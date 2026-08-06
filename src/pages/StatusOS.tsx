@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -6,7 +6,9 @@ import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MessageCircle, CheckCircle2, Circle, Clock } from "lucide-react";
+import { Search, MessageCircle, CheckCircle2, Circle, Clock, Copy, Check, Star, History } from "lucide-react";
+import QRCode from "qrcode";
+import { buildSiteReviewUrl } from "@/lib/reviewRequest";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -54,23 +56,72 @@ const FAQ = [
     a: "Não. O prazo exibido é uma estimativa que depende de diagnóstico, aprovação do orçamento e disponibilidade de peças. Qualquer alteração é comunicada pelo WhatsApp.",
   },
   {
+    q: "Consigo ver quando cada etapa foi atualizada?",
+    a: "Sim. Quando a OS é localizada, a página mostra a data e a hora de abertura, da última atualização e o histórico com cada mudança de etapa e de prazo registrada pelo técnico.",
+  },
+  {
+    q: "Posso compartilhar ou reabrir a consulta depois?",
+    a: "Sim. Use o botão de copiar link ou o QR code exibido na consulta: ambos abrem a página já com o número da OS preenchido, sem precisar digitar de novo no celular.",
+  },
+  {
+    q: "Perdi o link de avaliação. Como recebo de novo?",
+    a: "Na própria consulta há o botão \"Reenviar link de avaliação\", que abre o WhatsApp com o mesmo link e os mesmos parâmetros de origem usados no envio original.",
+  },
+  {
     q: "A consulta mostra dados pessoais?",
     a: "Não. A página mostra apenas etapa, prazo estimado e observações públicas do atendimento. Nome, telefone e conteúdo do equipamento não são exibidos.",
   },
 ];
 
+/** Formato aceito: OS-AAAAMMDD-HHMM-000 (aceita também sem o prefixo "OS-"). */
+const OS_REGEX = /^(OS-)?\d{8}-\d{4}-\d{1,4}$/i;
+
+const normalizeOS = (v: string) => {
+  const t = v.trim().toUpperCase().replace(/\s+/g, "");
+  return t && !t.startsWith("OS-") && /^\d{8}-/.test(t) ? `OS-${t}` : t;
+};
+
+interface HistoricoItem {
+  etapa?: string;
+  em?: string;
+  at?: string;
+  data?: string;
+  prazo_estimado?: string;
+  observacao?: string;
+  nota?: string;
+}
+
+const parseHistorico = (raw: unknown): HistoricoItem[] => {
+  if (!Array.isArray(raw)) return [];
+  return (raw as HistoricoItem[])
+    .filter((h) => h && typeof h === "object")
+    .sort((a, b) => String(a.em ?? a.at ?? a.data ?? "").localeCompare(String(b.em ?? b.at ?? b.data ?? "")));
+};
+
+const fmtDate = (v?: string) => {
+  if (!v) return "";
+  const d = new Date(v);
+  return Number.isNaN(d.getTime()) ? v : d.toLocaleString("pt-BR");
+};
+
 export default function StatusOS() {
   const [numero, setNumero] = useState("");
+  const [copiado, setCopiado] = useState(false);
+  const [qr, setQr] = useState("");
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [os, setOs] = useState<OSRow | null>(null);
 
   const buscar = async (e: React.FormEvent) => {
     e.preventDefault();
-    const q = numero.trim();
-    if (q.length < 6) {
-      setErro("Informe o número completo da OS (mínimo 6 caracteres).");
+    const q = normalizeOS(numero);
+    if (q !== numero) setNumero(q);
+    if (!OS_REGEX.test(q)) {
+      setErro(
+        "Número de OS inválido. Use o formato do PDF: OS-AAAAMMDD-HHMM-000 (exemplo: OS-20260806-1830-123).",
+      );
       setOs(null);
+      track("status_os_formato_invalido");
       return;
     }
     setLoading(true);
@@ -96,6 +147,47 @@ export default function StatusOS() {
   };
 
   const idxAtual = os ? Math.max(0, ETAPAS.findIndex((e) => e.id === os.etapa)) : -1;
+  const historico = useMemo(() => (os ? parseHistorico(os.historico) : []), [os]);
+
+  /** Link público e compartilhável da consulta (abre já com a OS preenchida). */
+  const shareUrl = os && typeof window !== "undefined"
+    ? `${window.location.origin}/status-os?os=${encodeURIComponent(os.numero)}`
+    : "";
+
+  useEffect(() => {
+    if (!shareUrl) { setQr(""); return; }
+    QRCode.toDataURL(shareUrl, { width: 200, margin: 1 }).then(setQr).catch(() => setQr(""));
+  }, [shareUrl]);
+
+  // Deep link: /status-os?os=OS-... consulta automaticamente.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const p = new URLSearchParams(window.location.search).get("os");
+    if (p) setNumero(normalizeOS(p));
+  }, []);
+
+  const copiarLink = async () => {
+    if (!shareUrl) return;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiado(true);
+      track("status_os_copiar_link");
+      setTimeout(() => setCopiado(false), 2000);
+    } catch {
+      setErro("Não foi possível copiar automaticamente. Copie o endereço da barra do navegador.");
+    }
+  };
+
+  /**
+   * Reenvio do link de avaliação: mantém exatamente os mesmos UTMs de origem
+   * (utm_source=whatsapp / utm_campaign=pos_atendimento_review), só muda o medium
+   * para identificar que partiu da própria página de status.
+   */
+  const reenviarAvaliacaoHref = os
+    ? `https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent(
+        `Olá! Quero receber novamente o link de avaliação da OS ${os.numero}.\n\n${buildSiteReviewUrl({ os: os.numero, medium: "whatsapp_os" })}`,
+      )}`
+    : "";
 
   const waHref = `https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent(
     `Olá! Quero acompanhar minha Ordem de Serviço${numero ? ` ${numero.trim()}` : ""}.`,
@@ -157,8 +249,21 @@ export default function StatusOS() {
         </form>
 
         {erro && (
-          <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive">
-            {erro}
+          <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm">
+            <p className="font-medium text-destructive">{erro}</p>
+            <p className="mt-2 text-muted-foreground">
+              Formato correto: <code className="rounded bg-muted px-1">OS-AAAAMMDD-HHMM-000</code> — o
+              mesmo código do PDF da Ordem de Serviço e da mensagem no WhatsApp.
+            </p>
+            <a
+              className="mt-3 inline-flex items-center gap-2 font-medium text-primary underline"
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("status_os_ajuda_whatsapp")}
+            >
+              <MessageCircle className="h-4 w-4" /> Falar com o técnico no WhatsApp
+            </a>
           </div>
         )}
 
@@ -223,6 +328,59 @@ export default function StatusOS() {
                 );
               })}
             </ol>
+
+            {historico.length > 0 && (
+              <div className="mt-6 rounded-lg border bg-muted/30 p-4">
+                <h3 className="flex items-center gap-2 text-sm font-semibold">
+                  <History className="h-4 w-4" aria-hidden="true" />
+                  Histórico do atendimento
+                </h3>
+                <ol className="mt-3 space-y-2 text-sm">
+                  {historico.map((h, i) => {
+                    const etapa = ETAPAS.find((e) => e.id === h.etapa);
+                    return (
+                      <li key={`${h.etapa}-${i}`} className="flex flex-wrap gap-x-2">
+                        <time className="text-muted-foreground">{fmtDate(h.em ?? h.at ?? h.data)}</time>
+                        <span className="font-medium">{etapa?.label ?? h.etapa}</span>
+                        {h.prazo_estimado && (
+                          <span className="text-muted-foreground">· prazo: {h.prazo_estimado}</span>
+                        )}
+                        {(h.observacao ?? h.nota) && (
+                          <span className="w-full text-muted-foreground">{h.observacao ?? h.nota}</span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            )}
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-start">
+              <Button type="button" variant="outline" className="h-12 sm:flex-1" onClick={copiarLink}>
+                {copiado ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
+                {copiado ? "Link copiado" : "Copiar link da OS"}
+              </Button>
+              <Button asChild variant="outline" className="h-12 sm:flex-1">
+                <a
+                  href={reenviarAvaliacaoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("status_os_reenviar_avaliacao", { etapa: os.etapa })}
+                >
+                  <Star className="mr-2 h-4 w-4" />
+                  Reenviar link de avaliação
+                </a>
+              </Button>
+            </div>
+
+            {qr && (
+              <figure className="mt-4 flex flex-col items-center rounded-lg border bg-background p-4">
+                <img src={qr} alt={`QR code para acompanhar a OS ${os.numero}`} width={200} height={200} loading="lazy" />
+                <figcaption className="mt-2 text-center text-xs text-muted-foreground">
+                  Aponte a câmera do celular para abrir esta consulta.
+                </figcaption>
+              </figure>
+            )}
 
             <Button asChild size="lg" className="mt-6 w-full">
               <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={() => track("status_os_whatsapp", { etapa: os.etapa })}>

@@ -7,6 +7,9 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppChat } from "@/components/WhatsAppChat";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
+import { TrustStrip } from "@/components/TrustStrip";
+import { PageTableOfContents } from "@/components/PageTableOfContents";
+import { InlineTriageCTA } from "@/components/InlineTriageCTA";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { trackPageView } from "@/lib/analytics";
 import { 
@@ -177,6 +180,34 @@ const PrecosEPoliticas = () => {
           </div>
         </section>
 
+        {/* Conversão: CTA de triagem + provas de confiança + sumário navegável */}
+        <section className="bg-background py-6">
+          <div className="container mx-auto">
+            <div className="mx-auto max-w-3xl">
+              <InlineTriageCTA
+                location="precos_hero"
+                label="Descrever meu atendimento"
+                message="Olá! Vim da página de Preços e Políticas do site."
+                hint="Você descreve o problema e recebe o valor antes de autorizar qualquer execução."
+              />
+              <TrustStrip className="mt-4" />
+              <PageTableOfContents
+                className="mt-4"
+                items={[
+                  { id: "visita-tecnica", label: "Visita técnica" },
+                  { id: "execucao-no-local", label: "Execução no local" },
+                  { id: "coleta-e-entrega", label: "Coleta e entrega" },
+                  { id: "diagnostico", label: "Diagnóstico" },
+                  { id: "tabela-completa", label: "Tabela completa de serviços" },
+                  { id: "politicas", label: "Políticas de atendimento" },
+                  { id: "laboratorio", label: "Laboratório" },
+                  { id: "casos-complexos", label: "Casos complexos" },
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
         {/* Link para Como Funciona */}
         <section className="py-6 bg-secondary">
           <div className="container mx-auto">
@@ -196,7 +227,7 @@ const PrecosEPoliticas = () => {
           <div className="absolute top-0 left-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center reveal-text">
+              <h2 id="visita-tecnica" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center reveal-text">
                 ⚡ Visita Técnica — Serviços Rápidos
               </h2>
               <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto reveal-text" data-reveal-delay="100">
@@ -223,7 +254,7 @@ const PrecosEPoliticas = () => {
         <section className="py-8 md:py-10 bg-secondary">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
+              <h2 id="execucao-no-local" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
                 🛠️ Serviços com Execução no Local
               </h2>
               <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -255,7 +286,7 @@ const PrecosEPoliticas = () => {
         <section className="py-8 md:py-10 bg-background">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
+              <h2 id="coleta-e-entrega" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
                 🚚 Equipamentos com Coleta e Entrega
               </h2>
                 <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -293,7 +324,7 @@ const PrecosEPoliticas = () => {
         <section className="py-8 md:py-10 bg-secondary">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
+              <h2 id="diagnostico" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
                 Diagnóstico com Compromisso
               </h2>
               <div className="bg-background rounded-2xl p-6 md:p-8 border-2 border-accent/20">
@@ -340,7 +371,7 @@ const PrecosEPoliticas = () => {
         <section className="py-8 md:py-10 bg-background">
           <div className="container mx-auto">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center reveal-text">
+              <h2 id="tabela-completa" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center reveal-text">
                 Tabela Completa de Serviços
               </h2>
 
@@ -395,7 +426,7 @@ const PrecosEPoliticas = () => {
           <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl translate-y-1/2 translate-x-1/3 pointer-events-none" />
           <div className="container mx-auto relative z-10">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center reveal-text">
+              <h2 id="politicas" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center reveal-text">
                 Políticas de Atendimento
               </h2>
 
@@ -542,7 +573,7 @@ const PrecosEPoliticas = () => {
         <section className="py-8 md:py-10 bg-background">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
+              <h2 id="laboratorio" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
                 Laboratório (Coleta e Entrega)
               </h2>
               <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -589,7 +620,7 @@ const PrecosEPoliticas = () => {
         <section className="py-8 md:py-10 bg-secondary">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
+              <h2 id="casos-complexos" style={{ scrollMarginTop: "96px" }} className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-center">
                 Casos Complexos
               </h2>
               <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
