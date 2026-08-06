@@ -131,7 +131,7 @@ export function OrcamentoMontagemWizard() {
     if (err) return setError(err);
     const numero = numeroOS || gerarNumeroOS();
     setNumeroOS(numero);
-    trackCTAClick("download", "montagem_pc_wizard_os", {
+    trackCTAClick("whatsapp", "montagem_pc_wizard_os_pdf", {
       servico: "montagem_pc",
       category: form.uso,
       cidade: form.cidade,
