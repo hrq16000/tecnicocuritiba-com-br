@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, CheckCircle, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, FileDown, ImagePlus, MessageCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
+import { baixarOrdemServicoPdf, gerarNumeroOS } from "@/lib/ordemServicoPdf";
 import { cn } from "@/lib/utils";
 
 /**
