@@ -267,7 +267,11 @@ const MontagemPc = () => {
               </a>
             </Button>
             <p className="text-sm text-muted-foreground mt-3">
-              O mesmo checklist é enviado pelo WhatsApp junto com a entrega do equipamento.
+              O mesmo checklist é enviado pelo WhatsApp junto com a entrega do equipamento.{" "}
+              <Link to="/servicos/montagem-pc/como-funciona" className="text-primary underline underline-offset-4">
+                Veja como funciona o atendimento e os prazos
+              </Link>
+              .
             </p>
           </div>
         </div>
