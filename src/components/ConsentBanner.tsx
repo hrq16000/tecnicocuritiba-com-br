@@ -13,6 +13,13 @@ const updateConsent = (granted: boolean) => {
   });
 };
 
+/**
+ * Banner de consentimento compacto e não bloqueante.
+ * - Mobile: barra baixa, alinhada à esquerda, com espaço reservado à direita
+ *   para o botão flutuante de WhatsApp continuar clicável.
+ * - Respeita safe-area-inset-bottom, alvos de toque >= 44px e foco por teclado.
+ * - Mantém a mesma chave de persistência e o mesmo contrato com o analytics.
+ */
 export const ConsentBanner = () => {
   const [open, setOpen] = useState(false);
 
@@ -26,7 +33,7 @@ export const ConsentBanner = () => {
   }, []);
 
   const decide = (granted: boolean) => {
-    try { localStorage.setItem(KEY, granted ? "granted" : "denied"); } catch {}
+    try { localStorage.setItem(KEY, granted ? "granted" : "denied"); } catch { /* storage indisponível */ }
     updateConsent(granted);
     setOpen(false);
   };
@@ -35,54 +42,38 @@ export const ConsentBanner = () => {
 
   return (
     <div
-      role="dialog"
+      role="region"
       aria-label="Aviso de privacidade e cookies"
-      style={{
-        position: "fixed",
-        zIndex: 9999,
-        left: "50%",
-        bottom: "16px",
-        transform: "translateX(-50%)",
-        width: "min(640px, calc(100vw - 24px))",
-        background: "rgba(15,23,42,0.96)",
-        color: "#fff",
-        borderRadius: "14px",
-        padding: "14px 16px",
-        boxShadow: "0 18px 38px rgba(0,0,0,.35)",
-        border: "1px solid rgba(255,255,255,.12)",
-        backdropFilter: "blur(10px)",
-        fontFamily: "Inter, system-ui, sans-serif",
-        fontSize: "14px",
-        lineHeight: 1.45,
-      }}
+      className={[
+        "fixed z-[90] rounded-xl border border-border bg-card/95 text-card-foreground shadow-lg backdrop-blur",
+        "left-3 right-[5.5rem] bottom-3 px-3 py-2.5",
+        "sm:left-6 sm:right-auto sm:bottom-6 sm:max-w-md sm:px-4 sm:py-3",
+      ].join(" ")}
+      style={{ marginBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
-      <p style={{ margin: 0, marginBottom: 10 }}>
-        Usamos cookies para medir audiência e melhorar sua experiência. Você pode aceitar ou recusar.
-        Veja nossos <a href="/termos-e-condicoes" style={{ color: "#fdba74", textDecoration: "underline" }}>Termos</a>.
-      </p>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
-        <button
-          type="button"
-          onClick={() => decide(false)}
-          style={{
-            minHeight: 40, padding: "0 14px", borderRadius: 10,
-            border: "1px solid rgba(255,255,255,.25)", background: "transparent",
-            color: "#fff", fontWeight: 600, cursor: "pointer",
-          }}
-        >
-          Recusar
-        </button>
-        <button
-          type="button"
-          onClick={() => decide(true)}
-          style={{
-            minHeight: 40, padding: "0 16px", borderRadius: 10,
-            border: "none", background: "hsl(145,63%,42%)",
-            color: "#fff", fontWeight: 700, cursor: "pointer",
-          }}
-        >
-          Aceitar
-        </button>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <p className="min-w-0 flex-1 text-xs leading-snug text-muted-foreground sm:text-sm">
+          Usamos cookies para medir audiência.{" "}
+          <a href="/politica-de-privacidade" className="underline underline-offset-2 hover:text-foreground">
+            Privacidade
+          </a>
+        </p>
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            type="button"
+            onClick={() => decide(false)}
+            className="min-h-11 rounded-lg border border-border px-3 text-xs font-semibold text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+          >
+            Recusar
+          </button>
+          <button
+            type="button"
+            onClick={() => decide(true)}
+            className="min-h-11 rounded-lg bg-primary px-4 text-xs font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+          >
+            Aceitar
+          </button>
+        </div>
       </div>
     </div>
   );
