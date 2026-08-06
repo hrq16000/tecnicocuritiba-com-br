@@ -53,7 +53,7 @@ export async function baixarOrdemServicoPdf(data: OrdemServicoData) {
   doc.text("Ordem de Serviço - Montagem de PC", M, 34);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
-  doc.text(`${NAP.name} · ${NAP.city}/${NAP.state}`, M, 54);
+  doc.text(`${NAP.name} · ${NAP.city}/${NAP.region}`, M, 54);
   doc.setTextColor(20, 20, 20);
   y = 104;
 
