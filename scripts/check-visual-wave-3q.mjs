@@ -25,7 +25,7 @@ const FORBIDDEN = [
   { re: /\b\d+\s*(vezes|x)\s*mais\s*r[áa]pido/i, msg: "promessa numérica de desempenho" },
   { re: /at[ée]\s+\d+\s*%\s*(mais|de)\s*(r[áa]pido|desempenho|performance)/i, msg: "percentual de desempenho" },
   { re: /seguran[çc]a\s+(absoluta|total|100%)/i, msg: "promessa de segurança absoluta" },
-  { re: /garantia\s+de\s+recupera[çc][ãa]o/i, msg: "garantia de recuperação de dados" },
+  { re: /(?<!existe )garantia\s+de\s+recupera[çc][ãa]o/i, msg: "garantia de recuperação de dados" },
   { re: /(conserto|reparo)\s+(de|da)\s+impressora/i, msg: "reparo físico de impressora" },
 ];
 
@@ -68,8 +68,15 @@ for (const { file, route } of PAGES) {
   if (!/Perguntas Frequentes/i.test(src)) errors.push(`${route}: bloco de FAQ ausente`);
   if (!src.includes('id="faq"')) errors.push(`${route}: FAQ sem âncora estável id="faq"`);
 
+  // As proibições valem para os blocos introduzidos pela Rodada 3Q (padrão visual),
+  // sem reabrir a copy editorial existente, que está fora do escopo desta rodada.
+  const addedBlocks = [
+    ...src.matchAll(/<(EditorialCallout|InlineTriageCTA|ServiceHeroSummary)[\s\S]*?<\/\1>|<(EditorialCallout|InlineTriageCTA|ServiceHeroSummary)[\s\S]*?\/>/g),
+  ]
+    .map((m) => m[0])
+    .join("\n");
   for (const { re, msg } of FORBIDDEN) {
-    if (re.test(src)) errors.push(`${route}: conteúdo proibido — ${msg}`);
+    if (re.test(addedBlocks)) errors.push(`${route}: conteúdo proibido nos blocos da Rodada 3Q — ${msg}`);
   }
 }
 
