@@ -123,6 +123,12 @@ export default function Avaliar() {
       bairro: neighborhood || "nao_informado",
       os_numero: presetOs || "nao_informado",
     });
+    try {
+      localStorage.setItem(dedupeKey(presetOs, presetService), String(Date.now()));
+    } catch {
+      /* storage indisponível: segue o fluxo */
+    }
+    setAlreadySent(true);
     setDone(true);
   };
 
@@ -168,6 +174,28 @@ export default function Avaliar() {
               Leva menos de 1 minuto. Sua opinião ajuda outros moradores de Curitiba e região a escolherem melhor.
               {presetOs && <span className="block mt-1">Ordem de serviço: <strong>{presetOs}</strong></span>}
             </p>
+
+            {alreadySent && (
+              <p className="mb-6 rounded-lg border border-border bg-muted/40 p-3 text-sm text-muted-foreground">
+                Já recebemos uma avaliação para este atendimento. Se precisar corrigir algo, fale com a gente no
+                WhatsApp.
+              </p>
+            )}
+
+            {/* Honeypot anti-spam: invisível para pessoas */}
+            <div aria-hidden className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+              <label htmlFor="website">Site</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
+
 
             <fieldset className="mb-6">
               <legend className="mb-2 text-sm font-semibold text-foreground">Sua nota *</legend>
