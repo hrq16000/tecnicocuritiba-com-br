@@ -107,22 +107,31 @@ const AdminReviews = () => {
     if (isAdmin) void fetchReviews();
   }, [isAdmin]);
 
+  const bairros = useMemo(
+    () => [...new Set(reviews.map((r) => r.neighborhood).filter(Boolean) as string[])].sort(),
+    [reviews],
+  );
+  const servicos = useMemo(
+    () => [...new Set(reviews.map((r) => r.service_slug).filter(Boolean) as string[])].sort(),
+    [reviews],
+  );
+
   const filtered = useMemo(() => {
     return reviews.filter((r) => {
-      if (filter === "pending" && (r.verified || !r.published)) {
-        // pendente = ainda não verificado
-        if (r.verified) return false;
-      }
+      if (filter === "pending" && (r.verified || r.moderation_action === "rejected")) return false;
       if (filter === "published" && !(r.verified && r.published)) return false;
       if (filter === "hidden" && r.published) return false;
+      if (filter === "rejected" && r.moderation_action !== "rejected") return false;
+      if (bairroFilter !== "all" && (r.neighborhood ?? "") !== bairroFilter) return false;
+      if (servicoFilter !== "all" && (r.service_slug ?? "") !== servicoFilter) return false;
       if (search) {
         const s = search.toLowerCase();
-        const hay = `${r.author_name} ${r.comment ?? ""} ${r.neighborhood ?? ""} ${r.city ?? ""} ${r.service_slug ?? ""}`.toLowerCase();
+        const hay = `${r.author_name} ${r.comment ?? ""} ${r.neighborhood ?? ""} ${r.city ?? ""} ${r.service_slug ?? ""} ${r.client_phone ?? ""}`.toLowerCase();
         if (!hay.includes(s)) return false;
       }
       return true;
     });
-  }, [reviews, filter, search]);
+  }, [reviews, filter, bairroFilter, servicoFilter, search]);
 
   const stats = useMemo(() => {
     const pub = reviews.filter((r) => r.verified && r.published);
@@ -132,35 +141,56 @@ const AdminReviews = () => {
     return {
       total: reviews.length,
       published: pub.length,
-      pending: reviews.filter((r) => !r.verified).length,
+      pending: reviews.filter((r) => !r.verified && r.moderation_action !== "rejected").length,
       hidden: reviews.filter((r) => !r.published).length,
       avg,
     };
   }, [reviews]);
 
+  /** Grava a trilha de auditoria da moderação (ação, motivo, quem e quando). */
+  async function moderate(
+    r: Review,
+    action: "approved" | "rejected" | "hidden" | "republished",
+    changes: Partial<Review>,
+    reason?: string,
+  ) {
+    const audit = {
+      ...changes,
+      moderation_action: action,
+      moderation_reason: reason?.slice(0, 500) ?? null,
+      moderated_at: new Date().toISOString(),
+      moderated_by: session?.user?.id ?? null,
+    };
+    const { error } = await supabase.from("reviews").update(audit).eq("id", r.id);
+    if (error) {
+      toast({ title: "Erro", description: error.message, variant: "destructive" });
+      return false;
+    }
+    setReviews((prev) => prev.map((x) => (x.id === r.id ? { ...x, ...audit } as Review : x)));
+    return true;
+  }
+
   async function togglePublished(r: Review) {
     const next = !r.published;
-    const { error } = await supabase
-      .from("reviews")
-      .update({ published: next })
-      .eq("id", r.id);
-    if (error) return toast({ title: "Erro", description: error.message, variant: "destructive" });
-    setReviews((prev) => prev.map((x) => (x.id === r.id ? { ...x, published: next } : x)));
-    if (next && r.verified) void pingIndexNow(indexNowUrlsForReview(r));
+    const reason = next ? undefined : (prompt("Motivo para ocultar (opcional):") ?? undefined);
+    const ok = await moderate(r, next ? "republished" : "hidden", { published: next }, reason);
+    if (ok && next && r.verified) void pingIndexNow(indexNowUrlsForReview(r));
   }
 
   async function approve(r: Review) {
-    const { error } = await supabase
-      .from("reviews")
-      .update({ verified: true, published: true })
-      .eq("id", r.id);
-    if (error) return toast({ title: "Erro", description: error.message, variant: "destructive" });
-    setReviews((prev) =>
-      prev.map((x) => (x.id === r.id ? { ...x, verified: true, published: true } : x)),
-    );
+    const ok = await moderate(r, "approved", { verified: true, published: true });
+    if (!ok) return;
     void pingIndexNow(indexNowUrlsForReview(r));
     toast({ title: "Review aprovada", description: "IndexNow notificado para Bing/Yandex." });
   }
+
+  async function reject(r: Review) {
+    const reason = prompt("Motivo da rejeição (fica registrado na auditoria):");
+    if (reason === null) return;
+    const ok = await moderate(r, "rejected", { verified: false, published: false }, reason);
+    if (ok) toast({ title: "Review rejeitada", description: "Motivo registrado na auditoria." });
+  }
+
 
   async function remove(id: string) {
     if (!confirm("Excluir esta review permanentemente?")) return;
