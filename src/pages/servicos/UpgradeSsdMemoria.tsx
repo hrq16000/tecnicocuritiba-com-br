@@ -196,8 +196,41 @@ const UpgradeSsdMemoria = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos" title="Quando o upgrade pode ajudar">
+              <p>
+                Quando o gargalo está no disco mecânico ou na falta de memória para o uso real da
+                máquina. O ganho depende do conjunto, não apenas da peça nova.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Compatibilidade antes da compra">
+              <p>
+                Conferimos slots livres, tipo e capacidade máxima suportada, memória soldada e
+                formato do armazenamento antes de indicar qualquer peça.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="O que ainda pode limitar o desempenho">
+              <p>
+                Processador, sistema desatualizado, refrigeração comprometida ou defeito de hardware
+                podem manter a lentidão mesmo após o upgrade.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-upgrade-ssd-ram-meio"
+              message="Olá! Quero avaliar upgrade de SSD ou memória no meu equipamento."
+              hint="Informe o modelo do equipamento para verificarmos a compatibilidade."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes
