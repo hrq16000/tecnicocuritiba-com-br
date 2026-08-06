@@ -327,6 +327,7 @@ const ConsertoNotebookCuritiba = lazy(() => import("./pages/servicos/ConsertoNot
 const RedesWifi = lazy(() => import("./pages/servicos/RedesWifi"));
 const BackupRecuperacao = lazy(() => import("./pages/servicos/BackupRecuperacao"));
 const MontagemPc = lazy(() => import("./pages/servicos/MontagemPc"));
+const PoliticaPecasCliente = lazy(() => import("./pages/PoliticaPecasCliente"));
 const ComputadorLento = lazy(() => import("./pages/servicos/ComputadorLento"));
 const ComputadorNaoLiga = lazy(() => import("./pages/servicos/ComputadorNaoLiga"));
 const ManutencaoTV = lazy(() => import("./pages/servicos/ManutencaoTV"));
@@ -823,6 +824,7 @@ const App = () => (
             <Route path="/servicos/redes-wifi" element={<RedesWifi />} />
             <Route path="/servicos/backup-recuperacao" element={<BackupRecuperacao />} />
             <Route path="/servicos/montagem-pc" element={<MontagemPc />} />
+            <Route path="/politica-pecas-cliente" element={<PoliticaPecasCliente />} />
             <Route path="/servicos/computador-lento" element={<ComputadorLento />} />
             <Route path="/servicos/computador-nao-liga" element={<ComputadorNaoLiga />} />
             <Route path="/servicos/manutencao-tv" element={<ManutencaoTV />} />

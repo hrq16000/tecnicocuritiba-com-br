@@ -189,6 +189,11 @@ const MontagemPc = () => {
               </div>
             ))}
           </div>
+          <p className="text-center mt-6">
+            <Link to="/politica-pecas-cliente" className="text-primary font-medium underline underline-offset-4">
+              Ver política completa de peças do cliente (compatibilidade, procedência, prazos, garantia e valor do equipamento)
+            </Link>
+          </p>
         </div>
       </section>
 
