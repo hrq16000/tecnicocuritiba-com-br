@@ -160,6 +160,17 @@ function ProgressoOS({ idx, previsao }: { idx: number; previsao?: string | null 
   );
 }
 
+const CONSENT_KEY = "status-os-consent-v1";
+
+/** Máscara progressiva de celular brasileiro: (41) 99999-9999 */
+function mascararCelular(valor: string): string {
+  const d = valor.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d;
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
 export default function StatusOS() {
   const [modo, setModo] = useState<"numero" | "celular">("numero");
   const [numero, setNumero] = useState("");
@@ -171,6 +182,15 @@ export default function StatusOS() {
   const [erro, setErro] = useState<string | null>(null);
   const [lista, setLista] = useState<OSRow[]>([]);
   const [selecionada, setSelecionada] = useState(0);
+  const [consentimento, setConsentimento] = useState(false);
+  const [revelarSensiveis, setRevelarSensiveis] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(CONSENT_KEY)) setConsentimento(true);
+    } catch { /* storage indisponível */ }
+  }, []);
+
   const ultimaBusca = useRef<{ modo: "numero" | "celular"; valor: string } | null>(null);
 
   const os = lista[selecionada] ?? null;
