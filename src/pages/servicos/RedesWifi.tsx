@@ -135,7 +135,7 @@ const RedesWifi = () => {
       />
 
       {/* Triagem antes da visita — reduz visitas improdutivas */}
-      <section className="py-10 bg-background border-y border-border">
+      <section id="triagem" className="py-10 bg-background border-y border-border scroll-mt-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-6">
