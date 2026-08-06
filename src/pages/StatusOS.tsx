@@ -160,6 +160,17 @@ function ProgressoOS({ idx, previsao }: { idx: number; previsao?: string | null 
   );
 }
 
+const CONSENT_KEY = "status-os-consent-v1";
+
+/** Máscara progressiva de celular brasileiro: (41) 99999-9999 */
+function mascararCelular(valor: string): string {
+  const d = valor.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d;
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
 export default function StatusOS() {
   const [modo, setModo] = useState<"numero" | "celular">("numero");
   const [numero, setNumero] = useState("");
@@ -171,6 +182,15 @@ export default function StatusOS() {
   const [erro, setErro] = useState<string | null>(null);
   const [lista, setLista] = useState<OSRow[]>([]);
   const [selecionada, setSelecionada] = useState(0);
+  const [consentimento, setConsentimento] = useState(false);
+  const [revelarSensiveis, setRevelarSensiveis] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(CONSENT_KEY)) setConsentimento(true);
+    } catch { /* storage indisponível */ }
+  }, []);
+
   const ultimaBusca = useRef<{ modo: "numero" | "celular"; valor: string } | null>(null);
 
   const os = lista[selecionada] ?? null;
@@ -377,6 +397,66 @@ export default function StatusOS() {
           ))}
         </div>
 
+        {/* Transparência e consentimento LGPD antes da consulta */}
+        <div className="mt-6 rounded-xl border bg-muted/30 p-4">
+          <h2 className="text-sm font-semibold">Antes de consultar: o que será exibido</h2>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+            <li>Etapa atual, progresso, prazo estimado e observações públicas da OS.</li>
+            <li>
+              Dados sensíveis da entrada (sintomas relatados e fotos enviadas pelo portal) só aparecem
+              depois que você autorizar a exibição nesta tela.
+            </li>
+            <li>O celular nunca é exibido completo — apenas no formato mascarado (41) ****-9999.</li>
+            <li>A consulta tem limite de tentativas por celular e por número de OS para evitar abuso.</li>
+          </ul>
+          <label className="mt-3 flex items-start gap-2 text-sm">
+            <input
+              type="checkbox"
+              className="mt-1 h-4 w-4 accent-primary"
+              checked={consentimento}
+              onChange={(e) => {
+                setConsentimento(e.target.checked);
+                if (!e.target.checked) setRevelarSensiveis(false);
+                try {
+                  if (e.target.checked) localStorage.setItem(CONSENT_KEY, new Date().toISOString());
+                  else localStorage.removeItem(CONSENT_KEY);
+                } catch { /* storage indisponível */ }
+                track("status_os_consentimento", { aceito: e.target.checked });
+              }}
+            />
+            <span className="text-muted-foreground">
+              Autorizo a consulta e a exibição dos dados da minha Ordem de Serviço neste dispositivo.
+              Consulte a{" "}
+              <Link className="underline" to="/politica-de-privacidade">
+                Política de Privacidade
+              </Link>{" "}
+              ou solicite a{" "}
+              <Link className="underline" to="/exclusao-de-dados">
+                exclusão dos dados e anexos
+              </Link>
+              .
+            </span>
+          </label>
+          <button
+            type="button"
+            className="mt-3 text-xs font-medium text-muted-foreground underline"
+            onClick={() => {
+              setConsentimento(false);
+              setRevelarSensiveis(false);
+              setLista([]);
+              setNumero("");
+              setCelular("");
+              setErro(null);
+              try {
+                localStorage.removeItem(CONSENT_KEY);
+              } catch { /* storage indisponível */ }
+              track("status_os_descartar_sessao");
+            }}
+          >
+            Descartar dados desta sessão neste dispositivo
+          </button>
+        </div>
+
         <form onSubmit={buscar} className="mt-4 flex flex-col gap-3 sm:flex-row">
           {modo === "numero" ? (
             <Input
@@ -391,20 +471,34 @@ export default function StatusOS() {
           ) : (
             <Input
               value={celular}
-              onChange={(e) => setCelular(e.target.value)}
+              onChange={(e) => setCelular(mascararCelular(e.target.value))}
               placeholder="(41) 99999-9999"
               aria-label="Celular cadastrado no atendimento"
               className="h-12 text-base"
               inputMode="tel"
               autoComplete="tel"
-              maxLength={20}
+              maxLength={16}
             />
           )}
-          <Button type="submit" size="lg" className="h-12" disabled={loading}>
+          <Button type="submit" size="lg" className="h-12" disabled={loading || !consentimento}>
             <Search className="mr-2 h-4 w-4" />
             {loading ? "Consultando..." : "Consultar"}
           </Button>
         </form>
+        {!consentimento && (
+          <p className="mt-2 text-xs text-muted-foreground">
+            Marque a autorização acima para liberar a consulta.
+          </p>
+        )}
+
+        {loading && (
+          <div className="mt-6 space-y-3" aria-hidden="true">
+            <div className="h-6 w-1/2 animate-pulse rounded bg-muted" />
+            <div className="h-24 animate-pulse rounded-xl bg-muted" />
+            <div className="h-40 animate-pulse rounded-xl bg-muted" />
+          </div>
+        )}
+
 
         {lento && loading && (
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
@@ -497,16 +591,47 @@ export default function StatusOS() {
               )}
             </dl>
 
-            {os.sintomas && (
+            {(os.sintomas || fotos.length > 0) && !revelarSensiveis && (
+              <div className="mt-4 rounded-lg border border-dashed bg-muted/20 p-4">
+                <h3 className="text-sm font-semibold">Dados sensíveis da entrada</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Esta OS tem {os.sintomas ? "sintomas relatados" : ""}
+                  {os.sintomas && fotos.length > 0 ? " e " : ""}
+                  {fotos.length > 0 ? `${fotos.length} foto(s) enviada(s) pelo portal` : ""}. Esse conteúdo
+                  fica oculto por padrão para proteger a sua privacidade em telas compartilhadas.
+                </p>
+                <button
+                  type="button"
+                  className="mt-3 rounded-md border px-3 py-2 text-sm font-medium"
+                  onClick={() => {
+                    setRevelarSensiveis(true);
+                    track("status_os_revelar_sensiveis", { numero: os.numero });
+                  }}
+                >
+                  Exibir sintomas e fotos
+                </button>
+              </div>
+            )}
+
+            {revelarSensiveis && os.sintomas && (
               <div className="mt-4 rounded-lg border bg-muted/30 p-4">
                 <h3 className="text-sm font-semibold">Sintomas e dados informados na entrada</h3>
                 <p className="mt-1 whitespace-pre-wrap text-sm text-muted-foreground">{os.sintomas}</p>
               </div>
             )}
 
-            {fotos.length > 0 && (
+            {revelarSensiveis && fotos.length > 0 && (
               <div className="mt-4">
-                <h3 className="text-sm font-semibold">Fotos enviadas pelo portal</h3>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold">Fotos enviadas pelo portal</h3>
+                  <button
+                    type="button"
+                    className="text-xs font-medium text-muted-foreground underline"
+                    onClick={() => setRevelarSensiveis(false)}
+                  >
+                    Ocultar
+                  </button>
+                </div>
                 <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4">
                   {fotos.map((src, i) => (
                     <a key={src} href={src} target="_blank" rel="noopener noreferrer" className="block">
@@ -523,6 +648,7 @@ export default function StatusOS() {
                 </div>
               </div>
             )}
+
 
             {os.observacao_publica && (
               <p className="mt-4 rounded-lg bg-muted/50 p-3 text-sm">{os.observacao_publica}</p>

@@ -123,6 +123,19 @@ const SuporteEmpresas = () => {
           subtitle="Suporte técnico empresarial completo e profissional"
         />
 
+        <PageSummaryBand
+          className="container mx-auto px-4"
+          summary="Suporte técnico empresarial em Curitiba para estações de trabalho, rede, impressão e continuidade da operação — atendimento avulso ou recorrente, com limites de escopo explícitos."
+          items={[
+            { id: "contextos-empresariais", label: "Contextos empresariais atendidos" },
+            { id: "antes-do-suporte", label: "O que registrar antes do chamado" },
+            { id: "avulso-ou-recorrente", label: "Avulso ou recorrente" },
+            { id: "limites-terceiros", label: "Limites com sistemas de terceiros" },
+            { id: "credenciais-e-acessos", label: "Credenciais e acessos" },
+            { id: "faq-empresas", label: "Perguntas frequentes" },
+          ]}
+        />
+
         <TriagemPJ />
 
         {/* O Que Está Incluso */}
@@ -273,7 +286,7 @@ const SuporteEmpresas = () => {
         </section>
 
         {/* Contextos empresariais atendidos */}
-        <section className="py-8 md:py-10 bg-background" id="contextos-empresariais" aria-labelledby="contextos-titulo">
+        <section className="py-8 md:py-10 bg-background" id="contextos-empresariais" style={{scrollMarginTop:"6rem"}}  aria-labelledby="contextos-titulo">
           <div className="container mx-auto px-4 max-w-5xl">
             <h2 id="contextos-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
               Contextos empresariais que podem precisar de suporte
@@ -321,7 +334,7 @@ const SuporteEmpresas = () => {
         </section>
 
         {/* O que registrar antes de solicitar suporte */}
-        <section className="py-8 md:py-10 bg-secondary" id="antes-do-suporte" aria-labelledby="antes-titulo">
+        <section className="py-8 md:py-10 bg-secondary" id="antes-do-suporte" style={{scrollMarginTop:"6rem"}}  aria-labelledby="antes-titulo">
           <div className="container mx-auto px-4 max-w-4xl">
             <h2 id="antes-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
               O que registrar antes de solicitar suporte
@@ -361,7 +374,7 @@ const SuporteEmpresas = () => {
         </section>
 
         {/* Atendimento avulso ou recorrente */}
-        <section className="py-8 md:py-10 bg-background" id="avulso-ou-recorrente" aria-labelledby="modelos-titulo">
+        <section className="py-8 md:py-10 bg-background" id="avulso-ou-recorrente" style={{scrollMarginTop:"6rem"}}  aria-labelledby="modelos-titulo">
           <div className="container mx-auto px-4 max-w-5xl">
             <h2 id="modelos-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
               Atendimento avulso ou recorrente
@@ -433,7 +446,7 @@ const SuporteEmpresas = () => {
         </section>
 
         {/* Limites por contexto e sistemas de terceiros */}
-        <section className="py-8 md:py-10 bg-secondary" id="limites-terceiros" aria-labelledby="limites-titulo">
+        <section className="py-8 md:py-10 bg-secondary" id="limites-terceiros" style={{scrollMarginTop:"6rem"}}  aria-labelledby="limites-titulo">
           <div className="container mx-auto px-4 max-w-5xl">
             <h2 id="limites-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
               O que depende de fornecedor, autorização ou especialização
@@ -471,7 +484,7 @@ const SuporteEmpresas = () => {
         </section>
 
         {/* Sistemas, credenciais e acessos de terceiros */}
-        <section className="py-8 md:py-10 bg-background" id="credenciais-e-acessos" aria-labelledby="credenciais-titulo">
+        <section className="py-8 md:py-10 bg-background" id="credenciais-e-acessos" style={{scrollMarginTop:"6rem"}}  aria-labelledby="credenciais-titulo">
           <div className="container mx-auto px-4 max-w-5xl">
             <h2 id="credenciais-titulo" className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">
               Sistemas, credenciais e acessos de terceiros
@@ -523,9 +536,9 @@ const SuporteEmpresas = () => {
         <TrustSection />
 
         {/* FAQ contextual */}
-        <section className="py-8 md:py-10 bg-secondary" aria-labelledby="faq-empresas">
+        <section className="py-8 md:py-10 bg-secondary scroll-mt-24" id="faq-empresas-sec" aria-labelledby="faq-empresas">
           <div className="container mx-auto px-4 max-w-3xl">
-            <h2 id="faq-empresas" className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
+            <h2 id="faq-empresas" className="scroll-mt-24 text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
               Perguntas frequentes de empresas
             </h2>
             <div className="space-y-5">
