@@ -225,7 +225,7 @@ const RedesWifi = () => {
       </section>
 
       {/* Impressoras e periféricos como dispositivos de rede */}
-      <section className="py-10 bg-background" id="perifericos-em-rede">
+      <section className="py-10 bg-background scroll-mt-24" id="perifericos-em-rede">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-3">
             Impressoras e periféricos: suporte de rede, não de hardware
