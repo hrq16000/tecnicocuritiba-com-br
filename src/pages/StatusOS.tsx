@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Search, MessageCircle, CheckCircle2, Circle, Clock, Copy, Check, Star, History,
-  Share2, Smartphone, Hash, RefreshCw, AlertTriangle,
+  Share2, Smartphone, Hash, RefreshCw, AlertTriangle, FileDown,
 } from "lucide-react";
 import { buildSiteReviewUrl } from "@/lib/reviewRequest";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
@@ -308,6 +308,48 @@ export default function StatusOS() {
       if (d.length >= 10) void consultar("celular", d);
     }
   }, [consultar]);
+
+  const [gerandoPdf, setGerandoPdf] = useState(false);
+
+  /** Comprovante em PDF com timeline, prazos, histórico e fotos já exibidas na tela. */
+  const baixarPdf = async () => {
+    if (!os || gerandoPdf) return;
+    setGerandoPdf(true);
+    try {
+      const { baixarStatusOsPdf } = await import("@/lib/statusOsPdf");
+      await baixarStatusOsPdf({
+        numero: os.numero,
+        etapaAtual: ETAPAS[idxAtual]?.label ?? os.etapa,
+        equipamento: os.equipamento,
+        local: [os.bairro, os.cidade].filter(Boolean).join(", ") || null,
+        prazoEstimado: os.prazo_estimado,
+        previsaoConclusao: os.previsao_conclusao
+          ? new Date(os.previsao_conclusao).toLocaleString("pt-BR")
+          : null,
+        abertura: new Date(os.created_at).toLocaleString("pt-BR"),
+        atualizacao: new Date(os.updated_at).toLocaleString("pt-BR"),
+        observacaoPublica: os.observacao_publica,
+        sintomas: revelarSensiveis ? os.sintomas ?? null : null,
+        fotos: revelarSensiveis ? fotos : [],
+        etapas: ETAPAS.map((e, i) => ({
+          label: e.label,
+          desc: e.desc,
+          estado: i < idxAtual ? "concluida" : i === idxAtual ? "atual" : "pendente",
+        })),
+        historico: historico.map((h) => ({
+          quando: fmtDate(h.em ?? h.at ?? h.data),
+          etapa: ETAPAS.find((e) => e.id === h.etapa)?.label ?? String(h.etapa),
+          observacao: (h.observacao ?? h.nota) as string | undefined,
+        })),
+        linkAcompanhamento: shareUrl,
+      });
+      track("status_os_baixar_pdf", { etapa: os.etapa });
+    } catch {
+      setErro("Não foi possível gerar o PDF agora. Tente novamente ou fale pelo WhatsApp.");
+    } finally {
+      setGerandoPdf(false);
+    }
+  };
 
   const copiarLink = async () => {
     if (!shareUrl) return;
@@ -734,6 +776,20 @@ export default function StatusOS() {
                 </a>
               </Button>
             </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-3 h-12 w-full"
+              disabled={gerandoPdf}
+              onClick={baixarPdf}
+            >
+              <FileDown className="mr-2 h-4 w-4" />
+              {gerandoPdf ? "Gerando comprovante…" : "Baixar comprovante em PDF"}
+            </Button>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Inclui a timeline, prazos, histórico e as fotos enviadas (quando exibidas nesta tela).
+            </p>
 
             {qr && (
               <figure className="mt-4 flex flex-col items-center rounded-lg border bg-background p-4">

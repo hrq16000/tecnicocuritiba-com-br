@@ -12,6 +12,7 @@ import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import { RealImageSection } from "@/components/RealImageSection";
 import { TriagemPJ } from "@/components/b2b/TriagemPJ";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
+import PageSummaryBand from "@/components/PageSummaryBand";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Headphones, Clock, Building, CreditCard, FileText, CheckCircle, Users, Shield } from "lucide-react";
