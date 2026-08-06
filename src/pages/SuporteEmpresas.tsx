@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
-import { PageHero } from "@/components/PageHero";
+import BusinessHero from "@/components/b2b/BusinessHero";
+import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+
 import { BenefitsGrid } from "@/components/BenefitsGrid";
 import { TrustSection } from "@/components/TrustSection";
 import { CTASection } from "@/components/CTASection";
