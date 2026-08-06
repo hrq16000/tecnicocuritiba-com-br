@@ -85,6 +85,15 @@ const UpgradeSsdMemoria = () => {
         </div>
       </section>
       <RealImageSection imageKey="componentesSsd" caption="SSD e memória RAM para upgrade de desempenho" />
+      <ServiceHeroSummary
+        summary="Instalação de SSD e memória com verificação de compatibilidade, clonagem ou instalação limpa e testes ao final — com os limites do ganho explicados antes da compra da peça."
+        items={[
+          { id: "comparativo", label: "HD e SSD na prática" },
+          { id: "opcoes", label: "Opções de upgrade" },
+          { id: "incluso", label: "O que está incluso" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Comparativo de Performance */}
       <section id="comparativo" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
