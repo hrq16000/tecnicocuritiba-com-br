@@ -48,6 +48,8 @@ const RedesWifi = () => {
           { question: "Vocês configuram sistema mesh (Deco, Nest, Eero)?", answer: "Sim. Instalamos sistemas mesh das principais marcas, posicionando os pontos para cobertura uniforme em toda a casa ou escritório." },
           { question: "Atendem empresas e escritórios?", answer: "Sim. Configuramos redes corporativas com VLANs, controle de acesso, rede de visitantes isolada e gestão de banda para empresas em Curitiba." },
           { question: "Quanto tempo demora?", answer: "Atendimento residencial leva em média 1 a 2 horas. Empresas e instalações mesh maiores levam 2 a 4 horas. Visita técnica em até 30 min do agendamento." },
+          { question: "Vocês configuram impressora em rede?", answer: "Sim. Conectamos a impressora à rede, reservamos IP fixo, instalamos o driver oficial e liberamos o compartilhamento entre os dispositivos. Não fazemos reparo mecânico ou eletrônico de impressoras." },
+          { question: "Vocês consertam impressora que não puxa papel ou está borrando?", answer: "Não. Falhas mecânicas e eletrônicas de impressora são de assistência autorizada da marca. Nosso escopo é o aparelho como dispositivo de rede." },
         ]}
       />
       <Header />
