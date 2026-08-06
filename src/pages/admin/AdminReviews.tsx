@@ -191,6 +191,24 @@ const AdminReviews = () => {
     if (ok) toast({ title: "Review rejeitada", description: "Motivo registrado na auditoria." });
   }
 
+  /** Abre o WhatsApp avisando o cliente que a avaliação foi publicada. */
+  async function notifyPublished(r: Review) {
+    const phone = r.client_phone?.replace(/\D/g, "") ?? "";
+    if (phone.length < 10) {
+      toast({ title: "Telefone ausente", description: "Edite a review e preencha o WhatsApp do cliente.", variant: "destructive" });
+      return;
+    }
+    const url = publishedWaLink(phone, {
+      clientName: r.author_name,
+      service: r.service_slug ?? undefined,
+      neighborhood: r.neighborhood ?? undefined,
+    });
+    window.open(url, "_blank", "noopener,noreferrer");
+    const now = new Date().toISOString();
+    const { error } = await supabase.from("reviews").update({ published_notified_at: now }).eq("id", r.id);
+    if (!error) setReviews((prev) => prev.map((x) => (x.id === r.id ? { ...x, published_notified_at: now } : x)));
+  }
+
 
   async function remove(id: string) {
     if (!confirm("Excluir esta review permanentemente?")) return;
