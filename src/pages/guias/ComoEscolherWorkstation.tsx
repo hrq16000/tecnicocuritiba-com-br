@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageSummaryBand from "@/components/PageSummaryBand";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { MessageCircle, CheckCircle, AlertTriangle, Cpu, MemoryStick, HardDrive, MonitorCog } from "lucide-react";
@@ -105,7 +106,21 @@ export default function ComoEscolherWorkstation() {
             </Button>
           </div>
 
-          <h2 className="text-2xl font-bold mb-3">Passo 1: comece pelo software, nunca pelo hardware</h2>
+          <PageSummaryBand
+            summary="Guia prático para especificar uma workstation a partir do software que ela vai rodar: checklist de componentes, estabilidade sob carga, requisitos por tipo de uso e os limites do que prometemos."
+            items={[
+              { id: "passo-1", label: "Comece pelo software" },
+              { id: "passo-2", label: "Checklist de componentes" },
+              { id: "passo-3", label: "Estabilidade acima de pico" },
+              { id: "passo-4", label: "Requisitos por tipo de uso" },
+              { id: "passo-5", label: "Limites operacionais" },
+              { id: "passo-6", label: "Montagem, teste e entrega" },
+              { id: "manutencao", label: "Depois da entrega" },
+              { id: "faq", label: "Perguntas frequentes" },
+            ]}
+          />
+
+          <h2 id="passo-1" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 1: comece pelo software, nunca pelo hardware</h2>
           <p className="mb-4 text-muted-foreground">
             Todo fabricante de software profissional publica requisitos mínimos e recomendados —
             AutoCAD, SolidWorks, Revit, Adobe, QGIS, ERPs e ambientes de desenvolvimento. Liste os
@@ -119,7 +134,7 @@ export default function ComoEscolherWorkstation() {
             núcleos.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">Passo 2: checklist de componentes</h2>
+          <h2 id="passo-2" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 2: checklist de componentes</h2>
           <div className="grid gap-4 sm:grid-cols-2 mb-6">
             {[
               { icon: Cpu, t: "Processador", d: "Muitos núcleos para render, compilação e virtualização; clock alto para CAD 2D, ERP e planilhas pesadas." },
@@ -143,7 +158,7 @@ export default function ComoEscolherWorkstation() {
             uma que trava no meio de um processamento longo.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">Passo 3: estabilidade acima de pico</h2>
+          <h2 id="passo-3" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 3: estabilidade acima de pico</h2>
           <p className="mb-6 text-muted-foreground">
             Em ambiente profissional, uma máquina 10% mais rápida que trava uma vez por semana é
             pior que uma estável. Por isso não trabalhamos com overclock em workstation: operamos
@@ -151,7 +166,7 @@ export default function ComoEscolherWorkstation() {
             carga prolongada antes da entrega. O relatório do teste final acompanha a máquina.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">Passo 4: requisitos por tipo de uso</h2>
+          <h2 id="passo-4" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 4: requisitos por tipo de uso</h2>
           <ul className="mb-6 space-y-2">
             {[
               "Escritório e ERP: CPU de clock alto, 16 GB, SSD NVMe 500 GB, vídeo integrado",
@@ -167,7 +182,7 @@ export default function ComoEscolherWorkstation() {
             ))}
           </ul>
 
-          <h2 className="text-2xl font-bold mb-3">Passo 5: limites operacionais (o que não prometemos)</h2>
+          <h2 id="passo-5" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 5: limites operacionais (o que não prometemos)</h2>
           <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-4 mb-6 flex gap-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500 mt-0.5" aria-hidden />
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -182,7 +197,7 @@ export default function ComoEscolherWorkstation() {
             </ul>
           </div>
 
-          <h2 className="text-2xl font-bold mb-3">Passo 6: montagem, teste e entrega</h2>
+          <h2 id="passo-6" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 6: montagem, teste e entrega</h2>
           <p className="mb-6 text-muted-foreground">
             A montagem segue um checklist com teste de memória, teste de disco, carga de CPU e GPU,
             leitura de temperaturas e validação do sistema operacional e drivers. Você recebe o
@@ -191,7 +206,7 @@ export default function ComoEscolherWorkstation() {
             serviço em si em <Link className="underline" to="/servicos/montagem-pc">montagem de PC sob medida</Link>.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">Depois da entrega: manter o parque em ordem</h2>
+          <h2 id="manutencao" className="text-2xl font-bold mb-3 scroll-mt-24">Depois da entrega: manter o parque em ordem</h2>
           <p className="mb-6 text-muted-foreground">
             Uma workstation bem especificada dura anos, desde que backup, rede e atualizações
             acompanhem. Se você está estruturando isso pela primeira vez, comece pelo guia de{" "}
@@ -200,7 +215,7 @@ export default function ComoEscolherWorkstation() {
             <Link className="underline" to="/suporte-empresas">suporte de TI para empresas</Link>.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4">Perguntas frequentes</h2>
+          <h2 id="faq" className="text-2xl font-bold mb-4 scroll-mt-24">Perguntas frequentes</h2>
           <div className="space-y-4 mb-10">
             {faqs.map((f) => (
               <details key={f.q} className="rounded-xl border p-4">

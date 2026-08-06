@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageSummaryBand from "@/components/PageSummaryBand";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { MessageCircle, CheckCircle, ShieldCheck, HardDrive, Wifi, Users } from "lucide-react";
@@ -106,7 +107,22 @@ export default function OrganizacaoTIEscritorios() {
             </Button>
           </div>
 
-          <h2 className="text-2xl font-bold mb-3">1. Inventário: você não gerencia o que não conhece</h2>
+          <PageSummaryBand
+            summary="Como organizar a TI de um escritório pequeno em Curitiba: inventário, padronização, backup testado, rede, controle de acessos, segurança proporcional ao risco e quando terceirizar o suporte."
+            items={[
+              { id: "inventario", label: "Inventário" },
+              { id: "padronizacao", label: "Padronização" },
+              { id: "backup", label: "Backup testado" },
+              { id: "rede", label: "Rede" },
+              { id: "acessos", label: "Contas e acessos" },
+              { id: "seguranca", label: "Segurança" },
+              { id: "terceirizar", label: "Quando terceirizar" },
+              { id: "renovacao", label: "Renovação de parque" },
+              { id: "faq", label: "Perguntas frequentes" },
+            ]}
+          />
+
+          <h2 id="inventario" className="text-2xl font-bold mb-3 scroll-mt-24">1. Inventário: você não gerencia o que não conhece</h2>
           <p className="mb-4 text-muted-foreground">
             O primeiro erro em escritório pequeno é não saber quantas máquinas existem, qual a idade
             delas e o que roda em cada uma. Monte uma planilha simples com: identificação do
@@ -122,7 +138,7 @@ export default function OrganizacaoTIEscritorios() {
             licenças duplicadas — dinheiro recuperado já no primeiro mês.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">2. Padronização reduz chamados pela metade</h2>
+          <h2 id="padronizacao" className="text-2xl font-bold mb-3 scroll-mt-24">2. Padronização reduz chamados pela metade</h2>
           <p className="mb-4 text-muted-foreground">
             Escritórios com dez máquinas diferentes têm dez formas de dar problema. Defina de um a
             dois perfis de estação: um "administrativo" (processador de entrada, 16 GB de RAM, SSD
@@ -144,7 +160,7 @@ export default function OrganizacaoTIEscritorios() {
             ))}
           </ul>
 
-          <h2 className="text-2xl font-bold mb-3">3. Backup: a única política que importa é a testada</h2>
+          <h2 id="backup" className="text-2xl font-bold mb-3 scroll-mt-24">3. Backup: a única política que importa é a testada</h2>
           <p className="mb-4 text-muted-foreground">
             Adote a regra 3-2-1: três cópias dos dados, em dois tipos de mídia diferentes, sendo uma
             fora do escritório. Na prática, para um escritório pequeno isso costuma ser: os arquivos
@@ -159,7 +175,7 @@ export default function OrganizacaoTIEscritorios() {
             de <Link className="underline" to="/servicos/backup-recuperacao">backup e recuperação de dados</Link>.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">4. Rede: cabo onde importa, Wi-Fi onde ajuda</h2>
+          <h2 id="rede" className="text-2xl font-bold mb-3 scroll-mt-24">4. Rede: cabo onde importa, Wi-Fi onde ajuda</h2>
           <p className="mb-4 text-muted-foreground">
             Escritório pequeno raramente precisa de infraestrutura sofisticada, mas precisa de
             infraestrutura previsível. Estações fixas, servidores de arquivos e impressoras de alto
@@ -173,7 +189,7 @@ export default function OrganizacaoTIEscritorios() {
             de acesso posicionados resolve a maior parte das queixas de "internet caindo".
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">5. Contas, acessos e saída de funcionários</h2>
+          <h2 id="acessos" className="text-2xl font-bold mb-3 scroll-mt-24">5. Contas, acessos e saída de funcionários</h2>
           <p className="mb-6 text-muted-foreground">
             Centralize as contas em uma plataforma só (Microsoft 365 ou Google Workspace) e mantenha
             um procedimento escrito de entrada e saída: criar conta, dar acesso às pastas
@@ -182,7 +198,7 @@ export default function OrganizacaoTIEscritorios() {
             acessos fantasmas — o principal vetor de vazamento em empresas pequenas.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">6. Segurança proporcional ao risco</h2>
+          <h2 id="seguranca" className="text-2xl font-bold mb-3 scroll-mt-24">6. Segurança proporcional ao risco</h2>
           <div className="grid gap-4 sm:grid-cols-2 mb-6">
             {[
               { icon: ShieldCheck, t: "Verificação em duas etapas", d: "Obrigatória em e-mail, nuvem e sistemas financeiros." },
@@ -200,7 +216,7 @@ export default function OrganizacaoTIEscritorios() {
             ))}
           </div>
 
-          <h2 className="text-2xl font-bold mb-3">7. Quando terceirizar o suporte</h2>
+          <h2 id="terceirizar" className="text-2xl font-bold mb-3 scroll-mt-24">7. Quando terceirizar o suporte</h2>
           <p className="mb-6 text-muted-foreground">
             Enquanto a TI cabe em "alguém do escritório que entende de computador", chamados avulsos
             bastam. A partir do momento em que uma parada custa faturamento — sistema fiscal fora do
@@ -211,7 +227,7 @@ export default function OrganizacaoTIEscritorios() {
             formatos de contrato, nota fiscal e pagamento faturado.
           </p>
 
-          <h2 className="text-2xl font-bold mb-3">8. Renovação de parque: comprar bem, uma vez</h2>
+          <h2 id="renovacao" className="text-2xl font-bold mb-3 scroll-mt-24">8. Renovação de parque: comprar bem, uma vez</h2>
           <p className="mb-6 text-muted-foreground">
             Máquinas de escritório têm vida útil produtiva de 4 a 6 anos. Renove por lote pequeno e
             planejado, não por emergência. Para funções que exigem mais desempenho, leia o guia de{" "}
@@ -220,7 +236,7 @@ export default function OrganizacaoTIEscritorios() {
             <Link className="underline" to="/servicos/montagem-pc">montagem de PC sob medida</Link>.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4">Perguntas frequentes</h2>
+          <h2 id="faq" className="text-2xl font-bold mb-4 scroll-mt-24">Perguntas frequentes</h2>
           <div className="space-y-4 mb-10">
             {faqs.map((f) => (
               <details key={f.q} className="rounded-xl border p-4">
