@@ -81,6 +81,7 @@ export async function baixarOrdemServicoPdf(data: OrdemServicoData) {
     "Peças fornecidas pelo cliente: garantia da peça é do fabricante/vendedor. Nossa garantia de 90 dias cobre a mão de obra de montagem e configuração.",
     "Não há promessa de desempenho, FPS ou overclock. A montagem segue as especificações do fabricante.",
     "Entrega após checklist técnico: BIOS/UEFI, drivers oficiais, teste de carga e temperaturas.",
+    "O cliente autorizou (LGPD) o uso dos dados e arquivos informados para atendimento, orçamento e emissão desta ordem de serviço.",
     "Avaliação de valor do equipamento em caso de sinistro, dano ou venda no estado pode ser inferior a 1/3 do valor informado, conforme laudo técnico.",
   ].forEach((t) => line(`• ${t}`, 10, false, 14));
 

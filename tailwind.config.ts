@@ -153,7 +153,12 @@ export default {
           "40%": { transform: "scale(1) rotate(0deg)" },
           "100%": { transform: "scale(1) rotate(0deg)" },
         },
+        "field-alert": {
+          "0%, 100%": { boxShadow: "0 0 0 0 hsl(var(--destructive) / 0.55)" },
+          "50%": { boxShadow: "0 0 0 6px hsl(var(--destructive) / 0)" },
+        },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
@@ -171,6 +176,8 @@ export default {
         "wa-pulse": "wa-pulse 2s ease-in-out infinite",
         "wa-wiggle": "wa-wiggle 3s ease-in-out infinite",
         "wa-ring": "wa-ring 2.5s ease-in-out infinite",
+        "field-alert": "field-alert 1.4s ease-in-out infinite",
+
       },
     },
   },
