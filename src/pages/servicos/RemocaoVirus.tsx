@@ -127,7 +127,7 @@ const RemocaoVirus = () => {
       <RealImageSection imageKey="diagnostico" caption="Análise e remoção completa de malware" />
 
       {/* Sinais de Infecção */}
-      <section className="py-10 bg-secondary">
+      <section id="sinais" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Sinais de que Seu Computador Está Infectado
