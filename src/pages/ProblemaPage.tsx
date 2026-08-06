@@ -11,6 +11,7 @@ import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TrustStrip from "@/components/TrustStrip";
 import PageTableOfContents from "@/components/PageTableOfContents";
+import CuratedSymptomSections, { CURATED_SYMPTOM_BLOCKS } from "@/components/CuratedSymptomSections";
 
 import { Helmet } from "react-helmet";
 import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
@@ -309,6 +310,9 @@ const ProblemaPage = () => {
     ],
   };
 
+  // Bloco curado do cluster de sintomas (somente slugs governados).
+  const curated = CURATED_SYMPTOM_BLOCKS[data.slug];
+
   const cidadesAtendidas = [
     { nome: "Curitiba", href: "/tecnico-informatica-curitiba" },
     { nome: "São José dos Pinhais", href: "/tecnico-informatica-sao-jose-dos-pinhais" },
@@ -370,6 +374,7 @@ const ProblemaPage = () => {
             <TrustStrip />
             <PageTableOfContents
               items={[
+                ...(curated?.tocItems ?? []),
                 { id: "sintomas", label: "Sintomas do problema" },
                 { id: "causas", label: "Causas reais" },
                 { id: "cenarios", label: "Cenários e prazos" },
@@ -379,6 +384,10 @@ const ProblemaPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Blocos curados do cluster de sintomas (Rodada 3R) */}
+      {curated ? <CuratedSymptomSections block={curated} /> : null}
+
 
       {/* Áreas atendidas — reforço de SEO local */}
       <section className="py-6 bg-secondary/50 border-y border-border">
