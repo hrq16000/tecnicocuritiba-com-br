@@ -11,6 +11,7 @@ import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TrustStrip from "@/components/TrustStrip";
 import PageTableOfContents from "@/components/PageTableOfContents";
+import CuratedSymptomSections, { CURATED_SYMPTOM_BLOCKS } from "@/components/CuratedSymptomSections";
 
 import { Helmet } from "react-helmet";
 import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
@@ -308,6 +309,9 @@ const ProblemaPage = () => {
       { "@type": "City", name: "Campo Largo" },
     ],
   };
+
+  // Bloco curado do cluster de sintomas (somente slugs governados).
+  const curated = CURATED_SYMPTOM_BLOCKS[data.slug];
 
   const cidadesAtendidas = [
     { nome: "Curitiba", href: "/tecnico-informatica-curitiba" },
