@@ -5,7 +5,9 @@ import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PageSummaryBand from "@/components/PageSummaryBand";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
-import { useEffect } from "react";
+import BusinessHero from "@/components/b2b/BusinessHero";
+import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+
 
 const WHATSAPP_URL = "https://wa.me/5541997452053?text=" + encodeURIComponent("Olá! Quero suporte de TI para minha empresa em Curitiba.");
 
@@ -29,93 +31,67 @@ const CIDADES_RMC = [
 ];
 
 const SERVICOS_EMPRESAS = [
-  { icon: Headphones, title: "Suporte Técnico Recorrente", desc: "Contratos mensais com SLA e atendimento prioritário para escritórios e indústrias." },
-  { icon: Shield, title: "Segurança e Antivírus Corporativo", desc: "Bitdefender/ESET, políticas de acesso, backup em nuvem e prevenção de ransomware." },
+  { icon: Headphones, title: "Suporte Técnico Recorrente", desc: "Acompanhamento recorrente com escopo, frequência e prioridades definidos em levantamento inicial." },
+  { icon: Shield, title: "Segurança e Antivírus Corporativo", desc: "Bitdefender/ESET, políticas de acesso, backup em nuvem e medidas de redução de risco de ransomware." },
   { icon: Building2, title: "Infraestrutura de Rede", desc: "Cabeamento estruturado, Wi-Fi empresarial (UniFi/Mikrotik), VLANs e VPN site-to-site." },
-  { icon: Clock, title: "Atendimento Emergencial", desc: "Chamados críticos em até 2 horas úteis. Zero downtime para PDVs e servidores." },
+  { icon: Clock, title: "Chamados Críticos", desc: "Priorização de chamados que param a operação (PDV, servidor, rede), conforme agenda disponível no momento." },
 ];
 
 const FAQ = [
-  { q: "Vocês atendem empresas em Curitiba?", a: "Sim. Atuamos há mais de 20 anos com suporte técnico de TI para empresas, escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Oferecemos contratos mensais, atendimento avulso e projetos de infraestrutura." },
-  { q: "Qual o valor da hora técnica para empresas?", a: "A visita técnica corporativa começa em R$ 99,99 (até 30 min). Uma hora de atendimento presencial (combinada previamente) sai por R$ 169,99. Contratos mensais têm valor negociado a partir de R$ 300/mês (até 5 equipamentos) com SLA e atendimento prioritário." },
-  { q: "Fazem contrato mensal de suporte?", a: "Sim. Oferecemos planos mensais com SLA definido, atendimento remoto ilimitado e visitas presenciais programadas. Ideal para empresas que precisam de estabilidade e resposta rápida sem custo variável alto." },
+  { q: "Vocês atendem empresas em Curitiba?", a: "Sim. Atuamos há mais de 20 anos com suporte técnico de TI para empresas, escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Trabalhamos com atendimento avulso por chamado, acompanhamento recorrente e projetos de infraestrutura." },
+  { q: "Qual o valor da hora técnica para empresas?", a: "A visita técnica corporativa começa em R$ 99,99 (até 30 min). Uma hora de atendimento presencial (combinada previamente) sai por R$ 169,99. O acompanhamento recorrente tem valor definido caso a caso, após levantamento de equipamentos, usuários e escopo." },
+  { q: "Como funciona o atendimento recorrente?", a: "Antes de qualquer proposta fazemos um levantamento do parque: quantidade de equipamentos, usuários, sistemas críticos e rotinas de backup. A partir disso definimos escopo, frequência de visitas e prioridade dos chamados por escrito." },
   { q: "Atendem em quais bairros e cidades?", a: "Curitiba (todos os bairros — com foco em Batel, Centro, Centro Cívico, Alto da Glória, Água Verde e Ecoville) e Região Metropolitana: São José dos Pinhais, Araucária, Pinhais, Colombo, Campo Largo, Fazenda Rio Grande e Almirante Tamandaré." },
   { q: "Fazem projetos de rede, cabeamento e Wi-Fi empresarial?", a: "Sim. Projetamos e instalamos redes cabeadas (categoria 5e/6), Wi-Fi corporativo com controladoras UniFi/Aruba/Mikrotik, VLANs, VPN entre filiais e segmentação para PDV/visitantes." },
   { q: "Emitem nota fiscal?", a: "Sim, todos os serviços para empresas são emitidos com NFS-e do Município de Curitiba." },
 ];
 
+
+const BREADCRUMBS = [
+  { name: "Início", path: "/" },
+  { name: "Empresa de TI em Curitiba", path: "/empresa-de-ti-curitiba" },
+];
+
 export default function EmpresaTICuritiba() {
-  useEffect(() => {
-    // FAQ schema injection
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.setAttribute("data-empresa-ti-faq", "true");
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: FAQ.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-    document.head.appendChild(script);
-
-    const service = document.createElement("script");
-    service.type = "application/ld+json";
-    service.setAttribute("data-empresa-ti-service", "true");
-    service.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: "Suporte de TI para Empresas",
-      provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba" },
-      areaServed: { "@type": "City", name: "Curitiba" },
-      offers: { "@type": "Offer", priceCurrency: "BRL", price: "99.99", url: "https://tecnicocuritiba.com.br/empresa-de-ti-curitiba" },
-    });
-    document.head.appendChild(service);
-
-    return () => {
-      document.querySelectorAll('script[data-empresa-ti-faq="true"],script[data-empresa-ti-service="true"]').forEach((s) => s.remove());
-    };
-  }, []);
-
   return (
     <>
       <PageSEO
         title="Empresa de TI em Curitiba | Suporte Corporativo a partir de R$ 99,99"
-        description="Empresa de TI em Curitiba com suporte técnico corporativo, contratos mensais com SLA, redes, Wi-Fi empresarial e segurança. Atendemos Batel, Centro, Ecoville e toda a RMC. A partir de R$ 99,99."
+        description="Empresa de TI em Curitiba com suporte técnico corporativo, contratos mensais, redes, Wi-Fi empresarial e segurança. Atendemos Batel, Centro, Ecoville e toda a RMC. A partir de R$ 99,99."
         path="/empresa-de-ti-curitiba"
-        breadcrumbs={[
-          { name: "Início", path: "/" },
-          { name: "Empresa de TI em Curitiba", path: "/empresa-de-ti-curitiba" },
-        ]}
+        breadcrumbs={BREADCRUMBS}
       />
+      <BusinessPageSchema
+        id="empresa-ti"
+        path="/empresa-de-ti-curitiba"
+        name="Empresa de TI em Curitiba"
+        description="Suporte técnico corporativo, redes e infraestrutura para empresas em Curitiba e Região Metropolitana."
+        breadcrumbs={BREADCRUMBS}
+        faq={FAQ}
+      />
+
+      <BusinessHero
+        eyebrow="Suporte de TI corporativo em Curitiba"
+        title="Empresa de TI em Curitiba"
+        titleSuffix="Suporte técnico, redes e infraestrutura para o seu negócio"
+        description="Atendemos escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Atendimento avulso por chamado, acompanhamento recorrente definido em levantamento inicial ou projetos de infraestrutura com escopo aprovado antes da execução."
+        whatsappUrl={WHATSAPP_URL}
+        ctaLabel="Falar com Consultor de TI"
+        ctaLocation="empresa_ti_hero"
+        secondary={{ label: "Ver serviços para empresas", to: "/suporte-empresas" }}
+        signals={[
+          "+20 anos de atuação",
+          "NFS-e do Município de Curitiba",
+          "Atendimento remoto e presencial",
+          "Escopo acordado antes da execução",
+        ]}
+      >
+        <PrecoVisitaTecnica tipo="padrao" />
+      </BusinessHero>
 
       <div className="container mx-auto px-4 py-8 md:py-12">
         <Breadcrumbs items={[{ label: "Empresa de TI em Curitiba" }]} />
 
-        <header className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-accent/10 text-accent rounded-full px-4 py-1.5 mb-4 text-sm font-semibold">
-            <Building2 className="h-4 w-4" /> Suporte de TI Corporativo em Curitiba
-          </div>
-          <h1 className="text-3xl md:text-5xl font-heading font-bold text-foreground leading-tight mb-4">
-            Empresa de TI em <span className="text-accent">Curitiba</span>
-            <span className="block text-xl md:text-2xl font-semibold text-muted-foreground mt-2">
-              Suporte técnico, redes e infraestrutura para o seu negócio
-            </span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            +20 anos apoiando escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Contrato mensal com SLA, atendimento avulso ou projetos completos de infraestrutura.
-          </p>
-          <div className="max-w-md mx-auto mb-6">
-            <PrecoVisitaTecnica tipo="padrao" />
-          </div>
-          <Button variant="heroWhatsapp" asChild className="shadow-lg">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-cta-location="empresa_ti_hero">
-              <MessageCircle className="h-5 w-5" /> Falar com Consultor de TI
-            </a>
-          </Button>
-        </header>
 
         <PageSummaryBand
           summary="Suporte técnico, redes e infraestrutura para empresas em Curitiba e Região Metropolitana, com atendimento avulso, contrato mensal ou projetos de infraestrutura."
@@ -194,7 +170,8 @@ export default function EmpresaTICuritiba() {
 
         <section className="bg-gradient-to-br from-primary to-accent rounded-2xl p-8 md:p-10 text-center text-white max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3">Precisa de suporte de TI agora?</h2>
-          <p className="text-white/90 mb-6">Atendimento em até 2h úteis para chamados críticos. Contratos mensais com SLA garantido.</p>
+          <p className="text-white/90 mb-6">Descreva o cenário da sua empresa no WhatsApp: avaliamos a prioridade do chamado e retornamos com escopo e agenda disponível.</p>
+
           <Button variant="heroWhatsapp" asChild className="shadow-xl">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-cta-location="empresa_ti_cta_final">
               <MessageCircle className="h-5 w-5" /> Chamar Consultor Agora

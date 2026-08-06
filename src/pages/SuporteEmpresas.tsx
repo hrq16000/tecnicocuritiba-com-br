@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
-import { PageHero } from "@/components/PageHero";
+import BusinessHero from "@/components/b2b/BusinessHero";
+import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+
 import { BenefitsGrid } from "@/components/BenefitsGrid";
 import { TrustSection } from "@/components/TrustSection";
 import { CTASection } from "@/components/CTASection";
@@ -19,6 +21,23 @@ import { MessageCircle, Headphones, Clock, Building, CreditCard, FileText, Check
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico para minha empresa.";
+
+const BREADCRUMBS = [
+  { name: "Início", path: "/" },
+  { name: "Serviços", path: "/servicos" },
+  { name: "Suporte Empresas", path: "/suporte-empresas" },
+];
+
+const FAQ_EMPRESAS = [
+  { q: "Quais informações devo registrar antes de pedir suporte?", a: "Equipamento e usuário afetados, horário do início do problema, mensagem de erro, programa envolvido, alteração recente, impacto na operação, quantidade de pessoas afetadas, possibilidade de acesso remoto, existência de backup e quem autoriza alterações. Senhas e códigos de autenticação não devem ser enviados por mensagem." },
+  { q: "Vocês atendem escritórios de diferentes segmentos?", a: "Sim. O atendimento é de informática generalista e cobre estações de trabalho, rede, impressão, backup e continuidade da operação, independentemente do segmento. Não oferecemos especialização setorial nem conformidade regulatória." },
+  { q: "Vocês prestam suporte a qualquer sistema empresarial?", a: "Não. Verificamos o computador, a conectividade e registramos o erro, e podemos auxiliar na comunicação com o fornecedor. Correção interna do sistema, licenças e credenciais permanecem com quem mantém a plataforma." },
+  { q: "Qual é a diferença entre atendimento avulso e recorrente?", a: "No avulso, o escopo é definido por solicitação e a prioridade segue a agenda. No recorrente, escopo, frequência e prioridades são definidos por um levantamento inicial dos equipamentos e usuários." },
+  { q: "Atendimento recorrente significa suporte ilimitado?", a: "Não. Não trabalhamos com suporte ilimitado, franquia fixa de horas, monitoramento permanente ou tempo de resposta garantido. O escopo é sempre acordado a partir do levantamento." },
+  { q: "Vocês corrigem problemas dentro de sistemas de terceiros?", a: "Não corrigimos código, não liberamos licença e não redefinimos credencial de terceiros. Executamos procedimentos autorizados no computador e na rede e indicamos quando o caso pertence ao fornecedor." },
+  { q: "O técnico precisa conhecer minha senha?", a: "Somente quando o procedimento autorizado exigir, e sempre com o acesso mínimo necessário. Evitamos armazenar credenciais, encerramos as sessões e nunca pedimos códigos de autenticação por mensagem." },
+];
+
 
 const services = [
   {
@@ -108,15 +127,35 @@ const SuporteEmpresas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: atendimento avulso ou recorrente, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Suporte Empresas", path: "/suporte-empresas" }]} />
+      <PageSEO title="Suporte de TI para Empresas em Curitiba | Contratos, M365 e Backup" description="Suporte de TI para empresas em Curitiba: atendimento avulso ou recorrente, Microsoft 365, Google Workspace, backup, servidores e infraestrutura de rede. Nota fiscal e pagamento faturado." path="/suporte-empresas" breadcrumbs={BREADCRUMBS} />
       <JsonLdSchema />
+      <BusinessPageSchema
+        id="suporte-empresas"
+        path="/suporte-empresas"
+        name="Suporte Técnico Empresarial em Curitiba"
+        description="Suporte de TI para empresas em Curitiba: estações de trabalho, rede, impressão, backup e continuidade da operação, em atendimento avulso ou recorrente."
+        breadcrumbs={BREADCRUMBS}
+        faq={FAQ_EMPRESAS}
+      />
       <Header />
       <main id="main-content">
-        <PageHero
+        <BusinessHero
+          eyebrow="Suporte técnico empresarial em Curitiba"
           title="Suporte Técnico para Empresas"
-          subtitle="Soluções de TI para pequenas e médias empresas em Curitiba. Atendimento avulso ou recorrente, escopo definido por solicitação e nota fiscal em todos os serviços."
-          ctaText="Solicitar Proposta Comercial"
+          titleSuffix="Estações de trabalho, rede, impressão e continuidade da operação"
+          description="Atendimento de informática para pequenas e médias empresas em Curitiba e região. Escopo definido por solicitação no avulso, ou por levantamento inicial no acompanhamento recorrente — sempre com autorização antes da execução."
+          whatsappUrl={whatsappUrl}
+          ctaLabel="Solicitar proposta comercial"
+          ctaLocation="suporte_empresas_hero"
+          secondary={{ label: "Ver preços e políticas", to: "/precos-e-politicas" }}
+          signals={[
+            "Nota fiscal em todos os atendimentos",
+            "Pagamento faturado para PJ",
+            "Remoto e presencial",
+            "Limites de escopo declarados",
+          ]}
         />
+
 
         <BenefitsGrid
           benefits={services}
@@ -543,15 +582,8 @@ const SuporteEmpresas = () => {
               Perguntas frequentes de empresas
             </h2>
             <div className="space-y-5">
-              {[
-                { q: "Quais informações devo registrar antes de pedir suporte?", a: "Equipamento e usuário afetados, horário do início do problema, mensagem de erro, programa envolvido, alteração recente, impacto na operação, quantidade de pessoas afetadas, possibilidade de acesso remoto, existência de backup e quem autoriza alterações. Senhas e códigos de autenticação não devem ser enviados por mensagem." },
-                { q: "Vocês atendem escritórios de diferentes segmentos?", a: "Sim. O atendimento é de informática generalista e cobre estações de trabalho, rede, impressão, backup e continuidade da operação, independentemente do segmento. Não oferecemos especialização setorial nem conformidade regulatória." },
-                { q: "Vocês prestam suporte a qualquer sistema empresarial?", a: "Não. Verificamos o computador, a conectividade e registramos o erro, e podemos auxiliar na comunicação com o fornecedor. Correção interna do sistema, licenças e credenciais permanecem com quem mantém a plataforma." },
-                { q: "Qual é a diferença entre atendimento avulso e recorrente?", a: "No avulso, o escopo é definido por solicitação e a prioridade segue a agenda. No recorrente, escopo, frequência e prioridades são definidos por um levantamento inicial dos equipamentos e usuários." },
-                { q: "Atendimento recorrente significa suporte ilimitado?", a: "Não. Não trabalhamos com suporte ilimitado, franquia fixa de horas, monitoramento permanente ou tempo de resposta garantido. O escopo é sempre acordado a partir do levantamento." },
-                { q: "Vocês corrigem problemas dentro de sistemas de terceiros?", a: "Não corrigimos código, não liberamos licença e não redefinimos credencial de terceiros. Executamos procedimentos autorizados no computador e na rede e indicamos quando o caso pertence ao fornecedor." },
-                { q: "O técnico precisa conhecer minha senha?", a: "Somente quando o procedimento autorizado exigir, e sempre com o acesso mínimo necessário. Evitamos armazenar credenciais, encerramos as sessões e nunca pedimos códigos de autenticação por mensagem." },
-              ].map((item) => (
+              {FAQ_EMPRESAS.map((item) => (
+
                 <div key={item.q} className="bg-background rounded-xl p-6">
                   <h3 className="font-bold text-foreground mb-2">{item.q}</h3>
                   <p className="text-muted-foreground text-sm">{item.a}</p>
