@@ -108,9 +108,10 @@ export default function StatusOS() {
         description="Consulte o andamento do seu atendimento pelo número da Ordem de Serviço: etapa atual, prazo estimado e observações do técnico em Curitiba e região."
         path="/status-os"
         breadcrumbs={[
-          { label: "Início", href: "/" },
-          { label: "Status da Ordem de Serviço", href: "/status-os" },
+          { name: "Início", path: "/" },
+          { name: "Status da Ordem de Serviço", path: "/status-os" },
         ]}
+
       />
       <script
         type="application/ld+json"
