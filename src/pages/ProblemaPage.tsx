@@ -329,7 +329,14 @@ const ProblemaPage = () => {
         })}</script>
       </Helmet>
       <Header />
-      <Breadcrumbs items={[{ label: data.categoria, href: "/servicos" }, { label: data.h1.split("—")[0].trim() }]} />
+      <Breadcrumbs
+        emitSchema={false}
+        items={[
+          { label: "Problemas comuns", href: HUB_PROBLEMAS },
+          { label: data.categoria, href: categoriaHref },
+          { label: data.h1.split("—")[0].trim() },
+        ]}
+      />
 
       {/* Hero */}
       <section className="pt-10 pb-10 hero-gradient">
