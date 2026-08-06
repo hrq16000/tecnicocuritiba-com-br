@@ -176,6 +176,8 @@ export default {
         "wa-pulse": "wa-pulse 2s ease-in-out infinite",
         "wa-wiggle": "wa-wiggle 3s ease-in-out infinite",
         "wa-ring": "wa-ring 2.5s ease-in-out infinite",
+        "field-alert": "field-alert 1.4s ease-in-out infinite",
+
       },
     },
   },
