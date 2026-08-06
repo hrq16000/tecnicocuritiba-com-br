@@ -44,78 +44,51 @@ const FAQ = [
   { q: "Emitem nota fiscal?", a: "Sim, todos os serviços para empresas são emitidos com NFS-e do Município de Curitiba." },
 ];
 
+const BREADCRUMBS = [
+  { name: "Início", path: "/" },
+  { name: "Empresa de TI em Curitiba", path: "/empresa-de-ti-curitiba" },
+];
+
 export default function EmpresaTICuritiba() {
-  useEffect(() => {
-    // FAQ schema injection
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.setAttribute("data-empresa-ti-faq", "true");
-    script.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: FAQ.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    });
-    document.head.appendChild(script);
-
-    const service = document.createElement("script");
-    service.type = "application/ld+json";
-    service.setAttribute("data-empresa-ti-service", "true");
-    service.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Service",
-      serviceType: "Suporte de TI para Empresas",
-      provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba" },
-      areaServed: { "@type": "City", name: "Curitiba" },
-      offers: { "@type": "Offer", priceCurrency: "BRL", price: "99.99", url: "https://tecnicocuritiba.com.br/empresa-de-ti-curitiba" },
-    });
-    document.head.appendChild(service);
-
-    return () => {
-      document.querySelectorAll('script[data-empresa-ti-faq="true"],script[data-empresa-ti-service="true"]').forEach((s) => s.remove());
-    };
-  }, []);
-
   return (
     <>
       <PageSEO
         title="Empresa de TI em Curitiba | Suporte Corporativo a partir de R$ 99,99"
-        description="Empresa de TI em Curitiba com suporte técnico corporativo, contratos mensais com SLA, redes, Wi-Fi empresarial e segurança. Atendemos Batel, Centro, Ecoville e toda a RMC. A partir de R$ 99,99."
+        description="Empresa de TI em Curitiba com suporte técnico corporativo, contratos mensais, redes, Wi-Fi empresarial e segurança. Atendemos Batel, Centro, Ecoville e toda a RMC. A partir de R$ 99,99."
         path="/empresa-de-ti-curitiba"
-        breadcrumbs={[
-          { name: "Início", path: "/" },
-          { name: "Empresa de TI em Curitiba", path: "/empresa-de-ti-curitiba" },
-        ]}
+        breadcrumbs={BREADCRUMBS}
       />
+      <BusinessPageSchema
+        id="empresa-ti"
+        path="/empresa-de-ti-curitiba"
+        name="Empresa de TI em Curitiba"
+        description="Suporte técnico corporativo, redes e infraestrutura para empresas em Curitiba e Região Metropolitana."
+        breadcrumbs={BREADCRUMBS}
+        faq={FAQ}
+      />
+
+      <BusinessHero
+        eyebrow="Suporte de TI corporativo em Curitiba"
+        title="Empresa de TI em Curitiba"
+        titleSuffix="Suporte técnico, redes e infraestrutura para o seu negócio"
+        description="Atendemos escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Atendimento avulso por chamado, acompanhamento recorrente definido em levantamento inicial ou projetos de infraestrutura com escopo aprovado antes da execução."
+        whatsappUrl={WHATSAPP_URL}
+        ctaLabel="Falar com Consultor de TI"
+        ctaLocation="empresa_ti_hero"
+        secondary={{ label: "Ver serviços para empresas", to: "/suporte-empresas" }}
+        signals={[
+          "+20 anos de atuação",
+          "NFS-e do Município de Curitiba",
+          "Atendimento remoto e presencial",
+          "Escopo acordado antes da execução",
+        ]}
+      >
+        <PrecoVisitaTecnica tipo="padrao" />
+      </BusinessHero>
 
       <div className="container mx-auto px-4 py-8 md:py-12">
         <Breadcrumbs items={[{ label: "Empresa de TI em Curitiba" }]} />
 
-        <header className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-accent/10 text-accent rounded-full px-4 py-1.5 mb-4 text-sm font-semibold">
-            <Building2 className="h-4 w-4" /> Suporte de TI Corporativo em Curitiba
-          </div>
-          <h1 className="text-3xl md:text-5xl font-heading font-bold text-foreground leading-tight mb-4">
-            Empresa de TI em <span className="text-accent">Curitiba</span>
-            <span className="block text-xl md:text-2xl font-semibold text-muted-foreground mt-2">
-              Suporte técnico, redes e infraestrutura para o seu negócio
-            </span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            +20 anos apoiando escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Contrato mensal com SLA, atendimento avulso ou projetos completos de infraestrutura.
-          </p>
-          <div className="max-w-md mx-auto mb-6">
-            <PrecoVisitaTecnica tipo="padrao" />
-          </div>
-          <Button variant="heroWhatsapp" asChild className="shadow-lg">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-cta-location="empresa_ti_hero">
-              <MessageCircle className="h-5 w-5" /> Falar com Consultor de TI
-            </a>
-          </Button>
-        </header>
 
         <PageSummaryBand
           summary="Suporte técnico, redes e infraestrutura para empresas em Curitiba e Região Metropolitana, com atendimento avulso, contrato mensal ou projetos de infraestrutura."
