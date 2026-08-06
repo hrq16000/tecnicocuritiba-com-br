@@ -57,6 +57,37 @@ const isValidInternalTarget = (to: string): boolean => {
   return VALID_EXTRA_ROUTES.has(to);
 };
 
+/**
+ * Taxonomia de breadcrumb: mapeia a categoria do problema para o destino
+ * canônico do serviço correspondente. Evita apontar todas as categorias
+ * para /servicos (destino genérico) e mantém a hierarquia
+ * Início > Problemas > Categoria (serviço canônico) > Problema.
+ */
+const CATEGORIA_CANONICAL: Array<[RegExp, string]> = [
+  [/notebook/i, "/servicos/conserto-notebook-curitiba"],
+  [/placa|solda|bga|chip/i, "/servicos/conserto-placa"],
+  [/\btv\b|smart ?tv|televis/i, "/servicos/conserto-tv"],
+  [/celular|smartphone|tablet/i, "/servicos/conserto-celular"],
+  [/wi-?fi|rede|roteador|internet|impressora/i, "/servicos/redes-wifi"],
+  [/v[ií]rus|malware|ransomware/i, "/servicos/remocao-virus"],
+  [/format|windows|sistema operacional|software/i, "/servicos/formatacao-computador"],
+  [/backup|recupera[çc][ãa]o|dados|hd|ssd corrompid/i, "/servicos/backup-recuperacao"],
+  [/upgrade|mem[óo]ria|ssd/i, "/servicos/upgrade-ssd-memoria"],
+  [/montagem|gamer|desktop novo/i, "/servicos/montagem-pc"],
+  [/lento|desempenho|travando/i, "/servicos/computador-lento"],
+  [/n[ãa]o liga|sem imagem|fonte/i, "/servicos/computador-nao-liga"],
+];
+
+const HUB_PROBLEMAS = "/problemas-reais-e-casos";
+
+const canonicalDestinoCategoria = (categoria: string, h1 = ""): string => {
+  const alvo = `${categoria} ${h1}`;
+  for (const [re, to] of CATEGORIA_CANONICAL) {
+    if (re.test(alvo) && isValidInternalTarget(to)) return to;
+  }
+  return "/servicos/conserto-pc-notebook";
+};
+
 
 const WHATSAPP_NUMBER = "5541997452053";
 
