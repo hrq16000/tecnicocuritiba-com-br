@@ -136,7 +136,7 @@ const FormatacaoComputador = () => {
       <RealImageSection imageKey="desktopMontado" caption="Computador pronto e otimizado após formatação" />
 
       {/* Quando formatar */}
-      <section className="py-10 bg-secondary">
+      <section id="quando-formatar" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Quando Devo Formatar Meu Computador?
