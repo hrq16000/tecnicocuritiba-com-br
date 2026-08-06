@@ -309,6 +309,48 @@ export default function StatusOS() {
     }
   }, [consultar]);
 
+  const [gerandoPdf, setGerandoPdf] = useState(false);
+
+  /** Comprovante em PDF com timeline, prazos, histórico e fotos já exibidas na tela. */
+  const baixarPdf = async () => {
+    if (!os || gerandoPdf) return;
+    setGerandoPdf(true);
+    try {
+      const { baixarStatusOsPdf } = await import("@/lib/statusOsPdf");
+      await baixarStatusOsPdf({
+        numero: os.numero,
+        etapaAtual: ETAPAS[idxAtual]?.label ?? os.etapa,
+        equipamento: os.equipamento,
+        local: [os.bairro, os.cidade].filter(Boolean).join(", ") || null,
+        prazoEstimado: os.prazo_estimado,
+        previsaoConclusao: os.previsao_conclusao
+          ? new Date(os.previsao_conclusao).toLocaleString("pt-BR")
+          : null,
+        abertura: new Date(os.created_at).toLocaleString("pt-BR"),
+        atualizacao: new Date(os.updated_at).toLocaleString("pt-BR"),
+        observacaoPublica: os.observacao_publica,
+        sintomas: revelarSensiveis ? os.sintomas ?? null : null,
+        fotos: revelarSensiveis ? fotos : [],
+        etapas: ETAPAS.map((e, i) => ({
+          label: e.label,
+          desc: e.desc,
+          estado: i < idxAtual ? "concluida" : i === idxAtual ? "atual" : "pendente",
+        })),
+        historico: historico.map((h) => ({
+          quando: fmtDate(h.em ?? h.at ?? h.data),
+          etapa: ETAPAS.find((e) => e.id === h.etapa)?.label ?? String(h.etapa),
+          observacao: (h.observacao ?? h.nota) as string | undefined,
+        })),
+        linkAcompanhamento: shareUrl,
+      });
+      track("status_os_baixar_pdf", { etapa: os.etapa });
+    } catch {
+      setErro("Não foi possível gerar o PDF agora. Tente novamente ou fale pelo WhatsApp.");
+    } finally {
+      setGerandoPdf(false);
+    }
+  };
+
   const copiarLink = async () => {
     if (!shareUrl) return;
     try {
