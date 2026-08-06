@@ -168,10 +168,47 @@ const SuporteEmpresas = () => {
           subtitle="Suporte técnico empresarial completo e profissional"
         />
 
+        <BusinessContinuityPillars
+          id="pilares-operacionais"
+          title="Pilares do atendimento empresarial"
+          intro="Quatro frentes que sustentam a operação no dia a dia. Cada pilar leva ao serviço correspondente — sem criar pacote, plano ou mensalidade."
+          pillars={[
+            {
+              icon: Users,
+              title: "Computadores e usuários",
+              description: "Lentidão, falhas, configurações, estações de trabalho e suporte ao usuário que depende do equipamento para produzir.",
+              to: "/servicos/manutencao-de-computador",
+              linkLabel: "Manutenção de computador",
+            },
+            {
+              icon: Building,
+              title: "Redes e conectividade",
+              description: "Wi-Fi, comunicação entre setores, impressoras em rede, compartilhamento de arquivos e estabilidade da conexão local.",
+              to: "/servicos/redes-wifi",
+              linkLabel: "Redes e Wi-Fi",
+            },
+            {
+              icon: Shield,
+              title: "Prevenção e continuidade",
+              description: "Manutenção preventiva, backup, avaliação de riscos, organização do ambiente e recomendações antes da parada acontecer.",
+              to: "/servicos/backup-recuperacao",
+              linkLabel: "Backup e recuperação",
+            },
+            {
+              icon: Headphones,
+              title: "Atendimento remoto e presencial",
+              description: "Triagem da demanda, definição da modalidade compatível e limites do que pode ser resolvido sem deslocamento.",
+              to: "/atendimento-remoto",
+              linkLabel: "Atendimento remoto",
+            },
+          ]}
+        />
+
         <PageSummaryBand
           className="container mx-auto px-4"
           summary="Suporte técnico empresarial em Curitiba para estações de trabalho, rede, impressão e continuidade da operação — atendimento avulso ou recorrente, com limites de escopo explícitos."
           items={[
+            { id: "pilares-operacionais", label: "Pilares do atendimento" },
             { id: "contextos-empresariais", label: "Contextos empresariais atendidos" },
             { id: "antes-do-suporte", label: "O que registrar antes do chamado" },
             { id: "avulso-ou-recorrente", label: "Avulso ou recorrente" },
@@ -180,6 +217,7 @@ const SuporteEmpresas = () => {
             { id: "faq-empresas", label: "Perguntas frequentes" },
           ]}
         />
+
 
         <TriagemPJ />
 
