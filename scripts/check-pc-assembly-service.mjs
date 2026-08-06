@@ -64,7 +64,9 @@ ok(src.includes("/servicos/upgrade-ssd-memoria"), "link para upgrade de SSD/RAM"
 
 // 5) Rotas duplicadas bloqueadas.
 for (const dup of ["/servicos/pc-gamer", "/servicos/montagem-de-pc"]) {
-  ok(!routes.includes(`path="${dup}"`), `rota duplicada ${dup} não registrada (canônica: /servicos/montagem-pc)`);
+  // Redirecionar (Navigate) para a canônica é permitido; renderizar página própria não.
+  const re = new RegExp(`path="${dup}"[^>]*element=\\{<(?!Navigate)`);
+  ok(!re.test(routes), `rota duplicada ${dup} não renderiza página própria (canônica: /servicos/montagem-pc)`);
 }
 
 if (failed > 0) {
