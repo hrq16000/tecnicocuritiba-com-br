@@ -42,6 +42,8 @@ const BackupRecuperacao = () => {
           { question: "E se o HD estiver fazendo barulho?", answer: "Ruído indica falha física grave. Não ligue mais o computador e acione o técnico para avaliação em bancada." },
           { question: "Quanto tempo demora a recuperação?", answer: "Recuperação lógica leva de 2 a 24 horas. Casos físicos podem levar alguns dias, sempre com prazo informado antes." },
           { question: "Vocês garantem a recuperação?", answer: "Não cobramos pelo resgate quando os dados não são recuperados. Você só paga pelo sucesso." },
+          { question: "O técnico precisa conhecer minha senha?", answer: "Somente o acesso estritamente necessário é solicitado, sempre com autorização e explicação do procedimento. Senhas, códigos de autenticação e credenciais bancárias não devem ser enviados por mensagem." },
+          { question: "Quem deve resolver problemas em sistemas de terceiros?", answer: "Licença, disponibilidade, erro interno e recuperação de conta são responsabilidade do fornecedor do sistema. O atendimento técnico verifica o computador, a conectividade e registra o erro para apoiar esse contato." },
         ]}
       />
       <PageSEO title="Backup e Recuperação de Dados em Curitiba | Técnico em Curitiba" description="Backup e recuperação de dados em Curitiba. Resgate de arquivos de HD, SSD, pendrive. Recuperação de dados deletados. Atendimento especializado." path="/servicos/backup-recuperacao"  breadcrumbs={[
