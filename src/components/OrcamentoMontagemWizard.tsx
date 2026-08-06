@@ -66,6 +66,7 @@ interface FormState {
   orcamento: string;
   cidade: string;
   bairro: string;
+  celular: string;
   periodo: string;
   aceite: boolean;
   lgpd: boolean;
@@ -79,10 +80,12 @@ const INITIAL: FormState = {
   orcamento: "",
   cidade: "",
   bairro: "",
+  celular: "",
   periodo: "",
   aceite: false,
   lgpd: false,
 };
+
 
 const labelOf = (list: readonly { id: string; label: string }[], id: string) =>
   list.find((i) => i.id === id)?.label || "";
@@ -179,15 +182,24 @@ export function OrcamentoMontagemWizard() {
     if (registradas.current.has(numero)) return;
     registradas.current.add(numero);
     try {
+      const digits = form.celular.replace(/\D/g, "");
       await supabase.from("ordens_servico").insert({
         numero,
         etapa: "aberta",
         descricao_curta: `Montagem de PC — ${labelOf(USOS, form.uso) || "uso não informado"}`.slice(0, 400),
         cidade: form.cidade || null,
         bairro: form.bairro.trim() || null,
+        telefone: digits.length >= 10 && digits.length <= 13 ? digits : null,
+        equipamento: "Desktop / montagem de PC",
+        sintomas: [
+          form.modelo.trim() ? `Configuração pretendida: ${form.modelo.trim()}` : "",
+          form.pecasLista.trim() ? `Peças do cliente: ${form.pecasLista.trim()}` : "",
+          anexos.length ? `Anexos informados: ${anexos.join(", ")}` : "",
+        ].filter(Boolean).join("\n").slice(0, 2000) || null,
         prazo_estimado: "Definido após diagnóstico e aprovação do orçamento.",
         observacao_publica: "Pedido registrado pelo site. Aguardando contato para confirmar escopo.",
       });
+
     } catch {
       /* acompanhamento é opcional: não bloqueia o atendimento */
     }
@@ -469,7 +481,24 @@ export function OrcamentoMontagemWizard() {
             value={form.bairro}
             onChange={(e) => set("bairro", e.target.value)}
           />
+          <label className="block font-bold text-foreground" htmlFor="wz-celular">
+            Celular com WhatsApp (opcional, libera a consulta em /status-os)
+          </label>
+          <input
+            id="wz-celular"
+            className={baseFieldCls}
+            inputMode="tel"
+            maxLength={20}
+            placeholder="Ex.: (41) 99999-9999"
+            value={form.celular}
+            onChange={(e) => set("celular", e.target.value)}
+          />
+          <p className="text-sm text-muted-foreground">
+            Usado apenas para localizar a sua ordem de serviço na consulta pública. Nunca é exibido
+            completo: a página mostra somente o formato (41) ****-9999.
+          </p>
           <label className="block font-bold text-foreground" htmlFor="wz-periodo">
+
             Período preferido para o contato (opcional)
           </label>
           <select

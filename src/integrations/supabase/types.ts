@@ -140,13 +140,19 @@ export type Database = {
           cidade: string | null
           created_at: string
           descricao_curta: string | null
+          equipamento: string | null
           etapa: string
+          fotos: Json
           historico: Json
           id: string
           numero: string
           observacao_publica: string | null
           prazo_estimado: string | null
+          previsao_conclusao: string | null
           session_id: string | null
+          sintomas: string | null
+          sla_horas: number | null
+          telefone: string | null
           updated_at: string
         }
         Insert: {
@@ -154,13 +160,19 @@ export type Database = {
           cidade?: string | null
           created_at?: string
           descricao_curta?: string | null
+          equipamento?: string | null
           etapa?: string
+          fotos?: Json
           historico?: Json
           id?: string
           numero: string
           observacao_publica?: string | null
           prazo_estimado?: string | null
+          previsao_conclusao?: string | null
           session_id?: string | null
+          sintomas?: string | null
+          sla_horas?: number | null
+          telefone?: string | null
           updated_at?: string
         }
         Update: {
@@ -168,14 +180,38 @@ export type Database = {
           cidade?: string | null
           created_at?: string
           descricao_curta?: string | null
+          equipamento?: string | null
           etapa?: string
+          fotos?: Json
           historico?: Json
           id?: string
           numero?: string
           observacao_publica?: string | null
           prazo_estimado?: string | null
+          previsao_conclusao?: string | null
           session_id?: string | null
+          sintomas?: string | null
+          sla_horas?: number | null
+          telefone?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      os_lookup_attempts: {
+        Row: {
+          chave: string
+          janela_inicio: string
+          tentativas: number
+        }
+        Insert: {
+          chave: string
+          janela_inicio?: string
+          tentativas?: number
+        }
+        Update: {
+          chave?: string
+          janela_inicio?: string
+          tentativas?: number
         }
         Relationships: []
       }
@@ -293,11 +329,35 @@ export type Database = {
           cidade: string
           created_at: string
           descricao_curta: string
+          equipamento: string
           etapa: string
+          fotos: Json
           historico: Json
           numero: string
           observacao_publica: string
           prazo_estimado: string
+          previsao_conclusao: string
+          sintomas: string
+          updated_at: string
+        }[]
+      }
+      consultar_os_por_telefone: {
+        Args: { _telefone: string }
+        Returns: {
+          bairro: string
+          cidade: string
+          created_at: string
+          descricao_curta: string
+          equipamento: string
+          etapa: string
+          fotos: Json
+          historico: Json
+          numero: string
+          observacao_publica: string
+          prazo_estimado: string
+          previsao_conclusao: string
+          sintomas: string
+          telefone_mascarado: string
           updated_at: string
         }[]
       }
@@ -307,6 +367,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      os_rate_limit: {
+        Args: { _chave: string; _limite?: number }
+        Returns: undefined
       }
     }
     Enums: {
