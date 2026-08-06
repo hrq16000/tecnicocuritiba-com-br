@@ -100,6 +100,8 @@ const infoLinks = [
   { label: "Contato", to: "/contato" },
   { label: "Avaliações de Clientes", to: "/avaliacoes" },
   { label: "Como Avaliar", to: "/como-avaliar" },
+  { label: "Guia: Organização de TI", to: "/guias/organizacao-de-ti-para-escritorios" },
+  { label: "Guia: Escolher Workstation", to: "/guias/como-escolher-workstation" },
   { label: "Termos e Condições", to: "/termos-e-condicoes" },
   { label: "Política de Privacidade", to: "/politica-de-privacidade" },
   { label: "Exclusão de Dados (LGPD)", to: "/exclusao-de-dados" },
