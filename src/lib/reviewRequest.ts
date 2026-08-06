@@ -23,6 +23,29 @@ const WHATSAPP_NUMBER = "5541997452053";
 export const GOOGLE_REVIEW_URL =
   "https://g.page/r/CQ_TECNICO_CURITIBA_PLACE_ID/review";
 
+/** Domínio canônico usado nos links enviados por WhatsApp. */
+export const SITE_URL = "https://tecnicocuritiba.com.br";
+
+/**
+ * Link rastreável da avaliação no próprio site (estrelas + autorização de
+ * publicação). Cai em /avaliar com UTMs para o GA4 medir abertura e envio.
+ */
+export const buildSiteReviewUrl = (opts: {
+  service?: string;
+  neighborhood?: string;
+  os?: string;
+  medium?: "whatsapp_t24" | "whatsapp_t72" | "whatsapp_os" | "qr";
+} = {}): string => {
+  const u = new URL("/avaliar", SITE_URL);
+  if (opts.service) u.searchParams.set("servico", opts.service);
+  if (opts.neighborhood) u.searchParams.set("bairro", opts.neighborhood);
+  if (opts.os) u.searchParams.set("os", opts.os);
+  u.searchParams.set("utm_source", "whatsapp");
+  u.searchParams.set("utm_medium", opts.medium ?? "whatsapp_t24");
+  u.searchParams.set("utm_campaign", "pos_atendimento_review");
+  return u.toString();
+};
+
 export interface ReviewRequestContext {
   clientName: string;
   service?: string; // ex.: "formatação de notebook"
@@ -43,6 +66,8 @@ export const buildT24Message = (ctx: ReviewRequestContext): string => {
     `Se ficou satisfeito com o atendimento, sua avaliação no Google ajuda muito ` +
     `outros moradores a encontrarem ajuda confiável. ` +
     `É 1 minutinho aqui ó: ${GOOGLE_REVIEW_URL} 🙏\n\n` +
+    `Prefere avaliar direto no nosso site (com estrelas e autorização de publicação)? ` +
+    `${buildSiteReviewUrl({ service: ctx.service, neighborhood: ctx.neighborhood, medium: "whatsapp_t24" })}\n\n` +
     `Qualquer ajuste ou dúvida, é só responder esta mensagem.`
   );
 };
@@ -55,6 +80,7 @@ export const buildT72Message = (ctx: ReviewRequestContext): string => {
     `Sei que a rotina aperta, mas se sobrou 1 minuto e o serviço ficou bom, ` +
     `essa avaliação no Google faz uma diferença enorme para um negócio local ` +
     `como o nosso aqui em Curitiba: ${GOOGLE_REVIEW_URL}\n\n` +
+    `Ou pelo site, em 30 segundos: ${buildSiteReviewUrl({ medium: "whatsapp_t72" })}\n\n` +
     `Se preferir, pode também responder aqui mesmo no WhatsApp com uma nota de 1 a 5 ` +
     `que eu publico com seu primeiro nome (sem expor telefone). Obrigado! 🚀`
   );
@@ -87,3 +113,27 @@ export const reviewWindow = (
   if (h < 168) return "t72"; // até 7 dias
   return "expired";
 };
+
+
+/**
+ * Mensagem enviada logo após a Ordem de Serviço (pré-OS em PDF): confirma o
+ * atendimento e já entrega o link de avaliação com estrelas + autorização.
+ */
+export const buildPosOsMessage = (
+  ctx: ReviewRequestContext & { osNumber?: string },
+): string => {
+  const nome = firstName(ctx.clientName);
+  const os = ctx.osNumber ? ` (OS ${ctx.osNumber})` : "";
+  return (
+    `Olá, ${nome}! Seu atendimento${os} foi finalizado ✅\n` +
+    `A Ordem de Serviço em PDF está anexada nesta conversa.\n\n` +
+    `Se puder, avalie com estrelas e marque a autorização de publicação: ` +
+    `${buildSiteReviewUrl({ service: ctx.service, neighborhood: ctx.neighborhood, os: ctx.osNumber, medium: "whatsapp_os" })}\n\n` +
+    `Garantia e dúvidas: é só responder por aqui.`
+  );
+};
+
+export const posOsWaLink = (
+  phone: string,
+  ctx: ReviewRequestContext & { osNumber?: string },
+) => buildWaMeUrl(phone, buildPosOsMessage(ctx));
