@@ -515,7 +515,7 @@ export function OrcamentoMontagemWizard() {
               <span>
                 Autorizo o uso dos dados e arquivos informados (fotos/vídeos das peças, cidade e bairro) para
                 atendimento, orçamento e emissão da ordem de serviço, conforme a{" "}
-                <Link to="/politica-privacidade" className="text-primary underline underline-offset-4">
+                <Link to="/politica-de-privacidade" className="text-primary underline underline-offset-4">
                   política de privacidade
                 </Link>
                 . Os dados ficam apenas no seu dispositivo e no WhatsApp enviado por você; nada é armazenado em
