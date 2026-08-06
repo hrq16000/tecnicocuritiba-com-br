@@ -22,6 +22,23 @@ import { MessageCircle, Headphones, Clock, Building, CreditCard, FileText, Check
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE = "Olá! Preciso de suporte técnico para minha empresa.";
 
+const BREADCRUMBS = [
+  { name: "Início", path: "/" },
+  { name: "Serviços", path: "/servicos" },
+  { name: "Suporte Empresas", path: "/suporte-empresas" },
+];
+
+const FAQ_EMPRESAS = [
+  { q: "Quais informações devo registrar antes de pedir suporte?", a: "Equipamento e usuário afetados, horário do início do problema, mensagem de erro, programa envolvido, alteração recente, impacto na operação, quantidade de pessoas afetadas, possibilidade de acesso remoto, existência de backup e quem autoriza alterações. Senhas e códigos de autenticação não devem ser enviados por mensagem." },
+  { q: "Vocês atendem escritórios de diferentes segmentos?", a: "Sim. O atendimento é de informática generalista e cobre estações de trabalho, rede, impressão, backup e continuidade da operação, independentemente do segmento. Não oferecemos especialização setorial nem conformidade regulatória." },
+  { q: "Vocês prestam suporte a qualquer sistema empresarial?", a: "Não. Verificamos o computador, a conectividade e registramos o erro, e podemos auxiliar na comunicação com o fornecedor. Correção interna do sistema, licenças e credenciais permanecem com quem mantém a plataforma." },
+  { q: "Qual é a diferença entre atendimento avulso e recorrente?", a: "No avulso, o escopo é definido por solicitação e a prioridade segue a agenda. No recorrente, escopo, frequência e prioridades são definidos por um levantamento inicial dos equipamentos e usuários." },
+  { q: "Atendimento recorrente significa suporte ilimitado?", a: "Não. Não trabalhamos com suporte ilimitado, franquia fixa de horas, monitoramento permanente ou tempo de resposta garantido. O escopo é sempre acordado a partir do levantamento." },
+  { q: "Vocês corrigem problemas dentro de sistemas de terceiros?", a: "Não corrigimos código, não liberamos licença e não redefinimos credencial de terceiros. Executamos procedimentos autorizados no computador e na rede e indicamos quando o caso pertence ao fornecedor." },
+  { q: "O técnico precisa conhecer minha senha?", a: "Somente quando o procedimento autorizado exigir, e sempre com o acesso mínimo necessário. Evitamos armazenar credenciais, encerramos as sessões e nunca pedimos códigos de autenticação por mensagem." },
+];
+
+
 const services = [
   {
     icon: Headphones,
