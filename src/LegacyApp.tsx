@@ -516,6 +516,10 @@ const App = () => (
             <Route path="/conserto-de-notebook-curitiba" element={<Navigate to="/servicos/conserto-notebook-curitiba" replace />} />
             <Route path="/suporte-tecnico-remoto" element={<Navigate to="/atendimento-remoto" replace />} />
             <Route path="/assistencia-tecnica-empresas-curitiba" element={<Navigate to="/suporte-empresas" replace />} />
+            <Route path="/servicos/pc-gamer" element={<Navigate to="/servicos/montagem-pc" replace />} />
+            <Route path="/servicos/montagem-de-pc" element={<Navigate to="/servicos/montagem-pc" replace />} />
+            <Route path="/pc-gamer-curitiba" element={<Navigate to="/servicos/montagem-pc" replace />} />
+            <Route path="/montagem-de-pc-curitiba" element={<Navigate to="/servicos/montagem-pc" replace />} />
 
 
 
