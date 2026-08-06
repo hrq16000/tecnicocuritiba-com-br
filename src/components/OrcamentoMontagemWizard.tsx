@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, CheckCircle, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, FileDown, ImagePlus, MessageCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
+import { baixarOrdemServicoPdf, gerarNumeroOS } from "@/lib/ordemServicoPdf";
 import { cn } from "@/lib/utils";
 
 /**
@@ -70,6 +71,8 @@ const labelOf = (list: readonly { id: string; label: string }[], id: string) =>
 export function OrcamentoMontagemWizard() {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(INITIAL);
+  const [fotos, setFotos] = useState<string[]>([]);
+  const [numeroOS, setNumeroOS] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) => {
@@ -108,10 +111,12 @@ export function OrcamentoMontagemWizard() {
     const lines = [
       "Olá! Vim do site tecnicocuritiba.com.br.",
       "Assunto: Orçamento de montagem de PC",
+      numeroOS ? `Ordem de serviço: ${numeroOS} (PDF gerado no site).` : "",
       form.uso ? `Uso pretendido: ${labelOf(USOS, form.uso)}.` : "",
       form.modelo.trim() ? `Configuração/modelo: ${form.modelo.trim()}.` : "",
       form.pecasOrigem ? `Peças: ${labelOf(PECAS_ORIGEM, form.pecasOrigem)}.` : "",
       form.pecasLista.trim() ? `Peças que já tenho: ${form.pecasLista.trim()}.` : "",
+      fotos.length ? `Vou anexar ${fotos.length} foto(s) das peças aqui no WhatsApp.` : "",
       form.orcamento.trim() ? `Faixa de investimento: ${form.orcamento.trim()}.` : "",
       local ? `Local: ${local}.` : "",
       "Li e aceito os termos e condições, a política de peças do cliente e a mão de obra a partir de R$ 99,99 com orçamento aprovado antes do serviço.",
@@ -119,11 +124,36 @@ export function OrcamentoMontagemWizard() {
       "Podem me atender?",
     ].filter(Boolean);
     return lines.join("\n");
-  }, [form]);
+  }, [form, fotos, numeroOS]);
+
+  const baixarOS = async () => {
+    const err = validate(4);
+    if (err) return setError(err);
+    const numero = numeroOS || gerarNumeroOS();
+    setNumeroOS(numero);
+    trackCTAClick("whatsapp", "montagem_pc_wizard_os_pdf", {
+      servico: "montagem_pc",
+      category: form.uso,
+      cidade: form.cidade,
+      bairro: form.bairro || undefined,
+    });
+    await baixarOrdemServicoPdf({
+      numero,
+      uso: labelOf(USOS, form.uso),
+      modelo: form.modelo.trim(),
+      pecasOrigem: labelOf(PECAS_ORIGEM, form.pecasOrigem),
+      pecasLista: form.pecasLista.trim(),
+      orcamento: form.orcamento.trim(),
+      cidade: form.cidade,
+      bairro: form.bairro.trim(),
+      fotos,
+    });
+  };
 
   const submit = () => {
     const err = validate(4);
     if (err) return setError(err);
+    if (!numeroOS) setNumeroOS(gerarNumeroOS());
     trackCTAClick("whatsapp", "montagem_pc_wizard", {
       servico: "montagem_pc",
       category: form.uso,
@@ -235,6 +265,26 @@ export function OrcamentoMontagemWizard() {
                 value={form.pecasLista}
                 onChange={(e) => set("pecasLista", e.target.value)}
               />
+              <label className="block font-bold text-foreground" htmlFor="wz-fotos">
+                Fotos das peças (opcional)
+              </label>
+              <input
+                id="wz-fotos"
+                type="file"
+                accept="image/*"
+                multiple
+                className={cn(inputCls, "file:mr-3 file:rounded-lg file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-white")}
+                onChange={(e) =>
+                  setFotos(Array.from(e.target.files || []).slice(0, 10).map((f) => f.name))
+                }
+              />
+              {fotos.length > 0 && (
+                <p className="text-sm text-foreground flex items-start gap-2">
+                  <ImagePlus className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                  {fotos.length} foto(s) selecionada(s): {fotos.join(", ")}. Elas ficam registradas na ordem de
+                  serviço — anexe as imagens direto na conversa do WhatsApp ao enviar.
+                </p>
+              )}
               <p className="text-sm text-muted-foreground">
                 Peças fornecidas por você seguem a{" "}
                 <Link to="/politica-pecas-cliente" className="text-primary underline underline-offset-4">
@@ -340,6 +390,20 @@ export function OrcamentoMontagemWizard() {
           </span>
         )}
       </div>
+
+      {step === STEPS.length - 1 && (
+        <div className="mt-4 rounded-xl border border-border bg-background p-4">
+          <Button type="button" variant="outline" onClick={baixarOS} disabled={!form.aceite} className="w-full">
+            <FileDown className="mr-2 h-4 w-4" />
+            Baixar Ordem de Serviço em PDF
+          </Button>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {numeroOS
+              ? `Ordem de serviço ${numeroOS} gerada. O número segue junto na mensagem do WhatsApp como comprovante de abertura do pedido.`
+              : "Gera um PDF com tudo que você preencheu (uso, peças, fotos informadas, local e condições) para você guardar e enviar junto no WhatsApp."}
+          </p>
+        </div>
+      )}
 
       <p className="mt-4 text-xs text-muted-foreground flex gap-2 items-start">
         <CheckCircle className="h-4 w-4 shrink-0 text-accent mt-0.5" />
