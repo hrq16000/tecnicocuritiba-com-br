@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useSearchParams, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -18,6 +18,9 @@ const track = (event: string, params: Record<string, unknown> = {}) => {
   }
 };
 
+/** Chave local de dedupe: 1 avaliação por OS (ou por serviço, sem OS). */
+const dedupeKey = (os: string, servico: string) => `rv_sent:${os || servico || "geral"}`;
+
 export default function Avaliar() {
   const [params] = useSearchParams();
   const presetService = params.get("servico") ?? "";
@@ -33,8 +36,15 @@ export default function Avaliar() {
   const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
+  /** Honeypot: bots preenchem, humanos não veem. */
+  const [website, setWebsite] = useState("");
+  const [alreadySent, setAlreadySent] = useState(false);
+  const openedAt = useRef<number>(Date.now());
 
   useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem(dedupeKey(presetOs, presetService))) {
+      setAlreadySent(true);
+    }
     track("review_link_open", {
       utm_source: params.get("utm_source") ?? "direct",
       utm_medium: params.get("utm_medium") ?? "none",
@@ -47,12 +57,38 @@ export default function Avaliar() {
   }, []);
 
   const canSubmit = useMemo(
-    () => rating >= 1 && name.trim().length >= 2 && comment.trim().length >= 5 && consent && !sending,
-    [rating, name, comment, consent, sending],
+    () =>
+      rating >= 1 &&
+      name.trim().length >= 2 &&
+      comment.trim().length >= 5 &&
+      consent &&
+      !sending &&
+      !alreadySent,
+    [rating, name, comment, consent, sending, alreadySent],
   );
+
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot preenchido = bot: finge sucesso e não grava nada.
+    if (website.trim()) {
+      track("review_spam_blocked", { reason: "honeypot" });
+      setDone(true);
+      return;
+    }
+    if (Date.now() - openedAt.current < 4000) {
+      track("review_spam_blocked", { reason: "too_fast" });
+      toast({
+        title: "Só um instante",
+        description: "Confira sua avaliação e envie novamente em alguns segundos.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (alreadySent) {
+      toast({ title: "Avaliação já registrada", description: "Já recebemos sua avaliação para este atendimento." });
+      return;
+    }
     if (!canSubmit) {
       toast({
         title: "Faltam informações",
@@ -87,6 +123,12 @@ export default function Avaliar() {
       bairro: neighborhood || "nao_informado",
       os_numero: presetOs || "nao_informado",
     });
+    try {
+      localStorage.setItem(dedupeKey(presetOs, presetService), String(Date.now()));
+    } catch {
+      /* storage indisponível: segue o fluxo */
+    }
+    setAlreadySent(true);
     setDone(true);
   };
 
@@ -132,6 +174,28 @@ export default function Avaliar() {
               Leva menos de 1 minuto. Sua opinião ajuda outros moradores de Curitiba e região a escolherem melhor.
               {presetOs && <span className="block mt-1">Ordem de serviço: <strong>{presetOs}</strong></span>}
             </p>
+
+            {alreadySent && (
+              <p className="mb-6 rounded-lg border border-border bg-muted/40 p-3 text-sm text-muted-foreground">
+                Já recebemos uma avaliação para este atendimento. Se precisar corrigir algo, fale com a gente no
+                WhatsApp.
+              </p>
+            )}
+
+            {/* Honeypot anti-spam: invisível para pessoas */}
+            <div aria-hidden className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+              <label htmlFor="website">Site</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
+
 
             <fieldset className="mb-6">
               <legend className="mb-2 text-sm font-semibold text-foreground">Sua nota *</legend>
