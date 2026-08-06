@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageSummaryBand from "@/components/PageSummaryBand";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { MessageCircle, CheckCircle, AlertTriangle, Cpu, MemoryStick, HardDrive, MonitorCog } from "lucide-react";
@@ -104,6 +105,20 @@ export default function ComoEscolherWorkstation() {
               </a>
             </Button>
           </div>
+
+          <PageSummaryBand
+            summary="Guia prático para especificar uma workstation a partir do software que ela vai rodar: checklist de componentes, estabilidade sob carga, requisitos por tipo de uso e os limites do que prometemos."
+            items={[
+              { id: "passo-1", label: "Comece pelo software" },
+              { id: "passo-2", label: "Checklist de componentes" },
+              { id: "passo-3", label: "Estabilidade acima de pico" },
+              { id: "passo-4", label: "Requisitos por tipo de uso" },
+              { id: "passo-5", label: "Limites operacionais" },
+              { id: "passo-6", label: "Montagem, teste e entrega" },
+              { id: "manutencao", label: "Depois da entrega" },
+              { id: "faq", label: "Perguntas frequentes" },
+            ]}
+          />
 
           <h2 id="passo-1" className="text-2xl font-bold mb-3 scroll-mt-24">Passo 1: comece pelo software, nunca pelo hardware</h2>
           <p className="mb-4 text-muted-foreground">

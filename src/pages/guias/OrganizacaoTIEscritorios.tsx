@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageSummaryBand from "@/components/PageSummaryBand";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { MessageCircle, CheckCircle, ShieldCheck, HardDrive, Wifi, Users } from "lucide-react";
@@ -105,6 +106,21 @@ export default function OrganizacaoTIEscritorios() {
               </a>
             </Button>
           </div>
+
+          <PageSummaryBand
+            summary="Como organizar a TI de um escritório pequeno em Curitiba: inventário, padronização, backup testado, rede, controle de acessos, segurança proporcional ao risco e quando terceirizar o suporte."
+            items={[
+              { id: "inventario", label: "Inventário" },
+              { id: "padronizacao", label: "Padronização" },
+              { id: "backup", label: "Backup testado" },
+              { id: "rede", label: "Rede" },
+              { id: "acessos", label: "Contas e acessos" },
+              { id: "seguranca", label: "Segurança" },
+              { id: "terceirizar", label: "Quando terceirizar" },
+              { id: "renovacao", label: "Renovação de parque" },
+              { id: "faq", label: "Perguntas frequentes" },
+            ]}
+          />
 
           <h2 id="inventario" className="text-2xl font-bold mb-3 scroll-mt-24">1. Inventário: você não gerencia o que não conhece</h2>
           <p className="mb-4 text-muted-foreground">
