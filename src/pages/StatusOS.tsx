@@ -106,17 +106,16 @@ export default function StatusOS() {
       <PageSEO
         title="Status da Ordem de Serviço | Consulta por número da OS"
         description="Consulte o andamento do seu atendimento pelo número da Ordem de Serviço: etapa atual, prazo estimado e observações do técnico em Curitiba e região."
-        canonical="/status-os"
-        jsonLd={[
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Início", item: "/" },
-              { "@type": "ListItem", position: 2, name: "Status da Ordem de Serviço", item: "/status-os" },
-            ],
-          },
-          {
+        path="/status-os"
+        breadcrumbs={[
+          { label: "Início", href: "/" },
+          { label: "Status da Ordem de Serviço", href: "/status-os" },
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: FAQ.map((f) => ({
@@ -124,9 +123,10 @@ export default function StatusOS() {
               name: f.q,
               acceptedAnswer: { "@type": "Answer", text: f.a },
             })),
-          },
-        ]}
+          }),
+        }}
       />
+
       <Header />
       <main className="container mx-auto max-w-3xl px-4 py-8">
         <Breadcrumbs items={[{ label: "Status da Ordem de Serviço" }]} />
