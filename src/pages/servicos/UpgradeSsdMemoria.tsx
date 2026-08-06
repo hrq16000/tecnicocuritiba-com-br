@@ -123,7 +123,7 @@ const UpgradeSsdMemoria = () => {
       <RealImageSection imageKey="placaMae" caption="Diagnóstico de compatibilidade para upgrade" />
 
       {/* Tipos de Upgrade */}
-      <section className="py-10 bg-secondary">
+      <section id="opcoes" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Opções de Upgrade
