@@ -277,6 +277,85 @@ const MontagemPc = () => {
         </div>
       </section>
 
+      {/* Workstations e estações de trabalho */}
+      <section className="py-10 bg-background" id="workstations">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-4">
+            Workstations e estações de trabalho profissionais
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Montamos e avaliamos computadores para cargas de trabalho mais exigentes. A configuração não parte de uma
+            receita pronta: ela é definida a partir do levantamento de requisitos do seu uso real.
+          </p>
+
+          <h3 className="text-xl font-bold text-foreground mb-3">Levantamento de requisitos</h3>
+          <ul className="grid md:grid-cols-2 gap-3 mb-8">
+            {[
+              "Programas utilizados e requisitos oficiais de cada um",
+              "Tamanho dos arquivos e dos projetos abertos",
+              "Quantidade de aplicações usadas ao mesmo tempo",
+              "Quantidade e resolução dos monitores",
+              "Perfil de uso de CPU, memória e GPU",
+              "Armazenamento para sistema, projetos, cache e backup",
+              "Necessidade de expansão futura",
+              "Orçamento disponível e vida útil esperada",
+              "Compatibilidade entre os componentes escolhidos",
+            ].map((item) => (
+              <li key={item} className="flex gap-2 text-sm text-muted-foreground bg-secondary p-4 rounded-lg">
+                <CheckCircle className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="text-xl font-bold text-foreground mb-3">Como cada componente entra na conta</h3>
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
+            {[
+              { t: "Processador", d: "Relacionado ao tipo de carga e à duração das tarefas. Cargas curtas e cargas prolongadas pedem escolhas diferentes." },
+              { t: "Memória", d: "Relacionada ao volume dos projetos, ao número de aplicações simultâneas e ao tamanho dos arquivos abertos." },
+              { t: "Placa de vídeo", d: "Relevante somente quando a aplicação utiliza aceleração gráfica compatível. Nem toda carga profissional depende de GPU." },
+              { t: "Armazenamento", d: "Considerar sistema, programas, arquivos de trabalho, cache, projetos ativos e a rotina de backup." },
+              { t: "Fonte e refrigeração", d: "Devem ser compatíveis com o conjunto e com a carga prevista, incluindo folga de potência e dissipação sob uso contínuo." },
+              { t: "Expansão", d: "Slots livres, baias, limites da placa-mãe e do gabinete definem o que dá para ampliar depois sem trocar a plataforma." },
+            ].map((item) => (
+              <div key={item.t} className="bg-secondary p-5 rounded-xl">
+                <h4 className="font-bold text-foreground mb-1">{item.t}</h4>
+                <p className="text-sm text-muted-foreground">{item.d}</p>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="text-xl font-bold text-foreground mb-3">Tipos de uso considerados no levantamento</h3>
+          <p className="text-muted-foreground mb-4">
+            Usamos como referência categorias de trabalho — programas de desenho técnico, modelagem, renderização,
+            edição, análise de dados e desenvolvimento. Compatibilidade e desempenho dependem sempre da versão do
+            programa, do tipo de projeto e dos requisitos oficiais publicados pelo fabricante do software.
+          </p>
+          <p className="text-muted-foreground mb-8">
+            Não publicamos benchmark sem teste real, não prometemos tempo de renderização, não prometemos FPS e não
+            afirmamos certificação de nenhum fabricante de software.
+          </p>
+
+          <div className="bg-secondary border-l-4 border-accent p-6 rounded-xl mb-8">
+            <p className="text-foreground font-medium">
+              A montagem correta não garante desempenho específico em um programa. A configuração deve ser definida a
+              partir dos requisitos da aplicação, do tipo de projeto e do orçamento disponível.
+            </p>
+          </div>
+
+          <h3 className="text-xl font-bold text-foreground mb-3">Continue por aqui</h3>
+          <ul className="grid md:grid-cols-2 gap-3">
+            <li><Link to="/suporte-empresas" className="text-primary underline underline-offset-4">Suporte técnico empresarial</Link> — execução, modalidades e limites do atendimento a empresas.</li>
+            <li><Link to="/servicos/redes-e-wifi" className="text-primary underline underline-offset-4">Redes e Wi-Fi</Link> — conectividade das estações e da rede local.</li>
+            <li><Link to="/servicos/backup-recuperacao" className="text-primary underline underline-offset-4">Backup e recuperação</Link> — prevenção e restauração dos arquivos de trabalho.</li>
+            <li><Link to="/equipamentos-atendidos" className="text-primary underline underline-offset-4">Equipamentos atendidos</Link> — o que entra e o que não entra no escopo.</li>
+            <li><Link to="/precos-e-politicas" className="text-primary underline underline-offset-4">Preços e políticas</Link> — diagnóstico, aprovação e garantia.</li>
+            <li><Link to="/guias/como-escolher-workstation" className="text-primary underline underline-offset-4">Como escolher uma workstation</Link> — checklist de requisitos passo a passo.</li>
+          </ul>
+        </div>
+      </section>
+
+
       {/* Mini-wizard de orçamento */}
       <section className="py-10 bg-secondary" id="orcamento">
         <div className="container mx-auto px-4">
