@@ -170,7 +170,8 @@ export default function EmpresaTICuritiba() {
 
         <section className="bg-gradient-to-br from-primary to-accent rounded-2xl p-8 md:p-10 text-center text-white max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3">Precisa de suporte de TI agora?</h2>
-          <p className="text-white/90 mb-6">Atendimento em até 2h úteis para chamados críticos. Contratos mensais com SLA garantido.</p>
+          <p className="text-white/90 mb-6">Descreva o cenário da sua empresa no WhatsApp: avaliamos a prioridade do chamado e retornamos com escopo e agenda disponível.</p>
+
           <Button variant="heroWhatsapp" asChild className="shadow-xl">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-cta-location="empresa_ti_cta_final">
               <MessageCircle className="h-5 w-5" /> Chamar Consultor Agora
