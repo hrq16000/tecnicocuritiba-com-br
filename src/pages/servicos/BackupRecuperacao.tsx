@@ -238,9 +238,42 @@ const BackupRecuperacao = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="antes-de-autorizar" title="Quando parar de usar">
+              <p>
+                Ruído no disco, falhas progressivas, desconexões, mídia não reconhecida, arquivos
+                sumindo ou dano físico: desligue o equipamento e evite novas tentativas por conta própria.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="verificamos" title="O que influencia a possibilidade de recuperação">
+              <p>
+                Tipo de mídia, causa da falha, tempo de uso após o incidente e tentativas anteriores
+                de recuperação afetam diretamente o resultado.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="Limites técnicos">
+              <p>
+                Não existe garantia de recuperação. O diagnóstico indica o que é viável antes de
+                qualquer tentativa, e o conteúdo acessado é tratado com sigilo.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-recuperacao-dados-meio"
+              message="Olá! Preciso avaliar a recuperação de dados de uma mídia."
+              hint="Descreva o que aconteceu antes da perda — isso orienta o diagnóstico."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
 
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes
