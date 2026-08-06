@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { Link } from "react-router-dom";
-import { Monitor, CheckCircle, Cpu, Gamepad2, Briefcase, MessageCircle } from "lucide-react";
+import { Monitor, CheckCircle, Cpu, Gamepad2, Briefcase, MessageCircle, FileDown } from "lucide-react";
+import { OrcamentoMontagemWizard } from "@/components/OrcamentoMontagemWizard";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -248,8 +249,44 @@ const MontagemPc = () => {
               </li>
             ))}
           </ol>
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <a
+                href="/checklist-montagem-pc.pdf"
+                download
+                onClick={() =>
+                  window.gtag?.("event", "checklist_download", {
+                    event_category: "engagement",
+                    event_label: "checklist_montagem_pc",
+                    page_path: "/servicos/montagem-pc",
+                  })
+                }
+              >
+                <FileDown className="mr-2 h-5 w-5" />
+                Baixar checklist final em PDF
+              </a>
+            </Button>
+            <p className="text-sm text-muted-foreground mt-3">
+              O mesmo checklist é enviado pelo WhatsApp junto com a entrega do equipamento.
+            </p>
+          </div>
         </div>
       </section>
+
+      {/* Mini-wizard de orçamento */}
+      <section className="py-10 bg-secondary" id="orcamento">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-3">
+            Monte seu orçamento em 1 minuto
+          </h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+            Responda cinco perguntas rápidas e a mensagem chega ao WhatsApp já preenchida com uso, configuração, peças e
+            sua cidade — sem ficar digitando tudo de novo.
+          </p>
+          <OrcamentoMontagemWizard />
+        </div>
+      </section>
+
 
       {/* Navegação contextual entre serviços relacionados */}
       <section className="py-8 bg-secondary" aria-labelledby="relacionados-montagem">
