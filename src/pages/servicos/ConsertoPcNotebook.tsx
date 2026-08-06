@@ -10,6 +10,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import EditorialCallout from "@/components/EditorialCallout";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -85,6 +88,15 @@ const ConsertoPcNotebook = () => {
           </div>
         </div>
       </section>
+      <ServiceHeroSummary
+        summary="Diagnóstico de hardware em computadores e notebooks: fonte, placa-mãe, memória, armazenamento, refrigeração e periféricos internos, com orçamento antes da execução."
+        items={[
+          { id: "o-que-consertamos", label: "O que consertamos" },
+          { id: "problemas-comuns", label: "Problemas comuns" },
+          { id: "como-funciona", label: "Como funciona o conserto" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
       <RealImageSection imageKey="notebookReparo" caption="Reparo profissional de notebooks e PCs" />
 
       {/* Aviso Coleta */}
@@ -97,7 +109,7 @@ const ConsertoPcNotebook = () => {
       </section>
 
       {/* Tipos de Conserto */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="o-que-consertamos" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -130,7 +142,7 @@ const ConsertoPcNotebook = () => {
       <RealImageSection imageKey="ferramentas" caption="Ferramentas especializadas para conserto de hardware" />
 
       {/* Problemas Comuns */}
-      <section className="py-10 bg-secondary">
+      <section id="problemas-comuns" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Problemas Comuns que Resolvemos
@@ -156,7 +168,7 @@ const ConsertoPcNotebook = () => {
       </section>
 
       {/* Processo */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="como-funciona" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -203,8 +215,41 @@ const ConsertoPcNotebook = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos">
+              <p>
+                Fonte, placa-mãe, memória, armazenamento, refrigeração e periféricos internos são
+                testados antes de qualquer indicação de peça.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="Quando o equipamento precisa de bancada">
+              <p>
+                Reparos em nível de componente e falhas intermitentes exigem análise em bancada, com
+                coleta combinada antes da retirada.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Peças e autorização">
+              <p>
+                Nenhuma peça é trocada sem aprovação. Peça e mão de obra têm garantias distintas,
+                registradas na ordem de serviço.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-conserto-pc-notebook-meio"
+              message="Olá! Meu computador apresenta um defeito de hardware. Podem avaliar?"
+              hint="Descreva o sintoma e recebemos o caso pela triagem, sem compromisso."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes

@@ -10,6 +10,9 @@ import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import EditorialCallout from "@/components/EditorialCallout";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -83,6 +86,16 @@ const RedesWifi = () => {
         </div>
       </section>
       <RealImageSection imageKey="redesWifi" caption="Infraestrutura de rede profissional" />
+      <ServiceHeroSummary
+        summary="Configuração de rede Wi-Fi e cabeada com avaliação de cobertura, interferência, roteador, access point e dispositivos em rede — incluindo impressoras apenas no aspecto de conectividade."
+        items={[
+          { id: "triagem", label: "Triagem antes da visita" },
+          { id: "problemas", label: "Problemas que resolvemos" },
+          { id: "solucoes", label: "Soluções por necessidade" },
+          { id: "perifericos-em-rede", label: "Impressoras em rede" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Serviços de Rede */}
       <section className="py-10 bg-background relative">
@@ -135,7 +148,7 @@ const RedesWifi = () => {
       />
 
       {/* Triagem antes da visita — reduz visitas improdutivas */}
-      <section className="py-10 bg-background border-y border-border">
+      <section id="triagem" className="py-10 bg-background border-y border-border scroll-mt-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-6">
@@ -164,7 +177,7 @@ const RedesWifi = () => {
       </section>
 
       {/* Problemas Comuns */}
-      <section className="py-10 bg-secondary">
+      <section id="problemas" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Problemas que Resolvemos
@@ -190,7 +203,7 @@ const RedesWifi = () => {
       </section>
 
       {/* Soluções */}
-      <section className="py-10 bg-background">
+      <section id="solucoes" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Soluções para Cada Necessidade
@@ -212,7 +225,7 @@ const RedesWifi = () => {
       </section>
 
       {/* Impressoras e periféricos como dispositivos de rede */}
-      <section className="py-10 bg-background" id="perifericos-em-rede">
+      <section className="py-10 bg-background scroll-mt-24" id="perifericos-em-rede">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-3">
             Impressoras e periféricos: suporte de rede, não de hardware
@@ -258,8 +271,41 @@ const RedesWifi = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos" title="Cobertura não é a mesma coisa que velocidade">
+              <p>
+                Sinal forte em todos os cômodos não significa link rápido: cobertura, interferência e
+                velocidade contratada são fatores diferentes e medidos separadamente.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="O que depende da operadora">
+              <p>
+                Velocidade contratada, estabilidade do link externo e equipamentos fornecidos pela
+                operadora seguem sob responsabilidade dela.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Impressoras e periféricos em rede">
+              <p>
+                O atendimento de impressoras e periféricos se limita à configuração, comunicação e
+                compartilhamento em rede — sem reparo mecânico ou eletrônico do aparelho.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-redes-wifi-meio"
+              message="Olá! Preciso avaliar a minha rede Wi-Fi ou cabeada."
+              hint="Conte onde o sinal falha e quantos dispositivos usam a rede."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-secondary">
+      <section id="faq" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes

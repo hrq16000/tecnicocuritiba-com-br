@@ -10,6 +10,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import EditorialCallout from "@/components/EditorialCallout";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -94,6 +97,15 @@ const FormatacaoComputador = () => {
         </div>
       </section>
       <RealImageSection imageKey="tecnicoTrabalhando" caption="Formatação profissional com backup dos seus dados" />
+      <ServiceHeroSummary
+        summary="Reinstalação do Windows com drivers, programas essenciais e backup combinado antes de iniciar — depois de confirmar que a formatação é mesmo o caminho para o seu caso."
+        items={[
+          { id: "incluso", label: "O que está incluso" },
+          { id: "quando-formatar", label: "Quando formatar" },
+          { id: "como-funciona", label: "Como funciona o serviço" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Preço Destaque */}
       <section className="py-8 bg-accent/10 border-y border-accent/20">
@@ -106,7 +118,7 @@ const FormatacaoComputador = () => {
       </section>
 
       {/* O que está incluso */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="incluso" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -136,7 +148,7 @@ const FormatacaoComputador = () => {
       <RealImageSection imageKey="desktopMontado" caption="Computador pronto e otimizado após formatação" />
 
       {/* Quando formatar */}
-      <section className="py-10 bg-secondary">
+      <section id="quando-formatar" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Quando Devo Formatar Meu Computador?
@@ -161,7 +173,7 @@ const FormatacaoComputador = () => {
       </section>
 
       {/* Processo */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="como-funciona" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -186,8 +198,41 @@ const FormatacaoComputador = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="antes-de-autorizar" title="Antes da formatação">
+              <p>
+                O backup dos arquivos é combinado antes de iniciar. Sem backup confirmado, a
+                reinstalação não é executada.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="verificamos" title="O que precisa ser confirmado">
+              <p>
+                Versão do Windows, licenças, drivers do equipamento e quais programas legítimos
+                precisam voltar após a reinstalação.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="O que não está incluso automaticamente">
+              <p>
+                Formatar não corrige defeito de hardware nem substitui diagnóstico. Programas
+                licenciados por terceiros dependem das chaves do cliente.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-formatacao-meio"
+              message="Olá! Quero avaliar se meu computador precisa de formatação."
+              hint="Conte o sintoma: nem toda lentidão se resolve com formatação."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-secondary">
+      <section id="faq" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes sobre Formatação

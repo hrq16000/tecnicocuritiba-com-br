@@ -9,6 +9,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import EditorialCallout from "@/components/EditorialCallout";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -85,6 +88,15 @@ const RemocaoVirus = () => {
         </div>
       </section>
       <RealImageSection imageKey="segurancaDigital" caption="Proteção profissional contra ameaças digitais" />
+      <ServiceHeroSummary
+        summary="Limpeza de vírus e programas indesejados com verificação do navegador, dos itens de inicialização e orientação sobre senhas — sempre com os limites do serviço explicados antes."
+        items={[
+          { id: "ameacas", label: "Ameaças que removemos" },
+          { id: "sinais", label: "Sinais de infecção" },
+          { id: "processo", label: "Nosso processo" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Preço Destaque */}
       <section className="py-8 bg-accent/10 border-y border-accent/20">
@@ -97,7 +109,7 @@ const RemocaoVirus = () => {
       </section>
 
       {/* Tipos de Ameaças */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="ameacas" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -127,7 +139,7 @@ const RemocaoVirus = () => {
       <RealImageSection imageKey="diagnostico" caption="Análise e remoção completa de malware" />
 
       {/* Sinais de Infecção */}
-      <section className="py-10 bg-secondary">
+      <section id="sinais" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Sinais de que Seu Computador Está Infectado
@@ -153,7 +165,7 @@ const RemocaoVirus = () => {
       </section>
 
       {/* Nosso Processo */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="processo" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -204,8 +216,41 @@ const RemocaoVirus = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos" title="Sinais que merecem atenção">
+              <p>
+                Pop-ups fora do navegador, página inicial trocada, extensões desconhecidas e
+                programas que voltam a iniciar sozinhos.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Cuidados com senhas e contas">
+              <p>
+                Depois da limpeza, recomenda-se trocar senhas importantes a partir de outro
+                dispositivo. Não solicitamos senhas bancárias em nenhum momento.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="Limites da remoção">
+              <p>
+                A limpeza não garante ausência de reinfecção nem recuperação de contas invadidas.
+                Casos com dados críticos exigem backup antes da intervenção.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-remocao-virus-meio"
+              message="Olá! Meu computador apresenta sinais de infecção. Podem avaliar?"
+              hint="Descreva os sintomas para orientarmos os primeiros cuidados."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes

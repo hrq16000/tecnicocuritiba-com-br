@@ -9,6 +9,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import EditorialCallout from "@/components/EditorialCallout";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -85,9 +88,18 @@ const UpgradeSsdMemoria = () => {
         </div>
       </section>
       <RealImageSection imageKey="componentesSsd" caption="SSD e memória RAM para upgrade de desempenho" />
+      <ServiceHeroSummary
+        summary="Instalação de SSD e memória com verificação de compatibilidade, clonagem ou instalação limpa e testes ao final — com os limites do ganho explicados antes da compra da peça."
+        items={[
+          { id: "comparativo", label: "HD e SSD na prática" },
+          { id: "opcoes", label: "Opções de upgrade" },
+          { id: "incluso", label: "O que está incluso" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Comparativo de Performance */}
-      <section className="relative py-16 bg-background overflow-hidden">
+      <section id="comparativo" className="relative py-16 bg-background overflow-hidden scroll-mt-24">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
@@ -123,7 +135,7 @@ const UpgradeSsdMemoria = () => {
       <RealImageSection imageKey="placaMae" caption="Diagnóstico de compatibilidade para upgrade" />
 
       {/* Tipos de Upgrade */}
-      <section className="py-10 bg-secondary">
+      <section id="opcoes" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Opções de Upgrade
@@ -171,7 +183,7 @@ const UpgradeSsdMemoria = () => {
       </section>
 
       {/* O que está incluso */}
-      <section className="py-10 bg-secondary">
+      <section id="incluso" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             O Que Está Incluso
@@ -196,8 +208,41 @@ const UpgradeSsdMemoria = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="verificamos" title="Quando o upgrade pode ajudar">
+              <p>
+                Quando o gargalo está no disco mecânico ou na falta de memória para o uso real da
+                máquina. O ganho depende do conjunto, não apenas da peça nova.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="antes-de-autorizar" title="Compatibilidade antes da compra">
+              <p>
+                Conferimos slots livres, tipo e capacidade máxima suportada, memória soldada e
+                formato do armazenamento antes de indicar qualquer peça.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="O que ainda pode limitar o desempenho">
+              <p>
+                Processador, sistema desatualizado, refrigeração comprometida ou defeito de hardware
+                podem manter a lentidão mesmo após o upgrade.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-upgrade-ssd-ram-meio"
+              message="Olá! Quero avaliar upgrade de SSD ou memória no meu equipamento."
+              hint="Informe o modelo do equipamento para verificarmos a compatibilidade."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes

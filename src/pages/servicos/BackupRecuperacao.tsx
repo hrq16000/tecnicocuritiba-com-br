@@ -9,6 +9,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import EditorialCallout from "@/components/EditorialCallout";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -83,6 +86,15 @@ const BackupRecuperacao = () => {
       </section>
 
       <RealImageSection imageKey="componentesSsd" caption="HD e SSD — recuperamos seus dados com segurança" />
+      <ServiceHeroSummary
+        summary="Diagnóstico de mídias com falha e tentativa de recuperação de arquivos, com sigilo do conteúdo e os limites técnicos informados antes de qualquer procedimento."
+        items={[
+          { id: "servicos", label: "Nossos serviços" },
+          { id: "niveis", label: "Níveis de recuperação" },
+          { id: "credenciais", label: "Credenciais e acessos" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Alerta Importante */}
       <section className="py-6 bg-destructive/10 border-y border-destructive/20">
@@ -98,7 +110,7 @@ const BackupRecuperacao = () => {
       </section>
 
       {/* Serviços */}
-      <section className="py-10 bg-background relative">
+      <section id="servicos" className="py-10 bg-background relative scroll-mt-24">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-3xl" />
         </div>
@@ -138,7 +150,7 @@ const BackupRecuperacao = () => {
       <RealImageSection imageKey="diagnostico" caption="Diagnóstico técnico para backup e recuperação segura" />
 
       {/* Tipos de Recuperação */}
-      <section className="py-10 bg-secondary">
+      <section id="niveis" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Níveis de Recuperação
@@ -161,7 +173,7 @@ const BackupRecuperacao = () => {
       </section>
 
       {/* Sistemas, credenciais e acessos de terceiros */}
-      <section className="py-10 bg-background">
+      <section id="credenciais" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl font-heading font-bold text-foreground mb-4 reveal-text">
             Sistemas, credenciais e acessos de terceiros
@@ -238,9 +250,42 @@ const BackupRecuperacao = () => {
         </div>
       </section>
 
+      {/* Caixas editoriais (3Q) + CTA intermediário */}
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto grid gap-4 md:grid-cols-3">
+            <EditorialCallout variant="antes-de-autorizar" title="Quando parar de usar">
+              <p>
+                Ruído no disco, falhas progressivas, desconexões, mídia não reconhecida, arquivos
+                sumindo ou dano físico: desligue o equipamento e evite novas tentativas por conta própria.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="verificamos" title="O que influencia a possibilidade de recuperação">
+              <p>
+                Tipo de mídia, causa da falha, tempo de uso após o incidente e tentativas anteriores
+                de recuperação afetam diretamente o resultado.
+              </p>
+            </EditorialCallout>
+            <EditorialCallout variant="limites" title="Limites técnicos">
+              <p>
+                Não existe garantia de recuperação. O diagnóstico indica o que é viável antes de
+                qualquer tentativa, e o conteúdo acessado é tratado com sigilo.
+              </p>
+            </EditorialCallout>
+          </div>
+          <div className="max-w-4xl mx-auto mt-6">
+            <InlineTriageCTA
+              location="servico-recuperacao-dados-meio"
+              message="Olá! Preciso avaliar a recuperação de dados de uma mídia."
+              hint="Descreva o que aconteceu antes da perda — isso orienta o diagnóstico."
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
 
-      <section className="py-10 bg-background">
+      <section id="faq" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Perguntas Frequentes
