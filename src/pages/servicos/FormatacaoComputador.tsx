@@ -94,6 +94,15 @@ const FormatacaoComputador = () => {
         </div>
       </section>
       <RealImageSection imageKey="tecnicoTrabalhando" caption="Formatação profissional com backup dos seus dados" />
+      <ServiceHeroSummary
+        summary="Reinstalação do Windows com drivers, programas essenciais e backup combinado antes de iniciar — depois de confirmar que a formatação é mesmo o caminho para o seu caso."
+        items={[
+          { id: "incluso", label: "O que está incluso" },
+          { id: "quando-formatar", label: "Quando formatar" },
+          { id: "como-funciona", label: "Como funciona o serviço" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Preço Destaque */}
       <section className="py-8 bg-accent/10 border-y border-accent/20">
