@@ -48,6 +48,9 @@ const PoliticaPrivacidade = lazy(() => import("./pages/PoliticaPrivacidade"));
 const FunilIndisponivel = lazy(() => import("./pages/FunilIndisponivel"));
 const Obrigado = lazy(() => import("./pages/Obrigado"));
 const Avaliar = lazy(() => import("./pages/Avaliar"));
+const Avaliacoes = lazy(() => import("./pages/Avaliacoes"));
+const ComoAvaliar = lazy(() => import("./pages/ComoAvaliar"));
+const ExclusaoDados = lazy(() => import("./pages/ExclusaoDados"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
 const AdminMetricas = lazy(() => import("./pages/admin/AdminMetricas"));
@@ -935,6 +938,9 @@ const App = () => (
             <Route path="/conserto-celular/:local" element={<ConsertoCelularLocalCity />} />
 
             <Route path="/status" element={<Status />} />
+            <Route path="/avaliacoes" element={<Avaliacoes />} />
+            <Route path="/como-avaliar" element={<ComoAvaliar />} />
+            <Route path="/exclusao-de-dados" element={<ExclusaoDados />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
