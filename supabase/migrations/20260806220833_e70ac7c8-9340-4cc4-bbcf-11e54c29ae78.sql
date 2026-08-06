@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.os_rate_limit(text, integer) FROM PUBLIC, anon, authenticated;
