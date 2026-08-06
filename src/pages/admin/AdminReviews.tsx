@@ -442,6 +442,19 @@ const AdminReviews = () => {
                       {r.published ? <><EyeOff className="w-4 h-4 mr-1" />Ocultar</> : <><Eye className="w-4 h-4 mr-1" />Publicar</>}
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => openEdit(r)} className="flex-1">Editar</Button>
+                    {r.verified && r.published && (
+                      <Button
+                        size="sm"
+                        variant={r.published_notified_at ? "outline" : "default"}
+                        className="flex-1"
+                        title={r.client_phone ? "Avisar cliente que a avaliação foi publicada" : "Telefone não cadastrado"}
+                        disabled={!r.client_phone || r.client_phone.replace(/\D/g, "").length < 10}
+                        onClick={() => notifyPublished(r)}
+                      >
+                        <MessageCircle className="w-4 h-4 mr-1" />
+                        {r.published_notified_at ? "Reavisar" : "Avisar"}
+                      </Button>
+                    )}
                     {(() => {
                       const baseDate = r.service_closed_at ?? r.review_date ?? r.created_at;
                       const win = reviewWindow(baseDate);
