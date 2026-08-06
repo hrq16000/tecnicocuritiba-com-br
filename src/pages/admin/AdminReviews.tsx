@@ -82,6 +82,8 @@ const AdminReviews = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
+  const [bairroFilter, setBairroFilter] = useState<string>("all");
+  const [servicoFilter, setServicoFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [form, setForm] = useState<Partial<Review>>(emptyForm);
   const [dialogOpen, setDialogOpen] = useState(false);
