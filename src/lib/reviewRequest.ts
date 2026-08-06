@@ -55,14 +55,33 @@ export interface ReviewRequestContext {
 
 const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? name;
 
-/** Mensagem T+24h — pedido inicial, leve e personalizado. */
+/**
+ * Variações de gancho por serviço/sintoma — aumentam a taxa de resposta
+ * porque a mensagem cita o resultado concreto entregue.
+ */
+const SERVICE_HOOKS: Array<{ match: RegExp; hook: string }> = [
+  { match: /format|windows|lentid|lento/i, hook: "O computador está rodando redondo depois da formatação?" },
+  { match: /montagem|pc gamer|gamer|upgrade/i, hook: "Como está o desempenho da máquina nos jogos e no dia a dia?" },
+  { match: /not(e|ebook)|tela|dobradi|carcaça/i, hook: "O notebook voltou a funcionar direitinho?" },
+  { match: /rede|wi-?fi|internet|roteador/i, hook: "O sinal de Wi-Fi ficou estável em todos os cômodos?" },
+  { match: /v[ií]rus|malware|seguran/i, hook: "Está tudo limpo e seguro por aí desde a remoção?" },
+  { match: /dado|backup|recupera/i, hook: "Conseguiu acessar todos os seus arquivos sem problema?" },
+  { match: /impressora|perif/i, hook: "A impressora está imprimindo normalmente pela rede?" },
+];
+
+/** Escolhe a variação de gancho de acordo com o serviço/sintoma atendido. */
+export const serviceHook = (service?: string): string => {
+  if (!service) return "Ficou tudo certo com o atendimento?";
+  return SERVICE_HOOKS.find((h) => h.match.test(service))?.hook ?? "Ficou tudo certo com o atendimento?";
+};
+
+/** Mensagem T+24h — pedido inicial, leve, personalizado e variado por serviço. */
 export const buildT24Message = (ctx: ReviewRequestContext): string => {
   const nome = firstName(ctx.clientName);
-  const servico = ctx.service ? ` na ${ctx.service}` : "";
   const bairro = ctx.neighborhood ? ` no ${ctx.neighborhood}` : "";
   const tech = ctx.technicianName ? `, do time do ${ctx.technicianName},` : "";
   return (
-    `Olá, ${nome}! Aqui é da Técnico em Curitiba${tech} tudo certo${servico}${bairro}? ` +
+    `Olá, ${nome}! Aqui é da Técnico em Curitiba${tech} ${serviceHook(ctx.service)}${bairro ? ` (atendimento${bairro})` : ""}\n\n` +
     `Se ficou satisfeito com o atendimento, sua avaliação no Google ajuda muito ` +
     `outros moradores a encontrarem ajuda confiável. ` +
     `É 1 minutinho aqui ó: ${GOOGLE_REVIEW_URL} 🙏\n\n` +
