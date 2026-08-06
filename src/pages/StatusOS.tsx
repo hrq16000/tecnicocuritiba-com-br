@@ -591,16 +591,47 @@ export default function StatusOS() {
               )}
             </dl>
 
-            {os.sintomas && (
+            {(os.sintomas || fotos.length > 0) && !revelarSensiveis && (
+              <div className="mt-4 rounded-lg border border-dashed bg-muted/20 p-4">
+                <h3 className="text-sm font-semibold">Dados sensíveis da entrada</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Esta OS tem {os.sintomas ? "sintomas relatados" : ""}
+                  {os.sintomas && fotos.length > 0 ? " e " : ""}
+                  {fotos.length > 0 ? `${fotos.length} foto(s) enviada(s) pelo portal` : ""}. Esse conteúdo
+                  fica oculto por padrão para proteger a sua privacidade em telas compartilhadas.
+                </p>
+                <button
+                  type="button"
+                  className="mt-3 rounded-md border px-3 py-2 text-sm font-medium"
+                  onClick={() => {
+                    setRevelarSensiveis(true);
+                    track("status_os_revelar_sensiveis", { numero: os.numero });
+                  }}
+                >
+                  Exibir sintomas e fotos
+                </button>
+              </div>
+            )}
+
+            {revelarSensiveis && os.sintomas && (
               <div className="mt-4 rounded-lg border bg-muted/30 p-4">
                 <h3 className="text-sm font-semibold">Sintomas e dados informados na entrada</h3>
                 <p className="mt-1 whitespace-pre-wrap text-sm text-muted-foreground">{os.sintomas}</p>
               </div>
             )}
 
-            {fotos.length > 0 && (
+            {revelarSensiveis && fotos.length > 0 && (
               <div className="mt-4">
-                <h3 className="text-sm font-semibold">Fotos enviadas pelo portal</h3>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold">Fotos enviadas pelo portal</h3>
+                  <button
+                    type="button"
+                    className="text-xs font-medium text-muted-foreground underline"
+                    onClick={() => setRevelarSensiveis(false)}
+                  >
+                    Ocultar
+                  </button>
+                </div>
                 <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4">
                   {fotos.map((src, i) => (
                     <a key={src} href={src} target="_blank" rel="noopener noreferrer" className="block">
@@ -617,6 +648,7 @@ export default function StatusOS() {
                 </div>
               </div>
             )}
+
 
             {os.observacao_publica && (
               <p className="mt-4 rounded-lg bg-muted/50 p-3 text-sm">{os.observacao_publica}</p>
