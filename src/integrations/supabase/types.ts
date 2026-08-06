@@ -134,6 +134,51 @@ export type Database = {
         }
         Relationships: []
       }
+      ordens_servico: {
+        Row: {
+          bairro: string | null
+          cidade: string | null
+          created_at: string
+          descricao_curta: string | null
+          etapa: string
+          historico: Json
+          id: string
+          numero: string
+          observacao_publica: string | null
+          prazo_estimado: string | null
+          session_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          bairro?: string | null
+          cidade?: string | null
+          created_at?: string
+          descricao_curta?: string | null
+          etapa?: string
+          historico?: Json
+          id?: string
+          numero: string
+          observacao_publica?: string | null
+          prazo_estimado?: string | null
+          session_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bairro?: string | null
+          cidade?: string | null
+          created_at?: string
+          descricao_curta?: string | null
+          etapa?: string
+          historico?: Json
+          id?: string
+          numero?: string
+          observacao_publica?: string | null
+          prazo_estimado?: string | null
+          session_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           author_name: string
@@ -241,6 +286,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consultar_os: {
+        Args: { _numero: string }
+        Returns: {
+          bairro: string
+          cidade: string
+          created_at: string
+          descricao_curta: string
+          etapa: string
+          historico: Json
+          numero: string
+          observacao_publica: string
+          prazo_estimado: string
+          updated_at: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
