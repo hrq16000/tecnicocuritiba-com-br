@@ -105,10 +105,9 @@ ok(
   "src/LegacyApp.tsx: rota nova criada fora do escopo (zero URL nova)",
 );
 
-// 11. Sem propagação do piloto para outras páginas
+// 11. Sem propagação do piloto para páginas residenciais/sintomas
+// (RedesWifi e BackupRecuperacao entram no escopo controlado da rodada 3T)
 const NAO_PROPAGAR = [
-  "src/pages/servicos/RedesWifi.tsx",
-  "src/pages/servicos/BackupRecuperacao.tsx",
   "src/pages/servicos/MontagemPc.tsx",
   "src/pages/ProblemaPage.tsx",
 ];
