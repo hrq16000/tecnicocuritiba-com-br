@@ -4,6 +4,11 @@ import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
 import BusinessHero from "@/components/b2b/BusinessHero";
 import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
+import SupportModelComparison from "@/components/b2b/SupportModelComparison";
+import ThirdPartyLimits from "@/components/b2b/ThirdPartyLimits";
+import BusinessInlineCTA from "@/components/b2b/BusinessInlineCTA";
+import BusinessContinuityPillars from "@/components/b2b/BusinessContinuityPillars";
 
 import { BenefitsGrid } from "@/components/BenefitsGrid";
 import { TrustSection } from "@/components/TrustSection";
