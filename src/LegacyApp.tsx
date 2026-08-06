@@ -938,6 +938,9 @@ const App = () => (
             <Route path="/conserto-celular/:local" element={<ConsertoCelularLocalCity />} />
 
             <Route path="/status" element={<Status />} />
+            <Route path="/avaliacoes" element={<Avaliacoes />} />
+            <Route path="/como-avaliar" element={<ComoAvaliar />} />
+            <Route path="/exclusao-de-dados" element={<ExclusaoDados />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
