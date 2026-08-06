@@ -108,7 +108,7 @@ const MontagemPc = () => {
                     </li>
                   ))}
                 </ul>
-                <p className="text-xl font-bold text-accent">{card.price}</p>
+                <p className="text-sm font-semibold text-accent">{card.price}</p>
               </div>
             ))}
           </div>
