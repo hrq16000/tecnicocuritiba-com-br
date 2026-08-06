@@ -946,7 +946,9 @@ const App = () => (
             <Route path="/status" element={<Status />} />
             <Route path="/avaliacoes" element={<Avaliacoes />} />
             <Route path="/como-avaliar" element={<ComoAvaliar />} />
-            <Route path="/exclusao-de-dados" element={<ExclusaoDados />} />
+            <Route path="/status-os" element={<StatusOS />} />
+            <Route path="*" element={<NotFound />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
