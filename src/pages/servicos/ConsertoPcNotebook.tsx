@@ -130,7 +130,7 @@ const ConsertoPcNotebook = () => {
       <RealImageSection imageKey="ferramentas" caption="Ferramentas especializadas para conserto de hardware" />
 
       {/* Problemas Comuns */}
-      <section className="py-10 bg-secondary">
+      <section id="problemas-comuns" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Problemas Comuns que Resolvemos
