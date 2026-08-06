@@ -9,6 +9,8 @@ const atendimentoLinks = [
   { icon: Truck, title: "Coleta e Entrega", desc: "Logística para equipamentos", to: "/coleta-e-entrega" },
   { icon: AlertTriangle, title: "Quando Não Compensa", desc: "Transparência na decisão", to: "/quando-nao-compensa" },
   { icon: BookOpen, title: "Casos Reais", desc: "Problemas e soluções reais", to: "/problemas-reais-e-casos" },
+  { icon: BookOpen, title: "Organização de TI", desc: "Guia para pequenos escritórios", to: "/guias/organizacao-de-ti-para-escritorios" },
+  { icon: Cpu, title: "Escolher Workstation", desc: "Checklist de requisitos", to: "/guias/como-escolher-workstation" },
   { icon: MessageCircle, title: "Contato", desc: "Fale conosco", to: "/contato" },
 ];
 
