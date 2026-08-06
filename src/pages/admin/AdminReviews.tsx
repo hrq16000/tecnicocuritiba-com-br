@@ -419,11 +419,25 @@ const AdminReviews = () => {
                       {r.review_date && <span>📅 {new Date(r.review_date).toLocaleDateString("pt-BR")}</span>}
                       {r.source && <span>· {r.source}</span>}
                     </div>
+                    {r.moderated_at && (
+                      <p className="mt-2 rounded-md bg-muted/50 px-2 py-1 text-xs text-muted-foreground">
+                        🛡️ Auditoria: <strong>{r.moderation_action}</strong> em{" "}
+                        {new Date(r.moderated_at).toLocaleString("pt-BR")}
+                        {r.moderation_reason ? ` · motivo: ${r.moderation_reason}` : ""}
+                        {r.published_notified_at
+                          ? ` · cliente avisado em ${new Date(r.published_notified_at).toLocaleDateString("pt-BR")}`
+                          : ""}
+                      </p>
+                    )}
                   </div>
                   <div className="flex gap-2 md:flex-col md:w-40">
                     {!r.verified && (
-                      <Button size="sm" onClick={() => approve(r)} className="flex-1"><Check className="w-4 h-4 mr-1" />Aprovar</Button>
+                      <>
+                        <Button size="sm" onClick={() => approve(r)} className="flex-1"><Check className="w-4 h-4 mr-1" />Aprovar</Button>
+                        <Button size="sm" variant="destructive" onClick={() => reject(r)} className="flex-1">Rejeitar</Button>
+                      </>
                     )}
+
                     <Button size="sm" variant="outline" onClick={() => togglePublished(r)} className="flex-1">
                       {r.published ? <><EyeOff className="w-4 h-4 mr-1" />Ocultar</> : <><Eye className="w-4 h-4 mr-1" />Publicar</>}
                     </Button>
