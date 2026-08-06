@@ -66,6 +66,7 @@ interface FormState {
   orcamento: string;
   cidade: string;
   bairro: string;
+  celular: string;
   periodo: string;
   aceite: boolean;
   lgpd: boolean;
@@ -79,10 +80,12 @@ const INITIAL: FormState = {
   orcamento: "",
   cidade: "",
   bairro: "",
+  celular: "",
   periodo: "",
   aceite: false,
   lgpd: false,
 };
+
 
 const labelOf = (list: readonly { id: string; label: string }[], id: string) =>
   list.find((i) => i.id === id)?.label || "";
