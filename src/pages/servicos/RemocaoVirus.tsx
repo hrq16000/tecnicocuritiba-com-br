@@ -85,6 +85,15 @@ const RemocaoVirus = () => {
         </div>
       </section>
       <RealImageSection imageKey="segurancaDigital" caption="Proteção profissional contra ameaças digitais" />
+      <ServiceHeroSummary
+        summary="Limpeza de vírus e programas indesejados com verificação do navegador, dos itens de inicialização e orientação sobre senhas — sempre com os limites do serviço explicados antes."
+        items={[
+          { id: "ameacas", label: "Ameaças que removemos" },
+          { id: "sinais", label: "Sinais de infecção" },
+          { id: "processo", label: "Nosso processo" },
+          { id: "faq", label: "Perguntas frequentes" },
+        ]}
+      />
 
       {/* Preço Destaque */}
       <section className="py-8 bg-accent/10 border-y border-accent/20">
