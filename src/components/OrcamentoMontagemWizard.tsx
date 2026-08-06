@@ -111,10 +111,12 @@ export function OrcamentoMontagemWizard() {
     const lines = [
       "Olá! Vim do site tecnicocuritiba.com.br.",
       "Assunto: Orçamento de montagem de PC",
+      numeroOS ? `Ordem de serviço: ${numeroOS} (PDF gerado no site).` : "",
       form.uso ? `Uso pretendido: ${labelOf(USOS, form.uso)}.` : "",
       form.modelo.trim() ? `Configuração/modelo: ${form.modelo.trim()}.` : "",
       form.pecasOrigem ? `Peças: ${labelOf(PECAS_ORIGEM, form.pecasOrigem)}.` : "",
       form.pecasLista.trim() ? `Peças que já tenho: ${form.pecasLista.trim()}.` : "",
+      fotos.length ? `Vou anexar ${fotos.length} foto(s) das peças aqui no WhatsApp.` : "",
       form.orcamento.trim() ? `Faixa de investimento: ${form.orcamento.trim()}.` : "",
       local ? `Local: ${local}.` : "",
       "Li e aceito os termos e condições, a política de peças do cliente e a mão de obra a partir de R$ 99,99 com orçamento aprovado antes do serviço.",
@@ -122,11 +124,36 @@ export function OrcamentoMontagemWizard() {
       "Podem me atender?",
     ].filter(Boolean);
     return lines.join("\n");
-  }, [form]);
+  }, [form, fotos, numeroOS]);
+
+  const baixarOS = async () => {
+    const err = validate(4);
+    if (err) return setError(err);
+    const numero = numeroOS || gerarNumeroOS();
+    setNumeroOS(numero);
+    trackCTAClick("download", "montagem_pc_wizard_os", {
+      servico: "montagem_pc",
+      category: form.uso,
+      cidade: form.cidade,
+      bairro: form.bairro || undefined,
+    });
+    await baixarOrdemServicoPdf({
+      numero,
+      uso: labelOf(USOS, form.uso),
+      modelo: form.modelo.trim(),
+      pecasOrigem: labelOf(PECAS_ORIGEM, form.pecasOrigem),
+      pecasLista: form.pecasLista.trim(),
+      orcamento: form.orcamento.trim(),
+      cidade: form.cidade,
+      bairro: form.bairro.trim(),
+      fotos,
+    });
+  };
 
   const submit = () => {
     const err = validate(4);
     if (err) return setError(err);
+    if (!numeroOS) setNumeroOS(gerarNumeroOS());
     trackCTAClick("whatsapp", "montagem_pc_wizard", {
       servico: "montagem_pc",
       category: form.uso,
