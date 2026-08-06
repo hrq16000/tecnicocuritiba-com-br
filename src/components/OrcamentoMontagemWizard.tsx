@@ -10,6 +10,7 @@ import { WhatsAppQr } from "@/components/WhatsAppQr";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
 import { baixarOrdemServicoPdf, gerarNumeroOS } from "@/lib/ordemServicoPdf";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Mini-wizard de orçamento para montagem de PC.
@@ -93,6 +94,7 @@ export function OrcamentoMontagemWizard() {
   const [numeroOS, setNumeroOS] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});
   const refs = useRef<Partial<Record<FieldKey, HTMLElement | null>>>({});
+  const registradas = useRef<Set<string>>(new Set());
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) => {
     setForm((f) => ({ ...f, [k]: v }));
@@ -172,10 +174,31 @@ export function OrcamentoMontagemWizard() {
     return lines.join("\n");
   }, [form, anexos, numeroOS]);
 
+  /** Registra a OS no backend para acompanhamento em /status-os (best-effort). */
+  const registrarOS = async (numero: string) => {
+    if (registradas.current.has(numero)) return;
+    registradas.current.add(numero);
+    try {
+      await supabase.from("ordens_servico").insert({
+        numero,
+        etapa: "aberta",
+        descricao_curta: `Montagem de PC — ${labelOf(USOS, form.uso) || "uso não informado"}`.slice(0, 400),
+        cidade: form.cidade || null,
+        bairro: form.bairro.trim() || null,
+        prazo_estimado: "Definido após diagnóstico e aprovação do orçamento.",
+        observacao_publica: "Pedido registrado pelo site. Aguardando contato para confirmar escopo.",
+      });
+    } catch {
+      /* acompanhamento é opcional: não bloqueia o atendimento */
+    }
+  };
+
   const baixarOS = async () => {
     if (!validate(4)) return;
     const numero = numeroOS || gerarNumeroOS();
     setNumeroOS(numero);
+    void registrarOS(numero);
+
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("event", "os_pdf_download", {
         event_category: "engagement",
@@ -207,7 +230,9 @@ export function OrcamentoMontagemWizard() {
 
   const submit = () => {
     if (!validate(4)) return;
-    if (!numeroOS) setNumeroOS(gerarNumeroOS());
+    const num = numeroOS || gerarNumeroOS();
+    if (!numeroOS) setNumeroOS(num);
+    void registrarOS(num);
     trackCTAClick("whatsapp", "montagem_pc_wizard", {
       servico: "montagem_pc",
       category: form.uso,
