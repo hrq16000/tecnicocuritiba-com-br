@@ -346,7 +346,7 @@ const MontagemPc = () => {
           <h3 className="text-xl font-bold text-foreground mb-3">Continue por aqui</h3>
           <ul className="grid md:grid-cols-2 gap-3">
             <li><Link to="/suporte-empresas" className="text-primary underline underline-offset-4">Suporte técnico empresarial</Link> — execução, modalidades e limites do atendimento a empresas.</li>
-            <li><Link to="/servicos/redes-e-wifi" className="text-primary underline underline-offset-4">Redes e Wi-Fi</Link> — conectividade das estações e da rede local.</li>
+            <li><Link to="/servicos/redes-wifi" className="text-primary underline underline-offset-4">Redes e Wi-Fi</Link> — conectividade das estações e da rede local.</li>
             <li><Link to="/servicos/backup-recuperacao" className="text-primary underline underline-offset-4">Backup e recuperação</Link> — prevenção e restauração dos arquivos de trabalho.</li>
             <li><Link to="/equipamentos-atendidos" className="text-primary underline underline-offset-4">Equipamentos atendidos</Link> — o que entra e o que não entra no escopo.</li>
             <li><Link to="/precos-e-politicas" className="text-primary underline underline-offset-4">Preços e políticas</Link> — diagnóstico, aprovação e garantia.</li>
