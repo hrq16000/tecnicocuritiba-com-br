@@ -161,7 +161,7 @@ const BackupRecuperacao = () => {
       </section>
 
       {/* Sistemas, credenciais e acessos de terceiros */}
-      <section className="py-10 bg-background">
+      <section id="credenciais" className="py-10 bg-background scroll-mt-24">
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl font-heading font-bold text-foreground mb-4 reveal-text">
             Sistemas, credenciais e acessos de terceiros
