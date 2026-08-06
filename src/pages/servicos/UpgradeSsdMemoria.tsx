@@ -171,7 +171,7 @@ const UpgradeSsdMemoria = () => {
       </section>
 
       {/* O que está incluso */}
-      <section className="py-10 bg-secondary">
+      <section id="incluso" className="py-10 bg-secondary scroll-mt-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             O Que Está Incluso
