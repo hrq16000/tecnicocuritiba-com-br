@@ -50,7 +50,7 @@ let checked = 0;
 for (const route of routes()) {
   let html;
   try {
-    const res = await fetch(`${BASE}${route}`, { redirect: "follow" });
+    const res = await fetch(`${BASE}${route}/`, { redirect: "follow" });
     if (!res.ok) {
       errors.push(`${route}: HTTP ${res.status}`);
       continue;

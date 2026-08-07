@@ -75,24 +75,71 @@ function htmlEscape(s) {
     .replace(/'/g, "&#39;");
 }
 
+// Título curto e único (limite de 70 chars, validado por check-title-meta-unique).
+function clampTitle(main, suffix) {
+  const full = suffix ? `${main} | ${suffix}` : main;
+  if (full.length <= 70) return full;
+  return main.length <= 70 ? main : `${main.slice(0, 67).trimEnd()}...`;
+}
+
 function metaForPath(routePath) {
   const url = `${SITE}${routePath}`;
+  const segs = routePath.split("/").filter(Boolean);
+
   if (routePath.startsWith("/bairros/")) {
-    const { bairro, city } = bairroMeta(routePath.replace("/bairros/", ""));
+    const { bairro, city } = bairroMeta(segs[1]);
     return {
       url,
       routePath,
-      title: `Técnico de Informática em ${bairro}, ${city} | Atendimento a domicílio`,
+      title: clampTitle(`Técnico de Informática em ${bairro}, ${city}`, "Atendimento a domicílio"),
       description: `Assistência técnica de computador e notebook em ${bairro}, ${city}. Atendimento a domicílio, remoto ou coleta. Diagnóstico e orçamento pelo WhatsApp.`,
       areaServed: [bairro, city],
     };
   }
-  const last = routePath.split("/").filter(Boolean).pop() || "";
+
+  // /atendimento/<cidade> e /atendimento/<cidade>/<bairro>
+  if (segs[0] === "atendimento" && segs[1]) {
+    const city = titleize(segs[1]);
+    if (segs[2]) {
+      const bairro = titleize(segs[2]);
+      return {
+        url,
+        routePath,
+        title: clampTitle(`Atendimento Técnico em ${bairro}, ${city}`, "WhatsApp"),
+        description: `Suporte de informática no bairro ${bairro}, em ${city}. Atendimento a domicílio, coleta ou remoto, com orçamento pelo WhatsApp a partir de R$ 99,99.`,
+        areaServed: [bairro, city],
+      };
+    }
+    return {
+      url,
+      routePath,
+      title: clampTitle(`Atendimento Técnico em ${city}`, "Orçamento no WhatsApp"),
+      description: `Atendimento técnico de informática em ${city}: domicílio, coleta ou remoto. Orçamento pelo WhatsApp a partir de R$ 99,99, com garantia de 90 dias.`,
+      areaServed: [city, "Curitiba"],
+    };
+  }
+
+  // /servicos/<servico>/<bairro>
+  if (segs[0] === "servicos" && segs[2]) {
+    const servico = titleize(segs[1]);
+    const { bairro, city } = bairroMeta(segs[2]);
+    return {
+      url,
+      routePath,
+      title: clampTitle(`${servico} em ${bairro}, ${city}`, "Técnico em Curitiba"),
+      description: `${servico} em ${bairro}, ${city}. Atendimento a domicílio, coleta ou suporte remoto, com diagnóstico e orçamento pelo WhatsApp a partir de R$ 99,99.`,
+      areaServed: [bairro, city],
+    };
+  }
+
+  const last = segs[segs.length - 1] || "";
+  const nome = titleize(last);
+  const contexto = segs.length > 1 ? `${titleize(segs[0])} — ` : "";
   return {
     url,
     routePath,
-    title: `${titleize(last)} | Técnico em Curitiba`,
-    description: `Assistência técnica de informática em Curitiba e Região Metropolitana. Diagnóstico e orçamento pelo WhatsApp.`,
+    title: clampTitle(`${nome} em Curitiba`, "Técnico em Curitiba"),
+    description: `${contexto}${nome}: assistência técnica de informática em Curitiba e Região Metropolitana, com atendimento a domicílio, coleta ou remoto e orçamento pelo WhatsApp.`,
     areaServed: ["Curitiba"],
   };
 }
