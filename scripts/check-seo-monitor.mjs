@@ -54,6 +54,21 @@ function toTarget(loc) {
   return loc.startsWith(SITE) ? BASE + loc.slice(SITE.length) : loc;
 }
 
+const IS_LOCAL = /^https?:\/\/(localhost|127\.0\.0\.1)/.test(BASE);
+const DIST = path.resolve("dist");
+
+/**
+ * `vite preview` aplica fallback de SPA e nunca serve dist/<rota>/index.html.
+ * A hospedagem de produção serve. Então, em base local, lemos o arquivo estático
+ * quando ele existe — HTTP continua validando status/redirect.
+ */
+function localPrerendered(loc) {
+  if (!IS_LOCAL) return null;
+  const route = loc.slice(SITE.length).replace(/\/$/, "");
+  const file = path.join(DIST, ...route.split("/").filter(Boolean), "index.html");
+  return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+}
+
 async function checkUrl(loc) {
   const target = toTarget(loc);
   let res;
@@ -75,7 +90,9 @@ async function checkUrl(loc) {
     errors.push(`STATUS ${res.status}: ${loc}`);
     return;
   }
-  const html = await res.text();
+  const served = await res.text();
+  const html = localPrerendered(loc) ?? served;
+
 
   const robots = html.match(/<meta[^>]+name=["']robots["'][^>]*content=["']([^"']+)["']/i)?.[1] || "";
   if (/noindex/i.test(robots)) {
