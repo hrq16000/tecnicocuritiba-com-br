@@ -134,12 +134,12 @@ function metaForPath(routePath) {
 
   const last = segs[segs.length - 1] || "";
   const nome = titleize(last);
-  const contexto = segs.length > 1 ? `${titleize(segs[0])} — ` : "";
+  const desc = `${nome}: assistência técnica de informática em Curitiba e RMC, com atendimento a domicílio, coleta ou remoto e orçamento pelo WhatsApp.`;
   return {
     url,
     routePath,
     title: clampTitle(`${nome} em Curitiba`, "Técnico em Curitiba"),
-    description: `${contexto}${nome}: assistência técnica de informática em Curitiba e Região Metropolitana, com atendimento a domicílio, coleta ou remoto e orçamento pelo WhatsApp.`,
+    description: desc.length <= 175 ? desc : `${nome}: assistência técnica em Curitiba e RMC — atendimento a domicílio, coleta ou remoto, orçamento pelo WhatsApp.`,
     areaServed: ["Curitiba"],
   };
 }
