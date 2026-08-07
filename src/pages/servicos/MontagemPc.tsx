@@ -161,7 +161,7 @@ const MontagemPc = () => {
       </section>
 
       {/* Processo */}
-      <section className="py-10 bg-background">
+      <section id="processo" className="scroll-mt-24 py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Como Funciona
