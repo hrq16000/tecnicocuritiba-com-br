@@ -49,11 +49,11 @@ for (const route of PAGES) {
   });
 
   for (const width of [360, 390, 430]) {
-    test(`CTA empresarial acima da dobra (${width}px) em ${route}`, async ({ page }) => {
+    test(`CTA acima da dobra (${width}px) em ${route}`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
       await page.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
 
-      const cta = page.locator("a[data-cta-location]").first();
+      const cta = page.locator('a[href*="wa.me"]').first();
       const box = await cta.boundingBox();
       expect(box, "CTA não encontrado").not.toBeNull();
       expect(box!.y).toBeLessThan(750);
