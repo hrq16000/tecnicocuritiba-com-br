@@ -14,13 +14,13 @@ import {
   AlertTriangle, Wrench, Users, Truck
 } from "lucide-react";
 import {
-import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
   COLETA_TAXA_MINIMA_LABEL,
   PRAZO_RAPIDO,
   REGRA_ORCAMENTO_GRATIS,
   REGRA_COLETA_SEM_VISITA,
   MSG_COLETA_RESUMO,
 } from "@/lib/coletaConfig";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
