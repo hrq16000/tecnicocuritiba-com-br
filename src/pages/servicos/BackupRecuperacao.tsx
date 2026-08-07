@@ -94,10 +94,14 @@ const BackupRecuperacao = () => {
         items={[
           { id: "servicos", label: "Nossos serviços" },
           { id: "niveis", label: "Níveis de recuperação" },
+          { id: "conceitos", label: "Sincronização, backup e recuperação" },
+          { id: "estrategia", label: "Estratégia de cópias e frequência" },
+          { id: "restauracao", label: "Teste de restauração" },
           { id: "credenciais", label: "Credenciais e acessos" },
           { id: "contextos-backup", label: "Backup em empresas" },
           { id: "faq", label: "Perguntas frequentes" },
         ]}
+
       />
 
       {/* Alerta Importante */}
