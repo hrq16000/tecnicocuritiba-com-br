@@ -132,12 +132,12 @@ const RedesWifi = () => {
                 ))}
               </ul>
               <div className="flex flex-wrap gap-3 text-sm">
-                <Link to="/servicos/suporte-home-office" className="text-accent underline underline-offset-2">
-                  Suporte para home office
-                </Link>
                 <Link to="/atendimento-remoto" className="text-accent underline underline-offset-2">
                   Atendimento remoto
                 </Link>
+                <a href="#triagem" className="text-accent underline underline-offset-2">
+                  Testar antes da visita
+                </a>
               </div>
             </div>
             <div className="bg-background p-6 rounded-xl border border-border">
