@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -246,6 +247,7 @@ const TecnicoInformaticaColombo = () => {
         <RealImageSection imageKey="diagnostico" caption="Diagnóstico profissional de hardware" />
 
         <ServiceLocalLinks currentCity="Colombo" />
+        <LocalPhotoGallery local="Colombo" />
         <LocalFAQSection title="Perguntas Frequentes - Colombo" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

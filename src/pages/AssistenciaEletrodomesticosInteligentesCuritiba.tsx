@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
@@ -199,6 +200,7 @@ const AssistenciaEletrodomesticosInteligentesCuritiba = () => {
         </div>
       </section>
 
+        <LocalPhotoGallery local="Curitiba" variant="tv" />
       </main>
       <Footer />
     </div>

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -139,6 +140,7 @@ const TecnicoInformaticaPiraquara = () => {
         <RealImageSection imageKey="redesWifi" caption="Configuração de redes e Wi-Fi" />
 
         <ServiceLocalLinks currentCity="Piraquara" />
+        <LocalPhotoGallery local="Piraquara" />
         <LocalFAQSection title="Perguntas Frequentes - Piraquara" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

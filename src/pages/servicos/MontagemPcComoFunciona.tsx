@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, ClipboardCheck, Cpu, MessageCircle, Package, Timer, Wrench } from "lucide-react";
@@ -228,6 +229,7 @@ const MontagemPcComoFunciona = () => {
             </Link>
           </p>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="montagem" />
       </main>
 
       <Footer />

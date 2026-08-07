@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -260,6 +261,7 @@ const MarcaPage = () => {
             </div>
           </section>
         </AnimatedSection>
+        <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
 
       <Footer />

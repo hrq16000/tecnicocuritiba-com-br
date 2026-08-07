@@ -195,6 +195,7 @@ export const GeoSpecificFAQs = ({ bairroSlug, bairroNome, cidadeNome }: GeoSpeci
     <section className="py-12 md:py-16 bg-secondary">
       {/* Schema FAQPage */}
       <script
+        data-jsonld-scope="local"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

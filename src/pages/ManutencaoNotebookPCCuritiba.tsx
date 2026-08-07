@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { Link } from "react-router-dom";
 import { Laptop, Monitor, Cpu, HardDrive, Wrench, Shield, Clock, MapPin, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -264,6 +265,7 @@ export default function ManutencaoNotebookPCCuritiba() {
           </Button>
         </section>
       </div>
+        <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
     </>
   );

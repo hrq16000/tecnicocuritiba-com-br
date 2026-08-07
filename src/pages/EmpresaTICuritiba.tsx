@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { Link } from "react-router-dom";
 import { Building2, Shield, Clock, Headphones, MapPin, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -180,6 +181,7 @@ export default function EmpresaTICuritiba() {
           </Button>
         </section>
       </div>
+        <LocalPhotoGallery local="Curitiba" variant="empresa" />
       </main>
     </>
   );

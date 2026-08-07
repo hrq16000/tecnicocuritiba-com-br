@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -134,6 +135,7 @@ const TecnicoInformaticaQuatroBarras = () => {
         <RealImageSection imageKey="segurancaDigital" caption="Proteção e segurança digital" />
 
         <ServiceLocalLinks currentCity="Quatro Barras" />
+        <LocalPhotoGallery local="Quatro Barras" />
         <LocalFAQSection title="Perguntas Frequentes - Quatro Barras" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

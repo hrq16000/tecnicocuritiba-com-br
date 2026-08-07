@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -227,6 +228,7 @@ const TecnicoInformaticaFazendaRioGrande = () => {
         <RealImageSection imageKey="placaMae" caption="Diagnóstico de placa-mãe profissional" />
 
         <ServiceLocalLinks currentCity="Fazenda Rio Grande" />
+        <LocalPhotoGallery local="Fazenda Rio Grande" />
         <LocalFAQSection title="Perguntas Frequentes - Fazenda Rio Grande" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useMemo } from "react";
 import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 
@@ -137,7 +138,7 @@ export default function AtendimentoCidadeBairro() {
       <PageSEO title={title} description={description} path={path} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script data-jsonld-scope="local" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
         <Breadcrumbs
@@ -230,6 +231,7 @@ export default function AtendimentoCidadeBairro() {
             ))}
           </ul>
 
+          <LocalPhotoGallery local={`${bairro.nome}, ${cidade.nome}`} bgClass="bg-transparent" />
           <h2 className="text-2xl font-bold mb-4">Dúvidas frequentes — {bairro.nome}</h2>
           <div className="space-y-4 mb-10">
             {faqs.map((f) => (

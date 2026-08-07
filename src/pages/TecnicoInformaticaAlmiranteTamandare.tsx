@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -224,6 +225,7 @@ const TecnicoInformaticaAlmiranteTamandare = () => {
         <RealImageSection imageKey="ferramentas" caption="Ferramentas profissionais para diagnóstico" />
 
         <ServiceLocalLinks currentCity="Almirante Tamandaré" />
+        <LocalPhotoGallery local="Almirante Tamandaré" />
         <LocalFAQSection title="Perguntas Frequentes - Almirante Tamandaré" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

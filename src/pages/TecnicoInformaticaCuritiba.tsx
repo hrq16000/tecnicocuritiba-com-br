@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -304,6 +305,7 @@ const TecnicoInformaticaCuritiba = () => {
 
         <ServiceLocalLinks currentCity="Curitiba" />
         <RealImageSection imageKey="bancadaTecnica" caption="Laboratório técnico profissional" />
+        <LocalPhotoGallery local="Curitiba" />
         <LocalFAQSection title="Perguntas Frequentes - Curitiba" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

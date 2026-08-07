@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
@@ -280,6 +281,7 @@ const ConsertoCelular = () => {
       </section>
 
       <BlocoInteligencia />
+        <LocalPhotoGallery local="Curitiba" variant="celular" />
       </main>
       <Footer />
     </div>

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
@@ -149,7 +150,7 @@ export const ArrumarPCCityTemplate = ({ data }: { data: CityData }) => {
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script data-jsonld-scope="local" type="application/ld+json">{JSON.stringify(faqSchema)}</script>
         {heroSet && (
           <link
             rel="preload"
@@ -266,9 +267,12 @@ export const ArrumarPCCityTemplate = ({ data }: { data: CityData }) => {
           </div>
         </section>
 
+        <LocalPhotoGallery local={data.cidade} title={`Arrumar PC em ${data.cidade}: como trabalhamos`} />
+
         <section className="container mx-auto px-4 py-16 md:py-20">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-10">
+              
               Perguntas frequentes — {data.cidade}
             </h2>
             <div className="space-y-3">

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
@@ -350,6 +351,7 @@ const Marcas = () => {
             </div>
           </section>
         </AnimatedSection>
+        <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
 
       <Footer />

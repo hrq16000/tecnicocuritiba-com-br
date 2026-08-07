@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -675,6 +676,7 @@ export default function AssistenciaTecnicaCuritiba() {
             ))}
           </nav>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="geral" />
       </main>
 
       <Footer />

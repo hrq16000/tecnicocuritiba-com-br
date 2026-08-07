@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -383,6 +384,7 @@ const SegurancaDados = () => {
             </div>
           </div>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="seguranca" />
       </main>
 
       <InterlinkingBlock />

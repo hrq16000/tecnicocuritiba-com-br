@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
@@ -236,6 +237,7 @@ export const ArrumarPCServicoCidadeTemplate = ({ servico, cidade }: Props) => {
         </section>
 
         <CTASection />
+        <LocalPhotoGallery local={cidade.cidade} variant="rede" />
       </main>
 
       <Footer />

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -286,6 +287,7 @@ const TecnicoInformaticaSaoJosePinhais = () => {
 
         <ServiceLocalLinks currentCity="São José dos Pinhais" />
         <RealImageSection imageKey="ferramentas" caption="Ferramentas profissionais para diagnóstico" />
+        <LocalPhotoGallery local="São José dos Pinhais" />
         <LocalFAQSection title="Perguntas Frequentes - São José dos Pinhais" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

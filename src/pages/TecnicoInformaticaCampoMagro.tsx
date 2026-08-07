@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -134,6 +135,7 @@ const TecnicoInformaticaCampoMagro = () => {
         <RealImageSection imageKey="componentesSsd" caption="Upgrade SSD e memória RAM" />
 
         <ServiceLocalLinks currentCity="Campo Magro" />
+        <LocalPhotoGallery local="Campo Magro" />
         <LocalFAQSection title="Perguntas Frequentes - Campo Magro" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -347,6 +348,7 @@ const TecnicoInformaticaPinhais = () => {
         {/* FAQ Local */}
         <ServiceLocalLinks currentCity="Pinhais" />
         <RealImageSection imageKey="atendimentoDomiciliar" caption="Atendimento domiciliar profissional" />
+        <LocalPhotoGallery local="Pinhais" />
         <LocalFAQSection title="Perguntas Frequentes - Pinhais" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

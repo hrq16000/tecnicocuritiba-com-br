@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -356,6 +357,7 @@ const TecnicoInformaticaAraucaria = () => {
         {/* FAQ Local */}
         <ServiceLocalLinks currentCity="Araucária" />
         <RealImageSection imageKey="diagnostico" caption="Diagnóstico profissional com equipamento especializado" />
+        <LocalPhotoGallery local="Araucária" />
         <LocalFAQSection title="Perguntas Frequentes - Araucária" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />
