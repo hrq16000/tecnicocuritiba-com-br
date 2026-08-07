@@ -124,6 +124,22 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
         { name: data.bairro, path: `/servicos/${data.servicoSlug}/${data.bairroSlug}` }
       ]} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {data.faq.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: data.faq.map((f) => ({
+                "@type": "Question",
+                name: f.pergunta,
+                acceptedAnswer: { "@type": "Answer", text: f.resposta },
+              })),
+            }),
+          }}
+        />
+      )}
       <SiteBaseSchema />
       <BairroSchema
         bairro={data.bairro}
