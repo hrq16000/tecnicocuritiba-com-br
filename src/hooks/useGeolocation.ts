@@ -25,7 +25,10 @@ export const useGeolocation = (): GeoData => {
   useEffect(() => {
     startGeoDetection();
     setGeo(getGeoState());
-    return subscribeGeo(setGeo);
+    const unsubscribe = subscribeGeo(setGeo);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return {
