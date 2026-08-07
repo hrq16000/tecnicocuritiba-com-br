@@ -1,5 +1,5 @@
 import { ogImageFromKey } from "@/lib/imageCredits";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
+import { LocalPhotoGallery, mainImageKeyFor } from "@/components/LocalPhotoGallery";
 import { useMemo } from "react";
 import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 
@@ -236,7 +236,7 @@ export default function AtendimentoCidade() {
             </>
           )}
 
-          <LocalPhotoGallery local={cidade.nome} bgClass="bg-transparent" />
+          <LocalPhotoGallery local={cidade.nome} bgClass="bg-transparent" path={path} />
           <h2 className="text-2xl font-bold mb-4">Dúvidas frequentes — {cidade.nome}</h2>
           <div className="space-y-4 mb-10">
             {faqs.map((f) => (

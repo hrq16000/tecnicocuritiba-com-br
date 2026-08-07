@@ -1,5 +1,5 @@
 import { ogImageFromKey } from "@/lib/imageCredits";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
+import { LocalPhotoGallery, mainImageKeyFor } from "@/components/LocalPhotoGallery";
 import { useMemo } from "react";
 import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 
