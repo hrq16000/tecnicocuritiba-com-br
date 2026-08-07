@@ -123,7 +123,7 @@ ok(redes.includes('id="contextos-rede"'), "redes: bloco residencial × empresari
 ok(redes.includes('id="pilares-rede"'), "redes: pilares de rede ausentes");
 ok(/home office/i.test(redes), "redes: público residencial/home office perdido");
 ok(/operadora/i.test(redes), "redes: limite de operadora ausente");
-ok(!/reparo mec[âa]nico de impressora(?![^<]*n[ãa]o)/i.test(redes.replace(/N[ãa]o fazemos[^<]*/g, "")), "redes: promessa de reparo de impressora");
+ok(/reparo mec[âa]nico ou eletr[ôo]nico/i.test(redes), "redes: limite de impressoras (somente rede) ausente");
 
 if (errors.length) {
   console.error("check:visual-wave-3t (3T extra) FALHOU\n" + errors.map((e) => ` - ${e}`).join("\n"));
