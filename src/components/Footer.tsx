@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { NAP, napContactPoint, napOpeningHours } from "@/lib/nap";
+import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/nap";
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { useMemo } from "react";
@@ -108,12 +108,27 @@ const infoLinks = [
 ];
 
 
+/** Cidades atendidas — usadas em LocalBusiness e Organization (areaServed). */
+const AREAS_ATENDIDAS = [
+  "Curitiba", "São José dos Pinhais", "Araucária", "Campo Largo",
+  "Pinhais", "Colombo", "Fazenda Rio Grande", "Almirante Tamandaré",
+  "Piraquara", "Campo Magro", "Quatro Barras",
+];
+
+const areaServedCities = AREAS_ATENDIDAS.map((c) => ({
+  "@type": "City",
+  name: c,
+  containedInPlace: { "@type": "State", name: "Paraná" },
+}));
+
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
   name: NAP.name,
   alternateName: NAP.alternateName,
+  address: napPostalAddress(),
+  parentOrganization: { "@id": "https://tecnicocuritiba.com.br/#organization" },
   description:
     "Assistência técnica em informática a domicílio em Curitiba e Região Metropolitana: formatação, conserto de PC/notebook, remoção de vírus, upgrade de SSD/memória, redes Wi-Fi e suporte para empresas.",
   image: "https://tecnicocuritiba.com.br/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp",
@@ -129,15 +144,7 @@ const localBusinessSchema = {
     longitude: NAP.geo.lng,
   },
   hasMap: `https://www.google.com/maps/search/?api=1&query=${NAP.geo.lat},${NAP.geo.lng}`,
-  areaServed: [
-    "Curitiba", "São José dos Pinhais", "Araucária", "Campo Largo",
-    "Pinhais", "Colombo", "Fazenda Rio Grande", "Almirante Tamandaré",
-    "Piraquara", "Campo Magro", "Quatro Barras",
-  ].map((c) => ({
-    "@type": "City",
-    name: c,
-    containedInPlace: { "@type": "State", name: "Paraná" },
-  })),
+  areaServed: areaServedCities,
   openingHoursSpecification: napOpeningHours(),
   contactPoint: napContactPoint(),
   knowsAbout: [
@@ -154,6 +161,40 @@ const localBusinessSchema = {
     "https://www.google.com/maps/search/?api=1&query=T%C3%A9cnico+Curitiba",
   ],
 };
+
+/**
+ * Nó Organization sitewide (`#organization`).
+ * Necessário porque Service/WebPage de várias páginas referenciam
+ * `${SITE}/#organization` como provider/about — sem este nó a referência ficava
+ * pendurada. NAP e áreas atendidas derivam da fonte única em `@/lib/nap`.
+ */
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://tecnicocuritiba.com.br/#organization",
+  name: NAP.name,
+  alternateName: NAP.alternateName,
+  legalName: NAP.legalName,
+  url: NAP.url,
+  logo: {
+    "@type": "ImageObject",
+    "@id": "https://tecnicocuritiba.com.br/#logo",
+    url: NAP.logo,
+    caption: NAP.alternateName,
+  },
+  image: { "@id": "https://tecnicocuritiba.com.br/#logo" },
+  telephone: NAP.phone,
+  address: napPostalAddress(),
+  contactPoint: napContactPoint(),
+  areaServed: areaServedCities,
+  foundingDate: NAP.foundingDate,
+  subOrganization: { "@id": "https://tecnicocuritiba.com.br/#localbusiness" },
+  sameAs: [
+    "https://www.google.com/maps/search/?api=1&query=T%C3%A9cnico+Curitiba",
+  ],
+};
+
+
 
 
 export const Footer = () => {
@@ -295,6 +336,10 @@ export const Footer = () => {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
 
 

@@ -10,6 +10,8 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -85,8 +87,23 @@ const MontagemPc = () => {
       </section>
       <RealImageSection imageKey="desktopMontado" caption="PC montado sob medida com componentes premium" />
 
+      <ServiceHeroSummary
+        summary="Montagem sob demanda, executada por projeto: levantamento de uso, definição das peças com você, montagem, BIOS/UEFI, drivers, teste de estabilidade e entrega com checklist. Não é contrato mensal, franquia de horas nem suporte ilimitado — cada montagem tem escopo próprio."
+        items={[
+          { id: "tipos-de-pc", label: "Tipos de PC que montamos" },
+          { id: "escopo-execucao", label: "Escopo da execução" },
+          { id: "processo", label: "Como funciona" },
+          { id: "contextos-montagem", label: "Contextos de uso" },
+          { id: "pecas-do-cliente", label: "Peças do cliente" },
+          { id: "garantia", label: "Garantia" },
+          { id: "checklist-entrega", label: "Checklist de entrega" },
+          { id: "workstations", label: "Workstations" },
+          { id: "orcamento", label: "Orçamento" },
+        ]}
+      />
+
       {/* Tipos de PC */}
-      <section className="py-10 bg-background relative">
+      <section id="tipos-de-pc" className="scroll-mt-24 py-10 bg-background relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-3xl" />
         </div>
@@ -122,7 +139,7 @@ const MontagemPc = () => {
       <RealImageSection imageKey="placaMae" caption="Componentes de alta performance selecionados" />
 
       {/* O que está incluso */}
-      <section className="py-10 bg-secondary">
+      <section id="escopo-execucao" className="scroll-mt-24 py-10 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             O Que Está Incluso no Serviço
@@ -144,7 +161,7 @@ const MontagemPc = () => {
       </section>
 
       {/* Processo */}
-      <section className="py-10 bg-background">
+      <section id="processo" className="scroll-mt-24 py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             Como Funciona
@@ -168,8 +185,32 @@ const MontagemPc = () => {
         </div>
       </section>
 
+      <BusinessContextGrid
+        id="contextos-montagem"
+        title="Contextos de uso que mudam a configuração"
+        intro="A montagem é sempre por projeto: cada configuração nasce do que a máquina vai rodar. Não existe pacote mensal, franquia de horas nem suporte ilimitado atrelado à montagem — o escopo termina na entrega com checklist."
+        contexts={[
+          {
+            title: "Jogos e streaming em casa",
+            body: "A definição parte da resolução do monitor e dos títulos jogados. Ajustamos GPU, memória e refrigeração ao orçamento. Limite: não prometemos FPS nem fazemos overclock — trabalhamos dentro das especificações do fabricante.",
+          },
+          {
+            title: "Edição, 3D e CAD",
+            body: "Levantamento do software usado, tamanho dos projetos, número de monitores e armazenamento. A escolha segue os requisitos oficiais da aplicação. Limite: desempenho em um programa específico não é garantido por contrato.",
+          },
+          {
+            title: "Estação de trabalho em escritório",
+            body: "Máquina para uso prolongado, com prioridade em estabilidade, ruído e consumo. A aprovação vem de quem responde pela compra. Limite: a montagem é pontual; suporte contínuo é tratado à parte em suporte para empresas.",
+          },
+          {
+            title: "Reaproveitamento de peças existentes",
+            body: "Parte dos componentes vem do equipamento atual. Conferimos compatibilidade e estado antes de montar. Limite: peça usada não tem garantia nossa e pode inviabilizar a montagem na conferência.",
+          },
+        ]}
+      />
+
       {/* Peças fornecidas pelo cliente */}
-      <section className="py-10 bg-background" id="pecas-do-cliente">
+      <section className="scroll-mt-24 py-10 bg-background" id="pecas-do-cliente">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6">
             Política para peças fornecidas pelo cliente
