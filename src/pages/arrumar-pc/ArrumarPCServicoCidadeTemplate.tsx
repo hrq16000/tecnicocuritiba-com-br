@@ -237,7 +237,7 @@ export const ArrumarPCServicoCidadeTemplate = ({ servico, cidade }: Props) => {
         </section>
 
         <CTASection />
-        <LocalPhotoGallery local={data.cidade} />
+        <LocalPhotoGallery local={cidade.cidade} variant="rede" />
       </main>
 
       <Footer />
