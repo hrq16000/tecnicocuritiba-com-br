@@ -127,7 +127,10 @@ const localBusinessSchema = {
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
   name: NAP.name,
   alternateName: NAP.alternateName,
-  address: napPostalAddress(),
+  // Negócio de atendimento a domicílio (service-area business): o endereço
+  // postal fica apenas no nó Organization; publicar `address` no LocalBusiness
+  // sinaliza loja física inexistente e é bloqueado pelo validador de JSON-LD.
+
   parentOrganization: { "@id": "https://tecnicocuritiba.com.br/#organization" },
   description:
     "Assistência técnica em informática a domicílio em Curitiba e Região Metropolitana: formatação, conserto de PC/notebook, remoção de vírus, upgrade de SSD/memória, redes Wi-Fi e suporte para empresas.",
