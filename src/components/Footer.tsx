@@ -108,12 +108,27 @@ const infoLinks = [
 ];
 
 
+/** Cidades atendidas — usadas em LocalBusiness e Organization (areaServed). */
+const AREAS_ATENDIDAS = [
+  "Curitiba", "São José dos Pinhais", "Araucária", "Campo Largo",
+  "Pinhais", "Colombo", "Fazenda Rio Grande", "Almirante Tamandaré",
+  "Piraquara", "Campo Magro", "Quatro Barras",
+];
+
+const areaServedCities = AREAS_ATENDIDAS.map((c) => ({
+  "@type": "City",
+  name: c,
+  containedInPlace: { "@type": "State", name: "Paraná" },
+}));
+
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
   name: NAP.name,
   alternateName: NAP.alternateName,
+  address: napPostalAddress(),
+  parentOrganization: { "@id": "https://tecnicocuritiba.com.br/#organization" },
   description:
     "Assistência técnica em informática a domicílio em Curitiba e Região Metropolitana: formatação, conserto de PC/notebook, remoção de vírus, upgrade de SSD/memória, redes Wi-Fi e suporte para empresas.",
   image: "https://tecnicocuritiba.com.br/lovable-uploads/87899615-1234-4c6d-a8ca-ee38ec566ef4.webp",
