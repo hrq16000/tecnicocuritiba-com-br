@@ -933,6 +933,8 @@ const App = () => (
             <Route path="/admin/metricas" element={<AdminMetricas />} />
             <Route path="/admin/reviews" element={<AdminReviews />} />
             <Route path="/admin/os" element={<AdminOS />} />
+            <Route path="/admin/os-auditoria" element={<AdminOSAuditoria />} />
+
             <Route path="/admin/vitals" element={<AdminVitals />} />
             <Route path="/conserto-impressora-curitiba" element={<ConsertoImpressoraCuritiba />} />
             <Route path="/assistencia-eletrodomesticos-inteligentes-curitiba" element={<AssistenciaEletrodomesticosInteligentesCuritiba />} />
