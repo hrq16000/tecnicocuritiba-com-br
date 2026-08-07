@@ -108,7 +108,7 @@ ok(
 // 11. Sem propagação do piloto para páginas residenciais/sintomas
 // (RedesWifi e BackupRecuperacao entram no escopo controlado da rodada 3T)
 const NAO_PROPAGAR = [
-  "src/pages/servicos/MontagemPc.tsx",
+  // MontagemPc entra no escopo controlado da rodada 3U
   "src/pages/ProblemaPage.tsx",
 ];
 for (const f of NAO_PROPAGAR) {

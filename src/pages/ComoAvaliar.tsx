@@ -115,6 +115,7 @@ export default function ComoAvaliar() {
                 href={`https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent("Olá! Quero avaliar o atendimento, pode me enviar o link?")}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cta-location="como_avaliar_pedir_link"
               >
                 <MessageCircle className="mr-2 h-5 w-5" /> Pedir o link no WhatsApp
               </a>

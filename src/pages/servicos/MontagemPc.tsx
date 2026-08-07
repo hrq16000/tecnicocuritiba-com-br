@@ -57,6 +57,7 @@ const MontagemPc = () => {
       ]} />
       <Header />
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Montagem de PC" }]} />
+      <main id="main-content">
       
       {/* Hero Section */}
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
@@ -580,6 +581,7 @@ const MontagemPc = () => {
 
 
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

@@ -214,6 +214,7 @@ export default function Avaliacoes() {
                 href={`https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent("Olá! Vi as avaliações no site e preciso de atendimento técnico.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-cta-location="avaliacoes_cta_final"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Falar no WhatsApp

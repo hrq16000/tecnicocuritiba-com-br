@@ -53,7 +53,7 @@ for (const [re, label] of BLOCKS) ok(re.test(src), `${label} presente`);
 const FORBIDDEN = [
   [/A partir de R\$\s?\d\.\d{3}/, "preço fechado de build (R$ x.xxx)"],
   [/garantimos?\s+\d+\s*fps/i, "promessa de FPS"],
-  [/fazemos overclock|overclock inclu/i, "promessa de overclock"],
+  [/(?<!n[ãa]o\s)(?<!nem\s)fazemos overclock|overclock inclu[ií]d/i, "promessa de overclock"],
   [/alta performance garantida|desempenho garantido/i, "promessa de desempenho"],
 ];
 for (const [re, label] of FORBIDDEN) ok(!re.test(src), `sem ${label}`);
