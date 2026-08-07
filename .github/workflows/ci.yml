@@ -196,6 +196,27 @@ jobs:
           fi
           node scripts/indexnow-ping.mjs
 
+  seo-deploy-hook:
+    runs-on: ubuntu-latest
+    needs: [build, e2e]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Reenviar sitemaps ao Search Console + validar canônicos
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::warning::SUPABASE_URL/ANON_KEY ausentes — pós-deploy de SEO pulado."
+            exit 0
+          fi
+          curl -sS --fail-with-body -X POST \
+            "$SUPABASE_URL/functions/v1/seo-deploy-hook" \
+            -H "Content-Type: application/json" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -d '{"origem":"deploy"}' | tee seo-deploy-hook.json
+
+
   lighthouse:
     runs-on: ubuntu-latest
     needs: build
