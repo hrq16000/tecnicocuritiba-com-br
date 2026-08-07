@@ -1,3 +1,4 @@
+import { ogImageFromKey } from "@/lib/imageCredits";
 import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useMemo } from "react";
 import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
@@ -115,7 +116,7 @@ export default function AtendimentoCidade() {
 
   return (
     <>
-      <PageSEO title={title} description={description} path={path} />
+      <PageSEO title={title} description={description} path={path} ogImage={ogImageFromKey(mainImageKeyFor("geral"))} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script data-jsonld-scope="local" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
