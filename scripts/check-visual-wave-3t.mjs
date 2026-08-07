@@ -98,8 +98,9 @@ for (const [file, cfg] of Object.entries(PAGES)) {
   );
 }
 
-// 8. Sem propagação acidental para sintomas / montagem
-for (const f of ["src/pages/ProblemaPage.tsx", "src/pages/servicos/MontagemPc.tsx"]) {
+// 8. Sem propagação acidental para páginas de sintomas
+// (montagem-de-pc recebe contexto empresarial de forma controlada na rodada 3U)
+for (const f of ["src/pages/ProblemaPage.tsx"]) {
   if (!existsSync(f)) continue;
   ok(!/components\/b2b\//.test(readFileSync(f, "utf8")), `${f}: propagação empresarial fora do escopo da 3T`);
 }
