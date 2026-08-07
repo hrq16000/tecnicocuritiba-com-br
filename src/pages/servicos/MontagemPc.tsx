@@ -90,7 +90,9 @@ const MontagemPc = () => {
       <ServiceHeroSummary
         summary="Montagem sob demanda, executada por projeto: levantamento de uso, definição das peças com você, montagem, BIOS/UEFI, drivers, teste de estabilidade e entrega com checklist. Não é contrato mensal, franquia de horas nem suporte ilimitado — cada montagem tem escopo próprio."
         items={[
-          { id: "tipos-de-pc", label: "Tipos de PC que montamos" },
+          { id: "tipos-de-pc", label: "Para quem é indicado" },
+          { id: "compatibilidade", label: "Compatibilidade" },
+          { id: "bios-drivers", label: "BIOS e drivers" },
           { id: "escopo-execucao", label: "Escopo da execução" },
           { id: "processo", label: "Como funciona" },
           { id: "contextos-montagem", label: "Contextos de uso" },
