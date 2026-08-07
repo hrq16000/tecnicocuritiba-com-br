@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
+import { AdSlot } from "@/components/AdSlot";
+
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TrustStrip from "@/components/TrustStrip";
@@ -863,7 +865,9 @@ const ProblemaPage = () => {
       </AnimatedSection>
 
       <BlocoInteligencia />
+      <AdSlot placement="problema-inline" />
       <InterlinkingBlock />
+
       </main>
       <Footer />
     </div>
