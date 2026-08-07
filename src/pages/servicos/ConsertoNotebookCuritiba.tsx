@@ -85,6 +85,7 @@ const ConsertoNotebookCuritiba = () => {
         ]}
       />
       <Header />
+      <main id="main-content">
       <Breadcrumbs
         items={[
           { label: "Serviços", href: "/servicos" },
@@ -330,6 +331,7 @@ const ConsertoNotebookCuritiba = () => {
       </section>
 
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

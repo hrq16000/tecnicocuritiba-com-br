@@ -61,6 +61,7 @@ const AssistenciaEletrodomesticosInteligentesCuritiba = () => {
         faqs={FAQS}
       />
       <Header />
+      <main id="main-content">
       <Breadcrumbs items={[{ label: "Eletrodomésticos Inteligentes" }]} />
 
       <section className="pt-14 pb-12 bg-gradient-to-br from-primary to-primary/80">
@@ -198,6 +199,7 @@ const AssistenciaEletrodomesticosInteligentesCuritiba = () => {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

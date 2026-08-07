@@ -53,6 +53,7 @@ const RemocaoVirus = () => {
         ]}
       />
       <Header />
+      <main id="main-content">
       <Breadcrumbs
         items={[
           { label: "Serviços", href: "/servicos" },
@@ -311,6 +312,7 @@ const RemocaoVirus = () => {
         </div>
       </section>
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

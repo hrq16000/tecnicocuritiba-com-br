@@ -54,6 +54,7 @@ const FormatacaoComputador = () => {
         ]}
       />
       <Header />
+      <main id="main-content">
       <Breadcrumbs
         items={[
           { label: "Serviços", href: "/servicos" },
@@ -293,6 +294,7 @@ const FormatacaoComputador = () => {
         </div>
       </section>
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

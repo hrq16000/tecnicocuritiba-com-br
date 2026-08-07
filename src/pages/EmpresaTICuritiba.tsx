@@ -70,6 +70,7 @@ export default function EmpresaTICuritiba() {
         faq={FAQ}
       />
 
+      <main id="main-content">
       <BusinessHero
         eyebrow="Suporte de TI corporativo em Curitiba"
         title="Empresa de TI em Curitiba"
@@ -179,6 +180,7 @@ export default function EmpresaTICuritiba() {
           </Button>
         </section>
       </div>
+      </main>
     </>
   );
 }

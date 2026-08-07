@@ -65,7 +65,12 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // Helpers internos do Vite (preload-helper etc.) precisam ficar no
+          // chunk base; se caírem em um chunk pesado (ex.: pdf), o entry passa
+          // a fazer modulepreload dele sem necessidade.
+          if (id.includes("vite/preload-helper") || id.includes("vite/modulepreload")) return "vendor";
           if (!id.includes("node_modules")) return undefined;
+
 
           // Split leaf-only libs. Runtime react/router/supabase permanecem em
           // `vendor` para evitar o TDZ ("Cannot access 'kf' before initialization",
@@ -74,9 +79,21 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("lucide-react")) return "vendor-icons";
           if (id.includes("@radix-ui")) return "vendor-radix";
           if (id.includes("react-helmet")) return "vendor-helmet";
+          // Libs "folha" (sem acoplamento ao runtime React/Router) isoladas para
+          // sair do chunk `vendor` e carregar só nas rotas que as usam.
+          if (id.includes("jspdf") || id.includes("canvg") || id.includes("html2canvas")) return "vendor-pdf";
+          if (id.includes("qrcode")) return "vendor-qrcode";
+          if (/node_modules\/(recharts|d3-|victory-|internmap|delaunator|robust-predicates)/.test(id)) return "vendor-charts";
+          if (id.includes("react-markdown") || id.includes("remark-") || id.includes("mdast") || id.includes("micromark") || id.includes("unified") || id.includes("hast") || id.includes("vfile") || id.includes("unist")) return "vendor-markdown";
+          if (id.includes("date-fns")) return "vendor-date";
+          if (id.includes("dompurify")) return "vendor-sanitize";
+          if (id.includes("embla-carousel")) return "vendor-carousel";
+          if (id.includes("@sentry")) return "vendor-sentry";
+          if (id.includes("/zod/")) return "vendor-zod";
 
           return "vendor";
         },
+
 
       },
     },

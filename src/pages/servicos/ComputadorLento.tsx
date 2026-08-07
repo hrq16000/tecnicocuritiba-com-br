@@ -61,6 +61,7 @@ const ComputadorLento = () => {
         { name: "Computador Lento", path: "/servicos/computador-lento" }
       ]} />
       <Header />
+      <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Computador Lento" }]} />
 
       {/* Hero */}
@@ -233,6 +234,7 @@ const ComputadorLento = () => {
 
       <BlocoInteligencia />
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );
