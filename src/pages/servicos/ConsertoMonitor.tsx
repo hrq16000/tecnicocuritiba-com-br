@@ -347,7 +347,7 @@ const ConsertoMonitor = () => {
           bgClass="bg-background"
         />
 
-        <ServiceOperationalSpec path={PATH} />
+        <ServiceOperationalSpec path="/servicos/conserto-monitor" />
 
         <AnimatedSection>
           <section className="py-12">
