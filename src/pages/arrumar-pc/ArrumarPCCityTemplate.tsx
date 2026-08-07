@@ -10,6 +10,7 @@ import { CTASection } from "@/components/CTASection";
 import { trackPageView } from "@/lib/analytics";
 import { getCityOgImage, getCityHeroImage } from "./cityImages";
 import {
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   ShieldCheck,
   Wifi,
   Zap,
@@ -269,6 +270,7 @@ export const ArrumarPCCityTemplate = ({ data }: { data: CityData }) => {
         <section className="container mx-auto px-4 py-16 md:py-20">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-10">
+              
               Perguntas frequentes — {data.cidade}
             </h2>
             <div className="space-y-3">

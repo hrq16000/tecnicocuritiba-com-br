@@ -11,6 +11,7 @@ import { trackPageView } from "@/lib/analytics";
 import { CATEGORIES, type CategoryId, findCategory } from "./categories";
 import { LOCAIS, findLocal, type LocalData } from "./locais";
 import {
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   Package, ShieldCheck, Clock, Wrench, MapPin, MessageCircle,
 } from "lucide-react";
 
@@ -191,6 +192,7 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
           </div>
         </section>
 
+        <LocalPhotoGallery local={cityLabel} variant={category.slug.includes("tv") ? "tv" : category.slug.includes("celular") ? "celular" : "geral"} title={`${category.nome} em ${cityLabel}: como trabalhamos`} />
         {/* FAQ */}
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto">

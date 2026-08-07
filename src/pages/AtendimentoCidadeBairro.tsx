@@ -11,6 +11,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsappMessage";
 import { CIDADES, SERVICOS } from "@/lib/servicoCidadeData";
 import { getBairro } from "@/lib/atendimentoBairrosData";
 import { MessageCircle, MapPin, Clock, Shield, CheckCircle, Wrench } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -230,6 +231,7 @@ export default function AtendimentoCidadeBairro() {
             ))}
           </ul>
 
+          <LocalPhotoGallery local={`${bairro.nome}, ${cidade.nome}`} bgClass="bg-transparent" />
           <h2 className="text-2xl font-bold mb-4">Dúvidas frequentes — {bairro.nome}</h2>
           <div className="space-y-4 mb-10">
             {faqs.map((f) => (
