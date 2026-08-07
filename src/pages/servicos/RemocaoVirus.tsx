@@ -13,6 +13,7 @@ import ServiceHeroSummary from "@/components/ServiceHeroSummary";
 import EditorialCallout from "@/components/EditorialCallout";
 import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -312,6 +313,7 @@ const RemocaoVirus = () => {
         </div>
       </section>
       <InterlinkingBlock />
+      <ServiceOperationalSpec path="/servicos/remocao-virus" />
       </main>
       <Footer />
     </div>

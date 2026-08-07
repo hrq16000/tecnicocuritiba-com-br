@@ -13,6 +13,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ServiceHeroSummary from "@/components/ServiceHeroSummary";
 import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -581,6 +582,7 @@ const MontagemPc = () => {
 
 
       <InterlinkingBlock />
+      <ServiceOperationalSpec path="/servicos/montagem-pc" />
       </main>
       <Footer />
     </div>

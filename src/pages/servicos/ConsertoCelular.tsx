@@ -14,6 +14,7 @@ import {
   AlertTriangle, Wrench, Users, Truck
 } from "lucide-react";
 import {
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
   COLETA_TAXA_MINIMA_LABEL,
   PRAZO_RAPIDO,
   REGRA_ORCAMENTO_GRATIS,
@@ -282,6 +283,7 @@ const ConsertoCelular = () => {
 
       <BlocoInteligencia />
         <LocalPhotoGallery local="Curitiba" variant="celular" />
+      <ServiceOperationalSpec path="/servicos/conserto-celular" />
       </main>
       <Footer />
     </div>

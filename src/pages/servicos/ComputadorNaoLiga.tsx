@@ -11,6 +11,7 @@ import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -203,6 +204,7 @@ const ComputadorNaoLiga = () => {
 
       <BlocoInteligencia />
       <InterlinkingBlock />
+      <ServiceOperationalSpec path="/servicos/computador-nao-liga" />
       </main>
       <Footer />
     </div>
