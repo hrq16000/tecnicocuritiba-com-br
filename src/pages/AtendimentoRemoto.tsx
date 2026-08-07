@@ -163,53 +163,79 @@ const AtendimentoRemoto = () => {
         </section>
 
 
-        <section id="como-funciona" className="scroll-mt-24 py-8 md:py-10 bg-background">
-          <div className="container mx-auto">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
-                Como Funciona o Atendimento Remoto?
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
-                    1
-                  </div>
+        <section id="fluxo" className="scroll-mt-24 py-8 md:py-10 bg-background">
+          <div className="container mx-auto max-w-3xl px-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
+              Como funciona o atendimento remoto, etapa por etapa
+            </h2>
+            <ol className="space-y-3">
+              {FLUXO.map(([t, d], i) => (
+                <li key={t} className="flex gap-4 items-start rounded-xl border border-border bg-muted/30 p-4">
+                  <span className="w-8 h-8 shrink-0 bg-accent rounded-full flex items-center justify-center text-white text-sm font-bold">
+                    {i + 1}
+                  </span>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Entre em Contato</h3>
-                    <p className="text-muted-foreground">
-                      Envie uma mensagem pelo WhatsApp explicando o problema do seu computador.
-                    </p>
+                    <h3 className="font-semibold text-foreground">{t}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{d}</p>
                   </div>
-                </div>
-                
-                <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Conectamos ao Seu PC</h3>
-                    <p className="text-muted-foreground">
-                      Com sua autorização, usamos um software seguro para acessar seu computador remotamente.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Resolvemos o Problema</h3>
-                    <p className="text-muted-foreground">
-                      Você acompanha tudo na tela enquanto corrigimos vírus, lentidão, erros e outros problemas.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                </li>
+              ))}
+            </ol>
+            <EditorialCallout variant="limites" title="Nem todo problema é resolvido remotamente" className="mt-6">
+              <p>
+                Nem todo problema pode ser resolvido remotamente. Quando há suspeita de falha física, ausência de
+                imagem, falta de energia ou risco para os dados, pode ser necessário atendimento presencial, coleta
+                ou bancada. Os prazos e valores de cada modalidade estão em{" "}
+                <Link to="/precos-e-politicas" className="text-accent underline underline-offset-2">
+                  preços e políticas
+                </Link>{" "}
+                e o passo a passo geral em{" "}
+                <Link to="/como-funciona" className="text-accent underline underline-offset-2">
+                  como funciona
+                </Link>
+                .
+              </p>
+            </EditorialCallout>
           </div>
         </section>
+
+        <section id="autorizacao" className="scroll-mt-24 bg-secondary py-8 md:py-10">
+          <div className="container mx-auto max-w-3xl px-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
+              Como o acesso remoto deve ser autorizado
+            </h2>
+            <ul className="grid gap-3 md:grid-cols-2">
+              {[
+                ["Consentimento", "A sessão só começa depois que você autoriza, sabendo o que será feito."],
+                ["Código temporário", "A conexão usa um código informado por você, válido apenas para aquela sessão."],
+                ["Acompanhamento", "Você vê a tela durante todo o atendimento e pode interromper quando quiser."],
+                ["Encerramento e revogação", "Ao final a sessão é encerrada e o acesso deixa de existir."],
+                ["Acesso mínimo", "Usamos apenas o necessário para executar o que foi combinado."],
+                ["Sem acesso permanente", "Não instalamos acesso permanente nem monitoramento contínuo sem contratação e autorização específicas."],
+              ].map(([t, d]) => (
+                <li key={t} className="rounded-xl border border-border bg-background p-4">
+                  <h3 className="text-sm font-semibold text-foreground">{t}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </li>
+              ))}
+            </ul>
+            <EditorialCallout variant="antes-de-autorizar" className="mt-6">
+              <p>
+                Nunca envie senha bancária, código de autenticação em duas etapas ou chave de recuperação por
+                mensagem — nem para nós. O tratamento dos seus arquivos está descrito em{" "}
+                <Link to="/seguranca-dos-dados" className="text-accent underline underline-offset-2">
+                  segurança dos dados
+                </Link>
+                . Para equipamentos de empresa, veja{" "}
+                <Link to="/servicos/suporte-tecnico-empresarial" className="text-accent underline underline-offset-2">
+                  suporte técnico empresarial
+                </Link>
+                .
+              </p>
+            </EditorialCallout>
+          </div>
+        </section>
+
 
         <BusinessContextGrid
           id="contextos-remoto"
