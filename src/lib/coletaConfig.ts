@@ -62,3 +62,8 @@ export const VISITA_MINIMA_LABEL = "R$ 99,99";
 export const MSG_COLETA_RESUMO = `Sem visita técnica. Coleta e entrega inclusa — taxa mínima ${COLETA_TAXA_MINIMA_LABEL} pré-aprovada.`;
 export const MSG_ORCAMENTO_APOS_COLETA = "Orçamento somente após coleta";
 export const MSG_DIAGNOSTICO_DESISTENCIA = `Em caso de desistência, o diagnóstico custa ${DIAGNOSTICO_VALOR_LABEL}.`;
+
+// === FAIXAS DE PEÇAS (planilha oficial) ===
+// Valores de PEÇA (não de mão de obra). Só podem aparecer nas páginas de
+// serviço se estiverem listados aqui — validado por `check:price-consistency`.
+export const FAIXAS_PECAS_VALORES = [199, 220, 250, 299, 350, 399, 900] as const;
