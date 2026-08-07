@@ -47,7 +47,7 @@ const AtendimentoRemoto = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" description="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" path="/atendimento-remoto" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]} />
+      <PageSEO title="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" description="Suporte técnico remoto em Curitiba: lentidão, vírus, erros do Windows, drivers e configuração de programas resolvidos por acesso autorizado, sem visita. Veja o que é possível resolver à distância e o que exige atendimento presencial." path="/atendimento-remoto" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]} />
       <JsonLdSchema />
       <Header />
       <main id="main-content">
@@ -56,14 +56,26 @@ const AtendimentoRemoto = () => {
           subtitle="Conserto de problemas do seu computador sem sair de casa"
           ctaText="Chame no WhatsApp"
         />
-        
-        <BenefitsGrid
-          benefits={benefits}
-          title="Por Que Escolher o Atendimento Remoto?"
-          subtitle="Solução rápida, prática e segura para resolver problemas de informática"
+
+        <ServiceHeroSummary
+          summary="Atendimento remoto é acesso autorizado ao seu computador para resolver o que é software: lentidão, vírus, erros do Windows, drivers, impressora em rede e configuração de programas. Problema físico continua exigindo visita ou coleta."
+          items={[
+            { id: "vantagens", label: "Por que o atendimento remoto" },
+            { id: "como-funciona", label: "Como funciona" },
+            { id: "contextos-remoto", label: "Situações atendidas" },
+            { id: "limites-remoto", label: "O que não é possível remotamente" },
+          ]}
         />
-        
-        <section className="py-8 md:py-10 bg-background">
+
+        <div id="vantagens" className="scroll-mt-24">
+          <BenefitsGrid
+            benefits={benefits}
+            title="Por Que Escolher o Atendimento Remoto?"
+            subtitle="Solução rápida, prática e segura para resolver problemas de informática"
+          />
+        </div>
+
+        <section id="como-funciona" className="scroll-mt-24 py-8 md:py-10 bg-background">
           <div className="container mx-auto">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center">
