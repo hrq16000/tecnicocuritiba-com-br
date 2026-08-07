@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GeoCityChip } from "@/components/GeoCityChip";
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE =
@@ -101,6 +102,7 @@ export const FastHeroSection = () => {
               <strong className="text-white/95">Curitiba</strong>, São José dos Pinhais, Araucária, Campo Largo, Pinhais
               e região
             </p>
+            <GeoCityChip />
           </div>
 
           <div className="order-2 flex justify-center lg:justify-end">

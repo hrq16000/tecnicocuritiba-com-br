@@ -117,6 +117,7 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
 }
 
 import { NAP_PHONE_DIGITS } from "./nap";
+import { getGeoState } from "./geoCity";
 
 const WHATSAPP_NUMBER = NAP_PHONE_DIGITS;
 
@@ -130,6 +131,19 @@ export function buildWhatsAppUrl(ctx: WaMessageContext = {}, number = WHATSAPP_N
       const sp = new URLSearchParams(window.location.search);
       withOrigin.utmSource = withOrigin.utmSource || sp.get("utm_source") || stored.utm_source || undefined;
       withOrigin.gclid = withOrigin.gclid || sp.get("gclid") || stored.gclid || undefined;
+    } catch { /* noop */ }
+  }
+  // Enriquecimento por geolocalização: quando o chamador não informou cidade,
+  // usa a cidade detectada/confirmada da sessão (nunca sobrescreve o explícito).
+  if (typeof window !== "undefined" && !clean(withOrigin.cidade) && !clean(withOrigin.cidadeLabel)) {
+    try {
+      const geo = getGeoState();
+      if (geo.city) {
+        withOrigin.cidadeLabel = geo.city;
+        if (!clean(withOrigin.bairro) && !clean(withOrigin.bairroLabel) && geo.neighborhood) {
+          withOrigin.bairroLabel = geo.neighborhood;
+        }
+      }
     } catch { /* noop */ }
   }
   const text = buildContextualMessage(withOrigin);
