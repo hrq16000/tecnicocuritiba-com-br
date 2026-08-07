@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackBusinessCTA } from "@/lib/b2bTracking";
 
 export interface BusinessHeroProps {
   /** Rótulo curto de contexto (ex.: "Suporte de TI corporativo em Curitiba") */
