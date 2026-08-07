@@ -28,20 +28,23 @@ export function BairroSchema({
   const url = `https://tecnicocuritiba.com.br/servicos/${servicoSlug}/${bairroSlug}`;
   const priceValue = precoBase ? precoBase.replace(/[^\d,]/g, "").replace(",", ".") : undefined;
 
-  const areaServed = {
-    "@type": "Neighborhood",
-    name: bairro,
-    containedInPlace: {
-      "@type": "City",
-      name: cidade,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: cidade,
-        addressRegion: "PR",
-        addressCountry: "BR",
+  // Atendimento é em domicílio (sem endereço postal público): areaServed cobre
+  // o bairro, a cidade e a Região Metropolitana de Curitiba.
+  const areaServed = [
+    {
+      "@type": "Neighborhood",
+      name: bairro,
+      containedInPlace: {
+        "@type": "City",
+        name: cidade,
+        containedInPlace: {
+          "@type": "AdministrativeArea",
+          name: "Região Metropolitana de Curitiba",
+        },
       },
     },
-  };
+    { "@type": "City", name: "Curitiba" },
+  ];
 
   const localBusiness = {
     "@context": "https://schema.org",
@@ -52,12 +55,6 @@ export function BairroSchema({
     url,
     telephone: "+55-41-99745-2053",
     priceRange: "R$ 99,99 - R$ 500",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: cidade,
-      addressRegion: "PR",
-      addressCountry: "BR",
-    },
     areaServed,
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
