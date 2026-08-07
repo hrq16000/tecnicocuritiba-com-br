@@ -187,6 +187,82 @@ const MontagemPc = () => {
         </div>
       </section>
 
+      {/* Compatibilidade */}
+      <section id="compatibilidade" className="scroll-mt-24 py-10 bg-secondary">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-4">
+            Compatibilidade conferida antes da montagem
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Nem toda peça funciona junto. Antes de montar, cada item da lista é conferido contra o restante do
+            conjunto — com peças novas ou fornecidas por você. Se algo for incompatível, o build é pausado e a
+            decisão é sua.
+          </p>
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ["Socket e chipset", "Processador e placa-mãe precisam ser da mesma plataforma e ter suporte de firmware."],
+              ["Memória", "Tipo, capacidade por slot, quantidade de módulos e perfil suportado pela placa."],
+              ["Fonte", "Potência do conjunto, conectores PCIe e EPS disponíveis e folga para picos."],
+              ["Conectores", "Portas de vídeo, USB, painel frontal, SATA e M.2 realmente disponíveis."],
+              ["Dimensões e gabinete", "Comprimento da GPU, altura do cooler, formato da placa e espaço para radiadores."],
+              ["Refrigeração e armazenamento", "Fluxo de ar, pontos de ventoinha, quantidade de discos e slots M.2 livres."],
+            ].map(([t, d]) => (
+              <li key={t} className="rounded-xl border border-border bg-background p-5">
+                <h3 className="font-bold text-foreground text-base">{t}</h3>
+                <p className="text-muted-foreground text-sm mt-1">{d}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-center text-sm text-muted-foreground mt-6">
+            Se o objetivo for modernizar o equipamento atual em vez de montar do zero, veja{" "}
+            <Link to="/servicos/upgrade-ssd-ram" className="text-primary underline underline-offset-4">
+              upgrade de SSD e memória
+            </Link>{" "}
+            ou{" "}
+            <Link to="/servicos/manutencao-de-computador" className="text-primary underline underline-offset-4">
+              manutenção de computador
+            </Link>
+            . Equipamentos atendidos em{" "}
+            <Link to="/equipamentos-atendidos" className="text-primary underline underline-offset-4">
+              equipamentos atendidos
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* BIOS e firmware */}
+      <section id="bios-drivers" className="scroll-mt-24 py-10 bg-background">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-4">
+            Quando uma atualização de BIOS pode ser necessária
+          </h2>
+          <p className="text-muted-foreground text-center mb-8">
+            Atualização de firmware não é rotina de montagem. Ela é feita apenas quando existe motivo técnico, com
+            sua autorização e com o risco explicado antes.
+          </p>
+          <ul className="grid gap-3 md:grid-cols-2">
+            {[
+              ["Compatibilidade", "Processador ou memória mais novos que a versão de fábrica da placa."],
+              ["Estabilidade", "Correção publicada pelo fabricante para falha reproduzida na montagem."],
+              ["Suporte ao componente", "Reconhecimento de armazenamento, perfil de memória ou recurso específico."],
+              ["Versão e risco", "Atualização interrompida pode inutilizar a placa; por isso só é feita quando necessária e autorizada."],
+            ].map(([t, d]) => (
+              <li key={t} className="rounded-xl border border-border bg-muted/30 p-5">
+                <h3 className="font-bold text-foreground text-base">{t}</h3>
+                <p className="text-muted-foreground text-sm mt-1">{d}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm text-muted-foreground mt-6 text-center">
+            Drivers são instalados a partir dos sites oficiais dos fabricantes. Desempenho depende do conjunto e do
+            software usado — não trabalhamos com overclock nem com metas de FPS ou pontuação de benchmark.
+          </p>
+        </div>
+      </section>
+
+
+
       <BusinessContextGrid
         id="contextos-montagem"
         title="Contextos de uso que mudam a configuração"
