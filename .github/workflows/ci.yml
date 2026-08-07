@@ -51,6 +51,16 @@ jobs:
         run: node scripts/check-visual-wave-3u.mjs
       - name: Brand consistency (og:site_name / Organization.name / LocalBusiness.name)
         run: node scripts/check-brand-consistency.mjs
+      - name: Créditos e licenças das fotos públicas (bloqueia IA / crédito ausente)
+        run: npm run check:image-credits
+      - name: Image sitemap (AVIF/WebP, sem duplicatas, assets válidos)
+        run: |
+          npm run sitemap:images
+          git diff --quiet -- public/sitemap-images.xml || {
+            echo "::error::public/sitemap-images.xml desatualizado — rode 'npm run sitemap:images' e commite."
+            git --no-pager diff -- public/sitemap-images.xml | head -40
+            exit 1
+          }
       - name: JSON-LD validation
         run: npm run validate:jsonld
 
@@ -89,6 +99,31 @@ jobs:
         env:
           BASE_URL: http://localhost:8080
         run: node scripts/check-pilot-routes.mjs
+      - name: Title/description únicos (serviço×cidade, bairros, blog)
+        env:
+          BASE_URL: http://localhost:8080
+          MAX_URLS: "300"
+        run: node scripts/check-title-meta-unique.mjs
+      - name: Markup de preços (Offer/PriceSpecification × tabela visível)
+        env:
+          BASE_URL: http://localhost:8080
+        run: |
+          npx playwright install --with-deps chromium >/dev/null
+          node scripts/check-price-schema.mjs
+      - name: Relatório de paridade FAQ × FAQPage (CSV público)
+        env:
+          BASE_URL: http://localhost:8080
+          FAIL_ON_DIFF: "1"
+        run: node scripts/report-faq-parity.mjs
+      - name: Upload relatório de paridade FAQ
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: faq-parity
+          path: |
+            public/relatorios/faq-parity.csv
+            docs/seo/faq-parity.md
+          if-no-files-found: ignore
       - name: SEO /atendimento (title/desc/H1/JSON-LD)
         env:
           E2E_BASE_URL: http://localhost:8080
@@ -349,6 +384,41 @@ jobs:
             docs/perf/heavy-posts-report.html
             docs/perf/heavy-posts-baseline.json
             docs/perf/heavy-posts-slugs.json
+          if-no-files-found: ignore
+
+  perf-local-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        run: npm ci --no-audit --no-fund
+      - name: Install Lighthouse
+        run: npm i -g lighthouse@12
+      - name: Build
+        run: npm run build
+      - name: Start preview
+        run: npx vite preview --port 8080 &
+      - name: Wait for server
+        run: npx wait-on http://localhost:8080 --timeout 60000
+      - name: Lighthouse páginas de bairro/cidade (LCP/CLS/TBT + gate de regressão)
+        env:
+          BASE_URL: http://localhost:8080
+          SAMPLE: "8"
+          LH_FAIL_ON_REGRESSION: "1"
+        run: node scripts/lh-local-pages.mjs
+      - name: Upload relatório de performance local
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-local-pages
+          path: |
+            docs/perf/local-pages-latest.json
+            docs/perf/local-pages-diff.md
           if-no-files-found: ignore
 
   images-404:
