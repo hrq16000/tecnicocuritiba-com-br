@@ -221,7 +221,7 @@ export async function prerenderCities(distDir) {
     }
   }
 
-  // --- /valores fallback (fora do sitemap, mas evita canonical=home para crawlers sem-JS) ---
+  // --- /valores (rota indexável presente no sitemap-main.xml) ---
   {
     const meta = {
       path: "/valores",
@@ -237,9 +237,10 @@ export async function prerenderCities(distDir) {
       url: meta.url,
       description: meta.description,
     };
-    let html = injectMeta(baseHtml, { ...meta, ogImage: absoluteOg, jsonLd });
-    // noindex para manter fora do índice, mas com canonical próprio
-    html = html.replace(/<\/head>/i, `    <meta name="robots" content="noindex,follow">\n  </head>`);
+    const html = injectMeta(baseHtml, { ...meta, ogImage: absoluteOg, jsonLd });
+    // Indexável: /valores está no sitemap-main.xml e recebe tráfego orgânico.
+    // Não injetar robots=noindex aqui (conflito sitemap x noindex).
+
     await writePage(distDir, meta.path, html);
     written++;
   }

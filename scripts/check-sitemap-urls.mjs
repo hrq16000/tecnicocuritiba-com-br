@@ -9,7 +9,11 @@
  *   BASE_URL=http://localhost:8080 node scripts/check-sitemap-urls.mjs
  *   MAX_URLS=60 node scripts/check-sitemap-urls.mjs
  */
+import nodeFs from "node:fs";
+import nodePath from "node:path";
+
 const BASE = (process.env.BASE_URL || "http://localhost:8080").replace(/\/$/, "");
+
 const MAX_URLS = Number(process.env.MAX_URLS || 80);
 
 const locsFromXml = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
@@ -48,13 +52,23 @@ const sample = [...allUrls].sort().slice(0, MAX_URLS);
 console.log(`\nchecando ${sample.length}/${allUrls.size} URLs (MAX_URLS=${MAX_URLS})`);
 
 const bad = [];
+// `vite preview` faz fallback de SPA e não serve dist/<rota>/index.html; a
+// hospedagem de produção serve. Em base local, lemos o arquivo estático quando existe.
+const IS_LOCAL = /^https?:\/\/(localhost|127\.0\.0\.1)/.test(BASE);
+const readPrerendered = (original) => {
+  if (!IS_LOCAL) return null;
+  const parts = new URL(original).pathname.split("/").filter(Boolean);
+  const file = nodePath.resolve("dist", ...parts, "index.html");
+  return nodeFs.existsSync(file) ? nodeFs.readFileSync(file, "utf8") : null;
+};
 for (const original of sample) {
   const url = original.replace(/^https?:\/\/[^/]+/, BASE);
   try {
     const r = await fetch(url, { redirect: "manual" });
     if (r.status !== 200) { bad.push({ url: original, status: r.status, kind: "http" }); continue; }
-    const html = await r.text();
+    const html = readPrerendered(original) ?? (await r.text());
     const m = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i);
+
     if (m) {
       const canonicalPath = new URL(m[1], url).pathname.replace(/\/+$/, "") || "/";
       const expectedPath = new URL(original).pathname.replace(/\/+$/, "") || "/";

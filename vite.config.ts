@@ -7,6 +7,9 @@ import { componentTagger } from "lovable-tagger";
 import { prerenderCitiesPlugin } from "./scripts/prerender-cities.mjs";
 // @ts-expect-error - JS plugin without types
 import { prerenderPilotPlugin } from "./scripts/prerender-pilot.mjs";
+// @ts-expect-error - JS plugin without types
+import { prerenderSitemapShellsPlugin } from "./scripts/prerender-bairros.mjs";
+
 
 const resolveAppVersion = () => {
   if (process.env.APP_VERSION) return process.env.APP_VERSION;
@@ -50,6 +53,8 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     prerenderCitiesPlugin(),
     prerenderPilotPlugin(),
+    prerenderSitemapShellsPlugin(),
+
   ].filter(Boolean),
   resolve: {
     alias: {

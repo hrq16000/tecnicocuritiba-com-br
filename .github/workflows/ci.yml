@@ -75,11 +75,16 @@ jobs:
           CI: "true"
       - name: Wait for server
         run: npx wait-on http://localhost:8080 --timeout 60000
+      - name: Monitor SEO (404, redirects, canônico, noindex, duplicatas, diff de sitemap)
+        env:
+          BASE_URL: http://localhost:8080
+        run: node scripts/check-seo-monitor.mjs
       - name: Sitemap URLs válidas (200 + canônico bate)
         env:
           BASE_URL: http://localhost:8080
           MAX_URLS: "80"
         run: node scripts/check-sitemap-urls.mjs
+
       - name: Piloto prerender (HTTP 200, redirects, canônico, meta social, JSON-LD)
         env:
           BASE_URL: http://localhost:8080
