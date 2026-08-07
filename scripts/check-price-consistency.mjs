@@ -20,6 +20,10 @@ const normalize = (v) => v.replace(/\s+/g, " ").replace(/R\$\s*/g, "").replace(/
 const allowed = new Set(
   [...cfg.matchAll(/R\$\s*\$?\{?[^"`'\n]*?([0-9][0-9.]*(?:,[0-9]{2})?)/g)].map((m) => normalize(m[1])),
 );
+// Faixas de peças declaradas na planilha
+const faixas = cfg.match(/FAIXAS_PECAS_VALORES\s*=\s*\[([^\]]*)\]/);
+if (faixas) for (const n of faixas[1].split(",")) { const v = n.trim(); if (v) allowed.add(normalize(v)); }
+
 // Valores derivados de constantes numéricas (ex.: `R$ ${COLETA_TAXA_MINIMA}`)
 for (const m of cfg.matchAll(/=\s*([0-9]+(?:\.[0-9]+)?)\s*;/g)) {
   const n = Number(m[1]);
