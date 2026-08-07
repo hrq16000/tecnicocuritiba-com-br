@@ -65,7 +65,12 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // Helpers internos do Vite (preload-helper etc.) precisam ficar no
+          // chunk base; se caírem em um chunk pesado (ex.: pdf), o entry passa
+          // a fazer modulepreload dele sem necessidade.
+          if (id.includes("vite/preload-helper") || id.includes("vite/modulepreload")) return "vendor";
           if (!id.includes("node_modules")) return undefined;
+
 
           // Split leaf-only libs. Runtime react/router/supabase permanecem em
           // `vendor` para evitar o TDZ ("Cannot access 'kf' before initialization",
