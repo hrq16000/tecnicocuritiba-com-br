@@ -43,6 +43,7 @@
     "check:price-schema": "node scripts/check-price-schema.mjs",
     "check:ad-slots": "node scripts/check-ad-slots.mjs",
     "check:service-specs": "node scripts/check-service-specs.mjs",
+    "check:price-consistency": "node scripts/check-price-consistency.mjs",
     "report:faq-parity": "node scripts/report-faq-parity.mjs",
     "perf:local-pages": "node scripts/lh-local-pages.mjs"
   },

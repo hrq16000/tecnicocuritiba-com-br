@@ -10,6 +10,7 @@ export const VALID_SERVICO_SLUGS: ReadonlySet<string> = new Set([
   "conserto-pc-notebook",
   "conserto-placa",
   "conserto-tv",
+  "conserto-monitor",
   "conserto-celular",
   "manutencao-tv",
   "formatacao-computador",
