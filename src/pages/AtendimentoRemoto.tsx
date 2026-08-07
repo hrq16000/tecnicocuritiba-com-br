@@ -311,8 +311,25 @@ const AtendimentoRemoto = () => {
           footer="A sessão remota só é iniciada com sua autorização e você acompanha tudo na tela. Não instalamos acesso permanente."
         />
 
+        <section id="perguntas" className="scroll-mt-24 bg-background py-8 md:py-10">
+          <div className="container mx-auto max-w-3xl px-4">
+            <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Perguntas frequentes sobre atendimento remoto
+            </h2>
+            <div className="mt-6 space-y-4">
+              {FAQ.map((f) => (
+                <details key={f.q} className="rounded-xl border border-border bg-muted/30 p-5">
+                  <summary className="cursor-pointer text-base font-semibold text-foreground">{f.q}</summary>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <TrustSection />
         <CTASection />
+
       </main>
       <RealImageSection imageKey="suporteRemoto" caption="Suporte técnico remoto profissional" />
       <InterlinkingBlock />
