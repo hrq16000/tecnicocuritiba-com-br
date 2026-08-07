@@ -85,8 +85,23 @@ const MontagemPc = () => {
       </section>
       <RealImageSection imageKey="desktopMontado" caption="PC montado sob medida com componentes premium" />
 
+      <ServiceHeroSummary
+        summary="Montagem sob demanda, executada por projeto: levantamento de uso, definição das peças com você, montagem, BIOS/UEFI, drivers, teste de estabilidade e entrega com checklist. Não é contrato mensal, franquia de horas nem suporte ilimitado — cada montagem tem escopo próprio."
+        items={[
+          { id: "tipos-de-pc", label: "Tipos de PC que montamos" },
+          { id: "escopo-execucao", label: "Escopo da execução" },
+          { id: "processo", label: "Como funciona" },
+          { id: "contextos-montagem", label: "Contextos de uso" },
+          { id: "pecas-do-cliente", label: "Peças do cliente" },
+          { id: "garantia", label: "Garantia" },
+          { id: "checklist-entrega", label: "Checklist de entrega" },
+          { id: "workstations", label: "Workstations" },
+          { id: "orcamento", label: "Orçamento" },
+        ]}
+      />
+
       {/* Tipos de PC */}
-      <section className="py-10 bg-background relative">
+      <section id="tipos-de-pc" className="scroll-mt-24 py-10 bg-background relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-3xl" />
         </div>
