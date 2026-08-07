@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GeoCityChip } from "@/components/GeoCityChip";
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE =
