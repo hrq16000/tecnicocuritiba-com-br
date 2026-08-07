@@ -29,6 +29,8 @@ jobs:
         run: npm run check:cta-funnel
       - name: Padronização operacional dos serviços (valor, prazo, escopo, fotos, agendamento)
         run: npm run check:service-specs
+      - name: Consistência de preços x planilha oficial
+        run: npm run check:price-consistency
 
       - name: Build
         run: npm run build

@@ -313,7 +313,7 @@ const RedesWifi = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
-              { title: "Casa Pequena", desc: "Até 60m² - Roteador bem posicionado resolve", price: "A partir de R$99", highlight: false },
+              { title: "Casa Pequena", desc: "Até 60m² - Roteador bem posicionado resolve", price: "A partir de R$ 99,99", highlight: false },
               { title: "Casa Média", desc: "60-150m² - Roteador + repetidor", price: "A partir de R$199", highlight: true },
               { title: "Casa Grande", desc: "Acima de 150m² - Sistema Mesh recomendado", price: "A partir de R$399", highlight: false },
             ].map((item, index) => (

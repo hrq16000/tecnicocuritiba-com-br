@@ -346,6 +346,7 @@ const ComputadorLento = lazy(() => import("./pages/servicos/ComputadorLento"));
 const ComputadorNaoLiga = lazy(() => import("./pages/servicos/ComputadorNaoLiga"));
 const ManutencaoTV = lazy(() => import("./pages/servicos/ManutencaoTV"));
 const ConsertoTV = lazy(() => import("./pages/servicos/ConsertoTV"));
+const ConsertoMonitor = lazy(() => import("./pages/servicos/ConsertoMonitor"));
 const ConsertoCelular = lazy(() => import("./pages/servicos/ConsertoCelular"));
 const ConsertoPlaca = lazy(() => import("./pages/servicos/ConsertoPlaca"));
 
@@ -847,6 +848,7 @@ const App = () => (
             <Route path="/servicos/computador-nao-liga" element={<ComputadorNaoLiga />} />
             <Route path="/servicos/manutencao-tv" element={<ManutencaoTV />} />
             <Route path="/servicos/conserto-tv" element={<ConsertoTV />} />
+            <Route path="/servicos/conserto-monitor" element={<ConsertoMonitor />} />
             <Route path="/servicos/conserto-celular" element={<ConsertoCelular />} />
             <Route path="/servicos/conserto-placa" element={<ConsertoPlaca />} />
             

@@ -424,6 +424,43 @@ const specs: ServiceSpec[] = [
       "Placas com dano físico visível — orçamento personalizado obrigatório",
     ],
   },
+  {
+    ...coletaBase,
+    path: "/servicos/conserto-monitor",
+    nome: "Conserto de monitor",
+    tempoEstimado: PRAZO_LONGO,
+    incluso: [
+      "Coleta e entrega no endereço do cliente",
+      "Diagnóstico em bancada (fonte, placa lógica, backlight e conectores)",
+      "Testes de imagem em HDMI, DisplayPort e VGA quando existentes",
+      "Limpeza interna e revisão de conectores",
+    ],
+    naoIncluso: [
+      "Peças (fonte, placa, kit de backlight, flat cable)",
+      "Troca de painel — monitor com tela trincada ou manchada não tem reparo de painel",
+      "Cabos, suportes e adaptadores",
+    ],
+    acrescimos: [
+      "Monitores acima de 32\" ou ultrawide (logística e bancada)",
+      "Peças com prazo de importação",
+      "Reparo em nível de componente detectado no diagnóstico",
+    ],
+    observacoes: [
+      APROVACAO,
+      "Sem visita técnica para monitor: o serviço é feito em laboratório com coleta e entrega.",
+      `Em caso de desistência após o diagnóstico, cobra-se ${DIAGNOSTICO_VALOR_LABEL}.`,
+      GARANTIA,
+    ],
+    fotosNecessarias: [
+      ...fotosColeta,
+      "Foto da tela mostrando o defeito (listras, manchas, tela preta com luz de fundo)",
+    ],
+    quandoVisitaOuOrcamento: [
+      "Monitor que não liga, pisca o LED ou fica com tela preta — coleta obrigatória",
+      "Painel trincado ou com mancha de impacto — orçamento personalizado (normalmente inviável)",
+      "Reparo de placa/fonte em nível de componente — orçamento personalizado após bancada",
+    ],
+  },
 ];
 
 export const SERVICE_SPECS: Record<string, ServiceSpec> = Object.fromEntries(

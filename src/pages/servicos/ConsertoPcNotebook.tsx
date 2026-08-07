@@ -258,7 +258,7 @@ const ConsertoPcNotebook = () => {
           </h2>
           <div className="max-w-3xl mx-auto space-y-6">
             {[
-              { q: "Quanto custa o diagnóstico?", a: "O diagnóstico com coleta custa R$99 caso desista do serviço. Se aprovar o orçamento, o valor é incluso no reparo." },
+              { q: "Quanto custa o diagnóstico?", a: "O diagnóstico com coleta custa R$ 99,99 caso desista do serviço. Se aprovar o orçamento, o valor é incluso no reparo." },
               { q: "Quanto tempo demora o conserto?", a: "Depende do problema e disponibilidade de peças. Consertos simples levam 1-2 dias. Reparos complexos podem levar até 7 dias." },
               { q: "Vocês trabalham com todas as marcas?", a: "Sim! Consertamos Dell, HP, Lenovo, Acer, Asus, Samsung, Apple e todas as outras marcas." },
               { q: "Vocês têm peças em estoque?", a: "Mantemos as peças mais comuns em estoque. Para componentes específicos, encomendamos com prazo de 1-3 dias." },

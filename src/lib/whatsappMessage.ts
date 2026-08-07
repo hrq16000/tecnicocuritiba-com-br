@@ -16,6 +16,15 @@ export interface WaMessageContext {
   category?: string;     // categoria da triagem (ex: notebook, tv, wifi)
   symptomSlug?: string;  // sintoma da triagem (ex: nao-liga, tela-preta)
   urgencia?: string;     // ex: "72h", "agendado"
+  /** Marca/modelo informado pelo cliente (ex: "AOC 24G2 24 polegadas"). */
+  modelo?: string;
+  /** Sintomas selecionados/descritos pelo cliente. */
+  sintomas?: string[];
+  /** Cliente confirmou que vai enviar foto/vídeo do defeito. */
+  temImagem?: boolean;
+  /** Detalhes livres adicionais. */
+  detalhes?: string;
+
   /** Valor/condição comercial exibido no assunto (default: mínimo padrão). */
   condicao?: string;
   /** Origem da campanha (utm_source) — entra no rastro [ref: ...]. */
@@ -93,6 +102,21 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
 
   const urg = clean(ctx.urgencia);
   if (urg) lines.push(`Urgência: ${urg}.`);
+
+  // Parâmetros dinâmicos do equipamento — evitam ida e volta no atendimento.
+  const modelo = clean(ctx.modelo);
+  if (modelo) lines.push(`Modelo: ${modelo}.`);
+
+  const sintomas = (ctx.sintomas ?? []).map((s) => clean(s)).filter(Boolean);
+  if (sintomas.length > 0) lines.push(`Sintomas: ${sintomas.join("; ")}.`);
+
+  const detalhes = clean(ctx.detalhes);
+  if (detalhes) lines.push(`Detalhes: ${detalhes}.`);
+
+  if (typeof ctx.temImagem === "boolean") {
+    lines.push(ctx.temImagem ? "Fotos/vídeo: vou enviar agora nesta conversa." : "Fotos/vídeo: ainda não tenho.");
+  }
+
 
   // Só cita a condição comercial quando há assunto — evita ruído no CTA genérico.
   if (subject) lines.push(`Condição: ${clean(ctx.condicao) || DEFAULT_CONDICAO}.`);
