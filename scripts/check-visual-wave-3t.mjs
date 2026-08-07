@@ -109,3 +109,24 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`check:visual-wave-3t — ${checks} verificações OK`);
+
+// 9. Blocos editoriais da rodada 3T (backup e redes)
+const backup = readFileSync("src/pages/servicos/BackupRecuperacao.tsx", "utf8");
+ok(backup.includes('id="conceitos"'), "backup: bloco sincronização × backup × recuperação ausente");
+ok(/Sincroniza[çc][ãa]o/.test(backup), "backup: conceito de sincronização ausente");
+ok(backup.includes('id="estrategia"'), "backup: estratégia de cópias ausente");
+ok(backup.includes('id="restauracao"'), "backup: teste de restauração ausente");
+ok(!/nunca perca|seguran[çc]a total|backup inf[aá]l[ií]vel|sempre protegidos/i.test(backup), "backup: promessa absoluta");
+
+const redes = readFileSync("src/pages/servicos/RedesWifi.tsx", "utf8");
+ok(redes.includes('id="contextos-rede"'), "redes: bloco residencial × empresarial ausente");
+ok(redes.includes('id="pilares-rede"'), "redes: pilares de rede ausentes");
+ok(/home office/i.test(redes), "redes: público residencial/home office perdido");
+ok(/operadora/i.test(redes), "redes: limite de operadora ausente");
+ok(/reparo mec[âa]nico ou eletr[ôo]nico/i.test(redes), "redes: limite de impressoras (somente rede) ausente");
+
+if (errors.length) {
+  console.error("check:visual-wave-3t (3T extra) FALHOU\n" + errors.map((e) => ` - ${e}`).join("\n"));
+  process.exit(1);
+}
+console.log(`check:visual-wave-3t extras — ${checks} verificações OK`);

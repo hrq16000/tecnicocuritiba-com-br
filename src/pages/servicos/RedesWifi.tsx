@@ -92,6 +92,8 @@ const RedesWifi = () => {
       <ServiceHeroSummary
         summary="Configuração de rede Wi-Fi e cabeada com avaliação de cobertura, interferência, roteador, access point e dispositivos em rede — incluindo impressoras apenas no aspecto de conectividade."
         items={[
+          { id: "contextos-rede", label: "Em casa ou no escritório" },
+          { id: "pilares-rede", label: "Cobertura, capacidade e estabilidade" },
           { id: "triagem", label: "Triagem antes da visita" },
           { id: "problemas", label: "Problemas que resolvemos" },
           { id: "solucoes", label: "Soluções por necessidade" },
@@ -101,6 +103,101 @@ const RedesWifi = () => {
           { id: "faq", label: "Perguntas frequentes" },
         ]}
       />
+
+      {/* Contexto residencial × empresarial — bloco visual, sem estado (3T) */}
+      <section id="contextos-rede" className="py-10 bg-secondary scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-3">
+            O mesmo atendimento em casa, no home office e no escritório
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            O que muda é o ambiente e a quantidade de dispositivos, não o serviço. Veja qual situação se parece
+            mais com a sua.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="bg-background p-6 rounded-xl border border-border">
+              <h3 className="text-lg font-bold text-foreground mb-3">Em casa ou home office</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                {[
+                  "Cobertura fraca em quartos, fundos ou segundo andar",
+                  "Quedas durante chamadas de vídeo e reuniões",
+                  "Roteador antigo ou mal posicionado",
+                  "Interferência de redes vizinhas e aparelhos próximos",
+                  "Muitos dispositivos conectados ao mesmo tempo",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <Link to="/atendimento-remoto" className="text-accent underline underline-offset-2">
+                  Atendimento remoto
+                </Link>
+                <a href="#triagem" className="text-accent underline underline-offset-2">
+                  Testar antes da visita
+                </a>
+              </div>
+            </div>
+            <div className="bg-background p-6 rounded-xl border border-border">
+              <h3 className="text-lg font-bold text-foreground mb-3">No escritório ou na empresa</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                {[
+                  "Vários usuários conectados simultaneamente",
+                  "Impressoras e periféricos compartilhados em rede",
+                  "Pastas e arquivos compartilhados entre estações",
+                  "Access points e distribuição por cabo",
+                  "Continuidade do atendimento durante o expediente",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <a href="#rede-empresarial" className="text-accent underline underline-offset-2">
+                  Rede em empresas
+                </a>
+                <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
+                  Suporte técnico empresarial
+                </Link>
+                <Link to="/equipamentos-atendidos" className="text-accent underline underline-offset-2">
+                  Equipamentos atendidos
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pilares da avaliação de rede (3T) */}
+      <section id="pilares-rede" className="py-10 bg-background scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-8">
+            O que é avaliado na rede
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+            {[
+              { title: "Cobertura", body: "Onde o sinal realmente alcança dentro do ambiente, por cômodo e por andar." },
+              { title: "Capacidade", body: "Quantos dispositivos usam a rede ao mesmo tempo e o que isso exige do equipamento." },
+              { title: "Estabilidade", body: "Quedas, reconexões e interferência de canal, banda ou redes vizinhas." },
+              { title: "Infraestrutura", body: "Roteador, access point, cabeamento e posicionamento dos equipamentos." },
+            ].map((p) => (
+              <div key={p.title} className="bg-secondary p-6 rounded-xl border border-border">
+                <h3 className="font-bold text-foreground mb-2">{p.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{p.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-muted-foreground text-center max-w-3xl mx-auto mt-6">
+            Cobertura, capacidade e estabilidade são medidas separadamente da velocidade contratada — o link
+            externo continua sob responsabilidade da operadora.
+          </p>
+        </div>
+      </section>
+
 
       {/* Serviços de Rede */}
       <section className="py-10 bg-background relative">
