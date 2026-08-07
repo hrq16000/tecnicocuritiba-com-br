@@ -31,6 +31,7 @@ export const VALID_EXTRA_ROUTES: ReadonlySet<string> = new Set([
   "/atendimento-domicilio",
   "/atendimento-remoto",
   "/servicos",
+  "/problemas-reais-e-casos",
 ]);
 
 export function isValidInternalTarget(to: string): boolean {
