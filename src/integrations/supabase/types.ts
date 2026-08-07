@@ -320,6 +320,105 @@ export type Database = {
         }
         Relationships: []
       }
+      seo_alertas: {
+        Row: {
+          criado_em: string
+          detalhe: string | null
+          enviado_slack: boolean
+          id: string
+          resolvido_em: string | null
+          severidade: string
+          tipo: string
+          titulo: string
+          url: string | null
+        }
+        Insert: {
+          criado_em?: string
+          detalhe?: string | null
+          enviado_slack?: boolean
+          id?: string
+          resolvido_em?: string | null
+          severidade?: string
+          tipo: string
+          titulo: string
+          url?: string | null
+        }
+        Update: {
+          criado_em?: string
+          detalhe?: string | null
+          enviado_slack?: boolean
+          id?: string
+          resolvido_em?: string | null
+          severidade?: string
+          tipo?: string
+          titulo?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
+      seo_relatorios: {
+        Row: {
+          gerado_em: string
+          id: string
+          mes: string
+          resumo: Json
+        }
+        Insert: {
+          gerado_em?: string
+          id?: string
+          mes: string
+          resumo?: Json
+        }
+        Update: {
+          gerado_em?: string
+          id?: string
+          mes?: string
+          resumo?: Json
+        }
+        Relationships: []
+      }
+      seo_snapshots: {
+        Row: {
+          cobertura: Json
+          criado_em: string
+          duracao_ms: number | null
+          erros: Json
+          gsc: Json
+          id: string
+          origem: string
+          sitemap_adicionadas: Json
+          sitemap_removidas: Json
+          sitemap_total: number
+          total_erros: number
+        }
+        Insert: {
+          cobertura?: Json
+          criado_em?: string
+          duracao_ms?: number | null
+          erros?: Json
+          gsc?: Json
+          id?: string
+          origem?: string
+          sitemap_adicionadas?: Json
+          sitemap_removidas?: Json
+          sitemap_total?: number
+          total_erros?: number
+        }
+        Update: {
+          cobertura?: Json
+          criado_em?: string
+          duracao_ms?: number | null
+          erros?: Json
+          gsc?: Json
+          id?: string
+          origem?: string
+          sitemap_adicionadas?: Json
+          sitemap_removidas?: Json
+          sitemap_total?: number
+          total_erros?: number
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
