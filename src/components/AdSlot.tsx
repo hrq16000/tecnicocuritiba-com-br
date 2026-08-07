@@ -1,5 +1,10 @@
 import { getSponsorsFor, type SponsorPlacement } from "@/lib/sponsors";
-import { trackEvent } from "@/lib/analytics";
+
+const trackAdEvent = (name: string, params: Record<string, unknown>) => {
+  if (typeof window === "undefined" || !window.gtag) return;
+  window.gtag("event", name, { event_category: "monetization", ...params });
+};
+
 
 interface AdSlotProps {
   placement: SponsorPlacement;
