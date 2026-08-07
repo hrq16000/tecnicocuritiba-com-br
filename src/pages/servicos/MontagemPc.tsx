@@ -139,7 +139,7 @@ const MontagemPc = () => {
       <RealImageSection imageKey="placaMae" caption="Componentes de alta performance selecionados" />
 
       {/* O que está incluso */}
-      <section className="py-10 bg-secondary">
+      <section id="escopo-execucao" className="scroll-mt-24 py-10 bg-secondary">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6 reveal-text">
             O Que Está Incluso no Serviço
