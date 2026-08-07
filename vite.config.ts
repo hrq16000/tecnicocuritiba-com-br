@@ -53,6 +53,8 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     prerenderCitiesPlugin(),
     prerenderPilotPlugin(),
+    prerenderSitemapShellsPlugin(),
+
   ].filter(Boolean),
   resolve: {
     alias: {
