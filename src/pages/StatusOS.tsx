@@ -196,7 +196,7 @@ export default function StatusOS() {
   const os = lista[selecionada] ?? null;
 
   const consultar = useCallback(
-    async (m: "numero" | "celular", valor: string, silencioso = false): Promise<void> => {
+    async (m: "numero" | "celular", valor: string, silencioso = false): Promise<boolean> => {
       if (!silencioso) {
         setLoading(true);
         setErro(null);
@@ -204,17 +204,25 @@ export default function StatusOS() {
         setSelecionada(0);
       }
       const alerta = window.setTimeout(() => setLento(true), 3500);
-      const { data, error } = await rpc(
-        m === "numero" ? "consultar_os" : "consultar_os_por_telefone",
-        m === "numero" ? { _numero: valor } : { _telefone: valor },
+      // Timeout duro: evita atualização automática pendurada em rede instável.
+      const timeout = new Promise<{ data: null; error: { message: string } }>((resolve) =>
+        window.setTimeout(() => resolve({ data: null, error: { message: "timeout" } }), silencioso ? 12000 : 20000),
       );
+      const { data, error } = await Promise.race([
+        rpc(
+          m === "numero" ? "consultar_os" : "consultar_os_por_telefone",
+          m === "numero" ? { _numero: valor } : { _telefone: valor },
+        ),
+        timeout,
+      ]);
       window.clearTimeout(alerta);
       setLento(false);
       if (!silencioso) setLoading(false);
       if (error) {
         if (!silencioso) setErro(mensagemErro(error.message));
-        track("status_os_erro", { modo: m });
-        return;
+        track("status_os_erro", { modo: m, motivo: error.message, silencioso });
+        console.warn("[status-os] consulta falhou", { modo: m, silencioso, motivo: error.message });
+        return false;
       }
       const rows = data ?? [];
       if (rows.length === 0) {
@@ -226,14 +234,17 @@ export default function StatusOS() {
           );
           track("status_os_nao_encontrada", { modo: m });
         }
-        return;
+        return true;
       }
       ultimaBusca.current = { modo: m, valor };
       setLista(rows);
+      setSincronizadoEm(Date.now());
       if (!silencioso) track("status_os_encontrada", { modo: m, etapa: rows[0].etapa, total: rows.length });
+      return true;
     },
     [],
   );
+
 
   const buscar = async (e: React.FormEvent) => {
     e.preventDefault();
