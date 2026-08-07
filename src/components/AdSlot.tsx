@@ -52,7 +52,7 @@ export const AdSlot = ({ placement, className = "" }: AdSlotProps) => {
                 rel={isExternal ? "sponsored nofollow noopener" : "sponsored"}
                 target={isExternal ? "_blank" : undefined}
                 onClick={() =>
-                  trackEvent("ad_click", {
+                  trackAdEvent("ad_click", {
                     ad_id: creative.id,
                     ad_placement: placement,
                     advertiser: creative.advertiser,
