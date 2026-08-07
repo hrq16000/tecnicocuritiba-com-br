@@ -21,9 +21,11 @@ const typesOf = (node: unknown): string[] => {
 };
 
 export function dedupeJsonLd(doc: Document = document): number {
-  const seen = new Set<string>();
   let removed = 0;
   const scripts = Array.from(doc.querySelectorAll<HTMLScriptElement>('script[type="application/ld+json"]'));
+
+  // key -> scripts candidatos
+  const buckets = new Map<string, HTMLScriptElement[]>();
 
   for (const script of scripts) {
     let parsed: unknown;
@@ -43,15 +45,27 @@ export function dedupeJsonLd(doc: Document = document): number {
 
     // Chave = conjunto de tipos sensíveis do script (evita colidir com grafos mistos).
     const key = [...new Set(scriptTypes)].sort().join("|");
-    if (seen.has(key)) {
-      script.remove();
+    const list = buckets.get(key);
+    if (list) list.push(script);
+    else buckets.set(key, [script]);
+  }
+
+  for (const list of buckets.values()) {
+    if (list.length < 2) continue;
+    // Schemas marcados como locais (FAQ do bairro/cidade, LocalBusiness da página)
+    // têm prioridade sobre o schema genérico do site.
+    const local = list.find((s) => s.dataset.jsonldScope === "local");
+    const keep = local ?? list[0];
+    for (const s of list) {
+      if (s === keep) continue;
+      s.remove();
       removed++;
-    } else {
-      seen.add(key);
     }
   }
+
   return removed;
 }
+
 
 /** Roda a deduplicação a cada troca de rota, após a hidratação dos schemas. */
 export const SchemaDedup = () => {
