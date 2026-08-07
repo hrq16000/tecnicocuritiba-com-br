@@ -120,12 +120,16 @@ export const ServiceLandingSchema = ({
   // (guard duplo em DynamicAggregateRating). Se não houver, não injeta nada.
   const serviceSlug = path.split("/").filter(Boolean).pop();
   return (
-    <DynamicAggregateRating
-      itemId={`${BASE_URL}${path}#service`}
-      itemType="Service"
-      itemName={serviceName}
-      service={serviceSlug}
-    />
+    <>
+      {/* WebSite + SearchAction estático: crawlers encontram sem rolar a página */}
+      <SiteBaseSchema />
+      <DynamicAggregateRating
+        itemId={`${BASE_URL}${path}#service`}
+        itemType="Service"
+        itemName={serviceName}
+        service={serviceSlug}
+      />
+    </>
   );
 };
 
