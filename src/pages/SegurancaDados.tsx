@@ -52,11 +52,35 @@ const FAQ = [
 
 const TOC = [
   { id: "o-que-cobre", label: "O que cobrimos" },
+  { id: "pilares", label: "Pilares" },
   { id: "contextos-dados", label: "Situações mais comuns" },
   { id: "responsabilidades", label: "Responsabilidades e limites" },
+  { id: "credenciais", label: "Credenciais" },
+  { id: "acesso-remoto", label: "Acesso remoto" },
+  { id: "armazenamento", label: "Backup, recuperação e nuvem" },
   { id: "boas-praticas", label: "Boas práticas do cliente" },
   { id: "perguntas", label: "Perguntas frequentes" },
 ];
+
+const PILARES = [
+  {
+    title: "Backup",
+    items: ["Cópias em mais de um lugar", "Separação do computador principal", "Restauração testada", "Responsabilidade de manter a cópia"],
+  },
+  {
+    title: "Acesso mínimo",
+    items: ["Somente o necessário para executar", "Tempo limitado ao atendimento", "Encerramento das sessões", "Troca de senha após o serviço"],
+  },
+  {
+    title: "Autorização",
+    items: ["Responsável identificado", "Escopo combinado antes", "Registro do que foi executado", "Limite claro do que não será feito"],
+  },
+  {
+    title: "Sistemas de terceiros",
+    items: ["Fornecedor responde pela plataforma", "Licença e conta do titular", "Autenticação junto ao provedor", "Disponibilidade fora do nosso alcance"],
+  },
+];
+
 
 const SegurancaDados = () => {
   useEffect(() => {
