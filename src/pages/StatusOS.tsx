@@ -191,9 +191,11 @@ export default function StatusOS() {
     } catch { /* storage indisponível */ }
   }, []);
 
-  const ultimaBusca = useRef<{ modo: "numero" | "celular"; valor: string } | null>(null);
+  const [sincronizadoEm, setSincronizadoEm] = useState<number | null>(null);
+  const [sincronizacao, setSincronizacao] = useState<"ativo" | "reconectando" | "pausado">("ativo");
 
   const os = lista[selecionada] ?? null;
+
 
   const consultar = useCallback(
     async (m: "numero" | "celular", valor: string, silencioso = false): Promise<boolean> => {
