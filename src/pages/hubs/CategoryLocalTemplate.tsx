@@ -80,10 +80,28 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
     },
   };
 
+  // FAQ localizada: perguntas da categoria + perguntas específicas do local.
+  // Fonte única para o conteúdo visível e para o JSON-LD (gate FAQPage 1:1).
+  const faqs = [
+    ...category.faqs,
+    {
+      q: `Vocês atendem ${cityLabel} para ${category.nome.toLowerCase()}?`,
+      a: `Sim. ${cityLabel} está na nossa área de cobertura. Combinamos pelo WhatsApp se o caso é resolvido no local ou se precisa de coleta do aparelho.`,
+    },
+    {
+      q: `Quanto tempo leva o atendimento em ${cityLabel}?`,
+      a: `Depende do defeito. Diagnóstico costuma ficar pronto em até 48 horas úteis e o prazo do reparo é informado por escrito antes da aprovação, junto com o valor fechado.`,
+    },
+    {
+      q: `Tem garantia para quem é de ${cityLabel}?`,
+      a: `Tem. 90 dias de garantia sobre a mão de obra, com as peças cobertas pela garantia do fabricante — vale igual para todos os locais que atendemos.`,
+    },
+  ];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: category.faqs.map((f) => ({
+    mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.q.replace(/\?$/, "") + `?`,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -200,7 +218,7 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
               Perguntas frequentes — {cityLabel}
             </h2>
             <div className="space-y-3">
-              {category.faqs.map((f) => (
+              {faqs.map((f) => (
                 <details key={f.q} className="group p-5 rounded-xl border border-border bg-card hover:border-accent/40 transition-colors">
                   <summary className="cursor-pointer font-semibold text-foreground list-none flex justify-between items-center gap-4">
                     {f.q}

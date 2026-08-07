@@ -48,7 +48,7 @@ for (const route of ROUTES) {
     }>;
     expect(entities.length, "mínimo de 4 perguntas localizadas").toBeGreaterThanOrEqual(4);
 
-    const bodyText = norm(await page.locator("main, body").first().innerText());
+    const bodyText = norm((await page.locator("body").first().textContent()) ?? "");
 
     for (const q of entities) {
       expect(q["@type"]).toBe("Question");
