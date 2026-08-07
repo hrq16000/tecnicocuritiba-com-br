@@ -221,7 +221,7 @@ export async function prerenderCities(distDir) {
     }
   }
 
-  // --- /valores fallback (fora do sitemap, mas evita canonical=home para crawlers sem-JS) ---
+  // --- /valores (rota indexável presente no sitemap-main.xml) ---
   {
     const meta = {
       path: "/valores",
