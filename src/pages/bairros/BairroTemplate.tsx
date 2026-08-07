@@ -464,20 +464,34 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
         </AnimatedSection>
 
         <AnimatedSection>
-          {bairroFAQs[data.slug] ? (
-            <GeoSpecificFAQs bairroSlug={data.slug} bairroNome={data.nome} cidadeNome={data.cidade} />
-          ) : (
-            <LocalFAQSection
-              title={`Perguntas Frequentes - ${data.nome}`}
-              faqs={[
-                { question: `Vocês atendem a domicílio no ${data.nome}?`, answer: `Sim. Fazemos atendimento a domicílio no ${data.nome} (${data.cidade}) com horário agendado. Levamos ferramentas e fazemos diagnóstico no local sempre que possível.` },
-                { question: `Quanto tempo demora para o técnico chegar no ${data.nome}?`, answer: `Em geral, ${data.tempoDeslocamento.toLowerCase()}. O tempo pode variar conforme trânsito e disponibilidade do dia.` },
-                { question: `Quais serviços vocês fazem no ${data.nome}?`, answer: `Os mais comuns são ${data.servicosDestaque.slice(0, 4).join(", ")}. Também realizamos diagnóstico e manutenção preventiva.` },
-                { question: `Qual o valor da visita técnica no ${data.nome}?`, answer: "A visita técnica começa em R$ 99,99. Após o diagnóstico, informamos o orçamento antes de executar qualquer serviço adicional." },
-              ]}
-            />
-          )}
+          <ServiceGallery
+            title={`Nosso trabalho no ${data.nome}`}
+            subtitle={`Registros reais de bancada e atendimento a domicílio na região do ${data.nome}, em ${data.cidade}.`}
+            items={[
+              { imageKey: "tecnicoTrabalhando", caption: `Diagnóstico no local durante atendimento no ${data.nome}`, altOverride: `Técnico de informática atendendo cliente no ${data.nome}, ${data.cidade}` },
+              { imageKey: "bancadaTecnica", caption: "Bancada técnica usada nos casos que exigem reparo fora do local", altOverride: `Bancada técnica para reparos de equipamentos do ${data.nome}` },
+              { imageKey: "componentesSsd", caption: "Upgrade de SSD e memória: um dos serviços mais pedidos na região", altOverride: `SSD e memória para upgrade de computadores no ${data.nome}` },
+            ]}
+            bgClass="bg-secondary/40"
+          />
         </AnimatedSection>
+
+        <AnimatedSection>
+          <LocalFAQSection
+            title={`Perguntas Frequentes — ${data.nome}, ${data.cidade}`}
+            faqs={dedupeFaqs([
+              ...(bairroFAQs[data.slug] ?? []).map((f) => ({ question: f.question, answer: f.answer })),
+              ...buildBairroFaqs({
+                nome: data.nome,
+                cidade: data.cidade,
+                tempoDeslocamento: data.tempoDeslocamento,
+                servicosDestaque: data.servicosDestaque,
+                pontosReferencia: data.pontosReferencia,
+              }),
+            ])}
+          />
+        </AnimatedSection>
+
 
         <AnimatedSection>
           <ServiceLocalLinks currentCity={data.cidade} currentNeighborhood={data.nome} />
