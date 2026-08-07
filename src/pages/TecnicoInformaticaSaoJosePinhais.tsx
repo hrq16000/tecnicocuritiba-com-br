@@ -18,6 +18,7 @@ import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   {
@@ -286,6 +287,7 @@ const TecnicoInformaticaSaoJosePinhais = () => {
 
         <ServiceLocalLinks currentCity="São José dos Pinhais" />
         <RealImageSection imageKey="ferramentas" caption="Ferramentas profissionais para diagnóstico" />
+        <LocalPhotoGallery local="São José dos Pinhais" />
         <LocalFAQSection title="Perguntas Frequentes - São José dos Pinhais" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

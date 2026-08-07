@@ -18,6 +18,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Zap } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   {
@@ -246,6 +247,7 @@ const TecnicoInformaticaColombo = () => {
         <RealImageSection imageKey="diagnostico" caption="Diagnóstico profissional de hardware" />
 
         <ServiceLocalLinks currentCity="Colombo" />
+        <LocalPhotoGallery local="Colombo" />
         <LocalFAQSection title="Perguntas Frequentes - Colombo" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

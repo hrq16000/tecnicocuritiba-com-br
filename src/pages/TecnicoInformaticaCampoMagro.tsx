@@ -18,6 +18,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Zap } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   { icon: MapPin, title: "Cobertura em Campo Magro", description: "Atendemos do Centro à região rural. Conhecemos os acessos da cidade." },
@@ -134,6 +135,7 @@ const TecnicoInformaticaCampoMagro = () => {
         <RealImageSection imageKey="componentesSsd" caption="Upgrade SSD e memória RAM" />
 
         <ServiceLocalLinks currentCity="Campo Magro" />
+        <LocalPhotoGallery local="Campo Magro" />
         <LocalFAQSection title="Perguntas Frequentes - Campo Magro" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

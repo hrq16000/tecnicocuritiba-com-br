@@ -18,6 +18,7 @@ import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Zap } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   {
@@ -347,6 +348,7 @@ const TecnicoInformaticaPinhais = () => {
         {/* FAQ Local */}
         <ServiceLocalLinks currentCity="Pinhais" />
         <RealImageSection imageKey="atendimentoDomiciliar" caption="Atendimento domiciliar profissional" />
+        <LocalPhotoGallery local="Pinhais" />
         <LocalFAQSection title="Perguntas Frequentes - Pinhais" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

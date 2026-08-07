@@ -18,6 +18,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Zap } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   {
@@ -227,6 +228,7 @@ const TecnicoInformaticaFazendaRioGrande = () => {
         <RealImageSection imageKey="placaMae" caption="Diagnóstico de placa-mãe profissional" />
 
         <ServiceLocalLinks currentCity="Fazenda Rio Grande" />
+        <LocalPhotoGallery local="Fazenda Rio Grande" />
         <LocalFAQSection title="Perguntas Frequentes - Fazenda Rio Grande" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

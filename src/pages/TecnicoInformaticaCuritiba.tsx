@@ -18,6 +18,7 @@ import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Star, Award } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   {
@@ -304,6 +305,7 @@ const TecnicoInformaticaCuritiba = () => {
 
         <ServiceLocalLinks currentCity="Curitiba" />
         <RealImageSection imageKey="bancadaTecnica" caption="Laboratório técnico profissional" />
+        <LocalPhotoGallery local="Curitiba" />
         <LocalFAQSection title="Perguntas Frequentes - Curitiba" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />

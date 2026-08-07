@@ -18,6 +18,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Zap } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   { icon: MapPin, title: "Atendimento em Quatro Barras", description: "Cobrimos toda a cidade. Técnico com conhecimento do acesso pela BR-116." },
@@ -134,6 +135,7 @@ const TecnicoInformaticaQuatroBarras = () => {
         <RealImageSection imageKey="segurancaDigital" caption="Proteção e segurança digital" />
 
         <ServiceLocalLinks currentCity="Quatro Barras" />
+        <LocalPhotoGallery local="Quatro Barras" />
         <LocalFAQSection title="Perguntas Frequentes - Quatro Barras" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />
