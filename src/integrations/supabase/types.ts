@@ -14,6 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      click_events: {
+        Row: {
+          app_version: string | null
+          attribution_channel: string | null
+          created_at: string
+          cta_location: string | null
+          equipamento: string | null
+          event_type: string
+          funnel_stage: string | null
+          gclid: string | null
+          id: string
+          path: string
+          session_id: string | null
+          sintoma: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          viewport_bucket: string | null
+        }
+        Insert: {
+          app_version?: string | null
+          attribution_channel?: string | null
+          created_at?: string
+          cta_location?: string | null
+          equipamento?: string | null
+          event_type: string
+          funnel_stage?: string | null
+          gclid?: string | null
+          id?: string
+          path?: string
+          session_id?: string | null
+          sintoma?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          viewport_bucket?: string | null
+        }
+        Update: {
+          app_version?: string | null
+          attribution_channel?: string | null
+          created_at?: string
+          cta_location?: string | null
+          equipamento?: string | null
+          event_type?: string
+          funnel_stage?: string | null
+          gclid?: string | null
+          id?: string
+          path?: string
+          session_id?: string | null
+          sintoma?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          viewport_bucket?: string | null
+        }
+        Relationships: []
+      }
       funnel_submissions: {
         Row: {
           atendido_em: string | null
