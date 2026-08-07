@@ -296,15 +296,57 @@ export default function StatusOS() {
     return () => { ativo = false; };
   }, [shareUrl]);
 
-  // Atualização automática a cada 45s enquanto a aba estiver visível.
+  // Atualização quase em tempo real: ciclo curto (20s) enquanto a aba está visível,
+  // com backoff exponencial em falha/timeout e retomada imediata ao voltar o foco.
   useEffect(() => {
     if (!ultimaBusca.current || lista.length === 0) return;
-    const id = window.setInterval(() => {
-      if (document.visibilityState !== "visible" || !ultimaBusca.current) return;
-      void consultar(ultimaBusca.current.modo, ultimaBusca.current.valor, true);
-    }, 45000);
-    return () => window.clearInterval(id);
+    let cancelado = false;
+    let timer = 0;
+    let falhas = 0;
+
+    const ciclo = async () => {
+      if (cancelado || !ultimaBusca.current) return;
+      if (document.visibilityState !== "visible") {
+        setSincronizacao("pausado");
+        agendar(20000);
+        return;
+      }
+      const ok = await consultar(ultimaBusca.current.modo, ultimaBusca.current.valor, true);
+      if (cancelado) return;
+      if (ok) {
+        falhas = 0;
+        setSincronizacao("ativo");
+        agendar(20000);
+      } else {
+        falhas += 1;
+        setSincronizacao("reconectando");
+        // 30s, 60s, 120s… teto de 5 min. Evita martelar o backend em queda.
+        agendar(Math.min(30000 * 2 ** (falhas - 1), 300000));
+      }
+    };
+
+    const agendar = (ms: number) => {
+      if (cancelado) return;
+      timer = window.setTimeout(() => void ciclo(), ms);
+    };
+
+    const aoVoltar = () => {
+      if (document.visibilityState !== "visible" || cancelado) return;
+      window.clearTimeout(timer);
+      void ciclo();
+    };
+
+    agendar(20000);
+    document.addEventListener("visibilitychange", aoVoltar);
+    window.addEventListener("focus", aoVoltar);
+    return () => {
+      cancelado = true;
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", aoVoltar);
+      window.removeEventListener("focus", aoVoltar);
+    };
   }, [lista.length, consultar]);
+
 
   // Deep link: /status-os?os=OS-... ou ?tel=41999999999 consulta automaticamente.
   useEffect(() => {
