@@ -581,7 +581,7 @@ const SuporteEmpresas = () => {
             <h2 id="continuar-empresas" className="text-2xl font-bold text-foreground mb-4">
               Continue por aqui
             </h2>
-            <ul className="grid md:grid-cols-2 gap-3 text-sm">
+            <ul className="grid md:grid-cols-2 gap-3 text-sm text-muted-foreground">
               <li><Link to="/servicos/montagem-pc#workstations" className="text-primary underline underline-offset-4">Workstations e montagem de PC</Link> — hardware e configuração para cargas exigentes.</li>
               <li><Link to="/servicos/backup-recuperacao" className="text-primary underline underline-offset-4">Backup e recuperação</Link> — prevenção e restauração de arquivos.</li>
               <li><Link to="/servicos/redes-wifi" className="text-primary underline underline-offset-4">Redes e Wi-Fi</Link> — rede local, cabeamento e cobertura.</li>

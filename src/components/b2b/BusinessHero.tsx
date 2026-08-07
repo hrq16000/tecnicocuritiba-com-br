@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackBusinessCTA } from "@/lib/b2bTracking";
 
 export interface BusinessHeroProps {
   /** Rótulo curto de contexto (ex.: "Suporte de TI corporativo em Curitiba") */
@@ -72,6 +73,8 @@ export const BusinessHero = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cta-location={ctaLocation}
+                data-b2b-cta="hero"
+                onClick={() => trackBusinessCTA("whatsapp", ctaLocation, { cta_slot: "hero" })}
               >
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
                 {ctaLabel}

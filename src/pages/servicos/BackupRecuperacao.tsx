@@ -58,6 +58,7 @@ const BackupRecuperacao = () => {
       ]} />
       <Header />
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Backup e Recuperação" }]} />
+      <main id="main-content">
       
       {/* Hero Section */}
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
@@ -353,13 +354,14 @@ const BackupRecuperacao = () => {
               { to: "/servicos/formatacao-computador", label: "Formatação" },
               { to: "/servicos/conserto-pc-notebook", label: "Conserto de Hardware" },
             ].map((link) => (
-              <Link key={link.to} to={link.to} className="px-5 py-2.5 bg-secondary rounded-lg hover:bg-accent/20 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 text-sm">
+              <Link key={link.to} to={link.to} className="px-5 py-2.5 bg-secondary text-foreground rounded-lg hover:bg-accent/20 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 text-sm">
                 {link.label}
               </Link>
             ))}
           </div>
         </div>
       </section>
+      </main>
       <InterlinkingBlock />
       <Footer />
     </div>

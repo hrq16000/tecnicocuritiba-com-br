@@ -5,7 +5,9 @@
         "http://localhost:4173/assistencia-tecnica-curitiba",
         "http://localhost:4173/termos-e-condicoes",
         "http://localhost:4173/servicos",
-        "http://localhost:4173/suporte-empresas"
+        "http://localhost:4173/suporte-empresas",
+        "http://localhost:4173/servicos/redes-wifi",
+        "http://localhost:4173/servicos/backup-recuperacao"
       ],
       "startServerCommand": "bun run preview -- --port 4173",
       "startServerReadyPattern": "Local:",
