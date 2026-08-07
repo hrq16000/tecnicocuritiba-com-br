@@ -9,6 +9,7 @@ import { trackPageView } from "@/lib/analytics";
 import { ShieldCheck, Zap, MapPin, MessageCircle, CheckCircle2, Wrench } from "lucide-react";
 import type { CityData } from "./ArrumarPCCityTemplate";
 import type { ServicoData } from "./services";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -236,6 +237,7 @@ export const ArrumarPCServicoCidadeTemplate = ({ servico, cidade }: Props) => {
         </section>
 
         <CTASection />
+        <LocalPhotoGallery local={data.cidade} />
       </main>
 
       <Footer />
