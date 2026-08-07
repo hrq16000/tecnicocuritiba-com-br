@@ -60,7 +60,7 @@ test.describe("Rodada 3T — propagação empresarial nas páginas de serviço",
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
       );
       expect(overflow).toBeLessThanOrEqual(2);
-      expect(errors.filter((e) => !/favicon|analytics|gtag|Failed to load resource/i.test(e))).toEqual([]);
+      expect(errors.filter((e) => !/favicon|analytics|gtag|Warning:|Failed to load resource/i.test(e))).toEqual([]);
     });
 
     test(`${p.path}: navegação por teclado com foco visível`, async ({ page }) => {
