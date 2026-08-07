@@ -21,7 +21,9 @@ const errors = [];
 const warn = (msg) => console.log(`  ! ${msg}`);
 
 const run = async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(
+    process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {},
+  );
   const page = await browser.newPage({ viewport: { width: 360, height: FOLD_PX } });
 
   for (const route of ROUTES) {
