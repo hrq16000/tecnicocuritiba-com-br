@@ -101,6 +101,7 @@ export const FastHeroSection = () => {
               <strong className="text-white/95">Curitiba</strong>, São José dos Pinhais, Araucária, Campo Largo, Pinhais
               e região
             </p>
+            <GeoCityChip />
           </div>
 
           <div className="order-2 flex justify-center lg:justify-end">
