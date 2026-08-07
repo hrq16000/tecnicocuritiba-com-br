@@ -72,6 +72,8 @@ export const BusinessHero = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cta-location={ctaLocation}
+                data-b2b-cta="hero"
+                onClick={() => trackBusinessCTA("whatsapp", ctaLocation, { cta_slot: "hero" })}
               >
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
                 {ctaLabel}
