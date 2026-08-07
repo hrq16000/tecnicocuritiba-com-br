@@ -4,6 +4,8 @@
  */
 import { readUtms } from "./utmCapture";
 import { getSessionId } from "./funnelSubmission";
+import { persistClickEvent } from "./clickEvents";
+
 
 type GtagFn = (...args: unknown[]) => void;
 
