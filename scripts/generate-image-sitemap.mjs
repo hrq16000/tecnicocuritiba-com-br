@@ -86,7 +86,7 @@ function build() {
 
 function validate(xml) {
   const errors = [];
-  const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const imageLocs = [...xml.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((m) => m[1]);
   const pageUrls = [...xml.matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const dupPages = pageUrls.filter((u, i) => pageUrls.indexOf(u) !== i);
   if (dupPages.length) errors.push(`URLs de página duplicadas: ${[...new Set(dupPages)].slice(0, 5).join(", ")}`);
@@ -108,7 +108,7 @@ function validate(xml) {
       if (!ALLOWED_HOSTS.includes(host)) errors.push(`${page}: host de imagem não permitido (${host}).`);
     }
   }
-  return { errors, pages: pageUrls.length, images: urls.length - pageUrls.length };
+  return { errors, pages: pageUrls.length, images: imageLocs.length };
 }
 
 const xml = CHECK_ONLY ? fs.readFileSync(OUT, "utf8") : build();
