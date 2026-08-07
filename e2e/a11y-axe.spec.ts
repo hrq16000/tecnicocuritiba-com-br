@@ -13,6 +13,7 @@ const ROUTES = [
   "/como-funciona",
   "/atendimento",
   "/atendimento/curitiba",
+  "/suporte-empresas",
   "/precos-e-politicas",
   "/obrigado",
 ];
