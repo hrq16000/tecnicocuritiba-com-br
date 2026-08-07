@@ -61,6 +61,7 @@ const ManutencaoTV = () => {
         { name: "Manutenção de TV", path: "/servicos/manutencao-tv" }
       ]} />
       <Header />
+      <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Manutenção de TV" }]} />
 
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
@@ -205,6 +206,7 @@ const ManutencaoTV = () => {
 
       <BlocoInteligencia />
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

@@ -54,6 +54,7 @@ const ConsertoPcNotebook = () => {
         ]}
       />
       <Header />
+      <main id="main-content">
       <Breadcrumbs
         items={[
           { label: "Serviços", href: "/servicos" },
@@ -302,6 +303,7 @@ const ConsertoPcNotebook = () => {
         </div>
       </section>
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

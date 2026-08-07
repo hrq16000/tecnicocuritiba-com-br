@@ -60,6 +60,7 @@ const ConsertoPlaca = () => {
         { name: "Conserto de Placa", path: "/servicos/conserto-placa" }
       ]} />
       <Header />
+      <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Conserto de Placa" }]} />
 
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
@@ -222,6 +223,7 @@ const ConsertoPlaca = () => {
 
       <BlocoInteligencia />
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

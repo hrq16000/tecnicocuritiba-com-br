@@ -53,6 +53,7 @@ const UpgradeSsdMemoria = () => {
         ]}
       />
       <Header />
+      <main id="main-content">
       <Breadcrumbs
         items={[
           { label: "Serviços", href: "/servicos" },
@@ -295,6 +296,7 @@ const UpgradeSsdMemoria = () => {
         </div>
       </section>
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

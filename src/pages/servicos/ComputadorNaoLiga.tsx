@@ -59,6 +59,7 @@ const ComputadorNaoLiga = () => {
         { name: "Computador Não Liga", path: "/servicos/computador-nao-liga" }
       ]} />
       <Header />
+      <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Computador Não Liga" }]} />
 
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
@@ -202,6 +203,7 @@ const ComputadorNaoLiga = () => {
 
       <BlocoInteligencia />
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

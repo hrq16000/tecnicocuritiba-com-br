@@ -87,6 +87,7 @@ const ConsertoCelular = () => {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
+      <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Conserto de Celular" }]} />
 
       {/* Hero */}
@@ -279,6 +280,7 @@ const ConsertoCelular = () => {
       </section>
 
       <BlocoInteligencia />
+      </main>
       <Footer />
     </div>
   );
