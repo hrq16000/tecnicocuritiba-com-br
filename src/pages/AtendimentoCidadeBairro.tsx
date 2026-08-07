@@ -232,7 +232,7 @@ export default function AtendimentoCidadeBairro() {
             ))}
           </ul>
 
-          <LocalPhotoGallery local={`${bairro.nome}, ${cidade.nome}`} bgClass="bg-transparent" />
+          <LocalPhotoGallery local={`${bairro.nome}, ${cidade.nome}`} bgClass="bg-transparent" path={path} />
           <h2 className="text-2xl font-bold mb-4">Dúvidas frequentes — {bairro.nome}</h2>
           <div className="space-y-4 mb-10">
             {faqs.map((f) => (

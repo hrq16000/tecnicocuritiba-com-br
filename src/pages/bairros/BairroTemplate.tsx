@@ -1,3 +1,4 @@
+import { ImageObjectSchema } from "@/components/ImageObjectSchema";
 import { mainImageKeyFor } from "@/components/LocalPhotoGallery";
 import { ogImageFromKey } from "@/lib/imageCredits";
 import { useEffect } from "react";
@@ -468,7 +469,13 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
         </AnimatedSection>
 
         <AnimatedSection>
+          <ImageObjectSchema
+            imageKeys={["tecnicoTrabalhando", "bancadaTecnica", "componentesSsd"]}
+            local={`${data.nome}, ${data.cidade}`}
+            path={`/bairros/${data.slug}`}
+          />
           <ServiceGallery
+            local={`${data.nome}, ${data.cidade}`}
             title={`Nosso trabalho no ${data.nome}`}
             subtitle={`Registros reais de bancada e atendimento a domicílio na região do ${data.nome}, em ${data.cidade}.`}
             items={[
