@@ -15,6 +15,16 @@ import path from "node:path";
 const SITE = "https://tecnicocuritiba.com.br";
 const PHONE = "+5541997452053";
 
+// Foto real (Unsplash, Unsplash License) exibida no card principal das páginas
+// locais — usada como imagem social para que qualquer citação da URL mostre
+// a mesma imagem que o usuário vê na página.
+const LOCAL_PHOTO_ID = "photo-1531482615713-2afd69097998";
+const LOCAL_PHOTO_BASE = `https://images.unsplash.com/${LOCAL_PHOTO_ID}`;
+const LOCAL_PHOTO_OG = `${LOCAL_PHOTO_BASE}?auto=format&fit=crop&w=1200&h=630&q=72`;
+const LOCAL_PHOTO_CREDIT = "Foto: Unsplash (Unsplash License)";
+const LOCAL_PHOTO_SOURCE = "https://unsplash.com/photos/1531482615713-2afd69097998";
+const LOCAL_PHOTO_LICENSE = "https://unsplash.com/license";
+
 // Sufixos de slug → cidade da RMC
 const CITY_SUFFIX = [
   ["-sjp", "São José dos Pinhais"],
@@ -112,19 +122,35 @@ function buildJsonLd(meta) {
         areaServed: meta.areaServed.map((name) => ({ "@type": "Place", name })),
       },
       {
+        "@type": "ImageObject",
+        "@id": `${meta.url}#primaryimage`,
+        contentUrl: LOCAL_PHOTO_OG,
+        url: LOCAL_PHOTO_OG,
+        name: `Atendimento técnico em ${meta.areaServed[0]}`,
+        description: `Técnico de informática realizando manutenção em computador — atendimento em ${meta.areaServed.join(", ")}`,
+        creditText: LOCAL_PHOTO_CREDIT,
+        creator: { "@type": "Organization", name: "Unsplash", url: "https://unsplash.com" },
+        copyrightNotice: LOCAL_PHOTO_CREDIT,
+        license: LOCAL_PHOTO_LICENSE,
+        acquireLicensePage: LOCAL_PHOTO_SOURCE,
+        width: 1200,
+        height: 630,
+      },
+      {
         "@type": "WebPage",
         "@id": `${meta.url}#webpage`,
         url: meta.url,
         name: meta.title,
         description: meta.description,
         inLanguage: "pt-BR",
+        primaryImageOfPage: { "@id": `${meta.url}#primaryimage` },
       },
     ],
   };
 }
 
 function injectMeta(html, meta) {
-  const ogImage = `${SITE}/og-image.jpg`;
+  const ogImage = LOCAL_PHOTO_OG;
   const block = [
     `<title>${htmlEscape(meta.title)}</title>`,
     `<meta name="description" content="${htmlEscape(meta.description)}">`,
@@ -139,7 +165,11 @@ function injectMeta(html, meta) {
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${htmlEscape(meta.title)}">`,
     `<meta name="twitter:description" content="${htmlEscape(meta.description)}">`,
+    `<meta property="og:image:width" content="1200">`,
+    `<meta property="og:image:height" content="630">`,
+    `<meta property="og:image:alt" content="${htmlEscape("Atendimento técnico de informática em " + meta.areaServed[0])}">`,
     `<meta name="twitter:image" content="${ogImage}">`,
+    `<meta name="twitter:image:alt" content="${htmlEscape("Atendimento técnico de informática em " + meta.areaServed[0])}">`,
     `<script type="application/ld+json">${JSON.stringify(buildJsonLd(meta))}</script>`,
   ].join("\n    ");
 
