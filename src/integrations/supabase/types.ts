@@ -215,6 +215,30 @@ export type Database = {
         }
         Relationships: []
       }
+      os_lookup_audit: {
+        Row: {
+          criado_em: string
+          encontrado: boolean
+          erro: string | null
+          id: string
+          tipo: string
+        }
+        Insert: {
+          criado_em?: string
+          encontrado?: boolean
+          erro?: string | null
+          id?: string
+          tipo: string
+        }
+        Update: {
+          criado_em?: string
+          encontrado?: boolean
+          erro?: string | null
+          id?: string
+          tipo?: string
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           author_name: string
@@ -367,6 +391,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      os_lookup_log: {
+        Args: { _encontrado: boolean; _erro?: string; _tipo: string }
+        Returns: undefined
       }
       os_rate_limit: {
         Args: { _chave: string; _limite?: number }

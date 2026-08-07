@@ -192,11 +192,15 @@ export default function StatusOS() {
   }, []);
 
   const ultimaBusca = useRef<{ modo: "numero" | "celular"; valor: string } | null>(null);
+  const [sincronizadoEm, setSincronizadoEm] = useState<number | null>(null);
+
+  const [sincronizacao, setSincronizacao] = useState<"ativo" | "reconectando" | "pausado">("ativo");
 
   const os = lista[selecionada] ?? null;
 
+
   const consultar = useCallback(
-    async (m: "numero" | "celular", valor: string, silencioso = false): Promise<void> => {
+    async (m: "numero" | "celular", valor: string, silencioso = false): Promise<boolean> => {
       if (!silencioso) {
         setLoading(true);
         setErro(null);
@@ -204,17 +208,25 @@ export default function StatusOS() {
         setSelecionada(0);
       }
       const alerta = window.setTimeout(() => setLento(true), 3500);
-      const { data, error } = await rpc(
-        m === "numero" ? "consultar_os" : "consultar_os_por_telefone",
-        m === "numero" ? { _numero: valor } : { _telefone: valor },
+      // Timeout duro: evita atualização automática pendurada em rede instável.
+      const timeout = new Promise<{ data: null; error: { message: string } }>((resolve) =>
+        window.setTimeout(() => resolve({ data: null, error: { message: "timeout" } }), silencioso ? 12000 : 20000),
       );
+      const { data, error } = await Promise.race([
+        rpc(
+          m === "numero" ? "consultar_os" : "consultar_os_por_telefone",
+          m === "numero" ? { _numero: valor } : { _telefone: valor },
+        ),
+        timeout,
+      ]);
       window.clearTimeout(alerta);
       setLento(false);
       if (!silencioso) setLoading(false);
       if (error) {
         if (!silencioso) setErro(mensagemErro(error.message));
-        track("status_os_erro", { modo: m });
-        return;
+        track("status_os_erro", { modo: m, motivo: error.message, silencioso });
+        console.warn("[status-os] consulta falhou", { modo: m, silencioso, motivo: error.message });
+        return false;
       }
       const rows = data ?? [];
       if (rows.length === 0) {
@@ -226,14 +238,17 @@ export default function StatusOS() {
           );
           track("status_os_nao_encontrada", { modo: m });
         }
-        return;
+        return true;
       }
       ultimaBusca.current = { modo: m, valor };
       setLista(rows);
+      setSincronizadoEm(Date.now());
       if (!silencioso) track("status_os_encontrada", { modo: m, etapa: rows[0].etapa, total: rows.length });
+      return true;
     },
     [],
   );
+
 
   const buscar = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -281,15 +296,57 @@ export default function StatusOS() {
     return () => { ativo = false; };
   }, [shareUrl]);
 
-  // Atualização automática a cada 45s enquanto a aba estiver visível.
+  // Atualização quase em tempo real: ciclo curto (20s) enquanto a aba está visível,
+  // com backoff exponencial em falha/timeout e retomada imediata ao voltar o foco.
   useEffect(() => {
     if (!ultimaBusca.current || lista.length === 0) return;
-    const id = window.setInterval(() => {
-      if (document.visibilityState !== "visible" || !ultimaBusca.current) return;
-      void consultar(ultimaBusca.current.modo, ultimaBusca.current.valor, true);
-    }, 45000);
-    return () => window.clearInterval(id);
+    let cancelado = false;
+    let timer = 0;
+    let falhas = 0;
+
+    const ciclo = async () => {
+      if (cancelado || !ultimaBusca.current) return;
+      if (document.visibilityState !== "visible") {
+        setSincronizacao("pausado");
+        agendar(20000);
+        return;
+      }
+      const ok = await consultar(ultimaBusca.current.modo, ultimaBusca.current.valor, true);
+      if (cancelado) return;
+      if (ok) {
+        falhas = 0;
+        setSincronizacao("ativo");
+        agendar(20000);
+      } else {
+        falhas += 1;
+        setSincronizacao("reconectando");
+        // 30s, 60s, 120s… teto de 5 min. Evita martelar o backend em queda.
+        agendar(Math.min(30000 * 2 ** (falhas - 1), 300000));
+      }
+    };
+
+    const agendar = (ms: number) => {
+      if (cancelado) return;
+      timer = window.setTimeout(() => void ciclo(), ms);
+    };
+
+    const aoVoltar = () => {
+      if (document.visibilityState !== "visible" || cancelado) return;
+      window.clearTimeout(timer);
+      void ciclo();
+    };
+
+    agendar(20000);
+    document.addEventListener("visibilitychange", aoVoltar);
+    window.addEventListener("focus", aoVoltar);
+    return () => {
+      cancelado = true;
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", aoVoltar);
+      window.removeEventListener("focus", aoVoltar);
+    };
   }, [lista.length, consultar]);
+
 
   // Deep link: /status-os?os=OS-... ou ?tel=41999999999 consulta automaticamente.
   useEffect(() => {
@@ -603,6 +660,31 @@ export default function StatusOS() {
             {os.descricao_curta && <p className="mt-2 text-sm text-muted-foreground">{os.descricao_curta}</p>}
 
             <ProgressoOS idx={idxAtual} previsao={os.previsao_conclusao} />
+
+            <p
+              className="mt-3 flex items-center gap-2 text-xs text-muted-foreground"
+              data-testid="status-os-sync"
+              data-estado={sincronizacao}
+              aria-live="polite"
+            >
+              <span
+                aria-hidden="true"
+                className={`inline-block h-2 w-2 rounded-full ${
+                  sincronizacao === "ativo"
+                    ? "bg-emerald-500"
+                    : sincronizacao === "reconectando"
+                      ? "bg-amber-500"
+                      : "bg-muted-foreground/50"
+                }`}
+              />
+              {sincronizacao === "ativo"
+                ? "Atualizando automaticamente a cada 20 segundos"
+                : sincronizacao === "reconectando"
+                  ? "Conexão instável — tentando novamente em instantes"
+                  : "Atualização pausada enquanto a aba está em segundo plano"}
+              {sincronizadoEm ? ` · sincronizado às ${new Date(sincronizadoEm).toLocaleTimeString("pt-BR")}` : ""}
+            </p>
+
 
             <dl className="mt-4 grid gap-3 sm:grid-cols-2">
               <div>
