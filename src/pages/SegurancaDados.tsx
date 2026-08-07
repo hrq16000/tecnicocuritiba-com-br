@@ -154,6 +154,31 @@ const SegurancaDados = () => {
           </div>
         </section>
 
+        <section id="pilares" className="scroll-mt-24 bg-secondary py-8 md:py-10">
+          <div className="container mx-auto max-w-4xl px-4">
+            <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Quatro pilares que reduzem risco
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
+              Nenhum procedimento técnico elimina totalmente o risco de perda. Backup, autorização, acesso mínimo e
+              comunicação clara reduzem riscos, mas não substituem avaliação e responsabilidade compartilhada.
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {PILARES.map((p) => (
+                <div key={p.title} className="rounded-xl border border-border bg-background p-5">
+                  <h3 className="text-base font-semibold text-foreground">{p.title}</h3>
+                  <ul className="mt-2 space-y-1 text-sm leading-relaxed text-muted-foreground">
+                    {p.items.map((i) => (
+                      <li key={i}>• {i}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
         <BusinessContextGrid
           id="contextos-dados"
           title="Situações mais comuns"
