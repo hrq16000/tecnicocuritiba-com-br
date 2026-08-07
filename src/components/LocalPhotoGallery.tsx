@@ -1,3 +1,4 @@
+import { ImageObjectSchema } from "@/components/ImageObjectSchema";
 import { ServiceGallery, GalleryItem } from "@/components/ServiceGallery";
 import { IMAGES } from "@/lib/images";
 
@@ -46,6 +47,9 @@ const SETS: Record<Variant, GalleryItem[]> = {
   ],
 };
 
+/** Chave da imagem principal (card de destaque) por variante — usada em OG/Twitter. */
+export const mainImageKeyFor = (variant: Variant = "geral") => SETS[variant][0].imageKey as string;
+
 interface Props {
   /** Ex.: "Batel, Curitiba" ou "Pinhais" */
   local?: string;
@@ -53,13 +57,16 @@ interface Props {
   title?: string;
   subtitle?: string;
   bgClass?: string;
+  /** Caminho da página, usado nos @id do ImageObject */
+  path?: string;
 }
 
 /**
  * Galeria de fotos reais (banco público Unsplash — sem imagens geradas por IA)
  * para enriquecer páginas locais que antes eram só texto.
+ * Cada foto sai com alt descritivo, `title`, crédito visível e ImageObject JSON-LD.
  */
-export const LocalPhotoGallery = ({ local, variant = "geral", title, subtitle, bgClass = "bg-secondary/40" }: Props) => {
+export const LocalPhotoGallery = ({ local, variant = "geral", title, subtitle, bgClass = "bg-secondary/40", path }: Props) => {
   const items = SETS[variant].map((it) => ({
     ...it,
     altOverride:
@@ -68,17 +75,25 @@ export const LocalPhotoGallery = ({ local, variant = "geral", title, subtitle, b
   }));
 
   return (
-    <ServiceGallery
-      title={title ?? (local ? `Como trabalhamos em ${local}` : "Como trabalhamos")}
-      subtitle={
-        subtitle ??
-        (local
-          ? `Fotos reais de bancada, ferramentas e atendimento técnico usados nos chamados de ${local}.`
-          : "Fotos reais de bancada, ferramentas e atendimento técnico.")
-      }
-      items={items}
-      bgClass={bgClass}
-    />
+    <>
+      <ImageObjectSchema
+        imageKeys={SETS[variant].map((it) => it.imageKey as string)}
+        local={local}
+        path={path}
+      />
+      <ServiceGallery
+        title={title ?? (local ? `Como trabalhamos em ${local}` : "Como trabalhamos")}
+        subtitle={
+          subtitle ??
+          (local
+            ? `Fotos reais de bancada, ferramentas e atendimento técnico usados nos chamados de ${local}.`
+            : "Fotos reais de bancada, ferramentas e atendimento técnico.")
+        }
+        items={items}
+        bgClass={bgClass}
+        local={local}
+      />
+    </>
   );
 };
 
