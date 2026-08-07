@@ -19,6 +19,7 @@ import {
   CreditCard,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MSG =
@@ -325,6 +326,7 @@ const ArrumarPC = () => {
         </section>
 
         <CTASection />
+        <LocalPhotoGallery variant="geral" />
       </main>
 
       <Footer />

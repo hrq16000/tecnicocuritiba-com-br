@@ -5,6 +5,7 @@ import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import { useEffect } from "react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WA = "https://wa.me/5541997452053?text=" + encodeURIComponent("Olá! Preciso de manutenção de notebook/PC em Curitiba.");
 
@@ -264,6 +265,7 @@ export default function ManutencaoNotebookPCCuritiba() {
           </Button>
         </section>
       </div>
+        <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
     </>
   );

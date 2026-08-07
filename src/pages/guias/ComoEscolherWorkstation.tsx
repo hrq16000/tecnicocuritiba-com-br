@@ -7,6 +7,7 @@ import PageSummaryBand from "@/components/PageSummaryBand";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { MessageCircle, CheckCircle, AlertTriangle, Cpu, MemoryStick, HardDrive, MonitorCog } from "lucide-react";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WA = "https://wa.me/5541997452053?text=" +
   encodeURIComponent("Olá! Quero ajuda para especificar uma workstation para minha empresa.") +
@@ -243,6 +244,7 @@ export default function ComoEscolherWorkstation() {
             </Button>
           </div>
         </article>
+        <LocalPhotoGallery variant="montagem" />
       </main>
       <Footer />
     </>

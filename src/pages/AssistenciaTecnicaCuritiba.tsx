@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { trackCTAClick, trackPageView } from "@/lib/analytics";
 import { SiteBaseSchema } from "@/components/SiteBaseSchema";
 import {
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   MessageCircle,
   Gamepad2,
   Monitor,
@@ -675,6 +676,7 @@ export default function AssistenciaTecnicaCuritiba() {
             ))}
           </nav>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="geral" />
       </main>
 
       <Footer />

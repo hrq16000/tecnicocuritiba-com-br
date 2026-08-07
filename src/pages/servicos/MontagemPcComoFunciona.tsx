@@ -9,6 +9,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const PATH = "/servicos/montagem-pc/como-funciona";
 
@@ -228,6 +229,7 @@ const MontagemPcComoFunciona = () => {
             </Link>
           </p>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="montagem" />
       </main>
 
       <Footer />

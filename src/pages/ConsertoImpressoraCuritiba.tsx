@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Printer, MessageCircle, CalendarCheck, CheckCircle, Clock, Shield, ArrowRight } from "lucide-react";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP = "5541997452053";
 const PATH = "/conserto-impressora-curitiba";
@@ -204,6 +205,7 @@ const ConsertoImpressoraCuritiba = () => {
         </div>
       </section>
 
+        <LocalPhotoGallery local="Curitiba" variant="geral" />
       </main>
       <Footer />
     </div>

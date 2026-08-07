@@ -13,6 +13,7 @@ import {
   AlertTriangle, Wrench, Users, Truck
 } from "lucide-react";
 import {
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   COLETA_TAXA_MINIMA_LABEL,
   PRAZO_RAPIDO,
   REGRA_ORCAMENTO_GRATIS,
@@ -280,6 +281,7 @@ const ConsertoCelular = () => {
       </section>
 
       <BlocoInteligencia />
+        <LocalPhotoGallery local="Curitiba" variant="celular" />
       </main>
       <Footer />
     </div>

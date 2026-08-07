@@ -12,6 +12,7 @@ import {
   Shield, Wrench, MessageCircle, ChevronRight, Building2, Calendar,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP = "5541997452053";
 
@@ -350,6 +351,7 @@ const Marcas = () => {
             </div>
           </section>
         </AnimatedSection>
+        <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
 
       <Footer />

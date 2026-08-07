@@ -7,6 +7,7 @@ import PageSummaryBand from "@/components/PageSummaryBand";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import BusinessHero from "@/components/b2b/BusinessHero";
 import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 
 const WHATSAPP_URL = "https://wa.me/5541997452053?text=" + encodeURIComponent("Olá! Quero suporte de TI para minha empresa em Curitiba.");
@@ -180,6 +181,7 @@ export default function EmpresaTICuritiba() {
           </Button>
         </section>
       </div>
+        <LocalPhotoGallery local="Curitiba" variant="empresa" />
       </main>
     </>
   );

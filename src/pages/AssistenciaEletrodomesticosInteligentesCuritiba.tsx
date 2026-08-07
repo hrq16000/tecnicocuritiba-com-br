@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Refrigerator, MessageCircle, CalendarCheck, CheckCircle, Wifi, Shield, ArrowRight } from "lucide-react";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP = "5541997452053";
 const PATH = "/assistencia-eletrodomesticos-inteligentes-curitiba";
@@ -199,6 +200,7 @@ const AssistenciaEletrodomesticosInteligentesCuritiba = () => {
         </div>
       </section>
 
+        <LocalPhotoGallery local="Curitiba" variant="tv" />
       </main>
       <Footer />
     </div>

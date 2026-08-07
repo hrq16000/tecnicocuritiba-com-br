@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Cpu, Flame, RefreshCw, Smartphone, Zap, Wrench, MessageCircle } from "lucide-react";
 import { useEffect } from "react";
 import { trackPageView } from "@/lib/analytics";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -242,6 +243,7 @@ const ProcedimentosPlaca = () => {
             </div>
           </AnimatedSection>
         </div>
+        <LocalPhotoGallery local="Curitiba" variant="celular" />
       </main>
       <Footer />
     </div>

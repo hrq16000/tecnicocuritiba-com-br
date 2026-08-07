@@ -13,6 +13,7 @@ import PageTableOfContents from "@/components/PageTableOfContents";
 import TrustStrip from "@/components/TrustStrip";
 import { trackPageView } from "@/lib/analytics";
 import { NAP } from "@/lib/nap";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_URL = `${NAP.whatsappUrl}?text=${encodeURIComponent(
   "Olá! Quero falar sobre segurança e proteção dos dados dos meus computadores.",
@@ -383,6 +384,7 @@ const SegurancaDados = () => {
             </div>
           </div>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="seguranca" />
       </main>
 
       <InterlinkingBlock />

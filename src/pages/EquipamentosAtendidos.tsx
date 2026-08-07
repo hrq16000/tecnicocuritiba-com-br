@@ -10,6 +10,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import {
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   Monitor, Laptop, Tv, HardDrive, Wifi, Server, Cpu, Printer,
   MessageCircle, ArrowRight, CheckCircle2, AlertTriangle, Wrench,
   Radio, Smartphone, Cable,
@@ -230,6 +231,7 @@ const EquipamentosAtendidos = () => {
             </div>
           </div>
         </section>
+        <LocalPhotoGallery local="Curitiba" variant="geral" />
       </main>
 
       <InterlinkingBlock />

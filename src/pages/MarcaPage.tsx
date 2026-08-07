@@ -11,6 +11,7 @@ import {
   Newspaper, CheckCircle, MessageCircle, ChevronRight, Building2, MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP = "5541997452053";
 
@@ -260,6 +261,7 @@ const MarcaPage = () => {
             </div>
           </section>
         </AnimatedSection>
+        <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
 
       <Footer />
