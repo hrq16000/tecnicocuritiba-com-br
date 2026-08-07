@@ -122,7 +122,79 @@ const AtendimentoRemoto = () => {
             </div>
           </div>
         </section>
-        
+
+        <BusinessContextGrid
+          id="contextos-remoto"
+          title="Situações atendidas à distância"
+          intro="Casos em que o acesso remoto costuma resolver sem visita — no computador de casa ou no equipamento de trabalho. O escopo é o mesmo: software, configuração e verificação."
+          contexts={[
+            {
+              title: "Computador lento ou travando",
+              body: "Verificação de programas em inicialização, uso de disco e memória, atualizações pendentes e limpeza de sistema. Limite: lentidão causada por disco com falha ou superaquecimento precisa de avaliação presencial.",
+            },
+            {
+              title: "Vírus, anúncios e sequestro de navegador",
+              body: "Remoção de extensões e programas indesejados, verificação com ferramenta autorizada e reconfiguração do navegador. Limite: infecção que impede o sistema de iniciar exige atendimento presencial ou coleta.",
+            },
+            {
+              title: "Programa, impressora ou conta que parou",
+              body: "Reinstalação de programa, driver, impressora em rede e reconfiguração de conta de e-mail no computador. Limite: falha mecânica ou eletrônica da impressora é da assistência autorizada da marca.",
+            },
+            {
+              title: "Home office e computador de escritório",
+              body: "Mesma execução técnica, com autorização de quem responde pelo equipamento e registro do que foi acessado. Limite: atendimento remoto é por chamado, não é plano mensal, monitoramento nem suporte ilimitado.",
+            },
+          ]}
+        />
+
+        <ThirdPartyLimits
+          id="limites-remoto"
+          title="O que não é possível resolver remotamente"
+          intro={
+            <>
+              Transparência antes de conectar: o acesso remoto resolve software, não hardware. O tratamento dos
+              seus arquivos e credenciais durante a sessão segue o que está descrito em{" "}
+              <Link to="/seguranca-dos-dados" className="text-accent underline underline-offset-2">
+                segurança dos dados
+              </Link>
+              .
+            </>
+          }
+          columns={[
+            {
+              title: "Resolvemos remotamente",
+              items: [
+                "Lentidão, erros e travamentos do Windows",
+                "Vírus, adware e navegador sequestrado",
+                "Drivers, programas e impressora em rede",
+                "Configuração de conta de e-mail e nuvem",
+                "Orientação e verificação acompanhada na tela",
+              ],
+            },
+            {
+              title: "Exige visita ou coleta",
+              tone: "warning",
+              items: [
+                "Computador que não liga ou não inicia o sistema",
+                "Troca de peças, SSD, memória ou fonte",
+                "Limpeza interna e pasta térmica",
+                "Tela, teclado ou conector com dano físico",
+                "Cabeamento e instalação de rede no ambiente",
+              ],
+            },
+            {
+              title: "Depende de terceiros",
+              items: [
+                "Link e velocidade contratados da operadora",
+                "Licença e suporte interno de sistemas contratados",
+                "Recuperação de conta junto ao provedor",
+                "Garantia de fabricante em equipamento novo",
+              ],
+            },
+          ]}
+          footer="A sessão remota só é iniciada com sua autorização e você acompanha tudo na tela. Não instalamos acesso permanente."
+        />
+
         <TrustSection />
         <CTASection />
       </main>
