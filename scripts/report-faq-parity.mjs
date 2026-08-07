@@ -57,7 +57,9 @@ for (const route of routes) {
     const res = await page.goto(`${BASE}${route}`, { waitUntil: "networkidle", timeout: 45000 });
     if (!res || !res.ok()) status = `http_${res ? res.status() : "erro"}`;
 
-    visible = await page.$$eval("h3, summary, [data-faq-question]", (els) =>
+    // Somente perguntas dentro de blocos de FAQ (acordeão ou <details>),
+    // evitando falsos positivos de títulos de seção terminados em "?".
+    visible = await page.$$eval("[data-faq-question], details > summary", (els) =>
       els.map((e) => e.textContent || "").filter((t) => t.trim().endsWith("?")),
     );
     structured = await page.$$eval('script[type="application/ld+json"]', (els) => {
