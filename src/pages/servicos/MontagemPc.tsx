@@ -238,6 +238,10 @@ const MontagemPc = () => {
             <Link to="/equipamentos-atendidos" className="text-primary underline underline-offset-4">
               equipamentos atendidos
             </Link>
+            . Para padronizar estações em empresa, veja{" "}
+            <Link to="/empresa-de-ti-curitiba" className="text-primary underline underline-offset-4">
+              empresa de TI em Curitiba
+            </Link>
             .
           </p>
         </div>
