@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
 import { PageHero } from "@/components/PageHero";
@@ -9,6 +10,9 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { RealImageSection } from "@/components/RealImageSection";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
+import ServiceHeroSummary from "@/components/ServiceHeroSummary";
+import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
+import ThirdPartyLimits from "@/components/b2b/ThirdPartyLimits";
 import { trackPageView } from "@/lib/analytics";
 import { MessageCircle, Zap, Download, MapPinOff } from "lucide-react";
 
