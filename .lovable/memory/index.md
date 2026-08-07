@@ -15,6 +15,7 @@
 - [Regras de Negócio e Preços](mem://business/pricing-and-policies-pt-br) — Preços padrão R$ 99,99, garantias e coleta.
 - [Pipeline de Reviews](mem://features/reviews-pipeline-pt-br) — Fluxo WhatsApp T+24/72h e painel admin.
 - [Estratégia de Carregamento](mem://performance/loading-strategy-pt-br) — Shell crítico, LazyMount e Web Vitals.
+- [Padronização de Serviços](mem://features/service-operational-specs) — Matriz única de valor/prazo/escopo/fotos/agendamento e gate check:service-specs.
 - [Componentes Técnicos](mem://features/technical-components-pt-br) — Calculadora, Hub Diagnóstico e Painel Admin.
 
 ## Memórias Legadas (EN)
