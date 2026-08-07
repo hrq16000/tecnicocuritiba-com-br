@@ -12,6 +12,8 @@ import { RealImageSection } from "@/components/RealImageSection";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import ServiceHeroSummary from "@/components/ServiceHeroSummary";
 import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
+import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+import EditorialCallout from "@/components/EditorialCallout";
 import ThirdPartyLimits from "@/components/b2b/ThirdPartyLimits";
 import { trackPageView } from "@/lib/analytics";
 import { MessageCircle, Zap, Download, MapPinOff } from "lucide-react";
