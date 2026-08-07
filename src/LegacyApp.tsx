@@ -58,6 +58,8 @@ const AdminFunnel = lazy(() => import("./pages/admin/AdminFunnel"));
 const AdminMetricas = lazy(() => import("./pages/admin/AdminMetricas"));
 const AdminReviews = lazy(() => import("./pages/admin/AdminReviews"));
 const AdminOS = lazy(() => import("./pages/admin/AdminOS"));
+const AdminOSAuditoria = lazy(() => import("./pages/admin/AdminOSAuditoria"));
+
 const AdminVitals = lazy(() => import("./pages/admin/AdminVitals"));
 const ConsertoImpressoraCuritiba = lazy(() => import("./pages/ConsertoImpressoraCuritiba"));
 const AssistenciaEletrodomesticosInteligentesCuritiba = lazy(() => import("./pages/AssistenciaEletrodomesticosInteligentesCuritiba"));
