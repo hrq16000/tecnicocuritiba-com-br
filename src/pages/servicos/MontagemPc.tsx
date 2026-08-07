@@ -82,6 +82,18 @@ const MontagemPc = () => {
                 Solicitar Orçamento
               </Button>
             </div>
+            <ul className="mt-6 flex flex-wrap justify-center gap-2 text-sm text-white/90" data-escopo-montagem>
+              {[
+                "Peças do cliente ou configuração a definir",
+                "Compatibilidade antes da montagem",
+                "Organização e configuração",
+                "Testes antes da entrega",
+              ].map((item) => (
+                <li key={item} className="rounded-full border border-white/25 bg-white/10 px-3 py-1">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
