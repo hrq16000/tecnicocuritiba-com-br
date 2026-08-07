@@ -180,6 +180,123 @@ const BackupRecuperacao = () => {
         </div>
       </section>
 
+      {/* Conceitos distintos: sincronização × backup × recuperação (3T) */}
+      <section id="conceitos" className="py-10 bg-background scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-3">
+            Sincronização, backup e recuperação não são a mesma coisa
+          </h2>
+          <p className="text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            Confundir os três conceitos é a causa mais comum de perda de arquivo em empresa. Cada um resolve um
+            problema diferente e nenhum deles substitui o outro.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              {
+                title: "Sincronização",
+                body: "Replica as alterações entre pastas, computadores ou nuvem. Se um arquivo é apagado ou corrompido, a exclusão também é replicada nas outras cópias.",
+              },
+              {
+                title: "Backup",
+                body: "Mantém cópias separadas, com versões ou retenção conforme a estratégia definida. É o que permite voltar a um estado anterior do arquivo.",
+              },
+              {
+                title: "Recuperação de dados",
+                body: "É uma tentativa posterior à perda, falha ou indisponibilidade da mídia. Depende do estado do disco e não tem resultado garantido.",
+              },
+            ].map((c) => (
+              <div key={c.title} className="bg-secondary p-6 rounded-xl border border-border">
+                <h3 className="text-lg font-bold text-foreground mb-2">{c.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Estratégia de cópias, frequência e retenção (3T) */}
+      <section id="estrategia" className="py-10 bg-secondary scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground text-center mb-3">
+              Estratégia de cópias: o que proteger, onde e com que frequência
+            </h2>
+            <p className="text-muted-foreground text-center mb-8">
+              A configuração é definida a partir dos arquivos que a empresa indica como importantes, do
+              armazenamento já existente e do que é viável no ambiente atual.
+            </p>
+            <ol className="grid gap-3 md:grid-cols-2 mb-8">
+              {[
+                "Mapear os arquivos que não podem ser perdidos",
+                "Identificar quem é responsável por cada conjunto de dados",
+                "Avaliar o armazenamento atual: disco interno, externo e nuvem do cliente",
+                "Definir cópias, frequência e período de retenção possível",
+                "Configurar dentro do escopo autorizado",
+                "Testar a restauração quando o teste for contratado",
+                "Documentar o que ficou configurado e o que ficou de fora",
+                "Revisar quando o volume, a equipe ou os sistemas mudarem",
+              ].map((step, i) => (
+                <li key={step} className="flex gap-3 bg-background rounded-lg p-4 border border-border">
+                  <span className="font-bold text-accent shrink-0">{i + 1}.</span>
+                  <span className="text-sm text-muted-foreground">{step}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="text-sm text-muted-foreground">
+              Não há armazenamento próprio, revisão contínua automática nem monitoramento sem contratação
+              específica. Capacidade, versões e retenção dependem da mídia e do plano de nuvem que a empresa já
+              mantém com o fornecedor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Teste de restauração (3T) */}
+      <section id="restauracao" className="py-10 bg-background scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <blockquote className="border-l-4 border-accent bg-secondary rounded-r-xl p-6 mb-6">
+              <p className="text-lg font-semibold text-foreground">
+                Um backup só pode ser considerado confiável quando existe uma cópia separada e o processo de
+                restauração é testado.
+              </p>
+            </blockquote>
+            <h2 className="text-2xl font-heading font-bold text-foreground mb-3">
+              O que o teste de restauração depende
+            </h2>
+            <ul className="grid gap-2 md:grid-cols-2">
+              {[
+                "Disponibilidade do equipamento e da janela de parada",
+                "Permissões de acesso concedidas pela empresa",
+                "Tamanho dos arquivos e tempo de cópia",
+                "Ambiente e sistema em que o dado será restaurado",
+                "Aplicação que gerou o arquivo e seu formato",
+                "Fornecedor da nuvem ou do sistema de origem",
+                "Escopo efetivamente contratado para o teste",
+              ].map((t) => (
+                <li key={t} className="flex gap-2 text-sm text-muted-foreground">
+                  <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-muted-foreground mt-4">
+              Prevenção e tentativa posterior são frentes distintas: veja também{" "}
+              <Link to="/seguranca-dos-dados" className="text-accent underline underline-offset-2">
+                segurança dos dados
+              </Link>{" "}
+              e o{" "}
+              <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
+                suporte técnico empresarial
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+
       {/* Sistemas, credenciais e acessos de terceiros — padrão visual empresarial (3T) */}
       <ThirdPartyLimits
         id="credenciais"
