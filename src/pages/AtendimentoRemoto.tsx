@@ -39,6 +39,59 @@ const benefits = [
   }
 ];
 
+const ELEGIBILIDADE = [
+  {
+    title: "O computador inicia",
+    body: "O equipamento precisa ligar e permitir acesso ao sistema para que a sessão remota seja possível.",
+  },
+  {
+    title: "Há conexão com a internet",
+    body: "A estabilidade da conexão influencia diretamente o andamento e a duração da sessão.",
+  },
+  {
+    title: "O usuário pode autorizar",
+    body: "A pessoa responsável pelo equipamento precisa acompanhar ou autorizar o acesso durante o atendimento.",
+  },
+  {
+    title: "O problema é compatível",
+    body: "Falha física, ausência de imagem, falta de energia e equipamento que não liga podem exigir atendimento presencial.",
+  },
+];
+
+const FLUXO = [
+  ["Solicitação", "Você descreve o problema pelo WhatsApp."],
+  ["Triagem", "Perguntas objetivas para entender o sintoma e o equipamento."],
+  ["Confirmação de compatibilidade", "Avaliamos se o caso pode ser tratado à distância."],
+  ["Autorização", "Você confirma o acesso e acompanha a sessão."],
+  ["Acesso temporário", "Conexão com código temporário, sem instalação de acesso permanente."],
+  ["Procedimento", "Execução do que foi combinado, com você acompanhando na tela."],
+  ["Encerramento da sessão", "Conexão finalizada e acesso revogado ao término."],
+  ["Orientação", "Explicação do que foi feito e do que evitar daqui em diante."],
+];
+
+const FAQ = [
+  {
+    q: "Atendimento remoto serve para residência e para empresa?",
+    a: "Sim. A modalidade é a mesma para computador de casa, home office, profissional autônomo e equipamento de escritório. Muda apenas quem autoriza o acesso: no ambiente empresarial a autorização vem de quem responde pelo equipamento.",
+  },
+  {
+    q: "Como o acesso ao meu computador é autorizado?",
+    a: "A sessão só começa com o seu consentimento e um código temporário informado por você. Você acompanha a tela durante todo o atendimento, pode encerrar a qualquer momento e o acesso é revogado ao final. Não deixamos acesso permanente instalado.",
+  },
+  {
+    q: "Todo problema pode ser resolvido remotamente?",
+    a: "Não. O acesso remoto resolve software, configuração e verificação. Quando há suspeita de falha física, ausência de imagem, falta de energia ou risco para os dados, o caso passa para atendimento presencial, coleta ou bancada.",
+  },
+  {
+    q: "Preciso enviar minhas senhas antes da sessão?",
+    a: "Não. Nunca peça nem envie senha bancária, código de autenticação em duas etapas ou chave de recuperação por mensagem. Quando um acesso é necessário, ele é o mínimo indispensável e limitado ao tempo do atendimento.",
+  },
+  {
+    q: "O atendimento remoto é um plano mensal ou monitoramento contínuo?",
+    a: "Não. É atendimento por chamado, com escopo definido em cada sessão. Não oferecemos plano mensal, monitoramento permanente, antivírus gerenciado nem suporte ilimitado.",
+  },
+];
+
 const AtendimentoRemoto = () => {
   useEffect(() => {
     document.title = "Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba";
@@ -49,6 +102,14 @@ const AtendimentoRemoto = () => {
     <div className="min-h-screen bg-background">
       <PageSEO title="Atendimento Remoto de Informática em Curitiba | Técnico em Curitiba" description="Suporte técnico remoto em Curitiba: lentidão, vírus, erros do Windows, drivers e configuração de programas resolvidos por acesso autorizado, sem visita. Veja o que é possível resolver à distância e o que exige atendimento presencial." path="/atendimento-remoto" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]} />
       <JsonLdSchema />
+      <BusinessPageSchema
+        id="atendimento-remoto"
+        path="/atendimento-remoto"
+        name="Atendimento remoto de informática em Curitiba"
+        description="Modalidade de atendimento por acesso autorizado ao computador, para uso residencial e empresarial, com limites e requisitos definidos."
+        breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Atendimento Remoto", path: "/atendimento-remoto" }]}
+        faq={FAQ}
+      />
       <Header />
       <main id="main-content">
         <PageHero
@@ -58,12 +119,15 @@ const AtendimentoRemoto = () => {
         />
 
         <ServiceHeroSummary
-          summary="Atendimento remoto é acesso autorizado ao seu computador para resolver o que é software: lentidão, vírus, erros do Windows, drivers, impressora em rede e configuração de programas. Problema físico continua exigindo visita ou coleta."
+          summary="Atendimento remoto é uma modalidade: acesso autorizado e temporário ao computador — de casa, do home office ou do escritório — para resolver o que é software. Cada sessão é por chamado, não é plano nem monitoramento contínuo. Problema físico continua exigindo visita ou coleta."
           items={[
-            { id: "vantagens", label: "Por que o atendimento remoto" },
-            { id: "como-funciona", label: "Como funciona" },
+            { id: "vantagens", label: "Quando o atendimento remoto ajuda" },
+            { id: "requisitos", label: "Requisitos" },
+            { id: "fluxo", label: "Como funciona" },
+            { id: "autorizacao", label: "Segurança e autorização" },
             { id: "contextos-remoto", label: "Situações atendidas" },
-            { id: "limites-remoto", label: "O que não é possível remotamente" },
+            { id: "limites-remoto", label: "O que não pode ser resolvido remotamente" },
+            { id: "perguntas", label: "Perguntas frequentes" },
           ]}
         />
 
@@ -74,6 +138,30 @@ const AtendimentoRemoto = () => {
             subtitle="Solução rápida, prática e segura para resolver problemas de informática"
           />
         </div>
+
+        <section id="requisitos" className="scroll-mt-24 bg-secondary py-8 md:py-10">
+          <div className="container mx-auto max-w-4xl px-4">
+            <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Requisitos para o atendimento remoto
+            </h2>
+            <p className="mt-3 text-center text-muted-foreground">
+              Antes de conectar, verificamos quatro condições. Se alguma não for atendida, indicamos{" "}
+              <Link to="/atendimento-domicilio" className="text-accent underline underline-offset-2">
+                atendimento a domicílio
+              </Link>{" "}
+              ou coleta.
+            </p>
+            <ul className="mt-6 grid gap-4 md:grid-cols-2">
+              {ELEGIBILIDADE.map((item) => (
+                <li key={item.title} className="rounded-xl border border-border bg-background p-5">
+                  <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
 
         <section id="como-funciona" className="scroll-mt-24 py-8 md:py-10 bg-background">
           <div className="container mx-auto">
