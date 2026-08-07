@@ -336,6 +336,7 @@ const ProblemaPage = () => {
         })}</script>
       </Helmet>
       <Header />
+      <main id="main-content">
       <Breadcrumbs
         emitSchema={false}
         items={[
@@ -863,6 +864,7 @@ const ProblemaPage = () => {
 
       <BlocoInteligencia />
       <InterlinkingBlock />
+      </main>
       <Footer />
     </div>
   );

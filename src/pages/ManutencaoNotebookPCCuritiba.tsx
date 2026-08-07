@@ -109,6 +109,7 @@ export default function ManutencaoNotebookPCCuritiba() {
         ]}
       />
 
+      <main id="main-content">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <Breadcrumbs items={[{ label: "Manutenção de Notebook e PC em Curitiba" }]} />
 
@@ -263,6 +264,7 @@ export default function ManutencaoNotebookPCCuritiba() {
           </Button>
         </section>
       </div>
+      </main>
     </>
   );
 }
