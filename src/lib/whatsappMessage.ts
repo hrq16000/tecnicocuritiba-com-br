@@ -103,6 +103,21 @@ export function buildContextualMessage(ctx: WaMessageContext = {}): string {
   const urg = clean(ctx.urgencia);
   if (urg) lines.push(`Urgência: ${urg}.`);
 
+  // Parâmetros dinâmicos do equipamento — evitam ida e volta no atendimento.
+  const modelo = clean(ctx.modelo);
+  if (modelo) lines.push(`Modelo: ${modelo}.`);
+
+  const sintomas = (ctx.sintomas ?? []).map((s) => clean(s)).filter(Boolean);
+  if (sintomas.length > 0) lines.push(`Sintomas: ${sintomas.join("; ")}.`);
+
+  const detalhes = clean(ctx.detalhes);
+  if (detalhes) lines.push(`Detalhes: ${detalhes}.`);
+
+  if (typeof ctx.temImagem === "boolean") {
+    lines.push(ctx.temImagem ? "Fotos/vídeo: vou enviar agora nesta conversa." : "Fotos/vídeo: ainda não tenho.");
+  }
+
+
   // Só cita a condição comercial quando há assunto — evita ruído no CTA genérico.
   if (subject) lines.push(`Condição: ${clean(ctx.condicao) || DEFAULT_CONDICAO}.`);
 
