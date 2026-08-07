@@ -9,7 +9,11 @@
  *   BASE_URL=http://localhost:8080 node scripts/check-sitemap-urls.mjs
  *   MAX_URLS=60 node scripts/check-sitemap-urls.mjs
  */
+import nodeFs from "node:fs";
+import nodePath from "node:path";
+
 const BASE = (process.env.BASE_URL || "http://localhost:8080").replace(/\/$/, "");
+
 const MAX_URLS = Number(process.env.MAX_URLS || 80);
 
 const locsFromXml = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
