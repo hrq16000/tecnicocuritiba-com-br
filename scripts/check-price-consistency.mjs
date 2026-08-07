@@ -18,7 +18,7 @@ const specsSrc = readFileSync("src/lib/serviceSpecs.ts", "utf8");
 const normalize = (v) => v.replace(/\s+/g, " ").replace(/R\$\s*/g, "").replace(/,00$/, "").trim();
 
 const allowed = new Set(
-  [...cfg.matchAll(/R\$\s*\$?\{?[^"`'\n]*?([0-9][0-9.]*(?:,[0-9]{2})?)/g)].map((m) => normalize(m[1])),
+  [...cfg.matchAll(/R\$\s*\$?\{?[^"`'\n]*?([0-9]{1,3}(?:\.[0-9]{3})*(?:,[0-9]{2})?)/g)].map((m) => normalize(m[1])),
 );
 // Faixas de peças declaradas na planilha
 const faixas = cfg.match(/FAIXAS_PECAS_VALORES\s*=\s*\[([^\]]*)\]/);
@@ -35,7 +35,7 @@ const errors = [];
 const dir = "src/pages/servicos";
 for (const file of readdirSync(dir).filter((f) => f.endsWith(".tsx"))) {
   const src = readFileSync(join(dir, file), "utf8");
-  for (const m of src.matchAll(/R\$\s*([0-9][0-9.]*(?:,[0-9]{2})?)/g)) {
+  for (const m of src.matchAll(/R\$\s*([0-9]{1,3}(?:\.[0-9]{3})*(?:,[0-9]{2})?)/g)) {
     const value = normalize(m[1]);
     if (!allowed.has(value)) {
       errors.push(`${dir}/${file}: valor R$ ${m[1]} não existe em coletaConfig.ts (divergência de preço)`);
