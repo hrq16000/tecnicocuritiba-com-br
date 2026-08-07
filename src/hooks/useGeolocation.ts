@@ -1,43 +1,42 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  CURITIBA_REGION_CITIES,
+  confirmGeoCity,
+  getGeoState,
+  startGeoDetection,
+  subscribeGeo,
+  type GeoStatus,
+} from "@/lib/geoCity";
 
 interface GeoData {
+  /** Cidade atendida detectada/confirmada. String vazia quando desconhecida. */
   city: string;
+  neighborhood: string;
   region: string;
+  status: GeoStatus;
   isLoading: boolean;
   error: string | null;
+  confirmCity: (city: string, neighborhood?: string) => void;
 }
 
-const CURITIBA_REGION_CITIES = [
-  "Curitiba",
-  "São José dos Pinhais",
-  "Araucária",
-  "Campo Largo",
-  "Pinhais",
-  "Colombo",
-  "Almirante Tamandaré",
-  "Fazenda Rio Grande",
-  "Piraquara",
-];
-
-// Fallback city when geolocation fails
-const getRandomLocalCity = () => {
-  const cities = CURITIBA_REGION_CITIES;
-  return cities[Math.floor(Math.random() * cities.length)];
-};
-
 export const useGeolocation = (): GeoData => {
-  const [geoData, setGeoData] = useState<GeoData>({
-    city: getRandomLocalCity(),
-    region: "Paraná",
-    isLoading: false,
-    error: null,
-  });
+  const [geo, setGeo] = useState(getGeoState);
 
   useEffect(() => {
-    setGeoData((current) => ({ ...current, isLoading: false }));
+    startGeoDetection();
+    setGeo(getGeoState());
+    return subscribeGeo(setGeo);
   }, []);
 
-  return geoData;
+  return {
+    city: geo.city ?? "",
+    neighborhood: geo.neighborhood ?? "",
+    region: geo.region,
+    status: geo.status,
+    isLoading: geo.status === "loading",
+    error: geo.status === "unknown" ? "not_served" : null,
+    confirmCity: confirmGeoCity,
+  };
 };
 
 export { CURITIBA_REGION_CITIES };
