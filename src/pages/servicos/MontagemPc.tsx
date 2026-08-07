@@ -185,8 +185,32 @@ const MontagemPc = () => {
         </div>
       </section>
 
+      <BusinessContextGrid
+        id="contextos-montagem"
+        title="Contextos de uso que mudam a configuração"
+        intro="A montagem é sempre por projeto: cada configuração nasce do que a máquina vai rodar. Não existe pacote mensal, franquia de horas nem suporte ilimitado atrelado à montagem — o escopo termina na entrega com checklist."
+        contexts={[
+          {
+            title: "Jogos e streaming em casa",
+            body: "A definição parte da resolução do monitor e dos títulos jogados. Ajustamos GPU, memória e refrigeração ao orçamento. Limite: não prometemos FPS nem fazemos overclock — trabalhamos dentro das especificações do fabricante.",
+          },
+          {
+            title: "Edição, 3D e CAD",
+            body: "Levantamento do software usado, tamanho dos projetos, número de monitores e armazenamento. A escolha segue os requisitos oficiais da aplicação. Limite: desempenho em um programa específico não é garantido por contrato.",
+          },
+          {
+            title: "Estação de trabalho em escritório",
+            body: "Máquina para uso prolongado, com prioridade em estabilidade, ruído e consumo. A aprovação vem de quem responde pela compra. Limite: a montagem é pontual; suporte contínuo é tratado à parte em suporte para empresas.",
+          },
+          {
+            title: "Reaproveitamento de peças existentes",
+            body: "Parte dos componentes vem do equipamento atual. Conferimos compatibilidade e estado antes de montar. Limite: peça usada não tem garantia nossa e pode inviabilizar a montagem na conferência.",
+          },
+        ]}
+      />
+
       {/* Peças fornecidas pelo cliente */}
-      <section className="py-10 bg-background" id="pecas-do-cliente">
+      <section className="scroll-mt-24 py-10 bg-background" id="pecas-do-cliente">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-heading font-bold text-foreground text-center mb-6">
             Política para peças fornecidas pelo cliente
