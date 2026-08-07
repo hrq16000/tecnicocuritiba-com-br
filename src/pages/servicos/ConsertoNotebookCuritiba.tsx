@@ -15,6 +15,7 @@ import TrustStrip from "@/components/TrustStrip";
 import PageTableOfContents from "@/components/PageTableOfContents";
 
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -331,6 +332,7 @@ const ConsertoNotebookCuritiba = () => {
       </section>
 
       <InterlinkingBlock />
+      <ServiceOperationalSpec path="/servicos/conserto-notebook-curitiba" />
       </main>
       <Footer />
     </div>

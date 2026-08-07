@@ -15,6 +15,7 @@ import InlineTriageCTA from "@/components/InlineTriageCTA";
 import ThirdPartyLimits from "@/components/b2b/ThirdPartyLimits";
 import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -482,6 +483,7 @@ const BackupRecuperacao = () => {
           </div>
         </div>
       </section>
+      <ServiceOperationalSpec path="/servicos/backup-recuperacao" />
       </main>
       <InterlinkingBlock />
       <Footer />

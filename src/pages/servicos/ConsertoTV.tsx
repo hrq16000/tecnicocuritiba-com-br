@@ -21,6 +21,7 @@ import {
   REGRA_COLETA_SEM_VISITA,
   MSG_COLETA_RESUMO,
 } from "@/lib/coletaConfig";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -354,6 +355,7 @@ const ConsertoTV = () => {
       </section>
 
       <BlocoInteligencia />
+      <ServiceOperationalSpec path="/servicos/conserto-tv" />
       </main>
       <Footer />
 

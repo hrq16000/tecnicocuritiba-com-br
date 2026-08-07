@@ -27,6 +27,9 @@ jobs:
         run: npm run test:unit
       - name: CTA funnel gate
         run: npm run check:cta-funnel
+      - name: Padronização operacional dos serviços (valor, prazo, escopo, fotos, agendamento)
+        run: npm run check:service-specs
+
       - name: Build
         run: npm run build
       - name: Sitemap /problemas/* guard (189 unique)

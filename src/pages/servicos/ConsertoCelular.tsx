@@ -20,6 +20,7 @@ import {
   REGRA_COLETA_SEM_VISITA,
   MSG_COLETA_RESUMO,
 } from "@/lib/coletaConfig";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -282,6 +283,7 @@ const ConsertoCelular = () => {
 
       <BlocoInteligencia />
         <LocalPhotoGallery local="Curitiba" variant="celular" />
+      <ServiceOperationalSpec path="/servicos/conserto-celular" />
       </main>
       <Footer />
     </div>

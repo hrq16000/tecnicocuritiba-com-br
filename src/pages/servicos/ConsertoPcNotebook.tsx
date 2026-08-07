@@ -14,6 +14,7 @@ import ServiceHeroSummary from "@/components/ServiceHeroSummary";
 import EditorialCallout from "@/components/EditorialCallout";
 import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -303,6 +304,7 @@ const ConsertoPcNotebook = () => {
         </div>
       </section>
       <InterlinkingBlock />
+      <ServiceOperationalSpec path="/servicos/conserto-pc-notebook" />
       </main>
       <Footer />
     </div>
