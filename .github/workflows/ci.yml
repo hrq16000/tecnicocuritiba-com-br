@@ -46,6 +46,9 @@ jobs:
 
       - name: Gate visual 3T (propagação empresarial em serviços)
         run: node scripts/check-visual-wave-3t.mjs
+
+      - name: Gate visual 3U (remoto, dados, montagem)
+        run: node scripts/check-visual-wave-3u.mjs
       - name: Brand consistency (og:site_name / Organization.name / LocalBusiness.name)
         run: node scripts/check-brand-consistency.mjs
       - name: JSON-LD validation

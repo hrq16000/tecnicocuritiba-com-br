@@ -24,6 +24,7 @@ const ALLOW_NEGATIVE = [
   /não fazemos/i,
   /nem com metas/i,
   /não assumimos/i,
+  /nenhum dos casos oferecemos/i,
 ];
 
 const TARGETS = [
