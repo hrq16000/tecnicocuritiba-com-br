@@ -59,6 +59,7 @@ const RedesWifi = () => {
       />
       <Header />
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Redes e Wi-Fi" }]} />
+      <main id="main-content">
       
       {/* Hero Section */}
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
@@ -470,6 +471,7 @@ const RedesWifi = () => {
         </div>
       </section>
 
+      </main>
       <InterlinkingBlock />
       <Footer />
 
