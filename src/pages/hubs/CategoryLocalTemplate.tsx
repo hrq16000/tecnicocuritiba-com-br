@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useParams, Navigate } from "react-router-dom";
@@ -11,7 +12,6 @@ import { trackPageView } from "@/lib/analytics";
 import { CATEGORIES, type CategoryId, findCategory } from "./categories";
 import { LOCAIS, findLocal, type LocalData } from "./locais";
 import {
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   Package, ShieldCheck, Clock, Wrench, MapPin, MessageCircle,
 } from "lucide-react";
 

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { CityServiceSchema } from "@/components/CityServiceSchema";
@@ -18,7 +19,6 @@ import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Trees } from "lucide-react";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const benefits = [
   {

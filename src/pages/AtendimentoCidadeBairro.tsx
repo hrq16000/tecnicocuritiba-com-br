@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useMemo } from "react";
 import { useParams, Navigate, Link, useSearchParams } from "react-router-dom";
 
@@ -11,7 +12,6 @@ import { buildWhatsAppUrl } from "@/lib/whatsappMessage";
 import { CIDADES, SERVICOS } from "@/lib/servicoCidadeData";
 import { getBairro } from "@/lib/atendimentoBairrosData";
 import { MessageCircle, MapPin, Clock, Shield, CheckCircle, Wrench } from "lucide-react";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 

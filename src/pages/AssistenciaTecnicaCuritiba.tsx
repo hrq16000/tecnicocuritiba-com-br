@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -8,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { trackCTAClick, trackPageView } from "@/lib/analytics";
 import { SiteBaseSchema } from "@/components/SiteBaseSchema";
 import {
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   MessageCircle,
   Gamepad2,
   Monitor,

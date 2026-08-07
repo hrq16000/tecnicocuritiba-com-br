@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -7,7 +8,6 @@ import PageSummaryBand from "@/components/PageSummaryBand";
 import { Button } from "@/components/ui/button";
 import { trackCTAClick } from "@/lib/analytics";
 import { MessageCircle, CheckCircle, ShieldCheck, HardDrive, Wifi, Users } from "lucide-react";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WA = "https://wa.me/5541997452053?text=" +
   encodeURIComponent("Olá! Quero organizar a TI do meu escritório em Curitiba. Pode me orientar?") +

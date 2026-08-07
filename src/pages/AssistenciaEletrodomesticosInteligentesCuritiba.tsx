@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
@@ -7,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Refrigerator, MessageCircle, CalendarCheck, CheckCircle, Wifi, Shield, ArrowRight } from "lucide-react";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP = "5541997452053";
 const PATH = "/assistencia-eletrodomesticos-inteligentes-curitiba";

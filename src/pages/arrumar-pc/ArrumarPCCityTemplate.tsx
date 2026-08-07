@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
@@ -10,7 +11,6 @@ import { CTASection } from "@/components/CTASection";
 import { trackPageView } from "@/lib/analytics";
 import { getCityOgImage, getCityHeroImage } from "./cityImages";
 import {
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   ShieldCheck,
   Wifi,
   Zap,

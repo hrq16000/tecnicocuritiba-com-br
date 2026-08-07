@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -13,7 +14,6 @@ import PageTableOfContents from "@/components/PageTableOfContents";
 import TrustStrip from "@/components/TrustStrip";
 import { trackPageView } from "@/lib/analytics";
 import { NAP } from "@/lib/nap";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_URL = `${NAP.whatsappUrl}?text=${encodeURIComponent(
   "Olá! Quero falar sobre segurança e proteção dos dados dos meus computadores.",

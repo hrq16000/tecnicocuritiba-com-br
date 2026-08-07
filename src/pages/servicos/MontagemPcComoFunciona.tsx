@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, ClipboardCheck, Cpu, MessageCircle, Package, Timer, Wrench } from "lucide-react";
@@ -9,7 +10,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const PATH = "/servicos/montagem-pc/como-funciona";
 

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
@@ -12,7 +13,6 @@ import {
   Shield, Wrench, MessageCircle, ChevronRight, Building2, Calendar,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP = "5541997452053";
 

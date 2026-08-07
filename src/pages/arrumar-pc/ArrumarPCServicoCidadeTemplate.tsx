@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
@@ -9,7 +10,6 @@ import { trackPageView } from "@/lib/analytics";
 import { ShieldCheck, Zap, MapPin, MessageCircle, CheckCircle2, Wrench } from "lucide-react";
 import type { CityData } from "./ArrumarPCCityTemplate";
 import type { ServicoData } from "./services";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 

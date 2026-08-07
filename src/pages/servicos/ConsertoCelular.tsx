@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
@@ -13,7 +14,6 @@ import {
   AlertTriangle, Wrench, Users, Truck
 } from "lucide-react";
 import {
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
   COLETA_TAXA_MINIMA_LABEL,
   PRAZO_RAPIDO,
   REGRA_ORCAMENTO_GRATIS,

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Header } from "@/components/Header";
@@ -19,7 +20,6 @@ import {
   CreditCard,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MSG =

@@ -1,3 +1,4 @@
+import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { Link } from "react-router-dom";
 import { Laptop, Monitor, Cpu, HardDrive, Wrench, Shield, Clock, MapPin, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -5,7 +6,6 @@ import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import { useEffect } from "react";
-import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 
 const WA = "https://wa.me/5541997452053?text=" + encodeURIComponent("Olá! Preciso de manutenção de notebook/PC em Curitiba.");
 
