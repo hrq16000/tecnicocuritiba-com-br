@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackBusinessCTA } from "@/lib/b2bTracking";
 
 interface Props {
   title: string;
