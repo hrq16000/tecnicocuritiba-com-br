@@ -64,7 +64,7 @@ for (const key of keys) {
 // -------------------------------------------------------------- credit lib
 const creditsSrc = read("src/lib/imageCredits.ts");
 for (const field of ["sourceUrl", "license", "licenseUrl", "creditLabel", "ogImageFromKey", "imageVariants"]) {
-  if (!creditsSrc.includes(field)) errors.push(`src/lib/imageCredits.ts: campo/へelper "${field}" ausente.`);
+  if (!creditsSrc.includes(field)) errors.push(`src/lib/imageCredits.ts: campo/helper "${field}" ausente.`);
 }
 
 // ------------------------------------------------- credit rendering places
