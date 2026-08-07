@@ -35,7 +35,11 @@ export const BusinessInlineCTA = ({
             target="_blank"
             rel="noopener noreferrer"
             data-cta-location={ctaLocation}
-            onClick={onClick}
+            data-b2b-cta="inline"
+            onClick={() => {
+              trackBusinessCTA("whatsapp", ctaLocation, { cta_slot: "inline" });
+              onClick?.();
+            }}
           >
             <MessageCircle className="h-5 w-5" aria-hidden="true" />
             {ctaLabel}
