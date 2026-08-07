@@ -36,6 +36,7 @@ export const LocalFAQSection = ({ title, faqs }: LocalFAQSectionProps) => {
     <section className="py-12 md:py-16 bg-background relative overflow-hidden">
       {/* Schema FAQPage (local) */}
       <script
+        data-jsonld-scope="local"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

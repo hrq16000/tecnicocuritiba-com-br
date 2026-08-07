@@ -107,7 +107,7 @@ export const CategoryLocalTemplate = ({ categoryId, localSlug }: Props) => {
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script data-jsonld-scope="local" type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <Header />

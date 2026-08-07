@@ -126,6 +126,7 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {data.faq.length > 0 && (
         <script
+          data-jsonld-scope="local"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
