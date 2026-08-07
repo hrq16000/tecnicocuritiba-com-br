@@ -50,9 +50,10 @@ const run = async () => {
 
     for (const slot of slots) {
       const name = await slot.getAttribute("data-ad-slot");
-      const box = await slot.boundingBox();
-      if (box && box.y < FOLD_PX) {
-        errors.push(`${route} [${name}]: slot acima da dobra (y=${Math.round(box.y)}px < ${FOLD_PX}px)`);
+      // Posição absoluta no documento (independente do scroll atual).
+      const docY = await slot.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+      if (docY < FOLD_PX) {
+        errors.push(`${route} [${name}]: slot acima da dobra (y=${Math.round(docY)}px < ${FOLD_PX}px)`);
       }
       const info = await slot.evaluate((el) => ({
         creatives: el.querySelectorAll("[data-ad-creative]").length,
