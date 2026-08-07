@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { creditLabel, getImageCredit, imageTitle } from "@/lib/imageCredits";
 import { IMAGES } from "@/lib/images";
 
 export interface GalleryItem {
@@ -12,13 +13,16 @@ interface Props {
   subtitle?: string;
   items: GalleryItem[];
   bgClass?: string;
+  /** Localidade usada nos títulos/alt (ex.: "Batel, Curitiba") */
+  local?: string;
 }
 
 /**
- * Galeria acessível (WebP via Unsplash `?fm=webp`), com legendas e alt semântico.
+ * Galeria acessível (WebP via Unsplash `?fm=webp`), com legendas, alt semântico,
+ * atributo `title` descritivo e crédito/licença visível por foto.
  * `loading="lazy"` + `decoding="async"` para preservar LCP/INP.
  */
-export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-background" }: Props) => {
+export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-background", local }: Props) => {
   const ref = useRef<HTMLElement | null>(null);
 
   // Guard de desenvolvimento: a galeria precisa ficar ANTES do <footer> no DOM.
@@ -55,12 +59,15 @@ export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-backgroun
             const src = rawSrc.includes("unsplash.com")
               ? rawSrc.replace(/(\?|&)auto=format/, "$1fm=webp&auto=format")
               : rawSrc;
+            const credit = getImageCredit(it.imageKey as string);
             const alt = it.altOverride || (IMAGES[`${it.imageKey}Alt` as keyof typeof IMAGES] as string) || it.caption;
+            const imgTitle = credit ? imageTitle(credit, local) : alt;
             return (
               <figure key={i} className="rounded-xl overflow-hidden bg-secondary border border-border">
                 <img
                   src={src}
                   alt={alt}
+                  title={imgTitle}
                   loading="lazy"
                   decoding="async"
                   width={600}
@@ -69,6 +76,28 @@ export const ServiceGallery = ({ title, subtitle, items, bgClass = "bg-backgroun
                 />
                 <figcaption className="text-xs text-muted-foreground p-3 leading-snug italic text-center">
                   {it.caption}
+                  {credit && (
+                    <span className="not-italic block mt-1.5 text-[11px] text-muted-foreground/80" data-image-credit={credit.key}>
+                      {creditLabel(credit)} ·{" "}
+                      <a
+                        href={credit.sourceUrl}
+                        target="_blank"
+                        rel="noopener nofollow"
+                        className="underline underline-offset-2 hover:text-foreground"
+                      >
+                        foto original
+                      </a>{" "}
+                      ·{" "}
+                      <a
+                        href={credit.licenseUrl}
+                        target="_blank"
+                        rel="noopener nofollow license"
+                        className="underline underline-offset-2 hover:text-foreground"
+                      >
+                        licença
+                      </a>
+                    </span>
+                  )}
                 </figcaption>
               </figure>
             );

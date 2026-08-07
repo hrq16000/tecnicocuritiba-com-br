@@ -15,6 +15,16 @@ import path from "node:path";
 const SITE = "https://tecnicocuritiba.com.br";
 const PHONE = "+5541997452053";
 
+// Foto real (Unsplash, Unsplash License) exibida no card principal das páginas
+// locais — usada como imagem social para que qualquer citação da URL mostre
+// a mesma imagem que o usuário vê na página.
+const LOCAL_PHOTO_ID = "photo-1531482615713-2afd69097998";
+const LOCAL_PHOTO_BASE = `https://images.unsplash.com/${LOCAL_PHOTO_ID}`;
+const LOCAL_PHOTO_OG = `${LOCAL_PHOTO_BASE}?auto=format&fit=crop&w=1200&h=630&q=72`;
+const LOCAL_PHOTO_CREDIT = "Foto: Unsplash (Unsplash License)";
+const LOCAL_PHOTO_SOURCE = "https://unsplash.com/photos/1531482615713-2afd69097998";
+const LOCAL_PHOTO_LICENSE = "https://unsplash.com/license";
+
 // Sufixos de slug → cidade da RMC
 const CITY_SUFFIX = [
   ["-sjp", "São José dos Pinhais"],
@@ -65,24 +75,71 @@ function htmlEscape(s) {
     .replace(/'/g, "&#39;");
 }
 
+// Título curto e único (limite de 70 chars, validado por check-title-meta-unique).
+function clampTitle(main, suffix) {
+  const full = suffix ? `${main} | ${suffix}` : main;
+  if (full.length <= 70) return full;
+  return main.length <= 70 ? main : `${main.slice(0, 67).trimEnd()}...`;
+}
+
 function metaForPath(routePath) {
   const url = `${SITE}${routePath}`;
+  const segs = routePath.split("/").filter(Boolean);
+
   if (routePath.startsWith("/bairros/")) {
-    const { bairro, city } = bairroMeta(routePath.replace("/bairros/", ""));
+    const { bairro, city } = bairroMeta(segs[1]);
     return {
       url,
       routePath,
-      title: `Técnico de Informática em ${bairro}, ${city} | Atendimento a domicílio`,
+      title: clampTitle(`Técnico de Informática em ${bairro}, ${city}`, "Atendimento a domicílio"),
       description: `Assistência técnica de computador e notebook em ${bairro}, ${city}. Atendimento a domicílio, remoto ou coleta. Diagnóstico e orçamento pelo WhatsApp.`,
       areaServed: [bairro, city],
     };
   }
-  const last = routePath.split("/").filter(Boolean).pop() || "";
+
+  // /atendimento/<cidade> e /atendimento/<cidade>/<bairro>
+  if (segs[0] === "atendimento" && segs[1]) {
+    const city = titleize(segs[1]);
+    if (segs[2]) {
+      const bairro = titleize(segs[2]);
+      return {
+        url,
+        routePath,
+        title: clampTitle(`Atendimento Técnico em ${bairro}, ${city}`, "WhatsApp"),
+        description: `Suporte de informática no bairro ${bairro}, em ${city}. Atendimento a domicílio, coleta ou remoto, com orçamento pelo WhatsApp a partir de R$ 99,99.`,
+        areaServed: [bairro, city],
+      };
+    }
+    return {
+      url,
+      routePath,
+      title: clampTitle(`Atendimento Técnico em ${city}`, "Orçamento no WhatsApp"),
+      description: `Atendimento técnico de informática em ${city}: domicílio, coleta ou remoto. Orçamento pelo WhatsApp a partir de R$ 99,99, com garantia de 90 dias.`,
+      areaServed: [city, "Curitiba"],
+    };
+  }
+
+  // /servicos/<servico>/<bairro>
+  if (segs[0] === "servicos" && segs[2]) {
+    const servico = titleize(segs[1]);
+    const { bairro, city } = bairroMeta(segs[2]);
+    return {
+      url,
+      routePath,
+      title: clampTitle(`${servico} em ${bairro}, ${city}`, "Técnico em Curitiba"),
+      description: `${servico} em ${bairro}, ${city}. Atendimento a domicílio, coleta ou suporte remoto, com diagnóstico e orçamento pelo WhatsApp a partir de R$ 99,99.`,
+      areaServed: [bairro, city],
+    };
+  }
+
+  const last = segs[segs.length - 1] || "";
+  const nome = titleize(last);
+  const desc = `${nome}: assistência técnica de informática em Curitiba e RMC, com atendimento a domicílio, coleta ou remoto e orçamento pelo WhatsApp.`;
   return {
     url,
     routePath,
-    title: `${titleize(last)} | Técnico em Curitiba`,
-    description: `Assistência técnica de informática em Curitiba e Região Metropolitana. Diagnóstico e orçamento pelo WhatsApp.`,
+    title: clampTitle(`${nome} em Curitiba`, "Técnico em Curitiba"),
+    description: desc.length <= 175 ? desc : `${nome}: assistência técnica em Curitiba e RMC — atendimento a domicílio, coleta ou remoto, orçamento pelo WhatsApp.`,
     areaServed: ["Curitiba"],
   };
 }
@@ -112,19 +169,35 @@ function buildJsonLd(meta) {
         areaServed: meta.areaServed.map((name) => ({ "@type": "Place", name })),
       },
       {
+        "@type": "ImageObject",
+        "@id": `${meta.url}#primaryimage`,
+        contentUrl: LOCAL_PHOTO_OG,
+        url: LOCAL_PHOTO_OG,
+        name: `Atendimento técnico em ${meta.areaServed[0]}`,
+        description: `Técnico de informática realizando manutenção em computador — atendimento em ${meta.areaServed.join(", ")}`,
+        creditText: LOCAL_PHOTO_CREDIT,
+        creator: { "@type": "Organization", name: "Unsplash", url: "https://unsplash.com" },
+        copyrightNotice: LOCAL_PHOTO_CREDIT,
+        license: LOCAL_PHOTO_LICENSE,
+        acquireLicensePage: LOCAL_PHOTO_SOURCE,
+        width: 1200,
+        height: 630,
+      },
+      {
         "@type": "WebPage",
         "@id": `${meta.url}#webpage`,
         url: meta.url,
         name: meta.title,
         description: meta.description,
         inLanguage: "pt-BR",
+        primaryImageOfPage: { "@id": `${meta.url}#primaryimage` },
       },
     ],
   };
 }
 
 function injectMeta(html, meta) {
-  const ogImage = `${SITE}/og-image.jpg`;
+  const ogImage = LOCAL_PHOTO_OG;
   const block = [
     `<title>${htmlEscape(meta.title)}</title>`,
     `<meta name="description" content="${htmlEscape(meta.description)}">`,
@@ -139,7 +212,11 @@ function injectMeta(html, meta) {
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${htmlEscape(meta.title)}">`,
     `<meta name="twitter:description" content="${htmlEscape(meta.description)}">`,
+    `<meta property="og:image:width" content="1200">`,
+    `<meta property="og:image:height" content="630">`,
+    `<meta property="og:image:alt" content="${htmlEscape("Atendimento técnico de informática em " + meta.areaServed[0])}">`,
     `<meta name="twitter:image" content="${ogImage}">`,
+    `<meta name="twitter:image:alt" content="${htmlEscape("Atendimento técnico de informática em " + meta.areaServed[0])}">`,
     `<script type="application/ld+json">${JSON.stringify(buildJsonLd(meta))}</script>`,
   ].join("\n    ");
 

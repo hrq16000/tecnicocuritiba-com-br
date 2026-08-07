@@ -1,3 +1,6 @@
+import { ImageObjectSchema } from "@/components/ImageObjectSchema";
+import { mainImageKeyFor } from "@/components/LocalPhotoGallery";
+import { ogImageFromKey } from "@/lib/imageCredits";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -142,7 +145,7 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title={data.metaTitle} description={data.metaDescription} path={`/bairros/${data.slug}`} breadcrumbs={[
+      <PageSEO title={data.metaTitle} description={data.metaDescription} path={`/bairros/${data.slug}`} ogImage={ogImageFromKey(mainImageKeyFor("geral"))} breadcrumbs={[
         { name: "Início", path: "/" },
         { name: `Técnico em ${data.cidade}`, path: getCityLink() },
         { name: data.nome, path: `/bairros/${data.slug}` }
@@ -466,7 +469,13 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
         </AnimatedSection>
 
         <AnimatedSection>
+          <ImageObjectSchema
+            imageKeys={["tecnicoTrabalhando", "bancadaTecnica", "componentesSsd"]}
+            local={`${data.nome}, ${data.cidade}`}
+            path={`/bairros/${data.slug}`}
+          />
           <ServiceGallery
+            local={`${data.nome}, ${data.cidade}`}
             title={`Nosso trabalho no ${data.nome}`}
             subtitle={`Registros reais de bancada e atendimento a domicílio na região do ${data.nome}, em ${data.cidade}.`}
             items={[

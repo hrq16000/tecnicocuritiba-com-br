@@ -11,6 +11,7 @@ import { TrustStrip } from "@/components/TrustStrip";
 import { PageTableOfContents } from "@/components/PageTableOfContents";
 import { InlineTriageCTA } from "@/components/InlineTriageCTA";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
+import { PriceSchema } from "@/components/PriceSchema";
 import { trackPageView } from "@/lib/analytics";
 import { 
   Check, 
@@ -151,6 +152,11 @@ const PrecosEPoliticas = () => {
     <div className="min-h-screen bg-background">
       <PageSEO title="Tabela de Valores | Técnico de Informática Curitiba" description="Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 99,99. Transparência total nos valores." path="/valores" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Valores", path: "/valores" }]} />
       <JsonLdSchema />
+      <PriceSchema
+        categorias={servicosPrecos.map((c) => ({ categoria: c.categoria, servicos: c.servicos }))}
+        url="https://tecnicocuritiba.com.br/valores"
+        name="Tabela de valores — assistência técnica de informática em Curitiba"
+      />
       <Header />
       <main id="main-content">
         {/* Hero */}

@@ -1,3 +1,5 @@
+import { mainImageKeyFor } from "@/components/LocalPhotoGallery";
+import { ogImageFromKey } from "@/lib/imageCredits";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -117,7 +119,7 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title={data.metaTitle} description={data.metaDescription} path={`/servicos/${data.servicoSlug}/${data.bairroSlug}`} breadcrumbs={[
+      <PageSEO title={data.metaTitle} description={data.metaDescription} path={`/servicos/${data.servicoSlug}/${data.bairroSlug}`} ogImage={ogImageFromKey(mainImageKeyFor("geral"))} breadcrumbs={[
         { name: "Início", path: "/" },
         { name: "Serviços", path: "/servicos" },
         { name: data.servico, path: `/servicos/${data.servicoSlug}` },
