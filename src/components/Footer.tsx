@@ -144,15 +144,7 @@ const localBusinessSchema = {
     longitude: NAP.geo.lng,
   },
   hasMap: `https://www.google.com/maps/search/?api=1&query=${NAP.geo.lat},${NAP.geo.lng}`,
-  areaServed: [
-    "Curitiba", "São José dos Pinhais", "Araucária", "Campo Largo",
-    "Pinhais", "Colombo", "Fazenda Rio Grande", "Almirante Tamandaré",
-    "Piraquara", "Campo Magro", "Quatro Barras",
-  ].map((c) => ({
-    "@type": "City",
-    name: c,
-    containedInPlace: { "@type": "State", name: "Paraná" },
-  })),
+  areaServed: areaServedCities,
   openingHoursSpecification: napOpeningHours(),
   contactPoint: napContactPoint(),
   knowsAbout: [
@@ -169,6 +161,40 @@ const localBusinessSchema = {
     "https://www.google.com/maps/search/?api=1&query=T%C3%A9cnico+Curitiba",
   ],
 };
+
+/**
+ * Nó Organization sitewide (`#organization`).
+ * Necessário porque Service/WebPage de várias páginas referenciam
+ * `${SITE}/#organization` como provider/about — sem este nó a referência ficava
+ * pendurada. NAP e áreas atendidas derivam da fonte única em `@/lib/nap`.
+ */
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://tecnicocuritiba.com.br/#organization",
+  name: NAP.name,
+  alternateName: NAP.alternateName,
+  legalName: NAP.legalName,
+  url: NAP.url,
+  logo: {
+    "@type": "ImageObject",
+    "@id": "https://tecnicocuritiba.com.br/#logo",
+    url: NAP.logo,
+    caption: NAP.alternateName,
+  },
+  image: { "@id": "https://tecnicocuritiba.com.br/#logo" },
+  telephone: NAP.phone,
+  address: napPostalAddress(),
+  contactPoint: napContactPoint(),
+  areaServed: areaServedCities,
+  foundingDate: NAP.foundingDate,
+  subOrganization: { "@id": "https://tecnicocuritiba.com.br/#localbusiness" },
+  sameAs: [
+    "https://www.google.com/maps/search/?api=1&query=T%C3%A9cnico+Curitiba",
+  ],
+};
+
+
 
 
 export const Footer = () => {
