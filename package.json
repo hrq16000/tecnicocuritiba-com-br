@@ -34,7 +34,9 @@
     "check:visual-wave-3r": "node scripts/check-visual-wave-3r.mjs",
     "check:visual-wave-3s": "node scripts/check-visual-wave-3s.mjs",
     "check:visual-wave-3t": "node scripts/check-visual-wave-3t.mjs",
-    "check:visual-wave-3u": "node scripts/check-visual-wave-3u.mjs"
+    "check:visual-wave-3u": "node scripts/check-visual-wave-3u.mjs",
+    "check:seo-monitor": "node scripts/check-seo-monitor.mjs"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
