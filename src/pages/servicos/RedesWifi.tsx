@@ -13,6 +13,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ServiceHeroSummary from "@/components/ServiceHeroSummary";
 import EditorialCallout from "@/components/EditorialCallout";
 import InlineTriageCTA from "@/components/InlineTriageCTA";
+import ThirdPartyLimits from "@/components/b2b/ThirdPartyLimits";
+import BusinessContextGrid from "@/components/b2b/BusinessContextGrid";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -93,6 +95,8 @@ const RedesWifi = () => {
           { id: "problemas", label: "Problemas que resolvemos" },
           { id: "solucoes", label: "Soluções por necessidade" },
           { id: "perifericos-em-rede", label: "Impressoras em rede" },
+          { id: "rede-empresarial", label: "Rede em empresas" },
+          { id: "limites-rede", label: "Limites e fornecedores" },
           { id: "faq", label: "Perguntas frequentes" },
         ]}
       />
@@ -270,6 +274,93 @@ const RedesWifi = () => {
           </div>
         </div>
       </section>
+
+      {/* Rede em ambiente empresarial — padrão visual empresarial (3T) */}
+      <BusinessContextGrid
+        id="rede-empresarial"
+        title="Rede em ambiente empresarial"
+        intro="Contextos operacionais comuns em escritórios e comércios de Curitiba. O escopo é o ambiente interno: cobertura, cabeamento, roteador, access point e dispositivos conectados."
+        contexts={[
+          {
+            title: "Escritórios com vários usuários simultâneos",
+            body: "Reuniões on-line, arquivos em nuvem e sistema web ao mesmo tempo. Avaliamos canal, banda, posicionamento e distribuição por cabo. Limite: velocidade contratada e link externo pertencem à operadora.",
+          },
+          {
+            title: "Recepções e postos de atendimento",
+            body: "Computador, impressora em rede e leitor conectados ao mesmo ponto. Organizamos IP fixo, compartilhamento e senha da rede. Limite: falha mecânica ou eletrônica de impressora é da assistência autorizada da marca.",
+          },
+          {
+            title: "Ambientes com muitas paredes ou dois pavimentos",
+            body: "Sinal cai entre salas ou andares. A avaliação indica cabeamento, access point adicional ou sistema mesh conforme o ambiente. Limite: obra civil e passagem de infraestrutura são orçadas à parte e podem exigir terceiro.",
+          },
+          {
+            title: "Rede compartilhada com visitantes",
+            body: "Separação entre rede interna e rede de visitantes, senha forte e revisão de dispositivos conectados. Limite: regras de sistemas corporativos e políticas internas seguem com o responsável de TI da empresa.",
+          },
+        ]}
+      />
+
+      <ThirdPartyLimits
+        id="limites-rede"
+        title="O que verificamos e o que depende de fornecedor"
+        intro={
+          <>
+            Transparência de escopo antes da visita — o que é possível verificar no ambiente, o que depende de
+            terceiros e o que não é executado sem autorização formal. Regras de acesso e credenciais seguem o que
+            está descrito em{" "}
+            <Link to="/seguranca-dos-dados" className="text-accent underline underline-offset-2">
+              segurança dos dados
+            </Link>
+            .
+          </>
+        }
+        columns={[
+          {
+            title: "Podemos verificar",
+            items: [
+              "Cobertura e interferência no ambiente",
+              "Canal, banda e configuração do roteador",
+              "Cabeamento e pontos de rede existentes",
+              "Dispositivos conectados e conflito de IP",
+              "Impressora e periféricos como dispositivo de rede",
+              "Rede de visitantes e senha da rede",
+            ],
+          },
+          {
+            title: "Pode depender do fornecedor",
+            tone: "warning",
+            items: [
+              "Velocidade contratada e estabilidade do link",
+              "Equipamento fornecido pela operadora",
+              "Indisponibilidade de plataforma ou sistema externo",
+              "Licença, conta e autenticação de sistema corporativo",
+              "Reparo mecânico ou eletrônico de impressora",
+              "Suporte a equipamento especializado do fabricante",
+            ],
+          },
+          {
+            title: "Não executamos sem autorização",
+            tone: "warning",
+            items: [
+              "Alteração de política de rede corporativa",
+              "Redefinição de credencial de terceiros",
+              "Acesso administrativo indevido",
+              "Contorno de proteção ou restrição interna",
+              "Modificação em servidor gerenciado por outra empresa",
+            ],
+          },
+        ]}
+        footer={
+          <>
+            Precisa organizar isso no ambiente da empresa? Veja como funciona o{" "}
+            <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
+              suporte técnico empresarial
+            </Link>
+            .
+          </>
+        }
+      />
+
 
       {/* Caixas editoriais (3Q) + CTA intermediário */}
       <section className="py-8 bg-background">
