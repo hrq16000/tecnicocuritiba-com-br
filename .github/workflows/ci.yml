@@ -110,7 +110,10 @@ jobs:
         run: |
           npx playwright install --with-deps chromium >/dev/null
           node scripts/check-price-schema.mjs
+      - name: Slots patrocinados (disclosure, fora da dobra, SEO neutro)
+        run: node scripts/check-ad-slots.mjs http://localhost:8080
       - name: Relatório de paridade FAQ × FAQPage (CSV público)
+
         env:
           BASE_URL: http://localhost:8080
           FAIL_ON_DIFF: "1"
