@@ -52,11 +52,35 @@ const FAQ = [
 
 const TOC = [
   { id: "o-que-cobre", label: "O que cobrimos" },
+  { id: "pilares", label: "Pilares" },
   { id: "contextos-dados", label: "Situações mais comuns" },
   { id: "responsabilidades", label: "Responsabilidades e limites" },
+  { id: "credenciais", label: "Credenciais" },
+  { id: "acesso-remoto", label: "Acesso remoto" },
+  { id: "armazenamento", label: "Backup, recuperação e nuvem" },
   { id: "boas-praticas", label: "Boas práticas do cliente" },
   { id: "perguntas", label: "Perguntas frequentes" },
 ];
+
+const PILARES = [
+  {
+    title: "Backup",
+    items: ["Cópias em mais de um lugar", "Separação do computador principal", "Restauração testada", "Responsabilidade de manter a cópia"],
+  },
+  {
+    title: "Acesso mínimo",
+    items: ["Somente o necessário para executar", "Tempo limitado ao atendimento", "Encerramento das sessões", "Troca de senha após o serviço"],
+  },
+  {
+    title: "Autorização",
+    items: ["Responsável identificado", "Escopo combinado antes", "Registro do que foi executado", "Limite claro do que não será feito"],
+  },
+  {
+    title: "Sistemas de terceiros",
+    items: ["Fornecedor responde pela plataforma", "Licença e conta do titular", "Autenticação junto ao provedor", "Disponibilidade fora do nosso alcance"],
+  },
+];
+
 
 const SegurancaDados = () => {
   useEffect(() => {
@@ -129,6 +153,31 @@ const SegurancaDados = () => {
             </ul>
           </div>
         </section>
+
+        <section id="pilares" className="scroll-mt-24 bg-secondary py-8 md:py-10">
+          <div className="container mx-auto max-w-4xl px-4">
+            <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Quatro pilares que reduzem risco
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
+              Nenhum procedimento técnico elimina totalmente o risco de perda. Backup, autorização, acesso mínimo e
+              comunicação clara reduzem riscos, mas não substituem avaliação e responsabilidade compartilhada.
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {PILARES.map((p) => (
+                <div key={p.title} className="rounded-xl border border-border bg-background p-5">
+                  <h3 className="text-base font-semibold text-foreground">{p.title}</h3>
+                  <ul className="mt-2 space-y-1 text-sm leading-relaxed text-muted-foreground">
+                    {p.items.map((i) => (
+                      <li key={i}>• {i}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         <BusinessContextGrid
           id="contextos-dados"
@@ -210,6 +259,90 @@ const SegurancaDados = () => {
           ]}
           footer="Não oferecemos SLA, monitoramento permanente, plano mensal de segurança nem consultoria de conformidade regulatória."
         />
+
+        <section id="credenciais" className="scroll-mt-24 bg-background py-8 md:py-10">
+          <div className="container mx-auto max-w-4xl px-4">
+            <div className="rounded-2xl border-2 border-destructive/40 bg-destructive/5 p-6">
+              <h2 className="font-heading text-2xl font-bold text-foreground">
+                O que nunca deve ser enviado por mensagem
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Vale para qualquer atendimento — inclusive o nosso. Nenhum técnico precisa desses dados por
+                WhatsApp, e-mail ou SMS.
+              </p>
+              <ul className="mt-4 grid gap-2 text-sm text-foreground md:grid-cols-2">
+                {[
+                  "Senha bancária ou de aplicativo financeiro",
+                  "Código de autenticação em duas etapas",
+                  "Token de acesso",
+                  "Chave privada",
+                  "Credencial de carteira digital",
+                  "Código de recuperação de conta",
+                  "Arquivo confidencial sem necessidade e autorização",
+                ].map((i) => (
+                  <li key={i} className="rounded-lg border border-border bg-background px-3 py-2">
+                    {i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="acesso-remoto" className="scroll-mt-24 bg-secondary py-8 md:py-10">
+          <div className="container mx-auto max-w-4xl px-4">
+            <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Como o acesso remoto é tratado
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-muted-foreground">
+              Quando o atendimento acontece à distância, valem as mesmas regras: autorização de quem responde pelo
+              equipamento, sessão temporária, acompanhamento na tela, encerramento ao final e revogação do acesso.
+              Não instalamos acesso permanente. Os requisitos e limites da modalidade estão em{" "}
+              <Link to="/atendimento-remoto" className="text-accent underline underline-offset-2">
+                atendimento remoto
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
+
+        <section id="armazenamento" className="scroll-mt-24 bg-background py-8 md:py-10">
+          <div className="container mx-auto max-w-4xl px-4">
+            <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
+              Backup, recuperação, sincronização e nuvem não são a mesma coisa
+            </h2>
+            <ul className="mt-6 grid gap-4 md:grid-cols-2">
+              {[
+                ["Backup", "Cópia adicional feita de propósito, guardada separada do equipamento de uso."],
+                ["Recuperação de dados", "Tentativa de resgate depois da falha, com resultado incerto e custo próprio."],
+                ["Sincronização", "Espelha alterações — inclusive exclusões e arquivos corrompidos. Não substitui backup."],
+                ["Armazenamento em nuvem", "Serviço de terceiro: conta, licença e disponibilidade pertencem ao fornecedor."],
+              ].map(([t, d]) => (
+                <li key={t} className="rounded-xl border border-border bg-muted/30 p-5">
+                  <h3 className="text-base font-semibold text-foreground">{t}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-center text-sm text-muted-foreground">
+              Estratégia de cópias em{" "}
+              <Link to="/servicos/backup-recuperacao" className="text-accent underline underline-offset-2">
+                backup e recuperação
+              </Link>
+              , execução empresarial em{" "}
+              <Link to="/servicos/suporte-tecnico-empresarial" className="text-accent underline underline-offset-2">
+                suporte técnico empresarial
+              </Link>{" "}
+              e condições comerciais em{" "}
+              <Link to="/precos-e-politicas" className="text-accent underline underline-offset-2">
+                preços e políticas
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
+
+
 
         <section id="boas-praticas" className="scroll-mt-24 bg-background py-8 md:py-10">
           <div className="container mx-auto max-w-4xl px-4">
