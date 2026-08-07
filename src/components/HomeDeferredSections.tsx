@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, useInRouterContext } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
 import { LazyOnVisible } from "@/components/LazyOnVisible";
+import { AdSlot } from "@/components/AdSlot";
 
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 const PainSection = lazy(() => import("@/components/PainSection").then(m => ({ default: m.PainSection })));
@@ -61,6 +62,7 @@ const DeferredContent = () => (
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><HomeParaQuemBlock /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><ProblemasDestaque /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><InterlinkingBlock /></Suspense></LazyOnVisible>
+    <AdSlot placement="home-inline" />
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><FAQSection /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><TrustSection /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><CTASection /></Suspense></LazyOnVisible>
