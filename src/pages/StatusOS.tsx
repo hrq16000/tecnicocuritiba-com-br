@@ -661,6 +661,31 @@ export default function StatusOS() {
 
             <ProgressoOS idx={idxAtual} previsao={os.previsao_conclusao} />
 
+            <p
+              className="mt-3 flex items-center gap-2 text-xs text-muted-foreground"
+              data-testid="status-os-sync"
+              data-estado={sincronizacao}
+              aria-live="polite"
+            >
+              <span
+                aria-hidden="true"
+                className={`inline-block h-2 w-2 rounded-full ${
+                  sincronizacao === "ativo"
+                    ? "bg-emerald-500"
+                    : sincronizacao === "reconectando"
+                      ? "bg-amber-500"
+                      : "bg-muted-foreground/50"
+                }`}
+              />
+              {sincronizacao === "ativo"
+                ? "Atualizando automaticamente a cada 20 segundos"
+                : sincronizacao === "reconectando"
+                  ? "Conexão instável — tentando novamente em instantes"
+                  : "Atualização pausada enquanto a aba está em segundo plano"}
+              {sincronizadoEm ? ` · sincronizado às ${new Date(sincronizadoEm).toLocaleTimeString("pt-BR")}` : ""}
+            </p>
+
+
             <dl className="mt-4 grid gap-3 sm:grid-cols-2">
               <div>
                 <dt className="text-xs uppercase text-muted-foreground">Abertura</dt>
