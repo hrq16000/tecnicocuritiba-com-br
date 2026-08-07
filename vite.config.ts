@@ -86,7 +86,9 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("@sentry")) return "vendor-sentry";
           if (id.includes("/zod/")) return "vendor-zod";
 
+          return "vendor";
         },
+
 
       },
     },
