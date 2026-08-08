@@ -12,6 +12,8 @@ import {
   MessageCircle,
   FileText,
 } from "lucide-react";
+import { MEDIA_KIT_PDF, trackMediaKitDownload } from "@/lib/mediaKit";
+import { trackCTAClick } from "@/lib/analytics";
 
 const CANONICAL = "https://tecnicocuritiba.com.br/patrocinadores";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
@@ -21,7 +23,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
 )}`;
 const UPDATED = "08/08/2026";
 const OG_IMAGE = "https://tecnicocuritiba.com.br/og-image.jpg?v=20260711-1";
-const MEDIA_KIT = "/downloads/midia-kit-tecnico-curitiba.pdf";
+const MEDIA_KIT = MEDIA_KIT_PDF;
 
 const formatos = [
   {
