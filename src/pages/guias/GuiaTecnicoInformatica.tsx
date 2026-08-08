@@ -45,7 +45,24 @@ const faqs = [
     q: "Quais equipamentos vocês atendem?",
     a: "Desktops, notebooks, all-in-one, workstations, servidores de pequeno porte, redes e periféricos ligados à rede. Marcas Dell, Lenovo, HP, Acer, Asus, Samsung, Positivo, Apple e máquinas montadas.",
   },
+  {
+    q: "Notebook não liga: o que verificar antes de chamar o técnico?",
+    a: "Teste a tomada e o carregador em outro ponto, observe se o LED de carga acende, retire a bateria (quando removível) e segure o botão liga por 30 segundos para descarga residual. Se não houver LED nem ventoinha, o problema costuma ser fonte, conector de energia ou placa — casos de bancada.",
+  },
+  {
+    q: "Trocar o HD por SSD resolve a lentidão?",
+    a: "Na maioria dos casos sim. Em máquinas com HD mecânico, o SSD reduz o tempo de inicialização de vários minutos para cerca de 20 segundos. Se o gargalo for memória RAM ou superaquecimento, o diagnóstico aponta antes da compra da peça.",
+  },
+  {
+    q: "Meus arquivos são preservados na formatação?",
+    a: "Sim, quando há espaço e mídia para backup. O backup é combinado antes do serviço e conferido com você no fim do atendimento. Em disco com falha física, a recuperação é tratada como serviço separado, com laudo e orçamento próprios.",
+  },
+  {
+    q: "Vocês atendem empresas e emitem nota fiscal?",
+    a: "Sim. Atendemos escritórios, clínicas, comércios e home offices em Curitiba e região, com emissão de nota fiscal, ordem de serviço detalhada e possibilidade de contrato de manutenção preventiva.",
+  },
 ];
+
 
 export default function GuiaTecnicoInformatica() {
   const path = "/guia-tecnico-informatica";
