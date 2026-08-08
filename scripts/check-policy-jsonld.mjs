@@ -71,7 +71,7 @@ for (const { file, route } of PAGES) {
     errors.push(`${file}: arquivo ausente (rota ${route})`);
     continue;
   }
-  const loaded = await loadGraph(file);
+  const loaded = loadGraph(file);
   if (!loaded) {
     errors.push(`${file}: bloco JSON-LD 'const jsonLd' não encontrado`);
     continue;
