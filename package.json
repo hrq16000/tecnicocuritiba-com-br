@@ -42,6 +42,7 @@
     "check:title-meta": "node scripts/check-title-meta-unique.mjs",
     "check:price-schema": "node scripts/check-price-schema.mjs",
     "check:ad-slots": "node scripts/check-ad-slots.mjs",
+    "check:adsense": "node scripts/check-adsense.mjs",
     "check:service-specs": "node scripts/check-service-specs.mjs",
     "check:price-consistency": "node scripts/check-price-consistency.mjs",
     "report:faq-parity": "node scripts/report-faq-parity.mjs",
