@@ -6,6 +6,8 @@
  * Consent Mode permanece com `ad_storage`/`ad_personalization` em "denied"
  * (default definido no index.html).
  */
+import { hasAdsConsent } from "@/lib/consent";
+
 export const ADSENSE_CLIENT = "ca-pub-3762170279587706";
 
 const SCRIPT_ID = "adsbygoogle-js";
