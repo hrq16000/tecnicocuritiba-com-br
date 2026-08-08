@@ -69,12 +69,19 @@ export const ServiceLocalLinks = ({ currentCity, currentNeighborhood }: ServiceL
             ))}
           </div>
           
-          <div className="text-center mt-6">
+          <div className="text-center mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2">
             <Link
               to="/servicos"
               className="inline-flex items-center gap-2 text-accent hover:underline font-medium text-sm group"
             >
               Ver todos os serviços
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              to="/areas-atendidas"
+              className="inline-flex items-center gap-2 text-accent hover:underline font-medium text-sm group"
+            >
+              Ver áreas atendidas
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>

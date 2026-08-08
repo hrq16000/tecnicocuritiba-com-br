@@ -153,6 +153,15 @@ export const InterlinkingBlock = () => {
                 </Link>
               ))}
             </div>
+            <div className="text-center mt-5">
+              <Link
+                to="/areas-atendidas"
+                className="inline-flex items-center gap-2 text-accent hover:underline font-medium text-sm group"
+              >
+                Ver mapa e lista completa de bairros e cidades atendidas
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
           </div>
 
           {/* Problemas Comuns */}
