@@ -848,6 +848,8 @@ const App = () => (
             <Route path="/servicos/montagem-pc/como-funciona" element={<MontagemPcComoFunciona />} />
             <Route path="/politica-pecas-cliente" element={<PoliticaPecasCliente />} />
             <Route path="/politica-de-publicidade" element={<PoliticaPublicidade />} />
+            <Route path="/politica-de-cookies-e-anuncios" element={<PoliticaCookies />} />
+            <Route path="/politica-de-cookies" element={<Navigate to="/politica-de-cookies-e-anuncios" replace />} />
             <Route path="/status-anuncios" element={<StatusAnuncios />} />
             <Route path="/seguranca-dos-dados" element={<SegurancaDados />} />
             <Route path="/servicos/computador-lento" element={<ComputadorLento />} />
