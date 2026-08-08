@@ -16,8 +16,8 @@ for (const { name, viewport } of VIEWPORTS) {
 
     test("og:image e twitter:image existem e retornam 200", async ({ page, request }) => {
       await page.goto("/patrocinadores");
-      const og = await page.locator('meta[property="og:image"]').getAttribute("content");
-      const tw = await page.locator('meta[name="twitter:image"]').getAttribute("content");
+      const og = await page.locator('meta[property="og:image"]').last.getAttribute("content");
+      const tw = await page.locator('meta[name="twitter:image"]').last.getAttribute("content");
       expect(og, "og:image ausente").toBeTruthy();
       expect(tw, "twitter:image ausente").toBeTruthy();
       expect(og!).toMatch(/^https:\/\//);
