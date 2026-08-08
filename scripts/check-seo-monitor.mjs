@@ -28,24 +28,43 @@ const PUBLIC_DIR = path.resolve("public");
 const errors = [];
 const warnings = [];
 
-/** Lê todas as <loc> dos sitemaps em public/, detectando duplicatas. */
+/**
+ * Sitemaps auxiliares (imagens/vídeo) repetem, por especificação, a <loc> da
+ * página que hospeda a mídia. Isso NÃO é duplicidade de indexação: eles não
+ * declaram novas URLs, apenas anexam mídia a URLs já presentes nos sitemaps de
+ * páginas. Por isso ficam fora da checagem de duplicatas — mas exigimos que
+ * cada URL citada por eles exista em algum sitemap de páginas.
+ */
+const AUX_SITEMAP = /^sitemap-(images|videos)\.xml$/;
+
+/** Lê todas as <loc> dos sitemaps em public/, detectando duplicatas reais. */
 function collectUrls() {
   const files = fs
     .readdirSync(PUBLIC_DIR)
     .filter((f) => /^sitemap.*\.xml$/.test(f))
     .sort();
   const seen = new Map();
+  const auxLocs = new Set();
   for (const file of files) {
     const xml = fs.readFileSync(path.join(PUBLIC_DIR, file), "utf8");
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
     for (const loc of locs) {
       if (/sitemap[\w-]*\.xml$/.test(loc)) continue; // entradas de sitemapindex
+      if (AUX_SITEMAP.test(file)) {
+        auxLocs.add(loc);
+        continue;
+      }
       if (!seen.has(loc)) seen.set(loc, []);
       seen.get(loc).push(file);
     }
   }
   for (const [loc, inFiles] of seen) {
     if (inFiles.length > 1) errors.push(`DUPLICADA: ${loc} aparece em ${inFiles.join(", ")}`);
+  }
+  for (const loc of auxLocs) {
+    if (!seen.has(loc)) {
+      errors.push(`ÓRFÃ EM SITEMAP DE MÍDIA: ${loc} não existe em nenhum sitemap de páginas`);
+    }
   }
   return { files, urls: [...seen.keys()] };
 }

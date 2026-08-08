@@ -46,7 +46,8 @@
     "check:service-specs": "node scripts/check-service-specs.mjs",
     "check:price-consistency": "node scripts/check-price-consistency.mjs",
     "report:faq-parity": "node scripts/report-faq-parity.mjs",
-    "perf:local-pages": "node scripts/lh-local-pages.mjs"
+    "perf:local-pages": "node scripts/lh-local-pages.mjs",
+    "check:policy-jsonld": "node scripts/check-policy-jsonld.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

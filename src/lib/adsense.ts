@@ -6,6 +6,8 @@
  * Consent Mode permanece com `ad_storage`/`ad_personalization` em "denied"
  * (default definido no index.html).
  */
+import { hasAdsConsent } from "@/lib/consent";
+
 export const ADSENSE_CLIENT = "ca-pub-3762170279587706";
 
 const SCRIPT_ID = "adsbygoogle-js";
@@ -22,11 +24,7 @@ export const loadAdSense = () => {
   document.head.appendChild(s);
 };
 
-/** Injeta o AdSense apenas quando já existe consentimento salvo ("granted"). */
+/** Injeta o AdSense apenas quando já existe consentimento de anúncios salvo. */
 export const loadAdSenseIfConsented = () => {
-  try {
-    if (localStorage.getItem("lgpd_consent_v1") === "granted") loadAdSense();
-  } catch {
-    /* storage indisponível: mantém anúncios desligados */
-  }
+  if (hasAdsConsent()) loadAdSense();
 };

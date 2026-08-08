@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { ADSENSE_CLIENT } from "@/lib/adsense";
+import { getConsent, openConsentPreferences } from "@/lib/consent";
 
 const PUBLISHER = "pub-3762170279587706";
 
@@ -49,23 +50,36 @@ export default function StatusAnuncios() {
         detail: meta?.content ?? "ausente",
       });
 
-      // 3. Consentimento armazenado (LGPD)
-      let consent = "não decidido";
-      try {
-        consent = localStorage.getItem("lgpd_consent_v1") ?? "não decidido";
-      } catch { /* storage indisponível */ }
+      // 3. Consentimento armazenado (LGPD) — granular por categoria
+      const consentState = getConsent();
+      const adsGranted = consentState?.ads === true;
       result.push({
         label: "Consentimento de anúncios armazenado",
-        ok: consent === "granted" ? true : consent === "denied" ? false : null,
-        detail: consent,
+        ok: consentState === null ? null : adsGranted,
+        detail: consentState === null
+          ? "não decidido"
+          : `anúncios: ${adsGranted ? "granted" : "denied"} · medição: ${consentState.analytics ? "granted" : "denied"}${consentState.decidedAt ? ` · em ${new Date(consentState.decidedAt).toLocaleString("pt-BR")}` : ""}`,
       });
 
-      // 4. Script adsbygoogle só após aceite
+      // 4. Script adsbygoogle só após aceite da categoria de anúncios
       const scriptLoaded = Boolean(document.getElementById("adsbygoogle-js"));
       result.push({
         label: "adsbygoogle carregado apenas com consentimento",
-        ok: consent === "granted" ? scriptLoaded : !scriptLoaded,
+        ok: adsGranted ? scriptLoaded : !scriptLoaded,
         detail: scriptLoaded ? "script injetado" : "script não injetado",
+      });
+
+      // 5. Consent Mode v2 (estado default declarado no index.html)
+      const dataLayer = (window as unknown as { dataLayer?: unknown[] }).dataLayer ?? [];
+      const hasDefault = dataLayer.some(
+        (e) => Array.isArray(e) && e[0] === "consent" && e[1] === "default",
+      );
+      result.push({
+        label: "Consent Mode v2 com default 'denied' antes do aceite",
+        ok: hasDefault || null,
+        detail: hasDefault
+          ? "comando consent default presente no dataLayer"
+          : "dataLayer indisponível neste contexto (GA4 pode estar bloqueado)",
       });
 
       setChecks(result);
@@ -133,11 +147,19 @@ export default function StatusAnuncios() {
               <li><a href="/sitemap-index.xml" className="text-accent underline">sitemap-index.xml</a></li>
               <li><Link to="/politica-de-publicidade" className="text-accent underline">Política de Publicidade e Cookies de Anúncios</Link></li>
               <li><Link to="/politica-de-privacidade" className="text-accent underline">Política de Privacidade e LGPD</Link></li>
+              <li><Link to="/politica-de-cookies-e-anuncios" className="text-accent underline">Política de Cookies e Anúncios</Link></li>
               <li><Link to="/exclusao-de-dados" className="text-accent underline">Exclusão de Dados (LGPD)</Link></li>
             </ul>
+            <button
+              type="button"
+              onClick={openConsentPreferences}
+              className="mt-4 inline-flex items-center rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-foreground hover:bg-accent/20"
+            >
+              Gerenciar preferências de cookies
+            </button>
             <p className="mt-3 text-sm text-muted-foreground">
-              Para alterar sua escolha de cookies, limpe os dados do site no navegador — o banner de
-              consentimento será exibido novamente na próxima visita.
+              A alteração vale imediatamente: negar anúncios impede o carregamento do script do
+              AdSense nesta e nas próximas visitas neste navegador.
             </p>
           </div>
         </section>

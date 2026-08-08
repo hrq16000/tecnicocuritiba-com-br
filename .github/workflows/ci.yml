@@ -33,6 +33,8 @@ jobs:
         run: npm run check:price-consistency
       - name: AdSense gate (ads.txt + meta + consentimento)
         run: npm run check:adsense
+      - name: Políticas — JSON-LD (WebPage, BreadcrumbList, FAQPage)
+        run: npm run check:policy-jsonld
 
 
       - name: Build
