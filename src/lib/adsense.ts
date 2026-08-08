@@ -22,11 +22,7 @@ export const loadAdSense = () => {
   document.head.appendChild(s);
 };
 
-/** Injeta o AdSense apenas quando já existe consentimento salvo ("granted"). */
+/** Injeta o AdSense apenas quando já existe consentimento de anúncios salvo. */
 export const loadAdSenseIfConsented = () => {
-  try {
-    if (localStorage.getItem("lgpd_consent_v1") === "granted") loadAdSense();
-  } catch {
-    /* storage indisponível: mantém anúncios desligados */
-  }
+  if (hasAdsConsent()) loadAdSense();
 };
