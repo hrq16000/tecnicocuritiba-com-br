@@ -109,7 +109,7 @@ const infoLinks = [
   { label: "Exclusão de Dados (LGPD)", to: "/exclusao-de-dados" },
   { label: "Status de Anúncios", to: "/status-anuncios" },
   { label: "Patrocinadores e Mídia Kit", to: "/patrocinadores" },
-  { label: "Mídia Kit (PDF)", to: "/downloads/midia-kit-tecnico-curitiba.pdf", external: true },
+  
 ];
 
 
