@@ -200,6 +200,7 @@ const PrecosEPoliticas = () => {
               <PageTableOfContents
                 className="mt-4"
                 items={[
+                  { id: "estimativa-rapida", label: "Estimativa rápida (3 perguntas)" },
                   { id: "visita-tecnica", label: "Visita técnica" },
                   { id: "execucao-no-local", label: "Execução no local" },
                   { id: "coleta-e-entrega", label: "Coleta e entrega" },
@@ -210,6 +211,10 @@ const PrecosEPoliticas = () => {
                   { id: "casos-complexos", label: "Casos complexos" },
                 ]}
               />
+              <div id="estimativa-rapida" className="scroll-mt-24">
+                <EstimativaRapida className="mt-6" />
+              </div>
+
             </div>
           </div>
         </section>
