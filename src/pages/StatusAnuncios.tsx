@@ -49,23 +49,36 @@ export default function StatusAnuncios() {
         detail: meta?.content ?? "ausente",
       });
 
-      // 3. Consentimento armazenado (LGPD)
-      let consent = "não decidido";
-      try {
-        consent = localStorage.getItem("lgpd_consent_v1") ?? "não decidido";
-      } catch { /* storage indisponível */ }
+      // 3. Consentimento armazenado (LGPD) — granular por categoria
+      const consentState = getConsent();
+      const adsGranted = consentState?.ads === true;
       result.push({
         label: "Consentimento de anúncios armazenado",
-        ok: consent === "granted" ? true : consent === "denied" ? false : null,
-        detail: consent,
+        ok: consentState === null ? null : adsGranted,
+        detail: consentState === null
+          ? "não decidido"
+          : `anúncios: ${adsGranted ? "granted" : "denied"} · medição: ${consentState.analytics ? "granted" : "denied"}${consentState.decidedAt ? ` · em ${new Date(consentState.decidedAt).toLocaleString("pt-BR")}` : ""}`,
       });
 
-      // 4. Script adsbygoogle só após aceite
+      // 4. Script adsbygoogle só após aceite da categoria de anúncios
       const scriptLoaded = Boolean(document.getElementById("adsbygoogle-js"));
       result.push({
         label: "adsbygoogle carregado apenas com consentimento",
-        ok: consent === "granted" ? scriptLoaded : !scriptLoaded,
+        ok: adsGranted ? scriptLoaded : !scriptLoaded,
         detail: scriptLoaded ? "script injetado" : "script não injetado",
+      });
+
+      // 5. Consent Mode v2 (estado default declarado no index.html)
+      const dataLayer = (window as unknown as { dataLayer?: unknown[] }).dataLayer ?? [];
+      const hasDefault = dataLayer.some(
+        (e) => Array.isArray(e) && e[0] === "consent" && e[1] === "default",
+      );
+      result.push({
+        label: "Consent Mode v2 com default 'denied' antes do aceite",
+        ok: hasDefault || null,
+        detail: hasDefault
+          ? "comando consent default presente no dataLayer"
+          : "dataLayer indisponível neste contexto (GA4 pode estar bloqueado)",
       });
 
       setChecks(result);
