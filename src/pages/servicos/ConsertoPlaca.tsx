@@ -44,6 +44,14 @@ const FAQ = [
   { question: "O problema é da placa ou do monitor?", answer: "Se a falha aparece apenas com um computador específico (artefatos, travas, sem sinal em uma saída), o caso é tratado como reparo de placa. Se o monitor apresenta o mesmo defeito ligado em outra fonte de sinal, o caminho correto é o conserto de monitor." },
 ];
 
+const tiposPlaca = [
+  { titulo: "Placa-mãe de desktop", desc: "Trilhas queimadas, capacitores estufados, VRM danificado, socket com pino torto. Diagnóstico com multímetro e osciloscópio.", prazo: "7-30 dias" },
+  { titulo: "Placa-mãe de notebook", desc: "Curto-circuito, chip BGA com solda fria, reguladores de tensão queimados. Pode exigir reballing.", prazo: "15-45 dias" },
+  { titulo: "Placa de vídeo (GPU)", desc: "Artefatos na tela, sem imagem, superaquecimento. GPU com desgaste, VRAM defeituosa ou VRM queimado.", prazo: "15-60 dias" },
+  { titulo: "Placa-fonte de TV/monitor", desc: "Capacitores estufados, MOSFETs queimados, transformador danificado. Reparo em componentes SMD.", prazo: "7-20 dias" },
+  { titulo: "Placas eletrônicas diversas", desc: "Inversores, placas de controle de eletrodomésticos, centrais automotivas, controladores industriais.", prazo: "Sob consulta" },
+];
+
 
 const ConsertoPlaca = () => {
   useEffect(() => {
