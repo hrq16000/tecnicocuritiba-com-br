@@ -34,7 +34,7 @@ for (const m of appSrc.matchAll(/<Route\s+path="([^"]+)"\s+element=\{<Navigate/g
 for (const p of redirectPaths) routes.delete(p);
 
 // Páginas com <meta name="robots" content="noindex"> não entram no sitemap.
-for (const p of ["/avaliar", "/obrigado", "/funil-indisponivel"]) routes.delete(p);
+for (const p of ["/avaliar", "/obrigado", "/funil-indisponivel", "/status-anuncios", "/status-os"]) routes.delete(p);
 
 // 2) Expand dynamic routes from data files.
 const brandSlugs = [...brandsSrc.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
