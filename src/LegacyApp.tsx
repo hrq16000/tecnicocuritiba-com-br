@@ -39,6 +39,7 @@ const AssistenciaTecnicaCuritiba = lazy(() => import("./pages/AssistenciaTecnica
 const ArrumarPC = lazy(() => import("./pages/ArrumarPC"));
 const AtendimentoHub = lazy(() => import("./pages/AtendimentoHub"));
 const AreasAtendidas = lazy(() => import("./pages/AreasAtendidas"));
+const Busca = lazy(() => import("./pages/Busca"));
 const GestorResponsavel = lazy(() => import("./pages/GestorResponsavel"));
 const AtendimentoCidade = lazy(() => import("./pages/AtendimentoCidade"));
 const AtendimentoCidadeBairro = lazy(() => import("./pages/AtendimentoCidadeBairro"));
