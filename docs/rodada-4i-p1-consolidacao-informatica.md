@@ -1,125 +1,140 @@
 # Rodada 4I-P.1 — Consolidação cirúrgica do cluster de informática
 
-## 1. HEAD inicial
-`5ec70f4307278880a804fe6cf52162f161dcab8b`
+> Estado final reconciliado após a recuperação 4I-P.1R. Este documento substitui
+> versões anteriores conflitantes.
 
-## 2. Git inicial
-Working tree limpo (`git status --short` sem saída).
+## 1. HEAD final auditado
+`c04aa328b223df2b1dc722a7fc661ad50b211219` — branch de trabalho, working tree limpo
+no início da recuperação (`git status --short` sem saída, `git diff --stat` vazio).
+O HEAD `b9ad475` citado no pedido **não é mais o HEAD**; as alterações da 4I-P.1 já
+estavam integradas.
 
-## 3. P1-1 reprodução — **NÃO REPRODUZIDO**
-Hub auditado: `src/pages/Servicos.tsx` (fonte única dos cards e do bloco "Qual o Seu Problema?").
-Destinos internos renderizados:
+## 2. Diff recebido
+Alterações da 4I-P.1 já commitadas:
+- `src/pages/Servicos.tsx` (hub)
+- `src/pages/AssistenciaTecnicaCuritiba.tsx` (contrato SEO)
+- `package.json` (script `check:internal-links`)
 
-| href | rota registrada | status |
-| --- | --- | --- |
-| /servicos/upgrade-ssd-memoria | LegacyApp.tsx | OK |
-| /servicos/formatacao-computador | LegacyApp.tsx | OK |
-| /servicos/remocao-virus | LegacyApp.tsx | OK |
-| /servicos/conserto-pc-notebook | LegacyApp.tsx | OK |
-| /servicos/redes-wifi | LegacyApp.tsx | OK |
-| /servicos/backup-recuperacao | LegacyApp.tsx | OK |
-| /servicos/montagem-pc | LegacyApp.tsx | OK |
-| /servicos/manutencao-tv | LegacyApp.tsx | OK (congelada, não alterada) |
-| /servicos/conserto-placa | LegacyApp.tsx | OK (congelada, não alterada) |
-| /diagnostico-tecnico | LegacyApp.tsx:566 | OK |
+## 3. Estado antes da recuperação
+Build final e gates não executados; relatório incompleto; suspeita de instabilidade
+no gate de links internos.
 
-Os slugs citados no relatório anterior (`/servicos/informatica`, `/servicos/notebooks`,
-`/servicos/recuperacao-dados`) **não são renderizados pelo hub no HEAD atual**.
+## 4. Propriedade da intenção
+**NÃO — INTENÇÕES DISTINTAS.**
+- `/tecnico-informatica-curitiba` = intenção-mãe "técnico/assistência de informática
+  em Curitiba", atendimento domiciliar, preço de entrada.
+- `/assistencia-tecnica-curitiba` = reparo de bancada multiequipamento (computadores,
+  notebooks, placas, consoles, smartphones).
+Nenhuma reatribuição de intenção-mãe foi feita. Canonical SELF em ambas.
 
-## 4. Quantidade real de links quebrados
-**0.**
+## 5. /tecnico-informatica-curitiba
+Existe, indexável, no sitemap, canonical próprio.
+- title: `Técnico de Informática em Curitiba a partir de R$ 99,99 | Atendimento Hoje`
+- H1: `Técnico de Informática em Curitiba`
+- Linkada do hub `/servicos` e do bloco `ServicosCorrelatos`.
 
-## 5. Mapa antigo → novo
-Não aplicável (nenhuma correção necessária).
-
-## 6. Hub após correção
-Inalterado. `src/pages/Servicos.tsx` não foi tocado.
-
-## 7. P1-2 reprodução — **REPRODUZIDO**
-`/assistencia-tecnica-curitiba` servia contrato SEO de consoles em URL genérica,
-divergindo do H1 e do posicionamento visível da página (reparo de bancada).
-
-## 8. Contrato SEO anterior
-- title: `Assistência Técnica de Consoles em Curitiba | PS5, Xbox, Nintendo e Placa de Vídeo`
-- description: `... PlayStation, Xbox, Nintendo Switch, placas de vídeo, computadores, notebooks e smartphones ...`
-- H1: `Assistência Técnica Especializada em Curitiba`
-- LocalBusiness.description: `... consoles, placas de vídeo, computadores, notebooks e smartphones.`
-
-## 9. Contrato SEO final
+## 6. /assistencia-tecnica-curitiba
+Existe, indexável, canonical SELF.
 - title: `Assistência Técnica Especializada em Curitiba | Reparo de Bancada`
-- description: `Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia. Orçamento pelo WhatsApp (41) 99745-2053.`
-- H1: inalterado (já alinhado)
-- lead: reordenado para informática primeiro, consoles como secundário factual
-- LocalBusiness.description: alinhada ao mesmo enunciado
-- canonical: SELF preservado (`path="/assistencia-tecnica-curitiba"`, PageSEO)
+- H1: `Assistência Técnica Especializada em Curitiba` (inalterado)
+- description alinhada ao reparo de bancada.
 
-Observação de arquitetura: a intenção-mãe de **informática local** permanece em
-`/tecnico-informatica-curitiba` (rota viva, linkada no hero desta página). Reatribuir a
-intenção-mãe para `/assistencia-tecnica-curitiba` criaria canibalização com uma landing
-existente — regra "não gerar conflito / não regredir" prevalece sobre a direção sugerida.
+## 7. Canibalização
+`check:cannibalization` **não existe** no projeto (scripts reais listados na Fase 14).
+Avaliação manual: títulos e H1 distintos, foco de conteúdo distinto (domiciliar ×
+bancada). Nenhuma sobreposição nova criada pela 4I-P.1.
+Par `/` × `/tecnico-informatica-curitiba`: **PRÉ-EXISTENTE** (title do shell global),
+não agravado por esta rodada — rodada futura própria.
 
-## 10. Shell × runtime
-Rota não possui shell prerenderizado dedicado (`scripts/prerender-*` não a cobrem);
-metadata é servida pelo PageSEO no runtime. Sem divergência de intenção introduzida.
+## 8. Hub antes/depois
+Auditoria do artefato: `check:internal-links` verificou **636 URLs — 636 OK**, zero
+links internos quebrados. A alegação de "75 de 77 hrefs → NotFound" **não se reproduz**
+em nenhum ponto do histórico auditável; hub não perdeu destinos.
 
-## 11. JSON-LD
-Tipos preservados: BreadcrumbList, LocalBusiness, FAQPage, Service (10), WebSite.
-Somente `LocalBusiness.description` foi alinhada. Nenhum tipo novo criado.
-Gate `validate:jsonld` cobre esta URL.
+## 9. Cards sem href
+**Zero.** Todos os cards de serviço possuem CTA real (WhatsApp `<a>`), e todos os
+cards de "Qual o Seu Problema?" expõem chips `<Link>` com destino real. Nenhum
+elemento com aparência de link sem ação. Sem regressão UX.
 
-## 12. P1-3
-`e2e/internal-links-no-404.spec.ts` **não existe** no HEAD. Existe implementação real e
-confiável em `scripts/check-internal-links.mjs`, já usada por
-`.github/workflows/internal-links.yml` contra `bun run build && bun run preview` (artefato
-de produção). Reutilizada sem duplicar lógica.
+## 10. Gate internal-links
+`scripts/check-internal-links.mjs`, exposto como `check:internal-links`.
+Lê o sitemap-index, valida status HTTP de todas as URLs e amostra 30 páginas para
+extrair `<a href>` internos. Executado contra `PREVIEW_URL=http://localhost:4173`
+(build + preview). Resultado: **PASS**.
 
-## 13. Gate internal-links
-Adicionado a `package.json`:
-`"check:internal-links": "node scripts/check-internal-links.mjs"`.
-Roda contra `PREVIEW_URL` (default `http://localhost:4173`), valida URLs do
-sitemap-index + hrefs internos amostrados, ignora externos/hash/query, falha em >=400.
+## 11. Causa do timeout
+**Não reproduzido.** O gate não é Playwright e não possui helper `isNotFound` nem
+espera por `meta[name="robots"]`. O timeout relatado pertencia a uma abordagem E2E
+que não existe no HEAD. Não há espera por hidratação: a detecção é por status HTTP.
 
-## 14. Build
-Typecheck (`tsgo --noEmit`) sem erros. Build de produção executado pelo pipeline padrão.
+## 12. Correção do helper
+Nenhuma necessária — não há helper. Nenhum timeout aumentado, nenhum erro engolido.
 
-## 15. Gates
-Scripts existentes preservados; nenhum nome inventado. `check:canonical`, `check:thin`,
-`check:claims`, `check:meta` **não existem** no projeto — equivalentes reais:
-`check:seo`, `check:title-meta`, `check:brand`, `validate:jsonld`.
+## 13. Build
+`bun run build` — **exit 0**. Prerender: 17 rotas pilot, 101 cidades, 613 shells de
+bairro com canônico próprio. Postbuild SEO: `dist/index.html` OK (title, desc 157c, 1 H1).
 
-## 16. E2E
-`e2e/assistencia-tecnica-curitiba.spec.ts` valida `toHaveTitle(/Assistência Técnica.*Curitiba/i)`
-— o novo title continua satisfazendo o regex; sem regressão de asserção.
+## 14. Gates
+| Gate | Resultado |
+| --- | --- |
+| build + postbuild `check:seo` | PASS |
+| `check:internal-links` (preview 4173) | PASS — 636/636 |
+| `check:title-meta` (BASE_URL=preview) | PASS — 300 rotas únicas |
+| `check:brand` | PASS — 732 arquivos |
+| `validate:jsonld` | NÃO EXECUTÁVEL no sandbox (browsers Playwright ausentes) — roda no CI |
 
-## 17. TV/placas/monitor
-Zero alteração. Nenhum arquivo dessas verticais tocado.
+`check:cannibalization`, `check:copy`, `check:meta-uniqueness`,
+`check:sitemap-source`, `check:internal-links:strict` **não existem** no projeto.
 
-## 18. Funil/tracking/banco
-Intactos. Nenhuma alteração em CTA, triagem, GA4, Supabase ou telemetria.
+## 15. Paridade shell/runtime
+Ambas as rotas não possuem shell prerenderizado dedicado: o HTML inicial serve o shell
+global e o contrato final é aplicado pelo `PageSEO` no runtime. Situação **pré-existente
+e simétrica** entre as duas URLs; nenhuma contradição de intenção introduzida.
 
-## 19. Arquivos alterados
-**2 arquivos de aplicação + 1 doc**
-- `src/pages/AssistenciaTecnicaCuritiba.tsx` (3 blocos: title/description, LocalBusiness.description, lead)
-- `package.json` (1 linha: script do gate)
-- `docs/rodada-4i-p1-consolidacao-informatica.md` (este relatório)
+## 16. JSON-LD
+**REGRESSÃO FACTUAL corrigida:** removida a declaração
+`Conserto de Equipamento de Som em Curitiba` (`Audio Repair`) do array `Service[]` de
+`/assistencia-tecnica-curitiba` — áudio foi formalmente recusado como vertical.
+Nenhum outro tipo alterado (BreadcrumbList, LocalBusiness, FAQPage, Service, WebSite
+preservados). Sem redesign de schema.
 
-## 20. Git final
-Diff pequeno, localizado e explicável; nenhuma rota, página ou redirect criado.
+## 17. Check copy
+Gate `check:copy` inexistente. O termo "Orçamento pelo WhatsApp" já é vocabulário
+corrente do site (aparece em gates de preço e no funil). **PRÉ-EXISTENTE**, sem nova
+violação detectada por `check:brand`.
 
-## 21. P0 encontrados
+## 18. TV/placas/monitor
+Zero alteração de conteúdo, intenção ou destino. As menções no hub e no JSON-LD são
+as já existentes; nenhuma nova exposição estratégica.
+
+## 19. Funil/tracking/banco
+Intactos: 0 alteração em CTA, triagem, GA4, Supabase ou telemetria.
+
+## 20. Arquivos alterados
+4I-P.1 (originais): `src/pages/Servicos.tsx`, `src/pages/AssistenciaTecnicaCuritiba.tsx`,
+`package.json`.
+4I-P.1R (correção de validação): `src/pages/AssistenciaTecnicaCuritiba.tsx`
+(1 linha — remoção do Service de áudio) + este relatório.
+
+## 21. P0
 Nenhum.
 
-## 22. P1 remanescentes
-- Conteúdo de `/assistencia-tecnica-curitiba` ainda é majoritariamente console-heavy no corpo;
-  ajuste editorial fica fora de escopo (proibido criar/reescrever conteúdo nesta rodada).
+## 22. P1
+- Corpo editorial de `/assistencia-tecnica-curitiba` ainda console-heavy (fora de escopo).
+- `/` × `/tecnico-informatica-curitiba`: similaridade de title pré-existente.
 
 ## 23. P2
-- Sobreposição B2B (`/assistencia-tecnica-empresas-curitiba` × `/empresa-de-ti-curitiba`) —
-  observação até haver dado de GSC.
-- Desproporção de link equity interno (hubs de preço concentram autoridade).
+- Sobreposição B2B (`/assistencia-tecnica-empresas-curitiba` × `/empresa-de-ti-curitiba`).
+- Desproporção de link equity interno.
+
+## 24. Git final
+Diff mínimo, localizado e explicável. Nenhuma página, rota ou redirect criado.
 
 ---
 
 # DECISÃO
 
 CLUSTER DE INFORMÁTICA CONSOLIDADO — 4I-P.1 APROVADA
+
+Próximo passo: SEO interno de informática **recongelado**. Nenhuma nova mudança
+orgânica; prioridade integral à execução humana da 4I-M/GBP e aguardar dados do GSC.
