@@ -31,6 +31,9 @@ jobs:
         run: npm run check:service-specs
       - name: Consistência de preços x planilha oficial
         run: npm run check:price-consistency
+      - name: AdSense gate (ads.txt + meta + consentimento)
+        run: npm run check:adsense
+
 
       - name: Build
         run: npm run build
