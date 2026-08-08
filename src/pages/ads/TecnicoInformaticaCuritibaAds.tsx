@@ -11,7 +11,7 @@ const TecnicoInformaticaCuritibaAds = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   useEffect(() => {
-    document.title = "Técnico de Informática em Curitiba | Atendimento Hoje | R$ 99,99";
+    document.title = "Técnico de Informática em Curitiba | Conserto de PC e Notebook";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -28,7 +28,7 @@ const TecnicoInformaticaCuritibaAds = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Técnico de Informática em Curitiba | Atendimento Hoje | R$ 99,99" description="Técnico de informática em Curitiba com atendimento hoje. Serviços a partir de R$ 99,99. Formatação, remoção de vírus, conserto. Chame no WhatsApp!" path="/tecnico-informatica-curitiba-ads" />
+      <PageSEO title="Técnico de Informática em Curitiba | Conserto de PC e Notebook" description="Técnico de informática em Curitiba com atendimento hoje. Serviços a partir de R$ 99,99. Formatação, remoção de vírus, conserto. Chame no WhatsApp!" path="/tecnico-informatica-curitiba-ads" />
       {/* Minimal Header - No Navigation */}
       <header className="bg-primary py-4">
         <div className="container mx-auto text-center">
