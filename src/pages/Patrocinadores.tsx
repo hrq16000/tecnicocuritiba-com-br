@@ -11,7 +11,9 @@ import {
   ShieldCheck,
   MessageCircle,
   FileText,
+  Send,
 } from "lucide-react";
+import { MediaProposalForm } from "@/components/MediaProposalForm";
 import { MEDIA_KIT_PDF, trackMediaKitDownload } from "@/lib/mediaKit";
 import { trackCTAClick } from "@/lib/analytics";
 
@@ -270,6 +272,20 @@ export default function Patrocinadores() {
               .
             </p>
           </article>
+
+          <article id="proposta" className="mt-10 scroll-mt-24">
+            <h2 className="flex items-center gap-2 text-xl font-bold mb-3">
+              <Send className="h-5 w-5 text-accent" aria-hidden="true" />
+              Solicitar proposta de mídia
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Datas e posicionamentos são confirmados por escrito no WhatsApp comercial, com o
+              período reservado e a página exata onde a peça será exibida. Enquanto não houver
+              confirmação, nenhum espaço fica bloqueado.
+            </p>
+            <MediaProposalForm whatsappNumber={WHATSAPP} />
+          </article>
+
 
           <article id="regras" className="mt-10 scroll-mt-24">
             <h2 className="flex items-center gap-2 text-xl font-bold mb-3">
