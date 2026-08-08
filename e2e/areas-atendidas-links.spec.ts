@@ -18,6 +18,8 @@ for (const { name, viewport } of VIEWPORTS) {
       const response = await page.goto("/areas-atendidas", { waitUntil: "domcontentloaded" });
       expect(response?.status(), "status HTTP da pagina").toBeLessThan(400);
 
+      // aguarda hidratacao do SPA antes de coletar os links
+      await expect(page.locator("h1").first()).toBeVisible({ timeout: 15000 });
       await expect(page.locator("h1")).toHaveCount(1);
 
       const hrefs = await page
