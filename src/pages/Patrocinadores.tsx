@@ -148,7 +148,6 @@ export default function Patrocinadores() {
 
       <main id="main-content">
         <PageHero
-          badge="Comercial"
           title="Patrocinadores e Mídia Kit"
           subtitle="Espaços publicitários rotulados, sem prejudicar a leitura nem a velocidade do portal. Segmentação por tema técnico e por localidade em Curitiba e Região Metropolitana."
         />
