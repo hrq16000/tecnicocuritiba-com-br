@@ -5,10 +5,35 @@ import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LazyOnVisible from "@/components/LazyOnVisible";
+import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { CIDADES } from "@/lib/servicoCidadeData";
 import { BAIRROS_ATENDIMENTO } from "@/lib/atendimentoBairrosData";
 
 const SITE = "https://tecnicocuritiba.com.br";
+
+const FAQ_AREAS: Array<{ q: string; a: string }> = [
+  {
+    q: "Como confirmo se o meu bairro é atendido?",
+    a: "A lista desta página cobre as regiões com rota frequente. Para bairros fora da lista, a confirmação é feita na triagem pelo WhatsApp, informando bairro e equipamento: respondemos com a disponibilidade de rota do dia e a modalidade indicada (domicílio, coleta ou remoto).",
+  },
+  {
+    q: "Qual é o prazo de atendimento em Curitiba e na Região Metropolitana?",
+    a: "Em Curitiba, o atendimento em domicílio costuma ser agendado para o mesmo dia ou no dia seguinte, conforme a agenda. Na Região Metropolitana, o agendamento depende da rota do dia. O atendimento remoto pode começar imediatamente após a triagem.",
+  },
+  {
+    q: "Atende bairros fora da lista publicada?",
+    a: "Sim, conforme disponibilidade de rota. Localidades mais distantes podem ser atendidas por coleta e entrega, com reparo em bancada e devolução no endereço informado.",
+  },
+  {
+    q: "O valor muda conforme o bairro ou a cidade?",
+    a: "O atendimento parte de R$ 99,99. Deslocamentos para a Região Metropolitana ou serviços que exigem coleta podem ter condições diferentes, sempre informadas e confirmadas antes do início do serviço.",
+  },
+  {
+    q: "Como confirmo data e horário do atendimento?",
+    a: "A confirmação é feita pelo WhatsApp ao final da triagem, com bairro, equipamento e período desejado (manhã ou tarde). Só há deslocamento após a confirmação combinada.",
+  },
+];
+
 
 export default function AreasAtendidas() {
   const title = "Áreas Atendidas em Curitiba e Região | Bairros e Cidades";
