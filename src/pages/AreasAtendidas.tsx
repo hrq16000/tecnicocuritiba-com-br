@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import SiteBaseSchema from "@/components/SiteBaseSchema";
 import LazyOnVisible from "@/components/LazyOnVisible";
 import InlineTriageCTA from "@/components/InlineTriageCTA";
 import { CIDADES } from "@/lib/servicoCidadeData";
@@ -79,6 +80,7 @@ export default function AreasAtendidas() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <SiteBaseSchema />
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-8">
         <Breadcrumbs
