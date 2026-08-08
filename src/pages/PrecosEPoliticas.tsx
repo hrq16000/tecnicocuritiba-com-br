@@ -11,6 +11,7 @@ import { TrustStrip } from "@/components/TrustStrip";
 import { PageTableOfContents } from "@/components/PageTableOfContents";
 import { InlineTriageCTA } from "@/components/InlineTriageCTA";
 import { EstimativaRapida } from "@/components/EstimativaRapida";
+import { PrecosFaqLinks } from "@/components/PrecosFaqLinks";
 
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { PriceSchema } from "@/components/PriceSchema";
@@ -211,6 +212,7 @@ const PrecosEPoliticas = () => {
                   { id: "politicas", label: "Políticas de atendimento" },
                   { id: "laboratorio", label: "Laboratório" },
                   { id: "casos-complexos", label: "Casos complexos" },
+                  { id: "faq-precos", label: "Perguntas frequentes" },
                 ]}
               />
               <div id="estimativa-rapida" className="scroll-mt-24">
@@ -686,6 +688,8 @@ const PrecosEPoliticas = () => {
             </div>
           </div>
         </section>
+
+        <PrecosFaqLinks />
 
         <CTASection />
       </main>
