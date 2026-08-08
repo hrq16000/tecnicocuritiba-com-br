@@ -212,6 +212,7 @@ const PrecosEPoliticas = () => {
                   { id: "politicas", label: "Políticas de atendimento" },
                   { id: "laboratorio", label: "Laboratório" },
                   { id: "casos-complexos", label: "Casos complexos" },
+                  { id: "faq-precos", label: "Perguntas frequentes" },
                 ]}
               />
               <div id="estimativa-rapida" className="scroll-mt-24">
