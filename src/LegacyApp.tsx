@@ -343,6 +343,7 @@ const OrganizacaoTIEscritorios = lazy(() => import("./pages/guias/OrganizacaoTIE
 const ComoEscolherWorkstation = lazy(() => import("./pages/guias/ComoEscolherWorkstation"));
 const PoliticaPecasCliente = lazy(() => import("./pages/PoliticaPecasCliente"));
 const PoliticaPublicidade = lazy(() => import("./pages/PoliticaPublicidade"));
+const PoliticaCookies = lazy(() => import("./pages/PoliticaCookies"));
 const StatusAnuncios = lazy(() => import("./pages/StatusAnuncios"));
 const SegurancaDados = lazy(() => import("./pages/SegurancaDados"));
 const ComputadorLento = lazy(() => import("./pages/servicos/ComputadorLento"));
