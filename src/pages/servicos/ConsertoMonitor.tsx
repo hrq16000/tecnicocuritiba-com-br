@@ -3,6 +3,7 @@ import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageTableOfContents from "@/components/PageTableOfContents";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ImageObjectSchema } from "@/components/ImageObjectSchema";
 import { ServiceGallery, GalleryItem } from "@/components/ServiceGallery";
@@ -198,6 +199,19 @@ const ConsertoMonitor = () => {
           </div>
         </section>
 
+
+        <div className="container mx-auto px-4 pt-6">
+          <div className="max-w-3xl mx-auto">
+            <PageTableOfContents
+              items={[
+                { id: "orcamento-monitor", label: "Triagem e orçamento rápido" },
+                { id: "monitor-gamer", label: "Monitor gamer" },
+                { id: "garantia-monitor", label: "Garantia de 90 dias" },
+                { id: "faq-monitor", label: "Perguntas frequentes" },
+              ]}
+            />
+          </div>
+        </div>
         {/* Montador de mensagem: modelo + sintomas + imagem + cidade/bairro + UTM */}
         <AnimatedSection>
           <section id="orcamento-monitor" className="py-12 scroll-mt-24">
@@ -466,7 +480,7 @@ const ConsertoMonitor = () => {
         <ServiceOperationalSpec path="/servicos/conserto-monitor" />
 
         <AnimatedSection>
-          <section className="py-12">
+          <section id="faq-monitor" className="py-12 scroll-mt-24">
             <div className="container mx-auto px-4">
               <div className="max-w-3xl mx-auto">
                 <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6">

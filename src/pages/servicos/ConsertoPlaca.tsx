@@ -15,6 +15,7 @@ import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PageTableOfContents from "@/components/PageTableOfContents";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
@@ -114,6 +115,21 @@ const ConsertoPlaca = () => {
         </div>
       </section>
       <RealImageSection imageKey="placaMae" caption="Reparo de placa-mãe em nível de componente" />
+      <div className="container mx-auto px-4 pt-6">
+        <div className="max-w-4xl mx-auto">
+          <PageTableOfContents
+            items={[
+              { id: "tipos-de-placas", label: "Tipos de placas que consertamos" },
+              { id: "casos-complexos", label: "Casos complexos atendidos" },
+              { id: "transparencia-placa", label: "Transparência no reparo" },
+              { id: "teste-final-placa", label: "Teste final e aceite/recusa" },
+              { id: "garantia-placa", label: "Garantia de 90 dias" },
+              { id: "faq-placa", label: "Perguntas frequentes" },
+            ]}
+          />
+        </div>
+      </div>
+
 
       {/* Aviso */}
       <section className="py-6 bg-accent/5 border-y border-accent/10">
@@ -129,7 +145,7 @@ const ConsertoPlaca = () => {
       </section>
 
       {/* Tipos */}
-      <section className="py-12 md:py-16 bg-background relative">
+      <section id="tipos-de-placas" className="py-12 md:py-16 bg-background relative scroll-mt-24">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/5 rounded-full blur-3xl" />
         </div>
@@ -158,7 +174,7 @@ const ConsertoPlaca = () => {
       <RealImageSection imageKey="diagnostico" caption="Diagnóstico técnico de placa eletrônica" />
 
       {/* Casos complexos */}
-      <section className="py-12 md:py-16 bg-secondary">
+      <section id="casos-complexos" className="py-12 md:py-16 bg-secondary scroll-mt-24">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-foreground mb-6 text-center reveal-text">Casos Complexos que Atendemos</h2>
@@ -185,7 +201,7 @@ const ConsertoPlaca = () => {
       </section>
 
       {/* Transparência */}
-      <section className="py-12 bg-background">
+      <section id="transparencia-placa" className="py-12 bg-background scroll-mt-24">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto bg-destructive/5 border border-destructive/20 rounded-xl p-6">
             <h2 className="text-xl font-bold text-foreground mb-3">Transparência no Reparo de Placas</h2>
@@ -339,7 +355,7 @@ const ConsertoPlaca = () => {
 
       {/* FAQ visível 1:1 com o JSON-LD */}
       <AnimatedSection>
-        <section className="py-12 bg-secondary/30">
+        <section id="faq-placa" className="py-12 bg-secondary/30 scroll-mt-24">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6">
