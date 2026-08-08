@@ -795,7 +795,38 @@ const ProblemaPage = () => {
       )}
 
       <AnimatedSection>
+      {/* Próximos passos */}
+      <section className="py-10 bg-background border-y border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-xl md:text-2xl font-bold text-primary mb-6 text-center">Próximos passos</h2>
+            <ol className="grid gap-4 sm:grid-cols-3">
+              <li className="bg-secondary rounded-xl p-4 border border-border">
+                <span className="text-accent font-bold">1.</span>
+                <p className="mt-1 text-sm text-muted-foreground">Descreva o sintoma pelo WhatsApp: modelo do equipamento, quando começou e o que já foi tentado.</p>
+              </li>
+              <li className="bg-secondary rounded-xl p-4 border border-border">
+                <span className="text-accent font-bold">2.</span>
+                <p className="mt-1 text-sm text-muted-foreground">Receba a triagem e a modalidade indicada (remoto, domicílio ou bancada) com prazo e faixa de preço.</p>
+              </li>
+              <li className="bg-secondary rounded-xl p-4 border border-border">
+                <span className="text-accent font-bold">3.</span>
+                <p className="mt-1 text-sm text-muted-foreground">Aprove o orçamento fechado antes da execução e acompanhe o serviço até a entrega com garantia.</p>
+              </li>
+            </ol>
+            <div className="text-center mt-6">
+              <Button variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_proximos_passos`}>
+                <MessageCircle className="mr-2 h-5 w-5" /> Falar com técnico agora
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      </AnimatedSection>
+
+      <AnimatedSection>
       {/* CTA */}
+
       <section className="py-12 bg-primary text-white relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-breathe" />
