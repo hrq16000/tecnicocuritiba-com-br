@@ -69,7 +69,20 @@ const FAQ = [
     q: "Quais marcas de monitor vocês atendem?",
     a: "AOC, Samsung, LG, Dell, Acer, Philips, BenQ, ASUS, Positivo, HP, Lenovo e similares, em modelos LED, LCD, IPS, VA e ultrawide.",
   },
+  {
+    q: "Consertam monitor gamer? A taxa de atualização volta a ser a mesma?",
+    a: "Atendemos monitores gamer (144 Hz, 165 Hz, ultrawide e curvos) no mesmo fluxo de bancada. O reparo devolve o funcionamento elétrico do aparelho — não prometemos ganho, recuperação ou certificação de Hz, HDR, tempo de resposta ou fidelidade de cor, porque essas características dependem do painel original e não são alteradas por reparo.",
+  },
+  {
+    q: "Quando o problema é do monitor e quando é da placa de vídeo do PC?",
+    a: "Se o monitor apresenta o mesmo defeito ligado em outra fonte de sinal, o caso é do monitor. Se a imagem falha apenas com um computador específico (artefatos, travas, sem sinal em uma saída), o reparo é tratado como reparo de placa — nesse caso encaminhamos para /servicos/conserto-placa, sem cobrar duas coletas.",
+  },
+  {
+    q: "Como funciona a garantia de 90 dias do conserto de monitor?",
+    a: "A garantia de 90 dias cobre o serviço executado e a peça substituída, descrita na ordem de serviço. Não cobre novo defeito em componente diferente do reparado, dano por surto elétrico posterior, queda, líquido, violação por terceiros ou desgaste do painel.",
+  },
 ];
+
 
 const ConsertoMonitor = () => {
   const spec = getServiceSpec(PATH)!;
@@ -338,7 +351,110 @@ const ConsertoMonitor = () => {
           </section>
         </AnimatedSection>
 
+        {/* Monitor gamer — escopo elétrico, sem promessa de Hz/HDR/cor */}
+        <AnimatedSection>
+          <section id="monitor-gamer" className="py-12 scroll-mt-24">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">
+                  Monitor gamer: o que o reparo resolve (e o que ele não promete)
+                </h2>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Monitores gamer de 144 Hz, 165 Hz, ultrawide e curvos entram no mesmo fluxo de coleta e
+                  bancada. O reparo atua na parte elétrica e eletrônica do aparelho — fonte, backlight, placa
+                  lógica, T-CON e conectores. Características do painel não são criadas nem restauradas por
+                  reparo, então não trabalhamos com promessa de desempenho.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="rounded-xl border border-border bg-card p-5">
+                    <h3 className="font-semibold text-foreground mb-2">Entra no reparo</h3>
+                    <ul className="space-y-1.5 text-sm text-muted-foreground">
+                      <li>• Monitor gamer que não liga ou liga e apaga</li>
+                      <li>• Backlight apagado com LED aceso</li>
+                      <li>• Porta HDMI / DisplayPort com mau contato</li>
+                      <li>• Fonte interna ou externa (brick) queimada</li>
+                      <li>• Capacitores estufados e retrabalho de solda</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-5">
+                    <h3 className="font-semibold text-foreground mb-2">Não prometemos</h3>
+                    <ul className="space-y-1.5 text-sm text-muted-foreground">
+                      <li>• Ganho, recuperação ou certificação de Hz</li>
+                      <li>• Validação de HDR, contraste ou gamut de cor</li>
+                      <li>• Redução de tempo de resposta ou input lag</li>
+                      <li>• Troca de painel trincado, manchado ou com vazamento</li>
+                      <li>• Recuperação garantida de placa oxidada</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="mt-5 rounded-xl border border-primary/30 bg-primary/5 p-5">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Artefatos, travamentos ou ausência de sinal que aparecem só com um computador específico
+                    normalmente não são do monitor. Nesse caso o caminho certo é o{" "}
+                    <Link to="/servicos/conserto-placa" className="text-primary underline">
+                      reparo de placa
+                    </Link>{" "}
+                    — testamos o monitor com fonte de sinal própria antes de indicar qualquer troca.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </AnimatedSection>
+
+        {/* Limites objetivos da garantia de 90 dias */}
+        <AnimatedSection>
+          <section id="garantia-monitor" className="py-12 bg-secondary/30 scroll-mt-24">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">
+                  Garantia de 90 dias: o que cobre e quando não se aplica
+                </h2>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  A garantia é de 90 dias e vale para o serviço executado e a peça substituída, exatamente
+                  como descritos na ordem de serviço. Ela não é uma cobertura geral do aparelho.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="rounded-xl border border-border bg-card p-5">
+                    <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary" aria-hidden="true" />
+                      Coberto por 90 dias
+                    </h3>
+                    <ul className="space-y-1.5 text-sm text-muted-foreground">
+                      <li>• Reincidência do mesmo defeito reparado</li>
+                      <li>• Peça trocada por nós, dentro do prazo</li>
+                      <li>• Retrabalho de solda no ponto que executamos</li>
+                      <li>• Reavaliação em bancada sem nova taxa de coleta</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-5">
+                    <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                      <AlertTriangle className="h-4 w-4 text-destructive" aria-hidden="true" />
+                      Fora da garantia
+                    </h3>
+                    <ul className="space-y-1.5 text-sm text-muted-foreground">
+                      <li>• Defeito novo em componente diferente do reparado</li>
+                      <li>• Surto elétrico, queda, líquido ou impacto posteriores</li>
+                      <li>• Violação, abertura ou reparo por terceiros</li>
+                      <li>• Desgaste natural do painel e pixels do painel</li>
+                      <li>• Reparos recusados pelo cliente no orçamento</li>
+                    </ul>
+                  </div>
+                </div>
+                <p className="mt-5 text-sm text-muted-foreground">
+                  Detalhes completos em{" "}
+                  <Link to="/precos-e-politicas" className="text-primary underline">
+                    preços e políticas
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </section>
+        </AnimatedSection>
+
         <ImageObjectSchema imageKeys={GALLERY.map((g) => g.imageKey as string)} local="Curitiba" path={PATH} />
+
         <ServiceGallery
           title="Provas reais do reparo de monitor"
           subtitle="Fotos reais de bancada, solda e logística usadas nos atendimentos de monitor em Curitiba."
