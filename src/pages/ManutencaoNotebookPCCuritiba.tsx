@@ -1,4 +1,5 @@
 import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
+import { ServicosCorrelatos } from "@/components/ServicosCorrelatos";
 import { Link } from "react-router-dom";
 import { Laptop, Monitor, Cpu, HardDrive, Wrench, Shield, Clock, MapPin, CheckCircle, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -267,6 +268,7 @@ export default function ManutencaoNotebookPCCuritiba() {
       </div>
         <LocalPhotoGallery local="Curitiba" variant="notebook" />
       </main>
+      <ServicosCorrelatos exclude={["/manutencao-notebook-pc-curitiba"]} />
     </>
   );
 }
