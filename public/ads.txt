@@ -1,0 +1,11 @@
+# ads.txt — tecnicocuritiba.com.br
+# Authorized Digital Sellers (IAB Tech Lab spec 1.1)
+# Vendedores autorizados a comercializar o inventario publicitario deste dominio.
+# Politica publica: https://tecnicocuritiba.com.br/politica-de-publicidade
+#
+# Formato: <dominio do sistema de anuncios>, <ID do publisher>, <DIRECT|RESELLER>, <ID da autoridade certificadora>
+#
+# Ao aprovar a conta do Google AdSense, substitua a linha abaixo pelo seu ID real
+# (pub-0000000000000000) e remova o "#" do inicio da linha:
+#
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
