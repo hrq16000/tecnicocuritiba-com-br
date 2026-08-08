@@ -80,9 +80,84 @@ ${items}
 }
 
 const posts = parsePosts();
-const xml = buildRss(posts);
+
+// ---------- lastmod real por post ----------
+// O <updated> do Atom (e o lastBuildDate do RSS) precisa refletir mudança real
+// de conteúdo — não o horário do build. Usamos o último commit que alterou o
+// bloco do post (busca por slug com `git log -S`) e, na falta de git, a data de
+// publicação do próprio post. Assim o feed só "muda" quando a página muda.
+const CONTENT_FILES = [
+  "src/data/blogPostsContent.tsx",
+  "src/data/blogProgrammaticPosts.tsx",
+  "src/pages/Blog.tsx",
+];
+
+function gitUpdated(slug) {
+  try {
+    const out = execFileSync(
+      "git",
+      ["log", "-1", "--format=%cI", "-S", `"${slug}"`, "--", ...CONTENT_FILES],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    return out || null;
+  } catch {
+    return null;
+  }
+}
+
+function updatedIso(post) {
+  const published = new Date(post.date + "T08:00:00-03:00");
+  const git = gitUpdated(post.slug);
+  const gitDate = git ? new Date(git) : null;
+  const best = gitDate && !Number.isNaN(gitDate.getTime()) && gitDate > published ? gitDate : published;
+  return best.toISOString();
+}
+
+const feedPosts = posts
+  .slice()
+  .sort((a, b) => (a.date < b.date ? 1 : -1))
+  .slice(0, 50)
+  .map((p) => ({ ...p, updated: updatedIso(p) }));
+
+const feedUpdated =
+  feedPosts.reduce((acc, p) => (p.updated > acc ? p.updated : acc), feedPosts[0]?.updated || new Date().toISOString());
+
+const xml = buildRss(posts, feedUpdated);
 writeFileSync(resolve("public/rss.xml"), xml);
 console.log(`rss.xml gerado com ${Math.min(posts.length, 50)} posts.`);
+
+// ---------- atom.xml ----------
+const atomEntries = feedPosts
+  .map(
+    (p) => `  <entry>
+    <title>${escapeXml(p.title)}</title>
+    <link rel="alternate" type="text/html" href="${BASE_URL}/blog/${p.slug}" />
+    <id>${BASE_URL}/blog/${p.slug}</id>
+    <published>${new Date(p.date + "T08:00:00-03:00").toISOString()}</published>
+    <updated>${p.updated}</updated>
+    <category term="${escapeXml(p.category)}" />
+    <summary type="text">${escapeXml(p.excerpt)}</summary>
+  </entry>`,
+  )
+  .join("\n");
+
+const atomXml = `<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="pt-BR">
+  <title>${escapeXml(SITE_TITLE)}</title>
+  <subtitle>${escapeXml(SITE_DESC)}</subtitle>
+  <link rel="self" type="application/atom+xml" href="${BASE_URL}/atom.xml" />
+  <link rel="alternate" type="text/html" href="${BASE_URL}/blog" />
+  <id>${BASE_URL}/blog</id>
+  <updated>${feedUpdated}</updated>
+  <author>
+    <name>Técnico em Curitiba</name>
+    <uri>${BASE_URL}</uri>
+  </author>
+${atomEntries}
+</feed>
+`;
+writeFileSync(resolve("public/atom.xml"), atomXml);
+console.log(`atom.xml gerado com ${feedPosts.length} entradas (updated: ${feedUpdated}).`);
 
 // ---------- sitemap-news.xml (Google News) ----------
 // Regra do Google: só posts das últimas 48h costumam entrar; nós emitimos os
