@@ -11,7 +11,9 @@ import {
   ShieldCheck,
   MessageCircle,
   FileText,
+  Send,
 } from "lucide-react";
+import { MediaProposalForm } from "@/components/MediaProposalForm";
 import { MEDIA_KIT_PDF, trackMediaKitDownload } from "@/lib/mediaKit";
 import { trackCTAClick } from "@/lib/analytics";
 
