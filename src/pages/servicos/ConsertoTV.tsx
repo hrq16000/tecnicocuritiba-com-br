@@ -77,28 +77,22 @@ const ConsertoTV = () => {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Conserto de TV",
-    description: "Serviço de conserto de TV LED, LCD, OLED e Smart TV em Curitiba e região metropolitana.",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Técnico em Curitiba",
-      telephone: "+55-41-99745-2053",
-    },
-    areaServed: { "@type": "City", name: "Curitiba" },
-  };
-
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Conserto de TV"
+        description="Conserto de TV LED, LCD, OLED e Smart TV em Curitiba e região metropolitana, com coleta e entrega, orçamento aprovado antes do reparo e garantia sobre serviço e peça."
+        path="/servicos/conserto-tv"
+        priceFrom={99.99}
+        category="Conserto de TV e Eletrônicos"
+        faqs={tvFaqs.map((f) => ({ question: f.q, answer: f.a }))}
+      />
       <PageSEO
         title="Conserto de TV em Curitiba e Região | Orçamento sem Compromisso"
         description="Conserto de TV LED, LCD, OLED e Smart TV. Orçamento humanizado. Samsung, LG, Sony, TCL e todas as marcas."
         path="/servicos/conserto-tv"
         breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Conserto de TV", path: "/servicos/conserto-tv" }]}
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
       <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Conserto de TV" }]} />
