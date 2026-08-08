@@ -1519,6 +1519,8 @@ docker run -d --name db --network minha-rede postgres
           <li><Link to="/valores" className="text-accent">Preços e políticas de serviço</Link></li>
           <li><Link to="/diagnostico-tecnico" className="text-accent">Por que o diagnóstico é pago</Link></li>
           <li><Link to="/servicos/upgrade-ssd-memoria" className="text-accent">Upgrade SSD e memória</Link></li>
+          <li><Link to="/guia-tecnico-informatica" className="text-accent">Guia técnico de informática: causas, custos e prazos</Link></li>
+          <li><Link to="/tecnico-informatica-curitiba" className="text-accent">Técnico de informática em Curitiba</Link></li>
         </ul>
       </>
     ),
@@ -1657,6 +1659,8 @@ docker run -d --name db --network minha-rede postgres
           <li><Link to="/diagnostico-tecnico" className="text-accent">Por que o diagnóstico é pago</Link></li>
           <li><Link to="/quando-nao-compensa" className="text-accent">Quando não compensa reparar</Link></li>
           <li><Link to="/problemas-reais-e-casos" className="text-accent">Problemas reais e casos técnicos</Link></li>
+          <li><Link to="/guia-tecnico-informatica" className="text-accent">Guia técnico de informática: causas, custos e prazos</Link></li>
+          <li><Link to="/tecnico-informatica-curitiba" className="text-accent">Técnico de informática em Curitiba</Link></li>
         </ul>
       </>
     ),
