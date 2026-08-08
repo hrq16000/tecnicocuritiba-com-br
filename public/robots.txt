@@ -100,3 +100,4 @@ Host: https://tecnicocuritiba.com.br
 
 # Feed RSS do blog
 # RSS: https://tecnicocuritiba.com.br/rss.xml
+# Atom: https://tecnicocuritiba.com.br/atom.xml
