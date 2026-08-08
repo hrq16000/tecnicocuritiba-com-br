@@ -242,6 +242,9 @@ export default function AreasAtendidas() {
               conforme disponibilidade de rota — confirme direto no WhatsApp informando bairro e equipamento.
             </p>
             <div className="flex flex-wrap gap-3 text-sm">
+              <Link to="/busca" className="text-primary hover:underline">
+                Buscar meu bairro
+              </Link>
               <Link to="/atendimento" className="text-primary hover:underline">
                 Atendimento por cidade
               </Link>
