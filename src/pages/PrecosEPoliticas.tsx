@@ -688,6 +688,8 @@ const PrecosEPoliticas = () => {
           </div>
         </section>
 
+        <PrecosFaqLinks />
+
         <CTASection />
       </main>
       <RealImageSection imageKey="bancadaTecnica" secondaryImageKey="ferramentas" layout="duo" caption="Bancada técnica profissional equipada" secondaryCaption="Ferramentas especializadas para cada serviço" />
