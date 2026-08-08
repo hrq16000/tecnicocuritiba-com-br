@@ -303,10 +303,61 @@ const Servicos = () => {
           </div>
         </section>
 
+        {/* Reforço contextual do cluster de informática (link equity dirigido) */}
+        <section className="py-8 md:py-10 bg-background" aria-labelledby="cluster-informatica">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto rounded-2xl border bg-secondary/30 p-6">
+              <h2 id="cluster-informatica" className="text-2xl md:text-3xl font-bold text-primary mb-3">
+                Comece pelas páginas principais de informática
+              </h2>
+              <p className="text-muted-foreground mb-4">
+                Se o seu problema é com computador ou notebook, estes são os caminhos mais diretos:
+                a página local de{" "}
+                <Link to="/tecnico-informatica-curitiba" className="text-accent underline">
+                  técnico de informática em Curitiba
+                </Link>{" "}
+                para atendimento, o{" "}
+                <Link to="/guia-tecnico-informatica" className="text-accent underline">
+                  guia técnico de informática
+                </Link>{" "}
+                para entender causas, custos e prazos antes de decidir, e o{" "}
+                <Link to="/diagnostico-tecnico" className="text-accent underline">
+                  diagnóstico técnico
+                </Link>{" "}
+                quando a causa ainda não está clara. Para lentidão, o caminho costuma ser{" "}
+                <Link to="/servicos/upgrade-ssd-memoria" className="text-accent underline">
+                  upgrade de SSD e memória
+                </Link>
+                ; para falhas de sistema,{" "}
+                <Link to="/servicos/formatacao-computador" className="text-accent underline">
+                  formatação com backup
+                </Link>{" "}
+                ou{" "}
+                <Link to="/servicos/remocao-virus" className="text-accent underline">
+                  remoção de vírus
+                </Link>
+                .
+              </p>
+              <p className="text-muted-foreground">
+                Manutenção recorrente de parque de máquinas fica em{" "}
+                <Link to="/manutencao-notebook-pc-curitiba" className="text-accent underline">
+                  manutenção de notebook e PC
+                </Link>{" "}
+                e, para empresas, em{" "}
+                <Link to="/suporte-empresas" className="text-accent underline">
+                  suporte de TI para empresas
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
+        </section>
+
         <TrustSection />
         <CTASection />
       </main>
       <RealImageSection imageKey="tecnicoTrabalhando" secondaryImageKey="notebookReparo" layout="duo" caption="Técnico especializado em ação" secondaryCaption="Reparo profissional de notebooks" />
+      <ServicosCorrelatos exclude={["/servicos"]} />
       <BlocoInteligencia />
       <InterlinkingBlock />
       <Footer />
