@@ -6,8 +6,18 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Copy, Check } from "lucide-react";
+import { Loader2, Copy, Check, MessageCircle } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { NAP_PHONE_DIGITS } from "@/lib/nap";
+
+/** Abre o WhatsApp já com o roteiro do serviço pré-preenchido. */
+const openWhatsApp = (texto: string) => {
+  window.open(
+    `https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent(texto)}`,
+    "_blank",
+    "noopener,noreferrer",
+  );
+};
 
 interface Template {
   id: string;
