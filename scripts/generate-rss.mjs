@@ -1,6 +1,7 @@
 // Gera public/rss.xml a partir dos posts do blog.
 // Roda em predev/prebuild para manter o feed sincronizado com o Blog.tsx.
 import { readFileSync, writeFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 
 const BASE_URL = "https://tecnicocuritiba.com.br";
@@ -47,7 +48,7 @@ function toRfc822(dateStr) {
   return d.toUTCString();
 }
 
-function buildRss(posts) {
+function buildRss(posts, feedUpdated) {
   const items = posts
     .slice()
     .sort((a, b) => (a.date < b.date ? 1 : -1))
@@ -72,7 +73,7 @@ function buildRss(posts) {
     <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
     <description>${escapeXml(SITE_DESC)}</description>
     <language>pt-BR</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${new Date(feedUpdated).toUTCString()}</lastBuildDate>
 ${items}
   </channel>
 </rss>
