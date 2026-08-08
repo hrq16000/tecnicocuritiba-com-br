@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { loadAdSense, loadAdSenseIfConsented } from "@/lib/adsense";
 
 const KEY = "lgpd_consent_v1";
+
 
 const updateConsent = (granted: boolean) => {
   if (typeof window === "undefined" || !window.gtag) return;
@@ -27,6 +29,7 @@ export const ConsentBanner = () => {
     try {
       const saved = localStorage.getItem(KEY);
       if (!saved) setOpen(true);
+      else loadAdSenseIfConsented();
     } catch {
       setOpen(true);
     }
@@ -35,8 +38,10 @@ export const ConsentBanner = () => {
   const decide = (granted: boolean) => {
     try { localStorage.setItem(KEY, granted ? "granted" : "denied"); } catch { /* storage indisponível */ }
     updateConsent(granted);
+    if (granted) loadAdSense();
     setOpen(false);
   };
+
 
   if (!open) return null;
 
