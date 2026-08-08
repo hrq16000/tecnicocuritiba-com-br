@@ -3,9 +3,12 @@ import { PageSEO } from "@/components/PageSEO";
 import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 import { RealImageSection } from "@/components/RealImageSection";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
+import { ImageObjectSchema } from "@/components/ImageObjectSchema";
+import { ServiceGallery, GalleryItem } from "@/components/ServiceGallery";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { Link } from "react-router-dom";
-import { Cpu, CheckCircle, AlertCircle, MessageCircle, ArrowRight, Clock } from "lucide-react";
-import { DIAGNOSTICO_VALOR_LABEL, COLETA_TAXA_MINIMA_LABEL } from "@/lib/coletaConfig";
+import { Cpu, CheckCircle, AlertCircle, AlertTriangle, MessageCircle, ArrowRight, Clock } from "lucide-react";
+import { DIAGNOSTICO_VALOR_LABEL, COLETA_TAXA_MINIMA_LABEL, REGRA_COLETA_SEM_VISITA } from "@/lib/coletaConfig";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -17,13 +20,30 @@ import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
-const tiposPlaca = [
-  { titulo: "Placa-mãe de desktop", desc: "Trilhas queimadas, capacitores estufados, VRM danificado, socket com pino torto. Diagnóstico com multímetro e osciloscópio.", prazo: "7-30 dias" },
-  { titulo: "Placa-mãe de notebook", desc: "Curto-circuito, chip BGA com solda fria, reguladores de tensão queimados. Pode exigir reballing.", prazo: "15-45 dias" },
-  { titulo: "Placa de vídeo (GPU)", desc: "Artefatos na tela, sem imagem, superaquecimento. GPU com desgaste, VRAM defeituosa ou VRM queimado.", prazo: "15-60 dias" },
-  { titulo: "Placa-fonte de TV/monitor", desc: "Capacitores estufados, MOSFETs queimados, transformador danificado. Reparo em componentes SMD.", prazo: "7-20 dias" },
-  { titulo: "Placas eletrônicas diversas", desc: "Inversores, placas de controle de eletrodomésticos, centrais automotivas, controladores industriais.", prazo: "Sob consulta" },
+const GALLERY: GalleryItem[] = [
+  { imageKey: "bancadaTecnica", caption: "Placa em bancada durante medição de tensões e trilhas" },
+  { imageKey: "estacaoSolda", caption: "Retrabalho de solda em componentes SMD com estação profissional" },
+  { imageKey: "coletaEntrega", caption: "Coleta e devolução da placa — serviço de laboratório, sem visita técnica" },
 ];
+
+const TESTE_FINAL = [
+  "Inspeção visual e registro fotográfico antes e depois do reparo",
+  "Medição de tensões nas linhas principais e conferência de curto",
+  "Teste de carga com o equipamento ligado por período contínuo",
+  "Verificação de aquecimento nos pontos reparados",
+  "Teste funcional das saídas usadas pelo cliente (vídeo, USB, áudio)",
+  "Registro do procedimento executado na ordem de serviço",
+];
+
+const FAQ = [
+  { question: "Vale a pena consertar a placa-mãe?", answer: "Vale quando o custo do reparo fica bem abaixo da substituição do equipamento. Informamos a comparação antes de aprovar." },
+  { question: "Quanto tempo leva o reparo em bancada?", answer: "O prazo varia de 7 a 60 dias úteis conforme a complexidade e a disponibilidade dos componentes. O prazo é confirmado junto do orçamento." },
+  { question: "Tem coleta e entrega?", answer: `Sim, com coleta agendada em Curitiba e região metropolitana. ${REGRA_COLETA_SEM_VISITA}` },
+  { question: "Qual a garantia do reparo de placa?", answer: "A garantia é de 90 dias sobre o serviço executado e a peça substituída, conforme descrito na ordem de serviço. Não cobre defeito novo em componente diferente do reparado." },
+  { question: "Posso recusar o orçamento depois do diagnóstico?", answer: `Pode. Em caso de recusa ou desistência após a coleta, cobra-se apenas o diagnóstico (${DIAGNOSTICO_VALOR_LABEL}), e o aparelho é devolvido nas mesmas condições.` },
+  { question: "O problema é da placa ou do monitor?", answer: "Se a falha aparece apenas com um computador específico (artefatos, travas, sem sinal em uma saída), o caso é tratado como reparo de placa. Se o monitor apresenta o mesmo defeito ligado em outra fonte de sinal, o caminho correto é o conserto de monitor." },
+];
+
 
 const ConsertoPlaca = () => {
   useEffect(() => {
