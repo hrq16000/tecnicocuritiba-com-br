@@ -22,6 +22,7 @@ import {
   MSG_COLETA_RESUMO,
 } from "@/lib/coletaConfig";
 import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
@@ -53,6 +54,16 @@ const cidades = [
   { nome: "Quatro Barras", slug: "quatro-barras" },
 ];
 
+/** FAQ único: alimenta o bloco visível e o FAQPage JSON-LD (paridade obrigatória). */
+const tvFaqs = [
+  { q: "Vocês fazem visita técnica para TV?", a: `Não. ${REGRA_COLETA_SEM_VISITA} Organizamos coleta e entrega com taxa mínima de ${COLETA_TAXA_MINIMA_LABEL}.` },
+  { q: "Quanto custa o conserto de TV?", a: `${REGRA_ORCAMENTO_GRATIS}. Orçamento preciso somente após coleta, com taxa mínima de ${COLETA_TAXA_MINIMA_LABEL} pré-aprovada.` },
+  { q: "Consertam TV de tela quebrada?", a: "Avaliamos caso a caso. Em muitos modelos, a troca do painel tem custo próximo ao de uma TV nova. Orientamos com honestidade." },
+  { q: "Quanto tempo leva o conserto?", a: `Prazo padrão para TV: ${PRAZO_LONGO}, dependendo do defeito e disponibilidade de peças.` },
+  { q: "Quais formas de pagamento?", a: "PIX, dinheiro e cartão. Consulte condições pelo WhatsApp." },
+  { q: "A garantia cobre o quê?", a: "Cobre o serviço realizado e a peça trocada. O prazo varia conforme o tipo de reparo." },
+];
+
 const ConsertoTV = () => {
   useEffect(() => {
     document.title = "Conserto de TV em Curitiba e Região | Orçamento sem Compromisso | Técnico em Curitiba";
@@ -67,28 +78,22 @@ const ConsertoTV = () => {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Conserto de TV",
-    description: "Serviço de conserto de TV LED, LCD, OLED e Smart TV em Curitiba e região metropolitana.",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Técnico em Curitiba",
-      telephone: "+55-41-99745-2053",
-    },
-    areaServed: { "@type": "City", name: "Curitiba" },
-  };
-
   return (
     <div className="min-h-screen bg-background">
+      <ServiceLandingSchema
+        serviceName="Conserto de TV"
+        description="Conserto de TV LED, LCD, OLED e Smart TV em Curitiba e região metropolitana, com coleta e entrega, orçamento aprovado antes do reparo e garantia sobre serviço e peça."
+        path="/servicos/conserto-tv"
+        priceFrom={99.99}
+        category="Conserto de TV e Eletrônicos"
+        faqs={tvFaqs.map((f) => ({ question: f.q, answer: f.a }))}
+      />
       <PageSEO
         title="Conserto de TV em Curitiba e Região | Orçamento sem Compromisso"
         description="Conserto de TV LED, LCD, OLED e Smart TV. Orçamento humanizado. Samsung, LG, Sony, TCL e todas as marcas."
         path="/servicos/conserto-tv"
         breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }, { name: "Conserto de TV", path: "/servicos/conserto-tv" }]}
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
       <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Conserto de TV" }]} />
@@ -272,14 +277,7 @@ const ConsertoTV = () => {
               Perguntas Frequentes – Conserto de TV
             </h2>
             <div className="max-w-3xl mx-auto space-y-4">
-              {[
-                { q: "Vocês fazem visita técnica para TV?", a: `Não. ${REGRA_COLETA_SEM_VISITA} Organizamos coleta e entrega com taxa mínima de ${COLETA_TAXA_MINIMA_LABEL}.` },
-                { q: "Quanto custa o conserto de TV?", a: `${REGRA_ORCAMENTO_GRATIS}. Orçamento preciso somente após coleta, com taxa mínima de ${COLETA_TAXA_MINIMA_LABEL} pré-aprovada.` },
-                { q: "Consertam TV de tela quebrada?", a: "Avaliamos caso a caso. Em muitos modelos, a troca do painel tem custo próximo ao de uma TV nova. Orientamos com honestidade." },
-                { q: "Quanto tempo leva o conserto?", a: `Prazo padrão para TV: ${PRAZO_LONGO}, dependendo do defeito e disponibilidade de peças.` },
-                { q: "Quais formas de pagamento?", a: "PIX, dinheiro e cartão. Consulte condições pelo WhatsApp." },
-                { q: "A garantia cobre o quê?", a: "Cobre o serviço realizado e a peça trocada. O prazo varia conforme o tipo de reparo." },
-              ].map((faq, i) => (
+              {tvFaqs.map((faq, i) => (
                 <div key={i} className="bg-secondary p-6 rounded-xl">
                   <h3 className="font-bold text-foreground mb-2">{faq.q}</h3>
                   <p className="text-muted-foreground">{faq.a}</p>
