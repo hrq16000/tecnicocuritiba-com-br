@@ -147,11 +147,19 @@ export default function StatusAnuncios() {
               <li><a href="/sitemap-index.xml" className="text-accent underline">sitemap-index.xml</a></li>
               <li><Link to="/politica-de-publicidade" className="text-accent underline">Política de Publicidade e Cookies de Anúncios</Link></li>
               <li><Link to="/politica-de-privacidade" className="text-accent underline">Política de Privacidade e LGPD</Link></li>
+              <li><Link to="/politica-de-cookies-e-anuncios" className="text-accent underline">Política de Cookies e Anúncios</Link></li>
               <li><Link to="/exclusao-de-dados" className="text-accent underline">Exclusão de Dados (LGPD)</Link></li>
             </ul>
+            <button
+              type="button"
+              onClick={openConsentPreferences}
+              className="mt-4 inline-flex items-center rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-foreground hover:bg-accent/20"
+            >
+              Gerenciar preferências de cookies
+            </button>
             <p className="mt-3 text-sm text-muted-foreground">
-              Para alterar sua escolha de cookies, limpe os dados do site no navegador — o banner de
-              consentimento será exibido novamente na próxima visita.
+              A alteração vale imediatamente: negar anúncios impede o carregamento do script do
+              AdSense nesta e nas próximas visitas neste navegador.
             </p>
           </div>
         </section>
