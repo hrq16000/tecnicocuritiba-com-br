@@ -496,6 +496,7 @@ const App = () => (
             <Route path="/atendimento-remoto" element={<AtendimentoRemoto />} />
             <Route path="/atendimento" element={<AtendimentoHub />} />
             <Route path="/areas-atendidas" element={<AreasAtendidas />} />
+            <Route path="/busca" element={<Busca />} />
             <Route path="/publicidade" element={<Navigate to="/patrocinadores" replace />} />
             <Route path="/anuncie" element={<Navigate to="/patrocinadores" replace />} />
             <Route path="/gestor-responsavel" element={<GestorResponsavel />} />
