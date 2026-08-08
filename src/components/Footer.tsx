@@ -108,6 +108,7 @@ const infoLinks = [
   { label: "Política de Cookies e Anúncios", to: "/politica-de-cookies-e-anuncios" },
   { label: "Exclusão de Dados (LGPD)", to: "/exclusao-de-dados" },
   { label: "Status de Anúncios", to: "/status-anuncios" },
+  { label: "Patrocinadores e Mídia Kit", to: "/patrocinadores" },
 ];
 
 
