@@ -69,7 +69,20 @@ const FAQ = [
     q: "Quais marcas de monitor vocês atendem?",
     a: "AOC, Samsung, LG, Dell, Acer, Philips, BenQ, ASUS, Positivo, HP, Lenovo e similares, em modelos LED, LCD, IPS, VA e ultrawide.",
   },
+  {
+    q: "Consertam monitor gamer? A taxa de atualização volta a ser a mesma?",
+    a: "Atendemos monitores gamer (144 Hz, 165 Hz, ultrawide e curvos) no mesmo fluxo de bancada. O reparo devolve o funcionamento elétrico do aparelho — não prometemos ganho, recuperação ou certificação de Hz, HDR, tempo de resposta ou fidelidade de cor, porque essas características dependem do painel original e não são alteradas por reparo.",
+  },
+  {
+    q: "Quando o problema é do monitor e quando é da placa de vídeo do PC?",
+    a: "Se o monitor apresenta o mesmo defeito ligado em outra fonte de sinal, o caso é do monitor. Se a imagem falha apenas com um computador específico (artefatos, travas, sem sinal em uma saída), o reparo é tratado como reparo de placa — nesse caso encaminhamos para /servicos/conserto-placa, sem cobrar duas coletas.",
+  },
+  {
+    q: "Como funciona a garantia de 90 dias do conserto de monitor?",
+    a: "A garantia de 90 dias cobre o serviço executado e a peça substituída, descrita na ordem de serviço. Não cobre novo defeito em componente diferente do reparado, dano por surto elétrico posterior, queda, líquido, violação por terceiros ou desgaste do painel.",
+  },
 ];
+
 
 const ConsertoMonitor = () => {
   const spec = getServiceSpec(PATH)!;
