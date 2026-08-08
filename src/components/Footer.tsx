@@ -106,6 +106,7 @@ const infoLinks = [
   { label: "Política de Privacidade", to: "/politica-de-privacidade" },
   { label: "Política de Publicidade", to: "/politica-de-publicidade" },
   { label: "Exclusão de Dados (LGPD)", to: "/exclusao-de-dados" },
+  { label: "Status de Anúncios", to: "/status-anuncios" },
 ];
 
 
