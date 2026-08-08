@@ -41,5 +41,28 @@ for (const { name, viewport } of VIEWPORTS) {
 
       expect(broken, `links quebrados em ${name}`).toEqual([]);
     });
+
+    test("emite FAQPage JSON-LD e fallback acessivel do mapa", async ({ page }) => {
+      await page.goto("/areas-atendidas", { waitUntil: "domcontentloaded" });
+      await expect(page.locator("h1").first()).toBeVisible({ timeout: 15000 });
+
+      const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
+      const faqBlocks = blocks
+        .map((raw) => {
+          try {
+            return JSON.parse(raw);
+          } catch {
+            return null;
+          }
+        })
+        .filter((json) => json && json["@type"] === "FAQPage");
+
+      expect(faqBlocks.length, "um unico FAQPage JSON-LD").toBe(1);
+      expect(Array.isArray(faqBlocks[0].mainEntity) && faqBlocks[0].mainEntity.length).toBeGreaterThan(2);
+
+      // Fallback: link direto para a lista de bairros mesmo se o mapa nao carregar
+      await expect(page.locator('a[href="#lista-areas"]').first()).toBeVisible();
+      await expect(page.locator("#lista-areas")).toHaveCount(1);
+    });
   });
 }
