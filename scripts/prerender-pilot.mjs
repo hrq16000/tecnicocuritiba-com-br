@@ -50,6 +50,13 @@ const service = (name, description, url) => ({
 /** Rotas do piloto — alto valor comercial (serviços, institucional, B2B). */
 export const PILOT_ROUTES = [
   {
+    path: "/guia-tecnico-informatica",
+    title: "Guia Técnico de Informática | Diagnóstico, Custos e Prazos",
+    description:
+      "Guia completo de informática: como descobrir a causa do problema, quanto custa cada serviço, prazos reais e quando compensa consertar PC ou notebook em Curitiba.",
+    kind: "page",
+  },
+  {
     path: "/servicos",
     title: "Serviços de Informática em Curitiba | Técnico em Curitiba",
     description:
