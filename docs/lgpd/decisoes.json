@@ -1,0 +1,98 @@
+{
+  "controlador": {
+    "nome": "O Técnico de Informática — Curitiba",
+    "site": "https://tecnicocuritiba.com.br",
+    "canalTitular": "WhatsApp (canal oficial) e página /exclusao-de-dados",
+    "encarregado": "Responsável operacional do portal (contato via /exclusao-de-dados)"
+  },
+  "status": "autorizado",
+  "versao": "1.0",
+  "decisoes": [
+    {
+      "id": 1,
+      "titulo": "Funil de atendimento por WhatsApp (geração de lead)",
+      "finalidade": "Triagem do problema técnico, envio de orçamento e agendamento do atendimento.",
+      "baseLegal": "Execução de procedimentos preliminares a contrato (art. 7º, V, LGPD)",
+      "dados": [
+        "Nome informado espontaneamente",
+        "Equipamento, sintomas e modelo",
+        "Cidade e bairro",
+        "Período preferido de atendimento",
+        "Parâmetros de origem (UTM) da visita"
+      ],
+      "titulares": ["Clientes e potenciais clientes"],
+      "retencao": "24 meses após o último contato",
+      "compartilhamento": ["WhatsApp/Meta (transporte da conversa)"],
+      "transferenciaInternacional": true,
+      "medidas": [
+        "Sem coleta de dados sensíveis",
+        "Mensagem pré-preenchida sem armazenamento de conteúdo no site",
+        "Nenhum telefone exposto publicamente"
+      ]
+    },
+    {
+      "id": 2,
+      "titulo": "Mensuração de cliques e navegação (click_events + GA4)",
+      "finalidade": "Medir desempenho do funil, dos CTAs e das campanhas.",
+      "baseLegal": "Consentimento (art. 7º, I, LGPD) via banner de cookies e Consent Mode v2",
+      "dados": [
+        "Evento de clique e rota",
+        "UTMs e origem",
+        "Viewport e tipo de dispositivo",
+        "Identificador de sessão anônimo (deduplicação)"
+      ],
+      "titulares": ["Visitantes do site"],
+      "retencao": "14 meses (GA4) e 12 meses (tabela click_events)",
+      "compartilhamento": ["Google Analytics 4", "Google AdSense (quando consentido)"],
+      "transferenciaInternacional": true,
+      "medidas": [
+        "Scripts de anúncio e analytics só carregam após consentimento",
+        "Tabela click_events com RLS INSERT-only para anônimos",
+        "Sem coleta de identificadores diretos do titular"
+      ]
+    },
+    {
+      "id": 3,
+      "titulo": "Avaliações e depoimentos de clientes",
+      "finalidade": "Publicar prova social autorizada e acompanhar qualidade do serviço.",
+      "baseLegal": "Consentimento específico do titular (art. 7º, I, LGPD)",
+      "dados": [
+        "Primeiro nome",
+        "Bairro/cidade",
+        "Nota e comentário",
+        "Serviço realizado"
+      ],
+      "titulares": ["Clientes atendidos"],
+      "retencao": "Enquanto a autorização de publicação estiver vigente",
+      "compartilhamento": ["Google Business Profile (quando o cliente publica diretamente)"],
+      "transferenciaInternacional": false,
+      "medidas": [
+        "Aceite explícito antes da publicação",
+        "Página /avaliar com noindex e antispam",
+        "Histórico de auditoria de aprovação/revogação em /admin/reviews"
+      ]
+    },
+    {
+      "id": 4,
+      "titulo": "Ordem de serviço e consulta pública de status",
+      "finalidade": "Registrar o serviço executado e permitir consulta do andamento pelo cliente.",
+      "baseLegal": "Execução de contrato (art. 7º, V, LGPD) e obrigação legal fiscal (art. 7º, II)",
+      "dados": [
+        "Número da OS",
+        "Telefone de contato (para busca)",
+        "Equipamento e laudo técnico",
+        "Fotos e anexos enviados pelo cliente",
+        "Histórico de estágios da OS"
+      ],
+      "titulares": ["Clientes atendidos"],
+      "retencao": "5 anos (garantia e obrigações fiscais)",
+      "compartilhamento": ["Nenhum terceiro além da infraestrutura de hospedagem"],
+      "transferenciaInternacional": false,
+      "medidas": [
+        "Rate limit e log de auditoria nas consultas públicas",
+        "Acesso administrativo restrito por papel",
+        "Exclusão de anexos sob solicitação em /exclusao-de-dados"
+      ]
+    }
+  ]
+}
