@@ -160,8 +160,8 @@ export const EstimativaRapida = ({ className = "" }: { className?: string }) => 
         confirmado após a descrição do defeito — nada é executado sem aprovação.
       </p>
 
-      <Grupo titulo="Qual é o equipamento?" passo={1} itens={EQUIPAMENTOS} valor={equipamento} onSelect={setEquipamento} />
-      <Grupo titulo="O que está acontecendo?" passo={2} itens={PROBLEMAS} valor={problema} onSelect={setProblema} />
+      <Grupo titulo="Qual é o equipamento?" passo={1} itens={EQUIPAMENTOS} valor={equipamento} onSelect={(id) => setEquipamento(id as Equipamento)} />
+      <Grupo titulo="O que está acontecendo?" passo={2} itens={PROBLEMAS} valor={problema} onSelect={(id) => setProblema(id as Problema)} />
       <Grupo
         titulo="Você precisa que seja no local?"
         passo={3}
@@ -170,7 +170,7 @@ export const EstimativaRapida = ({ className = "" }: { className?: string }) => 
           { id: "nao" as Local, label: "Não / tanto faz" },
         ]}
         valor={atendeNoLocal}
-        onSelect={setAtendeNoLocal}
+        onSelect={(id) => setAtendeNoLocal(id as Local)}
       />
 
       <div aria-live="polite">
