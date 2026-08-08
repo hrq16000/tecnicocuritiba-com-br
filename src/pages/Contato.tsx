@@ -224,7 +224,7 @@ const Contato = () => {
                   <p className="text-sm text-muted-foreground">
                     Descreva o número da OS e o ocorrido pelo WhatsApp. Você pode acompanhar o andamento em{" "}
                     <Link to="/status-os" className="text-accent underline">status da OS</Link> e conferir a{" "}
-                    <Link to="/politica-de-pecas-do-cliente" className="text-accent underline">política de peças e garantia</Link>.
+                    <Link to="/politica-pecas-cliente" className="text-accent underline">política de peças e garantia</Link>.
                   </p>
                 </div>
                 <div className="rounded-xl border border-border/60 bg-card/60 p-5">
