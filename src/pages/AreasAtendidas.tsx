@@ -183,11 +183,33 @@ export default function AreasAtendidas() {
                       .
                     </p>
                   )}
+                  <InlineTriageCTA
+                    className="mt-3"
+                    location={`areas_atendidas_${cidade.slug}`}
+                    label={`Confirmar atendimento em ${cidade.nome}`}
+                    message={`Olá! Preciso de atendimento técnico em ${cidade.nome}. Meu bairro é: `}
+                    hint="Informe bairro e equipamento para confirmarmos a rota do dia."
+                  />
                 </article>
               );
             })}
           </div>
         </section>
+
+        <section className="max-w-5xl mx-auto pb-12" aria-labelledby="faq-areas">
+          <h2 id="faq-areas" className="text-2xl md:text-3xl font-bold mb-4">
+            Dúvidas sobre cobertura, prazos e confirmação
+          </h2>
+          <div className="space-y-3">
+            {FAQ_AREAS.map((f) => (
+              <details key={f.q} className="rounded-xl border bg-card p-4">
+                <summary className="cursor-pointer font-semibold">{f.q}</summary>
+                <p className="mt-2 text-muted-foreground">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
 
         <section className="max-w-5xl mx-auto pb-16">
           <div className="rounded-2xl border bg-card p-6">
