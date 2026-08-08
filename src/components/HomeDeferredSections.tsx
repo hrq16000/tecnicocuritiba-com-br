@@ -38,7 +38,7 @@ const SectionFallback = ({ height = "400px" }: { height?: string }) => (
 
 const DeferredContent = () => (
   <>
-    <PageSEO title="Técnico de Informática Curitiba | Hoje R$ 99,99" description="Técnico de informática em Curitiba hoje. Conserto de PC/notebook, formatação, vírus e SSD a partir de R$ 99,99. Chame no WhatsApp." path="/" />
+    <PageSEO title="Técnico de Informática em Curitiba | Conserto de PC e Notebook" description="Técnico de informática em Curitiba: conserto de PC e notebook, formatação, remoção de vírus e upgrade de SSD. Atendimento via WhatsApp, a partir de R$ 99,99." path="/" />
 
     <LazyOnVisible minHeight="120px" rootMargin="-240px 0px"><Suspense fallback={<SectionFallback height="120px" />}><TechBrandsMarquee /></Suspense></LazyOnVisible>
     <LazyOnVisible rootMargin="-240px 0px"><Suspense fallback={<SectionFallback />}><PainSection /></Suspense></LazyOnVisible>
