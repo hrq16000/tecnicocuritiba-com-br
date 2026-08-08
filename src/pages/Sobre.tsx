@@ -205,6 +205,87 @@ const Sobre = () => {
           </div>
         </section>
 
+        {/* Transparência editorial, avaliações e patrocinadores */}
+        <section className="py-14 bg-secondary/40">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">
+                Como este portal produz conteúdo, avaliações e publicidade
+              </h2>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Este site não é apenas uma vitrine de serviços: publicamos guias técnicos, páginas de
+                sintomas e conteúdos de diagnóstico usados por quem procura solução antes de acionar um
+                técnico. Para que essa informação seja confiável, seguimos critérios fixos de produção,
+                revisão e divulgação — descritos abaixo de forma aberta.
+              </p>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Missão do portal</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Explicar o problema técnico em linguagem simples, mostrar quando o reparo compensa e
+                    quando não compensa, e reduzir o número de pessoas que gastam dinheiro em serviço
+                    desnecessário. Conteúdo primeiro; atendimento como consequência.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Processo editorial</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Todo conteúdo é escrito a partir de atendimentos reais executados em bancada e
+                    revisado pelo responsável técnico antes de publicar. Páginas com prazo, valor ou
+                    política são atualizadas sempre que a regra operacional muda, e a data de atualização
+                    fica registrada na própria página.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Critérios de conteúdo</h3>
+                  <ul className="list-disc pl-5 space-y-1.5 text-sm text-muted-foreground">
+                    <li>Nada de promessa de desempenho, prazo garantido ou resultado que não controlamos.</li>
+                    <li>Valores exibidos são a referência oficial de tabela, sempre com a condição aplicável.</li>
+                    <li>Quando o reparo não compensa, dizemos isso na própria página, mesmo perdendo o serviço.</li>
+                    <li>Correções de erro são feitas na página original, sem apagar o histórico da regra.</li>
+                  </ul>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Avaliações de clientes</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Publicamos apenas avaliações enviadas por clientes atendidos, com autorização
+                    explícita de publicação. Não compramos avaliação, não editamos a nota e não removemos
+                    crítica negativa legítima. Veja as{" "}
+                    <Link to="/avaliacoes" className="text-accent underline">avaliações publicadas</Link> e{" "}
+                    <Link to="/como-avaliar" className="text-accent underline">como avaliar</Link>.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5 md:col-span-2">
+                  <h3 className="font-semibold text-foreground mb-2">Publicidade e patrocinadores</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    O portal exibe anúncios de terceiros e pode exibir espaços patrocinados. Todo espaço
+                    pago aparece identificado como <strong>“Publicidade”</strong> e nunca é apresentado como
+                    recomendação editorial. Anunciante não influencia diagnóstico, ordem de conteúdo nem
+                    conclusão de página. Scripts de anúncio só carregam depois do seu aceite no banner de
+                    consentimento. Detalhes em{" "}
+                    <Link to="/politica-de-publicidade" className="text-accent underline">Política de Publicidade</Link>,{" "}
+                    <Link to="/politica-de-cookies-e-anuncios" className="text-accent underline">Política de Cookies e Anúncios</Link>{" "}
+                    e{" "}
+                    <Link to="/politica-de-privacidade" className="text-accent underline">Política de Privacidade</Link>.
+                    O estado técnico em tempo real fica em{" "}
+                    <Link to="/status-anuncios" className="text-accent underline">status de anúncios</Link>.
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-6 text-sm text-muted-foreground">
+                Encontrou informação desatualizada ou quer registrar uma reclamação?{" "}
+                <Link to="/contato" className="text-accent underline">Fale pelo canal de contato</Link>.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <TrustSection />
         <CTASection />
       </main>
