@@ -345,6 +345,7 @@ const MontagemPc = lazy(() => import("./pages/servicos/MontagemPc"));
 const MontagemPcComoFunciona = lazy(() => import("./pages/servicos/MontagemPcComoFunciona"));
 const OrganizacaoTIEscritorios = lazy(() => import("./pages/guias/OrganizacaoTIEscritorios"));
 const ComoEscolherWorkstation = lazy(() => import("./pages/guias/ComoEscolherWorkstation"));
+const GuiaTecnicoInformatica = lazy(() => import("./pages/guias/GuiaTecnicoInformatica"));
 const PoliticaPecasCliente = lazy(() => import("./pages/PoliticaPecasCliente"));
 const PoliticaPublicidade = lazy(() => import("./pages/PoliticaPublicidade"));
 const Patrocinadores = lazy(() => import("./pages/Patrocinadores"));
