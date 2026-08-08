@@ -399,6 +399,7 @@ const DiagnosticoTecnico = () => {
         </section>
       </main>
 
+      <ServicosCorrelatos exclude={["/diagnostico-tecnico"]} />
       <InterlinkingBlock />
       <Footer />
     </div>
