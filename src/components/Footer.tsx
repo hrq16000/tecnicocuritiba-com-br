@@ -37,6 +37,7 @@ const servicosLinks = [
   { label: "Atendimento Remoto", to: "/atendimento-remoto" },
   { label: "Domicílio", to: "/atendimento-domicilio" },
   { label: "Coleta e Entrega", to: "/coleta-e-entrega" },
+  { label: "Áreas Atendidas", to: "/areas-atendidas" },
   { label: "Conserto de TV", to: "/servicos/conserto-tv" },
 ];
 

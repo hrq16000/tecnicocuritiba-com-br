@@ -148,6 +148,13 @@ export const PILOT_ROUTES = [
     kind: "page",
   },
   {
+    path: "/areas-atendidas",
+    title: "Áreas Atendidas em Curitiba e Região | Bairros e Cidades",
+    description:
+      "Mapa e lista completa de bairros e cidades atendidas em Curitiba e Região Metropolitana: domicílio, coleta e remoto a partir de R$ 99,99.",
+    kind: "page",
+  },
+  {
     path: "/quando-nao-compensa",
     title: "Quando Não Compensa Consertar | Guia Honesto | Técnico em Curitiba",
     description:
