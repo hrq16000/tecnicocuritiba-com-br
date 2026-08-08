@@ -104,6 +104,7 @@ const infoLinks = [
   { label: "Guia: Escolher Workstation", to: "/guias/como-escolher-workstation" },
   { label: "Termos e Condições", to: "/termos-e-condicoes" },
   { label: "Política de Privacidade", to: "/politica-de-privacidade" },
+  { label: "Política de Publicidade", to: "/politica-de-publicidade" },
   { label: "Exclusão de Dados (LGPD)", to: "/exclusao-de-dados" },
 ];
 
