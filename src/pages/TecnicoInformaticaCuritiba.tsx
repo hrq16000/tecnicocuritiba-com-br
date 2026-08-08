@@ -10,6 +10,7 @@ import { TrustSection } from "@/components/TrustSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
+import { ServicosCorrelatos } from "@/components/ServicosCorrelatos";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
 import { RealImageSection } from "@/components/RealImageSection";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
@@ -306,11 +307,31 @@ const TecnicoInformaticaCuritiba = () => {
         <ServiceLocalLinks currentCity="Curitiba" />
         <RealImageSection imageKey="bancadaTecnica" caption="Laboratório técnico profissional" />
         <LocalPhotoGallery local="Curitiba" />
+
+        {/* Ponte para a pillar informacional do cluster */}
+        <section className="py-8 md:py-10 bg-background">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto rounded-2xl border bg-secondary/30 p-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3">
+                Quer entender o problema antes de chamar o técnico?
+              </h2>
+              <p className="text-muted-foreground">
+                O <Link to="/guia-tecnico-informatica" className="text-accent underline">guia técnico de informática</Link>{" "}
+                explica como separar falha de software de falha de hardware, faixas de custo, prazos
+                reais e quando compensa consertar. Se o sintoma já está claro, vá direto para{" "}
+                <Link to="/servicos" className="text-accent underline">os serviços</Link> ou para o{" "}
+                <Link to="/diagnostico-tecnico" className="text-accent underline">diagnóstico técnico</Link>.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <LocalFAQSection title="Perguntas Frequentes - Curitiba" faqs={localFaqs} />
         <SocialProofSection />
         <TrustSection />
         <CTASection />
       </main>
+      <ServicosCorrelatos exclude={["/tecnico-informatica-curitiba"]} />
       <BlocoInteligencia />
       <InterlinkingBlock />
       <Footer />

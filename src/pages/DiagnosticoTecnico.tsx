@@ -8,6 +8,7 @@ import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
+import { ServicosCorrelatos } from "@/components/ServicosCorrelatos";
 import { Button } from "@/components/ui/button";
 import {
   Search, AlertTriangle, ShieldCheck, CheckCircle2, ArrowRight,
@@ -399,6 +400,7 @@ const DiagnosticoTecnico = () => {
         </section>
       </main>
 
+      <ServicosCorrelatos exclude={["/diagnostico-tecnico"]} />
       <InterlinkingBlock />
       <Footer />
     </div>

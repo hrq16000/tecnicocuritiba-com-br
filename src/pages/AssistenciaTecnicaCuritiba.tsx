@@ -1,4 +1,5 @@
 import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
+import { ServicosCorrelatos } from "@/components/ServicosCorrelatos";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -678,6 +679,7 @@ export default function AssistenciaTecnicaCuritiba() {
         </section>
         <LocalPhotoGallery local="Curitiba" variant="geral" />
       </main>
+      <ServicosCorrelatos exclude={["/assistencia-tecnica-curitiba"]} />
 
       <Footer />
     </div>
