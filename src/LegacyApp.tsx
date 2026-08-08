@@ -941,6 +941,7 @@ const App = () => (
             <Route path="/termos-e-condicoes" element={<TermosCondicoes />} />
             <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
             <Route path="/privacidade" element={<Navigate to="/politica-de-privacidade" replace />} />
+            <Route path="/lgpd" element={<Navigate to="/politica-de-privacidade" replace />} />
             <Route path="/funil-indisponivel" element={<FunilIndisponivel />} />
             <Route path="/obrigado" element={<Obrigado />} />
             <Route path="/avaliar" element={<Avaliar />} />

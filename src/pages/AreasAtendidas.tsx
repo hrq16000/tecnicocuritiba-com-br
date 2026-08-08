@@ -210,6 +210,27 @@ export default function AreasAtendidas() {
           </div>
         </section>
 
+        <section className="max-w-5xl mx-auto pb-12" aria-labelledby="prova-social-areas">
+          <h2 id="prova-social-areas" className="text-2xl md:text-3xl font-bold mb-4">
+            Prova social por região
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            As avaliações publicadas são reais, enviadas por clientes após o atendimento e revisadas antes de irem ao
+            ar. Você pode conferir os relatos por região e, se já foi atendido, deixar o seu.
+          </p>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <Link to="/avaliacoes" className="text-primary hover:underline">
+              Ver avaliações de clientes
+            </Link>
+            <Link to="/como-avaliar" className="text-primary hover:underline">
+              Como avaliar o atendimento
+            </Link>
+            <Link to="/avaliar" className="text-primary hover:underline">
+              Enviar minha avaliação
+            </Link>
+          </div>
+        </section>
+
 
         <section className="max-w-5xl mx-auto pb-16">
           <div className="rounded-2xl border bg-card p-6">
