@@ -334,8 +334,8 @@ export default function AssistenciaTecnicaCuritiba() {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Assistência Técnica de Consoles em Curitiba | PS5, Xbox, Nintendo e Placa de Vídeo"
-        description="Assistência técnica especializada em Curitiba: PlayStation, Xbox, Nintendo Switch, placas de vídeo, computadores, notebooks e smartphones. Orçamento rápido pelo WhatsApp (41) 99745-2053."
+        title="Assistência Técnica Especializada em Curitiba | Reparo de Bancada"
+        description="Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia. Orçamento pelo WhatsApp (41) 99745-2053."
         path="/assistencia-tecnica-curitiba"
         breadcrumbs={[
           { name: "Início", path: "/" },
