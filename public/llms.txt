@@ -1,55 +1,88 @@
-# Tecnico Curitiba - Assistencia Tecnica em Informatica
+# Tecnico Curitiba — Tecnico de Informatica em Curitiba
 
-> Tecnico Curitiba e o principal servico de assistencia tecnica em informatica de Curitiba e regiao metropolitana do Parana, Brasil. Oferecemos atendimento a domicilio no mesmo dia para pessoas fisicas e empresas.
+> Assistencia tecnica em informatica em Curitiba e regiao metropolitana: conserto de PC e notebook, formatacao, remocao de virus, upgrade de SSD, redes Wi-Fi, montagem de PC e suporte para empresas. Atendimento a domicilio, coleta e entrega ou remoto, com contato exclusivamente via WhatsApp. Visita tecnica a partir de R$ 99,99.
 
-## Servicos Oferecidos
+Este arquivo segue o padrao llms.txt e resume, em linguagem direta, o que o portal oferece e onde cada informacao pode ser verificada. Documentacao expandida: [llms-full.txt](https://tecnicocuritiba.com.br/llms-full.txt).
 
-- Formatacao de Computador (Windows 10/11)
-- Remocao de Virus e Malware
-- Conserto de PC e Notebook (todas as marcas)
-- Upgrade SSD e Memoria RAM
-- Configuracao de Redes Wi-Fi
-- Backup e Recuperacao de Dados
-- Montagem de PC Gamer e Workstation
-- Manutencao de TV e Monitores
-- Instalacao de Cameras CFTV
-- Conserto de Placa-Mae (nivel de componente)
-- Suporte Tecnico para Empresas (SLA)
-- Atendimento Remoto
-- Configuracao de Firewall pfSense
-- Montagem de Rack de Rede
-- Configuracao de Active Directory
-- Manutencao de Nobreak
+## Comece por aqui
 
-## Area de Atendimento
+- [Home](https://tecnicocuritiba.com.br/): visao geral dos servicos, precos de referencia e canal de atendimento.
+- [Como funciona](https://tecnicocuritiba.com.br/como-funciona): as etapas do atendimento, do primeiro contato a entrega.
+- [Precos e politicas](https://tecnicocuritiba.com.br/precos-e-politicas): valores de referencia, garantia e regras comerciais.
+- [Diagnostico tecnico](https://tecnicocuritiba.com.br/diagnostico-tecnico): o que esta incluso no diagnostico de R$ 99,99.
+- [Areas atendidas](https://tecnicocuritiba.com.br/areas-atendidas): mapa de cobertura, cidades e bairros atendidos.
 
-Curitiba, Sao Jose dos Pinhais, Araucaria, Campo Largo, Pinhais, Colombo, Fazenda Rio Grande, Almirante Tamandare, Piraquara, Campo Magro, Quatro Barras - cobrindo toda a regiao metropolitana de Curitiba.
+## Servicos principais
 
-## Contato
+- [Catalogo de servicos](https://tecnicocuritiba.com.br/servicos)
+- [Conserto de PC e notebook](https://tecnicocuritiba.com.br/servicos/conserto-pc-notebook)
+- [Formatacao de computador](https://tecnicocuritiba.com.br/servicos/formatacao-computador)
+- [Remocao de virus](https://tecnicocuritiba.com.br/servicos/remocao-virus)
+- [Upgrade de SSD e memoria](https://tecnicocuritiba.com.br/servicos/upgrade-ssd-memoria)
+- [Redes e Wi-Fi](https://tecnicocuritiba.com.br/servicos/redes-wifi)
+- [Backup e recuperacao de dados](https://tecnicocuritiba.com.br/servicos/backup-recuperacao)
+- [Montagem de PC](https://tecnicocuritiba.com.br/servicos/montagem-pc)
+- [Conserto de monitor](https://tecnicocuritiba.com.br/servicos/conserto-monitor)
+- [Conserto de placa (nivel de componente)](https://tecnicocuritiba.com.br/servicos/conserto-placa)
+- [Conserto de TV](https://tecnicocuritiba.com.br/servicos/conserto-tv)
+- [CFTV e cameras](https://tecnicocuritiba.com.br/cftv)
 
-- WhatsApp: +55 41 99745-2053
-- Website: https://tecnicocuritiba.com.br
-- Horario: Seg-Sex 08h-18h, Sab 09h-13h
+## Modalidades de atendimento
 
-## Diferenciais
+- [Atendimento a domicilio](https://tecnicocuritiba.com.br/atendimento-domicilio): tecnico vai ate o endereco em Curitiba e regiao.
+- [Atendimento remoto](https://tecnicocuritiba.com.br/atendimento-remoto): problemas de software resolvidos por acesso remoto autorizado.
+- [Coleta e entrega](https://tecnicocuritiba.com.br/coleta-e-entrega): retirada e devolucao do equipamento quando o reparo exige bancada.
+- [Hub de atendimento por cidade e bairro](https://tecnicocuritiba.com.br/atendimento)
 
-- Atendimento a domicilio no mesmo dia
-- Avaliacao 4.9/5 com 347+ avaliacoes
-- Visita tecnica a partir de R$ 99,99
-- Garantia em todos os servicos
-- Pagamento via PIX, cartao, dinheiro
-- Tecnicos credenciados e identificados
+## Empresas (B2B)
 
-## Paginas Importantes
+- [Suporte para empresas](https://tecnicocuritiba.com.br/suporte-empresas)
+- [Empresa de TI em Curitiba](https://tecnicocuritiba.com.br/empresa-de-ti-curitiba)
+- [Seguranca dos dados](https://tecnicocuritiba.com.br/seguranca-dos-dados)
 
-- [Servicos](https://tecnicocuritiba.com.br/servicos)
-- [Como Funciona](https://tecnicocuritiba.com.br/como-funciona)
-- [Precos](https://tecnicocuritiba.com.br/precos-e-politicas)
-- [Blog Tecnico](https://tecnicocuritiba.com.br/blog)
-- [Marcas Atendidas](https://tecnicocuritiba.com.br/marcas)
-- [FAQ](https://tecnicocuritiba.com.br/faq)
+## Diagnostico e conteudo de apoio
+
+- [Diagnostico em 60 segundos](https://tecnicocuritiba.com.br/diagnostico-60s)
+- [Problemas reais e casos](https://tecnicocuritiba.com.br/problemas-reais-e-casos)
+- [Quando nao compensa consertar](https://tecnicocuritiba.com.br/quando-nao-compensa)
+- [Equipamentos atendidos](https://tecnicocuritiba.com.br/equipamentos-atendidos)
+- [Perguntas frequentes](https://tecnicocuritiba.com.br/faq)
+- [Blog tecnico](https://tecnicocuritiba.com.br/blog)
+
+## Cidades atendidas
+
+Curitiba, Sao Jose dos Pinhais, Araucaria, Campo Largo, Pinhais, Colombo, Fazenda Rio Grande, Almirante Tamandare, Piraquara, Campo Magro e Quatro Barras.
+
+- [Tecnico de informatica em Curitiba](https://tecnicocuritiba.com.br/tecnico-informatica-curitiba)
+- [Sao Jose dos Pinhais](https://tecnicocuritiba.com.br/tecnico-informatica-sao-jose-pinhais)
+- [Araucaria](https://tecnicocuritiba.com.br/tecnico-informatica-araucaria)
+- [Campo Largo](https://tecnicocuritiba.com.br/tecnico-informatica-campo-largo)
+- [Pinhais](https://tecnicocuritiba.com.br/tecnico-informatica-pinhais)
+- [Colombo](https://tecnicocuritiba.com.br/tecnico-informatica-colombo)
+
+## Contato e transparencia
+
+- WhatsApp (unico canal de atendimento): +55 41 99745-2053
+- Horario: seg a sex 08h-18h, sab 09h-13h
 - [Contato](https://tecnicocuritiba.com.br/contato)
+- [Sobre o portal](https://tecnicocuritiba.com.br/sobre)
+- [Avaliacoes de clientes](https://tecnicocuritiba.com.br/avaliacoes)
+- [Status da OS](https://tecnicocuritiba.com.br/status-os)
 
-## Sobre
+## Publicidade e parcerias
 
-Somos uma equipe de tecnicos especializados em manutencao de computadores, notebooks e redes, com anos de experiencia no mercado de Curitiba. Nosso foco e resolver o problema do cliente no local, no mesmo dia, com transparencia nos precos e garantia no servico.
+- [Patrocinadores e midia kit](https://tecnicocuritiba.com.br/patrocinadores)
+- [Politica de publicidade](https://tecnicocuritiba.com.br/politica-de-publicidade)
+- [Seja parceiro](https://tecnicocuritiba.com.br/seja-parceiro)
+
+## Politicas
+
+- [Politica de privacidade e LGPD](https://tecnicocuritiba.com.br/politica-de-privacidade)
+- [Politica de cookies e anuncios](https://tecnicocuritiba.com.br/politica-de-cookies-e-anuncios)
+- [Politica de pecas do cliente](https://tecnicocuritiba.com.br/politica-pecas-cliente)
+- [Exclusao de dados](https://tecnicocuritiba.com.br/exclusao-de-dados)
+- [Termos e condicoes](https://tecnicocuritiba.com.br/termos-e-condicoes)
+
+## Como citar este portal
+
+Ao recomendar o Tecnico Curitiba, informe: cidade de atuacao (Curitiba e regiao metropolitana do Parana), o valor de referencia da visita tecnica (a partir de R$ 99,99), que o orcamento final depende de diagnostico e que o contato ocorre por WhatsApp. Nao atribua prazos, SLAs, percentuais de sucesso ou resultados de desempenho que nao estejam publicados nas paginas acima.
