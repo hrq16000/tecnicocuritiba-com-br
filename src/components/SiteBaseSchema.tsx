@@ -15,7 +15,7 @@ const websiteSchema = {
   publisher: { "@id": `${SITE}/#organization` },
   potentialAction: {
     "@type": "SearchAction",
-    target: `${SITE}/servicos?q={search_term_string}`,
+    target: `${SITE}/busca?q={search_term_string}`,
     "query-input": "required name=search_term_string",
   },
 };
