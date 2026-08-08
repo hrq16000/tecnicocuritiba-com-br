@@ -22,6 +22,7 @@ import {
   MSG_COLETA_RESUMO,
 } from "@/lib/coletaConfig";
 import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
+import { ServiceLandingSchema } from "@/components/ServiceLandingSchema";
 
 const WHATSAPP_NUMBER = "5541997452053";
 
