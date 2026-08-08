@@ -295,6 +295,29 @@ const PoliticaPrivacidade = () => {
             </section>
           ))}
 
+          <section id="faq-privacidade" className="mb-10 scroll-mt-24">
+            <h2 className="text-xl md:text-2xl font-heading font-bold text-foreground mb-4">
+              Perguntas frequentes sobre privacidade e dados
+            </h2>
+            <div className="space-y-4">
+              {faq.map((f) => (
+                <div key={f.q} className="rounded-xl border border-border/60 bg-card/50 p-4">
+                  <h3 className="font-semibold mb-1">{f.q}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{f.a}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Detalhes por categoria de cookie e opt-out estão na{" "}
+              <Link to="/politica-de-cookies-e-anuncios" className="text-accent underline">
+                Política de Cookies e Anúncios
+              </Link>
+              .
+            </p>
+          </section>
+
+
+
           <div className="mt-12 rounded-2xl border border-accent/30 bg-accent/5 p-6 text-center">
             <p className="text-foreground font-semibold mb-3">
               Tem dúvida sobre seus dados ou quer falar com a gente?
