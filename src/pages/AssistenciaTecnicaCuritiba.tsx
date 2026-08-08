@@ -212,7 +212,7 @@ export default function AssistenciaTecnicaCuritiba() {
     "@id": "https://tecnicocuritiba.com.br/assistencia-tecnica-curitiba#localbusiness",
     name: "Preciso de um Técnico — Assistência Técnica Especializada",
     description:
-      "Assistência técnica especializada em Curitiba: consoles, placas de vídeo, computadores, notebooks e smartphones.",
+      "Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia.",
     areaServed: [
       { "@type": "City", name: "Curitiba", "@id": "https://www.wikidata.org/wiki/Q40269" },
       { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
@@ -334,8 +334,8 @@ export default function AssistenciaTecnicaCuritiba() {
   return (
     <div className="min-h-screen bg-background">
       <PageSEO
-        title="Assistência Técnica de Consoles em Curitiba | PS5, Xbox, Nintendo e Placa de Vídeo"
-        description="Assistência técnica especializada em Curitiba: PlayStation, Xbox, Nintendo Switch, placas de vídeo, computadores, notebooks e smartphones. Orçamento rápido pelo WhatsApp (41) 99745-2053."
+        title="Assistência Técnica Especializada em Curitiba | Reparo de Bancada"
+        description="Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia. Orçamento pelo WhatsApp (41) 99745-2053."
         path="/assistencia-tecnica-curitiba"
         breadcrumbs={[
           { name: "Início", path: "/" },
@@ -405,8 +405,8 @@ export default function AssistenciaTecnicaCuritiba() {
                 </span>
               </h1>
               <p className="mt-5 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed">
-                Reparo profissional em PlayStation, Xbox, Nintendo Switch e Placas de Vídeo —
-                e também computadores, notebooks e smartphones. <strong className="text-white">Serviço com garantia</strong>.
+                Reparo de bancada em computadores, notebooks, placas e smartphones —
+                e também PlayStation, Xbox e Nintendo Switch. <strong className="text-white">Serviço com garantia</strong>.
               </p>
               <p className="mt-4 max-w-2xl rounded-xl border border-white/15 bg-white/[0.06] p-4 text-sm leading-relaxed text-white/80">
                 Para formatação, remoção de vírus, upgrade SSD e suporte de informática a domicílio, acesse a página canônica de <Link to="/tecnico-informatica-curitiba" className="font-semibold text-accent hover:underline">técnico de informática em Curitiba</Link>. Esta página fica focada em assistência técnica especializada e reparos de bancada.

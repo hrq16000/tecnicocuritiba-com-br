@@ -40,6 +40,7 @@
     "sitemap:images": "node scripts/generate-image-sitemap.mjs",
     "check:sitemap-images": "node scripts/generate-image-sitemap.mjs --check",
     "check:title-meta": "node scripts/check-title-meta-unique.mjs",
+    "check:internal-links": "node scripts/check-internal-links.mjs",
     "check:price-schema": "node scripts/check-price-schema.mjs",
     "check:ad-slots": "node scripts/check-ad-slots.mjs",
     "check:adsense": "node scripts/check-adsense.mjs",
