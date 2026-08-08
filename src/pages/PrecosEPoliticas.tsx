@@ -10,6 +10,8 @@ import { RealImageSection } from "@/components/RealImageSection";
 import { TrustStrip } from "@/components/TrustStrip";
 import { PageTableOfContents } from "@/components/PageTableOfContents";
 import { InlineTriageCTA } from "@/components/InlineTriageCTA";
+import { EstimativaRapida } from "@/components/EstimativaRapida";
+
 import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { PriceSchema } from "@/components/PriceSchema";
 import { trackPageView } from "@/lib/analytics";
