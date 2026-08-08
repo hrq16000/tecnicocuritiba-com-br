@@ -6,8 +6,18 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Copy, Check } from "lucide-react";
+import { Loader2, Copy, Check, MessageCircle } from "lucide-react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { NAP_PHONE_DIGITS } from "@/lib/nap";
+
+/** Abre o WhatsApp já com o roteiro do serviço pré-preenchido. */
+const openWhatsApp = (texto: string) => {
+  window.open(
+    `https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent(texto)}`,
+    "_blank",
+    "noopener,noreferrer",
+  );
+};
 
 interface Template {
   id: string;
@@ -155,10 +165,16 @@ export default function AdminMensagens() {
                 <Card key={t.id} className="p-4">
                   <div className="flex items-start justify-between gap-3">
                     <h2 className="font-semibold text-foreground">{t.titulo}</h2>
-                    <Button size="sm" variant="outline" onClick={() => copy(t.id, t.texto)}>
-                      {copiedId === t.id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      {copiedId === t.id ? "Copiado" : "Copiar"}
-                    </Button>
+                    <div className="flex shrink-0 gap-2">
+                      <Button size="sm" variant="outline" onClick={() => copy(t.id, t.texto)}>
+                        {copiedId === t.id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                        {copiedId === t.id ? "Copiado" : "Copiar"}
+                      </Button>
+                      <Button size="sm" onClick={() => openWhatsApp(t.texto)}>
+                        <MessageCircle className="h-4 w-4" />
+                        WhatsApp
+                      </Button>
+                    </div>
                   </div>
                   <pre className="mt-3 whitespace-pre-wrap break-words rounded-lg bg-muted p-3 text-sm text-muted-foreground">
                     {t.texto}
