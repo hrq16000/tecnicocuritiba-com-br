@@ -134,8 +134,15 @@ export default function AreasAtendidas() {
               />
             </LazyOnVisible>
           </div>
+          <noscript>
+            <p className="text-sm text-muted-foreground mt-2">
+              O mapa exige JavaScript. A lista completa de cidades e bairros atendidos está logo abaixo, em{" "}
+              <a href="#lista-areas" className="text-primary underline">Cidades e bairros atendidos</a>.
+            </p>
+          </noscript>
           <p className="text-sm text-muted-foreground mt-2">
-            Base operacional em Curitiba (PR). Deslocamento para a Região Metropolitana conforme agenda e rota.
+            Base operacional em Curitiba (PR). Deslocamento para a Região Metropolitana conforme agenda e rota.{" "}
+            <a href="#lista-areas" className="text-primary hover:underline">Ver lista de bairros atendidos</a>.
           </p>
         </section>
 
