@@ -512,6 +512,11 @@ const App = () => (
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
             <Route path="/guias/organizacao-de-ti-para-escritorios" element={<OrganizacaoTIEscritorios />} />
             <Route path="/guias/como-escolher-workstation" element={<ComoEscolherWorkstation />} />
+            {/* Pillar informacional do cluster de informática */}
+            <Route path="/guia-tecnico-informatica" element={<GuiaTecnicoInformatica />} />
+            {/* Aliases de intenção → página local primária do cluster */}
+            <Route path="/informatica-curitiba" element={<Navigate to="/tecnico-informatica-curitiba" replace />} />
+            <Route path="/informatica" element={<Navigate to="/tecnico-informatica-curitiba" replace />} />
             {/* Consolidação B2B: página-mãe única em /suporte-empresas (elimina canibalização). */}
             <Route path="/empresa-de-ti-curitiba" element={<Navigate to="/suporte-empresas" replace />} />
             <Route path="/manutencao-notebook-pc-curitiba" element={<ManutencaoNotebookPCCuritiba />} />
