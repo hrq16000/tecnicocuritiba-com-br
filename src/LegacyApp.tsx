@@ -943,6 +943,7 @@ const App = () => (
             <Route path="/admin/seo" element={<AdminSeo />} />
 
             <Route path="/admin/vitals" element={<AdminVitals />} />
+            <Route path="/admin/tracking" element={<AdminTracking />} />
             <Route path="/conserto-impressora-curitiba" element={<ConsertoImpressoraCuritiba />} />
             <Route path="/assistencia-eletrodomesticos-inteligentes-curitiba" element={<AssistenciaEletrodomesticosInteligentesCuritiba />} />
 
