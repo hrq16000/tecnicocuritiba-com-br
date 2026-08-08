@@ -12,6 +12,8 @@ import {
   MessageCircle,
   FileText,
 } from "lucide-react";
+import { MEDIA_KIT_PDF, trackMediaKitDownload } from "@/lib/mediaKit";
+import { trackCTAClick } from "@/lib/analytics";
 
 const CANONICAL = "https://tecnicocuritiba.com.br/patrocinadores";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
@@ -21,7 +23,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
 )}`;
 const UPDATED = "08/08/2026";
 const OG_IMAGE = "https://tecnicocuritiba.com.br/og-image.jpg?v=20260711-1";
-const MEDIA_KIT = "/downloads/midia-kit-tecnico-curitiba.pdf";
+const MEDIA_KIT = MEDIA_KIT_PDF;
 
 const formatos = [
   {
@@ -185,6 +187,7 @@ export default function Patrocinadores() {
               target="_blank"
               rel="noopener noreferrer"
               data-cta-location="sponsors_media_kit_whatsapp"
+              onClick={() => trackCTAClick("whatsapp", "sponsors_media_kit_whatsapp")}
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-accent-foreground"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -194,6 +197,7 @@ export default function Patrocinadores() {
               href={MEDIA_KIT}
               download
               data-cta-location="sponsors_media_kit_pdf"
+              onClick={() => trackMediaKitDownload("cta_principal")}
               className="mt-3 ml-0 sm:ml-3 inline-flex items-center gap-2 rounded-lg border border-border/60 px-5 py-3 font-semibold text-foreground hover:border-accent"
             >
               <FileText className="h-4 w-4" aria-hidden="true" />
@@ -313,7 +317,7 @@ export default function Patrocinadores() {
               <li><Link to="/politica-de-privacidade" className="text-accent underline">Política de Privacidade e LGPD</Link></li>
               <li><Link to="/status-anuncios" className="text-accent underline">Status de Anúncios</Link></li>
               <li><Link to="/contato" className="text-accent underline">Contato</Link></li>
-              <li><a href={MEDIA_KIT} download className="text-accent underline">Mídia kit em PDF (download)</a></li>
+              <li><a href={MEDIA_KIT} download data-cta-location="sponsors_media_kit_docs" onClick={() => trackMediaKitDownload("documentos")} className="text-accent underline">Mídia kit em PDF (download)</a></li>
             </ul>
           </div>
         </section>

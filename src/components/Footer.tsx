@@ -3,6 +3,7 @@ import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/n
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { useMemo } from "react";
+import { MEDIA_KIT_PDF, trackMediaKitDownload } from "@/lib/mediaKit";
 
 const footerLink = "text-white/85 hover:text-white/90 text-sm transition-all duration-200 hover:translate-x-1 inline-block";
 
@@ -300,6 +301,17 @@ export const Footer = () => {
                   <Link to={item.to} className={`${footerLink} hover-lift inline-block`}>{item.label}</Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href={MEDIA_KIT_PDF}
+                  download
+                  data-cta-location="footer_media_kit_pdf"
+                  onClick={() => trackMediaKitDownload("rodape")}
+                  className={`${footerLink} hover-lift`}
+                >
+                  Mídia Kit em PDF (download)
+                </a>
+              </li>
             </ul>
             <h3 className="text-white/90 font-semibold mb-3 mt-6 text-xs uppercase tracking-widest">Blog</h3>
             <ul className="space-y-2">
