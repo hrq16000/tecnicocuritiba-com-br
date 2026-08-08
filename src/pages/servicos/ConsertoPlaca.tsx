@@ -89,21 +89,6 @@ const ConsertoPlaca = () => {
       <main id="main-content">
       <Breadcrumbs items={[{ label: "Serviços", href: "/servicos" }, { label: "Conserto de Placa" }]} />
 
-      <div className="container mx-auto px-4 pt-6">
-        <div className="max-w-4xl mx-auto">
-          <PageTableOfContents
-            items={[
-              { id: "tipos-de-placas", label: "Tipos de placas que consertamos" },
-              { id: "casos-complexos", label: "Casos complexos atendidos" },
-              { id: "transparencia-placa", label: "Transparência no reparo" },
-              { id: "teste-final-placa", label: "Teste final e aceite/recusa" },
-              { id: "garantia-placa", label: "Garantia de 90 dias" },
-              { id: "faq-placa", label: "Perguntas frequentes" },
-            ]}
-          />
-        </div>
-      </div>
-
       <section className="pt-10 pb-10 hero-gradient relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" />
@@ -130,6 +115,21 @@ const ConsertoPlaca = () => {
         </div>
       </section>
       <RealImageSection imageKey="placaMae" caption="Reparo de placa-mãe em nível de componente" />
+      <div className="container mx-auto px-4 pt-6">
+        <div className="max-w-4xl mx-auto">
+          <PageTableOfContents
+            items={[
+              { id: "tipos-de-placas", label: "Tipos de placas que consertamos" },
+              { id: "casos-complexos", label: "Casos complexos atendidos" },
+              { id: "transparencia-placa", label: "Transparência no reparo" },
+              { id: "teste-final-placa", label: "Teste final e aceite/recusa" },
+              { id: "garantia-placa", label: "Garantia de 90 dias" },
+              { id: "faq-placa", label: "Perguntas frequentes" },
+            ]}
+          />
+        </div>
+      </div>
+
 
       {/* Aviso */}
       <section className="py-6 bg-accent/5 border-y border-accent/10">
