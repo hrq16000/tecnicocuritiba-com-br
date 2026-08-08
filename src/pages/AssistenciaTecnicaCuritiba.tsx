@@ -212,7 +212,7 @@ export default function AssistenciaTecnicaCuritiba() {
     "@id": "https://tecnicocuritiba.com.br/assistencia-tecnica-curitiba#localbusiness",
     name: "Preciso de um Técnico — Assistência Técnica Especializada",
     description:
-      "Assistência técnica especializada em Curitiba: consoles, placas de vídeo, computadores, notebooks e smartphones.",
+      "Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia.",
     areaServed: [
       { "@type": "City", name: "Curitiba", "@id": "https://www.wikidata.org/wiki/Q40269" },
       { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
