@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { ADSENSE_CLIENT } from "@/lib/adsense";
+import { getConsent, openConsentPreferences } from "@/lib/consent";
 
 const PUBLISHER = "pub-3762170279587706";
 
