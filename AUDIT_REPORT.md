@@ -14,8 +14,8 @@ Legenda de severidade: 🔴 Crítico · 🟡 Médio · 🟢 Baixo.
 |---|---|---|---|
 | `<html lang="pt-BR">` | ✔ | — | Definido em `index.html`. |
 | Viewport, theme-color, apple-touch-icon, manifest, favicon versionado | ✔ | — | `index.html` linhas 1–90. |
-| Title raiz | ✔ | — | "Técnico de Informática Curitiba \| Hoje R$ 99,99" (60 chars). |
-| Meta description raiz | ✔ | — | 149 chars, inclui keyword + preço + CTA. |
+| Title raiz | ✔ | — | "Técnico de Informática em Curitiba | Conserto de PC e Notebook" (58 chars). |
+| Meta description raiz | ✔ | — | 157 chars, inclui keyword + preço + CTA. |
 | Canonical raiz | ✔ | — | `https://tecnicocuritiba.com.br/`. |
 | Open Graph + Twitter Card | ✔ | — | `og:image` absoluto 1200×630, `type=website`, `secure_url`, `image:alt`. |
 | `meta name="keywords"` (obsoleta) | 🟢 | Baixo | Google ignora; pode remover para limpar bytes (`index.html`). |

@@ -134,7 +134,7 @@ const servicosPrecos = [
 
 const PrecosEPoliticas = () => {
   useEffect(() => {
-    document.title = "Tabela de Valores | Técnico de Informática Curitiba";
+    document.title = "Tabela de Valores | Técnico de Informática em Curitiba";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -150,7 +150,7 @@ const PrecosEPoliticas = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Tabela de Valores | Técnico de Informática Curitiba" description="Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 99,99. Transparência total nos valores." path="/valores" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Valores", path: "/valores" }]} />
+      <PageSEO title="Tabela de Valores | Técnico de Informática em Curitiba" description="Tabela completa de valores de serviços de informática em Curitiba. Visita técnica a partir de R$ 99,99. Transparência total nos valores." path="/valores" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Valores", path: "/valores" }]} />
       <JsonLdSchema />
       <PriceSchema
         categorias={servicosPrecos.map((c) => ({ categoria: c.categoria, servicos: c.servicos }))}

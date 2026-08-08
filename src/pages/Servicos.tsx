@@ -128,7 +128,7 @@ const services = [
 
 const Servicos = () => {
   useEffect(() => {
-    document.title = "Serviços de Informática Curitiba | Hoje R$ 99,99";
+    document.title = "Serviços de Informática em Curitiba | Conserto de PC e Notebook";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute(
@@ -147,7 +147,7 @@ const Servicos = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageSEO title="Serviços de Informática Curitiba | Hoje R$ 99,99" description="Formatação, remoção de vírus, conserto de PC/notebook, upgrade SSD e suporte em Curitiba. Atendimento hoje a partir de R$ 99,99 via WhatsApp." path="/servicos" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }]} />
+      <PageSEO title="Serviços de Informática em Curitiba | Conserto de PC e Notebook" description="Formatação, remoção de vírus, conserto de PC/notebook, upgrade SSD e suporte em Curitiba. Atendimento hoje a partir de R$ 99,99 via WhatsApp." path="/servicos" breadcrumbs={[{ name: "Início", path: "/" }, { name: "Serviços", path: "/servicos" }]} />
       <JsonLdSchema />
       <Header />
       <Breadcrumbs items={[{ label: "Serviços" }]} />

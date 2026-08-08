@@ -19,11 +19,11 @@ const Index = () => {
   const [showNearFold, setShowNearFold] = useState(false);
 
   useEffect(() => {
-    document.title = "Técnico de Informática Curitiba | Hoje R$ 99,99";
+    document.title = "Técnico de Informática em Curitiba | Conserto de PC e Notebook";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content",
-        "Técnico de informática em Curitiba hoje. Conserto de PC/notebook, formatação, vírus e SSD a partir de R$ 99,99. Chame no WhatsApp."
+        "Técnico de informática em Curitiba: conserto de PC e notebook, formatação, remoção de vírus e upgrade de SSD. Atendimento via WhatsApp, a partir de R$ 99,99."
       );
     }
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
