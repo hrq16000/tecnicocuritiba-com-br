@@ -4,6 +4,8 @@
  */
 import { readUtms } from "./utmCapture";
 import { getSessionId } from "./funnelSubmission";
+import { persistClickEvent } from "./clickEvents";
+
 
 type GtagFn = (...args: unknown[]) => void;
 
@@ -53,9 +55,11 @@ export function track(name: string, params: Record<string, unknown> = {}) {
   if (typeof window !== "undefined") {
     window.__waFunnelEvents = window.__waFunnelEvents || [];
     window.__waFunnelEvents.push({ name, payload });
+    persistClickEvent(name, payload);
   }
   g?.("event", name, payload);
 }
+
 
 export const trackFunnelOpen = (location: string, hasPreset = false) =>
   track("wa_funnel_open", { cta_location: location, has_preset: hasPreset });
