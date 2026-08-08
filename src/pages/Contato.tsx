@@ -205,6 +205,55 @@ const Contato = () => {
             </div>
           </div>
         </section>
+
+        {/* Canais formais: reclamações, correções e dados pessoais */}
+        <section className="py-14 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">
+                Reclamações, correções e solicitações formais
+              </h2>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Além do atendimento comercial pelo WhatsApp, mantemos canais específicos para questões
+                formais. Toda solicitação é registrada e respondida pelo responsável técnico do portal.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Reclamação sobre um serviço</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Descreva o número da OS e o ocorrido pelo WhatsApp. Você pode acompanhar o andamento em{" "}
+                    <Link to="/status-os" className="text-accent underline">status da OS</Link> e conferir a{" "}
+                    <Link to="/garantia" className="text-accent underline">regra de garantia</Link>.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Correção de conteúdo</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Se encontrou informação incorreta ou desatualizada em alguma página, avise indicando o
+                    endereço. Corrigimos na própria página. Nossos critérios estão em{" "}
+                    <Link to="/sobre" className="text-accent underline">sobre o portal</Link>.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Dados pessoais (LGPD)</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Para acessar, corrigir ou excluir seus dados, use a página de{" "}
+                    <Link to="/exclusao-de-dados" className="text-accent underline">exclusão de dados</Link> ou consulte a{" "}
+                    <Link to="/politica-de-privacidade" className="text-accent underline">Política de Privacidade</Link>.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-border/60 bg-card/60 p-5">
+                  <h3 className="font-semibold text-foreground mb-2">Publicidade e parcerias</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Espaços patrocinados seguem a{" "}
+                    <Link to="/politica-de-publicidade" className="text-accent underline">Política de Publicidade</Link>{" "}
+                    e são sempre identificados como “Publicidade”, sem influenciar o conteúdo técnico.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <RealImageSection imageKey="clienteSatisfeito" caption="Atendimento humanizado e profissional" />
       <BlocoInteligencia />
