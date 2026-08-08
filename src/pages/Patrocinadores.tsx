@@ -20,6 +20,8 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
   "Olá! Tenho interesse em anunciar / patrocinar o portal tecnicocuritiba.com.br. Pode me enviar o mídia kit?",
 )}`;
 const UPDATED = "08/08/2026";
+const OG_IMAGE = "https://tecnicocuritiba.com.br/og-image.jpg?v=20260711-1";
+const MEDIA_KIT = "/downloads/midia-kit-tecnico-curitiba.pdf";
 
 const formatos = [
   {
@@ -141,6 +143,17 @@ export default function Patrocinadores() {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={CANONICAL} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta property="og:image:secure_url" content={OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Técnico em Curitiba — assistência técnica em informática" />
+        <meta property="og:site_name" content="Técnico em Curitiba" />
+        <meta property="og:locale" content="pt_BR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Patrocinadores e Mídia Kit — Técnico em Curitiba" />
+        <meta name="twitter:description" content="Formatos de anúncio, posições recomendadas e perfil de audiência do portal tecnicocuritiba.com.br." />
+        <meta name="twitter:image" content={OG_IMAGE} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
@@ -176,6 +189,15 @@ export default function Patrocinadores() {
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               Falar com o comercial no WhatsApp
+            </a>
+            <a
+              href={MEDIA_KIT}
+              download
+              data-cta-location="sponsors_media_kit_pdf"
+              className="mt-3 ml-0 sm:ml-3 inline-flex items-center gap-2 rounded-lg border border-border/60 px-5 py-3 font-semibold text-foreground hover:border-accent"
+            >
+              <FileText className="h-4 w-4" aria-hidden="true" />
+              Baixar mídia kit em PDF
             </a>
           </div>
 
@@ -291,6 +313,7 @@ export default function Patrocinadores() {
               <li><Link to="/politica-de-privacidade" className="text-accent underline">Política de Privacidade e LGPD</Link></li>
               <li><Link to="/status-anuncios" className="text-accent underline">Status de Anúncios</Link></li>
               <li><Link to="/contato" className="text-accent underline">Contato</Link></li>
+              <li><a href={MEDIA_KIT} download className="text-accent underline">Mídia kit em PDF (download)</a></li>
             </ul>
           </div>
         </section>
