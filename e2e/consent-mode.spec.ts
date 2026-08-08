@@ -15,18 +15,6 @@ const VIEWPORTS = [
   { name: "desktop", width: 1280, height: 900 },
 ] as const;
 
-async function installGtagSpy(page: Page) {
-  await page.addInitScript(() => {
-    (window as unknown as { __consentCalls: unknown[][] }).__consentCalls = [];
-    (window as unknown as { dataLayer: unknown[] }).dataLayer = [];
-    (window as unknown as { gtag: (...a: unknown[]) => void }).gtag = function (...args: unknown[]) {
-      if (args[0] === "consent") {
-        (window as unknown as { __consentCalls: unknown[][] }).__consentCalls.push(args);
-      }
-      (window as unknown as { dataLayer: unknown[] }).dataLayer.push(args);
-    };
-  });
-}
 
 type ConsentUpdate = {
   ad_storage?: string;
@@ -36,10 +24,13 @@ type ConsentUpdate = {
 };
 
 async function lastConsentUpdate(page: Page): Promise<ConsentUpdate | null> {
+  // O index.html define o próprio `gtag`, que empilha os argumentos em `dataLayer`.
   return page.evaluate(() => {
-    const calls = (window as unknown as { __consentCalls?: unknown[][] }).__consentCalls ?? [];
-    const updates = calls.filter((c) => c[1] === "update");
-    return (updates.length ? (updates[updates.length - 1][2] as ConsentUpdate) : null) ?? null;
+    const layer = ((window as unknown as { dataLayer?: unknown[] }).dataLayer ?? []) as unknown[];
+    const updates = layer
+      .map((entry) => Array.from(entry as ArrayLike<unknown>))
+      .filter((args) => args[0] === "consent" && args[1] === "update");
+    return updates.length ? (updates[updates.length - 1][2] as ConsentUpdate) : null;
   });
 }
 
@@ -64,7 +55,6 @@ for (const vp of VIEWPORTS) {
     test.use({ viewport: { width: vp.width, height: vp.height } });
 
     test("Aceitar concede ads e analytics", async ({ page }) => {
-      await installGtagSpy(page);
       const banner = await openFresh(page);
 
       await banner.getByRole("button", { name: "Aceitar" }).click();
@@ -84,7 +74,6 @@ for (const vp of VIEWPORTS) {
     });
 
     test("Recusar nega ads e analytics", async ({ page }) => {
-      await installGtagSpy(page);
       const banner = await openFresh(page);
 
       await banner.getByRole("button", { name: "Recusar" }).click();
