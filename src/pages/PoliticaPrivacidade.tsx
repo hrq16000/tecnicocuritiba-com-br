@@ -189,6 +189,64 @@ const sections: { id: string; title: string; icon: typeof ShieldCheck; body: Rea
   },
 ];
 
+const faq = [
+  {
+    q: "Quais dados pessoais este site coleta?",
+    a: "Coletamos apenas o necessário para o atendimento: nome, telefone de contato, cidade/bairro, descrição do problema técnico e, quando você envia, fotos ou vídeos do equipamento. Também registramos dados técnicos de navegação, como página de origem e tamanho de tela, quando você autoriza a medição de audiência.",
+  },
+  {
+    q: "O site usa cookies de anúncios antes do meu consentimento?",
+    a: "Não. Antes da sua decisão no banner, o Google Consent Mode v2 permanece em 'denied' para anúncios e medição e o script do Google AdSense não é carregado. Os detalhes por categoria estão na Política de Cookies e Anúncios.",
+  },
+  {
+    q: "Como faço para revogar o consentimento de cookies?",
+    a: "Use o botão 'Gerenciar preferências de cookies' na Política de Cookies e Anúncios ou o link equivalente no rodapé. O painel reabre com sua escolha atual e a alteração vale imediatamente, sem precisar justificar.",
+  },
+  {
+    q: "Como solicito a exclusão dos meus dados e anexos?",
+    a: "Pela página de Exclusão de Dados (LGPD) ou pelo WhatsApp oficial do site. Atendemos o pedido de eliminação dos dados pessoais e dos anexos enviados, ressalvadas as informações que precisamos manter por obrigação legal ou fiscal.",
+  },
+  {
+    q: "Meus dados são vendidos ou compartilhados com terceiros?",
+    a: "Não vendemos dados pessoais. Compartilhamos apenas com operadores necessários à prestação do serviço e à medição, como provedor de infraestrutura, Google Analytics e Google AdSense, cada um dentro da sua própria política e sempre limitado à finalidade declarada.",
+  },
+  {
+    q: "Por quanto tempo os dados do atendimento ficam guardados?",
+    a: "Mantemos os dados de ordens de serviço pelo prazo necessário para garantia, suporte e obrigações legais. Depois disso são eliminados ou anonimizados. Você pode pedir a exclusão antes desse prazo, respeitadas as retenções obrigatórias por lei.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${CANONICAL}#webpage`,
+      url: CANONICAL,
+      name: "Política de Privacidade | Técnico em Curitiba",
+      description:
+        "Como coletamos, usamos e protegemos dados pessoais, cookies, medição de audiência e direitos do titular sob a LGPD.",
+      inLanguage: "pt-BR",
+      dateModified: "2026-08-08",
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Início", item: "https://tecnicocuritiba.com.br/" },
+        { "@type": "ListItem", position: 2, name: "Política de Privacidade", item: CANONICAL },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
 const PoliticaPrivacidade = () => {
   return (
     <>
