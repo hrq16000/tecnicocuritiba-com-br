@@ -53,6 +53,16 @@ const cidades = [
   { nome: "Quatro Barras", slug: "quatro-barras" },
 ];
 
+/** FAQ único: alimenta o bloco visível e o FAQPage JSON-LD (paridade obrigatória). */
+const tvFaqs = [
+  { q: "Vocês fazem visita técnica para TV?", a: `Não. ${REGRA_COLETA_SEM_VISITA} Organizamos coleta e entrega com taxa mínima de ${COLETA_TAXA_MINIMA_LABEL}.` },
+  { q: "Quanto custa o conserto de TV?", a: `${REGRA_ORCAMENTO_GRATIS}. Orçamento preciso somente após coleta, com taxa mínima de ${COLETA_TAXA_MINIMA_LABEL} pré-aprovada.` },
+  { q: "Consertam TV de tela quebrada?", a: "Avaliamos caso a caso. Em muitos modelos, a troca do painel tem custo próximo ao de uma TV nova. Orientamos com honestidade." },
+  { q: "Quanto tempo leva o conserto?", a: `Prazo padrão para TV: ${PRAZO_LONGO}, dependendo do defeito e disponibilidade de peças.` },
+  { q: "Quais formas de pagamento?", a: "PIX, dinheiro e cartão. Consulte condições pelo WhatsApp." },
+  { q: "A garantia cobre o quê?", a: "Cobre o serviço realizado e a peça trocada. O prazo varia conforme o tipo de reparo." },
+];
+
 const ConsertoTV = () => {
   useEffect(() => {
     document.title = "Conserto de TV em Curitiba e Região | Orçamento sem Compromisso | Técnico em Curitiba";
