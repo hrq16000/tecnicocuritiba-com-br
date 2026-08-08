@@ -246,6 +246,124 @@ const ConsertoPlaca = () => {
         </div>
       </section>
 
+      {/* Provas reais */}
+      <ImageObjectSchema imageKeys={GALLERY.map((g) => g.imageKey as string)} local="Curitiba" path="/servicos/conserto-placa" />
+      <ServiceGallery
+        title="Provas reais do reparo de placa"
+        subtitle="Fotos reais de bancada, solda e logística usadas nos atendimentos de placa em Curitiba."
+        items={GALLERY}
+        local="Curitiba"
+        bgClass="bg-background"
+      />
+
+      <AnimatedSection>
+        <section id="teste-final-placa" className="py-12 bg-secondary/30 scroll-mt-24">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">
+                Checklist do teste final e regra de aceite/recusa
+              </h2>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Nenhuma placa é devolvida sem passar pelo teste final em bancada. O que foi executado fica
+                descrito na ordem de serviço, e você aprova ou recusa o orçamento antes de qualquer reparo.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                {TESTE_FINAL.map((item) => (
+                  <div key={item} className="flex items-start gap-2 rounded-lg border border-border bg-card p-3 text-sm">
+                    <CheckCircle className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
+                <p className="flex items-start gap-2">
+                  <AlertCircle className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>
+                    <strong className="text-foreground">Recusa sem surpresa:</strong> se você não aprovar o
+                    orçamento após o diagnóstico, cobra-se apenas o diagnóstico ({DIAGNOSTICO_VALOR_LABEL}) e o
+                    aparelho volta nas mesmas condições. Reparos podem ser recusados por nós quando o dano é
+                    extenso ou o custo supera o valor de reposição.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Garantia 90 dias */}
+      <AnimatedSection>
+        <section id="garantia-placa" className="py-12 bg-background scroll-mt-24">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">
+                Garantia de 90 dias: o que cobre e quando não se aplica
+              </h2>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                A garantia é de 90 dias e vale para o serviço executado e a peça substituída, exatamente como
+                descritos na ordem de serviço. Ela não é uma cobertura geral do aparelho.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border bg-card p-5">
+                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-primary" aria-hidden="true" /> Coberto por 90 dias
+                  </h3>
+                  <ul className="space-y-1.5 text-sm text-muted-foreground">
+                    <li>• Reincidência do mesmo defeito reparado</li>
+                    <li>• Peça ou componente trocado por nós, dentro do prazo</li>
+                    <li>• Retrabalho de solda no ponto que executamos</li>
+                    <li>• Reavaliação em bancada sem nova taxa de coleta</li>
+                  </ul>
+                </div>
+                <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-5">
+                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <AlertTriangle className="h-4 w-4 text-destructive" aria-hidden="true" /> Fora da garantia
+                  </h3>
+                  <ul className="space-y-1.5 text-sm text-muted-foreground">
+                    <li>• Defeito novo em componente diferente do reparado</li>
+                    <li>• Surto elétrico, queda, líquido ou impacto posteriores</li>
+                    <li>• Violação, abertura ou reparo por terceiros</li>
+                    <li>• Desgaste natural de placas com uso intensivo prévio</li>
+                    <li>• Reparos recusados pelo cliente no orçamento</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Detalhes completos em{" "}
+                <Link to="/precos-e-politicas" className="text-primary underline">preços e políticas</Link>.
+              </p>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* FAQ visível 1:1 com o JSON-LD */}
+      <AnimatedSection>
+        <section className="py-12 bg-secondary/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6">
+                Perguntas frequentes sobre conserto de placa
+              </h2>
+              <div className="space-y-3">
+                {FAQ.map((f) => (
+                  <details key={f.question} className="rounded-xl border border-border bg-card p-5">
+                    <summary className="font-semibold text-foreground cursor-pointer">{f.question}</summary>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.answer}</p>
+                  </details>
+                ))}
+              </div>
+              <p className="mt-6 text-sm text-muted-foreground">
+                Se o defeito é do próprio monitor (mesma falha em outra fonte de sinal), o caminho correto é o{" "}
+                <Link to="/servicos/conserto-monitor" className="text-primary underline">conserto de monitor</Link>{" "}
+                — assim você não paga duas coletas.
+              </p>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+
       <BlocoInteligencia />
       <InterlinkingBlock />
       <ServiceOperationalSpec path="/servicos/conserto-placa" />
