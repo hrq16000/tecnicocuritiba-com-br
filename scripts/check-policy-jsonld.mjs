@@ -22,32 +22,38 @@ const PAGES = [
 
 const errors = [];
 
-/** Extrai o objeto `jsonLd` do módulo sem executar React (transpila só a constante). */
-async function loadGraph(file) {
-  const src = fs.readFileSync(path.resolve(file), "utf8");
-  const start = src.indexOf("const jsonLd = {");
-  if (start === -1) return null;
-  // Balanceia chaves a partir do início do literal.
-  let i = src.indexOf("{", start);
+/** Extrai um literal balanceado a partir de `const <name> =`. */
+function extractLiteral(src, name) {
+  const decl = src.indexOf(`const ${name} = `);
+  if (decl === -1) return null;
+  const openIdx = src.slice(decl).search(/[[{]/) + decl;
+  const open = src[openIdx];
+  const close = open === "{" ? "}" : "]";
   let depth = 0;
-  let end = -1;
-  for (; i < src.length; i++) {
-    if (src[i] === "{") depth++;
-    else if (src[i] === "}") {
+  for (let i = openIdx; i < src.length; i++) {
+    if (src[i] === open) depth++;
+    else if (src[i] === close) {
       depth--;
-      if (depth === 0) { end = i + 1; break; }
+      if (depth === 0) return src.slice(openIdx, i + 1);
     }
   }
-  if (end === -1) return null;
-  const literal = src.slice(src.indexOf("{", start), end);
-  // Resolve template literals simples do tipo `${CANONICAL}#webpage`.
+  return null;
+}
+
+/** Interpreta o objeto `jsonLd` do módulo sem executar React. */
+function loadGraph(file) {
+  const src = fs.readFileSync(path.resolve(file), "utf8");
+  const literal = extractLiteral(src, "jsonLd");
+  if (!literal) return null;
   const canonical = src.match(/const CANONICAL = "([^"]+)"/)?.[1];
-  const resolved = literal
-    .replace(/`\$\{CANONICAL\}([^`]*)`/g, (_m, suffix) => JSON.stringify(canonical + suffix))
-    .replace(/\bCANONICAL\b/g, JSON.stringify(canonical));
+  const faqLiteral = extractLiteral(src, "faq") || "[]";
+  const resolve1 = (code) =>
+    code
+      .replace(/`\$\{CANONICAL\}([^`]*)`/g, (_m, suffix) => JSON.stringify(canonical + suffix))
+      .replace(/\bCANONICAL\b/g, JSON.stringify(canonical));
   try {
     // eslint-disable-next-line no-new-func
-    const obj = new Function(`return (${resolved});`)();
+    const obj = new Function(`const faq = ${resolve1(faqLiteral)}; return (${resolve1(literal)});`)();
     return { obj, canonical };
   } catch (err) {
     errors.push(`${file}: não foi possível interpretar o jsonLd (${err.message})`);
