@@ -11,7 +11,7 @@ const localBusinessSchema = {
   "@id": `${SITE}/#organization`,
   "name": "Técnico em Curitiba - Suporte em Informática",
   "alternateName": ["Técnico de Informática em Curitiba", "Assistência Técnica Curitiba"],
-  "description": "Técnico de informática em Curitiba e região metropolitana. Formatação, conserto de computadores e notebooks, remoção de vírus, upgrade SSD, redes. Atendimento domiciliar no mesmo dia.",
+  "description": "Técnico de informática em Curitiba: conserto de PC e notebook, formatação, remoção de vírus e upgrade de SSD. Atendimento via WhatsApp, a partir de R$ 99,99.",
   "url": SITE,
   "telephone": NAP.phone,
   "image": `${SITE}/og-image.jpg`,
