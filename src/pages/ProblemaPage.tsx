@@ -129,12 +129,10 @@ const ProblemaPage = () => {
   const [data, setData] = useState<ProblemaPageData | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   const heroWaRef = useRef<HTMLButtonElement>(null);
-  const heroCallRef = useRef<HTMLButtonElement>(null);
   const footerWaRef = useRef<HTMLButtonElement>(null);
 
   // Visibilidade dos CTAs — dispara `cta_visible` uma vez por CTA/página.
   useCTAVisibility(heroWaRef, `problema_${slug ?? "unknown"}_hero_whatsapp`, { problema: slug ?? "unknown" });
-  useCTAVisibility(heroCallRef, `problema_${slug ?? "unknown"}_hero_call`, { problema: slug ?? "unknown" });
   useCTAVisibility(footerWaRef, `problema_${slug ?? "unknown"}_footer_whatsapp`, { problema: slug ?? "unknown" });
 
 
@@ -253,15 +251,6 @@ const ProblemaPage = () => {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(contextualMsg)}`, "_blank");
   };
 
-  const handleLigar = () => {
-    trackCTAClick("phone", `problema_${data.slug}`, {
-      problema: data.slug,
-      equipamento: data.categoria,
-      modalidade: modalidadeSugerida,
-    });
-    window.location.href = `tel:+55${WHATSAPP_NUMBER}`;
-  };
-
   const handleDownloadChecklist = (kind: "wifi" | "tv") => {
     trackCTAClick("chatbot", `problema_${data.slug}_checklist_${kind}`, {
       problema: data.slug,
@@ -361,9 +350,6 @@ const ProblemaPage = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button ref={heroWaRef} size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_hero`}>
                 <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
-              </Button>
-              <Button ref={heroCallRef} size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_hero_call`}>
-                📞 Ligar Agora
               </Button>
             </div>
           </div>
@@ -820,9 +806,6 @@ const ProblemaPage = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button ref={footerWaRef} size="lg" variant="cta" onClick={handleWhatsApp} data-cta-location={`problema_${data.slug}_footer`}>
               <MessageCircle className="mr-2 h-5 w-5" /> WhatsApp Agora
-            </Button>
-            <Button size="lg" variant="outline" onClick={handleLigar} className="bg-white/10 text-white border-white/40 hover:bg-white/20" data-cta-location={`problema_${data.slug}_footer_call`}>
-              📞 Ligar Agora
             </Button>
           </div>
         </div>
