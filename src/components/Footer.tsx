@@ -3,6 +3,7 @@ import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/n
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
 import { useMemo } from "react";
+import { MEDIA_KIT_PDF, trackMediaKitDownload } from "@/lib/mediaKit";
 
 const footerLink = "text-white/85 hover:text-white/90 text-sm transition-all duration-200 hover:translate-x-1 inline-block";
 
