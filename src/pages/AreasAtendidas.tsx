@@ -81,16 +81,21 @@ export default function AreasAtendidas() {
           <h2 id="mapa-cobertura" className="text-2xl md:text-3xl font-bold mb-4">
             Mapa da área de cobertura
           </h2>
-          <div className="overflow-hidden rounded-xl border">
-            <iframe
-              title="Mapa da área de atendimento em Curitiba e Região Metropolitana"
-              src="https://www.google.com/maps?q=Curitiba,+PR&output=embed"
-              width="100%"
-              height="380"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              style={{ border: 0 }}
-            />
+          <div className="overflow-hidden rounded-xl border" style={{ height: 380 }}>
+            <LazyOnVisible
+              minHeight="380px"
+              rootMargin="300px 0px"
+            >
+              <iframe
+                title="Mapa da área de atendimento em Curitiba e Região Metropolitana"
+                src="https://www.google.com/maps?q=Curitiba,+PR&output=embed"
+                width="100%"
+                height="380"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                style={{ border: 0, display: "block" }}
+              />
+            </LazyOnVisible>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
             Base operacional em Curitiba (PR). Deslocamento para a Região Metropolitana conforme agenda e rota.
