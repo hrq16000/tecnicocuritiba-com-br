@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import LazyOnVisible from "@/components/LazyOnVisible";
 import { CIDADES } from "@/lib/servicoCidadeData";
 import { BAIRROS_ATENDIMENTO } from "@/lib/atendimentoBairrosData";
 
