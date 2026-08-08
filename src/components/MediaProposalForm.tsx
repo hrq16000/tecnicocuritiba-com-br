@@ -79,7 +79,6 @@ export const MediaProposalForm = ({ whatsappNumber }: MediaProposalFormProps) =>
     trackCTAClick("whatsapp", "sponsors_media_proposal", {
       servico: "publicidade",
       equipamento: segmento,
-      modalidade: periodo.toLowerCase(),
     });
 
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(linhas.join("\n"))}`;
