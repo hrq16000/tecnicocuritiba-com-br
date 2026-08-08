@@ -289,7 +289,6 @@ export default function PoliticaPublicidade() {
 
       <main id="main-content">
         <PageHero
-          eyebrow="Transparência"
           title="Política de Publicidade e Conteúdo"
           subtitle="Como este portal se sustenta, como sinalizamos anúncios e quais regras seguimos ao publicar conteúdo técnico."
         />
