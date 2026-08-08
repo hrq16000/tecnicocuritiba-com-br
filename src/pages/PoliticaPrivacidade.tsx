@@ -83,6 +83,35 @@ const sections: { id: string; title: string; icon: typeof ShieldCheck; body: Rea
           (Google Consent Mode v2).
         </p>
         <p className="mt-2">
+          <strong>Anúncios de terceiros:</strong> fornecedores terceirizados, incluindo o Google,
+          podem usar cookies para veicular anúncios com base em visitas anteriores deste e de outros
+          sites. O Google usa cookies de publicidade para exibir anúncios com base nas suas visitas
+          ao nosso site e a outros sites na Internet. Você pode desativar a publicidade personalizada
+          nas{" "}
+          <a
+            href="https://www.google.com/settings/ads"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="text-accent underline"
+          >
+            Configurações de anúncios do Google
+          </a>{" "}
+          ou desativar cookies de terceiros em{" "}
+          <a
+            href="https://www.aboutads.info/choices/"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="text-accent underline"
+          >
+            aboutads.info/choices
+          </a>
+          . Detalhes sobre rotulagem de anúncios e ads.txt estão na{" "}
+          <Link to="/politica-de-publicidade" className="text-accent underline">
+            Política de Publicidade
+          </Link>
+          .
+        </p>
+        <p className="mt-2">
           Você pode revogar o consentimento a qualquer momento limpando os cookies do site no seu
           navegador.
         </p>
