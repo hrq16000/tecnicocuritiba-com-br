@@ -330,6 +330,34 @@ export const WhatsAppFunnel = () => {
     };
   }, [openFunnel]);
 
+  // Deep link #agendamento / #triagem — pré-seleciona serviço e sintoma.
+  // Como o hash permanece na URL, um reload restaura o mesmo contexto.
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window === "undefined") return;
+      const link = parseTriageDeepLink(window.location.hash, window.location.pathname);
+      if (!link) return;
+      if (link.equipamento) {
+        update({
+          equipamento: link.equipamento,
+          ...(link.sintoma ? { sintoma: link.sintoma } : {}),
+        });
+      }
+      const loc = `deeplink_${link.hash}`;
+      track("wa_funnel_open", {
+        cta_location: loc,
+        has_preset: true,
+        deep_link: link.hash,
+        equipamento: link.equipamento || "none",
+        sintoma: link.sintoma || "none",
+      });
+      openFunnel(loc, buildDeepLinkPreset(link, window.location.pathname));
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, [openFunnel, update]);
+
   useEffect(() => {
     if (!open) return;
     trackFunnelStep(step, answers.equipamento, answers.sintoma, originLocation);
