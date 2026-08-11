@@ -58,7 +58,7 @@ const WA_RE = /wa\.me\/(\d+)/g;
 // 2) Qualquer telephone: "+55..." em JSON-LD deve bater com o E.164 canônico.
 const TEL_RE = /"?(?:telephone|servicePhone)"?\s*:\s*"(\+?\d[\d\s()-]*)"/g;
 // 3) Horários exibidos: aceita apenas a janela canônica.
-const HOURS_TEXT_RE = /0?(\d{1,2})h\s*(?:às|–|-|a)\s*(\d{1,2})h/gi;
+const HOURS_TEXT_RE = /Seg[^\n]{0,40}?0?(\d{1,2})h\s*(?:às|–|-|a)\s*(\d{1,2})h/gi;
 // 4) openingHours JSON-LD.
 const OPENS_RE = /"?opens"?\s*:\s*"(\d{2}:\d{2})"/g;
 const CLOSES_RE = /"?closes"?\s*:\s*"(\d{2}:\d{2})"/g;
