@@ -119,7 +119,7 @@ const Contato = () => {
                   {
                     icon: Clock,
                     title: "Horário",
-                    content: <>Segunda a Sexta: 8h às 18h<br />Sábado: 8h às 12h<br /><span className="text-accent font-medium">Urgências via WhatsApp</span></>,
+                    content: <>Segunda a Sábado: 08h às 20h<br /><span className="text-accent font-medium">Urgências via WhatsApp</span></>,
                   },
                   {
                     icon: MapPin,
