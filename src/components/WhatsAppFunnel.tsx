@@ -18,6 +18,8 @@ import {
   trackFunnelClose,
   trackFunnelBlocked,
 } from "@/lib/funnelAnalytics";
+import { track } from "@/lib/funnelAnalytics";
+import { parseTriageDeepLink, buildDeepLinkPreset } from "@/lib/deepLinkTriage";
 import { appendUtmsToUrl, captureUtmsFromUrl } from "@/lib/utmCapture";
 import {
   EQUIPMENT_BRANCHES,
