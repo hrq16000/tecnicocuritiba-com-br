@@ -52,6 +52,9 @@
     "check:feeds": "node scripts/check-feeds.mjs",
     "check:nap": "node scripts/check-nap-consistency.mjs",
     "check:cluster-jsonld": "node scripts/check-cluster-jsonld.mjs",
+    "photos:strip": "node scripts/strip-exif.mjs",
+    "photos:audit": "node scripts/strip-exif.mjs --dry-run",
+    "check:photo-privacy": "node scripts/check-photo-privacy.mjs",
 
     "lgpd:ropa": "node scripts/generate-ropa.mjs",
     "check:ropa": "node scripts/generate-ropa.mjs --check"
