@@ -43,6 +43,8 @@ jobs:
         run: npm run check:ropa
       - name: NAP consistente (telefone, horários e cidade x src/lib/nap.ts)
         run: npm run check:nap
+      - name: LGPD — fotos sem EXIF/GPS/XMP (seguras para o site e o GBP)
+        run: npm run check:photo-privacy
 
 
 
