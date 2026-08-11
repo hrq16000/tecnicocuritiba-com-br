@@ -203,6 +203,9 @@ const ComputadorNaoLiga = () => {
       </section>
 
       <BlocoInteligencia />
+      <section className="container mx-auto px-4 py-8">
+        <ChecklistDownloadCard slug="pc-nao-liga" source="servico_computador_nao_liga" className="max-w-3xl mx-auto" />
+      </section>
       <InterlinkingBlock />
       <ServiceOperationalSpec path="/servicos/computador-nao-liga" />
       </main>
