@@ -50,9 +50,31 @@ for (const file of files) {
   // Ignora componentes de UI genéricos do shadcn.
   if (file.includes("/components/ui/")) continue;
 
-  const tags = source.match(/<img\b[\s\S]*?\/?>/g) ?? [];
-  for (const tag of tags) {
-    const line = source.slice(0, source.indexOf(tag)).split("\n").length;
+  // Parser consciente de chaves/strings: expressões JSX como `(w) => ...`
+  // contêm ">" e quebrariam uma regex ingênua.
+  const tags = [];
+  const re = /<img\b/g;
+  let m;
+  while ((m = re.exec(source)) !== null) {
+    let depth = 0;
+    let quote = null;
+    let i = m.index + 4;
+    for (; i < source.length; i += 1) {
+      const ch = source[i];
+      if (quote) {
+        if (ch === quote) quote = null;
+        continue;
+      }
+      if (ch === '"' || ch === "'" || ch === "`") { quote = ch; continue; }
+      if (ch === "{") depth += 1;
+      else if (ch === "}") depth -= 1;
+      else if (ch === ">" && depth === 0) break;
+    }
+    tags.push({ tag: source.slice(m.index, i + 1), index: m.index });
+  }
+
+  for (const { tag, index } of tags) {
+    const line = source.slice(0, index).split("\n").length;
     const at = `${file}:${line}`;
 
     const src = attr(tag, "src");
