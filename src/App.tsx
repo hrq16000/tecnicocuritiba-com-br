@@ -5,6 +5,7 @@ import { startNav } from "./lib/navTelemetry";
 import ConsentBanner from "./components/ConsentBanner";
 import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { WhatsAppFunnel } from "./components/WhatsAppFunnel";
+import AutoBreadcrumbSchema from "./components/AutoBreadcrumbSchema";
 import { WhatsAppFloat } from "./components/WhatsAppFloat";
 
 
