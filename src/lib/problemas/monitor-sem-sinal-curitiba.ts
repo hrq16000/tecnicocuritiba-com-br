@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "monitor-sem-sinal-curitiba",
   "title": "Monitor Sem Sinal em Curitiba | Diagnóstico e Soluções Reais",
-  "metaDescription": "Monitor sem sinal? Diagnóstico profissional em Curitiba. Problema na placa de vídeo, cabo, monitor ou configuração. Atendimento rápido. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Monitor sem sinal? Diagnóstico profissional em Curitiba. Problema na placa de vídeo, cabo, monitor ou configuração. Atendimento rápido. Atendimento pelo WhatsApp.",
   "h1": "Monitor Sem Sinal — Diagnóstico e Soluções Reais",
   "categoria": "Problemas de Monitor/Vídeo",
   "intro": "Ligar o computador e ver \"Sem Sinal\" ou \"No Signal\" no monitor é assustador. Você não sabe se o problema é no monitor, no cabo, na placa de vídeo ou na placa-mãe.\n\nA boa notícia: na maioria dos casos o problema é simples — cabo solto, entrada errada ou driver corrompido. Mas em casos graves, pode indicar falha na GPU ou placa-mãe.\n\nEm Curitiba, atendemos este problema diariamente. Nosso diagnóstico identifica a causa real e evita substituições desnecessárias.",

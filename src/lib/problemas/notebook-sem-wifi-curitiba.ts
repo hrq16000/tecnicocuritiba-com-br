@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "notebook-sem-wifi-curitiba",
   "title": "Notebook Sem Wi-Fi em Curitiba | Diagnóstico e Solução Rápida",
-  "metaDescription": "Notebook não conecta no Wi-Fi? Diagnóstico rápido em Curitiba. Problema de driver, placa wireless, configuração. Atendimento no mesmo dia. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Notebook não conecta no Wi-Fi? Diagnóstico rápido em Curitiba. Problema de driver, placa wireless, configuração. Atendimento no mesmo dia. Atendimento pelo WhatsApp.",
   "h1": "Notebook Sem Wi-Fi — Diagnóstico e Solução Rápida",
   "categoria": "Problemas de Notebook",
   "intro": "Seu notebook parou de encontrar redes Wi-Fi ou não consegue se conectar? Esse problema afeta milhares de usuários e pode ter causas simples ou complexas.\n\nDesde um driver desatualizado pelo Windows Update até uma placa wireless queimada, o diagnóstico correto é essencial para não gastar dinheiro à toa.\n\nEm Curitiba, resolvemos problemas de Wi-Fi em notebooks de todas as marcas — Dell, Lenovo, HP, Acer, Asus, Samsung e Apple.",

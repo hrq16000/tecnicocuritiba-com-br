@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "computador-com-som-estranho-curitiba",
   "title": "Computador Com Som Estranho em Curitiba | Diagnóstico de Barulhos",
-  "metaDescription": "Computador fazendo barulho estranho? Diagnóstico profissional em Curitiba. Ventoinha, HD, fonte, cooler. Identifique antes que quebre. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Computador fazendo barulho estranho? Diagnóstico profissional em Curitiba. Ventoinha, HD, fonte, cooler. Identifique antes que quebre. Atendimento pelo WhatsApp.",
   "h1": "Computador Com Som Estranho — Diagnóstico de Barulhos e Ruídos",
   "categoria": "Problemas de Hardware",
   "intro": "Seu computador começou a fazer barulhos estranhos? Chiados, zumbidos, cliques ou vibrações não são normais e quase sempre indicam um componente prestes a falhar.\n\nIdentificar a origem do barulho cedo pode evitar quebras mais caras e perda de dados. Cada tipo de som aponta para um componente diferente.\n\nEm Curitiba, diagnosticamos a origem do barulho com precisão para resolver antes que o problema se agrave.",
