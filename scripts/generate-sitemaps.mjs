@@ -61,12 +61,28 @@ try {
   }
 } catch { /* opcional */ }
 
+// 2.1) Posts do blog — extraídos de src/pages/Blog.tsx (mesma fonte do RSS).
+// sitemap-news.xml só cobre 30 dias (regra do Google News), então sem este
+// bucket os posts antigos ficam fora de qualquer sitemap indexável.
+const blogSlugs = [];
+try {
+  const blogSrc = readFileSync(resolve("src/pages/Blog.tsx"), "utf8");
+  const start = blogSrc.indexOf("const blogPosts = [");
+  if (start !== -1) {
+    const end = blogSrc.indexOf("\n];", start);
+    const block = blogSrc.slice(start, end === -1 ? undefined : end);
+    for (const m of block.matchAll(/slug:\s*"([^"]+)"/g)) blogSlugs.push(m[1]);
+  }
+} catch { /* opcional */ }
+for (const s of new Set(blogSlugs)) routes.add(`/blog/${s}`);
+
 // 3) Categorize.
-const buckets = { bairros: [], marcas: [], problemas: [], servicos: [], main: [] };
+const buckets = { bairros: [], marcas: [], problemas: [], servicos: [], blog: [], main: [] };
 for (const p of [...routes].sort()) {
   if (p.startsWith("/bairros/")) buckets.bairros.push(p);
   else if (p.startsWith("/marcas")) buckets.marcas.push(p);
   else if (p.startsWith("/problemas/") || p.startsWith("/procedimentos")) buckets.problemas.push(p);
+  else if (p.startsWith("/blog/")) buckets.blog.push(p);
   else if (p.startsWith("/atendimento")) buckets.servicos.push(p);
   else if (p.startsWith("/servicos") || /^\/conserto-.+-curitiba$/.test(p) || p.startsWith("/conserto-tv/") || p.startsWith("/conserto-som/") || p.startsWith("/conserto-videogame/") || p.startsWith("/conserto-celular/")) buckets.servicos.push(p);
   else buckets.main.push(p);
