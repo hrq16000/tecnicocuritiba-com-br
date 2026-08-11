@@ -32,6 +32,7 @@ import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
 import { withVideoWarning } from "@/lib/funnelWarning";
 import { bipAndAttention } from "@/lib/attentionBip";
 import { logFunnelDiag } from "@/lib/funnelDiagnostics";
+import { buildLeadContextLines } from "@/lib/leadContext";
 
 
 const WHATSAPP_NUMBER = "5541997452053";
