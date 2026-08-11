@@ -18,6 +18,7 @@
   <url><loc>https://tecnicocuritiba.com.br/cftv/litoral</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/cftv/pinhais</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/cftv/sao-jose-dos-pinhais</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tecnicocuritiba.com.br/checklists</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/coleta-e-entrega</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/coleta-formulario</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/como-avaliar</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -60,5 +61,6 @@
   <url><loc>https://tecnicocuritiba.com.br/tecnico-informatica-quatro-barras</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/tecnico-informatica-sao-jose-pinhais</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/termos-e-condicoes</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tecnicocuritiba.com.br/urgente</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tecnicocuritiba.com.br/valores</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

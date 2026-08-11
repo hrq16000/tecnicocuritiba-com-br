@@ -82,9 +82,41 @@ function clampTitle(main, suffix) {
   return main.length <= 70 ? main : `${main.slice(0, 67).trimEnd()}...`;
 }
 
+// Posts do blog: título/descrição reais extraídos de src/pages/Blog.tsx para
+// que o shell estático não caia no fallback genérico "… em Curitiba".
+const BLOG_POSTS = (() => {
+  const map = new Map();
+  try {
+    const src = fsSync.readFileSync(path.resolve("src/pages/Blog.tsx"), "utf8");
+    const start = src.indexOf("const blogPosts = [");
+    if (start !== -1) {
+      const end = src.indexOf("\n];", start);
+      const block = src.slice(start, end === -1 ? undefined : end);
+      const re = /slug:\s*"([^"]+)"[\s\S]{0,400}?title:\s*"([^"]*)"[\s\S]{0,600}?excerpt:\s*"([^"]*)"/g;
+      for (const m of block.matchAll(re)) {
+        map.set(m[1], { title: m[2], excerpt: m[3] });
+      }
+    }
+  } catch { /* opcional */ }
+  return map;
+})();
+
 function metaForPath(routePath) {
   const url = `${SITE}${routePath}`;
   const segs = routePath.split("/").filter(Boolean);
+
+  if (segs[0] === "blog" && segs[1]) {
+    const post = BLOG_POSTS.get(segs[1]);
+    const title = clampTitle(post?.title || titleize(segs[1]), "Blog | Técnico em Curitiba");
+    const raw = post?.excerpt || `${titleize(segs[1])}: guia prático do Técnico em Curitiba com passo a passo, custos e quando chamar um profissional.`;
+    return {
+      url,
+      routePath,
+      title,
+      description: raw.length <= 175 ? raw : `${raw.slice(0, 172).trimEnd()}...`,
+      areaServed: ["Curitiba"],
+    };
+  }
 
   if (routePath.startsWith("/bairros/")) {
     const { bairro, city } = bairroMeta(segs[1]);

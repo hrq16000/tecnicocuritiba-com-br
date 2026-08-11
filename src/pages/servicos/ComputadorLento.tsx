@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { InterlinkingBlock } from "@/components/InterlinkingBlock";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
+import ChecklistDownloadCard from "@/components/ChecklistDownloadCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import ServiceOperationalSpec from "@/components/ServiceOperationalSpec";
@@ -234,6 +235,9 @@ const ComputadorLento = () => {
       </section>
 
       <BlocoInteligencia />
+      <section className="container mx-auto px-4 py-8">
+        <ChecklistDownloadCard slug="computador-lento" source="servico_computador_lento" className="max-w-3xl mx-auto" />
+      </section>
       <InterlinkingBlock />
       <ServiceOperationalSpec path="/servicos/computador-lento" />
       </main>

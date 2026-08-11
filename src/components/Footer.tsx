@@ -38,6 +38,8 @@ const servicosLinks = [
   { label: "Domicílio", to: "/atendimento-domicilio" },
   { label: "Coleta e Entrega", to: "/coleta-e-entrega" },
   { label: "Áreas Atendidas", to: "/areas-atendidas" },
+  { label: "Ajuda Urgente", to: "/urgente" },
+  { label: "Checklists em PDF", to: "/checklists" },
   { label: "Conserto de TV", to: "/servicos/conserto-tv" },
 ];
 

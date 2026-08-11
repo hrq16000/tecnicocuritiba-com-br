@@ -39,6 +39,8 @@ const AssistenciaTecnicaCuritiba = lazy(() => import("./pages/AssistenciaTecnica
 const ArrumarPC = lazy(() => import("./pages/ArrumarPC"));
 const AtendimentoHub = lazy(() => import("./pages/AtendimentoHub"));
 const AreasAtendidas = lazy(() => import("./pages/AreasAtendidas"));
+const Urgente = lazy(() => import("./pages/Urgente"));
+const Checklists = lazy(() => import("./pages/Checklists"));
 const Busca = lazy(() => import("./pages/Busca"));
 const GestorResponsavel = lazy(() => import("./pages/GestorResponsavel"));
 const AtendimentoCidade = lazy(() => import("./pages/AtendimentoCidade"));
@@ -500,6 +502,8 @@ const App = () => (
             <Route path="/atendimento-remoto" element={<AtendimentoRemoto />} />
             <Route path="/atendimento" element={<AtendimentoHub />} />
             <Route path="/areas-atendidas" element={<AreasAtendidas />} />
+            <Route path="/urgente" element={<Urgente />} />
+            <Route path="/checklists" element={<Checklists />} />
             <Route path="/busca" element={<Busca />} />
             <Route path="/publicidade" element={<Navigate to="/patrocinadores" replace />} />
             <Route path="/anuncie" element={<Navigate to="/patrocinadores" replace />} />

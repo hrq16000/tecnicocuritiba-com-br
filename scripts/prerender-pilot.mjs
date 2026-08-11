@@ -168,6 +168,20 @@ export const PILOT_ROUTES = [
       "Critérios objetivos para decidir entre reparar ou trocar notebook, PC e TV. Comparativo de custo, vida útil e disponibilidade de peças.",
     kind: "page",
   },
+  {
+    path: "/urgente",
+    title: "Ajuda Técnica Urgente em Curitiba | Atendimento no Mesmo Dia",
+    description:
+      "Precisa de técnico agora em Curitiba? Veja a disponibilidade do dia e siga para a triagem por WhatsApp: remoto imediato, visita no mesmo dia ou coleta, a partir de R$ 99,99.",
+    kind: "page",
+  },
+  {
+    path: "/checklists",
+    title: "Checklists Rápidos de Reparo | Técnico em Curitiba",
+    description:
+      "Baixe checklists gratuitos em PDF para computador que não liga, PC lento e internet instável: testes seguros em casa e o que anotar antes de chamar o técnico.",
+    kind: "page",
+  },
 ];
 
 const htmlEscape = (s) =>

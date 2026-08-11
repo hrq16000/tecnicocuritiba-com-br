@@ -566,6 +566,13 @@ const RedesWifi = () => {
           >
             📥 Baixar checklist Wi-Fi em PDF
           </a>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Internet caindo em todos os aparelhos?{" "}
+            <Link to="/checklists" className="text-primary hover:underline">
+              Baixe também o checklist “sem internet ou Wi-Fi instável”
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
