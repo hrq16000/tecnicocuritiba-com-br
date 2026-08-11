@@ -345,6 +345,7 @@ const MontagemPc = lazy(() => import("./pages/servicos/MontagemPc"));
 const MontagemPcComoFunciona = lazy(() => import("./pages/servicos/MontagemPcComoFunciona"));
 const OrganizacaoTIEscritorios = lazy(() => import("./pages/guias/OrganizacaoTIEscritorios"));
 const ComoEscolherWorkstation = lazy(() => import("./pages/guias/ComoEscolherWorkstation"));
+const ComoEscolherTecnicoPrecoPrazo = lazy(() => import("./pages/guias/ComoEscolherTecnicoPrecoPrazo"));
 const GuiaTecnicoInformatica = lazy(() => import("./pages/guias/GuiaTecnicoInformatica"));
 const PoliticaPecasCliente = lazy(() => import("./pages/PoliticaPecasCliente"));
 const PoliticaPublicidade = lazy(() => import("./pages/PoliticaPublicidade"));
@@ -512,6 +513,7 @@ const App = () => (
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
             <Route path="/guias/organizacao-de-ti-para-escritorios" element={<OrganizacaoTIEscritorios />} />
             <Route path="/guias/como-escolher-workstation" element={<ComoEscolherWorkstation />} />
+            <Route path="/guias/como-escolher-tecnico-preco-prazo" element={<ComoEscolherTecnicoPrecoPrazo />} />
             {/* Pillar informacional do cluster de informática */}
             <Route path="/guia-tecnico-informatica" element={<GuiaTecnicoInformatica />} />
             {/* Aliases de intenção → página local primária do cluster */}
