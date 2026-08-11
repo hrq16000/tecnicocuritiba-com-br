@@ -1,0 +1,10 @@
+REVOKE ALL ON FUNCTION public.os_lookup_log(text, boolean, text) FROM PUBLIC, anon, authenticated;
+REVOKE ALL ON FUNCTION public.os_rate_limit(text, integer) FROM PUBLIC, anon, authenticated;
+REVOKE ALL ON FUNCTION public.update_updated_at_column() FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.os_lookup_log(text, boolean, text) TO service_role;
+GRANT EXECUTE ON FUNCTION public.os_rate_limit(text, integer) TO service_role;
+GRANT EXECUTE ON FUNCTION public.update_updated_at_column() TO service_role;
+REVOKE ALL ON FUNCTION public.consultar_os(text) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.consultar_os_por_telefone(text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.consultar_os(text) TO anon, authenticated, service_role;
+GRANT EXECUTE ON FUNCTION public.consultar_os_por_telefone(text) TO anon, authenticated, service_role;
