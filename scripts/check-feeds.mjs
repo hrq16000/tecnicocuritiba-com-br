@@ -22,10 +22,14 @@ const read = (f) => fs.readFileSync(path.join(PUBLIC_DIR, f), "utf8");
 
 function checkWellFormed(file, xml) {
   if (!xml.trimStart().startsWith("<?xml")) errors.push(`${file}: sem declaração XML`);
-  const opens = (xml.match(/<[a-zA-Z][^>\/]*[^\/]>/g) || []).length;
-  const closes = (xml.match(/<\/[a-zA-Z][^>]*>/g) || []).length;
-  if (opens !== closes) {
-    errors.push(`${file}: tags abertas (${opens}) diferem das fechadas (${closes})`);
+  const root = xml.match(/<([a-zA-Z][\w:-]*)[^>]*>/g)?.find((t) => !t.startsWith("<?"));
+  const rootName = root?.match(/<([a-zA-Z][\w:-]*)/)?.[1];
+  if (!rootName) {
+    errors.push(`${file}: elemento raiz não encontrado`);
+    return;
+  }
+  if (!xml.trimEnd().endsWith(`</${rootName}>`)) {
+    errors.push(`${file}: XML truncado — não fecha </${rootName}>`);
   }
 }
 
@@ -52,7 +56,7 @@ for (const f of FILES) {
     errors.push(`AUSENTE: public/${f}`);
     continue;
   }
-  checkWellFormed(f, read(full === full ? f : f));
+  checkWellFormed(f, read(f));
 }
 if (errors.length === 0) {
   // 2) Datas dos sitemaps
