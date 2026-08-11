@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "hd-externo-nao-reconhece-curitiba",
   "title": "HD Externo Não Reconhece em Curitiba | Recuperação e Diagnóstico",
-  "metaDescription": "HD externo não reconhece? Diagnóstico e recuperação de dados em Curitiba. USB, partição, firmware. Atendimento especializado. WhatsApp (41) 99745-2053.",
+  "metaDescription": "HD externo não reconhece? Diagnóstico e recuperação de dados em Curitiba. USB, partição, firmware. Atendimento especializado. Atendimento pelo WhatsApp.",
   "h1": "HD Externo Não Reconhece — Diagnóstico e Recuperação de Dados",
   "categoria": "Hardware / Armazenamento",
   "intro": "Quando o HD externo não é reconhecido pelo computador, a preocupação principal é sempre os dados. Fotos, documentos, trabalhos acadêmicos e backups podem estar em risco. O problema pode ser tão simples quanto um cabo defeituoso ou tão grave quanto falha mecânica do disco.\n\nAntes de tentar qualquer solução por conta própria, é fundamental entender que HDs externos com problemas mecânicos (cliques, ruídos) NÃO devem ser ligados repetidamente — cada tentativa pode piorar o dano e tornar a recuperação mais cara ou impossível.\n\nOs HDs externos são especialmente vulneráveis porque são transportados constantemente e podem sofrer quedas, vibrações e variações de temperatura que HDs internos não experimentam.",

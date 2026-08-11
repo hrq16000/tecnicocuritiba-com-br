@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "teclado-mouse-nao-funciona-curitiba",
   "title": "Teclado ou Mouse Não Funciona em Curitiba | Diagnóstico Rápido",
-  "metaDescription": "Teclado ou mouse não funcionam? Diagnóstico rápido em Curitiba. Porta USB, driver, Bluetooth. Atendimento no mesmo dia. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Teclado ou mouse não funcionam? Diagnóstico rápido em Curitiba. Porta USB, driver, Bluetooth. Atendimento no mesmo dia. Atendimento pelo WhatsApp.",
   "h1": "Teclado ou Mouse Não Funciona — Diagnóstico e Soluções Rápidas",
   "categoria": "Problemas de Periféricos",
   "intro": "Teclado ou mouse pararam de funcionar? Antes de comprar novos, saiba que em muitos casos o problema está no computador — não no periférico.\n\nPortas USB defeituosas, drivers corrompidos, conflitos de Bluetooth ou sujeira acumulada podem ser a causa real.\n\nEm Curitiba, diagnosticamos e resolvemos com rapidez, evitando gastos desnecessários.",

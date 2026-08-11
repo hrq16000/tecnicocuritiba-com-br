@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "computador-nao-conecta-bluetooth-curitiba",
   "title": "Computador Não Conecta Bluetooth em Curitiba | Diagnóstico Rápido",
-  "metaDescription": "Bluetooth não funciona no computador? Diagnóstico rápido em Curitiba. Driver, adaptador, configuração. Atendimento no mesmo dia. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Bluetooth não funciona no computador? Diagnóstico rápido em Curitiba. Driver, adaptador, configuração. Atendimento no mesmo dia. Atendimento pelo WhatsApp.",
   "h1": "Computador Não Conecta Bluetooth — Diagnóstico e Solução",
   "categoria": "Problemas de Conectividade",
   "intro": "O Bluetooth do seu computador parou de funcionar? Não consegue parear fones, mouse, teclado ou caixas de som sem fio?\n\nEsse problema é extremamente comum e na maioria dos casos é causado por driver, configuração ou adaptador desativado.\n\nEm Curitiba, resolvemos problemas de Bluetooth em PCs e notebooks com rapidez.",

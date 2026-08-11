@@ -133,7 +133,39 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    /* Barra de rolagem com identidade da marca (Firefox) */
+    scrollbar-color: hsl(var(--accent)) hsl(var(--secondary));
+    scrollbar-width: thin;
   }
+
+  /* Barra de rolagem com identidade da marca (Chromium/Safari) */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--secondary));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--primary)) 100%
+    );
+    border-radius: 999px;
+    border: 2px solid hsl(var(--secondary));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent));
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: hsl(var(--secondary));
+  }
+
 
   body {
     @apply bg-background text-foreground font-sans antialiased;

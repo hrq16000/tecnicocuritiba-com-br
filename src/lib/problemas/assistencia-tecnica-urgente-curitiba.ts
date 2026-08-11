@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "assistencia-tecnica-urgente-curitiba",
   "title": "Assistência Técnica Urgente em Curitiba | Mesmo Dia",
-  "metaDescription": "Precisa de assistência técnica urgente em Curitiba? Atendimento no mesmo dia. Computador, notebook, TV. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Precisa de assistência técnica urgente em Curitiba? Atendimento no mesmo dia. Computador, notebook, TV. Atendimento pelo WhatsApp.",
   "h1": "Assistência Técnica Urgente em Curitiba — Atendimento no Mesmo Dia",
   "categoria": "Local + Intenção",
   "intro": "Situações urgentes acontecem: o computador do trabalho parou, o notebook com o TCC travou, a TV da empresa de eventos não liga antes de um evento. Para esses momentos, oferecemos atendimento prioritário em Curitiba e região metropolitana, com visita técnica no mesmo dia (sujeito à disponibilidade).\n\nNosso atendimento urgente funciona via WhatsApp — descreva a situação, envie fotos/vídeos se possível, e priorizamos seu caso na agenda do dia. Atendemos computadores, notebooks, TVs, redes e equipamentos eletrônicos.",

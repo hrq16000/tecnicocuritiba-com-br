@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "pc-trava-ao-jogar-curitiba",
   "title": "PC Trava ao Jogar em Curitiba | Diagnóstico Gamer Profissional",
-  "metaDescription": "PC trava, congela ou reinicia durante jogos? Diagnóstico gamer em Curitiba. GPU, fonte, temperatura, drivers. Atendimento especializado. WhatsApp (41) 99745-2053.",
+  "metaDescription": "PC trava, congela ou reinicia durante jogos? Diagnóstico gamer em Curitiba. GPU, fonte, temperatura, drivers. Atendimento especializado. Atendimento pelo WhatsApp.",
   "h1": "PC Trava ao Jogar — Diagnóstico Gamer e Soluções Reais",
   "categoria": "Problemas Gamer",
   "intro": "Seu PC congela, trava ou reinicia no meio de uma partida? Esse é um dos problemas mais frustrantes para gamers — especialmente quando acontece em momentos cruciais.\n\nAs causas mais comuns envolvem superaquecimento de GPU, fonte de alimentação insuficiente, drivers desatualizados ou RAM instável. Mas identificar qual é o culpado exige diagnóstico profissional.\n\nEm Curitiba, oferecemos diagnóstico especializado para PCs gamer com testes de stress, monitoramento de temperatura e análise de estabilidade.",

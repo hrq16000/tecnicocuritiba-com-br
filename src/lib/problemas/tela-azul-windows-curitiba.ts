@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "tela-azul-windows-curitiba",
   "title": "Tela Azul no Windows em Curitiba | Diagnóstico BSOD Profissional",
-  "metaDescription": "Tela azul da morte (BSOD) no Windows? Diagnóstico profissional em Curitiba. Identificamos o driver ou hardware causador. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Tela azul da morte (BSOD) no Windows? Diagnóstico profissional em Curitiba. Identificamos o driver ou hardware causador. Atendimento pelo WhatsApp.",
   "h1": "Tela Azul no Windows (BSOD) — Diagnóstico e Solução Profissional",
   "categoria": "Erros de Sistema",
   "intro": "A temida \"Tela Azul da Morte\" (BSOD - Blue Screen of Death) é o erro mais assustador do Windows. O computador para tudo, exibe um código de erro e reinicia sozinho.\n\nNa maioria dos casos, a tela azul é causada por um driver incompatível, memória RAM defeituosa ou superaquecimento. Mas também pode indicar HD/SSD com falha ou até placa-mãe danificada.\n\nEm Curitiba, analisamos os logs de crash dump para identificar exatamente qual componente ou driver está causando o problema — sem tentativa e erro.",

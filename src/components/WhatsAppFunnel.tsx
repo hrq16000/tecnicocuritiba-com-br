@@ -32,6 +32,7 @@ import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
 import { withVideoWarning } from "@/lib/funnelWarning";
 import { bipAndAttention } from "@/lib/attentionBip";
 import { logFunnelDiag } from "@/lib/funnelDiagnostics";
+import { buildLeadContextLines } from "@/lib/leadContext";
 
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -155,6 +156,8 @@ function buildMessage(a: Answers): string {
     lines.push("💻 *Modalidade indicada: ATENDIMENTO REMOTO*");
     lines.push("• Valor mínimo R$ 99,99 · requer computador ligado e acesso à internet");
   }
+  // Contexto silencioso (geo aproximado por IP, página de origem e busca).
+  buildLeadContextLines().forEach((l) => lines.push(l));
   lines.push("");
   lines.push("✅ Registro de ciência e aceite eletrônico dos termos e valores apresentados no funil.");
   if (a.descricao.trim()) {

@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "internet-lenta-curitiba",
   "title": "Internet Lenta em Curitiba | Diagnóstico de Rede e Soluções",
-  "metaDescription": "Internet lenta em Curitiba? Diagnóstico de rede profissional. Roteador, Wi-Fi, cabeamento, DNS. Atendimento rápido. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Internet lenta em Curitiba? Diagnóstico de rede profissional. Roteador, Wi-Fi, cabeamento, DNS. Atendimento rápido. Atendimento pelo WhatsApp.",
   "h1": "Internet Lenta — Diagnóstico de Rede e Soluções Profissionais",
   "categoria": "Problemas de Rede",
   "intro": "Internet lenta é uma das reclamações mais comuns em Curitiba. Antes de culpar o provedor, saiba que em mais de 60% dos casos o problema está na sua casa ou escritório.\n\nRoteador mal posicionado, canal Wi-Fi congestionado, cabeamento antigo, DNS lento ou malware consumindo banda — são dezenas de causas possíveis.\n\nNossa equipe utiliza ferramentas de análise de rede para identificar gargalos e interferências.",

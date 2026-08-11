@@ -3,7 +3,7 @@ import type { ProblemaPageData } from "./types";
 export const problema: ProblemaPageData = {
   "slug": "impressora-nao-imprime-curitiba",
   "title": "Impressora Não Imprime em Curitiba | Diagnóstico e Soluções Reais",
-  "metaDescription": "Impressora não imprime? Diagnóstico profissional em Curitiba e região. Problemas de driver, cabeçote, papel, Wi-Fi. Atendimento rápido. WhatsApp (41) 99745-2053.",
+  "metaDescription": "Impressora não imprime? Diagnóstico profissional em Curitiba e região. Problemas de driver, cabeçote, papel, Wi-Fi. Atendimento rápido. Atendimento pelo WhatsApp.",
   "h1": "Impressora Não Imprime — Diagnóstico e Soluções Reais",
   "categoria": "Problemas de Impressora",
   "intro": "Sua impressora parou de imprimir e você não sabe o motivo? Esse é um dos problemas mais frustrantes do dia a dia — especialmente quando você precisa imprimir um documento urgente para o trabalho, escola ou uma reunião.\n\nAs causas variam enormemente: pode ser algo simples como um driver desatualizado ou papel preso, ou algo mais complexo como cabeçote de impressão entupido, cartucho seco ou problema na placa lógica da impressora.\n\nEm Curitiba e região metropolitana, atendemos centenas de chamados relacionados a impressoras — HP, Epson, Canon, Brother, Samsung e outras marcas.",

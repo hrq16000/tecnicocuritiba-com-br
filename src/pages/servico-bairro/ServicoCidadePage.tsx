@@ -29,7 +29,7 @@ const ServicoCidadePage = () => {
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content",
-        `Técnico de informática em ${cidade.nome}. ${servico.nome} com atendimento a domicílio no mesmo dia. Sem sair de casa. WhatsApp: (41) 99745-2053.`
+        `Técnico de informática em ${cidade.nome}. ${servico.nome} com atendimento a domicílio no mesmo dia. Sem sair de casa. Atendimento pelo WhatsApp.`
       );
     }
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;

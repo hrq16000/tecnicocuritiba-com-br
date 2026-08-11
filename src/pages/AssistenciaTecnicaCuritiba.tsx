@@ -336,7 +336,7 @@ export default function AssistenciaTecnicaCuritiba() {
     <div className="min-h-screen bg-background">
       <PageSEO
         title="Assistência Técnica Especializada em Curitiba | Reparo de Bancada"
-        description="Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia. Orçamento pelo WhatsApp (41) 99745-2053."
+        description="Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia. Orçamento pelo Atendimento pelo WhatsApp."
         path="/assistencia-tecnica-curitiba"
         breadcrumbs={[
           { name: "Início", path: "/" },
