@@ -49,7 +49,7 @@ const faqCategories = [
       },
       {
         question: "Qual o horário de atendimento?",
-        answer: "Nosso horário comercial é de segunda a sexta, das 8h às 18h, e sábados das 8h às 12h. Para urgências fora do horário, entre em contato pelo WhatsApp."
+        answer: "Nosso horário de atendimento é de segunda a sábado, das 08h às 20h. Para urgências fora do horário, entre em contato pelo WhatsApp."
       },
       {
         question: "Quanto tempo para responder no WhatsApp?",

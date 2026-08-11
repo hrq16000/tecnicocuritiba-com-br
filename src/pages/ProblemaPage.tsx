@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import TrustStrip from "@/components/TrustStrip";
 import PageTableOfContents from "@/components/PageTableOfContents";
 import CuratedSymptomSections, { CURATED_SYMPTOM_BLOCKS } from "@/components/CuratedSymptomSections";
+import CasosReaisSection from "@/components/CasosReaisSection";
 
 import { Helmet } from "react-helmet";
 import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
@@ -400,6 +401,8 @@ const ProblemaPage = () => {
           </div>
         </div>
       </section>
+
+      <CasosReaisSection categoria={data.categoria} />
 
       {/* Bloco de links internos contextuais — SEO local + navegação por
           serviço mais buscado em Curitiba. */}
