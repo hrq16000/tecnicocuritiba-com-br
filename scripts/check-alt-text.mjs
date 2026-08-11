@@ -46,7 +46,12 @@ const attr = (tag, name) => {
 };
 
 for (const file of files) {
-  const source = readFileSync(file, "utf8");
+  const raw = readFileSync(file, "utf8");
+  // Neutraliza comentários (preservando o comprimento para manter as linhas)
+  // para não confundir menções a "<img>" em prosa com markup real.
+  const source = raw
+    .replace(/\/\*[\s\S]*?\*\//g, (c) => c.replace(/[^\n]/g, " "))
+    .replace(/(^|[^:])\/\/[^\n]*/g, (c, pre) => pre + c.slice(pre.length).replace(/[^\n]/g, " "));
   // Ignora componentes de UI genéricos do shadcn.
   if (file.includes("/components/ui/")) continue;
 

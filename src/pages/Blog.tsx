@@ -665,7 +665,7 @@ const Blog = () => {
                 <AnimatedSection key={item.slug} delay={80 * i}>
                   <Link to={item.path} className="group flex items-center gap-3 p-3 rounded-xl bg-card border border-border hover:border-accent/30 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
                     <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
-                      <img src={item.image + "&w=120&h=120"} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                      <img src={item.image + "&w=120&h=120"} alt={`Capa do artigo ${item.title}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-bold text-foreground line-clamp-2 group-hover:text-accent transition-colors">{item.title}</p>
