@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { baseUrl } from "./utils/baseUrl";
+import { BASE_URL } from "./utils/baseUrl";
 
 /**
  * Gate de qualidade visual: garante que nenhuma rota crítica renderize com
@@ -27,7 +27,7 @@ for (const viewport of VIEWPORTS) {
   for (const route of ROUTES) {
     test(`layout íntegro em ${route} (${viewport.name})`, async ({ page }) => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
-      await page.goto(`${baseUrl}${route}`, { waitUntil: "domcontentloaded" });
+      await page.goto(`${BASE_URL}${route}`, { waitUntil: "domcontentloaded" });
       await page.waitForTimeout(600);
 
       // 1) Sem scroll horizontal na página.
