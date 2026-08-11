@@ -36,7 +36,20 @@ function hasBreadcrumb(): boolean {
 }
 
 export const AutoBreadcrumbSchema = () => {
-  const { pathname } = useLocation();
+  const [pathname, setPathname] = useState(() =>
+    typeof window === "undefined" ? "/" : window.location.pathname,
+  );
+
+  // Sem dependência de Router: acompanha mudanças de rota (SPA e histórico).
+  useEffect(() => {
+    const sync = () => setPathname(window.location.pathname);
+    window.addEventListener("popstate", sync);
+    const id = window.setInterval(sync, 1000);
+    return () => {
+      window.removeEventListener("popstate", sync);
+      window.clearInterval(id);
+    };
+  }, []);
 
   useEffect(() => {
     document.getElementById(ID)?.remove();
