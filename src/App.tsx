@@ -205,6 +205,7 @@ const HomeApp = () => {
           <LegacyApp />
         </Suspense>
       )}
+      <AutoBreadcrumbSchema />
       <WhatsAppFunnel />
       <WhatsAppFloat />
       <ConsentBanner />
