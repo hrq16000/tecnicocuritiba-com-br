@@ -513,6 +513,7 @@ const App = () => (
             <Route path="/suporte-empresas" element={<SuporteEmpresas />} />
             <Route path="/guias/organizacao-de-ti-para-escritorios" element={<OrganizacaoTIEscritorios />} />
             <Route path="/guias/como-escolher-workstation" element={<ComoEscolherWorkstation />} />
+            <Route path="/guias/como-escolher-tecnico-preco-prazo" element={<ComoEscolherTecnicoPrecoPrazo />} />
             {/* Pillar informacional do cluster de informática */}
             <Route path="/guia-tecnico-informatica" element={<GuiaTecnicoInformatica />} />
             {/* Aliases de intenção → página local primária do cluster */}
