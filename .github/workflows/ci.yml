@@ -41,6 +41,8 @@ jobs:
         run: npm run check:feeds
       - name: LGPD — ROPA sincronizado com as decisões 1–4
         run: npm run check:ropa
+      - name: NAP consistente (telefone, horários e cidade x src/lib/nap.ts)
+        run: npm run check:nap
 
 
 

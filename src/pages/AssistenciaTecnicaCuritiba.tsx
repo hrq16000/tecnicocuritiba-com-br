@@ -1,5 +1,6 @@
 import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { ServicosCorrelatos } from "@/components/ServicosCorrelatos";
+import CasosReaisSection from "@/components/CasosReaisSection";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageSEO } from "@/components/PageSEO";
@@ -678,6 +679,7 @@ export default function AssistenciaTecnicaCuritiba() {
           </nav>
         </section>
         <LocalPhotoGallery local="Curitiba" variant="geral" />
+      <CasosReaisSection titulo="Casos reais de bancada em Curitiba" />
       </main>
       <ServicosCorrelatos exclude={["/assistencia-tecnica-curitiba"]} />
 
