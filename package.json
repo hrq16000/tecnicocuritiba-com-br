@@ -49,6 +49,8 @@
     "report:faq-parity": "node scripts/report-faq-parity.mjs",
     "perf:local-pages": "node scripts/lh-local-pages.mjs",
     "check:policy-jsonld": "node scripts/check-policy-jsonld.mjs",
+    "check:cluster-jsonld": "node scripts/check-cluster-jsonld.mjs",
+
     "lgpd:ropa": "node scripts/generate-ropa.mjs",
     "check:ropa": "node scripts/generate-ropa.mjs --check"
   },
