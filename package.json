@@ -56,6 +56,8 @@
     "photos:audit": "node scripts/strip-exif.mjs --dry-run",
     "check:photo-privacy": "node scripts/check-photo-privacy.mjs",
     "check:alt": "node scripts/check-alt-text.mjs",
+    "photos:optimize": "node scripts/optimize-photos.mjs",
+    "check:photos": "node scripts/optimize-photos.mjs --check",
 
     "lgpd:ropa": "node scripts/generate-ropa.mjs",
     "check:ropa": "node scripts/generate-ropa.mjs --check"
