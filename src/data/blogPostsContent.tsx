@@ -10671,7 +10671,7 @@ crontab -e
         <p>Nunca aceite formatar sem backup dos seus arquivos. Bom técnico faz o backup, mostra a pasta salva e só depois inicia a formatação. Veja como <Link to="/blog/backup-como-proteger-seus-arquivos">funciona o backup profissional</Link>.</p>
 
         <h2>5. Endereço fixo ou reputação online</h2>
-        <p>Prefira quem tem loja física em Curitiba, CNPJ ativo e avaliações no Google (nota 4.5+). Perfis 100% novos ou sem endereço são sinal amarelo.</p>
+        <p>Prefira quem tem loja física em Curitiba, empresa formalizada e avaliações no Google (nota 4.5+). Perfis 100% novos ou sem endereço são sinal amarelo.</p>
 
         <h2>6. Atende no domicílio (opcional)</h2>
         <p>Muitos serviços — configuração de rede, instalação de impressora, backup, remoção de vírus — são muito mais convenientes em domicílio. Verifique se o técnico atende sua região: <Link to="/tecnico-informatica-curitiba">Curitiba</Link>, <Link to="/tecnico-informatica-sao-jose-pinhais">SJP</Link>, <Link to="/tecnico-informatica-pinhais">Pinhais</Link>, etc.</p>
@@ -10811,7 +10811,7 @@ crontab -e
         <h2>É seguro? E meus dados?</h2>
         <p>Sim, desde que:</p>
         <ul>
-          <li>Você use um técnico com CNPJ e reputação (não aceite acesso de "amigos" desconhecidos).</li>
+          <li>Você use um técnico formalizado e com reputação (não aceite acesso de "amigos" desconhecidos).</li>
           <li>Você acompanhe o atendimento na tela.</li>
           <li>Você feche o programa de acesso ao final.</li>
           <li>Você troque senhas sensíveis (banco, e-mail principal) depois se quiser extra segurança.</li>

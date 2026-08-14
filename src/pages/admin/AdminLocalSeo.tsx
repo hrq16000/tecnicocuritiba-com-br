@@ -139,10 +139,6 @@ export default function AdminLocalSeo() {
                       <Input value={rec.cep} onChange={(e) => updateNap(idx, "cep", e.target.value)} />
                     </div>
                     <div>
-                      <Label>CNPJ</Label>
-                      <Input value={rec.cnpj} onChange={(e) => updateNap(idx, "cnpj", e.target.value)} />
-                    </div>
-                    <div>
                       <Label>Fonte / diretório</Label>
                       <Input
                         placeholder="Ex.: Google Business Profile, Apontador, Bing Places"
