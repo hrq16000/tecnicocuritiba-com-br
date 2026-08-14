@@ -283,6 +283,69 @@ export default function AdminOSAuditoria() {
         </Card>
 
         <Card className="mt-6 p-4">
+          <h2 className="text-sm font-semibold">Anomalias por origem e campanha</h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Tentativas bloqueadas pelo limite anti-enumeração e formatos inválidos, correlacionados com a página de
+            origem e a campanha (UTM) da sessão, quando existir. Picos concentrados em uma única origem indicam
+            possível abuso automatizado.
+          </p>
+          <div className="mt-3 grid gap-6 lg:grid-cols-2">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-xs uppercase text-muted-foreground">
+                  <th className="py-2">Origem (página)</th>
+                  <th className="py-2">Bloqueios</th>
+                  <th className="py-2">Inválidos</th>
+                  <th className="py-2">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {anomalias.origens.map((o) => (
+                  <tr key={o.origem} className="border-t">
+                    <td className="py-2">{o.origem}</td>
+                    <td className="py-2">{o.bloqueios}</td>
+                    <td className="py-2">{o.erros}</td>
+                    <td className="py-2">{o.total}</td>
+                  </tr>
+                ))}
+                {!anomalias.origens.length && (
+                  <tr>
+                    <td colSpan={4} className="py-4 text-muted-foreground">
+                      Nenhuma anomalia registrada nesta janela.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-xs uppercase text-muted-foreground">
+                  <th className="py-2">Campanha (UTM)</th>
+                  <th className="py-2">Bloqueios</th>
+                  <th className="py-2">Inválidos</th>
+                </tr>
+              </thead>
+              <tbody>
+                {anomalias.utms.map((u) => (
+                  <tr key={u.campanha} className="border-t">
+                    <td className="py-2">{u.campanha}</td>
+                    <td className="py-2">{u.bloqueios}</td>
+                    <td className="py-2">{u.erros}</td>
+                  </tr>
+                ))}
+                {!anomalias.utms.length && (
+                  <tr>
+                    <td colSpan={3} className="py-4 text-muted-foreground">
+                      Nenhuma anomalia com campanha identificada.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        <Card className="mt-6 p-4">
           <h2 className="text-sm font-semibold">Prazos das ordens em aberto</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             {sla.abertas} ordens em aberto · {sla.comPrazo} com previsão informada · {sla.vencidas.length} vencidas ·{" "}
