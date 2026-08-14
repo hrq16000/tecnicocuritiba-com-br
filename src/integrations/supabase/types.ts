@@ -505,51 +505,7 @@ export type Database = {
       }
     }
     Views: {
-      public_reviews: {
-        Row: {
-          author_name: string | null
-          author_photo_url: string | null
-          city: string | null
-          comment: string | null
-          created_at: string | null
-          google_review_url: string | null
-          id: string | null
-          neighborhood: string | null
-          rating: number | null
-          review_date: string | null
-          service_slug: string | null
-          source: string | null
-        }
-        Insert: {
-          author_name?: string | null
-          author_photo_url?: string | null
-          city?: string | null
-          comment?: string | null
-          created_at?: string | null
-          google_review_url?: string | null
-          id?: string | null
-          neighborhood?: string | null
-          rating?: number | null
-          review_date?: string | null
-          service_slug?: string | null
-          source?: string | null
-        }
-        Update: {
-          author_name?: string | null
-          author_photo_url?: string | null
-          city?: string | null
-          comment?: string | null
-          created_at?: string | null
-          google_review_url?: string | null
-          id?: string | null
-          neighborhood?: string | null
-          rating?: number | null
-          review_date?: string | null
-          service_slug?: string | null
-          source?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       consultar_os: {
