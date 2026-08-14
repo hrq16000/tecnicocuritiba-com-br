@@ -7,7 +7,6 @@ import { ShieldCheck, Cookie, Database, MessageCircle, FileText } from "lucide-r
 
 const CANONICAL = "https://tecnicocuritiba.com.br/politica-de-privacidade";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
-const CNPJ = "41.723.708/0001-58";
 const WHATSAPP = "5541997452053";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Olá! Tenho uma dúvida sobre a Política de Privacidade do site.")}`;
 const UPDATED = "24/06/2026";
@@ -22,7 +21,7 @@ const sections: { id: string; title: string; icon: typeof ShieldCheck; body: Rea
         <p>
           Esta Política de Privacidade aplica-se ao site{" "}
           <strong>tecnicocuritiba.com.br</strong>, operado por <strong>{COMPANY}</strong>,
-          inscrita no CNPJ {CNPJ}, com atendimento em Curitiba e Região Metropolitana – PR.
+          com atendimento em Curitiba e Região Metropolitana – PR.
         </p>
         <p className="mt-2">
           Contato do encarregado (DPO) exclusivamente pelo{" "}

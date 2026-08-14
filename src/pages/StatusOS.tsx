@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { buildSiteReviewUrl } from "@/lib/reviewRequest";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
+import { readUtms } from "@/lib/utmCapture";
 import { supabase } from "@/integrations/supabase/client";
 
 const track = (event: string, params: Record<string, unknown> = {}) => {
@@ -215,7 +216,11 @@ export default function StatusOS() {
       const { data, error } = await Promise.race([
         rpc(
           m === "numero" ? "consultar_os" : "consultar_os_por_telefone",
-          m === "numero" ? { _numero: valor } : { _telefone: valor },
+          {
+            ...(m === "numero" ? { _numero: valor } : { _telefone: valor }),
+            _origem: window.location.pathname,
+            _utm: readUtms(),
+          },
         ),
         timeout,
       ]);

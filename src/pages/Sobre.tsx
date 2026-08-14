@@ -127,10 +127,6 @@ const Sobre = () => {
                   <dd className="text-muted-foreground">Técnico em Curitiba — Assistência Técnica em Informática</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-foreground">CNPJ</dt>
-                  <dd className="text-muted-foreground">41.723.708/0001-58</dd>
-                </div>
-                <div>
                   <dt className="font-semibold text-foreground">Atendimento</dt>
                   <dd className="text-muted-foreground">Curitiba e Região Metropolitana — domicílio, remoto e coleta</dd>
                 </div>

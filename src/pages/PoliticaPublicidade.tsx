@@ -7,7 +7,6 @@ import { Megaphone, ShieldCheck, FileText, Cookie, MessageCircle, PenLine } from
 
 const CANONICAL = "https://tecnicocuritiba.com.br/politica-de-publicidade";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
-const CNPJ = "41.723.708/0001-58";
 const WHATSAPP = "5541997452053";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
   "Olá! Tenho uma dúvida sobre a Política de Publicidade do site.",
