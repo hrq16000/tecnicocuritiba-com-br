@@ -8,7 +8,6 @@ import { Cookie, BarChart3, Megaphone, ShieldCheck, SlidersHorizontal, FileText 
 
 const CANONICAL = "https://tecnicocuritiba.com.br/politica-de-cookies-e-anuncios";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
-const CNPJ = "41.723.708/0001-58";
 const PUBLISHER = "pub-3762170279587706";
 const UPDATED = "08/08/2026";
 
@@ -22,7 +21,7 @@ const sections: { id: string; title: string; icon: typeof Cookie; body: React.Re
         <p>
           Cookies são pequenos arquivos gravados no seu navegador quando você acessa uma página. Eles
           permitem lembrar preferências, medir quantas pessoas leram um conteúdo e, quando autorizado,
-          exibir publicidade. Este site é publicado por <strong>{COMPANY}</strong>, CNPJ {CNPJ}, e usa
+          exibir publicidade. Este site é publicado por <strong>{COMPANY}</strong> e usa
           cookies em três finalidades apenas: funcionamento, medição de audiência e publicidade.
         </p>
         <p className="mt-2">

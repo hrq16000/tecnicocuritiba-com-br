@@ -7,7 +7,6 @@ import { Megaphone, ShieldCheck, FileText, Cookie, MessageCircle, PenLine } from
 
 const CANONICAL = "https://tecnicocuritiba.com.br/politica-de-publicidade";
 const COMPANY = "Técnico em Curitiba — Assistência Técnica em Informática";
-const CNPJ = "41.723.708/0001-58";
 const WHATSAPP = "5541997452053";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
   "Olá! Tenho uma dúvida sobre a Política de Publicidade do site.",
@@ -23,7 +22,7 @@ const sections: { id: string; title: string; icon: typeof Megaphone; body: React
       <>
         <p>
           O site <strong>tecnicocuritiba.com.br</strong> é publicado por <strong>{COMPANY}</strong>,
-          CNPJ {CNPJ}, prestadora de serviços de assistência técnica em informática e eletrônica em
+          prestadora de serviços de assistência técnica em informática e eletrônica em
           Curitiba e Região Metropolitana do Paraná. Todo o conteúdo publicado aqui é produzido pela
           própria equipe técnica, com base em atendimentos reais executados em bancada e em domicílio.
         </p>

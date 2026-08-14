@@ -24,7 +24,6 @@ export interface NapRecord {
   email: string;
   address: string;
   cep: string;
-  cnpj: string;
   source: string;
   status: NapStatus;
   verifiedAt: string;
@@ -37,7 +36,6 @@ export const defaultNapRecord = (): NapRecord => ({
   email: "",
   address: `${NAP.street} — ${NAP.city}/${NAP.region}`,
   cep: "",
-  cnpj: "",
   source: "",
   status: "pendente",
   verifiedAt: "",
@@ -47,23 +45,6 @@ export const defaultNapRecord = (): NapRecord => ({
 const onlyDigits = (v: string) => v.replace(/\D+/g, "");
 
 export const isValidCep = (cep: string) => /^\d{8}$/.test(onlyDigits(cep));
-
-export const isValidCnpj = (cnpj: string): boolean => {
-  const d = onlyDigits(cnpj);
-  if (d.length !== 14 || /^(\d)\1{13}$/.test(d)) return false;
-  const calc = (len: number) => {
-    let sum = 0;
-    let pos = len - 7;
-    for (let i = 0; i < len; i += 1) {
-      sum += Number(d[i]) * pos;
-      pos -= 1;
-      if (pos < 2) pos = 9;
-    }
-    const r = sum % 11;
-    return r < 2 ? 0 : 11 - r;
-  };
-  return calc(12) === Number(d[12]) && calc(13) === Number(d[13]);
-};
 
 export const isValidE164Br = (phone: string) => /^\+55\d{10,11}$/.test(phone.trim());
 
@@ -88,8 +69,6 @@ export function validateNap(rec: NapRecord): NapIssue[] {
   if (!isValidEmail(rec.email)) issues.push({ field: "email", message: "E-mail inválido.", level: "erro" });
   if (rec.cep.trim() !== "" && !isValidCep(rec.cep))
     issues.push({ field: "cep", message: "CEP deve ter 8 dígitos.", level: "erro" });
-  if (rec.cnpj.trim() !== "" && !isValidCnpj(rec.cnpj))
-    issues.push({ field: "cnpj", message: "CNPJ inválido (dígito verificador).", level: "erro" });
   if (rec.source.trim() === "")
     issues.push({ field: "source", message: "Informe a fonte/diretório deste cadastro.", level: "aviso" });
   if (rec.status === "verificado" && rec.verifiedAt.trim() === "")
