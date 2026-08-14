@@ -22,7 +22,7 @@ const sections: { id: string; title: string; icon: typeof Megaphone; body: React
       <>
         <p>
           O site <strong>tecnicocuritiba.com.br</strong> é publicado por <strong>{COMPANY}</strong>,
-          CNPJ {CNPJ}, prestadora de serviços de assistência técnica em informática e eletrônica em
+          prestadora de serviços de assistência técnica em informática e eletrônica em
           Curitiba e Região Metropolitana do Paraná. Todo o conteúdo publicado aqui é produzido pela
           própria equipe técnica, com base em atendimentos reais executados em bancada e em domicílio.
         </p>
