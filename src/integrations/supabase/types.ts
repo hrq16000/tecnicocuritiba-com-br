@@ -278,21 +278,27 @@ export type Database = {
           encontrado: boolean
           erro: string | null
           id: string
+          origem: string | null
           tipo: string
+          utm: Json
         }
         Insert: {
           criado_em?: string
           encontrado?: boolean
           erro?: string | null
           id?: string
+          origem?: string | null
           tipo: string
+          utm?: Json
         }
         Update: {
           criado_em?: string
           encontrado?: boolean
           erro?: string | null
           id?: string
+          origem?: string | null
           tipo?: string
+          utm?: Json
         }
         Relationships: []
       }
@@ -499,11 +505,55 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_reviews: {
+        Row: {
+          author_name: string | null
+          author_photo_url: string | null
+          city: string | null
+          comment: string | null
+          created_at: string | null
+          google_review_url: string | null
+          id: string | null
+          neighborhood: string | null
+          rating: number | null
+          review_date: string | null
+          service_slug: string | null
+          source: string | null
+        }
+        Insert: {
+          author_name?: string | null
+          author_photo_url?: string | null
+          city?: string | null
+          comment?: string | null
+          created_at?: string | null
+          google_review_url?: string | null
+          id?: string | null
+          neighborhood?: string | null
+          rating?: number | null
+          review_date?: string | null
+          service_slug?: string | null
+          source?: string | null
+        }
+        Update: {
+          author_name?: string | null
+          author_photo_url?: string | null
+          city?: string | null
+          comment?: string | null
+          created_at?: string | null
+          google_review_url?: string | null
+          id?: string | null
+          neighborhood?: string | null
+          rating?: number | null
+          review_date?: string | null
+          service_slug?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       consultar_os: {
-        Args: { _numero: string }
+        Args: { _numero: string; _origem?: string; _utm?: Json }
         Returns: {
           bairro: string
           cidade: string
@@ -522,7 +572,7 @@ export type Database = {
         }[]
       }
       consultar_os_por_telefone: {
-        Args: { _telefone: string }
+        Args: { _origem?: string; _telefone: string; _utm?: Json }
         Returns: {
           bairro: string
           cidade: string
@@ -549,7 +599,13 @@ export type Database = {
         Returns: boolean
       }
       os_lookup_log: {
-        Args: { _encontrado: boolean; _erro?: string; _tipo: string }
+        Args: {
+          _encontrado: boolean
+          _erro?: string
+          _origem?: string
+          _tipo: string
+          _utm?: Json
+        }
         Returns: undefined
       }
       os_rate_limit: {
