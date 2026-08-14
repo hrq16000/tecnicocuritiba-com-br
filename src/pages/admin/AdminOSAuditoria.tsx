@@ -18,6 +18,8 @@ type Audit = {
   tipo: string;
   encontrado: boolean;
   erro: string | null;
+  origem: string | null;
+  utm: Record<string, string> | null;
   criado_em: string;
 };
 
@@ -45,7 +47,7 @@ export default function AdminOSAuditoria() {
     const [audit, os] = await Promise.all([
       supabase
         .from("os_lookup_audit")
-        .select("id,tipo,encontrado,erro,criado_em")
+        .select("id,tipo,encontrado,erro,origem,utm,criado_em")
         .gte("criado_em", desde)
         .order("criado_em", { ascending: false })
         .limit(5000),
@@ -111,6 +113,34 @@ export default function AdminOSAuditoria() {
     return Array.from(map.values());
   }, [rows]);
 
+  const anomalias = useMemo(() => {
+    const porOrigem = new Map<string, { origem: string; erros: number; bloqueios: number; total: number }>();
+    const porUtm = new Map<string, { campanha: string; erros: number; bloqueios: number }>();
+    for (const r of rows) {
+      const origem = r.origem || "(direto/desconhecida)";
+      const o = porOrigem.get(origem) ?? { origem, erros: 0, bloqueios: 0, total: 0 };
+      o.total += 1;
+      if (r.erro === "rate_limited") o.bloqueios += 1;
+      else if (r.erro) o.erros += 1;
+      porOrigem.set(origem, o);
+      if (r.erro && r.utm) {
+        const campanha = [r.utm.utm_source, r.utm.utm_campaign].filter(Boolean).join(" / ") || "(sem campanha)";
+        const u = porUtm.get(campanha) ?? { campanha, erros: 0, bloqueios: 0 };
+        if (r.erro === "rate_limited") u.bloqueios += 1;
+        else u.erros += 1;
+        porUtm.set(campanha, u);
+      }
+    }
+    const origens = Array.from(porOrigem.values())
+      .filter((o) => o.erros + o.bloqueios > 0)
+      .sort((a, b) => b.erros + b.bloqueios - (a.erros + a.bloqueios))
+      .slice(0, 10);
+    const utms = Array.from(porUtm.values())
+      .sort((a, b) => b.erros + b.bloqueios - (a.erros + a.bloqueios))
+      .slice(0, 10);
+    return { origens, utms };
+  }, [rows]);
+
   const sla = useMemo(() => {
     const agora = Date.now();
     const comPrazo = ordens.filter((o) => o.previsao_conclusao);
@@ -124,8 +154,17 @@ export default function AdminOSAuditoria() {
 
   const exportarCsv = () => {
     const linhas = [
-      ["criado_em", "rota", "tipo", "encontrado", "erro"],
-      ...rows.map((r) => [r.criado_em, rotaDoTipo(r.tipo), r.tipo, String(r.encontrado), r.erro ?? ""]),
+      ["criado_em", "rota", "tipo", "encontrado", "erro", "origem", "utm_source", "utm_campaign"],
+      ...rows.map((r) => [
+        r.criado_em,
+        rotaDoTipo(r.tipo),
+        r.tipo,
+        String(r.encontrado),
+        r.erro ?? "",
+        r.origem ?? "",
+        r.utm?.utm_source ?? "",
+        r.utm?.utm_campaign ?? "",
+      ]),
     ];
     const csv = linhas.map((l) => l.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
@@ -156,7 +195,8 @@ export default function AdminOSAuditoria() {
         <h1 className="text-2xl font-bold">Auditoria das consultas públicas de OS</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Volume de consultas em /status-os, taxa de erro, bloqueios por limite de tentativas e situação de prazo
-          das ordens em aberto. Nenhum dado pessoal do cliente é registrado — apenas o tipo de consulta e o resultado.
+          das ordens em aberto. Nenhum dado pessoal do cliente é registrado — apenas o tipo de consulta, o resultado
+          e a origem da sessão (página e campanha UTM, quando existir).
         </p>
 
         <div className="mt-5 flex flex-wrap items-center gap-2">
