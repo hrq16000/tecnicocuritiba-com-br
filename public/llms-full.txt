@@ -104,7 +104,7 @@ Dell, HP, Lenovo, Acer, Asus, Samsung, LG, Positivo, Apple, Microsoft, Razer, MS
 PIX, Cartao de Credito (ate 3x), Cartao de Debito, Dinheiro, Transferencia Bancaria
 
 ## Como Contratar
-1. Envie mensagem via WhatsApp: +55 41 99745-2053
+1. Envie mensagem pelo botao de WhatsApp disponivel em qualquer pagina do site
 2. Descreva o problema
 3. Receba orientacao e agende a visita
 4. Tecnico vai ate voce com ferramentas
