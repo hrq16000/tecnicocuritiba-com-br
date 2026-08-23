@@ -10,10 +10,10 @@ import {
   isLeaf,
 } from "@/lib/diagnostico60sTree";
 
-const WA_NUMBER = "5541997452053";
+import { NAP_PHONE_DIGITS } from "@/lib/nap";
 
 function waLink(message: string) {
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent(message)}`;
 }
 
 type Step =

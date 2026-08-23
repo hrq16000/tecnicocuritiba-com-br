@@ -73,4 +73,12 @@ describe("brand-privacy scanner", () => {
       scanContent("src/pages/Foo.tsx", "<p>R$ 99,99 — atualizado em 23/08/2026 às 03:30</p>")
     ).toHaveLength(0);
   });
+
+  it("não confunde URL de embed do Google Maps com CNPJ", () => {
+    const v = scanContent(
+      "src/components/CoverageMapSection.tsx",
+      'src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115063.98825866027!2d-49.35951754843749!3d-25.494912899999998"'
+    );
+    expect(v).toHaveLength(0);
+  });
 });

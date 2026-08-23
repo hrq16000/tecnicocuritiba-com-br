@@ -32,9 +32,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const WA = "5541997452053";
+import { NAP_PHONE_DIGITS, NAP_PHONE_E164 } from "@/lib/nap";
+
 const WA_TEXT = "Olá! Preciso de um orçamento de assistência técnica em Curitiba.";
-const waUrl = `https://wa.me/${WA}?text=${encodeURIComponent(WA_TEXT)}`;
+const waUrl = `https://wa.me/${NAP_PHONE_DIGITS}?text=${encodeURIComponent(WA_TEXT)}`;
 
 // Emits GA4 cta_click + generate_lead with utm_*/gclid (see analytics.ts)
 const onWa = (location: string) => () => trackCTAClick("whatsapp", `atc_${location}`);
@@ -329,7 +330,7 @@ export default function AssistenciaTecnicaCuritiba() {
     availableChannel: {
       "@type": "ServiceChannel",
       serviceUrl: "https://wa.me/5541997452053",
-      servicePhone: "+5541997452053",
+      servicePhone: NAP_PHONE_E164,
     },
   }));
 
@@ -632,7 +633,7 @@ export default function AssistenciaTecnicaCuritiba() {
               <Button asChild variant="heroWhatsapp" size="lg" className="atc-pulse text-base md:text-lg px-8" onClick={onWa("final_cta")}>
                 <a href={waUrl} target="_blank" rel="noopener noreferrer" data-wa-medium="final_cta">
                   <MessageCircle className="h-6 w-6" />
-                  Falar com Especialista — (41) 9 9745-2053
+                  Falar com Especialista
                 </a>
               </Button>
             </div>

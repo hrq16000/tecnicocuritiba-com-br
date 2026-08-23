@@ -6,9 +6,9 @@
   "scripts": {
     "predev": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs && bun scripts/check-seo-basics.ts index.html",
+    "prebuild": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs && bun scripts/check-seo-basics.ts index.html && node scripts/check-brand-privacy.mjs",
     "build": "vite build",
-    "postbuild": "bun scripts/check-seo-basics.ts dist/index.html",
+    "postbuild": "bun scripts/check-seo-basics.ts dist/index.html && node scripts/check-brand-privacy.mjs --dist",
     "build:dev": "node scripts/generate-sitemaps.mjs && vite build --mode development",
     "check:seo": "bun scripts/check-seo-basics.ts index.html",
     "lint": "eslint .",
@@ -60,7 +60,11 @@
     "check:photos": "node scripts/optimize-photos.mjs --check",
 
     "lgpd:ropa": "node scripts/generate-ropa.mjs",
-    "check:ropa": "node scripts/generate-ropa.mjs --check"
+    "check:ropa": "node scripts/generate-ropa.mjs --check",
+    "check:brand-privacy": "node scripts/check-brand-privacy.mjs",
+    "check:reviews-privacy": "node scripts/check-reviews-privacy.mjs",
+    "check:route-headers": "node scripts/check-route-headers.mjs",
+    "check:gsc-traffic": "node scripts/gsc-traffic-watch.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

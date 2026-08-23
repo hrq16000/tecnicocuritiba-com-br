@@ -42,6 +42,14 @@ export const WA_RAW = /(?<![\d+])\+?55?41997452053(?!\d)/;
 export const WA_RAW_ALLOW =
   /wa\.me\/|api\.whatsapp\.com|whatsapp|WHATSAPP_NUMBER|NAP_PHONE|telephone|contactPoint/i;
 
+/**
+ * URLs de embed/mapas do Google carregam sequências longas de dígitos no
+ * parâmetro `pb` — não são CNPJ. Só isentam a regra cnpj-digits; a palavra
+ * "CNPJ" e o WhatsApp visível continuam proibidos nessas linhas.
+ */
+export const CNPJ_ALLOW =
+  /google\.com\/maps|maps\.google\.|maps\.app\.goo\.gl|goo\.gl\/maps|googleapis\.com|gstatic\.com/i;
+
 const TEXT_EXTENSIONS = new Set([
   ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs",
   ".html", ".css", ".txt", ".xml", ".json", ".svg", ".md",
@@ -68,7 +76,7 @@ export function scanContent(filePath, content, opts = {}) {
       violations.push({ line, rule: "cnpj-word", excerpt });
     }
     // Reseta lastIndex de regexes com /g não é necessário (sem flag g).
-    if (CNPJ_DIGITS.test(text)) {
+    if (CNPJ_DIGITS.test(text) && !CNPJ_ALLOW.test(text)) {
       violations.push({ line, rule: "cnpj-digits", excerpt });
     }
     if (WA_FORMATTED.test(text)) {
