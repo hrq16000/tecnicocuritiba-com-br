@@ -49,6 +49,8 @@ jobs:
         run: npm run check:alt
       - name: Fotos otimizadas (WebP + AVIF responsivos, sem raster pesado sem variante)
         run: npm run check:photos
+      - name: Privacidade de marca (sem CNPJ, sem número de WhatsApp visível)
+        run: npm run check:brand-privacy
 
 
 

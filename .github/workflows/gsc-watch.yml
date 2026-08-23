@@ -1,0 +1,54 @@
+name: GSC Traffic Watch
+
+on:
+  schedule:
+    # Diário 12:00 UTC (09:00 em Curitiba) — alerta de queda de cliques/impressões.
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    name: Queda de impressões/cliques (Search Console)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Requer os secrets LOVABLE_API_KEY e GOOGLE_SEARCH_CONSOLE_API_KEY no
+      # repositório (Settings → Secrets and variables → Actions). Sem eles o
+      # script pula com sucesso — o alerta só funciona com os secrets ativos.
+      - name: GSC traffic watch (7 dias vs 7 dias anteriores)
+        id: watch
+        env:
+          LOVABLE_API_KEY: ${{ secrets.LOVABLE_API_KEY }}
+          GOOGLE_SEARCH_CONSOLE_API_KEY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_API_KEY }}
+        run: node scripts/gsc-traffic-watch.mjs
+
+      - name: Abrir issue de alerta (queda detectada)
+        if: failure() && steps.watch.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const marker = "📉 Queda de tráfego no Search Console";
+            const title = `${marker} (${new Date().toISOString().slice(0, 10)})`;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner, repo, state: "open", per_page: 30,
+            });
+            if (openIssues.some((i) => i.title.startsWith(marker))) {
+              core.info("Já existe issue aberta de queda de tráfego — sem duplicar.");
+              return;
+            }
+            await github.rest.issues.create({
+              owner, repo, title,
+              body: [
+                "O watch diário detectou queda de cliques e/ou impressões acima do limiar (30% em 7 dias vs 7 dias anteriores).",
+                "",
+                `Run: ${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
+                "",
+                "Ajuste o limiar via variável `DROP_THRESHOLD_PCT` no workflow ou no script `scripts/gsc-traffic-watch.mjs`.",
+              ].join("\n"),
+            });

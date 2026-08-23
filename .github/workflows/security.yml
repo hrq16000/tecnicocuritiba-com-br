@@ -8,10 +8,13 @@ on:
   schedule:
     # Weekly Monday 06:00 UTC re-scan to catch drift in dependencies.
     - cron: "0 6 * * 1"
+    # Daily 09:00 UTC (06:00 em Curitiba) — gates de privacidade/headers com alerta.
+    - cron: "0 9 * * *"
 
 permissions:
   contents: read
   security-events: write
+  issues: write
 
 jobs:
   audit:
@@ -63,3 +66,61 @@ jobs:
       # 6) Guard against SEO regressions on the landing shell (title / desc / unique H1).
       - name: Verify SEO basics on index.html
         run: bun scripts/check-seo-basics.ts index.html
+
+      # 7) Block CNPJ / número de WhatsApp visível em superfícies publicadas.
+      - name: Brand privacy gate (sem CNPJ, sem WhatsApp visível)
+        run: npm run check:brand-privacy
+
+      # 8) Headers de segurança (HSTS, Referrer-Policy, nosniff, CSP/XFO) nas
+      #    rotas críticas da produção — falha se algum sair do padrão.
+      - name: Security headers nas rotas críticas (produção, live)
+        run: npm run check:route-headers
+
+      # 9) Privacidade das reviews usando SOMENTE a chave pública (anon).
+      #    Requer secrets SUPABASE_URL e SUPABASE_ANON_KEY no repositório;
+      #    sem eles o gate é pulado com notice (nunca usa chave privilegiada).
+      - name: Detect Supabase secrets
+        id: supa
+        env:
+          SUPA_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -n "$SUPA_KEY" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::secrets SUPABASE_URL/SUPABASE_ANON_KEY ausentes — gate de reviews pulado"
+          fi
+
+      - name: Reviews privacy gate (client_phone/client_contact negados p/ anon)
+        if: steps.supa.outputs.available == 'true'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: npm run check:reviews-privacy
+
+      # 10) Alerta: abre issue no repositório quando o scan AGENDADO falha.
+      - name: Abrir issue de alerta (scan agendado falhou)
+        if: failure() && github.event_name == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const marker = "🚨 Security watch falhou";
+            const title = `${marker} (${new Date().toISOString().slice(0, 10)})`;
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner, repo, state: "open", per_page: 30,
+            });
+            if (openIssues.some((i) => i.title.startsWith(marker))) {
+              core.info("Já existe issue aberta de security-watch — sem duplicar.");
+              return;
+            }
+            await github.rest.issues.create({
+              owner, repo, title,
+              body: [
+                "O scan de segurança agendado falhou.",
+                "",
+                `Run: ${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
+                "",
+                "Verifique os logs do job `audit` (privacidade de reviews, headers de segurança, CNPJ/WhatsApp, auditoria de dependências).",
+              ].join("\n"),
+            });
