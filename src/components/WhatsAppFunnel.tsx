@@ -352,11 +352,23 @@ export const WhatsAppFunnel = () => {
       if (typeof window === "undefined") return;
       const link = parseTriageDeepLink(window.location.hash, window.location.pathname);
       if (!link) return;
+      // Se já há progresso salvo (ex.: reload com a âncora), respeita o passo
+      // restaurado — o preset do hash só preenche o que ainda não foi respondido.
+      let hadProgress = false;
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        hadProgress = !!raw && !!(JSON.parse(raw)?.answers?.equipamento);
+      } catch { /* noop */ }
       if (link.equipamento) {
         update({
           equipamento: link.equipamento,
           ...(link.sintoma ? { sintoma: link.sintoma } : {}),
         });
+        // Equipamento já respondido pelo link: pula direto para marca/sintoma.
+        if (!hadProgress) {
+          setStep(1);
+          persist({ step: 1 });
+        }
       }
       const loc = `deeplink_${link.hash}`;
       track("wa_funnel_open", {
