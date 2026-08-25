@@ -244,6 +244,13 @@ function AdminLeadsPage() {
                     retrying={retryingId === lead.id}
                   />
                 ))}
+                {filtrados.length === 0 && (
+                  <tr>
+                    <td colSpan={7} className="px-3 py-6 text-center text-muted-foreground">
+                      Nenhum lead corresponde aos filtros aplicados.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
