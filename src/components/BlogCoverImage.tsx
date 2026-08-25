@@ -79,7 +79,6 @@ export function BlogCoverImage({
         height={630}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
-        // @ts-expect-error fetchpriority is valid HTML
         fetchPriority={priority ? "high" : "auto"}
         className={className}
       />
@@ -103,7 +102,6 @@ export function BlogCoverImage({
         height={630}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
-        // @ts-expect-error fetchpriority is valid HTML
         fetchPriority={priority ? "high" : "auto"}
         className={className}
       />
