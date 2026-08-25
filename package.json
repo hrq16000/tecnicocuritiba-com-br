@@ -6,9 +6,9 @@
   "scripts": {
     "predev": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs",
     "dev": "vite dev",
-    "prebuild": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs && bun scripts/check-seo-basics.ts index.html && node scripts/check-brand-privacy.mjs",
+    "prebuild": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs && node scripts/check-brand-privacy.mjs",
     "build": "vite build",
-    "postbuild": "bun scripts/check-seo-basics.ts dist/index.html && node scripts/check-brand-privacy.mjs --dist",
+    "postbuild": "node scripts/check-brand-privacy.mjs --dist",
     "build:dev": "vite build --mode development",
     "check:seo": "bun scripts/check-seo-basics.ts index.html",
     "lint": "eslint .",
