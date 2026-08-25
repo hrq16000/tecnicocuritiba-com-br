@@ -26,7 +26,7 @@ import {
 import { getSessionId } from "@/lib/funnelSubmission";
 import { buildFaqPageSchema, SITE } from "@/lib/jsonLd";
 import { NAP_PHONE_DIGITS } from "@/lib/nap";
-import { readUtms } from "@/lib/leadContext";
+import { readUtms } from "@/lib/utmCapture";
 import {
   LAB_RESUMO,
   OS_COLETA_MIN,
@@ -154,8 +154,8 @@ function AbrirOsPage() {
     let unsub: (() => void) | undefined;
     void import("@/lib/geoCity").then((m) => {
       if (!alive) return;
-      const apply = (g: { status: string; city?: string; neighborhood?: string }) => {
-        if (g.status === "ok" && g.city) {
+      const apply = (g: { status: string; city?: string | null; neighborhood?: string | null }) => {
+        if ((g.status === "detected" || g.status === "confirmed") && g.city) {
           setForm((f) => ({
             ...f,
             cidade: f.cidade || g.city || "",
@@ -165,7 +165,7 @@ function AbrirOsPage() {
       };
       apply(m.getGeoState());
       unsub = m.subscribeGeo(apply);
-      void m.initGeo();
+      m.startGeoDetection();
     });
     return () => {
       alive = false;
