@@ -1,0 +1,23 @@
+{
+  "customizations": [
+    { "token": "--color-background/foreground/card/popover/primary/secondary/muted/accent/destructive/border/input/ring (+ -foreground variants)", "source": "src/index.css :root + tailwind.config.ts colors", "reappliedIn": "src/styles.css @theme inline" },
+    { "token": "--color-whatsapp / --color-whatsapp-hover", "source": "tailwind.config.ts colors.whatsapp", "reappliedIn": "src/styles.css @theme inline" },
+    { "token": "--color-cta / --color-cta-hover", "source": "tailwind.config.ts colors.cta", "reappliedIn": "src/styles.css @theme inline" },
+    { "token": "--color-trust", "source": "tailwind.config.ts colors.trust", "reappliedIn": "src/styles.css @theme inline" },
+    { "token": "--color-sidebar (8 tokens)", "source": "tailwind.config.ts colors.sidebar", "reappliedIn": "src/styles.css @theme inline" },
+    { "token": "--font-sans (Inter) / --font-heading (Poppins)", "source": "tailwind.config.ts fontFamily", "reappliedIn": "src/styles.css @theme" },
+    { "token": "--radius-sm/md/lg via var(--radius)", "source": "tailwind.config.ts borderRadius", "reappliedIn": "src/styles.css @theme inline" },
+    { "token": "--animate-accordion-down/up", "source": "tailwind.config.ts keyframes+animation", "reappliedIn": "src/styles.css @theme (+@keyframes)" },
+    { "token": "--animate-fade-in/fade-out/scale-in/scale-out", "source": "tailwind.config.ts keyframes+animation", "reappliedIn": "src/styles.css @theme (+@keyframes)" },
+    { "token": "--animate-slide-in-right/slide-out-right/enter/exit", "source": "tailwind.config.ts keyframes+animation", "reappliedIn": "src/styles.css @theme (+@keyframes)" },
+    { "token": "--animate-pulse-soft/bounce-subtle", "source": "tailwind.config.ts keyframes+animation", "reappliedIn": "src/styles.css @theme (+@keyframes)" },
+    { "token": "--animate-wa-bounce/wa-pulse/wa-wiggle/wa-ring", "source": "tailwind.config.ts keyframes+animation", "reappliedIn": "src/styles.css @theme (+@keyframes)" },
+    { "token": "--animate-field-alert", "source": "tailwind.config.ts keyframes+animation", "reappliedIn": "src/styles.css @theme (+@keyframes)" },
+    { "token": "container utility (center, padding 1rem, 2xl cap 1200px)", "source": "tailwind.config.ts theme.container", "reappliedIn": "src/styles.css @utility container" },
+    { "token": "dark: variant permanentemente inerte", "source": "tailwind.config.ts darkMode ['class','.__dark_disabled__']", "reappliedIn": "src/styles.css @custom-variant dark" },
+    { "token": ":root custom vars (z-index, header heights, glow, shadows, anim tokens, hero/section colors)", "source": "src/index.css @layer base :root", "reappliedIn": "src/styles.css (verbatim port)" },
+    { "token": "@property --border-angle", "source": "src/index.css", "reappliedIn": "src/styles.css (verbatim port)" },
+    { "token": "~45 @keyframes custom (staggerReveal..swipeHint) + classes utilitárias (.glass, .cta-*, .wa-*, .anim-*, .hover-*, .reveal-*, brand-*, .skeleton, .shimmer, etc.)", "source": "src/index.css @layer utilities", "reappliedIn": "src/styles.css (verbatim port)" },
+    { "token": "@media (prefers-reduced-motion: reduce) + scrollbar styling + base typography rules", "source": "src/index.css @layer base", "reappliedIn": "src/styles.css (verbatim port)" }
+  ]
+}
