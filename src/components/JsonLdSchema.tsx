@@ -39,20 +39,6 @@ const websiteSchema = {
   }
 };
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${SITE}/#organization`,
-  "name": "Técnico em Curitiba",
-  "alternateName": "Técnico de Informática em Curitiba",
-  "legalName": "Técnico em Curitiba — Assistência Técnica em Informática",
-
-  "url": SITE,
-  "logo": `${SITE}/logo.png`,
-  "contactPoint": napContactPoint(),
-  "sameAs": [NAP.whatsappUrl]
-};
-
 // WebPage com Speakable — extração prioritária para Bing Copilot / AI Overviews
 const webPageSchema = {
   "@context": "https://schema.org",
@@ -109,10 +95,8 @@ export const JsonLdSchema = () => {
     document.querySelectorAll('script[data-schema="true"]').forEach(s => s.remove());
 
     const entries: Array<[string, Record<string, unknown>]> = [
-      ['ld-localbusiness', localBusinessSchema],
       ['ld-faqpage', faqSchema],
       ['ld-website', websiteSchema],
-      ['ld-organization', organizationSchema],
       ['ld-webpage', webPageSchema],
       ['ld-itemlist-services', serviceItemListSchema],
       ['ld-navigation', navigationSchema],
