@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -105,12 +105,36 @@ function AdminLeadsPage() {
   const fetchLeads = useServerFn(listFunnelLeads);
   const retry = useServerFn(retryAdminAlert);
   const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [busca, setBusca] = useState("");
+  const [statusFiltro, setStatusFiltro] = useState<string>("todos");
+  const [ordem, setOrdem] = useState<"desc" | "asc">("desc");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["funnel-leads"],
     queryFn: () => fetchLeads(),
     refetchInterval: 30_000,
   });
+
+  // Filtros locais (serviço/sintoma/localidade/origem + status do alerta) e
+  // ordenação por data. Sem PII: a busca nunca toca telefone/e-mail (não existem).
+  const filtrados = useMemo(() => {
+    let rows = data ?? [];
+    if (statusFiltro !== "todos") {
+      rows = rows.filter((l) => l.alert_status === statusFiltro);
+    }
+    const q = busca.trim().toLowerCase();
+    if (q) {
+      rows = rows.filter((l) =>
+        [l.equipamento, l.marca, l.sintoma, l.bairro, l.cidade, l.utm_source, l.utm_campaign]
+          .filter(Boolean)
+          .some((v) => String(v).toLowerCase().includes(q)),
+      );
+    }
+    return [...rows].sort((a, b) => {
+      const diff = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      return ordem === "asc" ? diff : -diff;
+    });
+  }, [data, busca, statusFiltro, ordem]);
 
   const handleRetry = async (id: string) => {
     setRetryingId(id);
@@ -149,6 +173,40 @@ function AdminLeadsPage() {
       </header>
 
       <main className="container mx-auto px-4 py-6">
+        {data && data.length > 0 && (
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <input
+              type="search"
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              placeholder="Filtrar por serviço, sintoma, localidade ou origem…"
+              aria-label="Filtrar leads por texto"
+              className="w-64 rounded-md border border-border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary"
+            />
+            <select
+              value={statusFiltro}
+              onChange={(e) => setStatusFiltro(e.target.value)}
+              aria-label="Filtrar por status do alerta"
+              className="rounded-md border border-border bg-background px-2 py-1.5 text-xs outline-none focus:border-primary"
+            >
+              <option value="todos">Todos os alertas</option>
+              <option value="pending">Alerta pendente</option>
+              <option value="sent">Alerta enviado</option>
+              <option value="error">Alerta com erro</option>
+            </select>
+            <button
+              type="button"
+              onClick={() => setOrdem((o) => (o === "desc" ? "asc" : "desc"))}
+              className="rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-muted"
+            >
+              Data: {ordem === "desc" ? "mais recentes primeiro" : "mais antigas primeiro"}
+            </button>
+            <span className="ml-auto text-[11px] text-muted-foreground">
+              {filtrados.length} de {data.length} lead(s)
+            </span>
+          </div>
+        )}
+
         {isLoading && <LeadsSkeleton />}
 
         {error && (
@@ -178,7 +236,7 @@ function AdminLeadsPage() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((lead) => (
+                {filtrados.map((lead) => (
                   <LeadRow
                     key={lead.id}
                     lead={lead}
@@ -186,6 +244,13 @@ function AdminLeadsPage() {
                     retrying={retryingId === lead.id}
                   />
                 ))}
+                {filtrados.length === 0 && (
+                  <tr>
+                    <td colSpan={7} className="px-3 py-6 text-center text-muted-foreground">
+                      Nenhum lead corresponde aos filtros aplicados.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

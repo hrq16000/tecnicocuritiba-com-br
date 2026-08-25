@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AbrirOsRouteImport } from './routes/abrir-os'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as OrdemDeServicoRouteImport } from './routes/ordem-de-servico'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin/leads'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,9 +25,19 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AbrirOsRoute = AbrirOsRouteImport.update({
+  id: '/abrir-os',
+  path: '/abrir-os',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdemDeServicoRoute = OrdemDeServicoRouteImport.update({
+  id: '/ordem-de-servico',
+  path: '/ordem-de-servico',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
@@ -36,38 +48,48 @@ const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/abrir-os': typeof AbrirOsRoute
   '/auth': typeof AuthRoute
+  '/ordem-de-servico': typeof OrdemDeServicoRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/abrir-os': typeof AbrirOsRoute
   '/auth': typeof AuthRoute
+  '/ordem-de-servico': typeof OrdemDeServicoRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/abrir-os': typeof AbrirOsRoute
   '/auth': typeof AuthRoute
+  '/ordem-de-servico': typeof OrdemDeServicoRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/admin/leads'
+  fullPaths: '/' | '/abrir-os' | '/auth' | '/ordem-de-servico' | '/admin/leads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin/leads'
+  to: '/' | '/abrir-os' | '/auth' | '/ordem-de-servico' | '/admin/leads'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/abrir-os'
     | '/auth'
+    | '/ordem-de-servico'
     | '/_authenticated/admin/leads'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AbrirOsRoute: typeof AbrirOsRoute
   AuthRoute: typeof AuthRoute
+  OrdemDeServicoRoute: typeof OrdemDeServicoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -86,11 +108,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/abrir-os': {
+      id: '/abrir-os'
+      path: '/abrir-os'
+      fullPath: '/abrir-os'
+      preLoaderRoute: typeof AbrirOsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ordem-de-servico': {
+      id: '/ordem-de-servico'
+      path: '/ordem-de-servico'
+      fullPath: '/ordem-de-servico'
+      preLoaderRoute: typeof OrdemDeServicoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/leads': {
@@ -117,7 +153,9 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AbrirOsRoute: AbrirOsRoute,
   AuthRoute: AuthRoute,
+  OrdemDeServicoRoute: OrdemDeServicoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
