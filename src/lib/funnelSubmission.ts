@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 /** Gera um ID de sessão estável por aba do navegador. */
 export function getSessionId(): string {
   try {

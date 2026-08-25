@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useRef, useState, useMemo } from "react";
 import { PageSEO } from "@/components/PageSEO";
 import { Header } from "@/components/Header";

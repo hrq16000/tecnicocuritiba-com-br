@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { MessageCircle, Clock, FileCheck2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

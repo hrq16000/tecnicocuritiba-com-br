@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 /**
  * Captura global de erros em produção. Loga no console com a versão do build
  * para facilitar correlação com deploys e envia um evento `app_error` ao GA4

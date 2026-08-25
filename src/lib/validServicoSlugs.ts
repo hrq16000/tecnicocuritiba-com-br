@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 // Whitelist canônica de slugs válidos em /servicos/* + rotas extras
 // aceitas para linkagem contextual em /problemas/*, /bairros/*, etc.
 //

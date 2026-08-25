@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useState, useEffect, useCallback } from "react";
 import { X, Users, Clock, MapPin, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";

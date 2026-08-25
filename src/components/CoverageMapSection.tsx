@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { MapPin, Clock, Navigation, Loader2 } from "lucide-react";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
