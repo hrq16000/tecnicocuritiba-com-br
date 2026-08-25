@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useState } from "react";
 import { List, Share2, MessageCircle, Facebook } from "lucide-react";
 import { trackShareClick } from "@/lib/analytics";

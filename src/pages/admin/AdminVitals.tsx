@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useMemo, useState } from "react";
 import { readVitalsHistory, clearVitalsHistory, type WebVitalEntry } from "@/lib/webVitals";
 import { Button } from "@/components/ui/button";

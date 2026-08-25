@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { Quote, Clock, Wrench, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 

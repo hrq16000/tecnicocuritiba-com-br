@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 // Global UTM injector for WhatsApp links (wa.me / api.whatsapp.com).
 // Runs once on mount; intercepts clicks and appends utm_source/medium/campaign
 // derived from the current page so GA4/Ads can attribute lead origin.

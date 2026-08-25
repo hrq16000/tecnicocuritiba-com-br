@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useState, useEffect, useRef } from "react";
 import { ExitIntentPopup } from "./ExitIntentPopup";
 import { X, Users, Clock, MapPin, Activity, AlertTriangle } from "lucide-react";

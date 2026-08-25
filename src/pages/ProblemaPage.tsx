@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useRef, useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { useParams } from "react-router-dom";

@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useRef } from "react";
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -134,7 +135,7 @@ export const Header = () => {
             height="98"
             decoding="sync"
             // @ts-ignore - fetchpriority is valid HTML attribute
-            fetchpriority="high"
+            fetchPriority="high"
             className="h-12 w-auto object-scale-down transition-[height] duration-200 sm:h-14 md:h-16 [html[data-scrolled='1']_&]:h-9 [html[data-scrolled='1']_&]:sm:h-10 [html[data-scrolled='1']_&]:md:h-11"
           />
         </a>

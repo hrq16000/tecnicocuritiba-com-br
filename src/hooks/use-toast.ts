@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast";

@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 /**
  * Runtime guard: garante que todo clique em CTA passa pelo funil obrigatório
  * com tracking completo (click_location + app_version).

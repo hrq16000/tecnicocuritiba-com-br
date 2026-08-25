@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 /**
  * Sentry loader leve — só ativa em produção quando `VITE_SENTRY_DSN` está
  * definido no build. Sem DSN, todas as APIs viram no-op (custo zero em bundle

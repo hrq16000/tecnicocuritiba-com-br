@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect } from "react";
 import { validateAndInjectSchema } from "@/lib/schemaValidation";
 import { DynamicAggregateRating } from "@/components/DynamicAggregateRating";

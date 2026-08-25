@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";

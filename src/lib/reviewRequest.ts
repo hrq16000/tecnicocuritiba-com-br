@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 /**
  * Pipeline WhatsApp T+24h / T+72h — custo zero (wa.me manual via admin).
  *

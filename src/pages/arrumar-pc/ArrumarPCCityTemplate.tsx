@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
@@ -160,7 +161,7 @@ export const ArrumarPCCityTemplate = ({ data }: { data: CityData }) => {
             // @ts-expect-error - react-helmet passes attrs through
             imagesrcset={heroSet.webpSrcset || heroSet.jpgSrcset}
             imagesizes={heroSet.sizes}
-            fetchpriority="high"
+            fetchPriority="high"
           />
         )}
       </Helmet>

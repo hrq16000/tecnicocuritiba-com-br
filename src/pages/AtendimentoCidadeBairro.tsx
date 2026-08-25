@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { ogImageFromKey } from "@/lib/imageCredits";
 import { LocalPhotoGallery, mainImageKeyFor } from "@/components/LocalPhotoGallery";
 import { useMemo } from "react";

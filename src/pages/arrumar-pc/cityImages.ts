@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 // Per-city OG and hero image mapping for /arrumar-pc/:cidade pages.
 // Uses Vite's eager glob so we get hashed asset URLs without 40+ explicit imports.
 

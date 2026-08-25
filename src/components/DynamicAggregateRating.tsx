@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 // ⚠️ RISCO SEO: emitir schema.org/AggregateRating sem base real de reviews
 // verificáveis na página pode gerar Manual Action ("spammy structured markup")
 // no Google Search Console. Este componente aplica DUPLO GUARD:

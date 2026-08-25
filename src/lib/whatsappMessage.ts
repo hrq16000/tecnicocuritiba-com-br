@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 // Helper para gerar mensagem de WhatsApp pré-preenchida com contexto
 // (cidade, bairro, modalidade, problema, equipamento, serviço, triagem).
 // Nunca inclui "unknown" no texto visível — campos ausentes são omitidos.

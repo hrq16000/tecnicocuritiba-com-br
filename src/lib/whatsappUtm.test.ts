@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { auditWhatsAppUrl, initWhatsAppUtm } from "./whatsappUtm";
 

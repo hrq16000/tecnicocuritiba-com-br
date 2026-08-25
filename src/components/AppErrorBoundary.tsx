@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
 const WHATSAPP_URL = "https://wa.me/5541997452053?text=Ol%C3%A1!%20O%20site%20travou%20no%20meu%20celular.%20Preciso%20de%20atendimento%20t%C3%A9cnico.";

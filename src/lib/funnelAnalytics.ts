@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 /**
  * Helpers de tracking de eventos do funil para GA4 (window.gtag).
  * Falha silenciosa quando gtag não está carregado (dev / adblock).

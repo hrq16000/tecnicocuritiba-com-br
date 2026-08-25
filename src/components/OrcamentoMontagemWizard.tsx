@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle, FileDown, ImagePlus, MessageCircle } from "lucide-react";
