@@ -50,7 +50,7 @@ function LeadRow({ lead, onRetry, retrying }: {
   onRetry: (id: string) => void;
   retrying: boolean;
 }) {
-  const alert = ALERT_STATUS[lead.alert_status] ?? ALERT_STATUS.pending;
+  const alert = ALERT_STATUS[lead.alert_status] ?? ALERT_STATUS["pending"];
   const origem = [lead.utm_source, lead.utm_campaign].filter(Boolean).join(" / ") || "—";
   const localidade = [lead.bairro, lead.cidade].filter(Boolean).join(" — ") || "—";
   return (

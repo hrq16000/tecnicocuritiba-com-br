@@ -27,4 +27,6 @@ const csrfMiddleware = createCsrfMiddleware({
 
 export const startInstance = createStart(() => ({
   requestMiddleware: [errorMiddleware, csrfMiddleware],
+  // Anexa o bearer do Supabase em toda server fn (necessário p/ requireSupabaseAuth).
+  functionMiddleware: [attachSupabaseAuth],
 }));
