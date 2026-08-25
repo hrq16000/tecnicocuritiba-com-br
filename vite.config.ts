@@ -29,6 +29,15 @@ export default defineConfig({
     server: { entry: "server" },
   },
   vite: {
+    resolve: {
+      alias: {
+        // Legacy imports keep working through the compatibility shims.
+        "react-router-dom": new URL("./src/lib/router-compat.tsx", import.meta.url)
+          .pathname,
+        "react-helmet": new URL("./src/lib/helmet-compat.tsx", import.meta.url)
+          .pathname,
+      },
+    },
     define: {
       __APP_VERSION__: JSON.stringify(resolveAppVersion()),
       __APP_BUILD_TIME__: JSON.stringify(new Date().toISOString()),
