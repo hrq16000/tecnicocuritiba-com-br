@@ -6,6 +6,8 @@
   "scripts": {
     "predev": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs",
     "dev": "vite dev",
+    "dev:local": "vite dev --mode development",
+    "functions:serve": "supabase functions serve",
     "prebuild": "node scripts/generate-sitemaps.mjs && node scripts/generate-rss.mjs && node scripts/check-brand-privacy.mjs",
     "build": "vite build",
     "postbuild": "node scripts/check-brand-privacy.mjs --dist",
