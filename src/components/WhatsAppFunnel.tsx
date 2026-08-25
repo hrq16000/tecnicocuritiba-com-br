@@ -169,7 +169,9 @@ function buildMessage(a: Answers): string {
     lines.push("• Valor mínimo R$ 99,99 · requer computador ligado e acesso à internet");
   }
   // Contexto silencioso (geo aproximado por IP, página de origem e busca).
-  buildLeadContextLines().forEach((l) => lines.push(l));
+  // Se o usuário informou o bairro manualmente, o dado explícito prevalece e
+  // a linha "Região aproximada (IP)" é omitida para não gerar contradição.
+  buildLeadContextLines({ omitRegion: Boolean(a.bairroManual.trim()) }).forEach((l) => lines.push(l));
   lines.push("");
   lines.push("✅ Registro de ciência e aceite eletrônico dos termos e valores apresentados no funil.");
   if (a.descricao.trim()) {
@@ -422,9 +424,13 @@ export const WhatsAppFunnel = () => {
       return null;
     }
     if (s === 3) return requiresColeta && !answers.coletaAccepted ? "[data-funnel-field='coleta']" : null;
-    if (s === 4) return !answers.minimumAccepted ? "[data-funnel-field='minimum']" : null;
+    if (s === 4) {
+      if (answers.descricao.trim().length === 1) return "[data-funnel-field='descricao']";
+      return !answers.minimumAccepted ? "[data-funnel-field='minimum']" : null;
+    }
     return null;
   }, [
+    answers.descricao,
     answers.marca,
     answers.sintoma,
     answers.outroEquipamento,
@@ -480,6 +486,11 @@ export const WhatsAppFunnel = () => {
       return { ok: true };
     }
     if (s === 4) {
+      // Observação com 1 caractere é quase sempre toque acidental — pede
+      // revisão (com scroll+foco via attention) em vez de enviar lixo.
+      if (answers.descricao.trim().length === 1) {
+        return { ok: false, reason: "Descreva um pouco mais ou deixe a observação em branco." };
+      }
       return answers.minimumAccepted
         ? { ok: true }
         : { ok: false, reason: "Confirme ciência do valor mínimo de R$ 99,99." };
