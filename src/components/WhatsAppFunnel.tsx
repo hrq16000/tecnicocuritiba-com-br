@@ -979,6 +979,36 @@ export const WhatsAppFunnel = () => {
               {requiresColeta && <p className="text-amber-700 dark:text-amber-400">🚚 Coleta autorizada · mín. R$ 300</p>}
             </div>
 
+            {/* Fallback de bairro: só aparece quando a geolocalização não detectou um. */}
+            {!geo.neighborhood && (
+              <div data-funnel-field="bairro">
+                <p className="text-xs font-semibold mb-1 text-foreground/80">
+                  Seu bairro (opcional — agiliza o agendamento)
+                </p>
+                <input
+                  type="text"
+                  className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-primary"
+                  placeholder="Ex.: Batel, Água Verde, Boqueirão…"
+                  value={answers.bairroManual}
+                  maxLength={60}
+                  onChange={(e) => update({ bairroManual: e.target.value })}
+                />
+              </div>
+            )}
+
+            {/* Transparência: o cliente vê exatamente o que será enviado. */}
+            {previewMessage && (
+              <details className="rounded-lg border border-border bg-card/50 p-2.5 text-[11px] leading-snug group">
+                <summary className="cursor-pointer font-bold text-foreground list-none flex items-center justify-between">
+                  <span>💬 Prévia da mensagem enviada no WhatsApp</span>
+                  <span className="text-[10px] text-muted-foreground group-open:hidden">ver</span>
+                </summary>
+                <pre className="mt-1.5 whitespace-pre-wrap font-sans text-foreground/80 max-h-48 overflow-y-auto">
+                  {previewMessage}
+                </pre>
+              </details>
+            )}
+
             <details className="rounded-lg border border-amber-500/50 bg-amber-500/10 p-2.5 text-[11px] leading-snug group">
               <summary className="cursor-pointer font-bold text-foreground list-none flex items-center justify-between">
                 <span>📸 Próximo passo no WhatsApp (obrigatório)</span>

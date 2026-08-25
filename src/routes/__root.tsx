@@ -4,13 +4,14 @@ import {
   Scripts,
   createRootRoute,
 } from "@tanstack/react-router";
-import { Suspense, lazy, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SchemaDedup } from "@/components/SchemaDedup";
 import NotFound from "@/pages/NotFound";
+import { captureUtmsFromUrl } from "@/lib/utmCapture";
 
 const Toaster = lazy(() =>
   import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })),
@@ -18,6 +19,31 @@ const Toaster = lazy(() =>
 const Sonner = lazy(() =>
   import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })),
 );
+// Funil de triagem + botão flutuante: globais, carregados sob demanda.
+// Todos os CTAs do site disparam `wa-funnel:open` — sem estes mounts o
+// evento não tem ouvinte e a conversão quebra (regressão da migração).
+const WhatsAppFunnel = lazy(() =>
+  import("@/components/WhatsAppFunnel").then((m) => ({
+    default: m.WhatsAppFunnel,
+  })),
+);
+const WhatsAppFloat = lazy(() =>
+  import("@/components/WhatsAppFloat").then((m) => ({
+    default: m.WhatsAppFloat,
+  })),
+);
+const AutoBreadcrumbSchema = lazy(() => import("@/components/AutoBreadcrumbSchema"));
+
+/** Bootstrap client-only: UTMs no primeiro hit + tracking de profundidade. */
+function AppInit() {
+  useEffect(() => {
+    captureUtmsFromUrl();
+    import("@/lib/analytics").then(({ attachScrollDepthTracking }) =>
+      attachScrollDepthTracking(),
+    );
+  }, []);
+  return null;
+}
 
 export const Route = createRootRoute({
   head: () => ({
@@ -61,10 +87,14 @@ function RootComponent() {
     <RootDocument>
       <ScrollToTop />
       <SchemaDedup />
+      <AppInit />
       <Outlet />
       <Suspense fallback={null}>
         <Toaster />
         <Sonner />
+        <AutoBreadcrumbSchema />
+        <WhatsAppFunnel />
+        <WhatsAppFloat />
       </Suspense>
     </RootDocument>
   );
