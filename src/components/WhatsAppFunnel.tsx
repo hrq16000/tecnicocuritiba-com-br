@@ -169,7 +169,9 @@ function buildMessage(a: Answers): string {
     lines.push("• Valor mínimo R$ 99,99 · requer computador ligado e acesso à internet");
   }
   // Contexto silencioso (geo aproximado por IP, página de origem e busca).
-  buildLeadContextLines().forEach((l) => lines.push(l));
+  // Se o usuário informou o bairro manualmente, o dado explícito prevalece e
+  // a linha "Região aproximada (IP)" é omitida para não gerar contradição.
+  buildLeadContextLines({ omitRegion: Boolean(a.bairroManual.trim()) }).forEach((l) => lines.push(l));
   lines.push("");
   lines.push("✅ Registro de ciência e aceite eletrônico dos termos e valores apresentados no funil.");
   if (a.descricao.trim()) {
@@ -350,11 +352,23 @@ export const WhatsAppFunnel = () => {
       if (typeof window === "undefined") return;
       const link = parseTriageDeepLink(window.location.hash, window.location.pathname);
       if (!link) return;
+      // Se já há progresso salvo (ex.: reload com a âncora), respeita o passo
+      // restaurado — o preset do hash só preenche o que ainda não foi respondido.
+      let hadProgress = false;
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        hadProgress = !!raw && !!(JSON.parse(raw)?.answers?.equipamento);
+      } catch { /* noop */ }
       if (link.equipamento) {
         update({
           equipamento: link.equipamento,
           ...(link.sintoma ? { sintoma: link.sintoma } : {}),
         });
+        // Equipamento já respondido pelo link: pula direto para marca/sintoma.
+        if (!hadProgress) {
+          setStep(1);
+          persist({ step: 1 });
+        }
       }
       const loc = `deeplink_${link.hash}`;
       track("wa_funnel_open", {
@@ -422,9 +436,13 @@ export const WhatsAppFunnel = () => {
       return null;
     }
     if (s === 3) return requiresColeta && !answers.coletaAccepted ? "[data-funnel-field='coleta']" : null;
-    if (s === 4) return !answers.minimumAccepted ? "[data-funnel-field='minimum']" : null;
+    if (s === 4) {
+      if (answers.descricao.trim().length === 1) return "[data-funnel-field='descricao']";
+      return !answers.minimumAccepted ? "[data-funnel-field='minimum']" : null;
+    }
     return null;
   }, [
+    answers.descricao,
     answers.marca,
     answers.sintoma,
     answers.outroEquipamento,
@@ -480,6 +498,11 @@ export const WhatsAppFunnel = () => {
       return { ok: true };
     }
     if (s === 4) {
+      // Observação com 1 caractere é quase sempre toque acidental — pede
+      // revisão (com scroll+foco via attention) em vez de enviar lixo.
+      if (answers.descricao.trim().length === 1) {
+        return { ok: false, reason: "Descreva um pouco mais ou deixe a observação em branco." };
+      }
       return answers.minimumAccepted
         ? { ok: true }
         : { ok: false, reason: "Confirme ciência do valor mínimo de R$ 99,99." };
@@ -1043,6 +1066,7 @@ export const WhatsAppFunnel = () => {
             </details>
 
             <Textarea
+              data-funnel-field="descricao"
               placeholder="Quer acrescentar algo? (opcional)"
               rows={2}
               value={answers.descricao}

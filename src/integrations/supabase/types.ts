@@ -73,8 +73,14 @@ export type Database = {
       }
       funnel_submissions: {
         Row: {
+          alert_attempts: number
+          alert_last_error: string | null
+          alert_sent_at: string | null
+          alert_status: string
           atendido_em: string | null
           atendido_por: string | null
+          bairro: string | null
+          cidade: string | null
           created_at: string
           equipamento: string | null
           gclid: string | null
@@ -94,8 +100,14 @@ export type Database = {
           wa_message: string | null
         }
         Insert: {
+          alert_attempts?: number
+          alert_last_error?: string | null
+          alert_sent_at?: string | null
+          alert_status?: string
           atendido_em?: string | null
           atendido_por?: string | null
+          bairro?: string | null
+          cidade?: string | null
           created_at?: string
           equipamento?: string | null
           gclid?: string | null
@@ -115,8 +127,14 @@ export type Database = {
           wa_message?: string | null
         }
         Update: {
+          alert_attempts?: number
+          alert_last_error?: string | null
+          alert_sent_at?: string | null
+          alert_status?: string
           atendido_em?: string | null
           atendido_por?: string | null
+          bairro?: string | null
+          cidade?: string | null
           created_at?: string
           equipamento?: string | null
           gclid?: string | null

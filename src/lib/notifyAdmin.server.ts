@@ -34,7 +34,7 @@ export type AlertKind =
 export interface NotifyResult {
   ok: boolean;
   kind: AlertKind;
-  httpStatus?: number;
+  httpStatus?: number | undefined;
   attempts: number;
 }
 
@@ -115,7 +115,7 @@ export function buildAdminAlertText(lead: {
 
 interface CallAttempt {
   kind: AlertKind;
-  httpStatus?: number;
+  httpStatus?: number | undefined;
 }
 
 async function postCallMeBot(

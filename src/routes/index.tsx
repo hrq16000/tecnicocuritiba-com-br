@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { howToAtendimentoSchema } from "@/lib/jsonLd";
 import Index from "@/pages/Index";
 
 const TITLE =
@@ -23,6 +24,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [{ rel: "canonical", href: "https://tecnicocuritiba.com.br/" }],
+    // Rich snippet HowTo: processo de atendimento em 4 passos (SSR).
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(howToAtendimentoSchema) },
+    ],
   }),
   component: Index,
 });

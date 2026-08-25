@@ -1,51 +1,11 @@
 import { useEffect } from 'react';
 import { validateAndInjectSchema } from '@/lib/schemaValidation';
-import { NAP, napContactPoint, napOpeningHours } from '@/lib/nap';
+
+// NOTA: LocalBusiness e Organization foram movidos para SSR no head() do
+// __root (src/lib/jsonLd.ts) — não reintroduzir aqui (gate check:seo-ssr).
 
 const SITE = "https://tecnicocuritiba.com.br";
 const BUILD_DATE = new Date().toISOString();
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
-  "@id": `${SITE}/#organization`,
-  "name": "Técnico em Curitiba - Suporte em Informática",
-  "alternateName": ["Técnico de Informática em Curitiba", "Assistência Técnica Curitiba"],
-  "description": "Técnico de informática em Curitiba: conserto de PC e notebook, formatação, remoção de vírus e upgrade de SSD. Atendimento via WhatsApp, a partir de R$ 99,99.",
-  "url": SITE,
-  "telephone": NAP.phone,
-  "image": `${SITE}/og-image.jpg`,
-  "logo": `${SITE}/logo.png`,
-  "priceRange": "R$ 99,99 - R$ 500",
-  "currenciesAccepted": "BRL",
-  "foundingDate": NAP.foundingDate,
-  "slogan": "Assistência Técnica Nº1 de Curitiba e Região",
-  "paymentAccepted": "Dinheiro, Cartão de Crédito, Cartão de Débito, PIX, Transferência Bancária",
-
-  "geo": { "@type": "GeoCoordinates", "latitude": "-25.4284", "longitude": "-49.2733" },
-  "areaServed": [
-    { "@type": "City", "name": "Curitiba", "sameAs": "https://pt.wikipedia.org/wiki/Curitiba" },
-    { "@type": "City", "name": "São José dos Pinhais" },
-    { "@type": "City", "name": "Araucária" },
-    { "@type": "City", "name": "Campo Largo" },
-    { "@type": "City", "name": "Pinhais" },
-    { "@type": "City", "name": "Colombo" },
-    { "@type": "City", "name": "Almirante Tamandaré" },
-    { "@type": "City", "name": "Fazenda Rio Grande" },
-    { "@type": "City", "name": "Piraquara" },
-    { "@type": "City", "name": "Quatro Barras" },
-    { "@type": "City", "name": "Campo Magro" }
-  ],
-  "openingHoursSpecification": napOpeningHours(),
-  "sameAs": [NAP.whatsappUrl],
-  "knowsAbout": [
-    "Manutenção de computadores", "Conserto de notebooks", "Formatação Windows",
-    "Remoção de vírus", "Upgrade de hardware", "Configuração de redes",
-    "Suporte técnico em informática", "Instalação de câmeras CFTV",
-    "Conserto de impressoras", "Assistência de eletrodomésticos inteligentes"
-  ],
-  "hasMap": "https://www.google.com/maps?cid=tecnicocuritiba"
-};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -77,20 +37,6 @@ const websiteSchema = {
     "target": `${SITE}/busca?q={search_term_string}`,
     "query-input": "required name=search_term_string"
   }
-};
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${SITE}/#organization`,
-  "name": "Técnico em Curitiba",
-  "alternateName": "Técnico de Informática em Curitiba",
-  "legalName": "Técnico em Curitiba — Assistência Técnica em Informática",
-
-  "url": SITE,
-  "logo": `${SITE}/logo.png`,
-  "contactPoint": napContactPoint(),
-  "sameAs": [NAP.whatsappUrl]
 };
 
 // WebPage com Speakable — extração prioritária para Bing Copilot / AI Overviews
@@ -149,10 +95,8 @@ export const JsonLdSchema = () => {
     document.querySelectorAll('script[data-schema="true"]').forEach(s => s.remove());
 
     const entries: Array<[string, Record<string, unknown>]> = [
-      ['ld-localbusiness', localBusinessSchema],
       ['ld-faqpage', faqSchema],
       ['ld-website', websiteSchema],
-      ['ld-organization', organizationSchema],
       ['ld-webpage', webPageSchema],
       ['ld-itemlist-services', serviceItemListSchema],
       ['ld-navigation', navigationSchema],

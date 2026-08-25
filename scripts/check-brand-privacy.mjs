@@ -46,6 +46,13 @@ export const WA_RAW_ALLOW =
 export const MAILTO_LINK = /mailto:/i;
 
 /**
+ * Variante para bundles de build: bibliotecas (React, TanStack Router)
+ * carregam a string "mailto:" em tabelas internas de protocolo — falso
+ * positivo. No bundle só é violação quando vira link de fato (href:"mailto:…").
+ */
+export const MAILTO_BUILT = /href\s*[:=]\s*[{('"`]mailto:/i;
+
+/**
  * Caixas postais de contato (contato@, atendimento@, …) não podem aparecer
  * em superfícies publicadas. E-mails didáticos de posts (seu-email@exemplo.com,
  * joao.silva@empresa.local) não correspondem a este padrão.
@@ -96,7 +103,9 @@ export function scanContent(filePath, content, opts = {}) {
     if (!opts.dist && WA_RAW.test(text) && !WA_RAW_ALLOW.test(text)) {
       violations.push({ line, rule: "whatsapp-raw-outside-link-context", excerpt });
     }
-    if (MAILTO_LINK.test(text)) {
+    // Em código-fonte: qualquer "mailto:" é proibido. Em bundle de build:
+    // só flag quando vira href real (bibliotecas embutem a string "mailto:").
+    if (opts.dist ? MAILTO_BUILT.test(text) : MAILTO_LINK.test(text)) {
       violations.push({ line, rule: "email-mailto-link", excerpt });
     }
     if (CONTACT_EMAIL.test(text)) {

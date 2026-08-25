@@ -11,6 +11,7 @@ import appCss from "../styles.css?url";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SchemaDedup } from "@/components/SchemaDedup";
 import NotFound from "@/pages/NotFound";
+import { localBusinessSchema, organizationSchema } from "@/lib/jsonLd";
 import { captureUtmsFromUrl } from "@/lib/utmCapture";
 
 const Toaster = lazy(() =>
@@ -68,6 +69,12 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap",
       },
+    ],
+    // LocalBusiness + Organization unificados via SSR — presentes em TODAS as
+    // rotas (NAP, área de atendimento e horários consistentes para crawlers).
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },
+      { type: "application/ld+json", children: JSON.stringify(organizationSchema) },
     ],
   }),
   component: RootComponent,

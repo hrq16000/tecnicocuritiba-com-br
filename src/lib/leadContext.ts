@@ -73,13 +73,19 @@ export function getLeadContext(): LeadContext {
   };
 }
 
-/** Linhas prontas para anexar à mensagem do WhatsApp (vazio se nada útil). */
-export function buildLeadContextLines(): string[] {
+/**
+ * Linhas prontas para anexar à mensagem do WhatsApp (vazio se nada útil).
+ * `omitRegion`: quando o usuário já informou o bairro manualmente no funil,
+ * a região inferida por IP é omitida — dado explícito sempre prevalece.
+ */
+export function buildLeadContextLines(opts?: { omitRegion?: boolean }): string[] {
   const c = getLeadContext();
   const lines: string[] = [];
 
-  const local = [c.neighborhood, c.city].filter(Boolean).join(" · ");
-  if (local) lines.push(`• Região aproximada: ${local}`);
+  if (!opts?.omitRegion) {
+    const local = [c.neighborhood, c.city].filter(Boolean).join(" · ");
+    if (local) lines.push(`• Região aproximada: ${local}`);
+  }
   if (c.pageTitle) lines.push(`• Página: ${c.pageTitle} (${c.path})`);
   else lines.push(`• Página: ${c.path}`);
   if (c.searchTerm) lines.push(`• Busca: "${c.searchTerm}"`);
