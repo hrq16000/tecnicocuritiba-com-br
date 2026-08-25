@@ -1054,6 +1054,7 @@ export const WhatsAppFunnel = () => {
             </details>
 
             <Textarea
+              data-funnel-field="descricao"
               placeholder="Quer acrescentar algo? (opcional)"
               rows={2}
               value={answers.descricao}
