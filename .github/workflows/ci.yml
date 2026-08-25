@@ -21,8 +21,14 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Lint (non-blocking warnings)
         run: npm run lint --silent || echo "::warning::lint reported issues"
-      - name: Typecheck (tsc)
-        run: npx tsc --noEmit
+      - name: Typecheck (tsc — falha inclusive em @ts-expect-error não utilizado / TS2578)
+        run: |
+          if ! npx tsc --noEmit 2>&1 | tee tsc.log; then
+            if grep -q "TS2578" tsc.log; then
+              echo "::error::@ts-expect-error não utilizado detectado (TS2578). Remova a diretiva — o código já está tipado."
+            fi
+            exit 1
+          fi
       - name: Unit tests (vitest — inclui guard do sitemap-problemas)
         run: npm run test:unit
       - name: CTA funnel gate
