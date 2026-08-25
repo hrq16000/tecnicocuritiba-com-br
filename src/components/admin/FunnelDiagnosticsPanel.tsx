@@ -50,7 +50,7 @@ export function FunnelDiagnosticsPanel() {
   const lastResets = resets.slice(-3).reverse();
 
   const chip = (active: boolean) =>
-    `rounded px-2 py-1 text-[11px] border ${active ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground"}`;
+    `rounded-sm px-2 py-1 text-[11px] border ${active ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground"}`;
 
   return (
     <>
@@ -100,7 +100,7 @@ export function FunnelDiagnosticsPanel() {
       </div>
 
       {lastResets.length > 0 && (
-        <div className="mb-3 rounded border border-amber-500/30 bg-amber-500/5 p-2">
+        <div className="mb-3 rounded-sm border border-amber-500/30 bg-amber-500/5 p-2">
           <p className="text-[11px] font-semibold mb-1">Últimos resets</p>
           <ul className="text-[11px] text-muted-foreground space-y-0.5">
             {lastResets.map((r, i) => (
@@ -119,7 +119,7 @@ export function FunnelDiagnosticsPanel() {
           para reproduzir.
         </p>
       ) : (
-        <div className="max-h-72 overflow-y-auto rounded border border-border bg-background/70">
+        <div className="max-h-72 overflow-y-auto rounded-sm border border-border bg-background/70">
           <table className="w-full text-[11px]">
             <thead className="bg-muted sticky top-0">
               <tr>

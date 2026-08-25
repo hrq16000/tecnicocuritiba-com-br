@@ -460,7 +460,7 @@ export const WhatsAppChatbot = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={reiniciarChat}
-                  className="text-white/80 hover:text-white transition-colors text-xs px-2 py-1 bg-white/10 rounded"
+                  className="text-white/80 hover:text-white transition-colors text-xs px-2 py-1 bg-white/10 rounded-sm"
                 >
                   Reiniciar
                 </button>

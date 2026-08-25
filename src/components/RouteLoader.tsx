@@ -29,7 +29,7 @@ export const RouteLoader = () => (
         width: "clamp(13rem, 58vw, 22rem)",
         height: "auto",
         objectFit: "contain",
-        filter: "drop-shadow(0 .75rem 1.5rem rgba(0,0,0,.22))",
+        filter: "drop-shadow-sm(0 .75rem 1.5rem rgba(0,0,0,.22))",
         animation: "routeLogoPulse 720ms ease-in-out infinite",
       }}
     />

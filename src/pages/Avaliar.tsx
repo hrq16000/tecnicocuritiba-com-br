@@ -213,7 +213,7 @@ export default function Avaliar() {
                       setRating(n);
                       track("review_rating_select", { rating: n });
                     }}
-                    className="rounded-lg p-2 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="rounded-lg p-2 transition-transform hover:scale-110 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3"
                   >
                     <Star
                       className={`h-9 w-9 ${(hover || rating) >= n ? "fill-primary text-primary" : "text-muted-foreground"}`}

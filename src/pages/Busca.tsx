@@ -170,7 +170,7 @@ export default function Busca() {
               value={termo}
               onChange={(e) => setTermo(e.target.value.slice(0, 60))}
               placeholder="Ex.: Boqueirão, Pinhais, formatação, SSD…"
-              className="w-full rounded-xl border bg-background pl-11 pr-4 py-3 text-base outline-none focus:ring-2 focus:ring-primary"
+              className="w-full rounded-xl border bg-background pl-11 pr-4 py-3 text-base outline-hidden focus:ring-2 focus:ring-primary"
               autoComplete="off"
               list="busca-sugestoes"
               enterKeyHint="search"

@@ -32,8 +32,8 @@ export const SkeletonHero = () => (
           <div className="h-12 bg-white/10 rounded-lg w-3/4" />
           <div className="h-8 bg-white/10 rounded-lg w-1/2" />
           <div className="space-y-2 mt-4">
-            <div className="h-4 bg-white/10 rounded w-full" />
-            <div className="h-4 bg-white/10 rounded w-4/5" />
+            <div className="h-4 bg-white/10 rounded-sm w-full" />
+            <div className="h-4 bg-white/10 rounded-sm w-4/5" />
           </div>
           <div className="flex gap-4 mt-6">
             <div className="h-14 bg-white/10 rounded-xl w-48" />

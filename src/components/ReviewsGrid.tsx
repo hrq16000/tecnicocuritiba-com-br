@@ -126,7 +126,7 @@ export const ReviewsGrid = ({
             {reviews.map((r) => (
               <article
                 key={r.id}
-                className="rounded-xl border border-border bg-card p-5 shadow-sm hover:shadow-md transition-shadow"
+                className="rounded-xl border border-border bg-card p-5 shadow-xs hover:shadow-md transition-shadow-sm"
               >
                 <div className="flex items-center gap-3 mb-3">
                   {r.author_photo_url ? (

@@ -247,7 +247,7 @@ export const TopSearchedServicesSection = () => {
           ))}
         </div>
 
-        <div className="glass-card gradient-border rounded-2xl p-6 md:p-8 hover:shadow-[var(--shadow-lg)] transition-shadow duration-300">
+        <div className="glass-card gradient-border rounded-2xl p-6 md:p-8 hover:shadow-[var(--shadow-lg)] transition-shadow-sm duration-300">
           <div className="text-center mb-6">
             <h3 className="text-xl font-bold text-foreground mb-2 reveal-text">
               Atendimento por <span className="gradient-text">Região</span>

@@ -715,7 +715,7 @@ export const WhatsAppFunnel = () => {
                   <input
                     data-funnel-field="outro-equipamento"
                     type="text"
-                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-primary"
                     placeholder="Ex: micro-ondas, drone, projetor…"
                     value={answers.outroEquipamento}
                     maxLength={80}
@@ -793,7 +793,7 @@ export const WhatsAppFunnel = () => {
                       >
                         <span>{s.label}</span>
                         {s.requiresColeta && (
-                          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-700 dark:text-amber-300 flex-shrink-0">
+                          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-sm bg-amber-500/20 text-amber-700 dark:text-amber-300 flex-shrink-0">
                             COLETA
                           </span>
                         )}

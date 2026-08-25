@@ -81,7 +81,7 @@ export const problema: ProblemaPageData = {
     },
     {
       "nivel": "Complexo",
-      "desc": "Ransomware com criptografia forte sem ferramenta disponível — recuperação parcial de backups/shadow copies",
+      "desc": "Ransomware com criptografia forte sem ferramenta disponível — recuperação parcial de backups/shadow-sm copies",
       "tempo": "4–8 horas",
       "custo": "R$ 300–600"
     }

@@ -146,7 +146,7 @@ export const InterlinkingBlock = () => {
                 <Link
                   key={i}
                   to={item.to}
-                  className="inline-flex items-center gap-1.5 bg-background rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/20 hover:scale-105 hover:shadow-[var(--shadow-sm)] transition-all duration-200 elastic-click"
+                  className="inline-flex items-center gap-1.5 bg-background rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/20 hover:scale-105 hover:shadow-[var(--shadow-xs)] transition-all duration-200 elastic-click"
                 >
                   <MapPin className="h-3.5 w-3.5" />
                   {item.title}
@@ -175,7 +175,7 @@ export const InterlinkingBlock = () => {
                 <Link
                   key={i}
                   to={item.to}
-                  className="inline-flex items-center gap-1.5 bg-background rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-destructive/10 hover:text-destructive border border-transparent hover:border-destructive/20 hover:scale-105 hover:shadow-[var(--shadow-sm)] transition-all duration-200 elastic-click"
+                  className="inline-flex items-center gap-1.5 bg-background rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-destructive/10 hover:text-destructive border border-transparent hover:border-destructive/20 hover:scale-105 hover:shadow-[var(--shadow-xs)] transition-all duration-200 elastic-click"
                 >
                   <AlertCircle className="h-3.5 w-3.5" />
                   {item.title}

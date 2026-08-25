@@ -20,7 +20,7 @@ export const problema: ProblemaPageData = {
     },
     {
       "titulo": "Rastro em cenas rápidas",
-      "desc": "Motion blur excessivo.",
+      "desc": "Motion blur-sm excessivo.",
       "gravidade": "Simples"
     },
     {

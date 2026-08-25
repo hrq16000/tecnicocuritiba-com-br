@@ -153,7 +153,7 @@ const TermosCondicoes = () => {
               desc: "Faixa pré-aprovada. Reparos acima de R$ 500 só com sua autorização explícita.",
             },
           ].map((c) => (
-            <article key={c.title} className="rounded-xl border border-border bg-card p-5 hover:shadow-lg transition-shadow">
+            <article key={c.title} className="rounded-xl border border-border bg-card p-5 hover:shadow-lg transition-shadow-sm">
               <c.icon className={`h-7 w-7 ${c.tone} mb-3`} />
               <h3 className="text-base font-semibold mb-1">{c.title}</h3>
               <p className="text-lg font-bold text-foreground mb-2">{c.price}</p>

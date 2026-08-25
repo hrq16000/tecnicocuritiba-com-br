@@ -597,7 +597,7 @@ const Blog = () => {
                 return (
                   <AnimatedSection key={item.slug} delay={120 * i}>
                     <Link to={item.path} className="group block h-full">
-                      <div className="relative rounded-2xl overflow-hidden h-full gradient-border hover-glow-ring hover-lift bg-card">
+                      <div className="relative rounded-2xl overflow-hidden h-full gradient-border hover-glow-ring-3 hover-lift bg-card">
                         <div className="relative h-52 overflow-hidden">
                           {(() => { const cover = getCategoryCover(item.slug); return cover ? (
                           <img
@@ -726,7 +726,7 @@ const Blog = () => {
                       onClick={() => handleCatChange(cat)}
                       className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-300 whitespace-nowrap btn-feedback ${
                         activeCat === cat
-                          ? "bg-accent/15 text-accent border border-accent/30 shadow-sm"
+                          ? "bg-accent/15 text-accent border border-accent/30 shadow-xs"
                           : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent"
                       }`}
                     >
@@ -771,7 +771,7 @@ const Blog = () => {
                         id="perPage"
                         value={itemsPerPage}
                         onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
-                        className="text-xs bg-muted border border-border rounded-lg px-2 py-1.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 transition-all cursor-pointer"
+                        className="text-xs bg-muted border border-border rounded-lg px-2 py-1.5 text-foreground focus:outline-hidden focus:ring-2 focus:ring-accent/30 transition-all cursor-pointer"
                       >
                         {ITEMS_PER_PAGE_OPTIONS.map((n) => (
                           <option key={n} value={n}>{n} por página</option>
@@ -846,15 +846,15 @@ const Blog = () => {
                               <div className={`absolute inset-0 bg-gradient-to-t ${cat.color} opacity-35 mix-blend-multiply`} />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
                               <div className="absolute top-2 left-2 flex gap-1.5">
-                                <span className={`px-2 py-0.5 text-[10px] font-bold rounded-md ${typeBadgeColor} backdrop-blur-sm`}>{typeBadge}</span>
+                                <span className={`px-2 py-0.5 text-[10px] font-bold rounded-md ${typeBadgeColor} backdrop-blur-xs`}>{typeBadge}</span>
                               </div>
                               <div className="absolute top-2 right-2">
-                                <div className="w-7 h-7 rounded-md bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/10">
+                                <div className="w-7 h-7 rounded-md bg-white/10 backdrop-blur-xs flex items-center justify-center border border-white/10">
                                   <Icon className="h-3.5 w-3.5 text-white/80" />
                                 </div>
                               </div>
                               <div className="absolute bottom-2 left-2 right-2">
-                                <span className="text-[10px] text-white/70 font-medium bg-black/30 px-2 py-0.5 rounded-md backdrop-blur-sm">{item.category}</span>
+                                <span className="text-[10px] text-white/70 font-medium bg-black/30 px-2 py-0.5 rounded-md backdrop-blur-xs">{item.category}</span>
                               </div>
                             </div>
                             <div className="p-4">
@@ -865,7 +865,7 @@ const Blog = () => {
                                   {item.readTime && <span className="flex items-center gap-0.5"><Clock className="h-3 w-3" /> {item.readTime}</span>}
                                   {item.date && <span className="flex items-center gap-0.5"><Calendar className="h-3 w-3" /> {new Date(item.date).toLocaleDateString("pt-BR", { month: "short", year: "2-digit" })}</span>}
                                   {item.gravidade && (
-                                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold ${
+                                    <span className={`px-1.5 py-0.5 rounded-sm text-[9px] font-semibold ${
                                       item.gravidade === "Complexo" ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" :
                                       item.gravidade === "Médio" ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" :
                                       "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
@@ -908,7 +908,7 @@ const Blog = () => {
             </div>
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-2xl mx-auto text-center">
-                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm text-white/80 mb-5 border border-white/10">
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs px-4 py-1.5 rounded-full text-sm text-white/80 mb-5 border border-white/10">
                   <Sparkles className="h-3.5 w-3.5 text-accent" /> Atendimento especializado
                 </div>
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Não encontrou o que procura?</h2>
@@ -918,7 +918,7 @@ const Blog = () => {
                     <Button className="gap-2 bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] text-white rounded-full px-8 py-6 text-base shadow-[var(--shadow-whatsapp)] hover-glow-cta cta-pulse">WhatsApp</Button>
                   </a>
                   <Link to="/contato">
-                    <Button variant="outline" className="gap-2 rounded-full px-8 py-6 text-base border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white/60 hover-glow-cta font-semibold backdrop-blur-sm">
+                    <Button variant="outline" className="gap-2 rounded-full px-8 py-6 text-base border-white/40 text-white bg-white/10 hover:bg-white/20 hover:border-white/60 hover-glow-cta font-semibold backdrop-blur-xs">
                       Contato <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>

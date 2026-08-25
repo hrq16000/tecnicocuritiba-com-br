@@ -149,7 +149,7 @@ export const CitiesSection = () => {
         </div>
 
         {/* SEO content */}
-        <div className="mt-12 glass-card gradient-border rounded-2xl p-6 md:p-8 hover:shadow-[var(--shadow-lg)] transition-shadow duration-300 hover-streak">
+        <div className="mt-12 glass-card gradient-border rounded-2xl p-6 md:p-8 hover:shadow-[var(--shadow-lg)] transition-shadow-sm duration-300 hover-streak">
           <h3 className="text-xl font-heading font-bold text-foreground mb-4">
             Por que escolher nosso serviço de <span className="gradient-text">assistência técnica</span>?
           </h3>

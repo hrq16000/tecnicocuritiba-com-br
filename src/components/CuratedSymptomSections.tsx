@@ -181,7 +181,7 @@ export const CuratedSymptomSections = ({ block }: { block: CuratedSymptomBlock }
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.dados.texto}</p>
             <Link
               to={block.dados.to}
-              className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3"
             >
               {block.dados.label}
             </Link>

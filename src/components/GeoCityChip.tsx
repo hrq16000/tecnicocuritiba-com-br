@@ -16,7 +16,7 @@ export const GeoCityChip = () => {
   if (status === "loading") {
     return (
       <span
-        className="mt-3 inline-flex min-h-8 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3 py-1.5 text-[13px] text-white/80 backdrop-blur-sm"
+        className="mt-3 inline-flex min-h-8 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3 py-1.5 text-[13px] text-white/80 backdrop-blur-xs"
         aria-live="polite"
       >
         <span className="h-2 w-2 animate-pulse rounded-full bg-accent" aria-hidden="true" />
@@ -36,7 +36,7 @@ export const GeoCityChip = () => {
               confirmCity(c);
               setEditing(false);
             }}
-            className="inline-flex min-h-8 items-center rounded-full border border-white/20 bg-white/[0.1] px-3 py-1.5 text-[13px] font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            className="inline-flex min-h-8 items-center rounded-full border border-white/20 bg-white/[0.1] px-3 py-1.5 text-[13px] font-medium text-white backdrop-blur-xs transition-colors hover:bg-white/20"
           >
             {c}
           </button>
@@ -47,7 +47,7 @@ export const GeoCityChip = () => {
 
   return (
     <span
-      className="mt-3 inline-flex min-h-8 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3 py-1.5 text-[13px] text-white backdrop-blur-sm"
+      className="mt-3 inline-flex min-h-8 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-3 py-1.5 text-[13px] text-white backdrop-blur-xs"
       data-geo-status={status}
       aria-live="polite"
     >

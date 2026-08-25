@@ -179,7 +179,7 @@ const PrecosEPoliticas = () => {
                   { icon: Star, text: "Garantia por escrito" },
                   { icon: FileText, text: "Nota fiscal" },
                 ].map((badge, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur rounded-lg px-4 py-2 flex items-center gap-2 stagger-item hover:bg-white/15 transition-colors" style={{ animationDelay: `${i * 100}ms` }}>
+                  <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center gap-2 stagger-item hover:bg-white/15 transition-colors" style={{ animationDelay: `${i * 100}ms` }}>
                     <badge.icon className="h-5 w-5 text-accent" />
                     <span className="text-white text-sm">{badge.text}</span>
                   </div>
@@ -394,7 +394,7 @@ const PrecosEPoliticas = () => {
                 {servicosPrecos.map((categoria, catIndex) => {
                   const Icon = categoria.icon;
                   return (
-                    <div key={catIndex} className="bg-secondary rounded-xl overflow-hidden stagger-item hover:shadow-lg transition-shadow" style={{ animationDelay: `${catIndex * 100}ms` }}>
+                    <div key={catIndex} className="bg-secondary rounded-xl overflow-hidden stagger-item hover:shadow-lg transition-shadow-sm" style={{ animationDelay: `${catIndex * 100}ms` }}>
                       <div className="bg-primary px-6 py-4 flex items-center gap-3">
                         <Icon className="h-6 w-6 text-primary-foreground" />
                         <h3 className="text-lg font-bold text-primary-foreground">

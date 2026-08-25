@@ -517,7 +517,7 @@ const AdminFunnel = () => {
 
                 <div>
                   <div className="text-xs font-semibold text-muted-foreground mb-1">Mensagem WhatsApp (pré-preenchida)</div>
-                  <pre className="text-[11px] whitespace-pre-wrap bg-muted p-2 rounded max-h-60 overflow-y-auto">{selected.wa_message || "— (não gerada)"}</pre>
+                  <pre className="text-[11px] whitespace-pre-wrap bg-muted p-2 rounded-sm max-h-60 overflow-y-auto">{selected.wa_message || "— (não gerada)"}</pre>
                 </div>
 
 
@@ -526,7 +526,7 @@ const AdminFunnel = () => {
                   <textarea
                     defaultValue={selected.notas_admin ?? ""}
                     rows={3}
-                    className="w-full text-xs p-2 rounded border border-border bg-background"
+                    className="w-full text-xs p-2 rounded-sm border border-border bg-background"
                     onBlur={(e) => {
                       if (e.target.value !== (selected.notas_admin ?? "")) {
                         void saveNotes(selected.id, e.target.value);
@@ -546,7 +546,7 @@ const AdminFunnel = () => {
 };
 
 const Field = ({ label, value }: { label: string; value: string | null | undefined }) => (
-  <div className="rounded border border-border p-2">
+  <div className="rounded-sm border border-border p-2">
     <div className="text-[10px] text-muted-foreground uppercase">{label}</div>
     <div className="truncate">{value || "—"}</div>
   </div>

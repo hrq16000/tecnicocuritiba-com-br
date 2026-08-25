@@ -260,11 +260,11 @@ export function OrcamentoMontagemWizard() {
   };
 
   const baseFieldCls =
-    "w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent";
+    "w-full rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-accent";
 
   const fieldCls = (k: FieldKey) =>
     cn(
-      "w-full rounded-xl border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent",
+      "w-full rounded-xl border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-accent",
       errors[k] ? "border-destructive animate-field-alert" : "border-border",
     );
 
