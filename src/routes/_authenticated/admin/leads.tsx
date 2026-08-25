@@ -173,6 +173,40 @@ function AdminLeadsPage() {
       </header>
 
       <main className="container mx-auto px-4 py-6">
+        {data && data.length > 0 && (
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <input
+              type="search"
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              placeholder="Filtrar por serviço, sintoma, localidade ou origem…"
+              aria-label="Filtrar leads por texto"
+              className="w-64 rounded-md border border-border bg-background px-3 py-1.5 text-xs outline-none focus:border-primary"
+            />
+            <select
+              value={statusFiltro}
+              onChange={(e) => setStatusFiltro(e.target.value)}
+              aria-label="Filtrar por status do alerta"
+              className="rounded-md border border-border bg-background px-2 py-1.5 text-xs outline-none focus:border-primary"
+            >
+              <option value="todos">Todos os alertas</option>
+              <option value="pending">Alerta pendente</option>
+              <option value="sent">Alerta enviado</option>
+              <option value="error">Alerta com erro</option>
+            </select>
+            <button
+              type="button"
+              onClick={() => setOrdem((o) => (o === "desc" ? "asc" : "desc"))}
+              className="rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-muted"
+            >
+              Data: {ordem === "desc" ? "mais recentes primeiro" : "mais antigas primeiro"}
+            </button>
+            <span className="ml-auto text-[11px] text-muted-foreground">
+              {filtrados.length} de {data.length} lead(s)
+            </span>
+          </div>
+        )}
+
         {isLoading && <LeadsSkeleton />}
 
         {error && (
