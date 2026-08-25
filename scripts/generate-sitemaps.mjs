@@ -36,6 +36,11 @@ for (const p of redirectPaths) routes.delete(p);
 // Páginas com <meta name="robots" content="noindex"> não entram no sitemap.
 for (const p of ["/avaliar", "/obrigado", "/funil-indisponivel", "/status-anuncios"]) routes.delete(p);
 
+// Rotas públicas migradas para TanStack Start (src/routes/) — o parser acima
+// lê apenas o LegacyApp.tsx (React Router). Adicionar novas rotas públicas aqui;
+// /ordem-de-servico é redirect 301 para /abrir-os, portanto fica fora.
+for (const p of ["/abrir-os"]) routes.add(p);
+
 // 2) Expand dynamic routes from data files.
 const brandSlugs = [...brandsSrc.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
 const problemSlugs = problemSlugsFromDir;
