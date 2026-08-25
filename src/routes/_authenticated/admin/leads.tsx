@@ -236,7 +236,7 @@ function AdminLeadsPage() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((lead) => (
+                {filtrados.map((lead) => (
                   <LeadRow
                     key={lead.id}
                     lead={lead}
