@@ -230,7 +230,7 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-10">
           {/* Logo e Contato */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2 space-y-4">
-            <div className="inline-flex w-fit rounded-md bg-white/95 px-2 py-1 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-shadow duration-300">
+            <div className="inline-flex w-fit rounded-md bg-white/95 px-2 py-1 shadow-[var(--shadow-xs)] hover:shadow-[var(--shadow-md)] transition-shadow-sm duration-300">
               <img
                 alt="Técnico em Curitiba"
                 className="h-10 w-auto"
@@ -252,7 +252,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               onClick={() => trackFooterWhatsApp("footer_primary")}
               aria-label="Chamar o técnico no WhatsApp"
-              className="inline-flex min-h-11 items-center gap-2 bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] hover:scale-105 hover:shadow-[var(--shadow-whatsapp)] text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex min-h-11 items-center gap-2 bg-[hsl(var(--whatsapp))] hover:bg-[hsl(var(--whatsapp-hover))] hover:scale-105 hover:shadow-[var(--shadow-whatsapp)] text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <MessageCircle className="h-4 w-4 flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
               <span>Chamar no WhatsApp</span>

@@ -231,7 +231,7 @@ export const CoverageMapSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Mapa Interativo */}
           <MouseGlow className="rounded-xl">
-            <div className="relative rounded-xl overflow-hidden shadow-lg border border-border bg-background hover:shadow-[var(--shadow-xl)] transition-shadow duration-500">
+            <div className="relative rounded-xl overflow-hidden shadow-lg border border-border bg-background hover:shadow-[var(--shadow-xl)] transition-shadow-sm duration-500">
               <div className="aspect-[4/3] w-full">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115063.98825866027!2d-49.35951754843749!3d-25.494912899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce35351c67f2f%3A0xf9e5a1e1d08a0c6a!2sCuritiba%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1705000000000!5m2!1spt-BR!2sbr"
@@ -245,7 +245,7 @@ export const CoverageMapSection = () => {
                   className="w-full h-full"
                 />
               </div>
-              <div className="absolute bottom-4 left-4 right-4 bg-background/95 backdrop-blur-sm rounded-lg p-3 shadow-md border border-border">
+              <div className="absolute bottom-4 left-4 right-4 bg-background/95 backdrop-blur-xs rounded-lg p-3 shadow-md border border-border">
                 <div className="flex items-center gap-2 text-sm">
                   <div className="flex items-center gap-1.5">
                     <span className="relative flex h-3 w-3">
@@ -329,7 +329,7 @@ export const CoverageMapSection = () => {
                       <div
                         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-500 ${
                           isActive
-                            ? "bg-accent text-accent-foreground shadow-sm"
+                            ? "bg-accent text-accent-foreground shadow-xs"
                             : "bg-muted text-foreground"
                         }`}
                       >
@@ -337,7 +337,7 @@ export const CoverageMapSection = () => {
                         {region.time}
                       </div>
                       {region.isReal && (
-                        <span className="text-[9px] text-accent font-medium bg-accent/10 px-1.5 py-0.5 rounded">real</span>
+                        <span className="text-[9px] text-accent font-medium bg-accent/10 px-1.5 py-0.5 rounded-sm">real</span>
                       )}
                     </div>
                   </div>

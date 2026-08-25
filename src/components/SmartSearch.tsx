@@ -261,7 +261,7 @@ export const SmartSearch = ({ isOpen, onClose }: SmartSearchProps) => {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" />
       <div
         className="relative w-full max-w-xl mx-4 bg-background rounded-2xl shadow-2xl border border-border overflow-hidden animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
@@ -275,7 +275,7 @@ export const SmartSearch = ({ isOpen, onClose }: SmartSearchProps) => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar serviço, bairro ou cidade..."
-            className="flex-1 bg-transparent text-foreground text-base outline-none placeholder:text-muted-foreground"
+            className="flex-1 bg-transparent text-foreground text-base outline-hidden placeholder:text-muted-foreground"
             autoComplete="off"
           />
           <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-md border border-border">
@@ -343,13 +343,13 @@ export const SmartSearch = ({ isOpen, onClose }: SmartSearchProps) => {
         {/* Footer */}
         <div className="px-5 py-2.5 border-t border-border bg-muted/30 flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border text-[10px]">↑↓</kbd> navegar
+            <kbd className="px-1.5 py-0.5 bg-muted rounded-sm border border-border text-[10px]">↑↓</kbd> navegar
           </span>
           <span className="flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border text-[10px]">Enter</kbd> abrir
+            <kbd className="px-1.5 py-0.5 bg-muted rounded-sm border border-border text-[10px]">Enter</kbd> abrir
           </span>
           <span className="hidden sm:flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 bg-muted rounded border border-border text-[10px]">Ctrl+K</kbd> buscar
+            <kbd className="px-1.5 py-0.5 bg-muted rounded-sm border border-border text-[10px]">Ctrl+K</kbd> buscar
           </span>
         </div>
       </div>

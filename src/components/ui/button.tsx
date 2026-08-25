@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold ring-offset-background transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -16,9 +16,9 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         whatsapp: "bg-whatsapp text-white hover:bg-whatsapp-hover cta-shadow-whatsapp font-bold",
-        cta: "bg-cta text-white hover:bg-cta-hover cta-shadow font-bold",
+        cta: "bg-cta text-white hover:bg-cta-hover cta-shadow-sm font-bold",
         heroWhatsapp: "bg-whatsapp text-white hover:bg-whatsapp-hover border-2 border-white/20 font-bold text-base md:text-lg px-6 md:px-8 py-4 md:py-5 cta-shadow-whatsapp",
-        heroCta: "bg-cta text-white hover:bg-cta-hover border-2 border-white/20 font-bold text-base md:text-lg px-6 md:px-8 py-4 md:py-5 cta-shadow",
+        heroCta: "bg-cta text-white hover:bg-cta-hover border-2 border-white/20 font-bold text-base md:text-lg px-6 md:px-8 py-4 md:py-5 cta-shadow-sm",
       },
       size: {
         default: "h-10 px-4 py-2",

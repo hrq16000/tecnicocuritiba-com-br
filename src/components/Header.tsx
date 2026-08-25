@@ -122,7 +122,7 @@ export const Header = () => {
       </a>
       <header
         data-testid="site-header"
-        className="fixed left-0 right-0 top-0 h-[var(--site-header-height)] border-b border-border bg-background/95 shadow-[var(--shadow-sm)] backdrop-blur-md transition-[height] duration-200"
+        className="fixed left-0 right-0 top-0 h-[var(--site-header-height)] border-b border-border bg-background/95 shadow-[var(--shadow-xs)] backdrop-blur-md transition-[height] duration-200"
         style={{ zIndex: "var(--z-header)" as unknown as number }}
       >
         <div className="container mx-auto flex h-full items-center justify-between gap-2">
@@ -153,7 +153,7 @@ export const Header = () => {
             onClick={() => trackHeaderClick("whatsapp")}
             aria-label="Falar com técnico no WhatsApp"
             data-cta-variant="whatsapp"
-            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-sm transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
+            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[hsl(var(--whatsapp))] px-3 text-sm font-bold text-primary-foreground shadow-xs transition-colors hover:bg-[hsl(var(--whatsapp-hover))] sm:min-w-24"
           >
             <span aria-hidden="true">☏</span>
             <span>WhatsApp</span>
@@ -167,7 +167,7 @@ export const Header = () => {
             <summary
               aria-label="Abrir menu"
               title="Abrir menu"
-              className="inline-flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-lg border border-border bg-background text-foreground shadow-sm transition-colors hover:bg-accent/10 hover:text-accent marker:hidden [&::-webkit-details-marker]:hidden"
+              className="inline-flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-lg border border-border bg-background text-foreground shadow-xs transition-colors hover:bg-accent/10 hover:text-accent marker:hidden [&::-webkit-details-marker]:hidden"
             >
               <span aria-hidden="true" className="relative block h-5 w-5">
                 <span className="absolute left-0 top-1 block h-0.5 w-5 rounded-full bg-current transition-all duration-200 group-open/root:top-2.5 group-open/root:rotate-45" />
@@ -184,7 +184,7 @@ export const Header = () => {
                 Menu
               </div>
               <div className="grid gap-2 border-b border-border p-4">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackHeaderClick("whatsapp")} aria-label="Falar com o técnico no WhatsApp — atendimento a partir de R$ 99,99" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-4 text-sm font-bold text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackHeaderClick("whatsapp")} aria-label="Falar com o técnico no WhatsApp — atendimento a partir de R$ 99,99" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[hsl(var(--whatsapp))] px-4 text-sm font-bold text-primary-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 focus-visible:ring-offset-2">
                   <span aria-hidden="true">☏</span> Falar no WhatsApp
                 </a>
 

@@ -53,7 +53,7 @@ export const ConsentBanner = () => {
       role="region"
       aria-label="Aviso de privacidade e cookies"
       className={[
-        "fixed z-[90] rounded-xl border border-border bg-card/95 text-card-foreground shadow-lg backdrop-blur",
+        "fixed z-[90] rounded-xl border border-border bg-card/95 text-card-foreground shadow-lg backdrop-blur-sm",
         "left-3 right-[5.5rem] bottom-3 px-3 py-2.5",
         "sm:left-6 sm:right-auto sm:bottom-6 sm:max-w-md sm:px-4 sm:py-3",
       ].join(" ")}
@@ -71,21 +71,21 @@ export const ConsentBanner = () => {
             type="button"
             onClick={() => setCustom((v) => !v)}
             aria-expanded={custom}
-            className="min-h-11 rounded-lg border border-border px-3 text-xs font-semibold text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+            className="min-h-11 rounded-lg border border-border px-3 text-xs font-semibold text-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 sm:text-sm"
           >
             Personalizar
           </button>
           <button
             type="button"
             onClick={() => decide({ ads: false, analytics: false })}
-            className="min-h-11 rounded-lg border border-border px-3 text-xs font-semibold text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+            className="min-h-11 rounded-lg border border-border px-3 text-xs font-semibold text-foreground hover:bg-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 sm:text-sm"
           >
             Recusar
           </button>
           <button
             type="button"
             onClick={() => decide({ ads: true, analytics: true })}
-            className="min-h-11 rounded-lg bg-primary px-4 text-xs font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+            className="min-h-11 rounded-lg bg-primary px-4 text-xs font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 sm:text-sm"
           >
             Aceitar
           </button>
@@ -128,7 +128,7 @@ export const ConsentBanner = () => {
           <button
             type="button"
             onClick={() => decide({ ads, analytics })}
-            className="mt-3 min-h-11 w-full rounded-lg bg-primary px-4 text-xs font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+            className="mt-3 min-h-11 w-full rounded-lg bg-primary px-4 text-xs font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 sm:text-sm"
           >
             Salvar preferências
           </button>

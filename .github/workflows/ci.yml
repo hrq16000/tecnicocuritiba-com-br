@@ -22,7 +22,7 @@ jobs:
       - name: Lint (non-blocking warnings)
         run: npm run lint --silent || echo "::warning::lint reported issues"
       - name: Typecheck (tsc)
-        run: npx tsc -p tsconfig.app.json --noEmit
+        run: npx tsc --noEmit
       - name: Unit tests (vitest — inclui guard do sitemap-problemas)
         run: npm run test:unit
       - name: CTA funnel gate

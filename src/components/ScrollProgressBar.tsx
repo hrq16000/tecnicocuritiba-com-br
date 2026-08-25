@@ -42,7 +42,7 @@ export const ScrollProgressBar = () => {
         style={{
           left: `calc(${progress}% - 24px)`,
           background: `radial-gradient(ellipse at center, hsl(var(--accent) / 0.7), transparent)`,
-          filter: "blur(3px)",
+          filter: "blur-sm(3px)",
         }}
       />
       {/* Shimmer trail */}

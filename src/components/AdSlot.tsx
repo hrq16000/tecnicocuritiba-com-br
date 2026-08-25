@@ -35,7 +35,7 @@ export const AdSlot = ({ placement, className = "" }: AdSlotProps) => {
             <aside
               key={creative.id}
               data-ad-creative={creative.id}
-              className="flex min-h-[180px] flex-col justify-between rounded-xl border border-border bg-card/60 p-5 shadow-sm"
+              className="flex min-h-[180px] flex-col justify-between rounded-xl border border-border bg-card/60 p-5 shadow-xs"
             >
               <div>
                 <p

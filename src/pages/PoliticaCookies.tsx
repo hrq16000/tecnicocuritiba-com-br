@@ -267,7 +267,7 @@ export default function PoliticaCookies() {
             <button
               type="button"
               onClick={openConsentPreferences}
-              className="mt-3 min-h-11 rounded-lg bg-primary px-5 text-sm font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="mt-3 min-h-11 rounded-lg bg-primary px-5 text-sm font-bold text-primary-foreground hover:opacity-90 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3"
             >
               Gerenciar preferências de cookies
             </button>

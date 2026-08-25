@@ -597,7 +597,7 @@ export default function StatusOS() {
 
         {loading && (
           <div className="mt-6 space-y-3" aria-hidden="true">
-            <div className="h-6 w-1/2 animate-pulse rounded bg-muted" />
+            <div className="h-6 w-1/2 animate-pulse rounded-sm bg-muted" />
             <div className="h-24 animate-pulse rounded-xl bg-muted" />
             <div className="h-40 animate-pulse rounded-xl bg-muted" />
           </div>
@@ -619,7 +619,7 @@ export default function StatusOS() {
           <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm">
             <p className="font-medium text-destructive">{erro}</p>
             <p className="mt-2 text-muted-foreground">
-              Formato do número da OS: <code className="rounded bg-muted px-1">OS-AAAAMMDD-HHMM-000</code> — o
+              Formato do número da OS: <code className="rounded-sm bg-muted px-1">OS-AAAAMMDD-HHMM-000</code> — o
               mesmo código do PDF e da mensagem no WhatsApp. Pelo celular, use DDD + número.
             </p>
             <a
@@ -652,7 +652,7 @@ export default function StatusOS() {
         )}
 
         {os && (
-          <section className="mt-6 rounded-xl border bg-card p-5 shadow-sm">
+          <section className="mt-6 rounded-xl border bg-card p-5 shadow-xs">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-xl font-semibold">OS {os.numero}</h2>
               <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">

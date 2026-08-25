@@ -153,7 +153,7 @@ const ProcedimentosPlaca = () => {
               const Icon = proc.icon;
               return (
                 <AnimatedSection key={proc.slug} delay={0.1 * (i + 1)}>
-                  <div className="glass-card gradient-border rounded-xl p-6 md:p-8 hover:shadow-lg transition-shadow">
+                  <div className="glass-card gradient-border rounded-xl p-6 md:p-8 hover:shadow-lg transition-shadow-sm">
                     <div className="flex flex-col md:flex-row gap-6">
                       <div className="flex-shrink-0">
                         <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center">

@@ -364,10 +364,10 @@ export default function AssistenciaTecnicaCuritiba() {
         [data-atc-stagger] > *{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
         [data-atc-stagger].atc-in > *{opacity:1;transform:translateY(0);}
         ${Array.from({ length: 12 }).map((_, i) => `[data-atc-stagger].atc-in > *:nth-child(${i + 1}){transition-delay:${i * 70}ms;}`).join("")}
-        @keyframes atcPulse{0%,100%{box-shadow:0 0 0 0 hsl(var(--accent)/.45);}50%{box-shadow:0 0 0 14px hsl(var(--accent)/0);}}
+        @keyframes atcPulse{0%,100%{box-shadow-sm:0 0 0 0 hsl(var(--accent)/.45);}50%{box-shadow-sm:0 0 0 14px hsl(var(--accent)/0);}}
         .atc-pulse{animation:atcPulse 2.2s ease-out infinite;}
-        .atc-card{transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
-        .atc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:hsl(var(--accent)/.5);}
+        .atc-card{transition:transform .35s ease, box-shadow-sm .35s ease, border-color .35s ease;}
+        .atc-card:hover{transform:translateY(-4px);box-shadow-sm:var(--shadow-lg);border-color:hsl(var(--accent)/.5);}
         .atc-card:hover .atc-card-icon{transform:translateY(-3px) rotate(-4deg);}
         .atc-card-icon{transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
       `}</style>
@@ -481,7 +481,7 @@ export default function AssistenciaTecnicaCuritiba() {
               <article
                 key={s.title}
                 data-atc-reveal
-                className="atc-card group rounded-2xl border border-border bg-card text-card-foreground p-6 shadow-[var(--shadow-sm)]"
+                className="atc-card group rounded-2xl border border-border bg-card text-card-foreground p-6 shadow-[var(--shadow-xs)]"
               >
                 <div className="atc-card-icon h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[var(--shadow-md)] mb-4">
                   <s.icon className="h-6 w-6 text-white" />
@@ -529,7 +529,7 @@ export default function AssistenciaTecnicaCuritiba() {
                 <div
                   key={g.title}
                   data-atc-reveal
-                  className="atc-card rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-sm)]"
+                  className="atc-card rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-xs)]"
                 >
                   <div className="flex items-center gap-3 mb-5">
                     <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[var(--shadow-md)]">
@@ -584,7 +584,7 @@ export default function AssistenciaTecnicaCuritiba() {
               <div
                 key={d.title}
                 data-atc-reveal
-                className="atc-card rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-sm)]"
+                className="atc-card rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-xs)]"
               >
                 <div className="atc-card-icon h-12 w-12 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-[var(--shadow-md)] mb-4">
                   <d.icon className="h-6 w-6 text-white" />
@@ -607,7 +607,7 @@ export default function AssistenciaTecnicaCuritiba() {
               <details
                 key={i}
                 data-atc-reveal
-                className="atc-card group rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-sm)] open:border-accent/40"
+                className="atc-card group rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-xs)] open:border-accent/40"
               >
                 <summary className="flex items-start justify-between gap-4 cursor-pointer list-none">
                   <h3 className="text-base md:text-lg font-semibold text-foreground">{f.question}</h3>

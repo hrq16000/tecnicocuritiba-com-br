@@ -107,6 +107,8 @@ if (isMain) {
   const includeDist = process.argv.includes("--dist");
   const roots = ["src", "public", "index.html"].filter((p) => existsSync(p));
   if (includeDist && existsSync("dist")) roots.push("dist");
+  // TanStack Start (Nitro) publica os assets do client em .output/public.
+  if (includeDist && existsSync(".output/public")) roots.push(".output/public");
 
   /** @type {ReturnType<typeof scanContent>} */
   let all = [];
@@ -123,7 +125,7 @@ if (isMain) {
       } catch {
         continue; // binário/encoding — não é superfície de texto
       }
-      const isDist = file.startsWith("dist");
+      const isDist = file.startsWith("dist") || file.startsWith(".output");
       all = all.concat(scanContent(file, content, { dist: isDist }));
     }
   }

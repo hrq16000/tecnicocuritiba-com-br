@@ -31,7 +31,7 @@ export const InlineTriageCTA = ({
         type="button"
         onClick={open}
         data-cta-location={location}
-        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[hsl(var(--whatsapp))] px-6 text-base font-extrabold text-primary-foreground shadow-lg transition-transform hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:w-auto"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[hsl(var(--whatsapp))] px-6 text-base font-extrabold text-primary-foreground shadow-lg transition-transform hover:scale-[1.01] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 sm:w-auto"
       >
         <MessageCircle className="h-5 w-5" aria-hidden="true" />
         {label}

@@ -107,7 +107,7 @@ export const GA4ChecklistPanel = () => {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-1 right-1 z-[100] p-1 rounded opacity-[0.04] hover:opacity-50 transition-opacity"
+        className="fixed top-1 right-1 z-[100] p-1 rounded-sm opacity-[0.04] hover:opacity-50 transition-opacity"
         aria-label="Checklist GA4/Ads"
         title="Ctrl+Shift+G"
       >

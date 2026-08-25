@@ -68,7 +68,7 @@ export function ErrorAlertsPanel() {
       {summary.topBrokenLinks.length > 0 && (
         <div className="mt-4">
           <h3 className="text-xs font-semibold text-foreground mb-2">Top links quebrados</h3>
-          <div className="rounded border border-border bg-background/70 overflow-hidden">
+          <div className="rounded-sm border border-border bg-background/70 overflow-hidden">
             <table className="w-full text-[11px]">
               <thead className="bg-muted">
                 <tr>

@@ -45,7 +45,7 @@ export const FastHeroSection = () => {
               <h1 className="mb-4 font-heading text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl md:mb-5 md:text-5xl lg:text-[3.4rem]">
               Técnico de Informática
               <br />
-              <span className="text-accent drop-shadow-sm">em Curitiba — Hoje</span>
+              <span className="text-accent drop-shadow-xs">em Curitiba — Hoje</span>
               <span className="mt-2 block text-lg font-semibold tracking-normal text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] sm:text-xl md:text-2xl">
                 A partir de <span className="text-yellow-300 font-extrabold">R$ 99,99</span> · Atendimento a domicílio
               </span>
@@ -67,7 +67,7 @@ export const FastHeroSection = () => {
               ].map(({ icon, text }) => (
                 <span
                   key={text}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.09] px-3 py-1.5 text-[13px] font-medium text-white backdrop-blur-sm"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.09] px-3 py-1.5 text-[13px] font-medium text-white backdrop-blur-xs"
                 >
                   <span className="text-yellow-300" aria-hidden="true">{icon}</span>
                   {text}
@@ -158,7 +158,7 @@ export const FastHeroSection = () => {
 
       {showScheduling && (
         <div
-          className="fixed inset-0 z-[90] flex items-center justify-center bg-foreground/60 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-foreground/60 p-4 backdrop-blur-xs"
           role="dialog"
           aria-modal="true"
           aria-labelledby="schedule-title"

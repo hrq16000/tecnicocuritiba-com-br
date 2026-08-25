@@ -28,7 +28,7 @@ export const SocialProofAdminPanel = () => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed top-1 left-1 z-[100] p-1 rounded opacity-[0.03] hover:opacity-40 transition-opacity duration-500"
+        className="fixed top-1 left-1 z-[100] p-1 rounded-sm opacity-[0.03] hover:opacity-40 transition-opacity duration-500"
         aria-label="Abrir painel de configurações"
         title="Ctrl+Shift+P"
       >

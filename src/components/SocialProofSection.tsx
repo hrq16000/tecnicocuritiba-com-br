@@ -52,7 +52,7 @@ export const SocialProofSection = () => {
 
 
             <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8">
-            <div className="bg-card rounded-xl px-6 py-4 text-center border border-border shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1.5 transition-all duration-300 card-shine stat-reveal" style={{ animationDelay: '0ms' }}>
+            <div className="bg-card rounded-xl px-6 py-4 text-center border border-border shadow-[var(--shadow-xs)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1.5 transition-all duration-300 card-shine stat-reveal" style={{ animationDelay: '0ms' }}>
               <div className="flex items-center justify-center gap-1 mb-1">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-accent text-accent" />
@@ -61,13 +61,13 @@ export const SocialProofSection = () => {
               <p className="text-2xl font-bold text-foreground glow-pulse-text">{stats.rating}</p>
               <p className="text-xs text-muted-foreground">Nota Média</p>
             </div>
-            <div className="bg-card rounded-xl px-6 py-4 text-center border border-border shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1.5 transition-all duration-300 card-shine stat-reveal" style={{ animationDelay: '100ms' }}>
+            <div className="bg-card rounded-xl px-6 py-4 text-center border border-border shadow-[var(--shadow-xs)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1.5 transition-all duration-300 card-shine stat-reveal" style={{ animationDelay: '100ms' }}>
               <p className="text-2xl font-bold text-foreground">
                 <AnimatedCounter end={stats.totalReviews} suffix="+" />
               </p>
               <p className="text-xs text-muted-foreground">Avaliações</p>
             </div>
-            <div className="bg-card rounded-xl px-6 py-4 text-center border border-border shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1.5 transition-all duration-300 card-shine stat-reveal" style={{ animationDelay: '200ms' }}>
+            <div className="bg-card rounded-xl px-6 py-4 text-center border border-border shadow-[var(--shadow-xs)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1.5 transition-all duration-300 card-shine stat-reveal" style={{ animationDelay: '200ms' }}>
               <p className="text-2xl font-bold text-accent">
                 <AnimatedCounter end={stats.satisfaction} suffix="%" />
               </p>
@@ -80,7 +80,7 @@ export const SocialProofSection = () => {
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="bg-card border border-border gradient-border rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] group card-shine animated-border hover-streak slide-up-stagger shadow-sm"
+              className="bg-card border border-border gradient-border rounded-xl p-6 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03] group card-shine animated-border hover-streak slide-up-stagger shadow-xs"
               style={{ animationDelay: `${index * 90}ms` }}
             >
               <Quote className="h-7 w-7 text-accent/25 mb-3 group-hover:text-accent/50 group-hover:scale-110 transition-all duration-300" />

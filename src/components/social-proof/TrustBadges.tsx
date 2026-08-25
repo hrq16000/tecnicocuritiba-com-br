@@ -83,7 +83,7 @@ export const RatingBadge = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg shadow-sm",
+        "inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg shadow-xs",
         className
       )}
     >

@@ -22,7 +22,7 @@ export const PageTableOfContents = ({
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex min-h-11 w-full items-center justify-between gap-2 px-4 py-3 text-left text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:cursor-default md:pointer-events-none"
+        className="flex min-h-11 w-full items-center justify-between gap-2 px-4 py-3 text-left text-sm font-semibold text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3 md:cursor-default md:pointer-events-none"
       >
         {title}
         <ChevronDown
@@ -35,7 +35,7 @@ export const PageTableOfContents = ({
           <li key={it.id} className="py-1">
             <a
               href={`#${it.id}`}
-              className="inline-flex min-h-9 items-center text-sm text-muted-foreground underline-offset-4 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex min-h-9 items-center text-sm text-muted-foreground underline-offset-4 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3"
             >
               {it.label}
             </a>

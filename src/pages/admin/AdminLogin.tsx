@@ -48,7 +48,7 @@ const AdminLogin = () => {
             Acesso restrito. Apenas operadores autorizados conseguem visualizar leads do funil.
           </p>
           {session && !isAdmin && !loading && (
-            <div className="mb-4 text-xs p-2 rounded border border-destructive/40 bg-destructive/5 text-destructive">
+            <div className="mb-4 text-xs p-2 rounded-sm border border-destructive/40 bg-destructive/5 text-destructive">
               Você está logado mas não tem permissão de administrador.
             </div>
           )}

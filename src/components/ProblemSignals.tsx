@@ -35,7 +35,7 @@ export const ProblemSignals = ({
             <li key={s.to}>
               <a
                 href={s.to}
-                className="flex min-h-12 items-center gap-2 rounded-lg border border-dashed border-border bg-card/50 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex min-h-12 items-center gap-2 rounded-lg border border-dashed border-border bg-card/50 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3"
               >
                 <Activity className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                 {s.label}

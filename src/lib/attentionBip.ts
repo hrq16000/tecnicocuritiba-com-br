@@ -2,7 +2,7 @@
  * Feedback UX unificado quando o usuário tenta avançar sem preencher:
  * - Beep curto via WebAudio (não requer asset).
  * - Vibração leve (mobile) via navigator.vibrate.
- * - Anima os elementos alvo com a classe utilitária `.wa-attention` (pulse + ring).
+ * - Anima os elementos alvo com a classe utilitária `.wa-attention` (pulse + ring-3).
  *
  * O beep respeita o "Reduce Motion / silent": só toca uma vez por 800ms e
  * só se `sessionStorage.getItem("wa_bip_off") !== "1"`.
