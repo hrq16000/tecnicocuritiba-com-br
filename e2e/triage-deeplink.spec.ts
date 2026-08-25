@@ -38,18 +38,15 @@ test.describe("Triagem via deep link (#agendamento)", () => {
     expect(savedAfter).toContain('"equipamento":"pc"');
   });
 
-  test("hash com equipamento (#agendamento-notebook) pré-seleciona o serviço", async ({ page }) => {
+  test("hash com equipamento (#agendamento-notebook) já entra na etapa de sintoma", async ({ page }) => {
     await page.goto(`${BASE}/#agendamento-notebook`, { waitUntil: "domcontentloaded" });
 
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible({ timeout: 10000 });
 
-    // Equipamento pré-selecionado via deep link — etapa 0 exibe "Continuar"
-    await expect(
-      dialog.getByRole("button", { name: /Continuar/i }),
-    ).toBeVisible();
-    // O funil mostra a seleção inferida do link
-    await expect(dialog).toContainText(/PC \/ Notebook|Notebook/i);
+    // Equipamento já respondido pelo link — funil avança direto para
+    // marca/sintoma (etapa 2/5), sem exigir novo clique em "PC / Notebook".
+    await expect(dialog).toContainText(/Triagem — 2\/5/);
 
     // Seleção persistida (sobrevive a reload)
     const saved = await page.evaluate(() =>
