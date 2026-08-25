@@ -125,7 +125,7 @@ if (isMain) {
       } catch {
         continue; // binário/encoding — não é superfície de texto
       }
-      const isDist = file.startsWith("dist");
+      const isDist = file.startsWith("dist") || file.startsWith(".output");
       all = all.concat(scanContent(file, content, { dist: isDist }));
     }
   }
