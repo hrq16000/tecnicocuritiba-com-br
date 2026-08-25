@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -105,12 +105,36 @@ function AdminLeadsPage() {
   const fetchLeads = useServerFn(listFunnelLeads);
   const retry = useServerFn(retryAdminAlert);
   const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [busca, setBusca] = useState("");
+  const [statusFiltro, setStatusFiltro] = useState<string>("todos");
+  const [ordem, setOrdem] = useState<"desc" | "asc">("desc");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["funnel-leads"],
     queryFn: () => fetchLeads(),
     refetchInterval: 30_000,
   });
+
+  // Filtros locais (serviço/sintoma/localidade/origem + status do alerta) e
+  // ordenação por data. Sem PII: a busca nunca toca telefone/e-mail (não existem).
+  const filtrados = useMemo(() => {
+    let rows = data ?? [];
+    if (statusFiltro !== "todos") {
+      rows = rows.filter((l) => l.alert_status === statusFiltro);
+    }
+    const q = busca.trim().toLowerCase();
+    if (q) {
+      rows = rows.filter((l) =>
+        [l.equipamento, l.marca, l.sintoma, l.bairro, l.cidade, l.utm_source, l.utm_campaign]
+          .filter(Boolean)
+          .some((v) => String(v).toLowerCase().includes(q)),
+      );
+    }
+    return [...rows].sort((a, b) => {
+      const diff = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      return ordem === "asc" ? diff : -diff;
+    });
+  }, [data, busca, statusFiltro, ordem]);
 
   const handleRetry = async (id: string) => {
     setRetryingId(id);
