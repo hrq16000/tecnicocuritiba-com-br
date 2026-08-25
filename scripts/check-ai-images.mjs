@@ -56,6 +56,18 @@ const AI_SIGNATURES = [
 const FILENAME_RE =
   /(^|[._-])(ai-gen|ai_generated|aigen|midjourney|dall-?e|sdxl|stable-diffusion|firefly|comfyui)([._-]|$)/i;
 
+/**
+ * Exceções documentadas — identidade visual flat (logotipo/wordmark), NÃO
+ * fotografia apresentada como real. A regra Zero IA existe para proteger a
+ * prova fotográfica (E-E-A-T); estes arquivos são marca gráfica e seguem
+ * aqui de forma explícita e auditável até o redesign vetorial do logo.
+ * NÃO adicione fotos a esta lista.
+ */
+const BRAND_GRAPHICS_ALLOWLIST = new Set([
+  "src/assets/logo.png",
+  "public/lovable-uploads/b702f033-fd78-4d1e-ae32-2ad60f672710.png",
+]);
+
 function collect(target) {
   const files = [];
   for (const entry of fs.readdirSync(target, { withFileTypes: true })) {
@@ -70,6 +82,8 @@ const files = ROOTS.filter((r) => fs.existsSync(r)).flatMap(collect);
 const flagged = [];
 
 for (const file of files) {
+  const normalized = file.split(path.sep).join("/");
+  if (BRAND_GRAPHICS_ALLOWLIST.has(normalized)) continue;
   const base = path.basename(file);
   const nameHit = base.match(FILENAME_RE);
   if (nameHit) {
