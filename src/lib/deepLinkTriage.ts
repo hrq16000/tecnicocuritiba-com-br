@@ -7,6 +7,7 @@
  *   /servicos/conserto-celular#agendamento
  *   /servicos/conserto-celular#agendamento?equipamento=celular&sintoma=molhou
  *   /qualquer-rota#triagem?servico=pc&sintoma=nao-liga
+ *   /#agendamento-notebook        (sufixo = alias de equipamento)
  *
  * Regras de segurança:
  * - Só aceita ids que existem de fato nos ramos do funil (nunca inventa dados).
@@ -32,6 +33,18 @@ const ROUTE_EQUIPMENT: Array<[RegExp, Equipment]> = [
   [/\btv\b|televis/i, "tv"],
   [/notebook|computador|\bpc\b|informatica|desktop|formatacao|placa|ssd|memoria/i, "pc"],
 ];
+
+/**
+ * Aliases aceitos como sufixo do hash (#agendamento-notebook → pc).
+ * Só entram aliases que resolvem para um branch real do funil.
+ */
+const HASH_EQUIPMENT_ALIASES: Record<string, Equipment> = {
+  pc: "pc", notebook: "pc", computador: "pc", desktop: "pc",
+  celular: "celular", smartphone: "celular", iphone: "celular",
+  tv: "tv", televisao: "tv",
+  videogame: "videogame", console: "videogame",
+  som: "som", audio: "som",
+};
 
 const prettify = (slug: string) =>
   slug
@@ -65,7 +78,9 @@ export function parseTriageDeepLink(
 ): TriageDeepLink | null {
   if (!hash) return null;
   const [rawHash, rawQuery = ""] = hash.replace(/^#/, "").split("?");
-  const name = rawHash.toLowerCase();
+  const dashIdx = rawHash.indexOf("-");
+  const name = (dashIdx === -1 ? rawHash : rawHash.slice(0, dashIdx)).toLowerCase();
+  const suffix = dashIdx === -1 ? "" : rawHash.slice(dashIdx + 1).toLowerCase();
   if (name !== "agendamento" && name !== "triagem") return null;
 
   const params = new URLSearchParams(rawQuery);
@@ -73,6 +88,12 @@ export function parseTriageDeepLink(
 
   let equipamento: Equipment | null = null;
   if (wanted && getBranch(wanted as Equipment)) equipamento = wanted as Equipment;
+  // Sufixo do hash (#agendamento-notebook): alias explícito tem precedência
+  // sobre a inferência pela rota, mas perde para ?equipamento=.
+  if (!equipamento && suffix) {
+    const aliased = HASH_EQUIPMENT_ALIASES[suffix];
+    if (aliased && getBranch(aliased)) equipamento = aliased;
+  }
   if (!equipamento) equipamento = inferEquipment(pathname);
 
   const wantedSintoma = (params.get("sintoma") || params.get("problema") || "").toLowerCase();
