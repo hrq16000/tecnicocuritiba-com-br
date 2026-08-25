@@ -59,6 +59,7 @@
     "photos:strip": "node scripts/strip-exif.mjs",
     "photos:audit": "node scripts/strip-exif.mjs --dry-run",
     "check:photo-privacy": "node scripts/check-photo-privacy.mjs",
+    "check:ai-images": "node scripts/check-ai-images.mjs",
     "check:alt": "node scripts/check-alt-text.mjs",
     "photos:optimize": "node scripts/optimize-photos.mjs",
     "check:photos": "node scripts/optimize-photos.mjs --check",

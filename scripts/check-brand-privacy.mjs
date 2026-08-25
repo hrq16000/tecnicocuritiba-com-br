@@ -42,6 +42,17 @@ export const WA_RAW = /(?<![\d+])\+?55?41997452053(?!\d)/;
 export const WA_RAW_ALLOW =
   /wa\.me\/|api\.whatsapp\.com|whatsapp|WHATSAPP_NUMBER|NAP_PHONE|telephone|contactPoint/i;
 
+/** Contato exclusivo via WhatsApp: links mailto: são proibidos no portal. */
+export const MAILTO_LINK = /mailto:/i;
+
+/**
+ * Caixas postais de contato (contato@, atendimento@, …) não podem aparecer
+ * em superfícies publicadas. E-mails didáticos de posts (seu-email@exemplo.com,
+ * joao.silva@empresa.local) não correspondem a este padrão.
+ */
+export const CONTACT_EMAIL =
+  /\b(?:contato|atendimento|suporte|comercial|orcamento|orçamento|vendas|faleconosco|sac)@[a-z0-9.-]+\.[a-z]{2,}\b/i;
+
 /**
  * URLs de embed/mapas do Google carregam sequências longas de dígitos no
  * parâmetro `pb` — não são CNPJ. Só isentam a regra cnpj-digits; a palavra
@@ -84,6 +95,12 @@ export function scanContent(filePath, content, opts = {}) {
     }
     if (!opts.dist && WA_RAW.test(text) && !WA_RAW_ALLOW.test(text)) {
       violations.push({ line, rule: "whatsapp-raw-outside-link-context", excerpt });
+    }
+    if (MAILTO_LINK.test(text)) {
+      violations.push({ line, rule: "email-mailto-link", excerpt });
+    }
+    if (CONTACT_EMAIL.test(text)) {
+      violations.push({ line, rule: "email-contact-address", excerpt });
     }
   });
   return violations.map((v) => ({ file: filePath, ...v }));

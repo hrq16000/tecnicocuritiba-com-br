@@ -51,6 +51,8 @@ jobs:
         run: npm run check:nap
       - name: LGPD — fotos sem EXIF/GPS/XMP (seguras para o site e o GBP)
         run: npm run check:photo-privacy
+      - name: Zero IA — nenhuma imagem publicada com assinatura de geradores
+        run: npm run check:ai-images
       - name: Alt text obrigatório e descritivo em todas as imagens
         run: npm run check:alt
       - name: Fotos otimizadas (WebP + AVIF responsivos, sem raster pesado sem variante)
