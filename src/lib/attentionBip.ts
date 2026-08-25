@@ -56,6 +56,23 @@ export function attention(selector: string, root?: ParentNode): void {
     el.classList.add("wa-attention");
     window.setTimeout(() => el.classList.remove("wa-attention"), 2200);
   }
+  // Direciona o usuário ao campo que falta: rola até o primeiro alvo e
+  // move o foco para o controle preenchível dentro dele (a11y + mobile).
+  const first = els[0];
+  if (!first) return;
+  try {
+    first.scrollIntoView({ behavior: "smooth", block: "center" });
+  } catch { /* noop */ }
+  const focusable = first.matches("input, textarea, select, button, [tabindex]")
+    ? first
+    : first.querySelector<HTMLElement>(
+        "input, textarea, select, button, [tabindex]:not([tabindex='-1'])",
+      );
+  window.setTimeout(() => {
+    try {
+      focusable?.focus({ preventScroll: true });
+    } catch { /* noop */ }
+  }, 350);
 }
 
 export function bipAndAttention(selector: string, root?: ParentNode): void {

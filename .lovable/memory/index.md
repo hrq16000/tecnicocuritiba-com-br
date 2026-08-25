@@ -10,6 +10,7 @@
 
 ## Memórias (PT-BR)
 - [Identidade Visual e UI](mem://design/visual-identity-pt-br) — Estética Premium, pulse logo, restrições de layout.
+- [Política Zero IA em Imagens](mem://design/zero-ia-images) — Gate check:ai-images, allowlist de logo/wordmark, fotos só via registry Unsplash.
 - [Estratégia SEO e Arquitetura](mem://seo/strategy-and-architecture-pt-br) — Hierarquia local, IndexNow, Hubs e Glossário.
 - [Integridade de Schema e E-E-A-T](mem://seo/schema-integrity-pt-br) — Regras de rating, speakable e validação.
 - [Regras de Negócio e Preços](mem://business/pricing-and-policies-pt-br) — Preços padrão R$ 99,99, garantias e coleta.

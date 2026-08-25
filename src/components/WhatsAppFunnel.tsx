@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useGeolocation } from "@/hooks/useGeolocation";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   MessageCircle,
@@ -68,6 +69,8 @@ interface Answers {
   outroEquipamento: string;
   outroProblema: string;
   outroIdade: string;
+  /** Bairro digitado pelo cliente quando a geolocalização não detectou um. */
+  bairroManual: string;
   // Contexto detalhado (Etapa 2 — sempre visível)
   ctxQuando: string;     // ex: "Hoje", "Ontem", "Última semana", "Mais de 1 mês", "Sempre foi assim"
   ctxFrequencia: string; // ex: "Todo momento", "Só às vezes", "Só ao ligar", "Sob calor / uso pesado"
@@ -85,6 +88,7 @@ const EMPTY: Answers = {
   outroEquipamento: "",
   outroProblema: "",
   outroIdade: "",
+  bairroManual: "",
   ctxQuando: "",
   ctxFrequencia: "",
   ctxTentou: "",
@@ -131,6 +135,11 @@ function buildMessage(a: Answers): string {
   } else {
     if (a.marca) lines.push(`• Marca/tipo: ${a.marca}`);
     if (sintoma) lines.push(`• Sintoma: ${sintoma.label}`);
+  }
+  // Bairro digitado pelo cliente (fallback quando a geo não detectou) —
+  // o dado explícito da triagem sempre tem precedência sobre o inferido.
+  if ((a.bairroManual ?? "").trim()) {
+    lines.push(`• Bairro informado: ${(a.bairroManual ?? "").trim()}`);
   }
   // Contexto detalhado (Etapa 2)
   const ctx: string[] = [];
@@ -190,6 +199,7 @@ export const WhatsAppFunnel = () => {
   const [answers, setAnswers] = useState<Answers>(EMPTY);
   const [originLocation, setOriginLocation] = useState("cta");
   const [presetMessage, setPresetMessage] = useState<string | null>(null);
+  const geo = useGeolocation();
   const [submitting, setSubmitting] = useState(false);
   const submittingRef = useRef(false);
   const lastSubmitAtRef = useRef(0);
@@ -546,6 +556,18 @@ export const WhatsAppFunnel = () => {
 
 
 
+
+  // Prévia fiel da mensagem que será enviada (etapa final) — mesma montagem
+  // do submit. Memoizada para manter estável o identificador [ref: TRG-…].
+  const previewMessage = useMemo(() => {
+    if (step !== 4) return "";
+    try {
+      const base = buildMessage(answers);
+      return presetMessage ? `${presetMessage}\n\n---\n${base}` : base;
+    } catch {
+      return "";
+    }
+  }, [step, answers, presetMessage]);
 
   const submit = useCallback(async () => {
     // Bloqueio anti-duplo-clique: usa ref para evitar corrida com o setState.
@@ -978,6 +1000,36 @@ export const WhatsAppFunnel = () => {
               {answers.ctxUrgencia && <p>⚡ Urgência: {answers.ctxUrgencia}</p>}
               {requiresColeta && <p className="text-amber-700 dark:text-amber-400">🚚 Coleta autorizada · mín. R$ 300</p>}
             </div>
+
+            {/* Fallback de bairro: só aparece quando a geolocalização não detectou um. */}
+            {!geo.neighborhood && (
+              <div data-funnel-field="bairro">
+                <p className="text-xs font-semibold mb-1 text-foreground/80">
+                  Seu bairro (opcional — agiliza o agendamento)
+                </p>
+                <input
+                  type="text"
+                  className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-primary"
+                  placeholder="Ex.: Batel, Água Verde, Boqueirão…"
+                  value={answers.bairroManual}
+                  maxLength={60}
+                  onChange={(e) => update({ bairroManual: e.target.value })}
+                />
+              </div>
+            )}
+
+            {/* Transparência: o cliente vê exatamente o que será enviado. */}
+            {previewMessage && (
+              <details className="rounded-lg border border-border bg-card/50 p-2.5 text-[11px] leading-snug group">
+                <summary className="cursor-pointer font-bold text-foreground list-none flex items-center justify-between">
+                  <span>💬 Prévia da mensagem enviada no WhatsApp</span>
+                  <span className="text-[10px] text-muted-foreground group-open:hidden">ver</span>
+                </summary>
+                <pre className="mt-1.5 whitespace-pre-wrap font-sans text-foreground/80 max-h-48 overflow-y-auto">
+                  {previewMessage}
+                </pre>
+              </details>
+            )}
 
             <details className="rounded-lg border border-amber-500/50 bg-amber-500/10 p-2.5 text-[11px] leading-snug group">
               <summary className="cursor-pointer font-bold text-foreground list-none flex items-center justify-between">

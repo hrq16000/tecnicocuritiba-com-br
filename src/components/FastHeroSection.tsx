@@ -1,5 +1,13 @@
 import { useState } from "react";
 import { GeoCityChip } from "@/components/GeoCityChip";
+import { IMAGES } from "@/lib/images";
+import { creditLabel, getImageCredit, imageTitle } from "@/lib/imageCredits";
+
+// Hero usa APENAS foto real auditada (regra Zero IA — gate check:ai-images).
+const heroCredit = getImageCredit("tecnicoTrabalhando");
+const HERO_BASE = IMAGES.tecnicoTrabalhando.split("?")[0];
+const heroVariant = (w: number) =>
+  `${HERO_BASE}?fm=webp&auto=format&fit=crop&w=${w}&h=${w}&q=72`;
 
 const WHATSAPP_NUMBER = "5541997452053";
 const WHATSAPP_MESSAGE =
@@ -108,16 +116,29 @@ export const FastHeroSection = () => {
           <div className="order-2 flex justify-center lg:justify-end">
             <div className="relative">
               <img
-                alt="Técnico de informática profissional realizando conserto de computador em Curitiba"
-                className="relative w-64 rounded-2xl shadow-2xl sm:w-80 md:w-96 lg:w-auto lg:max-w-md"
+                alt={IMAGES.tecnicoTrabalhandoAlt}
+                title={heroCredit ? imageTitle(heroCredit) : IMAGES.tecnicoTrabalhandoAlt}
+                className="relative w-64 rounded-2xl shadow-2xl sm:w-80 md:w-96 lg:w-auto lg:max-w-md aspect-square object-cover"
                 loading="eager"
                 decoding="async"
                 width="400"
                 height="400"
-                src="/lovable-uploads/77ec0b6a-9ce8-4e20-b893-7eff7ec03859-480.webp"
-                srcSet="/lovable-uploads/77ec0b6a-9ce8-4e20-b893-7eff7ec03859-240.webp 240w, /lovable-uploads/77ec0b6a-9ce8-4e20-b893-7eff7ec03859-360.webp 360w, /lovable-uploads/77ec0b6a-9ce8-4e20-b893-7eff7ec03859-480.webp 480w, /lovable-uploads/77ec0b6a-9ce8-4e20-b893-7eff7ec03859-800.webp 800w"
+                src={heroVariant(480)}
+                srcSet={`${heroVariant(256)} 256w, ${heroVariant(384)} 384w, ${heroVariant(480)} 480w, ${heroVariant(800)} 800w`}
                 sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, (max-width: 1024px) 384px, 448px"
               />
+              {heroCredit && (
+                <p className="absolute bottom-1.5 left-2 rounded bg-black/55 px-1.5 py-0.5 text-[9px] text-white/85">
+                  <a
+                    href={heroCredit.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline-offset-2 hover:underline"
+                  >
+                    {creditLabel(heroCredit)}
+                  </a>
+                </p>
+              )}
               {/* Badge da imagem: prova concreta, não claim genérico */}
               <div className="absolute -bottom-3 -right-3 rounded-lg bg-accent px-3 py-2 text-xs font-extrabold text-accent-foreground shadow-lg sm:text-sm">
                 <div className="flex items-center gap-1.5">
