@@ -4,7 +4,7 @@
  * /abrir-os e embutidos na mensagem enviada ao atendimento.
  *
  * Regras globais respeitadas:
- * - Zero CNPJ e zero e-mail em qualquer texto.
+ * - Nenhum dado fiscal da empresa e nenhum e-mail em texto publicado.
  * - Número de WhatsApp nunca aparece como texto visível (só no href wa.me).
  */
 
