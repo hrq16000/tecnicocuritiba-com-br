@@ -54,6 +54,27 @@ if (!existsSync(resolve(process.cwd(), "src/lib/jsonLd.ts"))) {
   errors.push("src/lib/jsonLd.ts ausente (fonte única dos schemas estruturais)");
 }
 
+// 7. Módulo O.S.: metadados OG/Twitter/canonical + FAQPage no SSR da rota /abrir-os
+const abrirOs = read("src/routes/abrir-os.tsx");
+for (const tag of ["og:title", "og:description", "twitter:card", "canonical"]) {
+  if (!abrirOs.includes(tag)) errors.push(`abrir-os.tsx sem ${tag} no head()`);
+}
+if (!abrirOs.includes("buildFaqPageSchema")) {
+  errors.push("abrir-os.tsx sem FAQPage (buildFaqPageSchema) no head() SSR");
+}
+if (!abrirOs.includes("BreadcrumbList")) {
+  errors.push("abrir-os.tsx sem BreadcrumbList JSON-LD no head() SSR");
+}
+if (!existsSync(resolve(process.cwd(), "src/routes/ordem-de-servico.tsx"))) {
+  errors.push("src/routes/ordem-de-servico.tsx ausente (alias 301 para /abrir-os)");
+}
+if (existsSync(resolve(process.cwd(), "public/sitemap-main.xml"))) {
+  const sitemap = read("public/sitemap-main.xml");
+  if (!sitemap.includes("/abrir-os")) {
+    errors.push("sitemap-main.xml sem a URL /abrir-os");
+  }
+}
+
 if (errors.length) {
   console.error("[check:seo-ssr] FALHOU:");
   errors.forEach((e) => console.error(`  ✗ ${e}`));
