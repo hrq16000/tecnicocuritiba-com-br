@@ -135,7 +135,7 @@ export const Header = () => {
             height="98"
             decoding="sync"
             // @ts-ignore - fetchpriority is valid HTML attribute
-            fetchpriority="high"
+            fetchPriority="high"
             className="h-12 w-auto object-scale-down transition-[height] duration-200 sm:h-14 md:h-16 [html[data-scrolled='1']_&]:h-9 [html[data-scrolled='1']_&]:sm:h-10 [html[data-scrolled='1']_&]:md:h-11"
           />
         </a>

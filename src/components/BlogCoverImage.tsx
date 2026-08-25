@@ -3,7 +3,7 @@
  * local em /public/blog-covers/[slug]/cover-{480,768,1200}.{avif,webp,jpg}.
  *
  * - width/height explícitos = 1200×630 (evita CLS).
- * - `priority=true` no post aberto (LCP): `fetchpriority="high" loading="eager"`.
+ * - `priority=true` no post aberto (LCP): `fetchPriority="high" loading="eager"`.
  * - `priority=false` em listagens: `loading="lazy" decoding="async"`.
  * - Slugs sem cover local caem no fallback (Unsplash) via `fallbackSrc`.
  */
@@ -80,7 +80,7 @@ export function BlogCoverImage({
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
         // @ts-expect-error fetchpriority is valid HTML
-        fetchpriority={priority ? "high" : "auto"}
+        fetchPriority={priority ? "high" : "auto"}
         className={className}
       />
     );
@@ -104,7 +104,7 @@ export function BlogCoverImage({
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
         // @ts-expect-error fetchpriority is valid HTML
-        fetchpriority={priority ? "high" : "auto"}
+        fetchPriority={priority ? "high" : "auto"}
         className={className}
       />
     </picture>
