@@ -54,6 +54,7 @@
     "perf:local-pages": "node scripts/lh-local-pages.mjs",
     "check:policy-jsonld": "node scripts/check-policy-jsonld.mjs",
     "check:feeds": "node scripts/check-feeds.mjs",
+    "check:seo-ssr": "node scripts/check-seo-ssr.mjs",
     "check:nap": "node scripts/check-nap-consistency.mjs",
     "check:cluster-jsonld": "node scripts/check-cluster-jsonld.mjs",
     "photos:strip": "node scripts/strip-exif.mjs",

@@ -45,6 +45,8 @@ jobs:
         run: npm run check:cluster-jsonld
       - name: Feeds e sitemaps (XML válido, datas coerentes, sem data futura)
         run: npm run check:feeds
+      - name: SEO SSR (LocalBusiness/Organization/HowTo no SSR, robots e sitemap íntegros)
+        run: npm run check:seo-ssr
       - name: LGPD — ROPA sincronizado com as decisões 1–4
         run: npm run check:ropa
       - name: NAP consistente (telefone, horários e cidade x src/lib/nap.ts)
