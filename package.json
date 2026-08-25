@@ -12,6 +12,8 @@
     "build:dev": "vite build --mode development",
     "check:seo": "bun scripts/check-seo-basics.ts index.html",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "check:ts-expect-error": "tsc --noEmit 2>&1 | grep -q TS2578 && { echo '✗ @ts-expect-error não utilizado (TS2578) — remova a diretiva.'; exit 1; } || echo '✓ Sem @ts-expect-error não utilizado'",
     "preview": "vite preview",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
