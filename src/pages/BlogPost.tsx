@@ -104,11 +104,10 @@ const BlogPost = () => {
       "datePublished": `${post.date}T08:00:00-03:00`,
       "dateModified": `${post.date}T08:00:00-03:00`,
       // Discover requires high-res image (min 1200px wide). Provide multiple aspect ratios.
-      "image": [
-        { "@type": "ImageObject", "url": heroImage, "width": 1600, "height": 900 },
-        { "@type": "ImageObject", "url": heroImage, "width": 1200, "height": 1200 },
-        { "@type": "ImageObject", "url": heroImage, "width": 1200, "height": 675 }
-      ],
+      "image": categoryCover
+        ? [{ "@type": "ImageObject", "url": heroImage, "width": 1200, "height": 630,
+          "caption": categoryCover.alt, "creditText": "Unsplash", "license": "https://unsplash.com/license", "acquireLicensePage": categoryCover.source }]
+        : [{ "@type": "ImageObject", "url": heroImage, "width": 1600, "height": 900 }],
       "thumbnailUrl": heroImage,
       "author": {
         "@type": "Person",
@@ -212,8 +211,8 @@ const BlogPost = () => {
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:image" content={heroImageOg} />
         <meta property="og:image:secure_url" content={heroImageOg} />
-        <meta property="og:image:width" content="1600" />
-        <meta property="og:image:height" content="900" />
+        <meta property="og:image:width" content={categoryCover ? "1200" : "1600"} />
+        <meta property="og:image:height" content={categoryCover ? "630" : "900"} />
         <meta property="og:image:alt" content={post.title} />
         <meta property="article:published_time" content={`${post.date}T08:00:00-03:00`} />
         <meta property="article:modified_time" content={`${post.date}T08:00:00-03:00`} />
@@ -311,16 +310,17 @@ const BlogPost = () => {
                         : undefined
                     }
                     sizes="(max-width: 768px) 100vw, 1200px"
-                    alt={post.title}
+                    alt={categoryCover?.alt ?? post.title}
                     className="w-full h-full object-cover"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    width={1600}
-                    height={900}
+                    width={categoryCover ? 1200 : 1600}
+                    height={categoryCover ? 630 : 900}
                   />
                 )}
               </AspectRatio>
+              {categoryCover && <p className="mt-2 text-xs text-muted-foreground">Foto: <a href={categoryCover.source} target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a> (<a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer" className="underline">licença</a>)</p>}
             </div>
             <article className="max-w-3xl mx-auto prose prose-lg prose-headings:text-primary prose-headings:font-heading prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-accent">
               <BlogTOCAndShare
