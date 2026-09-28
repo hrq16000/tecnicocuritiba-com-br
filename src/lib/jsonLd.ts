@@ -8,7 +8,7 @@
  * o gate `check:seo-ssr` bloqueia regressão.
  */
 
-import { NAP, napContactPoint, napOpeningHours } from "@/lib/nap";
+import { NAP, NAP_SOCIAL, napContactPoint, napOpeningHours, napSameAs } from "@/lib/nap";
 
 export const SITE = "https://tecnicocuritiba.com.br";
 
@@ -44,14 +44,14 @@ export const localBusinessSchema = {
     { "@type": "City", name: "Campo Magro" },
   ],
   openingHoursSpecification: napOpeningHours(),
-  sameAs: [NAP.whatsappUrl],
+  sameAs: napSameAs(),
   knowsAbout: [
     "Manutenção de computadores", "Conserto de notebooks", "Formatação Windows",
     "Remoção de vírus", "Upgrade de hardware", "Configuração de redes",
     "Suporte técnico em informática", "Instalação de câmeras CFTV",
     "Conserto de impressoras", "Assistência de eletrodomésticos inteligentes",
   ],
-  hasMap: "https://www.google.com/maps?cid=tecnicocuritiba",
+  ...(NAP_SOCIAL.googleBusiness ? { hasMap: NAP_SOCIAL.googleBusiness } : {}),
 } as const;
 
 export const organizationSchema = {
@@ -64,8 +64,21 @@ export const organizationSchema = {
   url: SITE,
   logo: `${SITE}/logo.png`,
   contactPoint: napContactPoint(),
-  sameAs: [NAP.whatsappUrl],
+  sameAs: napSameAs(),
 } as const;
+
+/**
+ * Offer "a partir de" para schema Service. Usa apenas valores já publicados
+ * na política de preços (visita R$ 99,99; reparo em bancada/coleta mínimo R$ 300).
+ */
+export const serviceOffer = (minPrice: "99.99" | "300", url: string) => ({
+  "@type": "Offer",
+  priceCurrency: "BRL",
+  price: minPrice,
+  url,
+  availability: "https://schema.org/InStock",
+  priceSpecification: { "@type": "PriceSpecification", priceCurrency: "BRL", minPrice },
+});
 
 export interface FaqItem {
   question: string;

@@ -13,6 +13,16 @@ export const NAP_PHONE_E164 = "+5541997452053";
 /** Somente dígitos com DDI — usado em `https://wa.me/<digits>`. */
 export const NAP_PHONE_DIGITS = "5541997452053";
 
+/**
+ * Perfis oficiais para `sameAs` (LocalBusiness/Organization).
+ * Preencher SOMENTE com URLs reais e públicas; vazio = omitido do JSON-LD.
+ */
+export const NAP_SOCIAL: { instagram: string; facebook: string; googleBusiness: string } = {
+  instagram: "",
+  facebook: "",
+  googleBusiness: "",
+};
+
 export const NAP = {
   /** Razão social / nome do negócio exibido em LocalBusiness e Organization. */
   name: "Técnico em Curitiba — Assistência Técnica em Informática",
@@ -65,4 +75,10 @@ export const napContactPoint = () => [
     availableLanguage: ["Portuguese", "pt-BR"],
     url: NAP.whatsappUrl,
   },
+];
+
+/** Lista `sameAs`: WhatsApp oficial + perfis preenchidos em NAP_SOCIAL. */
+export const napSameAs = (): string[] => [
+  `https://wa.me/${NAP_PHONE_DIGITS}`,
+  ...Object.values(NAP_SOCIAL).filter((u): u is string => /^https:\/\//.test(u)),
 ];

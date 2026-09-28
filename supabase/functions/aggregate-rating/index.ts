@@ -12,7 +12,7 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 };
 
-const MIN_REVIEWS = 10; // política: só publica AggregateRating com >=10 reviews reais
+const MIN_REVIEWS = 5; // política: só publica AggregateRating com >=5 reviews reais (verified + published)
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {

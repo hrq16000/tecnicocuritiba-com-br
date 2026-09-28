@@ -107,6 +107,7 @@ export const ServicoBairroTemplate = ({ data }: { data: ServicoBairroData }) => 
     "@context": "https://schema.org",
     "@type": "Service",
     name: `${data.servico} no ${data.bairro}`,
+    serviceType: data.servico,
     description: data.metaDescription,
     provider: {
       "@type": "LocalBusiness",
