@@ -17,11 +17,11 @@ export const NAP_PHONE_DIGITS = "5541997452053";
  * Perfis oficiais para `sameAs` (LocalBusiness/Organization).
  * Preencher SOMENTE com URLs reais e públicas; vazio = omitido do JSON-LD.
  */
-export const NAP_SOCIAL = {
+export const NAP_SOCIAL: { instagram: string; facebook: string; googleBusiness: string } = {
   instagram: "",
   facebook: "",
   googleBusiness: "",
-} as const;
+};
 
 export const NAP = {
   /** Razão social / nome do negócio exibido em LocalBusiness e Organization. */
