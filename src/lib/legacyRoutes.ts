@@ -8,8 +8,8 @@ import legacySource from "@/LegacyApp.tsx?raw";
 export const LEGACY_ROUTE_PATTERNS: string[] = Array.from(
   new Set(
     Array.from(legacySource.matchAll(/<Route\s+path="([^"]+)"/g))
-      .map((m) => m[1])
-      .filter((p) => p !== "*"),
+      .map((m) => m[1] ?? "")
+      .filter((p) => p !== "" && p !== "*"),
   ),
 );
 
