@@ -1,5 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { Link } from "react-router-dom";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ArrowRight, TrendingUp, MapPin, Monitor, Shield, HardDrive, Wifi, Wrench, Server, Cpu, Tv, Smartphone, Database, Zap, LocateFixed, ChevronDown } from "lucide-react";
@@ -126,7 +127,8 @@ type GeoState = "idle" | "prompting" | "loading" | "granted" | "denied";
 export const TopSearchedServicesSection = () => {
   const isMobile = useIsMobile();
   const serviceCount = isMobile ? 3 : 6;
-  const randomizedServices = useMemo(() => shuffleArray(allServices).slice(0, serviceCount), [serviceCount]);
+  const rng = usePageRng("top-searched");
+  const randomizedServices = useMemo(() => seededShuffle(allServices, rng).slice(0, serviceCount), [serviceCount]);
 
   const [geoState, setGeoState] = useState<GeoState>("idle");
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
@@ -188,13 +190,13 @@ export const TopSearchedServicesSection = () => {
       const nearby = sorted.slice(0, 3);
       return nearby.map((city, i) => ({
         ...city,
-        bairros: shuffleArray(city.bairros).slice(0, i === 0 ? 6 : 4),
+        bairros: seededShuffle(city.bairros, rng).slice(0, i === 0 ? 6 : 4),
       }));
     }
     // Show all with randomized bairros
     return cityLinks.map(city => ({
       ...city,
-      bairros: shuffleArray(city.bairros).slice(0, 4),
+      bairros: seededShuffle(city.bairros, rng).slice(0, 4),
     }));
   }, [geoState, closestCity, showAll, userCoords]);
 

@@ -1,5 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useMemo } from "react";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { Link } from "react-router-dom";
 import { MessageCircle, CheckCircle, Zap, Shield, Clock, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,7 +39,8 @@ const headlines: { text: string; path: string }[] = [
 ];
 
 export const PainSection = () => {
-  const headline = useMemo(() => headlines[Math.floor(Math.random() * headlines.length)], []);
+  const rng = usePageRng("pain");
+  const headline = useMemo(() => headlines[Math.floor(rng() * headlines.length)], []);
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Meu computador está com problema e preciso de ajuda técnica urgente.")}`;
 
   const handleWhatsAppClick = () => {

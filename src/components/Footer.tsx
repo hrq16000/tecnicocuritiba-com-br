@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/nap";
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
@@ -11,8 +12,8 @@ const trackFooterWhatsApp = (location: string) => {
   import("@/lib/analytics").then(({ trackCTAClick }) => trackCTAClick("whatsapp", location));
 };
 
-function pickRandom<T>(arr: T[], n: number): T[] {
-  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+function pickRandom<T>(arr: T[], n: number, rng: () => number): T[] {
+  const shuffled = seededShuffle(arr, rng);
   return shuffled.slice(0, n);
 }
 
@@ -212,10 +213,11 @@ const organizationSchema = {
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const rng = usePageRng("footer");
   const servicosFooter = useMemo(() => {
-    const info = pickRandom(informaticaLinks, 3);
-    const serv = pickRandom(servicosLinks, 3);
-    const proc = pickRandom(procedimentosTvLinks, 3);
+    const info = pickRandom(informaticaLinks, 3, rng);
+    const serv = pickRandom(servicosLinks, 3, rng);
+    const proc = pickRandom(procedimentosTvLinks, 3, rng);
     return [
       { label: "Todos os Serviços", to: "/servicos" },
       ...info, ...serv, ...proc,

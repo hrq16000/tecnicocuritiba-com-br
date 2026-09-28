@@ -1,5 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { MapPin, Clock, Navigation, Loader2 } from "lucide-react";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { MouseGlow } from "@/components/MouseGlow";
@@ -107,6 +108,7 @@ export const CoverageMapSection = () => {
   const { city } = useGeolocation();
 
   // Pick which regions to show based on detected city
+  const rng = usePageRng("coverage");
   const visibleIndices = useMemo(() => {
     const cityKey = city.toLowerCase();
     const matched = cityToRegionMap[cityKey] || [];
@@ -114,15 +116,15 @@ export const CoverageMapSection = () => {
     if (matched.length > 0) {
       const remaining = Array.from({ length: regions.length }, (_, i) => i)
         .filter(i => !matched.includes(i));
-      const shuffled = shuffleArray(remaining);
+      const shuffled = seededShuffle(remaining, rng);
       const needed = MAX_VISIBLE - matched.length;
       return [...matched, ...shuffled.slice(0, Math.max(0, needed))];
     }
 
     // No match — pick 4 random, always include one Curitiba
-    const curitibaIdx = Math.floor(Math.random() * 4); // 0-3
-    const others = shuffleArray([4, 5, 6, 7]).slice(0, MAX_VISIBLE - 1);
-    return shuffleArray([curitibaIdx, ...others]);
+    const curitibaIdx = Math.floor(rng() * 4); // 0-3
+    const others = seededShuffle([4, 5, 6, 7], rng).slice(0, MAX_VISIBLE - 1);
+    return seededShuffle([curitibaIdx, ...others], rng);
   }, [city]);
 
   const fetchRoutes = useCallback(async () => {
