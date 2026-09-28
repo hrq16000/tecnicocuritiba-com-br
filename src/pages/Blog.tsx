@@ -460,7 +460,6 @@ const Blog = () => {
     4, rngPicks
   ), [allContent]);
 
-  console.log("PICKS", allContent.length, editorPicks.map((p) => p.slug).join(","));
   const stats = useMemo(() => ({
     artigos: allContent.filter((c) => c.type === "blog").length,
     problemas: allContent.filter((c) => c.type === "problema").length,
