@@ -99,7 +99,7 @@ export function detectCategoryFromSlug(slug: string): CategoryKey | null {
   return null;
 }
 
-export function getCategoryCover(slug: string) {
+export function getCategoryCover(slug: string): { src: string; srcSet: string; alt?: string; source?: string } | null {
   const tutorial = tutorialCategories.get(slug);
   if (tutorial) return TUTORIAL_COVERS[tutorial];
   const key = detectCategoryFromSlug(slug);

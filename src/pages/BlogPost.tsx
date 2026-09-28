@@ -108,7 +108,7 @@ const BlogPost = () => {
       "datePublished": `${post.date}T08:00:00-03:00`,
       "dateModified": `${post.date}T08:00:00-03:00`,
       // Discover requires high-res image (min 1200px wide). Provide multiple aspect ratios.
-      "image": categoryCover
+      "image": categoryCover?.source
         ? [{ "@type": "ImageObject", "url": heroImage, "width": 1200, "height": 630,
           "caption": categoryCover.alt, "creditText": "Unsplash", "license": "https://unsplash.com/license", "acquireLicensePage": categoryCover.source }]
         : [{ "@type": "ImageObject", "url": heroImage, "width": 1600, "height": 900 }],
@@ -324,7 +324,7 @@ const BlogPost = () => {
                   />
                 )}
               </AspectRatio>
-              {categoryCover && <p className="mt-2 text-xs text-muted-foreground">Foto: <a href={categoryCover.source} target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a> (<a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer" className="underline">licença</a>)</p>}
+              {categoryCover?.source && <p className="mt-2 text-xs text-muted-foreground">Foto: <a href={categoryCover.source} target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a> (<a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer" className="underline">licença</a>)</p>}
             </div>
             <article className="max-w-3xl mx-auto prose prose-lg prose-headings:text-primary prose-headings:font-heading prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-accent">
               <BlogTOCAndShare
