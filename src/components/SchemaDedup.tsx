@@ -59,6 +59,9 @@ export function dedupeJsonLd(doc: Document = document): number {
     const keep = local ?? list[0];
     for (const s of list) {
       if (s === keep) continue;
+      // Só mexe em nós já hidratados pelo React; antes disso, alterar o nó
+      // causa erro de hidratação. Uma passada posterior os alcança.
+      if (!Object.keys(s).some((k) => k.startsWith("__reactFiber"))) continue;
       // Desativa em vez de remover: o nó pertence ao React e removê-lo antes
       // da hidratação quebra a página inteira (erro de hidratação).
       s.type = "application/x-jsonld-dedup";
@@ -80,9 +83,11 @@ export const SchemaDedup = () => {
     // (schemas injetados por import dinâmico).
     const raf = requestAnimationFrame(run);
     const timer = window.setTimeout(run, 1200);
+    const late = window.setTimeout(run, 4000);
     return () => {
       cancelAnimationFrame(raf);
       window.clearTimeout(timer);
+      window.clearTimeout(late);
     };
   }, [location.pathname]);
 
