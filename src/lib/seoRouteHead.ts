@@ -112,9 +112,9 @@ const PILOT_ROUTES: readonly PilotRoute[] = [
   // --- Onda 2 (domínio comercial) ---
   {
     path: "/assistencia-tecnica-curitiba",
-    title: "Assistência Técnica em Curitiba | Computador, Notebook e Mais",
+    title: "Assistência Técnica Especializada em Curitiba | Reparo de Bancada",
     description:
-      "Assistência técnica em Curitiba e Região Metropolitana para computador, notebook e outros equipamentos. Atendimento em domicílio, remoto ou bancada com triagem pelo WhatsApp.",
+      "Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico, garantia e orçamento pelo WhatsApp.",
   },
   {
     path: "/assistencia-tecnica-computador-curitiba",
