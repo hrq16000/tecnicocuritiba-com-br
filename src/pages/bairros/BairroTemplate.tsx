@@ -21,6 +21,8 @@ import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { ServiceGallery } from "@/components/ServiceGallery";
 import { buildBairroFaqs, dedupeFaqs } from "@/lib/localFaq";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
+import { NearbyBairrosLinks } from "@/components/NearbyBairrosLinks";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView, trackCTAClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
@@ -504,6 +506,14 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
           />
         </AnimatedSection>
 
+
+        <ReviewsGrid
+          filter={{ city: data.cidade, neighborhood: data.nome }}
+          fallbackToCity
+          title={`Avaliações de clientes em ${data.nome} e região`}
+        />
+
+        {data.cidade === "Curitiba" && <NearbyBairrosLinks slug={data.slug} nome={data.nome} />}
 
         <AnimatedSection>
           <ServiceLocalLinks currentCity={data.cidade} currentNeighborhood={data.nome} />

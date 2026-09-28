@@ -15,6 +15,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -134,6 +135,7 @@ const TecnicoInformaticaCampoMagro = () => {
 
         <RealImageSection imageKey="componentesSsd" caption="Upgrade SSD e memória RAM" />
 
+        <ReviewsGrid filter={{ city: "Campo Magro" }} title="Avaliações de clientes em Campo Magro" />
         <ServiceLocalLinks currentCity="Campo Magro" />
         <LocalPhotoGallery local="Campo Magro" />
         <LocalFAQSection title="Perguntas Frequentes - Campo Magro" faqs={localFaqs} />

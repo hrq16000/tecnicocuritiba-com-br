@@ -41,6 +41,7 @@ const ALL_ROUTES = [
   { path: "/", required: ["LocalBusiness", "WebSite"] },
   { path: "/suporte-empresas", required: ["LocalBusiness", "WebSite", "BreadcrumbList", "FAQPage", "Service"] },
   { path: "/assistencia-tecnica-curitiba", required: ["BreadcrumbList", "LocalBusiness", "FAQPage", "Service", "WebSite"] },
+  ...readSitemap("public/sitemap-main.xml").filter((p) => p.startsWith("/tecnico-informatica-")).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "BreadcrumbList"] })),
   ...pick(bairros).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "BreadcrumbList"] })),
   ...pick(servicos).map((p) => ({ path: p, required: ["LocalBusiness", "WebSite", "Service"] })),
 ];

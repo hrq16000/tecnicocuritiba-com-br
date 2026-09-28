@@ -15,6 +15,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -246,6 +247,7 @@ const TecnicoInformaticaColombo = () => {
 
         <RealImageSection imageKey="diagnostico" caption="Diagnóstico profissional de hardware" />
 
+        <ReviewsGrid filter={{ city: "Colombo" }} title="Avaliações de clientes em Colombo" />
         <ServiceLocalLinks currentCity="Colombo" />
         <LocalPhotoGallery local="Colombo" />
         <LocalFAQSection title="Perguntas Frequentes - Colombo" faqs={localFaqs} />

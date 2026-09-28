@@ -15,6 +15,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -227,6 +228,7 @@ const TecnicoInformaticaFazendaRioGrande = () => {
 
         <RealImageSection imageKey="placaMae" caption="Diagnóstico de placa-mãe profissional" />
 
+        <ReviewsGrid filter={{ city: "Fazenda Rio Grande" }} title="Avaliações de clientes em Fazenda Rio Grande" />
         <ServiceLocalLinks currentCity="Fazenda Rio Grande" />
         <LocalPhotoGallery local="Fazenda Rio Grande" />
         <LocalFAQSection title="Perguntas Frequentes - Fazenda Rio Grande" faqs={localFaqs} />
