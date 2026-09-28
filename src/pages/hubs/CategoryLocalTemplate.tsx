@@ -280,9 +280,16 @@ export const CategoryHub = ({ categoryId }: { categoryId: CategoryId }) => {
     "@context": "https://schema.org",
     "@type": "Service",
     name: category.titlePrefix,
+    serviceType: category.titlePrefix,
     description,
     provider: { "@type": "LocalBusiness", name: "Técnico em Curitiba", url: "https://tecnicocuritiba.com.br" },
     areaServed: { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "BRL",
+      price: "300",
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "BRL", minPrice: "300", description: "Reparo mínimo com diagnóstico incluso. Coleta e entrega conforme distância." },
+    },
   };
 
   return (

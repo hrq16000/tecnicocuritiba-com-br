@@ -67,6 +67,19 @@ export const organizationSchema = {
   sameAs: [NAP.whatsappUrl],
 } as const;
 
+/**
+ * Offer "a partir de" para schema Service. Usa apenas valores já publicados
+ * na política de preços (visita R$ 99,99; reparo em bancada/coleta mínimo R$ 300).
+ */
+export const serviceOffer = (minPrice: "99.99" | "300", url: string) => ({
+  "@type": "Offer",
+  priceCurrency: "BRL",
+  price: minPrice,
+  url,
+  availability: "https://schema.org/InStock",
+  priceSpecification: { "@type": "PriceSpecification", priceCurrency: "BRL", minPrice },
+});
+
 export interface FaqItem {
   question: string;
   answer: string;

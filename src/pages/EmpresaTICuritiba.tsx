@@ -8,6 +8,7 @@ import PageSummaryBand from "@/components/PageSummaryBand";
 import { PrecoVisitaTecnica } from "@/components/PrecoVisitaTecnica";
 import BusinessHero from "@/components/b2b/BusinessHero";
 import BusinessPageSchema from "@/components/b2b/BusinessPageSchema";
+import { SITE, serviceOffer } from "@/lib/jsonLd";
 
 
 const WHATSAPP_URL = "https://wa.me/5541997452053?text=" + encodeURIComponent("Olá! Quero suporte de TI para minha empresa em Curitiba.");
@@ -80,6 +81,25 @@ export default function EmpresaTICuritiba() {
         faq={FAQ}
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "@id": `${SITE}/empresa-de-ti-curitiba#service`,
+            name: "Empresa de TI em Curitiba",
+            serviceType: "Suporte de TI para empresas",
+            url: `${SITE}/empresa-de-ti-curitiba`,
+            provider: { "@id": `${SITE}/#organization` },
+            areaServed: [
+              { "@type": "City", name: "Curitiba" },
+              { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
+            ],
+            offers: serviceOffer("99.99", `${SITE}/empresa-de-ti-curitiba`),
+          }),
+        }}
+      />
       <main id="main-content">
       <BusinessHero
         eyebrow="Suporte de TI corporativo em Curitiba"

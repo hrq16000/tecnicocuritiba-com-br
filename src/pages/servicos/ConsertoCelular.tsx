@@ -70,6 +70,13 @@ const ConsertoCelular = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Conserto de Celular",
+    serviceType: "Conserto de Celular",
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "BRL",
+      price: "300",
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "BRL", minPrice: "300", description: "Reparo mínimo com diagnóstico incluso. Coleta e entrega conforme distância." },
+    },
     description: "Serviço de conserto de celular e smartphone em Curitiba e região metropolitana.",
     provider: {
       "@type": "LocalBusiness",

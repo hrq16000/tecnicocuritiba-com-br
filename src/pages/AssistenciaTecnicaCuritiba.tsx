@@ -327,6 +327,12 @@ export default function AssistenciaTecnicaCuritiba() {
     ],
     provider: { "@id": "https://tecnicocuritiba.com.br/assistencia-tecnica-curitiba#localbusiness" },
     url: "https://tecnicocuritiba.com.br/assistencia-tecnica-curitiba",
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "BRL",
+      price: "99.99",
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "BRL", minPrice: "99.99" },
+    },
     availableChannel: {
       "@type": "ServiceChannel",
       serviceUrl: "https://wa.me/5541997452053",

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { PageSEO } from "@/components/PageSEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { SITE, serviceOffer } from "@/lib/jsonLd";
 
 /**
  * Onda 2 — páginas "assistência técnica de computador/notebook em Curitiba".
@@ -110,6 +111,26 @@ function Page({ c }: { c: Config }) {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: c.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "@id": `${SITE}${c.path}#service`,
+            name: c.h1,
+            serviceType: c.crumb,
+            description: c.description,
+            url: `${SITE}${c.path}`,
+            provider: { "@id": `${SITE}/#organization` },
+            areaServed: [
+              { "@type": "City", name: "Curitiba" },
+              { "@type": "AdministrativeArea", name: "Região Metropolitana de Curitiba" },
+            ],
+            offers: serviceOffer("99.99", `${SITE}${c.path}`),
           }),
         }}
       />

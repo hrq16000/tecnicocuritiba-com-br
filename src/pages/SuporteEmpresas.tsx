@@ -117,6 +117,12 @@ const SuporteEmpresas = () => {
           areaServed: { "@type": "City", name: "Curitiba" },
           provider: baseProvider,
           url: "https://tecnicocuritiba.com.br/suporte-empresas",
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "BRL",
+            price: "99.99",
+            priceSpecification: { "@type": "PriceSpecification", priceCurrency: "BRL", minPrice: "99.99", description: "Visita técnica corporativa (até 30 min). Contratos recorrentes sob levantamento." },
+          },
         });
       });
     });
