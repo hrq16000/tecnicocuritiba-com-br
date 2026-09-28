@@ -478,8 +478,6 @@ const IdleEnhancements = () => {
 
   return (
     <Suspense fallback={null}>
-      <Toaster />
-      <Sonner />
       <SocialProofProvider />
 
       <GA4ChecklistPanel />
@@ -487,12 +485,11 @@ const IdleEnhancements = () => {
   );
 };
 
+// ScrollToTop, SchemaDedup, AppInit e toasts já são montados em src/routes/__root.tsx.
 const App = () => (
       <AppErrorBoundary>
       <BrowserRouter>
-        <ScrollToTop />
-        <SchemaDedup />
-        <AppInit />
+
         <Suspense fallback={<RouteLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
