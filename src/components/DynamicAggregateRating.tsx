@@ -9,9 +9,9 @@
 import { useEffect } from "react";
 import { useAggregateRating } from "@/hooks/useAggregateRating";
 
-const MIN_REVIEWS_TO_PUBLISH = 10;
+const MIN_REVIEWS_TO_PUBLISH = 5;
 const AGGREGATE_RATING_ENABLED =
-  (import.meta.env.VITE_AGGREGATE_RATING_ENABLED as string | undefined) === "true";
+  (import.meta.env.VITE_AGGREGATE_RATING_ENABLED as string | undefined) !== "false";
 
 interface Props {
   itemId: string; // ex: "https://tecnicocuritiba.com.br/#organization"
