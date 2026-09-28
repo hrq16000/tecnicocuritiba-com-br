@@ -1,5 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useState, useMemo, useRef, useCallback } from "react";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { PageSEO } from "@/components/PageSEO";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -199,8 +200,8 @@ function getCat(cat: string) {
   return DEFAULT_CAT;
 }
 
-function pickRandom<T>(arr: T[], n: number): T[] {
-  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+function pickRandom<T>(arr: T[], n: number, rng: () => number): T[] {
+  const shuffled = seededShuffle(arr, rng);
   return shuffled.slice(0, n);
 }
 
@@ -446,14 +447,15 @@ const Blog = () => {
     localStorage.setItem("blog_items_per_page", String(value));
   }, []);
 
+  const rng = usePageRng("blog");
   const featured = useMemo(() => pickRandom(
     allContent.filter((c) => c.type === "problema" && c.excerpt.length > 100),
-    3
+    3, rng
   ), [allContent]);
 
   const editorPicks = useMemo(() => pickRandom(
     allContent.filter((c) => c.type === "blog"),
-    4
+    4, rng
   ), [allContent]);
 
   const stats = useMemo(() => ({
