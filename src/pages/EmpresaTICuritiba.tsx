@@ -38,6 +38,15 @@ const SERVICOS_EMPRESAS = [
   { icon: Clock, title: "Chamados Críticos", desc: "Priorização de chamados que param a operação (PDV, servidor, rede), conforme agenda disponível no momento." },
 ];
 
+const PAGINAS_SUPORTE = [
+  { label: "Suporte de TI para empresas", to: "/suporte-empresas", desc: "Contratos, Microsoft 365, backup e servidores." },
+  { label: "Redes e Wi-Fi empresarial", to: "/servicos/redes-wifi", desc: "Cabeamento, Wi-Fi e segmentação de rede." },
+  { label: "Segurança dos dados", to: "/seguranca-dos-dados", desc: "Backup, antivírus e redução de risco." },
+  { label: "Suporte remoto", to: "/atendimento-remoto", desc: "Chamados resolvidos sem deslocamento." },
+  { label: "Atendimento presencial", to: "/atendimento-domicilio", desc: "Técnico no escritório em Curitiba e RMC." },
+  { label: "Como escolher workstation", to: "/guias/como-escolher-workstation", desc: "Guia para estações de trabalho." },
+];
+
 const FAQ = [
   { q: "Vocês atendem empresas em Curitiba?", a: "Sim. Atuamos há mais de 20 anos com suporte técnico de TI para empresas, escritórios, clínicas, indústrias e comércios em Curitiba e Região Metropolitana. Trabalhamos com atendimento avulso por chamado, acompanhamento recorrente e projetos de infraestrutura." },
   { q: "Qual o valor da hora técnica para empresas?", a: "A visita técnica corporativa começa em R$ 99,99 (até 30 min). Uma hora de atendimento presencial (combinada previamente) sai por R$ 169,99. O acompanhamento recorrente tem valor definido caso a caso, após levantamento de equipamentos, usuários e escopo." },
@@ -99,6 +108,7 @@ export default function EmpresaTICuritiba() {
           summary="Suporte técnico, redes e infraestrutura para empresas em Curitiba e Região Metropolitana, com atendimento avulso, contrato mensal ou projetos de infraestrutura."
           items={[
             { id: "servicos-empresas", label: "O que fazemos para empresas" },
+            { id: "paginas-suporte", label: "Páginas de suporte por serviço" },
             { id: "bairros-comerciais", label: "Polos comerciais atendidos" },
             { id: "cidades-rmc", label: "Região Metropolitana" },
             { id: "faq-empresas", label: "Perguntas frequentes" },
@@ -120,6 +130,18 @@ export default function EmpresaTICuritiba() {
             <Link to="/suporte-empresas" className="text-accent hover:underline inline-flex items-center gap-1 font-medium">
               Ver todos os serviços para empresas <ArrowRight className="h-4 w-4" />
             </Link>
+          </div>
+        </section>
+
+        <section className="max-w-5xl mx-auto mb-14" aria-labelledby="paginas-suporte">
+          <h2 id="paginas-suporte" className="scroll-mt-24 text-2xl md:text-3xl font-heading font-bold text-center mb-8">Suporte técnico para empresas: páginas por serviço</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {PAGINAS_SUPORTE.map((p) => (
+              <Link key={p.to} to={p.to} className="block bg-card border border-border rounded-xl p-4 hover:border-accent/40 transition-colors">
+                <span className="font-semibold text-foreground inline-flex items-center gap-1">{p.label} <ArrowRight className="h-4 w-4" /></span>
+                <span className="block text-sm text-muted-foreground mt-1">{p.desc}</span>
+              </Link>
+            ))}
           </div>
         </section>
 

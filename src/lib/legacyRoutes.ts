@@ -46,3 +46,16 @@ export function matchLegacyPattern(
 export function isLegacyPath(pathname: string): boolean {
   return LEGACY_ROUTE_PATTERNS.some((p) => matchLegacyPattern(p, pathname) !== null);
 }
+
+/** Redirects estáticos do LegacyApp (<Route path=... element={<Navigate to=...}) → 301 no SSR. */
+export const LEGACY_REDIRECTS: ReadonlyMap<string, string> = new Map(
+  Array.from(
+    legacySource.matchAll(/<Route\s+path="([^":*]+)"\s+element=\{<Navigate\s+to="([^"]+)"/g),
+  ).map((m) => [normalize(m[1] ?? "").toLowerCase(), m[2] ?? "/"] as const),
+);
+
+export function legacyRedirectFor(pathname: string): string | null {
+  return LEGACY_REDIRECTS.get(normalize(pathname).toLowerCase()) ?? null;
+}
+
+export { normalize as normalizeLegacyPath };
