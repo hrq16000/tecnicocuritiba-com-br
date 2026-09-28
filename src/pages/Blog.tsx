@@ -360,11 +360,12 @@ const Blog = () => {
   const [activeTab, setActiveTab] = useState<"todos" | "artigos" | "problemas" | "servicos">("todos");
   const [activeCat, setActiveCat] = useState("Todos");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(() => {
-    if (typeof window === "undefined") return DEFAULT_ITEMS_PER_PAGE;
+  const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
+  // Preferência salva lida após a hidratação (evita divergência servidor/navegador).
+  useEffect(() => {
     const stored = localStorage.getItem("blog_items_per_page");
-    return stored ? Number(stored) : DEFAULT_ITEMS_PER_PAGE;
-  });
+    if (stored) setItemsPerPage(Number(stored));
+  }, []);
   const [searchFocused, setSearchFocused] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
