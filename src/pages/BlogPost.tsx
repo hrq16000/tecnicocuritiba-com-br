@@ -31,7 +31,11 @@ const loadBlogPostsContent = (): Promise<PostsMap> => {
   if (cachedPosts) return Promise.resolve(cachedPosts);
   if (inflight) return inflight;
   inflight = import("@/data/blogPostsContent").then((m) => {
-    cachedPosts = { ...m.blogPostsContentBase, ...programmaticPosts } as PostsMap;
+    const allPosts = { ...m.blogPostsContentBase, ...programmaticPosts } as PostsMap;
+    cachedPosts = Object.fromEntries(Object.entries(allPosts).map(([slug, post]) => {
+      const cover = getCategoryCover(slug);
+      return [slug, cover ? { ...post, image: cover.src } : post];
+    }));
     inflight = null;
     return cachedPosts;
   });

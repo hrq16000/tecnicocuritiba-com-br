@@ -605,7 +605,7 @@ const Blog = () => {
                             src={cover.src}
                             srcSet={cover.srcSet}
                             sizes="(max-width: 768px) 100vw, 33vw"
-                            alt={item.title}
+                            alt={cover.alt ?? item.title}
                             width={1200}
                             height={630}
                             className="w-full h-full object-cover group-hover:scale-[1.12] transition-transform duration-[800ms] ease-out"
@@ -823,7 +823,7 @@ const Blog = () => {
                                     src={cover.src}
                                     srcSet={cover.srcSet}
                                     sizes={COVER_SIZES}
-                                    alt={item.title}
+                                    alt={cover.alt ?? item.title}
                                     width={1200}
                                     height={630}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
