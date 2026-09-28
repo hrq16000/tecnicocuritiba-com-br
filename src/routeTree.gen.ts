@@ -14,6 +14,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AbrirOsRouteImport } from './routes/abrir-os'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as OrdemDeServicoRouteImport } from './routes/ordem-de-servico'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin/leads'
 
 const IndexRoute = IndexRouteImport.update({
@@ -40,6 +42,16 @@ const OrdemDeServicoRoute = OrdemDeServicoRouteImport.update({
   path: '/ordem-de-servico',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
   id: '/admin/leads',
   path: '/admin/leads',
@@ -51,6 +63,8 @@ export interface FileRoutesByFullPath {
   '/abrir-os': typeof AbrirOsRoute
   '/auth': typeof AuthRoute
   '/ordem-de-servico': typeof OrdemDeServicoRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +72,8 @@ export interface FileRoutesByTo {
   '/abrir-os': typeof AbrirOsRoute
   '/auth': typeof AuthRoute
   '/ordem-de-servico': typeof OrdemDeServicoRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
 }
 export interface FileRoutesById {
@@ -67,13 +83,29 @@ export interface FileRoutesById {
   '/abrir-os': typeof AbrirOsRoute
   '/auth': typeof AuthRoute
   '/ordem-de-servico': typeof OrdemDeServicoRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/abrir-os' | '/auth' | '/ordem-de-servico' | '/admin/leads'
+  fullPaths:
+    | '/'
+    | '/abrir-os'
+    | '/auth'
+    | '/ordem-de-servico'
+    | '/blog/$slug'
+    | '/blog/'
+    | '/admin/leads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/abrir-os' | '/auth' | '/ordem-de-servico' | '/admin/leads'
+  to:
+    | '/'
+    | '/abrir-os'
+    | '/auth'
+    | '/ordem-de-servico'
+    | '/blog/$slug'
+    | '/blog'
+    | '/admin/leads'
   id:
     | '__root__'
     | '/'
@@ -81,6 +113,8 @@ export interface FileRouteTypes {
     | '/abrir-os'
     | '/auth'
     | '/ordem-de-servico'
+    | '/blog/$slug'
+    | '/blog/'
     | '/_authenticated/admin/leads'
   fileRoutesById: FileRoutesById
 }
@@ -90,6 +124,8 @@ export interface RootRouteChildren {
   AbrirOsRoute: typeof AbrirOsRoute
   AuthRoute: typeof AuthRoute
   OrdemDeServicoRoute: typeof OrdemDeServicoRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -129,6 +165,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdemDeServicoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin/leads': {
       id: '/_authenticated/admin/leads'
       path: '/admin/leads'
@@ -156,6 +206,8 @@ const rootRouteChildren: RootRouteChildren = {
   AbrirOsRoute: AbrirOsRoute,
   AuthRoute: AuthRoute,
   OrdemDeServicoRoute: OrdemDeServicoRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
