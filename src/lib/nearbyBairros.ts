@@ -74,5 +74,5 @@ export function nearbyBairros(slug: string, max = 6): NearbyBairro[] {
   return (ADJ[slug] ?? [])
     .filter((s) => CURITIBA_BAIRROS[s])
     .slice(0, max)
-    .map((s) => ({ slug: s, nome: CURITIBA_BAIRROS[s] }));
+    .map((s) => ({ slug: s, nome: CURITIBA_BAIRROS[s] ?? s }));
 }
