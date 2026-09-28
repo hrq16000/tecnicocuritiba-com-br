@@ -10,6 +10,9 @@ const AtendimentoDomicilio = lazy(() => import("./pages/AtendimentoDomicilio"));
 const AtendimentoRemoto = lazy(() => import("./pages/AtendimentoRemoto"));
 const SuporteEmpresas = lazy(() => import("./pages/SuporteEmpresas"));
 const ManutencaoNotebookPCCuritiba = lazy(() => import("./pages/ManutencaoNotebookPCCuritiba"));
+const EmpresaTICuritiba = lazy(() => import("./pages/EmpresaTICuritiba"));
+const AssistenciaComputadorCuritiba = lazy(() => import("./pages/AssistenciaDispositivoCuritiba").then((m) => ({ default: m.AssistenciaComputadorCuritiba })));
+const AssistenciaNotebookCuritiba = lazy(() => import("./pages/AssistenciaDispositivoCuritiba").then((m) => ({ default: m.AssistenciaNotebookCuritiba })));
 const PrecosEPoliticas = lazy(() => import("./pages/PrecosEPoliticas"));
 const TecnicoInformaticaCuritiba = lazy(() => import("./pages/TecnicoInformaticaCuritiba"));
 const TecnicoInformaticaSaoJosePinhais = lazy(() => import("./pages/TecnicoInformaticaSaoJosePinhais"));
@@ -508,8 +511,10 @@ const App = () => (
             {/* Aliases de intenção → página local primária do cluster */}
             <Route path="/informatica-curitiba" element={<Navigate to="/tecnico-informatica-curitiba" replace />} />
             <Route path="/informatica" element={<Navigate to="/tecnico-informatica-curitiba" replace />} />
-            {/* Consolidação B2B: página-mãe única em /suporte-empresas (elimina canibalização). */}
-            <Route path="/empresa-de-ti-curitiba" element={<Navigate to="/suporte-empresas" replace />} />
+            {/* Onda 2: /empresa-de-ti-curitiba é hub (intenção 'empresa de TI'); /suporte-empresas segue como página de serviço B2B. */}
+            <Route path="/empresa-de-ti-curitiba" element={<EmpresaTICuritiba />} />
+            <Route path="/assistencia-tecnica-computador-curitiba" element={<AssistenciaComputadorCuritiba />} />
+            <Route path="/assistencia-tecnica-notebook-curitiba" element={<AssistenciaNotebookCuritiba />} />
             <Route path="/manutencao-notebook-pc-curitiba" element={<ManutencaoNotebookPCCuritiba />} />
             <Route path="/precos-e-politicas" element={<PrecosEPoliticas />} />
             <Route path="/valores" element={<PrecosEPoliticas />} />
