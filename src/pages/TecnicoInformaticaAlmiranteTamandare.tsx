@@ -15,6 +15,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -224,6 +225,7 @@ const TecnicoInformaticaAlmiranteTamandare = () => {
 
         <RealImageSection imageKey="ferramentas" caption="Ferramentas profissionais para diagnóstico" />
 
+        <ReviewsGrid filter={{ city: "Almirante Tamandaré" }} title="Avaliações de clientes em Almirante Tamandaré" />
         <ServiceLocalLinks currentCity="Almirante Tamandaré" />
         <LocalPhotoGallery local="Almirante Tamandaré" />
         <LocalFAQSection title="Perguntas Frequentes - Almirante Tamandaré" faqs={localFaqs} />

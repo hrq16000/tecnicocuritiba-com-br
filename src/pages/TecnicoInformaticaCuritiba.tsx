@@ -17,6 +17,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Star, Award } from "lucide-react";
@@ -304,6 +305,7 @@ const TecnicoInformaticaCuritiba = () => {
           </div>
         </section>
 
+        <ReviewsGrid filter={{ city: "Curitiba" }} title="Avaliações de clientes em Curitiba" />
         <ServiceLocalLinks currentCity="Curitiba" />
         <RealImageSection imageKey="bancadaTecnica" caption="Laboratório técnico profissional" />
         <LocalPhotoGallery local="Curitiba" />

@@ -15,6 +15,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -139,6 +140,7 @@ const TecnicoInformaticaPiraquara = () => {
 
         <RealImageSection imageKey="redesWifi" caption="Configuração de redes e Wi-Fi" />
 
+        <ReviewsGrid filter={{ city: "Piraquara" }} title="Avaliações de clientes em Piraquara" />
         <ServiceLocalLinks currentCity="Piraquara" />
         <LocalPhotoGallery local="Piraquara" />
         <LocalFAQSection title="Perguntas Frequentes - Piraquara" faqs={localFaqs} />

@@ -16,6 +16,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Zap } from "lucide-react";
@@ -346,6 +347,7 @@ const TecnicoInformaticaPinhais = () => {
         </section>
 
         {/* FAQ Local */}
+        <ReviewsGrid filter={{ city: "Pinhais" }} title="Avaliações de clientes em Pinhais" />
         <ServiceLocalLinks currentCity="Pinhais" />
         <RealImageSection imageKey="atendimentoDomiciliar" caption="Atendimento domiciliar profissional" />
         <LocalPhotoGallery local="Pinhais" />

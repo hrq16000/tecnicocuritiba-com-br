@@ -15,6 +15,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -134,6 +135,7 @@ const TecnicoInformaticaQuatroBarras = () => {
 
         <RealImageSection imageKey="segurancaDigital" caption="Proteção e segurança digital" />
 
+        <ReviewsGrid filter={{ city: "Quatro Barras" }} title="Avaliações de clientes em Quatro Barras" />
         <ServiceLocalLinks currentCity="Quatro Barras" />
         <LocalPhotoGallery local="Quatro Barras" />
         <LocalFAQSection title="Perguntas Frequentes - Quatro Barras" faqs={localFaqs} />

@@ -16,6 +16,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Factory, Home } from "lucide-react";
@@ -355,6 +356,7 @@ const TecnicoInformaticaAraucaria = () => {
         </section>
 
         {/* FAQ Local */}
+        <ReviewsGrid filter={{ city: "Araucária" }} title="Avaliações de clientes em Araucária" />
         <ServiceLocalLinks currentCity="Araucária" />
         <RealImageSection imageKey="diagnostico" caption="Diagnóstico profissional com equipamento especializado" />
         <LocalPhotoGallery local="Araucária" />

@@ -27,6 +27,8 @@ interface ReviewsGridProps {
   showAverage?: boolean;
   title?: string;
   whatsappCta?: boolean;
+  /** Se não houver avaliações do bairro, mostra as da cidade. */
+  fallbackToCity?: boolean;
 }
 
 const WHATSAPP_NUMBER = "5541997452053";
@@ -37,6 +39,7 @@ export const ReviewsGrid = ({
   showAverage = true,
   title = "Avaliações de clientes reais",
   whatsappCta = true,
+  fallbackToCity = false,
 }: ReviewsGridProps) => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +65,17 @@ export const ReviewsGrid = ({
       if (filter.service) q = q.eq("service_slug", filter.service);
       if (filter.city) q = q.eq("city", filter.city);
       if (filter.neighborhood) q = q.eq("neighborhood", filter.neighborhood);
-      const { data } = await q;
+      let { data } = await q;
+      if (fallbackToCity && filter.neighborhood && filter.city && (!data || data.length === 0)) {
+        let q2 = supabase
+          .from("reviews")
+          .select("id, author_name, author_photo_url, rating, comment, service_slug, city, neighborhood, review_date")
+          .order("review_date", { ascending: false })
+          .limit(limit)
+          .eq("city", filter.city);
+        if (filter.service) q2 = q2.eq("service_slug", filter.service);
+        ({ data } = await q2);
+      }
       if (!cancelled) {
         setReviews((data as Review[]) ?? []);
         setLoading(false);
@@ -71,7 +84,7 @@ export const ReviewsGrid = ({
     return () => {
       cancelled = true;
     };
-  }, [filter.service, filter.city, filter.neighborhood, limit]);
+  }, [filter.service, filter.city, filter.neighborhood, limit, fallbackToCity]);
 
   if (!loading && reviews.length === 0) {
     return null; // fallback silencioso, evita schema vazio

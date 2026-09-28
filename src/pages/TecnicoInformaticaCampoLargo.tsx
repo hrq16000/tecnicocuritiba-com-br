@@ -16,6 +16,7 @@ import { JsonLdSchema } from "@/components/JsonLdSchema";
 import { LocalFAQSection } from "@/components/LocalFAQSection";
 import { SocialProofSection } from "@/components/SocialProofSection";
 import { ServiceLocalLinks } from "@/components/ServiceLocalLinks";
+import { ReviewsGrid } from "@/components/ReviewsGrid";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { trackPageView } from "@/lib/analytics";
 import { MapPin, Clock, Shield, Wrench, CheckCircle, ArrowRight, Building2, Home, Trees } from "lucide-react";
@@ -346,6 +347,7 @@ const TecnicoInformaticaCampoLargo = () => {
         </section>
 
         {/* FAQ Local */}
+        <ReviewsGrid filter={{ city: "Campo Largo" }} title="Avaliações de clientes em Campo Largo" />
         <ServiceLocalLinks currentCity="Campo Largo" />
         <RealImageSection imageKey="componentesSsd" caption="Upgrade SSD e memória RAM" />
         <LocalPhotoGallery local="Campo Largo" />

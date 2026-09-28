@@ -1,6 +1,7 @@
 import { LocalPhotoGallery } from "@/components/LocalPhotoGallery";
 import { useEffect } from "react";
 import { PageSEO } from "@/components/PageSEO";
+import SiteBaseSchema from "@/components/SiteBaseSchema";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BlocoInteligencia } from "@/components/BlocoInteligencia";
@@ -88,6 +89,7 @@ const ConsertoCelular = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SiteBaseSchema />
       <PageSEO
         title="Conserto de Celular em Curitiba e Região | Orçamento sem Compromisso"
         description="Conserto de celular e smartphone. iPhone, Samsung, Motorola, Xiaomi. Orçamento humanizado sem compromisso."
