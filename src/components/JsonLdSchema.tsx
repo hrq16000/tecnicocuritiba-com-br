@@ -94,8 +94,12 @@ export const JsonLdSchema = () => {
     // Limpa schemas antigos
     document.querySelectorAll('script[data-schema="true"]').forEach(s => s.remove());
 
+    // FAQ genérico do site só na home e em /faq: nas demais páginas ele
+    // duplicaria (e contradiria) o FAQPage próprio da página.
+    const path = window.location.pathname.replace(/\/+$/, "") || "/";
+    const withFaq = path === "/" || path === "/faq";
     const entries: Array<[string, Record<string, unknown>]> = [
-      ['ld-faqpage', faqSchema],
+      ...(withFaq ? ([['ld-faqpage', faqSchema]] as Array<[string, Record<string, unknown>]>) : []),
       ['ld-website', websiteSchema],
       ['ld-webpage', webPageSchema],
       ['ld-itemlist-services', serviceItemListSchema],
