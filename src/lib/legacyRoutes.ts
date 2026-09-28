@@ -28,13 +28,15 @@ export function matchLegacyPattern(
   if (a.length !== b.length) return null;
   const params: Record<string, string> = {};
   for (let i = 0; i < a.length; i++) {
-    if (a[i].startsWith(":")) {
+    const seg = a[i] ?? "";
+    const val = b[i] ?? "";
+    if (seg.startsWith(":")) {
       try {
-        params[a[i].slice(1)] = decodeURIComponent(b[i]);
+        params[seg.slice(1)] = decodeURIComponent(val);
       } catch {
-        params[a[i].slice(1)] = b[i];
+        params[seg.slice(1)] = val;
       }
-    } else if (a[i].toLowerCase() !== b[i].toLowerCase()) {
+    } else if (seg.toLowerCase() !== val.toLowerCase()) {
       return null;
     }
   }
