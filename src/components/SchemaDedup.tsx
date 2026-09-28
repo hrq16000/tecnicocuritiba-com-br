@@ -59,7 +59,9 @@ export function dedupeJsonLd(doc: Document = document): number {
     const keep = local ?? list[0];
     for (const s of list) {
       if (s === keep) continue;
-      s.remove();
+      // Desativa em vez de remover: o nó pertence ao React e removê-lo antes
+      // da hidratação quebra a página inteira (erro de hidratação).
+      s.type = "application/x-jsonld-dedup";
       removed++;
     }
   }
