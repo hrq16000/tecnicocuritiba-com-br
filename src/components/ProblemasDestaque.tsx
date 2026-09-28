@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { Link } from "react-router-dom";
 import { AlertTriangle, ArrowRight } from "lucide-react";
 import { problemaSummaries } from "@/lib/problemaSummaries";
@@ -6,8 +7,9 @@ import { problemaSummaries } from "@/lib/problemaSummaries";
 const DISPLAY_COUNT = 6;
 
 export const ProblemasDestaque = () => {
+  const rng = usePageRng("problemas-destaque");
   const problemas = useMemo(() => {
-    const shuffled = [...problemaSummaries].sort(() => Math.random() - 0.5);
+    const shuffled = seededShuffle(problemaSummaries, rng);
     return shuffled.slice(0, DISPLAY_COUNT);
   }, []);
 

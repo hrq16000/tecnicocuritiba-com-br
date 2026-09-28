@@ -35,7 +35,7 @@ const getAvailabilityStatus = (): AvailabilityStatus => {
       isOnline: true,
       technicianCount: 2,
       waitTime: "30-45 min",
-      queueSize: Math.floor(Math.random() * 3) + 2,
+      queueSize: (hour % 3) + 2,
     };
   }
 
@@ -43,7 +43,7 @@ const getAvailabilityStatus = (): AvailabilityStatus => {
     isOnline: true,
     technicianCount: 3,
     waitTime: "15-30 min",
-    queueSize: Math.floor(Math.random() * 2) + 1,
+    queueSize: (hour % 2) + 1,
   };
 };
 

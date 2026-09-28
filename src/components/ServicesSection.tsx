@@ -1,5 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { Link } from "react-router-dom";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -186,9 +187,10 @@ const trackServiceWhatsApp = (service: Service) => {
 export const ServicesSection = () => {
   const isMobile = useIsMobile();
   // Mantém os 6 serviços prioritários (briefing comercial) no topo e embaralha os extras.
+  const rng = usePageRng("services");
   const services = useMemo(() => {
     const pinned = allServices.slice(0, 6);
-    const rest = shuffleArray(allServices.slice(6));
+    const rest = seededShuffle(allServices.slice(6), rng);
     const all = [...pinned, ...rest];
     return isMobile ? all.slice(0, 6) : all.slice(0, 9);
   }, [isMobile]);

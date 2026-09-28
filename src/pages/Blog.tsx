@@ -1,5 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useState, useMemo, useRef, useCallback } from "react";
+import { usePageRng, seededShuffle } from "@/lib/stableRandom";
 import { PageSEO } from "@/components/PageSEO";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -199,8 +200,8 @@ function getCat(cat: string) {
   return DEFAULT_CAT;
 }
 
-function pickRandom<T>(arr: T[], n: number): T[] {
-  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+function pickRandom<T>(arr: T[], n: number, rng: () => number): T[] {
+  const shuffled = seededShuffle(arr, rng);
   return shuffled.slice(0, n);
 }
 
@@ -359,11 +360,12 @@ const Blog = () => {
   const [activeTab, setActiveTab] = useState<"todos" | "artigos" | "problemas" | "servicos">("todos");
   const [activeCat, setActiveCat] = useState("Todos");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(() => {
-    if (typeof window === "undefined") return DEFAULT_ITEMS_PER_PAGE;
+  const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
+  // Preferência salva lida após a hidratação (evita divergência servidor/navegador).
+  useEffect(() => {
     const stored = localStorage.getItem("blog_items_per_page");
-    return stored ? Number(stored) : DEFAULT_ITEMS_PER_PAGE;
-  });
+    if (stored) setItemsPerPage(Number(stored));
+  }, []);
   const [searchFocused, setSearchFocused] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -446,14 +448,16 @@ const Blog = () => {
     localStorage.setItem("blog_items_per_page", String(value));
   }, []);
 
+  const rng = usePageRng("blog-featured");
+  const rngPicks = usePageRng("blog-picks");
   const featured = useMemo(() => pickRandom(
     allContent.filter((c) => c.type === "problema" && c.excerpt.length > 100),
-    3
+    3, rng
   ), [allContent]);
 
   const editorPicks = useMemo(() => pickRandom(
     allContent.filter((c) => c.type === "blog"),
-    4
+    4, rngPicks
   ), [allContent]);
 
   const stats = useMemo(() => ({
