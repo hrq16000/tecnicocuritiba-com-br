@@ -448,7 +448,8 @@ const Blog = () => {
     localStorage.setItem("blog_items_per_page", String(value));
   }, []);
 
-  const rng = usePageRng("blog");
+  const rng = usePageRng("blog-featured");
+  const rngPicks = usePageRng("blog-picks");
   const featured = useMemo(() => pickRandom(
     allContent.filter((c) => c.type === "problema" && c.excerpt.length > 100),
     3, rng
@@ -456,7 +457,7 @@ const Blog = () => {
 
   const editorPicks = useMemo(() => pickRandom(
     allContent.filter((c) => c.type === "blog"),
-    4, rng
+    4, rngPicks
   ), [allContent]);
 
   const stats = useMemo(() => ({
