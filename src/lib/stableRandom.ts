@@ -38,5 +38,6 @@ export function seededShuffle<T>(arr: readonly T[], rng: () => number): T[] {
 /** Gerador estável por página (+ sal por componente). */
 export function usePageRng(salt: string): () => number {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  return seededRng(hashSeed(`${pathname}|${salt}`));
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  return seededRng(hashSeed(`${path.toLowerCase()}|${salt}`));
 }
