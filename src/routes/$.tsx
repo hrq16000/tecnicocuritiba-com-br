@@ -6,6 +6,11 @@ import { seoForPath } from "@/lib/seoRouteHead";
 
 const SITE = "https://tecnicocuritiba.com.br";
 
+const prettify = (seg: string) => {
+  const t = decodeURIComponent(seg).replace(/-/g, " ");
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
+
 /**
  * Compatibilidade: entrega em entrada direta as rotas públicas ainda
  * registradas no LegacyApp. Rotas TanStack explícitas têm precedência.
@@ -37,7 +42,35 @@ export const Route = createFileRoute("/$")({
         meta.push({ property: "og:image", content: seo.ogImage }, { name: "twitter:image", content: seo.ogImage });
       }
     }
-    return { meta, links: [{ rel: "canonical", href: url }] };
+    // BreadcrumbList SSR para TODA página interna (fonte primária; o
+    // AutoBreadcrumbSchema/SchemaDedup no cliente só evitam cópias).
+    const parts = loaderData.pathname.split("/").filter(Boolean);
+    const scripts =
+      parts.length === 0
+        ? []
+        : [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Início", item: `${SITE}/` },
+                  ...parts.map((p, i) => {
+                    const last = i === parts.length - 1;
+                    const name = last && seo ? (seo.title.split(/\s[|—–]\s/)[0] ?? prettify(p)) : prettify(p);
+                    return {
+                      "@type": "ListItem",
+                      position: i + 2,
+                      name,
+                      item: last ? url : `${SITE}/${parts.slice(0, i + 1).join("/")}`,
+                    };
+                  }),
+                ],
+              }),
+            },
+          ];
+    return { meta, links: [{ rel: "canonical", href: url }], scripts };
   },
   component: LegacyApp,
 });
