@@ -23,14 +23,22 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import {
+  Children,
+  createContext,
   forwardRef,
+  isValidElement,
+  useContext,
   type AnchorHTMLAttributes,
   type ReactElement,
   type ReactNode,
   type Ref,
 } from "react";
 
+import { matchLegacyPattern } from "@/lib/legacyRoutes";
+
 type To = string;
+
+const LegacyParamsContext = createContext<Record<string, string> | null>(null);
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const TanLink = TanLinkReal as unknown as (props: any) => ReactElement;
@@ -116,10 +124,11 @@ export function useNavigate() {
 export function useParams<
   T extends Record<string, string> = Record<string, string>,
 >(): T {
+  const legacy = useContext(LegacyParamsContext);
   const params = (useTanParamsReal as unknown as (opts?: unknown) => unknown)(
     { strict: false },
   );
-  return (params ?? {}) as T;
+  return (legacy ?? params ?? {}) as T;
 }
 
 export function useLocation() {
@@ -176,9 +185,33 @@ export function useInRouterContext() {
   return true;
 }
 
-/** Inert stubs — only referenced by the retired LegacyApp route table. */
+/**
+ * Minimal matcher for the LegacyApp route table (rendered by the TanStack
+ * splat route). Picks the first matching <Route path> (":param" segments,
+ * "*" as fallback) and exposes its params through useParams().
+ */
 export function Routes({ children }: { children?: ReactNode }) {
-  return <>{children}</>;
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  let fallback: ReactNode = null;
+  const routes = Children.toArray(children).filter(isValidElement) as ReactElement<{
+    path?: string;
+    element?: ReactNode;
+  }>[];
+  for (const r of routes) {
+    const { path, element } = r.props;
+    if (!path) continue;
+    if (path === "*") {
+      fallback = element ?? null;
+      continue;
+    }
+    const params = matchLegacyPattern(path, pathname);
+    if (params) {
+      return (
+        <LegacyParamsContext.Provider value={params}>{element}</LegacyParamsContext.Provider>
+      );
+    }
+  }
+  return <>{fallback}</>;
 }
 
 export function Route(_props: {

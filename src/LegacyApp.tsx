@@ -1,8 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ScrollToTop } from "@/components/ScrollToTop";
-import { SchemaDedup } from "@/components/SchemaDedup";
-import { captureUtmsFromUrl } from "@/lib/utmCapture";
 import { RouteLoader } from "@/components/RouteLoader";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import Index from "./pages/Index";
@@ -444,16 +441,7 @@ const CFTVPinhais = lazy(() => import("./pages/cftv/CFTVPinhais"));
 // WhatsAppChatbot removido: redundante com WhatsAppFloat (bottom-right global).
 const SocialProofProvider = lazy(() => import("@/components/social-proof").then((m) => ({ default: m.SocialProofProvider })));
 const GA4ChecklistPanel = lazy(() => import("@/components/GA4ChecklistPanel").then((m) => ({ default: m.GA4ChecklistPanel })));
-const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
-const Sonner = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
 
-const AppInit = () => {
-  useEffect(() => {
-    captureUtmsFromUrl();
-    import("@/lib/analytics").then(({ attachScrollDepthTracking }) => attachScrollDepthTracking());
-  }, []);
-  return null;
-};
 
 
 const IdleEnhancements = () => {
@@ -478,8 +466,6 @@ const IdleEnhancements = () => {
 
   return (
     <Suspense fallback={null}>
-      <Toaster />
-      <Sonner />
       <SocialProofProvider />
 
       <GA4ChecklistPanel />
@@ -487,12 +473,11 @@ const IdleEnhancements = () => {
   );
 };
 
+// ScrollToTop, SchemaDedup, AppInit e toasts já são montados em src/routes/__root.tsx.
 const App = () => (
       <AppErrorBoundary>
       <BrowserRouter>
-        <ScrollToTop />
-        <SchemaDedup />
-        <AppInit />
+
         <Suspense fallback={<RouteLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
