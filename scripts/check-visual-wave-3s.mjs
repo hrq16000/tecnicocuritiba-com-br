@@ -97,8 +97,8 @@ ok(!/"@type":\s*"(Offer|Review|AggregateRating|LegalService|MedicalBusiness)"/.t
 // 10. Zero rota nova: redirects de consolidação preservados
 const legacy = readFileSync("src/LegacyApp.tsx", "utf8");
 ok(
-  /path="\/empresa-de-ti-curitiba" element=\{<Navigate to="\/suporte-empresas"/.test(legacy),
-  "src/LegacyApp.tsx: redirect /empresa-de-ti-curitiba → /suporte-empresas foi alterado",
+  /path="\/empresa-de-ti-curitiba" element=\{<EmpresaTICuritiba/.test(legacy),
+  "src/LegacyApp.tsx: hub /empresa-de-ti-curitiba (Onda 2) foi removido",
 );
 ok(
   !/path="\/servicos\/suporte-tecnico-empresarial"/.test(legacy),

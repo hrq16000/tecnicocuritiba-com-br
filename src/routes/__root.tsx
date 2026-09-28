@@ -55,6 +55,7 @@ export const Route = createRootRoute({
       { name: "author", content: "Técnico Curitiba" },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Técnico Curitiba" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

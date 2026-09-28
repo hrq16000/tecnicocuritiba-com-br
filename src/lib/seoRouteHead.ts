@@ -109,6 +109,43 @@ interface PilotRoute {
 }
 
 const PILOT_ROUTES: readonly PilotRoute[] = [
+  // --- Onda 2 (domínio comercial) ---
+  {
+    path: "/assistencia-tecnica-curitiba",
+    title: "Assistência Técnica Especializada em Curitiba | Reparo de Bancada",
+    description:
+      "Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico, garantia e orçamento pelo WhatsApp.",
+  },
+  {
+    path: "/assistencia-tecnica-computador-curitiba",
+    title: "Assistência Técnica de Computador em Curitiba | PC e Desktop",
+    description:
+      "Assistência técnica de computador em Curitiba: PC que não liga, lentidão, vírus, upgrade e montagem. Atendimento em domicílio, remoto ou bancada com triagem pelo WhatsApp.",
+  },
+  {
+    path: "/assistencia-tecnica-notebook-curitiba",
+    title: "Assistência Técnica de Notebook em Curitiba | Todas as Marcas",
+    description:
+      "Assistência técnica de notebook em Curitiba: Dell, Lenovo, HP, Acer, Asus, Samsung e MacBook. Tela, teclado, bateria, lentidão e notebook que não liga, com triagem pelo WhatsApp.",
+  },
+  {
+    path: "/servicos/conserto-notebook-curitiba",
+    title: "Conserto de Notebook em Curitiba | Reparo em Bancada",
+    description:
+      "Conserto de notebook em Curitiba: placa-mãe, tela, teclado, carcaça e notebook que não liga. Diagnóstico em bancada, coleta e entrega e orçamento antes do reparo.",
+  },
+  {
+    path: "/manutencao-notebook-pc-curitiba",
+    title: "Manutenção de Notebook e PC em Curitiba | Limpeza e Prevenção",
+    description:
+      "Manutenção de notebook e PC em Curitiba: limpeza interna, pasta térmica, upgrade de SSD, formatação e remoção de vírus. Domicílio ou bancada.",
+  },
+  {
+    path: "/empresa-de-ti-curitiba",
+    title: "Empresa de TI em Curitiba | Suporte Técnico para Empresas",
+    description:
+      "Empresa de TI em Curitiba: suporte técnico corporativo, redes, Wi-Fi empresarial, segurança e backup. Veja as páginas de suporte por serviço e as perguntas frequentes.",
+  },
   {
     path: "/guia-tecnico-informatica",
     title: "Guia Técnico de Informática | Diagnóstico, Custos e Prazos",
