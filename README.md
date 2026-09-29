@@ -1,73 +1,159 @@
-# Welcome to your Lovable project
+# Curitiba Tech Fix
 
-## Project info
+Crie uma landing page completa e funcional para o site tecnicocuritiba.com.br, focada exclusivamente em conversão (Google Ads + SEO local).
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+OBJETIVO
 
-## How can I edit this code?
+Gerar leads imediatos via WhatsApp e ligação telefônica para serviços de informática em Curitiba.
 
-There are several ways of editing your application.
+PÚBLICO
 
-**Use Lovable**
+Pessoas físicas e pequenas empresas em Curitiba que precisam de:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+conserto de computador
 
-Changes made via Lovable will be committed automatically to this repo.
+formatação
 
-**Use your preferred IDE**
+remoção de vírus
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+suporte técnico urgente
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+IDENTIDADE VISUAL
 
-Follow these steps:
+Cores principais: azul escuro (#0B3C5D), laranja (#F57C00), branco
+
+Estilo: profissional, direto, moderno, sem efeitos exagerados
+
+Tipografia moderna e legível (ex: Poppins / Inter / Roboto)
+
+HEADER (fixo no mobile)
+
+Logo à esquerda
+
+Botão verde “WhatsApp Agora”
+
+Botão laranja “Ligar Agora”
+
+HERO (primeira dobra)
+
+Título grande:
+“Técnico de Informática em Curitiba”
+
+Subtítulo:
+“Atendimento rápido • No local ou remoto • Com garantia”
+
+Botões grandes:
+
+WhatsApp Agora
+
+Ligar Agora
+
+Imagem de apoio:
+Técnico de informática profissional, uniforme azul, ambiente limpo, aparência confiável.
+
+SEÇÃO DOR + SOLUÇÃO
+
+Texto claro:
+“Computador lento, não liga, travando ou com vírus?
+Aqui você fala direto com técnico. Sem call center. Sem enrolação.”
+
+SERVIÇOS (cards simples com ícones)
+
+Formatação de computador
+
+Remoção de vírus e malwares
+
+Conserto de PC e notebook
+
+Upgrade SSD e memória
+
+Redes e Wi-Fi
+
+Backup e recuperação de dados
+
+Suporte técnico para empresas
+
+Atendimento remoto imediato
+
+Atendimento residencial em Curitiba
+
+PROVAS DE CONFIANÇA
+
+Lista com ícones:
+
+Atendimento local em Curitiba
+
+Técnico identificado
+
+Garantia por escrito
+
+Nota fiscal quando necessário
+
+Pagamento facilitado
+
+CTA FINAL
+
+Texto forte:
+“Precisa resolver agora? Fale direto com o técnico.”
+
+Botões:
+
+WhatsApp imediato
+
+Ligação direta
+
+REQUISITOS TÉCNICOS
+
+Página única (one page)
+
+Totalmente responsiva
+
+Otimizada para velocidade
+
+SEO básico configurado (title, meta description, H1 único)
+
+Estrutura limpa em HTML + CSS + JS
+
+Sem formulários (apenas WhatsApp e telefone)
+
+ENTREGA
+
+Gerar o site completo pronto para deploy.     obs: como no mockup.. segue logo em anexo .... Tipografia
+
+Título: Poppins / Montserrat (Bold)
+
+Texto: Inter / Roboto (Regular).... Cores
+
+Azul escuro → confiança, técnica, profissionalismo
+Ex: #0B3C5D
+
+Laranja → ação, urgência, clique
+Ex: #F57C00
+
+Cinza claro → respiro visual
+Ex: #F4F4F4
+
+Azul manda. Laranja converte. Ponto.
+
+This project was built with [Lovable](https://lovable.dev).
+
+**Live app**: https://tecnicocuritiba.lovable.app
+
+## Build with Lovable
+
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/db05fb04-6a35-4144-b491-17fc6125cd87).
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
