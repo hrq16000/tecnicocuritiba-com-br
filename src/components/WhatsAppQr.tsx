@@ -1,6 +1,5 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { useEffect, useState } from "react";
-import QRCode from "qrcode";
 import { NAP, NAP_PHONE_DIGITS } from "@/lib/nap";
 
 interface WhatsAppQrProps {
@@ -58,7 +57,12 @@ export const WhatsAppQr = ({
 
   useEffect(() => {
     let alive = true;
-    QRCode.toDataURL(href, { margin: 1, width: size * 2, errorCorrectionLevel: "M" })
+    // Import dinâmico: `qrcode` depende de pngjs/util.inherits (Node), que
+    // quebra a avaliação do módulo no runtime SSR edge-like.
+    import("qrcode")
+      .then((QRCode) =>
+        QRCode.toDataURL(href, { margin: 1, width: size * 2, errorCorrectionLevel: "M" }),
+      )
       .then((d) => alive && setSrc(d))
       .catch(() => { /* noop */ });
     return () => {
