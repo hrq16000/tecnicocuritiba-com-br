@@ -356,6 +356,25 @@ const BlogPost = () => {
                 </div>
               )}
 
+              {(post.category === "Redes" || post.category === "Segurança e Redes" || /rede|wi-?fi|rj45|cabo/i.test(slug ?? "")) && (
+                <div className="not-prose mt-12 bg-primary/5 rounded-xl p-6 border border-primary/10">
+                  <h3 className="font-heading font-bold text-primary text-lg mb-2">Instalação de rede e Wi‑Fi em Curitiba</h3>
+                  <p className="text-muted-foreground text-sm mb-4">Prefere que um técnico faça? Cabeamento, crimpagem, roteadores e Wi‑Fi sem pontos cegos, em casa ou na empresa.</p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { name: "Serviço de redes e Wi‑Fi", path: "/servicos/redes-wifi" },
+                      { name: "Suporte para empresas", path: "/servicos/suporte-empresas" },
+                      { name: "Atendimento a domicílio", path: "/atendimento-domicilio" },
+                    ].map((l) => (
+                      <Link key={l.path} to={l.path} className="inline-flex items-center gap-1.5 bg-background border border-primary/10 rounded-full px-4 py-2 text-sm text-foreground hover:border-accent/30 hover:text-accent transition-all">
+                        {l.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
               {/* Snippet WhatsApp contextual no fim do tutorial */}
               <div className="not-prose mt-12 rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 via-background to-primary/10 p-6 md:p-8 shadow-lg">
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
