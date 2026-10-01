@@ -363,7 +363,7 @@ const BlogPost = () => {
                   <div className="flex flex-wrap gap-2">
                     {[
                       { name: "Serviço de redes e Wi‑Fi", path: "/servicos/redes-wifi" },
-                      { name: "Suporte para empresas", path: "/servicos/suporte-empresas" },
+                      { name: "Suporte para empresas", path: "/suporte-empresas" },
                       { name: "Atendimento a domicílio", path: "/atendimento-domicilio" },
                     ].map((l) => (
                       <Link key={l.path} to={l.path} className="inline-flex items-center gap-1.5 bg-background border border-primary/10 rounded-full px-4 py-2 text-sm text-foreground hover:border-accent/30 hover:text-accent transition-all">
