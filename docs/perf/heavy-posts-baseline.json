@@ -1,0 +1,122 @@
+{
+  "por-que-conserto-placa-mae-custa-caro-curitiba": {
+    "mobile": {
+      "lcp": 7158.5945,
+      "bytes": 948253,
+      "score": 0.62
+    },
+    "desktop": {
+      "lcp": 1319.3490000000002,
+      "bytes": 985804,
+      "score": 0.95
+    }
+  },
+  "tv-listras-horizontais-verticais-conserto-curitiba": {
+    "mobile": {
+      "lcp": 6852.612999999999,
+      "bytes": 948079,
+      "score": 0.62
+    },
+    "desktop": {
+      "lcp": 1591.3709999999996,
+      "bytes": 985784,
+      "score": 0.93
+    }
+  },
+  "listras-tela-celular-apos-atualizacao-curitiba": {
+    "mobile": {
+      "lcp": 6418.7575000000015,
+      "bytes": 947927,
+      "score": 0.62
+    },
+    "desktop": {
+      "lcp": 1584.6815,
+      "bytes": 985706,
+      "score": 0.92
+    }
+  },
+  "conserto-computador-domicilio-curitiba": {
+    "mobile": {
+      "lcp": 6899.336999999998,
+      "bytes": 947737,
+      "score": 0.62
+    },
+    "desktop": {
+      "lcp": 1372.958,
+      "bytes": 985583,
+      "score": 0.95
+    }
+  },
+  "impressora-erro-conexao-usb-wifi-curitiba": {
+    "mobile": {
+      "lcp": 6858.834000000001,
+      "bytes": 945733,
+      "score": 0.65
+    },
+    "desktop": {
+      "lcp": 1613.5100000000002,
+      "bytes": 956016,
+      "score": 0.93
+    }
+  },
+  "notebook-nao-conecta-bluetooth-curitiba": {
+    "mobile": {
+      "lcp": 6706.3695,
+      "bytes": 947923,
+      "score": 0.62
+    },
+    "desktop": {
+      "lcp": 1601.9475000000002,
+      "bytes": 948002,
+      "score": 0.93
+    }
+  },
+  "computador-desligando-apos-segundos-curitiba": {
+    "mobile": {
+      "lcp": 7013.8690000000015,
+      "bytes": 948065,
+      "score": 0.63
+    },
+    "desktop": {
+      "lcp": 1346.9884999999997,
+      "bytes": 947768,
+      "score": 0.95
+    }
+  },
+  "computador-com-cheiro-de-queimado-curitiba": {
+    "mobile": {
+      "lcp": 7040.8405,
+      "bytes": 947993,
+      "score": 0.62
+    },
+    "desktop": {
+      "lcp": 1597.4424999999999,
+      "bytes": 948350,
+      "score": 0.93
+    }
+  },
+  "impressora-cartucho-nao-reconhece-curitiba": {
+    "mobile": {
+      "lcp": 7005.001500000002,
+      "bytes": 937579,
+      "score": 0.61
+    },
+    "desktop": {
+      "lcp": 1540.3834999999997,
+      "bytes": 956144,
+      "score": 0.93
+    }
+  },
+  "notebook-bateria-nao-carrega-curitiba": {
+    "mobile": {
+      "lcp": 6939.777999999999,
+      "bytes": 947899,
+      "score": 0.6
+    },
+    "desktop": {
+      "lcp": 1614.7570000000005,
+      "bytes": 985508,
+      "score": 0.92
+    }
+  }
+}
