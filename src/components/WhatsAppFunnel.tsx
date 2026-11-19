@@ -34,6 +34,7 @@ import {
 import { ColetaRequiredCard } from "@/components/funnel/ColetaRequiredCard";
 import { getSessionId, recordSubmission } from "@/lib/funnelSubmission";
 import { withVideoWarning } from "@/lib/funnelWarning";
+import { toWhatsAppPlainText } from "@/lib/whatsappSafeText";
 import { bipAndAttention } from "@/lib/attentionBip";
 import { logFunnelDiag } from "@/lib/funnelDiagnostics";
 import { buildLeadContextLines } from "@/lib/leadContext";
@@ -176,7 +177,7 @@ function buildMessage(a: Answers): string {
   lines.push("✅ Registro de ciência e aceite eletrônico dos termos e valores apresentados no funil.");
   if (a.descricao.trim()) {
     lines.push("");
-    lines.push(`📝 ${a.descricao.trim()}`);
+    lines.push(`*Descrição do problema:* ${a.descricao.trim()}`);
   }
   lines.push("");
   lines.push("— Estou ciente das políticas e termos: tecnicocuritiba.com.br/termos-e-condicoes");
@@ -586,7 +587,7 @@ export const WhatsAppFunnel = () => {
     if (step !== 4) return "";
     try {
       const base = buildMessage(answers);
-      return presetMessage ? `${presetMessage}\n\n---\n${base}` : base;
+      return toWhatsAppPlainText(presetMessage ? `${presetMessage}\n\n---\n${base}` : base);
     } catch {
       return "";
     }
@@ -629,9 +630,9 @@ export const WhatsAppFunnel = () => {
       const baseMessage = buildMessage(answers);
       // Mesmo com preset (mensagem vinda de outro CTA), o aviso obrigatório
       // sempre fica no final via `withVideoWarning`.
-      const finalMessage = withVideoWarning(
+      const finalMessage = toWhatsAppPlainText(withVideoWarning(
         presetMessage ? `${presetMessage}\n\n---\n${baseMessage}` : baseMessage,
-      );
+      ));
 
       try {
         await recordSubmission({

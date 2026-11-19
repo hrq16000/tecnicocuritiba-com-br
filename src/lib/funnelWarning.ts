@@ -8,7 +8,7 @@
  * sem áudio nem ruídos.
  */
 export const VIDEO_WARNING =
-  "🚨 *Atenção — obrigatório para iniciar o atendimento:* envie *agora neste chat* (1) *fotos* do equipamento por completo, incluindo a *etiqueta traseira* com modelo/série, e (2) um *vídeo* mostrando o defeito acontecendo. O vídeo *não pode ter áudio nem ruídos de fundo* (mute o microfone do celular, ambiente em silêncio). *Sem o envio das fotos e do vídeo, o atendimento não será iniciado.*";
+  "*Atenção — obrigatório para iniciar o atendimento:* envie *agora neste chat* (1) *fotos* do equipamento por completo, incluindo a *etiqueta traseira* com modelo/série, e (2) um *vídeo* mostrando o defeito acontecendo. O vídeo *não pode ter áudio nem ruídos de fundo* (mute o microfone do celular, ambiente em silêncio). *Sem o envio das fotos e do vídeo, o atendimento não será iniciado.*";
 
 /** Garante que `VIDEO_WARNING` esteja sempre no final da mensagem. */
 export function withVideoWarning(message: string): string {
