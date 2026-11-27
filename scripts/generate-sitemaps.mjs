@@ -44,6 +44,12 @@ for (const p of ["/abrir-os"]) routes.add(p);
 // 2) Expand dynamic routes from data files.
 const brandSlugs = [...brandsSrc.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
 const problemSlugs = problemSlugsFromDir;
+// Manifesto pequeno para redirects de slugs antigos, sem importar o conteúdo das páginas.
+writeFileSync(
+  resolve("src/lib/canonicalProblemSlugs.generated.ts"),
+  "// Gerado por scripts/generate-sitemaps.mjs; não editar manualmente.\n" +
+    "export const CANONICAL_PROBLEM_SLUGS = " + JSON.stringify([...problemSlugs].sort(), null, 2) + " as const;\n",
+);
 
 for (const s of brandSlugs) routes.add(`/marcas/${s}`);
 for (const s of problemSlugs) routes.add(`/problemas/${s}`);

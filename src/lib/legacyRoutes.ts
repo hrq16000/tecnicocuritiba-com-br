@@ -4,6 +4,9 @@
  * compatibilidade para decidir 200 vs 404 ainda no servidor.
  */
 import legacySource from "@/LegacyApp.tsx?raw";
+import { CANONICAL_PROBLEM_SLUGS } from "./canonicalProblemSlugs.generated";
+
+const canonicalProblemSlugs = new Set<string>(CANONICAL_PROBLEM_SLUGS);
 
 export const LEGACY_ROUTE_PATTERNS: string[] = Array.from(
   new Set(
@@ -55,7 +58,12 @@ export const LEGACY_REDIRECTS: ReadonlyMap<string, string> = new Map(
 );
 
 export function legacyRedirectFor(pathname: string): string | null {
-  return LEGACY_REDIRECTS.get(normalize(pathname).toLowerCase()) ?? null;
+  const normalized = normalize(pathname).toLowerCase();
+  const explicit = LEGACY_REDIRECTS.get(normalized);
+  if (explicit) return explicit;
+  // Preserva páginas legadas reais e aceita apenas slugs canônicos conhecidos.
+  if (!/^\/[a-z0-9-]+$/.test(normalized) || !canonicalProblemSlugs.has(normalized.slice(1)) || isLegacyPath(normalized)) return null;
+  return `/problemas${normalized}`;
 }
 
 export { normalize as normalizeLegacyPath };

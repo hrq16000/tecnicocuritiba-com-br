@@ -81,6 +81,32 @@ if (bad.length) {
   for (const b of bad) console.error(`  ${b.status}\t${b.url}`);
 }
 
+// Regressão determinística dos aliases de problema: 301 apenas para slugs publicados.
+// As rotas reais do LegacyApp conservam precedência sobre o alias.
+const legacySource = fs.readFileSync(path.resolve("src/LegacyApp.tsx"), "utf8");
+const legacyPaths = new Set([...legacySource.matchAll(/<Route\s+path="([^"]+)"/g)].map((m) => m[1].toLowerCase()));
+const expectedAliases = paths
+  .filter((p) => /^\/problemas\/[a-z0-9-]+$/.test(p))
+  .filter((p) => !legacyPaths.has(p.slice("/problemas".length)));
+const aliasErrors = (await runPool(expectedAliases, async (target) => {
+  const alias = target.slice("/problemas".length);
+  try {
+    const res = await fetch(new URL(alias, BASE), { redirect: "manual" });
+    const location = res.headers.get("location");
+    if (res.status !== 301 || !location || new URL(location, BASE).href !== new URL(target, BASE).href) {
+      return `${alias}: esperado 301 → ${target}; recebido ${res.status} ${location ?? ""}`;
+    }
+  } catch (e) { return `${alias}: ${e.message}`; }
+  return null;
+})).filter(Boolean);
+const unknown = await check("/slug-inexistente-regressao-404");
+if (unknown.status !== 404) aliasErrors.push(`${unknown.url}: esperado 404; recebido ${unknown.status}`);
+if (aliasErrors.length) {
+  console.error("❌ Redirects de problema inválidos:", aliasErrors.join("\n"));
+} else {
+  console.log(`✅ ${expectedAliases.length} aliases canônicos 301; slug desconhecido mantém 404.`);
+}
+
 // Amostra 30 URLs para link-check interno (parsing HTML é caro).
 const sample = paths.sort(() => 0.5 - Math.random()).slice(0, 30);
 const validPathSet = new Set(paths.map((p) => (p.replace(/\/$/, "") || "/")));
@@ -103,5 +129,5 @@ if (brokenLinks.length) {
   }
 }
 
-if (bad.length || brokenLinks.length) process.exit(1);
+if (bad.length || brokenLinks.length || aliasErrors.length) process.exit(1);
 console.log("✅ Sitemap + links internos íntegros.");
