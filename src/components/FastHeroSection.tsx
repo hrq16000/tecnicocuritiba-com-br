@@ -32,17 +32,17 @@ export const FastHeroSection = () => {
 
   return (
     <section
-      className="hero-gradient relative overflow-hidden pb-14 pt-8 md:pb-20 md:pt-12"
+      className="hero-gradient relative overflow-hidden pb-10 pt-6 md:pb-16 md:pt-10"
       aria-label="Técnico de informática em Curitiba — atendimento hoje"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-[hsl(var(--hero-bg))] to-[hsl(var(--hero-bg-end))]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--accent)/0.16),transparent_45%),radial-gradient(ellipse_at_bottom_left,hsl(var(--primary-foreground)/0.08),transparent_50%)]" />
 
       <div className="container relative z-10 mx-auto">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="order-1 text-center lg:text-left">
+        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)] lg:gap-10">
+          <div className="order-1 min-w-0 text-left">
             {/* Prova de autoridade mensurável (substitui o "+20 anos" abstrato) */}
-            <div className="mb-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-full border border-white/15 bg-white/[0.08] px-4 py-2 backdrop-blur-md lg:justify-start">
+            <div className="mb-5 inline-flex flex-wrap items-center justify-start gap-x-3 gap-y-1 rounded-full border border-white/15 bg-white/[0.08] px-3 py-2">
               <span className="text-sm font-semibold tracking-wide text-yellow-300" aria-hidden="true">★ 4.9/5</span>
               <span className="text-sm font-medium text-white/90">+1.200 atendimentos</span>
               <span className="hidden text-white/40 sm:inline" aria-hidden="true">·</span>
@@ -50,24 +50,23 @@ export const FastHeroSection = () => {
             </div>
 
             {/* H1 cirúrgico: serviço + cidade + ancoragem de preço + urgência local */}
-              <h1 className="mb-4 font-heading text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl md:mb-5 md:text-5xl lg:text-[3.4rem]">
-              Técnico de Informática
-              <br />
-              <span className="text-accent drop-shadow-xs">em Curitiba — Hoje</span>
-              <span className="mt-2 block text-lg font-semibold tracking-normal text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] sm:text-xl md:text-2xl">
+            <h1 className="mb-4 break-normal hyphens-none font-heading text-[clamp(1.85rem,4vw,3.3rem)] font-bold leading-[1.12] tracking-tight text-white md:mb-5">
+              Técnico de Informática{" "}
+              <span className="block text-accent">em Curitiba — Hoje</span>
+              <span className="mt-3 block text-lg font-semibold leading-snug tracking-normal text-white/90 sm:text-xl md:text-2xl">
                 A partir de <span className="text-yellow-300 font-extrabold">R$ 99,99</span> · Atendimento a domicílio
               </span>
             </h1>
 
             {/* Subhead remove objeção principal: "vai me cobrar caro sem dizer antes?" */}
-            <p className="mx-auto mb-5 max-w-xl text-base leading-relaxed text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] md:text-lg lg:mx-0">
+            <p className="mb-5 max-w-xl text-base leading-relaxed text-white/95 md:text-lg">
               <strong className="text-white">Diagnóstico grátis</strong> e você aprova o preço{" "}
               <strong className="text-white">antes</strong> de qualquer reparo. Formatação, remoção de vírus, upgrade
               SSD e mais — com garantia.
             </p>
 
             {/* Trust chips reorientados: cada um quebra uma objeção real */}
-            <div className="mb-6 flex flex-wrap justify-center gap-2 lg:justify-start" aria-label="Garantias do serviço">
+            <div className="mb-5 flex flex-wrap justify-start gap-2" aria-label="Garantias do serviço">
               {[
                 { icon: "✓", text: "Garantia de 90 dias" },
                 { icon: "✓", text: "Preço fixo aprovado por você" },
@@ -75,7 +74,7 @@ export const FastHeroSection = () => {
               ].map(({ icon, text }) => (
                 <span
                   key={text}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.09] px-3 py-1.5 text-[13px] font-medium text-white backdrop-blur-xs"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.09] px-3 py-1.5 text-[13px] font-medium text-white"
                 >
                   <span className="text-yellow-300" aria-hidden="true">{icon}</span>
                   {text}
@@ -92,7 +91,7 @@ export const FastHeroSection = () => {
                 onClick={trackHeroWhatsApp}
                 data-cta-location="hero_primary"
                 aria-label="Falar com técnico no WhatsApp agora — orçamento gratuito"
-                className="group inline-flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-xl bg-[hsl(var(--whatsapp))] px-6 py-2 text-base font-extrabold text-primary-foreground shadow-[0_12px_30px_-8px_hsl(145_63%_42%/0.55)] transition-all hover:scale-[1.02] hover:bg-[hsl(var(--whatsapp-hover))] sm:flex-1"
+                className="group inline-flex min-h-14 flex-col items-center justify-center gap-0.5 rounded-xl bg-[hsl(var(--whatsapp))] px-6 py-2 text-base font-extrabold text-primary-foreground shadow-[0_12px_30px_-8px_hsl(145_63%_42%/0.55)] transition-colors hover:bg-[hsl(var(--whatsapp-hover))] active:bg-[hsl(var(--whatsapp-hover))] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:flex-1"
               >
                 <span className="flex items-center gap-2">
                   <span aria-hidden="true">💬</span>
@@ -113,12 +112,12 @@ export const FastHeroSection = () => {
             <GeoCityChip />
           </div>
 
-          <div className="order-2 flex justify-center lg:justify-end">
+          <div className="order-2 flex min-w-0 justify-center lg:justify-end">
             <div className="relative">
               <img
                 alt={IMAGES.tecnicoTrabalhandoAlt}
                 title={heroCredit ? imageTitle(heroCredit) : IMAGES.tecnicoTrabalhandoAlt}
-                className="relative w-64 rounded-2xl shadow-2xl sm:w-80 md:w-96 lg:w-auto lg:max-w-md aspect-square object-cover"
+                className="relative aspect-square w-64 max-w-full rounded-2xl border border-white/15 object-cover sm:w-80 md:w-96 lg:w-auto lg:max-w-full xl:max-w-md"
                 loading="eager"
                 decoding="async"
                 width="400"
@@ -140,7 +139,7 @@ export const FastHeroSection = () => {
                 </p>
               )}
               {/* Badge da imagem: prova concreta, não claim genérico */}
-              <div className="absolute -bottom-3 -right-3 rounded-lg bg-accent px-3 py-2 text-xs font-extrabold text-accent-foreground shadow-lg sm:text-sm">
+              <div className="absolute bottom-2 right-2 max-w-[80%] rounded-lg bg-accent px-3 py-2 text-xs font-extrabold text-accent-foreground shadow-lg sm:text-sm">
                 <div className="flex items-center gap-1.5">
                   <span aria-hidden="true">🛡️</span>
                   <div className="text-left leading-tight">
@@ -166,7 +165,7 @@ export const FastHeroSection = () => {
           onClick={trackStickyMobileWhatsApp}
           data-cta-location="sticky_mobile"
           aria-label="WhatsApp — R$ 99,99, resposta em ~5 min, Seg-Sáb 8h-20h"
-          className="pointer-events-auto inline-flex w-full max-w-md flex-col items-center justify-center gap-0 rounded-full bg-[hsl(var(--whatsapp))] px-5 py-2.5 text-sm font-extrabold text-primary-foreground shadow-[0_12px_30px_-8px_rgba(0,0,0,0.45)] wa-pulse"
+          className="pointer-events-auto inline-flex w-full max-w-md flex-col items-center justify-center gap-0 rounded-full bg-[hsl(var(--whatsapp))] px-5 py-2.5 text-sm font-extrabold text-primary-foreground shadow-[0_12px_30px_-8px_rgba(0,0,0,0.45)] transition-colors active:bg-[hsl(var(--whatsapp-hover))]"
         >
           <span className="flex items-center gap-2">
             <span aria-hidden="true">💬</span>

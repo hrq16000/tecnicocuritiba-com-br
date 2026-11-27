@@ -21,21 +21,21 @@ export const ProblemSignals = ({
   signals = HOME_SIGNALS,
   className = "",
 }: { title?: string; signals?: Signal[]; className?: string }) => (
-  <section className={`py-8 ${className}`} aria-labelledby="sintomas-heading">
+  <section className={`border-b border-border bg-background py-8 md:py-12 ${className}`} aria-labelledby="sintomas-heading">
     <div className="container mx-auto">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <h2 id="sintomas-heading" className="text-xl font-bold text-foreground sm:text-2xl">
           {title}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Escolha o sintoma mais parecido com o seu para ver causas possíveis e o que fazer antes do atendimento.
         </p>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+        <ul className="mt-5 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {signals.slice(0, 6).map((s) => (
             <li key={s.to}>
               <a
                 href={s.to}
-                className="flex min-h-12 items-center gap-2 rounded-lg border border-dashed border-border bg-card/50 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring-3"
+                className="group relative flex h-full min-h-14 items-center gap-3 bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:text-primary focus-visible:z-10 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
               >
                 <Activity className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                 {s.label}
