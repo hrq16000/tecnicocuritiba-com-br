@@ -103,7 +103,7 @@ export const problema: ProblemaPageData = {
       "label": "Notebook Sem Áudio"
     },
     {
-      "to": "/conserto-notebook-curitiba",
+      "to": "/servicos/conserto-notebook-curitiba",
       "label": "Conserto de Notebook"
     },
     {
@@ -111,7 +111,7 @@ export const problema: ProblemaPageData = {
       "label": "Computador Lento"
     },
     {
-      "to": "/redes-wifi-curitiba",
+      "to": "/servicos/redes-wifi",
       "label": "Redes e Wi-Fi"
     },
     {

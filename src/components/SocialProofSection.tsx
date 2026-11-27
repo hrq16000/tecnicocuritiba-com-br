@@ -21,7 +21,7 @@ export const SocialProofSection = () => {
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Técnico em Curitiba - Suporte em Informática",
+    "name": "Técnico em Curitiba",
     "review": reviews.map(review => ({
       "@type": "Review",
       "reviewRating": { "@type": "Rating", "ratingValue": review.rating.toString(), "bestRating": "5" },

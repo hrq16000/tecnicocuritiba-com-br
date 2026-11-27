@@ -331,7 +331,7 @@ const SegurancaDados = () => {
                 backup e recuperação
               </Link>
               , execução empresarial em{" "}
-              <Link to="/servicos/suporte-tecnico-empresarial" className="text-accent underline underline-offset-2">
+              <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
                 suporte técnico empresarial
               </Link>{" "}
               e condições comerciais em{" "}

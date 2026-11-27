@@ -117,7 +117,7 @@ export const problema: ProblemaPageData = {
       "label": "Computador Não Liga"
     },
     {
-      "to": "/conserto-notebook-curitiba",
+      "to": "/servicos/conserto-notebook-curitiba",
       "label": "Conserto de Notebook"
     },
     {

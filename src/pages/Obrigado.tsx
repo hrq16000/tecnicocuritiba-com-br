@@ -157,7 +157,7 @@ const Obrigado = () => {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
     "@id": `${SITE}/#organization`,
-    name: "Técnico em Curitiba - Suporte em Informática",
+    name: "Técnico em Curitiba",
     url: SITE,
     telephone: "+55-41-99745-2053",
     priceRange: "R$ 99,99 - R$ 500",

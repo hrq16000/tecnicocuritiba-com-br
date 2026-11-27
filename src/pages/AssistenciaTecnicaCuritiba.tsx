@@ -213,7 +213,7 @@ export default function AssistenciaTecnicaCuritiba() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": "https://tecnicocuritiba.com.br/assistencia-tecnica-curitiba#localbusiness",
-    name: "Preciso de um Técnico — Assistência Técnica Especializada",
+    name: "Técnico em Curitiba",
     description:
       "Assistência técnica especializada em Curitiba: reparo de bancada em computadores, notebooks, placas, consoles e smartphones, com diagnóstico e garantia.",
     areaServed: [

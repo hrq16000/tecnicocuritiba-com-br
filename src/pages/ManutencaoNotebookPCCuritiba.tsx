@@ -33,12 +33,12 @@ const BAIRROS_FOCO = [
 ];
 
 const SERVICO_BAIRRO = [
-  { label: "Conserto de notebook no Batel", to: "/servico-bairro/conserto-notebook-batel" },
-  { label: "Conserto de notebook no CIC", to: "/servico-bairro/conserto-notebook-cic" },
-  { label: "Conserto de notebook no Portão", to: "/servico-bairro/conserto-notebook-portao" },
-  { label: "Formatação no Centro", to: "/servico-bairro/formatacao-centro" },
-  { label: "Formatação no Portão", to: "/servico-bairro/formatacao-portao" },
-  { label: "Remoção de vírus no Batel", to: "/servico-bairro/remocao-virus-batel" },
+  { label: "Conserto de notebook no Batel", to: "/servicos/conserto-pc-notebook/batel" },
+  { label: "Conserto de notebook no CIC", to: "/servicos/conserto-pc-notebook/cic" },
+  { label: "Conserto de notebook no Portão", to: "/servicos/conserto-pc-notebook/portao" },
+  { label: "Formatação no Centro", to: "/servicos/formatacao-computador/centro" },
+  { label: "Formatação no Portão", to: "/servicos/formatacao-computador/portao" },
+  { label: "Remoção de vírus no Batel", to: "/servicos/remocao-virus/batel" },
 ];
 
 const FAQ = [
@@ -180,7 +180,12 @@ export default function ManutencaoNotebookPCCuritiba() {
             Visita técnica em domicílio agendada por WhatsApp — normalmente em 30 a 60 min.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-            {BAIRROS_FOCO.map((b) => (
+            {BAIRROS_FOCO.map((b) => b.slug === "ecoville" ? (
+              <div key={b.slug} className="bg-card border border-border rounded-lg px-4 py-3 text-center">
+                <MapPin className="h-4 w-4 text-accent mx-auto mb-1" />
+                <span className="text-sm font-medium text-foreground">{b.nome}</span>
+              </div>
+            ) : (
               <Link
                 key={b.slug}
                 to={`/bairros/${b.slug}`}
@@ -251,7 +256,7 @@ export default function ManutencaoNotebookPCCuritiba() {
             <Link to="/assistencia-tecnica-curitiba" className="bg-secondary hover:bg-accent/20 px-4 py-2 rounded-lg">Assistência Técnica em Curitiba</Link>
             <Link to="/tecnico-informatica-curitiba" className="bg-secondary hover:bg-accent/20 px-4 py-2 rounded-lg">Técnico de Informática em Curitiba</Link>
             <Link to="/empresa-de-ti-curitiba" className="bg-secondary hover:bg-accent/20 px-4 py-2 rounded-lg">Empresa de TI em Curitiba</Link>
-            <Link to="/coleta-entrega" className="bg-secondary hover:bg-accent/20 px-4 py-2 rounded-lg">Coleta e Entrega Grátis</Link>
+            <Link to="/coleta-e-entrega" className="bg-secondary hover:bg-accent/20 px-4 py-2 rounded-lg">Coleta e Entrega Grátis</Link>
             <Link to="/valores" className="bg-secondary hover:bg-accent/20 px-4 py-2 rounded-lg">Tabela de Valores</Link>
           </div>
         </section>

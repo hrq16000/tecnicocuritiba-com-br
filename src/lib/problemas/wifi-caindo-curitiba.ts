@@ -104,7 +104,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu Wi-Fi está caindo toda hora. Preciso de diagnóstico e solução em Curitiba.",
   "relatedPages": [
     {
-      "to": "/redes-wifi-curitiba",
+      "to": "/servicos/redes-wifi",
       "label": "Redes e Wi-Fi"
     },
     {

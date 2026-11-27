@@ -109,11 +109,11 @@ export const problema: ProblemaPageData = {
       "label": "PC Não Reconhece USB"
     },
     {
-      "to": "/backup-recuperacao-curitiba",
+      "to": "/servicos/backup-recuperacao",
       "label": "Backup e Recuperação"
     },
     {
-      "to": "/upgrade-ssd-memoria-curitiba",
+      "to": "/servicos/upgrade-ssd-memoria",
       "label": "Upgrade SSD"
     },
     {

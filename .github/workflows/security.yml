@@ -26,6 +26,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
@@ -81,8 +85,13 @@ jobs:
         run: bun scripts/check-rls-migrations.ts
 
       # 6) Guard against SEO regressions on the landing shell (title / desc / unique H1).
-      - name: Verify SEO basics on index.html
-        run: bun scripts/check-seo-basics.ts index.html
+      - name: Verify SEO basics on rendered SSR homepage
+        run: |
+          bun run build
+          bash scripts/start-worker-preview.sh 8080
+          curl -fsS http://127.0.0.1:8080/ -o "$RUNNER_TEMP/seo-home.html"
+          bun scripts/check-seo-basics.ts "$RUNNER_TEMP/seo-home.html"
+          node scripts/check-adsense.mjs --html "$RUNNER_TEMP/seo-home.html"
 
       # 7) Block CNPJ / número de WhatsApp visível em superfícies publicadas.
       - name: Brand privacy gate (sem CNPJ, sem WhatsApp visível)

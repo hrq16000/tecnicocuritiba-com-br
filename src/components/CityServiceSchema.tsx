@@ -35,7 +35,7 @@ export const CityServiceSchema = ({
       "@context": "https://schema.org",
       "@type": "Service",
       "@id": `${url}#service`,
-      name: `Técnico de Informática em ${city}`,
+      name: "Técnico em Curitiba",
       description: `Assistência técnica em informática em ${city}: formatação, conserto de PC e notebook, remoção de vírus, upgrade de SSD/RAM e configuração de redes Wi-Fi. Atendimento em domicílio em até 30 minutos.`,
       serviceType: "Assistência Técnica de Informática",
       category: "Assistência Técnica de Informática",

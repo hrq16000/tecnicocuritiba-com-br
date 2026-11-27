@@ -3,7 +3,7 @@
  * Gate de CI: valida a configuração do AdSense.
  *
  * 1. public/ads.txt existe e contém a linha DIRECT do publisher correto.
- * 2. index.html contém a meta `google-adsense-account` com o mesmo publisher.
+ * 2. O head SSR contém a meta `google-adsense-account` com o mesmo publisher.
  * 3. O script adsbygoogle NÃO é carregado estaticamente (deve depender do consentimento).
  *
  * Com --remote <origem>, também verifica se o ads.txt publicado responde 200
@@ -29,14 +29,28 @@ if (!existsSync("public/ads.txt")) {
   else ok.push(`ads.txt: ${line}`);
 }
 
-const html = readFileSync("index.html", "utf8");
-if (!html.includes(`content="ca-${PUB}"`))
-  errors.push(`index.html sem <meta name="google-adsense-account" content="ca-${PUB}">`);
-else ok.push("meta google-adsense-account presente");
+const root = readFileSync("src/routes/__root.tsx", "utf8");
+const adsense = readFileSync("src/lib/adsense.ts", "utf8");
+if (!root.includes('name: "google-adsense-account", content: ADSENSE_CLIENT') ||
+    !adsense.includes(`ADSENSE_CLIENT = "ca-${PUB}"`))
+  errors.push("head SSR sem meta google-adsense-account correspondente ao publisher");
+else ok.push("meta google-adsense-account configurada no head SSR");
 
-if (/<script[^>]+adsbygoogle\.js/.test(html))
-  errors.push("adsbygoogle.js carregado estaticamente no index.html — deve ser injetado só após consentimento");
-else ok.push("adsbygoogle não carrega antes do consentimento");
+if (!root.includes("<ConsentBanner />") || !adsense.includes("|| !hasAdsConsent()) return;") ||
+    /<script[^>]+adsbygoogle\.js/.test(root))
+  errors.push("consentimento de publicidade ausente ou script carregado estaticamente");
+else ok.push("AdSense condicionado ao consentimento");
+
+const htmlIndex = process.argv.indexOf("--html");
+if (htmlIndex !== -1) {
+  const html = readFileSync(process.argv[htmlIndex + 1], "utf8");
+  if (!html.includes('name="google-adsense-account"') || !html.includes(`content="ca-${PUB}"`))
+    errors.push("HTML SSR sem meta google-adsense-account correspondente");
+  else ok.push("meta google-adsense-account presente no HTML SSR");
+  if (/<script[^>]+adsbygoogle\.js/.test(html))
+    errors.push("adsbygoogle.js carregado estaticamente no HTML SSR");
+  else ok.push("HTML SSR sem script publicitário estático");
+}
 
 const remoteIndex = process.argv.indexOf("--remote");
 if (remoteIndex !== -1) {

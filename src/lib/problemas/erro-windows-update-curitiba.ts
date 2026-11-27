@@ -112,11 +112,11 @@ export const problema: ProblemaPageData = {
       "label": "Erro de Disco Cheio"
     },
     {
-      "to": "/computador-lento",
+      "to": "/servicos/computador-lento",
       "label": "Computador Lento"
     },
     {
-      "to": "/formatacao-computador",
+      "to": "/servicos/formatacao-computador",
       "label": "Formatação de Computador"
     },
     {

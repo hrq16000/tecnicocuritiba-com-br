@@ -53,7 +53,7 @@ const localFaqs = [
 
 const schema = {
   "@context": "https://schema.org", "@type": "LocalBusiness",
-  "name": "Técnico de Informática em Campo Magro",
+  "name": "Técnico em Curitiba",
   "description": "Assistência técnica em Campo Magro PR. Atendimento a domicílio.",
   "telephone": "+55-41-99745-2053",
   "areaServed": { "@type": "City", "name": "Campo Magro", "containedInPlace": { "@type": "State", "name": "Paraná" } },

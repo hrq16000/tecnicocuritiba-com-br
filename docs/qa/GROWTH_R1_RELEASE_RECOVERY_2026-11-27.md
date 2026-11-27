@@ -42,3 +42,20 @@ Referências: https://supabase.com/docs/guides/getting-started/api-keys, https:/
 ## Ensaio controlado do runtime de preview
 
 Apenas o workflow Internal links passa a usar a configuração de Worker gerada pelo build Nitro, Wrangler 4.169.0 (Node 22), loopback explícito e checagem HTTP 2xx. É uma prova incremental da compatibilidade no runner GitHub, não uma mudança de produção nem um bypass de SSR. Os demais jobs permanecem com seus gates originais até esta prova passar. O script de links e sitemap não foi alterado.
+
+## Recuperação SEO e consentimento no SSR (27/11/2026)
+
+O run 46056933553 confirmou o preview Cloudflare funcional e acessibilidade do sitemap (780 rotas), mas encontrou 102 ocorrências de links inválidos na amostra. O catálogo de 189 problemas passa a fornecer o conteúdo e metadados no loader SSR; os slugs válidos legados recebem 301 específico, os desconhecidos retornam 404. Links editoriais, serviços, bairros e rotas antigas foram corrigidos para destinos existentes; bairros sem página própria ficam como texto. A verificação de links passou de uma amostra aleatória de 30 para todas as URLs, com cache de destinos adicionais e sem reduzir as verificações.
+
+O gate de marca agora lê todo o sitemap efetivamente servido pelo SSR, não um dist/index.html inexistente. O nome de marca já definido pelo gate ("Técnico em Curitiba") foi alinhado nos metadados dos próprios schemas, preservando identidade legal/NAP e o prestador externo CFTV. Não altera identidade visual, preços, contratos ou destinos de conversão.
+
+Restaurei o banner já existente, meta de publisher e Consent Mode default-denied. loadAdSense verifica consentimento explícito antes de criar qualquer script; não introduzi carregamento externo GA4. Os gates de SEO e AdSense leem HTML realmente servido pelo preview do Worker, com Wrangler fixado e Node 22. A remoção do index.html antigo não é tratada como aprovação automática. Os workflows de preview abandonam vite preview SPA e usam o Worker construído.
+
+Validação local com Nitro node-server (não é um deploy Cloudflare):
+- TypeScript sem erro; 67/67 testes unitários.
+- Build OK; SEO da home: title presente, descrição 157 caracteres, exatamente um H1.
+- AdSense: ads.txt e meta correspondentes; script publicitário não estático; teste de consentimento negativo/positivo.
+- Canonical /problemas/computador-nao-liga-curitiba 200 (conteúdo SSR completo); alias raiz 301; slug desconhecido 404.
+- 780/780 URLs HTTP OK, rastreamento integral sem links quebrados; verificação de marca de 780 HTMLs OK.
+- 189 arquivos de problemas/163 links únicos validados antes do último lote; NAP e SEO SSR passaram.
+- CI remoto e publicação de produção ainda pendentes; manter PR sem merge até os gates reais ficarem verdes.

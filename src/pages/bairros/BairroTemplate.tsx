@@ -106,7 +106,7 @@ export const BairroTemplate = ({ data }: BairroTemplateProps) => {
   const localSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": `Técnico de Informática em ${data.nome}`,
+    "name": "Técnico em Curitiba",
     "description": data.metaDescription,
     "telephone": "+55-41-99745-2053",
     "areaServed": {

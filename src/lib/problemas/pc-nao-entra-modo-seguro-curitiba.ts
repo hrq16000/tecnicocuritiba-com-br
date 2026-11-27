@@ -98,7 +98,7 @@ export const problema: ProblemaPageData = {
       "label": "Erro 0xc000021a"
     },
     {
-      "to": "/tela-azul-bsod-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {

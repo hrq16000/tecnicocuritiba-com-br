@@ -13,6 +13,8 @@ import { SchemaDedup } from "@/components/SchemaDedup";
 import NotFound from "@/pages/NotFound";
 import { localBusinessSchema, organizationSchema } from "@/lib/jsonLd";
 import { captureUtmsFromUrl } from "@/lib/utmCapture";
+import { ConsentBanner } from "@/components/ConsentBanner";
+import { ADSENSE_CLIENT } from "@/lib/adsense";
 
 const Toaster = lazy(() =>
   import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })),
@@ -52,10 +54,11 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
       { name: "robots", content: "index, follow" },
-      { name: "author", content: "Técnico Curitiba" },
+      { name: "author", content: "Técnico em Curitiba" },
+      { name: "google-adsense-account", content: ADSENSE_CLIENT },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Técnico Curitiba" },
+      { property: "og:site_name", content: "Técnico em Curitiba" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -97,6 +100,7 @@ function RootComponent() {
       <SchemaDedup />
       <AppInit />
       <Outlet />
+      <ConsentBanner />
       <Suspense fallback={null}>
         <Toaster />
         <Sonner />
@@ -113,6 +117,8 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        {/* Local queue only: no remote script is loaded by this bootstrap. */}
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};window.gtag("consent","default",{ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",analytics_storage:"denied"});` }} />
       </head>
       <body>
         {children}

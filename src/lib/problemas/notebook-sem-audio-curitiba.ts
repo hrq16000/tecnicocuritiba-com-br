@@ -116,11 +116,11 @@ export const problema: ProblemaPageData = {
       "label": "Notebook Não Liga"
     },
     {
-      "to": "/conserto-notebook-curitiba",
+      "to": "/servicos/conserto-notebook-curitiba",
       "label": "Conserto de Notebook"
     },
     {
-      "to": "/formatacao-computador-curitiba",
+      "to": "/servicos/formatacao-computador",
       "label": "Formatação"
     },
     {

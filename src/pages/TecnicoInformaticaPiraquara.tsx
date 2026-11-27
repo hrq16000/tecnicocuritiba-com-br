@@ -58,7 +58,7 @@ const localFaqs = [
 
 const schema = {
   "@context": "https://schema.org", "@type": "LocalBusiness",
-  "name": "Técnico de Informática em Piraquara",
+  "name": "Técnico em Curitiba",
   "description": "Assistência técnica de computadores em Piraquara PR. Atendimento a domicílio.",
   "telephone": "+55-41-99745-2053",
   "areaServed": { "@type": "City", "name": "Piraquara", "containedInPlace": { "@type": "State", "name": "Paraná" } },

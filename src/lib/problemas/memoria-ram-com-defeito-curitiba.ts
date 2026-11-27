@@ -110,7 +110,7 @@ export const problema: ProblemaPageData = {
       "label": "PC Reiniciando Sozinho"
     },
     {
-      "to": "/erro-tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {

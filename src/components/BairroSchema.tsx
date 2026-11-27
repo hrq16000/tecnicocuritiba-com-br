@@ -50,7 +50,7 @@ export function BairroSchema({
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ComputerRepairService"],
     "@id": `${url}#localbusiness`,
-    name: `Técnico em Curitiba — ${servico} no ${bairro}`,
+    name: "Técnico em Curitiba",
     description: descricao,
     url,
     telephone: "+55-41-99745-2053",

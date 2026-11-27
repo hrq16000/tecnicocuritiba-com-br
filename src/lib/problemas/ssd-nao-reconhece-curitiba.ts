@@ -108,7 +108,7 @@ export const problema: ProblemaPageData = {
       "label": "HD Externo Não Reconhece"
     },
     {
-      "to": "/upgrade-ssd-memoria-curitiba",
+      "to": "/servicos/upgrade-ssd-memoria",
       "label": "Upgrade SSD e Memória"
     },
     {
@@ -116,7 +116,7 @@ export const problema: ProblemaPageData = {
       "label": "Computador Lento"
     },
     {
-      "to": "/backup-recuperacao-curitiba",
+      "to": "/servicos/backup-recuperacao",
       "label": "Backup e Recuperação"
     },
     {

@@ -104,7 +104,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu notebook não está carregando a bateria. Gostaria de agendar um diagnóstico.",
   "relatedPages": [
     {
-      "to": "/computador-desligando-sozinho-curitiba",
+      "to": "/problemas/pc-desligando-sozinho-curitiba",
       "label": "PC Desligando Sozinho"
     },
     {

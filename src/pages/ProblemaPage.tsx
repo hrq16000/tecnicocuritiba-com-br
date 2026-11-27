@@ -1,5 +1,5 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -20,7 +20,7 @@ import CasosReaisSection from "@/components/CasosReaisSection";
 import { Helmet } from "react-helmet";
 import { trackPageView, trackCTAClick, trackInternalLink } from "@/lib/analytics";
 import { useCTAVisibility } from "@/hooks/useCTAVisibility";
-import type { ProblemaPageData } from "@/lib/problemaPagesData";
+import { getProblemaPageBySlug, type ProblemaPageData } from "@/lib/problemaPagesData";
 import ReactMarkdown from "react-markdown";
 import { IMAGES } from "@/lib/images";
 import { RealImageSection } from "@/components/RealImageSection";
@@ -128,8 +128,7 @@ const diagnosticoSteps = [
 
 const ProblemaPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [data, setData] = useState<ProblemaPageData | undefined>(undefined);
-  const [loading, setLoading] = useState(true);
+  const data = slug ? getProblemaPageBySlug(slug) : undefined;
   const heroWaRef = useRef<HTMLButtonElement>(null);
   const footerWaRef = useRef<HTMLButtonElement>(null);
 
@@ -137,19 +136,6 @@ const ProblemaPage = () => {
   useCTAVisibility(heroWaRef, `problema_${slug ?? "unknown"}_hero_whatsapp`, { problema: slug ?? "unknown" });
   useCTAVisibility(footerWaRef, `problema_${slug ?? "unknown"}_footer_whatsapp`, { problema: slug ?? "unknown" });
 
-
-  useEffect(() => {
-    if (!slug) { setLoading(false); return; }
-    let active = true;
-    setLoading(true);
-    import("@/lib/problemaPagesData").then(({ getProblemaPageBySlug }) => {
-      if (!active) return;
-      const found = getProblemaPageBySlug(slug);
-      setData(found);
-      setLoading(false);
-    }).catch(() => { if (active) setLoading(false); });
-    return () => { active = false; };
-  }, [slug]);
 
   useEffect(() => {
     if (data) {
@@ -200,18 +186,6 @@ const ProblemaPage = () => {
       { "@type": "ListItem", position: 4, name: data.h1.split("—")[0].trim(), item: `https://tecnicocuritiba.com.br/problemas/${data.slug}` },
     ],
   } : null;
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="container mx-auto py-20 text-center text-muted-foreground">
-          Carregando…
-        </div>
-        <Footer />
-      </div>
-    );
-  }
 
   if (!data) {
     return (
@@ -308,7 +282,7 @@ const ProblemaPage = () => {
 
   const cidadesAtendidas = [
     { nome: "Curitiba", href: "/tecnico-informatica-curitiba" },
-    { nome: "São José dos Pinhais", href: "/tecnico-informatica-sao-jose-dos-pinhais" },
+    { nome: "São José dos Pinhais", href: "/tecnico-informatica-sao-jose-pinhais" },
     { nome: "Pinhais", href: "/tecnico-informatica-pinhais" },
     { nome: "Colombo", href: "/tecnico-informatica-colombo" },
     { nome: "Araucária", href: "/tecnico-informatica-araucaria" },
@@ -318,7 +292,6 @@ const ProblemaPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <link rel="canonical" href={`https://tecnicocuritiba.com.br/problemas/${data.slug}`} />
         {/* Pré-carrega recursos críticos para melhorar LCP em /problemas/*. */}
         <link rel="preconnect" href="https://wa.me" crossOrigin="" />
         <link rel="dns-prefetch" href="//wa.me" />

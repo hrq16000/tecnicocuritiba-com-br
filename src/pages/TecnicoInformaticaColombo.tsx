@@ -97,7 +97,7 @@ const localFaqs = [
 const colomboSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Técnico de Informática em Colombo",
+  "name": "Técnico em Curitiba",
   "description": "Assistência técnica de computadores em Colombo PR. Atendimento a domicílio. Formatação, conserto, upgrade e redes.",
   "telephone": "+55-41-99745-2053",
   "areaServed": { "@type": "City", "name": "Colombo", "containedInPlace": { "@type": "State", "name": "Paraná" } },

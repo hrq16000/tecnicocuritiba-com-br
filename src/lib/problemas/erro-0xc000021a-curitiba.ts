@@ -95,7 +95,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu PC está com tela azul erro 0xc000021a e não inicia. Preciso de ajuda urgente em Curitiba.",
   "relatedPages": [
     {
-      "to": "/tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {
@@ -107,11 +107,11 @@ export const problema: ProblemaPageData = {
       "label": "Erro 0x80070005"
     },
     {
-      "to": "/remocao-virus-curitiba",
+      "to": "/servicos/remocao-virus",
       "label": "Remoção de Vírus"
     },
     {
-      "to": "/formatacao-computador-curitiba",
+      "to": "/servicos/formatacao-computador",
       "label": "Formatação"
     },
     {

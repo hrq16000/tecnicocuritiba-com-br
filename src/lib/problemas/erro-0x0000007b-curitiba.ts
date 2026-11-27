@@ -104,7 +104,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu computador está dando erro 0x0000007B (INACCESSIBLE_BOOT_DEVICE). Preciso de ajuda.",
   "relatedPages": [
     {
-      "to": "/tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {
@@ -116,7 +116,7 @@ export const problema: ProblemaPageData = {
       "label": "Erro de Driver"
     },
     {
-      "to": "/hd-com-defeito-curitiba",
+      "to": "/servicos/backup-recuperacao",
       "label": "HD com Defeito"
     },
     {

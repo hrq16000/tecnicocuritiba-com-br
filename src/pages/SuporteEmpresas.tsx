@@ -182,7 +182,7 @@ const SuporteEmpresas = () => {
               icon: Users,
               title: "Computadores e usuários",
               description: "Lentidão, falhas, configurações, estações de trabalho e suporte ao usuário que depende do equipamento para produzir.",
-              to: "/servicos/manutencao-de-computador",
+              to: "/manutencao-notebook-pc-curitiba",
               linkLabel: "Manutenção de computador",
             },
             {

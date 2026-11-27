@@ -101,7 +101,7 @@ export default function GestorResponsavel() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${SITE}/#organization`,
-    name: "Técnico em Curitiba - Suporte em Informática",
+    name: "Técnico em Curitiba",
     url: SITE,
     logo: `${SITE}/logo.png`,
     telephone: NAP.phone,

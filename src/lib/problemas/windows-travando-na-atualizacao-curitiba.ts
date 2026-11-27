@@ -105,7 +105,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu Windows travou na atualização e não consigo usar o computador. Podem me ajudar?",
   "relatedPages": [
     {
-      "to": "/tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {

@@ -111,7 +111,7 @@ export const problema: ProblemaPageData = {
       "label": "Computador Lento"
     },
     {
-      "to": "/conserto-notebook-curitiba",
+      "to": "/servicos/conserto-notebook-curitiba",
       "label": "Conserto de Notebook"
     },
     {
