@@ -15,20 +15,23 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Install deps
         run: bun install --frozen-lockfile
       - name: Build
         run: bun run build
       - name: Start preview
-        run: bun run preview --port 4173 &
+        run: npm run preview -- --port 4173 &
       - name: Wait for preview
         run: |
           for i in {1..30}; do
-            curl -sf http://localhost:4173 >/dev/null && exit 0
+            curl -sf http://127.0.0.1:4173 >/dev/null && exit 0
             sleep 1
           done
           echo "preview não subiu"; exit 1
       - name: Check internal links + sitemap URLs
         run: node scripts/check-internal-links.mjs
         env:
-          PREVIEW_URL: http://localhost:4173
+          PREVIEW_URL: http://127.0.0.1:4173

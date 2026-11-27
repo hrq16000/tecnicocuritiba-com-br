@@ -37,7 +37,7 @@ jobs:
         run: |
           set -e
           bunx --bun npm audit --audit-level=high --json > audit.json || true
-          node -e "const r=require('./audit.json');const m=r.metadata?.vulnerabilities||{};const bad=(m.high||0)+(m.critical||0);console.log('high:',m.high,'critical:',m.critical);if(bad>0){process.exit(1)}"
+          node -e "const r=require('./audit.json');const m=r.metadata?.vulnerabilities;if(!m||!r.vulnerabilities){console.error('npm audit não produziu relatório válido');process.exit(1)};for(const [pkg,v] of Object.entries(r.vulnerabilities)){if(['high','critical'].includes(v.severity))console.log(pkg,v.severity,v.range,Array.isArray(v.via)?v.via.map(x=>typeof x==='string'?x:x.url||x.title).join(', '):'')};const bad=(m.high||0)+(m.critical||0);console.log('high:',m.high,'critical:',m.critical);if(bad>0)process.exit(1)"
 
       # 2) Block secrets being committed.
       - name: Gitleaks secret scan
