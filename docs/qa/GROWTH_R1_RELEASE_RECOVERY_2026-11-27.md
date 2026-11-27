@@ -25,3 +25,9 @@ A validação local não substitui o CI completo, os testes E2E e o deploy. Não
 ## Segundo diagnóstico CI
 
 O run 46056014396 aprovou o audit npm, mas o wrapper gitleaks-action@v2 falhou por ausência de GITLEAKS_LICENSE da organização, antes de executar uma varredura. Substituído pelo CLI oficial MIT em imagem de versão 8.30.1 fixada por digest, com histórico Git completo, findings redigidos, montagem somente leitura, sem rede no container e exit code bloqueante. Nenhuma allowlist nova, nenhum gate desabilitado. A execução real do scanner depende do próximo CI. Fontes: https://github.com/gitleaks/gitleaks e https://github.com/gitleaks/gitleaks/pkgs/container/gitleaks/versions.
+
+## Resultado do scanner e preview
+
+O run 46056245758 executou o scanner fixado por digest e varreu 2624 commits (~16,08 MB), sinalizou 10 achados potenciais e terminou com código 1. Isso confirma que o gate não foi enfraquecido. Sem assumir que são credenciais válidas: é necessário triage dos achados, eventual rotação de credenciais legítimas e revisão autorizada antes de liberar a PR. O scanner passa a exibir somente regra, caminho, linha e commit; nenhum valor secreto, match ou autor será registrado. O relatório temporário é eliminado no fim do step.
+
+O run 46056014408 falhou em Wait for preview. Reprodução local: Vite preview inicia, mas responde HTTP 500 porque o plugin TanStack procura dist/server/server.js, enquanto o build Nitro cloudflare-module gera .output/server/index.mjs e wrangler.json. O preview local com Wrangler 4.169.0 identificou ASSETS, porém o ambiente retornou uv_interface_addresses (system error 1). A compatibilidade do runtime real ainda precisa ser validada num runner com workerd funcional. Não se deve trocar a aplicação SSR por fallback estático ou liberar o gate apenas para obter verde.

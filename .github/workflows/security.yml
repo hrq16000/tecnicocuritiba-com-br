@@ -46,11 +46,21 @@ jobs:
       - name: Gitleaks secret scan
         run: |
           set -euo pipefail
-          docker run --rm --network none \
+          report_dir="$(mktemp -d)"
+          trap 'rm -rf "$report_dir"' EXIT
+          scan_status=0
+          docker run --rm --network none --user "$(id -u):$(id -g)" \
             --volume "$GITHUB_WORKSPACE:/repo:ro" --workdir /repo \
+            --volume "$report_dir:/reports:rw" \
             -e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0=/repo \
             ghcr.io/gitleaks/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f \
-            git --redact=100 --no-banner --log-opts="--all" .
+            git --redact=100 --no-banner --log-opts="--all" \
+            --report-format=json --report-path=/reports/gitleaks.json . || scan_status=$?
+          # Only metadata; never emit raw matches, secret values, or authors.
+          if [ -f "$report_dir/gitleaks.json" ]; then
+            node -e 'const rows=JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")); for(const row of rows) console.log(JSON.stringify({rule:row.RuleID,file:row.File,line:row.StartLine,commit:row.Commit}));' "$report_dir/gitleaks.json"
+          fi
+          exit "$scan_status"
 
       # 3) Static analysis on JS/TS.
       - name: Semgrep (OWASP/React rulesets)
