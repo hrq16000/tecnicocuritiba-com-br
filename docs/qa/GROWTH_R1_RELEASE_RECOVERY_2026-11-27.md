@@ -21,3 +21,7 @@ Escopo: desbloquear a PR #5 de acabamento visual sem alterar o funil público ne
 ## Gate de entrega
 
 A validação local não substitui o CI completo, os testes E2E e o deploy. Não fazer merge/publicação até todos os gates obrigatórios concluírem; não atualizar baselines ou reduzir limites para mascarar falhas. Os arquivos gerados (sitemaps, feeds, .output e config Wrangler) não fazem parte desta correção. A PR #6 de documentação permanece independente.
+
+## Segundo diagnóstico CI
+
+O run 46056014396 aprovou o audit npm, mas o wrapper gitleaks-action@v2 falhou por ausência de GITLEAKS_LICENSE da organização, antes de executar uma varredura. Substituído pelo CLI oficial MIT em imagem de versão 8.30.1 fixada por digest, com histórico Git completo, findings redigidos, montagem somente leitura, sem rede no container e exit code bloqueante. Nenhuma allowlist nova, nenhum gate desabilitado. A execução real do scanner depende do próximo CI. Fontes: https://github.com/gitleaks/gitleaks e https://github.com/gitleaks/gitleaks/pkgs/container/gitleaks/versions.
