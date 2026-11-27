@@ -229,7 +229,7 @@ const AtendimentoRemoto = () => {
                   segurança dos dados
                 </Link>
                 . Para equipamentos de empresa, veja{" "}
-                <Link to="/servicos/suporte-tecnico-empresarial" className="text-accent underline underline-offset-2">
+                <Link to="/suporte-empresas" className="text-accent underline underline-offset-2">
                   suporte técnico empresarial
                 </Link>
                 .

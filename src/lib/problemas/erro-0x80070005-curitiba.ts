@@ -117,11 +117,11 @@ export const problema: ProblemaPageData = {
       "label": "Tela Azul Windows"
     },
     {
-      "to": "/remocao-virus-curitiba",
+      "to": "/servicos/remocao-virus",
       "label": "Remoção de Vírus"
     },
     {
-      "to": "/formatacao-computador-curitiba",
+      "to": "/servicos/formatacao-computador",
       "label": "Formatação"
     },
     {

@@ -143,7 +143,7 @@ const localFaqs = [
 const campoLargoSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Técnico de Informática em Campo Largo",
+  "name": "Técnico em Curitiba",
   "description": "Assistência técnica de computadores em Campo Largo PR. Atendimento a domicílio. Formatação, conserto de notebook, remoção de vírus. Capital da Louça.",
   "telephone": "+55-41-99745-2053",
   "url": "https://tecnicocuritiba.com.br/tecnico-informatica-campo-largo",

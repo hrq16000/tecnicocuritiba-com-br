@@ -229,11 +229,11 @@ const MontagemPc = () => {
           </ul>
           <p className="text-center text-sm text-muted-foreground mt-6">
             Se o objetivo for modernizar o equipamento atual em vez de montar do zero, veja{" "}
-            <Link to="/servicos/upgrade-ssd-ram" className="text-primary underline underline-offset-4">
+            <Link to="/servicos/upgrade-ssd-memoria" className="text-primary underline underline-offset-4">
               upgrade de SSD e memória
             </Link>{" "}
             ou{" "}
-            <Link to="/servicos/manutencao-de-computador" className="text-primary underline underline-offset-4">
+            <Link to="/manutencao-notebook-pc-curitiba" className="text-primary underline underline-offset-4">
               manutenção de computador
             </Link>
             . Equipamentos atendidos em{" "}

@@ -113,7 +113,7 @@ export const problema: ProblemaPageData = {
       "label": "Placa-Mãe com Defeito"
     },
     {
-      "to": "/tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {

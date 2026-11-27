@@ -114,11 +114,11 @@ export const problema: ProblemaPageData = {
     },
     {
       "label": "Tela Azul (BSOD)",
-      "to": "/tela-azul-bsod-curitiba"
+      "to": "/problemas/tela-azul-windows-curitiba"
     },
     {
       "label": "Superaquecimento",
-      "to": "/computador-superaquecendo-curitiba"
+      "to": "/problemas/pc-superaquecendo-curitiba"
     },
     {
       "label": "Conserto de PC",

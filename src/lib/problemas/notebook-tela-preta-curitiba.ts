@@ -117,7 +117,7 @@ export const problema: ProblemaPageData = {
       "label": "Notebook Superaquecendo"
     },
     {
-      "to": "/conserto-notebook-curitiba",
+      "to": "/servicos/conserto-notebook-curitiba",
       "label": "Conserto de Notebook"
     },
     {

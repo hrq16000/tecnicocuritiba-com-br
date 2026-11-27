@@ -101,7 +101,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu computador está com erro de driver e dispositivos não funcionam. Podem me ajudar?",
   "relatedPages": [
     {
-      "to": "/erro-tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {

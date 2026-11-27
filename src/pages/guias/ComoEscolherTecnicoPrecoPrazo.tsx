@@ -223,7 +223,7 @@ export default function ComoEscolherTecnicoPrecoPrazo() {
           </div>
           <p className="mb-6 text-muted-foreground">
             Os valores praticados e as condições de coleta estão detalhados em{" "}
-            <Link className="underline" to="/precos">preços e políticas</Link>. Nenhum serviço é
+            <Link className="underline" to="/precos-e-politicas">preços e políticas</Link>. Nenhum serviço é
             executado antes da sua aprovação.
           </p>
 

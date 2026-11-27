@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePageRng, seededShuffle } from "@/lib/stableRandom";
+import { SITE_BRAND } from "@/lib/jsonLd";
 import { NAP, napContactPoint, napOpeningHours, napPostalAddress } from "@/lib/nap";
 import { MapPin, MessageCircle, Users, ArrowRight, Clock } from "lucide-react";
 import { FloatingParticles } from "@/components/FloatingParticles";
@@ -50,12 +51,12 @@ const procedimentosTvLinks = [
   { label: "Troca de Chip BGA", to: "/procedimentos/troca-chip-bga-curitiba" },
   { label: "Microsoldagem Celular", to: "/procedimentos/microsoldagem-celular-curitiba" },
   { label: "Recapacitação", to: "/procedimentos/recapacitacao-placa-eletronica-curitiba" },
-  { label: "Reparo Placa TV", to: "/reparo-placa-principal-tv-curitiba" },
-  { label: "Reparo Placa Notebook", to: "/reparo-placa-mae-notebook-curitiba" },
-  { label: "Reparo Placa Celular", to: "/reparo-placa-mae-celular-curitiba" },
-  { label: "TV Listras na Tela", to: "/tv-listras-na-tela-curitiba" },
-  { label: "TV Listras H/V", to: "/tv-listras-horizontais-verticais-conserto-curitiba" },
-  { label: "Por Que Custa Caro", to: "/por-que-conserto-placa-mae-custa-caro-curitiba" },
+  { label: "Reparo Placa TV", to: "/problemas/reparo-placa-principal-tv-curitiba" },
+  { label: "Reparo Placa Notebook", to: "/problemas/reparo-placa-mae-notebook-curitiba" },
+  { label: "Reparo Placa Celular", to: "/problemas/reparo-placa-mae-celular-curitiba" },
+  { label: "TV Listras na Tela", to: "/problemas/tv-listras-na-tela-curitiba" },
+  { label: "TV Listras H/V", to: "/problemas/tv-listras-horizontais-verticais-conserto-curitiba" },
+  { label: "Por Que Custa Caro", to: "/problemas/por-que-conserto-placa-mae-custa-caro-curitiba" },
 ];
 
 
@@ -135,7 +136,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": "https://tecnicocuritiba.com.br/#localbusiness",
-  name: NAP.name,
+  name: SITE_BRAND,
   alternateName: NAP.alternateName,
   // Negócio de atendimento a domicílio (service-area business): o endereço
   // postal fica apenas no nó Organization; publicar `address` no LocalBusiness
@@ -185,7 +186,7 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": "https://tecnicocuritiba.com.br/#organization",
-  name: NAP.name,
+  name: SITE_BRAND,
   alternateName: NAP.alternateName,
   legalName: NAP.legalName,
   url: NAP.url,

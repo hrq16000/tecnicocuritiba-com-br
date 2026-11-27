@@ -59,7 +59,7 @@ const ServicoCidadePage = () => {
     "@graph": [
       {
         "@type": "LocalBusiness",
-        "name": `Técnico de Informática em ${cidade.nome}`,
+        "name": "Técnico em Curitiba",
         "telephone": "+55-41-99745-2053",
         "url": "https://tecnicocuritiba.com.br",
         "areaServed": cidade.nome,

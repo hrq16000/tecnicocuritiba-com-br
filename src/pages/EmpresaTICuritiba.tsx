@@ -167,9 +167,14 @@ export default function EmpresaTICuritiba() {
 
         <section className="max-w-5xl mx-auto mb-14" aria-labelledby="bairros-comerciais">
           <h2 id="bairros-comerciais" className="scroll-mt-24 text-2xl md:text-3xl font-heading font-bold text-center mb-2">Atendimento nos principais polos comerciais</h2>
-          <p className="text-center text-muted-foreground mb-8">Empresas em Curitiba — clique no bairro e veja detalhes locais.</p>
+          <p className="text-center text-muted-foreground mb-8">Empresas em Curitiba — veja detalhes locais nos bairros com páginas disponíveis.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {BAIRROS_COMERCIAIS.map((b) => (
+            {BAIRROS_COMERCIAIS.map((b) => ["centro-civico", "ecoville", "champagnat"].includes(b.slug) ? (
+              <div key={b.slug} className="bg-card border border-border rounded-lg px-4 py-3 text-center">
+                <MapPin className="h-4 w-4 text-accent mx-auto mb-1" />
+                <span className="text-sm font-medium text-foreground">{b.nome}</span>
+              </div>
+            ) : (
               <Link
                 key={b.slug}
                 to={`/bairros/${b.slug}`}

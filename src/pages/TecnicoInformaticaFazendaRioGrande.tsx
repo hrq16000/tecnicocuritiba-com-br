@@ -92,7 +92,7 @@ const localFaqs = [
 const frgSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Técnico de Informática em Fazenda Rio Grande",
+  "name": "Técnico em Curitiba",
   "description": "Assistência técnica de computadores em Fazenda Rio Grande PR. Formatação, conserto, upgrade, redes. Atendimento a domicílio.",
   "telephone": "+55-41-99745-2053",
   "areaServed": { "@type": "City", "name": "Fazenda Rio Grande", "containedInPlace": { "@type": "State", "name": "Paraná" } },

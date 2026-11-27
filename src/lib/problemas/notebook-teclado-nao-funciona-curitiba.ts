@@ -112,7 +112,7 @@ export const problema: ProblemaPageData = {
       "label": "Notebook Tela Preta"
     },
     {
-      "to": "/conserto-pc-notebook-curitiba",
+      "to": "/servicos/conserto-pc-notebook",
       "label": "Conserto de Notebook"
     },
     {

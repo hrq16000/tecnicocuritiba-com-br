@@ -103,7 +103,7 @@ export const problema: ProblemaPageData = {
       "label": "Erro 0x80004005"
     },
     {
-      "to": "/formatacao-computador-curitiba",
+      "to": "/servicos/formatacao-computador",
       "label": "Formatação"
     },
     {
@@ -111,7 +111,7 @@ export const problema: ProblemaPageData = {
       "label": "Computador Lento"
     },
     {
-      "to": "/remocao-virus-curitiba",
+      "to": "/servicos/remocao-virus",
       "label": "Remoção de Vírus"
     },
     {

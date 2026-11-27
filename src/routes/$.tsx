@@ -2,7 +2,7 @@ import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 
 import LegacyApp from "@/LegacyApp";
 import { isLegacyPath, legacyRedirectFor, normalizeLegacyPath } from "@/lib/legacyRoutes";
-import { seoForPath } from "@/lib/seoRouteHead";
+import { seoForPath, type RouteHeadMeta } from "@/lib/seoRouteHead";
 
 const SITE = "https://tecnicocuritiba.com.br";
 
@@ -19,15 +19,23 @@ const prettify = (seg: string) => {
  * - head(): canonical/og:url autorreferentes + title/description do seoRouteHead.
  */
 export const Route = createFileRoute("/$")({
-  loader: ({ location }) => {
+  loader: async ({ location }) => {
     const target = legacyRedirectFor(location.pathname);
     if (target) throw redirect({ href: target, statusCode: 301 });
     if (!isLegacyPath(location.pathname)) throw notFound();
-    return { pathname: normalizeLegacyPath(location.pathname) };
+    const pathname = normalizeLegacyPath(location.pathname);
+    const match = pathname.match(/^\/(?:problemas|procedimentos)\/([^/]+)$/);
+    if (match) {
+      const { getProblemaPageBySlug } = await import("@/lib/problemaPagesData");
+      const data = getProblemaPageBySlug(match[1] ?? "");
+      if (!data) throw notFound();
+      return { pathname, problemSeo: { title: data.title, description: data.metaDescription, canonical: `${SITE}/problemas/${data.slug}` } };
+    }
+    return { pathname, problemSeo: null };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const seo = seoForPath(loaderData.pathname);
+    const seo: RouteHeadMeta | null = loaderData.problemSeo ?? seoForPath(loaderData.pathname);
     const url = seo?.canonical ?? `${SITE}${loaderData.pathname === "/" ? "/" : loaderData.pathname}`;
     const meta: Array<Record<string, string>> = [{ property: "og:url", content: url }];
     if (seo) {

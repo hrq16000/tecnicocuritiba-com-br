@@ -11,13 +11,14 @@
 import { NAP, NAP_SOCIAL, napContactPoint, napOpeningHours, napSameAs } from "@/lib/nap";
 
 export const SITE = "https://tecnicocuritiba.com.br";
+export const SITE_BRAND = "Técnico em Curitiba";
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService", "ComputerRepairService"],
   "@id": `${SITE}/#organization`,
-  name: "Técnico em Curitiba - Suporte em Informática",
-  alternateName: ["Técnico de Informática em Curitiba", "Assistência Técnica Curitiba"],
+  name: SITE_BRAND,
+  alternateName: ["Técnico em Curitiba - Suporte em Informática", "Técnico de Informática em Curitiba", "Assistência Técnica Curitiba"],
   description:
     "Técnico de informática em Curitiba: conserto de PC e notebook, formatação, remoção de vírus e upgrade de SSD. Atendimento via WhatsApp, a partir de R$ 99,99.",
   url: SITE,
@@ -58,7 +59,7 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${SITE}/#organization`,
-  name: "Técnico em Curitiba",
+  name: SITE_BRAND,
   alternateName: "Técnico de Informática em Curitiba",
   legalName: "Técnico em Curitiba — Assistência Técnica em Informática",
   url: SITE,

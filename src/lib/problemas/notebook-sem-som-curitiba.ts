@@ -116,7 +116,7 @@ export const problema: ProblemaPageData = {
       "label": "Touchpad Não Funciona"
     },
     {
-      "to": "/conserto-notebook-curitiba",
+      "to": "/servicos/conserto-notebook-curitiba",
       "label": "Conserto de Notebook"
     },
     {

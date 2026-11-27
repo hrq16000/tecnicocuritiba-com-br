@@ -116,7 +116,7 @@ export const problema: ProblemaPageData = {
       "label": "Fonte Queimada"
     },
     {
-      "to": "/tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul"
     },
     {

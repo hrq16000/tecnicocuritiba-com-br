@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Falha o CI se og:site_name, Organization.name ou LocalBusiness.name divergirem
- * do nome oficial "Técnico em Curitiba" nos HTMLs pré-renderizados em dist/.
+ * do nome oficial "Técnico em Curitiba" nos HTMLs SSR servidos pelo preview (BASE_URL) ou pré-renderizados em dist/.
  *
  * Uso: node scripts/check-brand-consistency.mjs
  *   BRAND override via env BRAND
@@ -23,18 +23,39 @@ function walk(dir, out = []) {
 }
 
 const errors = [];
-const files = walk(DIST);
+const BASE = process.env.BASE_URL;
+const files = BASE ? [] : walk(DIST);
+if (BASE) {
+  const index = fs.readFileSync("public/sitemap-index.xml", "utf8");
+  const urls = new Set();
+  for (const [, loc] of index.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    const child = path.join("public", new URL(loc).pathname.replace(/^\/+/, ""));
+    const xml = fs.readFileSync(child, "utf8");
+    for (const [, page] of xml.matchAll(/<loc>([^<]+)<\/loc>/g))
+      urls.add(new URL(page).pathname);
+  }
+  files.push(...urls);
+}
+
 if (!files.length) {
-  console.error(`[brand-check] dist/ vazio ou sem index.html. Rode o build antes.`);
+  console.error(`[brand-check] Nenhuma página encontrada. Rode o build antes.`);
   process.exit(2);
 }
 
-for (const file of files) {
-  const rel = path.relative(DIST, file);
-  const html = fs.readFileSync(file, "utf8");
+async function inspect(file) {
+  const rel = BASE ? file : path.relative(DIST, file);
+  let html;
+  try {
+    if (BASE) {
+      const response = await fetch(new URL(file, BASE), { redirect: "manual" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      html = await response.text();
+    } else html = fs.readFileSync(file, "utf8");
+  } catch (error) { errors.push(`${rel}: ${error.message}`); return; }
 
   // og:site_name
   const og = html.match(/<meta[^>]+property=["']og:site_name["'][^>]+content=["']([^"']+)["']/i);
+  if (BASE && !og) errors.push(`${rel}: og:site_name ausente`);
   if (og && og[1].trim() !== BRAND) {
     errors.push(`${rel}: og:site_name = "${og[1]}" (esperado "${BRAND}")`);
   }
@@ -49,12 +70,22 @@ for (const file of files) {
   }
 }
 
+let cursor = 0;
+await Promise.all(Array.from({ length: 10 }, async () => {
+  while (cursor < files.length) await inspect(files[cursor++]);
+}));
+
 function checkNode(node, rel) {
   if (!node || typeof node !== "object") return;
   const type = node["@type"];
   const types = Array.isArray(type) ? type : [type];
   const isBrandType = types.some((t) => t === "Organization" || t === "LocalBusiness" || (typeof t === "string" && t.endsWith("Business")));
-  if (isBrandType && typeof node.name === "string" && node.name.trim() !== BRAND) {
+  // The actual CFTV installation partner is explicitly separate from the site
+  // organization. Do not relabel a third party as the first-party business.
+  const externalCftvProvider = rel.startsWith("/cftv") &&
+    node.name === "Mileuma Soluções / Mestre dos Serviços" &&
+    !node["@id"] && !node.url;
+  if (isBrandType && !externalCftvProvider && typeof node.name === "string" && node.name.trim() !== BRAND) {
     errors.push(`${rel}: ${types.join("/")}.name = "${node.name}" (esperado "${BRAND}")`);
   }
   // provider aninhado

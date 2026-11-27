@@ -1,0 +1,14 @@
+# Individually reviewed historical false positives only. No wildcard/rule suppression.
+# Supabase browser-publishable anon JWT (decoded role=anon, issuer=supabase).
+44b45d3e26001c5e7db557d7e5a6ffb581c17f20:.env:jwt:2
+ba7f1c90aae9403de8c0bea9a49066ab6bd170f7:.env:jwt:2
+d95c8f2573e476083f7bec48549aa7b07283e572:supabase/migrations/20260615004316_42360983-554a-455a-872e-3e92e2e81be9.sql:jwt:47
+# Browser storage identifiers for consent state, integration tests and diagnostics.
+8a2d8b0316b32cc042d2cac766a395887e5fc53d:e2e/consent-mode.spec.ts:generic-api-key:10
+b2ea53e6eb11ad4ec1ab4e16f3cde4faf577d0cc:src/lib/consent.ts:generic-api-key:12
+b2ea53e6eb11ad4ec1ab4e16f3cde4faf577d0cc:src/lib/consent.ts:generic-api-key:13
+a032c7e9e81900fc673c8908bcaadcbdbd14f6ec:src/lib/funnelDiagnostics.ts:generic-api-key:11
+303544af23f57fd96dd5d802c19b1ab119816673:src/components/ConsentBanner.tsx:generic-api-key:3
+# IndexNow domain verification, exact value matches the public root text file.
+014f0319a915c44cf70d9bb58086a3f70a5830c6:scripts/check-indexnow-ping.mjs:generic-api-key:17
+b5ddcc1b1fed4d2ec86bdc65e66bd1d3b3803f7b:supabase/functions/indexnow-ping/index.ts:generic-api-key:7

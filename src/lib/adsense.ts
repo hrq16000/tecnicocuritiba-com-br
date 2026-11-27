@@ -4,7 +4,7 @@
  * O script `adsbygoogle` só é injetado depois que o visitante aceita o banner.
  * Antes disso nenhum script de terceiros de publicidade é executado, e o
  * Consent Mode permanece com `ad_storage`/`ad_personalization` em "denied"
- * (default definido no index.html).
+ * (default definido no head SSR).
  */
 import { hasAdsConsent } from "@/lib/consent";
 
@@ -13,7 +13,7 @@ export const ADSENSE_CLIENT = "ca-pub-3762170279587706";
 const SCRIPT_ID = "adsbygoogle-js";
 
 export const loadAdSense = () => {
-  if (typeof document === "undefined") return;
+  if (typeof document === "undefined" || !hasAdsConsent()) return;
   if (document.getElementById(SCRIPT_ID)) return;
 
   const s = document.createElement("script");

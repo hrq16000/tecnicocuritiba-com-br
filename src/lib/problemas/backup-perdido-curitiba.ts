@@ -118,7 +118,7 @@ export const problema: ProblemaPageData = {
       "label": "Disco Cheio"
     },
     {
-      "to": "/virus-ransomware-curitiba",
+      "to": "/problemas/pc-com-virus-ransomware-curitiba",
       "label": "Vírus e Ransomware"
     },
     {

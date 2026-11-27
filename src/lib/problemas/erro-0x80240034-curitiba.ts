@@ -112,7 +112,7 @@ export const problema: ProblemaPageData = {
       "label": "Computador Lento"
     },
     {
-      "to": "/formatacao-computador-curitiba",
+      "to": "/servicos/formatacao-computador",
       "label": "Formatação"
     },
     {

@@ -104,7 +104,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu computador está cheio de pop-ups e propagandas. Preciso de ajuda para remover.",
   "relatedPages": [
     {
-      "to": "/remocao-virus-malware-curitiba",
+      "to": "/servicos/remocao-virus",
       "label": "Remoção de Vírus"
     },
     {
@@ -120,7 +120,7 @@ export const problema: ProblemaPageData = {
       "label": "Formatação"
     },
     {
-      "to": "/tela-azul-curitiba",
+      "to": "/problemas/tela-azul-windows-curitiba",
       "label": "Tela Azul (BSOD)"
     },
     {

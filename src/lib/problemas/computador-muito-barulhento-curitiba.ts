@@ -115,7 +115,7 @@ export const problema: ProblemaPageData = {
   "relatedPages": [
     {
       "label": "Superaquecimento",
-      "to": "/computador-superaquecendo-curitiba"
+      "to": "/problemas/pc-superaquecendo-curitiba"
     },
     {
       "label": "PC Lento",

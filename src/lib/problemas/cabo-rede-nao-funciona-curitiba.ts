@@ -99,11 +99,11 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Estou com problema no cabo de rede / internet cabeada. Gostaria de agendar um diagnóstico.",
   "relatedPages": [
     {
-      "to": "/redes-wifi",
+      "to": "/servicos/redes-wifi",
       "label": "Redes Wi-Fi"
     },
     {
-      "to": "/computador-lento",
+      "to": "/servicos/computador-lento",
       "label": "Computador Lento"
     },
     {

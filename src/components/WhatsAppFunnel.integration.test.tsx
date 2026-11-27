@@ -1,7 +1,6 @@
 // @ts-nocheck — legacy file silenced during TanStack migration (see .lovable/migrate-to-tanstack/tsc-silenced.json)
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { act, render, screen, cleanup, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
 import { WhatsAppFunnel } from "./WhatsAppFunnel";
 import { VIDEO_WARNING } from "@/lib/funnelWarning";
 
@@ -28,6 +27,10 @@ const openSpy = vi.fn<(url?: string | URL, target?: string, features?: string) =
 );
 
 beforeEach(() => {
+  localStorage.clear();
+  sessionStorage.clear();
+  // jsdom has no layout or scrolling; browser scrolling remains covered by Playwright.
+  Object.defineProperty(HTMLElement.prototype, "scrollIntoView", { configurable: true, value: vi.fn() });
   openSpy.mockClear();
   vi.stubGlobal("open", openSpy);
   (window as unknown as { gtag: (...a: unknown[]) => void }).gtag = vi.fn();
@@ -37,14 +40,11 @@ afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
   sessionStorage.clear();
+  localStorage.clear();
 });
 
 function renderFunnel() {
-  return render(
-    <MemoryRouter>
-      <WhatsAppFunnel />
-    </MemoryRouter>,
-  );
+  return render(<WhatsAppFunnel />);
 }
 
 async function openFunnel() {

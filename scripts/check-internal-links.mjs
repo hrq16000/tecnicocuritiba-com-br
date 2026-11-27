@@ -81,17 +81,22 @@ if (bad.length) {
   for (const b of bad) console.error(`  ${b.status}\t${b.url}`);
 }
 
-// Amostra 30 URLs para link-check interno (parsing HTML é caro).
-const sample = paths.sort(() => 0.5 - Math.random()).slice(0, 30);
+// Todas as URLs, determinísticas. Reutiliza consultas para destinos repetidos.
+const sample = [...paths].sort();
 const validPathSet = new Set(paths.map((p) => (p.replace(/\/$/, "") || "/")));
 const brokenLinks = [];
+const extraStatuses = new Map();
+const checkExtra = (href) => {
+  if (!extraStatuses.has(href)) extraStatuses.set(href, check(href));
+  return extraStatuses.get(href);
+};
 await runPool(sample, async (url) => {
   const hrefs = await extractHrefs(url);
-  for (const h of hrefs) {
+  for (const h of new Set(hrefs)) {
     if (!validPathSet.has(h)) {
       // Segunda chance: HEAD real (arquivo estático como /rss.xml, /robots.txt).
-      const res = await fetch(`${BASE}${h}`, { redirect: "manual" }).catch(() => null);
-      if (!res || res.status >= 400) brokenLinks.push({ referrer: url, href: h, status: res?.status ?? "ERR" });
+      const res = await checkExtra(h);
+      if (typeof res.status !== "number" || res.status >= 400) brokenLinks.push({ referrer: url, href: h, status: res.status });
     }
   }
 });

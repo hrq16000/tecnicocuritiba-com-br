@@ -104,7 +104,7 @@ export const problema: ProblemaPageData = {
   "whatsappMessage": "Olá! Meu PC está travando em jogos. Gostaria de agendar um diagnóstico gamer.",
   "relatedPages": [
     {
-      "to": "/computador-lento",
+      "to": "/servicos/computador-lento",
       "label": "Computador Lento"
     },
     {
@@ -116,7 +116,7 @@ export const problema: ProblemaPageData = {
       "label": "Placa de Vídeo Não Funciona"
     },
     {
-      "to": "/montagem-pc",
+      "to": "/servicos/montagem-pc",
       "label": "Montagem de PC"
     }
   ],

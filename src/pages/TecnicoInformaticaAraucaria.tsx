@@ -143,7 +143,7 @@ const localFaqs = [
 const araucariaSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Técnico de Informática em Araucária",
+  "name": "Técnico em Curitiba",
   "description": "Assistência técnica de computadores e notebooks em Araucária. Atendimento a domicílio para residências e empresas. Formatação, conserto, remoção de vírus.",
   "telephone": "+55-41-99745-2053",
   "url": "https://tecnicocuritiba.com.br/tecnico-informatica-araucaria",

@@ -113,7 +113,7 @@ export const problema: ProblemaPageData = {
       "label": "PC Sem Som HDMI"
     },
     {
-      "to": "/redes-wifi-curitiba",
+      "to": "/servicos/redes-wifi",
       "label": "Redes e Wi-Fi"
     },
     {
