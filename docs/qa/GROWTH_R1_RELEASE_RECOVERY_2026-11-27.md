@@ -38,3 +38,7 @@ O run 46056508267 confirmou dez fingerprints. Cada registro foi consultado no co
 
 A lista .gitleaksignore contém somente os 10 fingerprints commit:arquivo:regra:linha já verificados. Não há supressão por extensão, diretório, família de regra ou padrão genérico. Todo novo achado continua bloqueante; o gate de RLS, privacidade e demais verificações permanece independente. Manter os valores de JWT e verificação fora do relatório.
 Referências: https://supabase.com/docs/guides/getting-started/api-keys, https://supabase.com/docs/guides/database/secure-data, https://www.indexnow.org/documentation, https://github.com/gitleaks/gitleaks (fingerprints).
+
+## Ensaio controlado do runtime de preview
+
+Apenas o workflow Internal links passa a usar a configuração de Worker gerada pelo build Nitro, Wrangler 4.169.0 (Node 22), loopback explícito e checagem HTTP 2xx. É uma prova incremental da compatibilidade no runner GitHub, não uma mudança de produção nem um bypass de SSR. Os demais jobs permanecem com seus gates originais até esta prova passar. O script de links e sitemap não foi alterado.
