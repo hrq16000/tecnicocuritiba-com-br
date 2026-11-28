@@ -17,8 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Lint (non-blocking warnings)
         run: npm run lint --silent || echo "::warning::lint reported issues"
       - name: Typecheck (tsc — falha inclusive em @ts-expect-error não utilizado / TS2578)
@@ -107,11 +107,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
       - name: Build
@@ -203,11 +206,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
       - name: Build
@@ -298,11 +304,14 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Install Lighthouse CI
         run: npm i -g @lhci/cli@0.13.x
       - name: Build
@@ -329,11 +338,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Build
         run: npm run build
       - name: Start preview
@@ -358,11 +370,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
       - name: Build
@@ -432,11 +447,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Install Lighthouse
         run: npm i -g lighthouse@12
       - name: Build
@@ -467,11 +485,14 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
-        run: npm ci --no-audit --no-fund
+      - name: Install deps (canonical bun.lock)
+        run: bun install --frozen-lockfile
       - name: Build
         run: npm run build
       - name: Start preview
